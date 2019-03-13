@@ -1,0 +1,237 @@
+/*
+ *
+ *   EGRET - Angular Material Design Admin Template
+ *
+ *
+*/
+
+// Third pirty style files
+// Sidebar Scroll
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+//  star-rating styles (Used in Shop app)
+// @import "~css-star-rating/scss/star-rating.scss";
+
+// Data Table
+// @import '~@swimlane/ngx-datatable/release/index.css';
+// @import '~@swimlane/ngx-datatable/release/themes/material.css';
+// @import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+// Rich Text Editor
+// @import '~quill/dist/quill.core.css';
+// @import '~quill/dist/quill.snow.css';
+
+// Drag and Drop
+// @import '~dragula/dist/dragula.css';
+
+// Calendar
+// @import '~angular-calendar/css/angular-calendar.css';
+
+// User tour
+// @import '~hopscotch/dist/css/hopscotch.min.css';
+
+// Page loader Topbar
+@import '../../vendor/pace/pace-theme-min.css';
+
+
+
+// Main Variables File
+@import "scss/variables";
+
+// Open _themes.scss and remove unnecessary theme files
+@import "scss/themes";
+
+// Open _main.scss and keep files which are required for your current layout.
+@import "scss/main";
+
+// Open _views.scss and remove unnecessary view related files
+@import "scss/views";
+
+// global table including material table
+.mat-table {
+  overflow: auto;
+  max-height: 250px;
+  width: 100% !important;
+}
+
+table td[class*=col-], table th[class*=col-] {
+    position: static;
+    display: table-cell;
+    float: none;
+}
+
+thead {
+  tr {
+    border-collapse: separate;
+    background: rgba(0, 0, 0, 0.03);
+    th {
+      border-collapse: separate;
+      text-align: left;
+      padding: 1rem;
+      font-weight: 500;
+      letter-spacing: .1px;
+    }
+  }
+}
+tbody {
+  tr {
+    td {
+      text-align: left;
+      padding: 16px;
+    }
+  }
+}
+
+// font orange
+.mat-color-success{
+  color: #fb8a01;
+}
+
+// background orange
+.mat-bg-success{
+  background: #fb8a01 !important;
+  color: whitesmoke !important;
+}
+
+// background green
+.mat-color-green, .mat-bg-green{
+	background: #35b729 !important;
+	color: white !important;
+}
+
+// background red
+.mat-bg-red{
+  background: red !important;
+  color: white !important;
+}
+
+// font gray
+.mat-color-gray{
+  color: gray;
+}
+
+.mat-color-red{
+  color: red;
+}
+
+// background gray
+.mat-bg-gray{
+  background: gray !important;
+  color: whitesmoke !important;
+}
+
+// font yellow
+.mat-color-info{
+  color: #ffe082;
+}
+
+// background yellow
+.mat-bg-info{
+  background: #ffe082 !important;
+}
+
+body .mat-select-trigger, .mat-select-trigger {
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  color: #247ba0 !important;
+}
+
+.egret-blue .mat-select-value {
+  color: #247ba0 !important;
+}
+
+.databox-refreshing{
+	color: #fb8a01 !important;
+}
+
+.databox-ready{
+	color: #35b729 !important;
+}
+
+.databox-expired{
+	color: gray !important;
+}
+
+.databox-noconfig{
+	color: red !important;
+}
+
+.control-btns{
+  position: relative;
+  margin-top: 20px;
+  height: 60px;
+  .btn-left {
+    position: absolute;
+    left: 10px;
+  }
+  .btn-right {
+    position: absolute;
+    right: 10px;
+  }
+}
+
+// handsontable global css
+hot-table{
+	width: 100% !important;
+	.hot-container, .ht_clone_top {
+		width: 100% !important;
+	}
+	table {
+	    font-family: arial, sans-serif;
+	    border-collapse: collapse !important;
+	}
+
+	th{
+		font-family: arial, sans-serif;
+		background: whitesmoke !important;
+		color: gray !important;
+		padding-top: 15px !important;
+		font-weight: 600 !important;
+	}
+
+	td{
+	    padding: 18px !important;
+	    padding-left: 10px !important;
+	    font-size: 13px !important;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    -o-text-overflow: ellipsis;
+	    width: 30px !important;
+	    checkbox{
+	    	background: red !important;
+	    }
+	}
+
+	tr:nth-child(even) {
+	    background-color: #dddddd !important;
+	}
+
+	button {
+		background-color: rgba(0, 0, 0, 0);
+		border: none;
+		color: gray;
+		padding: 5px 10px;
+		cursor: pointer;
+		cursor: hand;
+	  	font-size: 18px !important;
+	}
+
+	.htDimmed{
+		font-size: 13px !important;
+		background: white !important;
+		color: #919191 !important;
+	}
+
+	.changeType{
+		font-size: 10px !important;
+		color: #bababa !important;
+		margin-right: 35px !important;
+		margin-left: 0 !important;
+	}
+
+	.hot-check{
+		cursor: pointer !important;
+	}
+}
+

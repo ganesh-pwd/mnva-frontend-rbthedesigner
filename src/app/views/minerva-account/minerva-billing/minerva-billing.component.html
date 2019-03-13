@@ -1,0 +1,275 @@
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+	<h1 class="mat-h1">
+		<mat-icon>attach_money</mat-icon>
+		Billing
+		<small>   |     Account / Billings </small>
+	</h1>
+</div>
+
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
+		<mat-card class="profile-sidebar mb-1 pb-0">
+      <div class="text-center app-user">
+        <div class="app-user-photo" (click)="changeImageDialog('Change Image')">
+          <img src="{{userImage}}" alt="">
+        </div><br>
+        <h1 class="mat-h3">CCK</h1>
+      </div>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="profile-nav">
+        <mat-nav-list>
+          <mat-list-item routerLink="/accounts/minerva-news" routerLinkActive="list-item-active">
+            <mat-icon>home</mat-icon>
+            Minerva News
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/users" routerLinkActive="list-item-active">
+            <mat-icon>group</mat-icon>
+            Users
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/billings" routerLinkActive="list-item-active">
+            <mat-icon>monetization_on</mat-icon>
+            Billing
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+		</mat-card>
+	</div>
+
+	<!-- Users -->
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+		<mat-card>
+			<mat-tab-group>
+				<!-- Products Active -->
+			  	<mat-tab label="Products Active">
+				  	<mat-card-content>
+				  		<br>
+				  		<table mat-table #table
+				  		  	[dataSource]="dataSource"
+				  		  	matSort="sort"
+				  		  	class="default-table">
+
+				  		  	<!-- Date Product Type -->
+				  		  	<ng-container matColumnDef="product_type">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Type</th>
+				  		    	<td mat-cell *matCellDef="let row"  width="150px">{{row.product_type}}</td>
+				  		  	</ng-container>
+
+				  		  	<!-- Content Product Name -->
+				  		  	<ng-container matColumnDef="product_name">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
+				  		    	<td mat-cell *matCellDef="let row"><p [innerHtml]="row.product_name"></p></td>
+				  		  	</ng-container>
+
+				  		  	<!-- Content Status -->
+				  		  	<ng-container matColumnDef="status">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+				  		    	<td mat-cell *matCellDef="let row" width="130px">{{row.status}}</td>
+				  		  	</ng-container>
+
+				  		  	<!-- Content Date Created -->
+				  		  	<ng-container matColumnDef="date_created">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
+				  		    	<td mat-cell *matCellDef="let row" width="130px">{{row.date_created}}</td>
+				  		  	</ng-container>
+
+				  		  	<!-- Content Auto Renew -->
+				  		  	<ng-container matColumnDef="auto_renew">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Auto Renew</th>
+				  		    	<td mat-cell *matCellDef="let row">
+				  		    		<mat-slide-toggle
+				  			    		*ngIf="row.auto_renew !== 'Renew'
+				  			    		&& row.auto_renew !== 'One Time Purchase';
+				  			    		else showRenew" color="primary" class="mb-1"
+				  			    		[checked]="row.auto_renew">
+				  		    		</mat-slide-toggle>
+
+                      <button
+                        class="mat-bg-green"
+                        mat-raised-button *ngIf="row.auto_renew === 'Renew'">
+                        Renew
+                      </button>
+
+				  		    		<span *ngIf="row.auto_renew === 'One Time Purchase'">
+				  		    			{{row.auto_renew}}
+				  		    		</span>
+				  		    	</td>
+				  		  	</ng-container>
+
+				  		  	<!-- Content Duration -->
+				  		  	<ng-container matColumnDef="duration">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
+				  		    	<td mat-cell *matCellDef="let row">{{row.duration}}</td>
+				  		  	</ng-container>
+
+				  		  	<!-- Content Expiration -->
+				  		  	<ng-container matColumnDef="expiration">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Expiration</th>
+				  		    	<td mat-cell *matCellDef="let row">{{row.expiration}}</td>
+				  		  	</ng-container>
+
+				  		  	<ng-container matColumnDef="price">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+				  		    	<td mat-cell *matCellDef="let row">${{row.price}}</td>
+				  		  	</ng-container>
+
+				  		  	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				  		  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				  		</table>
+
+				  		<mat-paginator #paginator [hidden]="!dataSource"
+				  		  [length]="dataSource.data.length"
+				  		  [pageIndex]="0"
+				  		  [pageSize]="10"
+				  		  [pageSizeOptions]="[10, 20, 50, 100]">
+				  		</mat-paginator>
+				  	</mat-card-content>
+			  	</mat-tab>
+
+			  	<!-- Billing information -->
+			  	<mat-tab label="Billing Information">
+			  		<br><br>
+			  		<mat-card>
+			  			<mat-card-header>
+			  				<mat-card-title>
+			  					<h3 class="mat-h3">Billing Address</h3>
+			  				</mat-card-title>
+			  			</mat-card-header>
+
+			  			<mat-card-content>
+			  				<form>
+			  					<div fxLayout="row" fxLayoutWrap="wrap">
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+		  							  		<input matInput placeholder="Country">
+		  								</mat-form-field>
+			  						</div>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  						  		<input matInput placeholder="First Name">
+			  							</mat-form-field>
+			  						</div><br>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="Last Name">
+			  				  			</mat-form-field>
+			  						</div>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+		  								  	<input matInput placeholder="Company">
+		  								</mat-form-field>
+			  						</div><br>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="Address Line 1">
+			  				  			</mat-form-field>
+			  						</div>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="Address Line 2">
+			  				  			</mat-form-field>
+			  						</div><br>
+
+									<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="City">
+			  				  			</mat-form-field>
+			  						</div>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="Zip">
+			  				  			</mat-form-field>
+			  						</div><br>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="Phone">
+			  				  			</mat-form-field>
+			  						</div>
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+		  								<mat-form-field class="billing-form">
+			  				    			<input matInput placeholder="Email">
+			  				  			</mat-form-field>
+			  						</div><br>
+			  					</div>
+
+			  				  	<div class="text-center"><br>
+			  				  		<button mat-raised-button color="primary">Save</button>
+			  				  	</div>
+			  				</form>
+			  			</mat-card-content>
+			  		</mat-card>
+			  	</mat-tab>
+
+			  	<!-- Billing History -->
+			  	<mat-tab label="Billing History">
+			  		<br>
+		  			<table mat-table #billingTable
+		  			  	[dataSource]="dataSourceBillingHistory"
+		  			  	matSort="historySort"
+		  			  	class="my-table">
+
+		  			  	<!-- Payment Date -->
+		  			  	<ng-container matColumnDef="payment_date">
+		  			    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Payment Date</th>
+		  			    	<td mat-cell *matCellDef="let row">{{row.payment_date}}</td>
+		  			  	</ng-container>
+
+		  			  	<!-- Content Invoice Number -->
+		  			  	<ng-container matColumnDef="invoice_number">
+		  			    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Invoice Number</th>
+		  			    	<td mat-cell *matCellDef="let row">{{row.invoice_number}}</td>
+		  			  	</ng-container>
+
+		  			  	<!-- Content Product -->
+		  			  	<ng-container matColumnDef="product">
+		  			    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+		  			    	<td mat-cell *matCellDef="let row">
+		  			    		<p [innerHtml]="row.product"></p>
+		  			    	</td>
+		  			  	</ng-container>
+
+		  			  	<!-- Content Amount -->
+		  			  	<ng-container matColumnDef="amount">
+		  			    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+		  			    	<td mat-cell *matCellDef="let row">{{row.amount}}</td>
+		  			  	</ng-container>
+
+		  			  	<!-- Content download -->
+		  			  	<ng-container matColumnDef="download">
+		  			    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Download</th>
+		  			    	<td mat-cell *matCellDef="let row">{{row.download}}</td>
+		  			  	</ng-container>
+
+		  			  	<tr mat-header-row *matHeaderRowDef="displayedColumnsBillingHistory"></tr>
+		  			  	<tr mat-row *matRowDef="let row; columns: displayedColumnsBillingHistory;"></tr>
+		  			</table>
+
+		  			<mat-paginator #historyPaginator [hidden]="!dataSourceBillingHistory"
+		  			  [length]="dataSourceBillingHistory.data.length"
+		  			  [pageIndex]="0"
+		  			  [pageSize]="10"
+		  			  [pageSizeOptions]="[10, 20, 50, 100]">
+		  			</mat-paginator>
+			  	</mat-tab>
+			</mat-tab-group>
+		</mat-card>
+	</div>
+</div>

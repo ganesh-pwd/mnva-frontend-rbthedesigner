@@ -1,0 +1,39 @@
+.choose-version {
+
+	width: 30%;
+}
+.breadcrumb {
+  position: relative;
+  width: 100%;
+}
+.breadcrumb-title {
+  display: flex;
+  align-items: center;
+  padding: .5rem .333rem;
+  line-height: 40px;
+}
+
+small{
+	mat-icon{
+		cursor: pointer;
+		font-size: 18px;
+		color: gray;
+		margin-left: 1%;
+	}
+
+	font-size: 15px !important;
+	
+}
+
+.main-route{
+	padding-left: 1%;
+	color: gray;
+
+	a{
+		color: #0d4b73;
+		
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}

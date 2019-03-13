@@ -1,0 +1,237 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" >
+		<h1 class="mat-h1">
+			<mat-icon>widgets</mat-icon> {{databoxItemData?.databox_name}}
+			<small>
+				<mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> |
+				<span class="main-route">
+					<a routerLink="/databoxes/">Databoxes </a> /
+					<a routerLink="/databoxes/{{databoxItemData?.folder}}">{{databoxItemData?.folder}} </a> /
+					<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, databoxItemData?.first_create)">
+					{{databoxItemData?.databox_name}}</a>
+				</span> /
+				Settings
+			</small>
+		</h1>
+	</div>
+</div>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+	<button mat-raised-button
+	class="mb-05"
+	color="primary"
+	(click)="navigateToDatabox(data?.folder, data?._id, data?.first_create)">
+	Back to Databox
+	</button>
+</div>
+<hr>
+
+<br>
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
+		<div class="text-center" >
+			<mat-radio-group value="1" id="settings-radio">
+				<mat-radio-button value="1"
+					routerLink="/databoxes/settings/{{data?._id}}">
+					Configuration
+				</mat-radio-button>
+				-------------
+				<mat-radio-button value="2"
+					routerLink="/databoxes/settings/query/{{data?._id}}">
+					Query
+				</mat-radio-button>
+				-------------
+				<mat-radio-button value="3"
+					routerLink="/databoxes/settings/algorithm/{{data?._id}}">
+					Algorithms
+				</mat-radio-button>
+			</mat-radio-group>
+		</div>
+	</div>
+</div>
+
+<div class="control-btns" fxLayout="row" fxLayoutWrap="wrap">
+  <button mat-raised-button
+    class="mb-05 btn-right"
+    routerLink="/databoxes/settings/query/{{data?._id}}">
+    Next
+	</button>
+</div>
+
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+		<mat-card>
+			<mat-card-content>
+				<div fxLayout="row" fxLayoutWrap="wrap" >
+					<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" >
+						<div class="text-center">
+							<br>
+							<img src="/assets/images/image-placeholder.png" alt="" class="minerva-logo">
+							<br>
+							<span class="text-muted">Change Image</span>
+						</div>
+					</div>
+					<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="75">
+						<div class="text-left databox-data">
+							<br>
+							<h3 class="mat-h3 mat-color-primary">{{data?.databox_name}}
+								<mat-icon class="text-muted edit-databox" (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon>
+								<h4 class="mat-h4">
+									{{data?.databox_type}} Databox |
+									{{data?.datasource}}
+								</h4>
+							</h3> 
+						</div> 
+					</div>
+				</div>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+		<mat-card>
+			<mat-card-content>
+				<h3 class="mat-h3 mat-color-primary">
+					Where should we send email notifications about this Databox?
+				</h3> 
+				<small class="text-muted">
+					<input type="email" matInput placeholder="test@minerva.io">
+					<span fxFlex></span>
+					<mat-slide-toggle
+					color="primary"
+					class="mb-1"
+					[checked]="checked" >
+				</mat-slide-toggle>
+			</small>
+		</mat-card-content>
+	</mat-card>
+</div>
+
+<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title class="mat-color-primary">
+				<span>Project Folder</span>
+			</mat-card-title>
+		</mat-card-header>
+
+		<mat-divider></mat-divider>
+
+		<mat-card-content>
+			<br>
+			<form>
+				<mat-form-field class="full-width">
+				  	<mat-select placeholder="Folder" value="Banco Popular">
+					  	<mat-option value="Demo">
+					  	  Demo
+					  	</mat-option>
+					    <mat-option value="Banco Popular">
+					      Banco Popular
+					    </mat-option>
+					    <mat-option value="Blank Folder">
+					      Blank Folder
+					    </mat-option>
+				  	</mat-select>
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
+<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title class="mat-color-primary">
+				<span>Upgrade Databox</span>
+			</mat-card-title>
+		</mat-card-header>
+
+		<mat-divider></mat-divider>
+
+		<mat-card-content>
+			<br>
+			<form>
+				<mat-form-field class="full-width">
+				  	<mat-select placeholder="Databox" value="Standard">
+					    <mat-option value="Standard">
+					      Standard
+					    </mat-option>
+					    <mat-option value="Plus">
+					      Plus
+					    </mat-option>
+					    <mat-option value="Custom">
+					      Custom
+					    </mat-option>
+				  	</mat-select>
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+		<mat-card>
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<span>Change Datasource</span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+
+			<mat-card-content>
+				<br>
+				<form>
+				<mat-form-field class="full-width">
+				  	<mat-select placeholder="Datasource" [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
+              <mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
+                {{ singleDatasource.name }}
+              </mat-option>
+				  	</mat-select>
+				</mat-form-field>
+			</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+		<mat-card>
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<span>Change Country</span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<mat-card-content>
+			<br>
+			<form>
+				<mat-form-field class="full-width">
+				  	<mat-select placeholder="Country" value="Costa Rica">
+					    <mat-option *ngFor="let country of countries" [value]="country.name">
+					      {{country.name}}
+					    </mat-option>
+				  	</mat-select>
+				</mat-form-field>
+			</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
+<br>
+<mat-divider></mat-divider><br>
+<div class="deleteButtonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
+
+  	<button mat-raised-button
+    class="mb-05 mat-bg-success"
+    (click)="openDialog('Rebuild Databox', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, '')">
+    Rebuild Databox
+  	</button>
+  	<button mat-raised-button
+    class="mb-05 mat-bg-red"
+    (click)="openDialog('Delete Databox', 'Are you sure you want to delete this databox?', false, data?.folder)">
+    Delete
+	</button>
+</div>
+<br><br>

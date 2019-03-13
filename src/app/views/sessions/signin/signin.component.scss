@@ -1,0 +1,41 @@
+.header-platform{
+	font-size: 17px;
+	text-transform: uppercase;
+}
+
+.copyright{
+	margin: 20px 0;
+	font-size: 13px;
+	text-align: justify;
+}
+
+.minerva-logo{
+	width: 100%;
+	margin: 20px 0;
+}
+
+.mat-card{
+	box-shadow: none !important;
+}
+
+.signin-form{
+	margin: auto auto;
+	min-height: min-content; /* needs vendor prefixes */
+    display: flex;
+    align-items: stretch
+}
+
+.signin-btn{
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+
+.minerva-icon{
+  padding-top: 140px;
+}
+
+.page-wrap {
+  @media screen and (max-width: 764px) {
+    padding-top: 100px !important;
+  }
+}

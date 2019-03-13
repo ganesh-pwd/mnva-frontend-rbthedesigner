@@ -1,0 +1,234 @@
+<div  id="dialog-scroll">
+	<h1 matDialogTitle>{{ data.title }}
+		<span fxFlex></span>
+		<mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+	</h1>
+	<div mat-dialog-content>
+		<p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. </p>
+	</div>
+	<mat-divider></mat-divider>
+	<br>
+	<mat-accordion>
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					<mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+						Receive one email per mention
+					</mat-slide-toggle> 
+				</mat-panel-title>
+				<mat-panel-description>
+
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+
+	        <!-- Time line -->
+	        <mat-card class="default">
+		        <mat-card-content>
+		            <div class="timeline">
+		              	<div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group value="1">
+		                  	        <mat-radio-button value="1">
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top">
+			                    	<b class="timeline-body-title">Who is going to recieve this Summary Report?</b><br>
+
+			                    	<form>
+			                    	  <mat-form-field class="full-width">
+			                    	    <input type="email" matInput placeholder="Email">
+			                    	  </mat-form-field>
+			                    	</form>
+			                  	</div>
+			                </div>
+		              	</div>
+
+			            <div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group value="1">
+		                  	        <mat-radio-button value="1">
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top" fxLayout="row">
+				                    <b class="timeline-body-title">Choose at what time do you need your Email Summary Report sent</b>
+				                  	</div>
+				                  	<div class="timeline-body-content">
+				                    <p><mat-checkbox>9:00 AM</mat-checkbox></p>
+				                    <p><mat-checkbox>11:00 AM</mat-checkbox></p>
+				                    <p><mat-checkbox>12:00 PM</mat-checkbox></p>
+				                    <p><mat-checkbox>4:00 PM</mat-checkbox></p>
+				                    <p>
+				                    	<button 
+				                    	mat-raised-button 
+				                    	color="primary">
+				                    	Next</button>
+				                    </p>
+			                  	</div>
+			                </div>
+			            </div>
+
+			            <div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group  value="1">
+		                  	        <mat-radio-button>
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top" fxLayout="row">
+			                    	<div class="timeline-body-content">
+			                    		<b class="timeline-body-title">Choose what days will the report be received</b><br><br>
+			                    	
+			                    		<p><mat-checkbox>Monday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Tuesday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Wednesday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Thursday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Friday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Saturday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Sunday</mat-checkbox></p>
+			                    		<p>
+			                    			<button 
+			                    			mat-raised-button 
+			                    			color="primary">
+			                    			Next</button>
+			                    		</p>
+			                    	</div>
+			                  	</div>
+			                </div>
+		              	</div>
+
+		              	<div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group  value="1">
+		                  	        <mat-radio-button>
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top" fxLayout="row">
+			                    	<b class="timeline-body-title">Done</b>
+			                  	</div>
+			                </div>
+		              	</div>
+		            </div>
+		        </mat-card-content>
+	        </mat-card>
+	        <!-- End Time line -->
+		</mat-expansion-panel>
+
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					<mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+						Receive an aggregated report periodically
+					</mat-slide-toggle> 
+				</mat-panel-title>
+				<mat-panel-description>
+
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+
+	        <!-- Time line -->
+	        <mat-card class="default">
+		        <mat-card-content>
+		            <div class="timeline">
+		              	<div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group value="1">
+		                  	        <mat-radio-button value="1"> 
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top">
+			                    	<b class="timeline-body-title">Who is going to recieve this Summary Report?</b><br>
+
+			                    	<form>
+			                    	  <mat-form-field class="full-width">
+			                    	    <input type="email" matInput placeholder="Email">
+			                    	  </mat-form-field>
+			                    	</form>
+			                  	</div>
+			                </div>
+		              	</div>
+
+			            <div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group>
+		                  	        <mat-radio-button>
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top" fxLayout="row">
+				                    <b class="timeline-body-title">Choose at what time do you need your Email Summary Report sent</b>
+				                  	</div>
+				                  	<div class="timeline-body-content">
+				                    <p><mat-checkbox>9:00 AM</mat-checkbox></p>
+				                    <p><mat-checkbox>11:00 AM</mat-checkbox></p>
+				                    <p><mat-checkbox>12:00 PM</mat-checkbox></p>
+				                    <p><mat-checkbox>4:00 PM</mat-checkbox></p>
+				                    <p>
+				                    	<button 
+				                    	mat-raised-button 
+				                    	color="primary">
+				                    	Next</button>
+				                    </p>
+			                  	</div>
+			                </div>
+			            </div>
+
+			            <div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group  value="1">
+		                  	        <mat-radio-button>
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top" fxLayout="row">
+			                  		<div class="timeline-body-content">
+			                    		<b class="timeline-body-title">Choose what days will the report be received</b><br><br>
+			                    	
+			                    		<p><mat-checkbox>Monday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Tuesday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Wednesday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Thursday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Friday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Saturday</mat-checkbox></p>
+			                    		<p><mat-checkbox>Sunday</mat-checkbox></p>
+			                    		<p>
+			                    			<button 
+			                    			mat-raised-button 
+			                    			color="primary">
+			                    			Next</button>
+			                    		</p>
+			                    	</div>
+			                  	</div>
+			                </div>
+		              	</div>
+
+		              	<div class="timeline-item">
+			                <div class="timeline-badge">
+			                  	<mat-radio-group  value="1">
+		                  	        <mat-radio-button>
+		                  	        </mat-radio-button>
+		                  	    </mat-radio-group>
+			                </div>
+			                <div class="timeline-body">
+			                  	<div class="timeline-body-top" fxLayout="row">
+			                    	<b class="timeline-body-title">Done</b>
+			                  	</div>
+			                </div>
+		              	</div>
+		            </div>
+		        </mat-card-content>
+	        </mat-card>
+	        <!-- End Time line -->
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>

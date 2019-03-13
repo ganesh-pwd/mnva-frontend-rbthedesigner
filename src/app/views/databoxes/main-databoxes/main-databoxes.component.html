@@ -1,0 +1,91 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap"
+  [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+  <h1 class="mat-h1">
+    <mat-icon>widgets</mat-icon>
+    Databoxes
+  </h1>
+</div>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <button
+    mat-raised-button
+    class="mb-05 mat-color-green"
+    (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
+    Create Databox
+  </button>
+
+  <button
+    mat-raised-button
+    class="mb-05"
+    (click)="openDialog('Create Folder', 'Folder Name', true)">
+    Create Folder
+  </button>
+  <br>
+</div>
+
+<hr>
+<div fxLayout="row" fxLayoutWrap="wrap" >
+  <div fxFlex="100" fxFlex.gt-xs="33" *ngFor="let data of databoxes" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    <mat-card>
+      <mat-card-header>
+      	<mat-card-title class="mat-color-primary" (click)="navigateToFolder(data.folder)">{{data.folder}}</mat-card-title>
+      	<mat-card-subtitle (click)="navigateToDatabox(data.folder, data._id, data.first_create)">{{data.databox_name}} | {{data.location}}</mat-card-subtitle>
+
+      	<span fxFlex></span>
+      	<button mat-icon-button [matMenuTriggerFor]="userMenu" class="">
+      	    <mat-icon class="">more_vert</mat-icon>
+      	</button>
+      	<mat-menu #userMenu="matMenu">
+      	    <button mat-menu-item routerLink="/databoxes/settings/{{data._id}}">Settings</button>
+            <button mat-menu-item routerLink="/databoxes/settings/{{data._id}}">Remove From Folder</button>
+      	</mat-menu>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)">
+        <div class="databox-details">
+            Last Updated: {{data.last_updated | date: 'EEEE, MMMM d, y'}}<br>
+            Results: <b>{{data.result}}</b>
+            <br>
+            <br>
+            {{data.keywords}} Keywords<br>
+            {{data.category}} Categories<br>
+            {{data.sub_category}} Sub Categories<br>
+            Historical: {{data.historical}}<br>
+            <br>
+            Expiry Date:
+            <span *ngIf="data.expiry_date !== 'No Configuration'; else showNoConfig">
+              <b>{{data.expiry_date  | date: 'EEEE, MMMM d, y'}}</b>
+            </span>
+            <ng-template #showNoConfig>
+              <b>{{data.expiry_date}}</b>
+            </ng-template>
+            <br>
+        </div>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-actions>
+      	<h3 class="mat-h4">Status:
+          <span [ngClass]="
+              data.status === 'Ready' ? 'databox-ready' :
+              data.status === 'Expired' ? 'databox-expired':
+              data.status === 'No Configuration' ? 'databox-noconfig' :
+              data.status === 'Refreshing'? 'databox-refreshing' :
+              ''"> {{data.status}}
+          </span>
+        </h3>
+      	<span fxFlex></span>
+      	<button mat-button class="renew mat-color-green"
+      	  *ngIf="data.status==='Expired'" (click)="openDialog('Renew Databox', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false)">
+      	  Renew
+      	</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<br><br>
+
+

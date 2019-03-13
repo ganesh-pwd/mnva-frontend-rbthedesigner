@@ -1,0 +1,42 @@
+
+<div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap" 
+[@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
+<div class="container" id="scroll-signin" fxLayoutAlign="center">
+	<div fxFlex="100" fxFlex.gt-sm="65" class="box">
+		<mat-card>
+			<div fxFlex="100" fxFlex.gt-sm="100">
+				<mat-card>
+					<div class="minerva-logo">
+						<mat-card-header>
+							<img src="assets/images/logo_minerva.svg" class="mb-05">
+						</mat-card-header>
+					</div>
+
+					<mat-card-content>
+						<div class="text-center pb-1">
+							<h4 class="text-muted m-0">We need some details for your new account</h4>
+							<p class="copyright text-muted">
+								Please provide your work email that will be linked to this account. You will be asked to confirm your account through your email for verification. Please note that you will be creating an account for your organization (domain name). New users will be added vía your account.
+							</p>
+						</div>
+						<form>
+							<mat-form-field class="full-width mb-1">
+								<input matInput placeholder="Work Email" [formControl]="email" required>
+								<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+							</mat-form-field>
+
+							<button mat-raised-button class="mat-primary full-width mb-1 signin-btn" [routerLink]="'/accounts/create'">Add</button>
+							<div class="text-center">
+								We only allow accounts for users that have an organization email.<br>
+								<div class="copyright text-muted">
+									<p>©2001-2018 All Rights Reserved. Minerva® is a registered trademark. By clicking this button, you agree to Minerva Anti-spam Policy & Terms of Use. </p>
+								</div>
+							</div>
+						</form>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</mat-card>
+	</div>
+</div>
+</div>

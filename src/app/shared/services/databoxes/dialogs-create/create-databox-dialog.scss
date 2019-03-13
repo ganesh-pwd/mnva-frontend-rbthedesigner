@@ -1,0 +1,79 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+* {
+    box-sizing: border-box
+}
+
+.container {
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    text-align: left !important;
+}
+
+.close{
+	cursor: pointer !important;
+}
+
+.databox-icon{
+	margin-right: 5%;
+}
+
+.databox-icon-help{
+	margin-left: 5%;
+}
+
+table, .details {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+td, th, .details  {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.databox-details{
+    font-family: arial;
+    width: 350px;
+    position: absolute;
+    z-index: 99999;
+    top: 22%;
+    left: 53%;
+    background: white;
+}
+
+h1{
+    margin-top: 3%;
+    margin-left: 2%;
+}
+
+.checkout{
+    text-align: center !important;
+}
+
+.mat-dialog-content {
+  max-height: 75vh;
+}

@@ -1,0 +1,42 @@
+
+<div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap" 
+[@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
+<div class="container" id="scroll-signin" fxLayoutAlign="center">
+	<div fxFlex="100" fxFlex.gt-sm="65" class="box">
+		<mat-card>
+			<div fxFlex="100" fxFlex.gt-sm="100">
+				<mat-card>
+					<div class="minerva-logo">
+						<mat-card-header>
+							<img src="assets/images/logo_minerva.svg" class="mb-05">
+						</mat-card-header>
+						
+					</div>
+
+					<mat-card-content>
+						<div class="text-center pb-1">					
+							<h4 class="text-muted m-0">Choose a name for your new Minerva Account</h4>
+							<p class="copyright text-muted">
+								Please provide a name your account. Your account name will be used by eveyone on the team. A good advice is to use the name of your organization.
+							</p>
+						</div>
+						<form>
+							<mat-form-field class="full-width">
+								<input matInput placeholder="Account Name">
+							</mat-form-field>
+
+							<button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Create New Account</button>
+							<div class="text-center">
+								<a [routerLink]="'/accounts/select'" class="mat-primary text-center full-width">Do you have an account already? Choose account.</a><br>
+								<div class="copyright text-muted">
+									<p>©2001-2018 All Rights Reserved. Minerva® is a registered trademark. By clicking this button, you agree to Minerva Anti-spam Policy & Terms of Use. </p>
+								</div>
+							</div>
+						</form>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</mat-card>
+	</div>
+</div>
+</div>

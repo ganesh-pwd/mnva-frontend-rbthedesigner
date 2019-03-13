@@ -1,0 +1,21 @@
+<div>
+    <h3 class="mat-h3">Change Image</h3>
+    <small>Recommended image size: 128x128 pixels</small>
+
+    <form>
+      <input type="file" class="full-width" id="photo">
+    </form>
+
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button
+        color="primary"
+        (click)="replaceImage()">
+        	Change Image
+    	</button>
+        <button
+        type="button"
+        mat-raised-button
+        (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+</div>

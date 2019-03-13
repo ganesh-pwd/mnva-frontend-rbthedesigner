@@ -1,0 +1,174 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+		<h1 class="mat-h1">
+			<mat-icon>widgets</mat-icon> {{databoxItemData?.databox_name}}  
+			<small>
+				<mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">
+				edit</mat-icon> | 
+				<span class="main-route">
+					<a routerLink="/databoxes/">Databoxes </a> / 
+					<a routerLink="/databoxes/{{databoxItemData?.folder}}">{{databoxItemData?.folder}} </a> / 
+					<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, data?.first_create)">
+					{{databoxItemData?.databox_name}}</a> /
+					<a routerLink="/databoxes/settings/{{databoxItemData?._id}}">Settings</a>
+				</span> / Connect Your Data
+			</small>
+		</h1>
+	</div>
+</div>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+	<button mat-raised-button 
+	class="mb-05" 
+	color="primary" 
+	(click)="navigateToDatabox(data?.folder, data?._id, data?.first_create)">
+	Back to Databox
+	</button>&nbsp;
+</div>
+<hr>
+<br>
+
+<!-- Connectors -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+		<h1 class="mat-h1 mat-color-primary connector">Connectors</h1>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card (click)="openDialog('How to connect to Power BI', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, 'Power BI')">
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/power_bi.png" class="minerva-logo" >
+					<span class="title-header">Power BI <br>
+						<small class="text-muted">Microsoft</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="card-content">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card (click)="openDialog('How to connect to Tableau', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, 'Tableau')">
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/tableau.png" class="minerva-logo" >
+					<span class="title-header">Tableau <br>
+						<small class="text-muted">Tableau</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="card-content">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card (click)="openDialog('How to connect to Data Studio', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, 'Data Studio')">
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/data_studio.png" class="minerva-logo" >
+					<span class="title-header">Data Studio <br>
+						<small class="text-muted">Google</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="card-content">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
+
+<br><br>
+
+<!-- Notification -->
+<div fxLayout="row" fxLayoutWrap="wrap" 
+	[@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+		<h1 class="mat-h1 mat-color-primary connector">Notification</h1>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >
+		<mat-card (click)="openNotificationDialog('Email Notifications')">
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/email.png" class="minerva-logo" >
+					<span class="title-header">Email <br>
+						<small class="text-muted">Email</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="card-content">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card>
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/slack.png" class="minerva-logo" >
+					<span class="title-header">Slack <br>
+						<small class="text-muted">Slack</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="card-content">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card>
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/apple_tv.png" class="minerva-logo" >
+					<span class="title-header">Apple TV <br>
+						<small class="text-muted">Apple</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="card-content">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
+
+<br><br>

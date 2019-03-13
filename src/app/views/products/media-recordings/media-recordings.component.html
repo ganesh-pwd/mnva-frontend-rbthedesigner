@@ -1,0 +1,128 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+    <h1 class="mat-h1">
+        <mat-icon>shopping_cart</mat-icon>
+        Products
+        <small>   |    
+          <span class="main-route">
+            <a routerLink="/products">Products</a>
+          </span> / Media Recordings</small>
+      </h1>
+  </div>
+</div>
+
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    <mat-card>
+      <mat-card-content>
+        <div class="full-width mb-1 mt-1">
+          <button mat-raised-button color="primary" routerLink="/products/cart">
+            <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
+          </button>
+        </div>
+
+        <h4>Media Recordings</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis asperiores, explicabo amet similique fuga optio laborum iste culpa alias iure unde! Tenetur velit fuga sit suscipit nobis odio facilis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis asperiores, explicabo amet similique fuga optio laborum iste culpa alias iure unde! Tenetur velit fuga sit suscipit nobis odio facilis? Consequatur.
+        </p>
+
+        <div>
+          <table class="mat-elevation-z8">
+              <tbody>
+                <tr>
+                  <td>Select Media</td>
+                  <td>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Media" value="Radio">
+                        <mat-option value="Radio">Radio</mat-option>
+                        <mat-option>TV</mat-option>
+                        <mat-option>Internet</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Country</td>
+                  <td>
+                    <mat-form-field>
+                    <mat-select placeholder="Select Country" value="Costa Rica">
+                      <mat-option value="Costa Rica">Costa Rica</mat-option>
+                      <mat-option>United States</mat-option>
+                      <mat-option>Germany</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Frequency</td>
+                  <td>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Frequency" value="89.1FM">
+                        <mat-option value="89.1FM">89.1FM</mat-option>
+                        <mat-option>95.5FM</mat-option>
+                        <mat-option>101.1FM</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Time Start</td>
+                  <td>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Time" value="10:00 AM">
+                        <mat-option value="10:00 AM">10:00 AM</mat-option>
+                        <mat-option>11:00 AM</mat-option>
+                        <mat-option>12:00 PM</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Duration</td>
+                  <td>
+                    <mat-form-field>
+                    <mat-select placeholder="Select Duration" [(ngModel)]="total">
+                      <mat-option [value]=250>60 min</mat-option>
+                      <mat-option [value]=200>50 min</mat-option>
+                      <mat-option [value]=150>40 min</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Date Start</td>
+                  <td>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker" placeholder="Select a date">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Repeat</td>
+                  <td>
+                    <mat-form-field>
+                    <mat-select placeholder="Select Value" value="Just One Time">
+                      <mat-option value="Just One Time">Just One Time</mat-option>
+                      <mat-option>Just Two Time</mat-option>
+                      <mat-option>Just Three Time</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </td>
+                </tr>
+                <tr class="action mat-color-primary">
+                  <td>${{total}}</td>
+                  <td>
+                    <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart(total)">
+                      <mat-icon>shopping_cart</mat-icon> Add to cart
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

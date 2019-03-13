@@ -1,0 +1,166 @@
+<div id="dialog-scroll">
+  <h1 matDialogTitle>{{ data.title }}
+      <span fxFlex></span><mat-icon class="close" (click)="closeDialog()">close</mat-icon>
+  </h1>
+
+  <!-- Show databox option -->
+  <div mat-dialog-content *ngIf="!selectedItem">
+      {{data.data}}
+
+      <div class="container">
+          <div *ngFor="let data of databoxItem">
+              <button mat-raised-button (click)="selectDatabox(data)">
+              <mat-icon class="databox-icon"
+              *ngIf="data.databox_type === 'Standard'">
+              star_border</mat-icon>
+
+              <mat-icon class="databox-icon"
+              *ngIf="data.databox_type === 'Plus'">
+              star</mat-icon>
+
+              <mat-icon class="databox-icon"
+              *ngIf="data.databox_type === 'Custom'">
+              thumb_up_alt</mat-icon>
+
+              {{data.databox_type}} Databox
+              <mat-icon class="databox-icon-help" (mouseover)="showDataboxTypeDetail(data._id)" (mouseout)="closeSelectedDataboxType()">help_outline</mat-icon>
+
+              <span fxFlex></span>
+              <span>${{data.price}}
+              <span *ngIf="!data.price">-</span>/Mo</span>
+              </button>
+          </div>
+
+          <div class="myTable">
+              <div class="databox-details mat-elevation-z8" *ngIf="selectedDatabox" [@animate]="{value:'*', params:{ scale:'.5', delay:'200ms' }}">
+                <h1 class="mat-h3 mat-color-primary">The Basics</h1>
+                <table>
+                  <tbody>
+                    <tr>
+                        <td>Data Source</td>
+                        <td>{{selectedDatabox?.data_source}}</td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td>{{selectedDatabox?.country}}</td>
+                    </tr>
+                    <tr>
+                        <td>Keywords</td>
+                        <td>{{selectedDatabox?.keywords}}</td>
+                    </tr>
+                    <tr>
+                        <td>Categories</td>
+                        <td>{{selectedDatabox?.categories}}</td>
+                    </tr>
+                    <tr>
+                        <td>Subcategories</td>
+                        <td>{{selectedDatabox?.sub_categories}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <h1 class="mat-h3 mat-color-primary">Connect Your Data</h1>
+                <table>
+                  <tbody>
+                    <tr>
+                        <td>Alerts</td>
+                        <td>{{selectedDatabox?.alerts}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email Reports</td>
+                        <td>{{selectedDatabox?.email_reports}}</td>
+                    </tr>
+                    <tr>
+                        <td>Enrichment</td>
+                        <td>{{selectedDatabox?.enrichment}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- After selecting databox -->
+  <div mat-dialog-content *ngIf="selectedItem" [@animate]="{value:'*', params:{ scale:'.5', delay:'200ms' }}">
+
+      <h1 class="mat-h1 mat-color-primary">{{selectedItem?.databox_type}} Databox |
+        <span>${{selectedItem.price}}
+        <span *ngIf="selectedItem?.databox_type === 'Custom'">{{customDatabox === 0 ? '-' : customDatabox}}</span>/Mo</span>
+      </h1>
+
+      <div class="container">
+        <div class="details" *ngIf="selectedItem?.databox_type !== 'Custom'">
+          <dd><span class="text-muted">{{selectedItem?.data_source}} Data source</span></dd>
+          <dd><span class="text-muted">{{selectedItem?.country}} Country</span></dd>
+          <dd><span class="text-muted">{{selectedItem?.keywords}} Keywords</span></dd>
+          <dd><span class="text-muted">{{selectedItem?.categories}} Category</span></dd>
+          <dd><span class="text-muted">{{selectedItem?.sub_categories}} Sub-Categories</span></dd>
+        </div>
+
+        <div class="details" *ngIf="selectedItem?.databox_type === 'Custom'">
+          <mat-select placeholder="Select Keywords" 
+          class="choose-version mb-1" 
+          [(ngModel)]="customKeyword"
+          (ngModelChange)="computeTotal()">
+            <mat-option [value]=17.5>5 Keywords</mat-option>
+            <mat-option [value]=22.5>10 Keywords</mat-option>
+            <mat-option [value]=27.5>15 Keywords</mat-option>
+            <mat-option [value]=32.5>20 Keywords</mat-option>
+            <mat-option [value]=37.5>25 Keywords</mat-option>
+          </mat-select>
+          <mat-select placeholder="Select Categories" 
+            class="choose-version mb-1" 
+            [(ngModel)]="customCategory"
+            (ngModelChange)="computeTotal()">
+            <mat-option [value]=17.5>5 Categories</mat-option>
+            <mat-option [value]=22.5>10 Categories</mat-option>
+            <mat-option [value]=27.5>15 Categories</mat-option>
+            <mat-option [value]=32.5>20 Categories</mat-option>
+            <mat-option [value]=37.5>25 Categories</mat-option>
+          </mat-select>
+          <mat-select placeholder="Select SubCategories" 
+            class="choose-version mb-1" 
+            [(ngModel)]="customSubCategory"
+            (ngModelChange)="computeTotal()">
+            <mat-option [value]=17.5>5 Sub-Categories</mat-option>
+            <mat-option [value]=22.5>10 Sub-Categories</mat-option>
+            <mat-option [value]=27.5>15 Sub-Categories</mat-option>
+            <mat-option [value]=32.5>20 Sub-Categories</mat-option>
+            <mat-option [value]=37.5>25 Sub-Categories</mat-option>
+          </mat-select>
+          <mat-select placeholder="Select Days" 
+            class="choose-version mb-1" 
+            [(ngModel)]="customDay"
+            (ngModelChange)="computeTotal()">
+            <mat-option [value]=17.5>7 Days Historical</mat-option>
+            <mat-option [value]=22.5>14 Days Historical</mat-option>
+            <mat-option [value]=27.5>28 Days Historical</mat-option>
+            <mat-option [value]=32.5>49 Days Historical</mat-option>
+            <mat-option [value]=37.5>100 Days Historical</mat-option>
+          </mat-select>
+        </div>
+
+        <table>
+          <tbody>
+            <tr>
+                <td>Alerts</td>
+                <td>{{selectedItem?.alerts}}</td>
+            </tr>
+            <tr>
+                <td>Email Reports</td>
+                <td>{{selectedItem?.email_reports}}</td>
+            </tr>
+            <tr>
+                <td>Enrichment</td>
+                <td>{{selectedItem?.enrichment}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <button mat-raised-button class="mat-primary checkout" (click)="createDatabox()">
+          Checkout {{selectedItem?.databox_type}} Databox
+        </button>
+      </div>
+  </div>
+</div>

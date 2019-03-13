@@ -1,0 +1,60 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+    <h1 class="mat-h1">
+        <mat-icon>pie_chart</mat-icon>
+        Template Gallery
+        <small>   |    
+          <span class="main-route">
+            <a routerLink="/template-gallery">Template Gallery</a>
+          </span> / {{data?.type}} </small>
+      </h1>
+  </div>
+</div>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+  <button mat-raised-button
+  class="mb-05"
+  color="primary"
+  routerLink="/template-gallery">
+  Back to Gallery
+  </button>&nbsp;
+</div>
+<hr>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="40" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    <mat-card class="default p-1">
+      <mat-card-title class="pl-0"><h2 class="mat-h2">{{data?.type}}</h2></mat-card-title>
+      <mat-card-content class="p-0">
+        <p [innerHtml]="data?.content"></p>
+          <br>
+          <mat-divider></mat-divider>
+          <br><br>
+          <div class="text-center">
+            <mat-select placeholder="Choose a version" class="choose-version mb-1">
+              <mat-option *ngFor="let version of versions" [value]="version.value" ngDefaultControl>
+                {{version.viewValue}}
+              </mat-option>
+            </mat-select><br>
+            <button mat-raised-button color="primary" class="mr-1">Download Template</button>
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="60" [@animate]="{value:'*', params:{ x:'300px', delay:'400ms' }}">
+    <mat-card class="default">
+      <mat-card-content class="p-0">
+        <img src="/assets/images/image-placeholder.png" class="img-fluid" alt="Responsive image">
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="default">
+      <mat-card-content class="p-0">
+        <img src="/assets/images/image-placeholder.png" class="img-fluid" alt="Responsive image">
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+

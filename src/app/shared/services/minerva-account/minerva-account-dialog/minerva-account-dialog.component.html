@@ -1,0 +1,69 @@
+<div>
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div *ngIf="data.title === 'Delete Account'">
+    	<div mat-dialog-content>
+    		<p>Are you sure you want to delete de Account? All your databoxes will be canceled and you will not be able to restore the previous configuration. All your data will be lost.</p>
+    	</div>
+
+    	<mat-form-field class="full-width">
+    	    <input matInput placeholder="Write down the word 'delete' to confirm">
+    	</mat-form-field>
+
+    	<br>
+    	<div mat-dialog-actions>
+    	    <span fxFlex></span>
+    	    <button type="button"
+    	    mat-raised-button
+    	    color="warn" (click)="dialogRef.close(false)">Delete Account</button>
+
+    	    <button
+    	    type="button"
+    	    mat-raised-button
+    	    (click)="dialogRef.close(false)">Cancel</button>
+    	</div>
+    </div>
+
+    <div *ngIf="data.title === 'Add New User' || data.title === 'Edit User'">
+    	<mat-form-field class="full-width">
+    	    <input matInput placeholder="Email Address" value="s@mnrva.io">
+    	</mat-form-field>
+
+    	<br>
+    	<h3 class="mat-h3">Role</h3>
+    	<p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. </p>
+
+    	<mat-form-field>
+    	  <mat-select value="Administrator">
+    	    <mat-option value="Administrator">
+    	      Administrator
+    	    </mat-option>
+    	    <mat-option value="Normal User">
+    	      Normal User
+    	    </mat-option>
+    	  </mat-select>
+    	</mat-form-field>
+
+    	<br>
+    	<div mat-dialog-actions>
+    	    <span fxFlex></span>
+    	    <button
+    	    *ngIf="data.title === 'Add New User'"
+    	    type="button"
+    	    mat-raised-button
+          class="mat-color-green"
+          (click)="dialogRef.close(false)">Invite</button>
+
+    	    <button
+    	    *ngIf="data.title === 'Edit User'"
+    	    type="button"
+    	    mat-raised-button
+          color="primary"
+          (click)="dialogRef.close(false)">Save</button>
+
+    	    <button
+    	    type="button"
+    	    mat-raised-button
+    	    (click)="dialogRef.close(false)">Cancel</button>
+    	</div>
+    </div>
+</div>

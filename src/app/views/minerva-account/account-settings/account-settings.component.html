@@ -1,0 +1,70 @@
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+	<h1 class="mat-h1">
+		<mat-icon>settings</mat-icon>
+		Settings
+		<small>   |     Account / Settings </small>
+	</h1>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
+
+		<mat-card class="profile-sidebar mb-1 pb-0">
+      <div class="text-center app-user">
+        <div class="app-user-photo" (click)="changeImageDialog('Change Image')">
+          <img src="{{userImage}}" alt="">
+        </div><br>
+        <h1 class="mat-h3">CCK</h1>
+      </div>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="profile-nav">
+        <mat-nav-list>
+          <mat-list-item routerLink="/accounts/minerva-news" routerLinkActive="list-item-active">
+            <mat-icon>home</mat-icon>
+            Minerva News
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/users" routerLinkActive="list-item-active">
+            <mat-icon>group</mat-icon>
+            Users
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/billings" routerLinkActive="list-item-active">
+            <mat-icon>monetization_on</mat-icon>
+            Billing
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+		<mat-card>
+			<mat-card-content>
+				<h1 class="mat-h2">Change Account Name</h1>
+				<br>
+
+				<mat-form-field>
+				    <input matInput placeholder="Account Name" value="CCK">
+				</mat-form-field>
+
+				<h1 class="mat-h2">Email From Minerva</h1>
+				<mat-checkbox>When New User Joins</mat-checkbox><br>
+				<mat-checkbox checked=true>When New Data Sources are Released</mat-checkbox><br>
+				<mat-checkbox>When An Invoice is Generated</mat-checkbox><br><br><br>
+
+				<h1 class="mat-h2">Delete Account</h1>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique.</p>
+				<button mat-raised-button color="warn" (click)="deleteAccountDialog('Delete Account')">Delete Account</button>
+
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>

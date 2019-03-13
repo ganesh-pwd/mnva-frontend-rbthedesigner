@@ -1,0 +1,41 @@
+<div class="sidebar-panel">
+  <div id="scroll-area" class="navigation-hold" fxLayout="column">
+    <!-- App Logo -->
+    <div class="branding default-bg">
+      <a routerLink = "/databoxes"><img src="assets/images/logo_minerva.svg" width="150" alt="logo minerva"></a>
+      <!-- Two different logos for dark and light themes -->
+
+    </div>
+
+    <!-- Sidebar user -->
+    <div class="app-user">
+      <div class="app-user-photo">
+        <img src="{{userImage}}" alt="">
+      </div>
+
+      <span class="mb-05">
+        <mat-form-field>
+          <mat-select [(value)]="selected">
+            <mat-option value="CCK" selected>
+              CCK
+            </mat-option>
+            <mat-option value="Paprika Digital">
+              Paprika Digital
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+
+      <!-- Small buttons -->
+      <div class="app-user-controls">
+        <a routerLink = "/accounts/minerva-news"
+        class="text-muted"
+        mat-xs-button>
+          Configuration
+        </a>
+      </div>
+    </div>
+    <!-- Navigation -->
+    <app-sidenav [items]="menuItems" [hasIconMenu]="hasIconTypeMenuItem" [iconMenuTitle]="iconTypeMenuTitle"></app-sidenav>
+  </div>
+</div>

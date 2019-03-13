@@ -1,0 +1,33 @@
+.header-platform{
+	font-size: 17px;
+	text-transform: uppercase;
+}
+
+.copyright{
+	margin: 20px 0;
+	font-size: 13px;
+	text-align: justify;
+}
+
+
+.mat-card{
+	box-shadow: none !important;
+}
+
+
+.signin-form{
+	margin: auto auto;
+	min-height: min-content; /* needs vendor prefixes */
+    display: flex;
+    align-items: stretch
+}
+
+.container{
+    overflow: auto !important;
+
+}
+
+.signin-btn{
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}

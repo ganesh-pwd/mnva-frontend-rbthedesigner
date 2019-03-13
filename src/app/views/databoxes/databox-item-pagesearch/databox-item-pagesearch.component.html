@@ -1,0 +1,148 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="folder">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+    <h1 class="mat-h1">
+      <mat-icon>widgets</mat-icon> {{data?.databox_name}}  
+      <small>
+        <mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> 
+        <mat-icon (click)="openDialog('Delete Databox', 'Are you sure you want to delete this databox?', false, '')">delete
+        </mat-icon> | 
+        <span class="main-route">
+        <a routerLink="/databoxes/">Databoxes </a> / 
+        <a routerLink="/databoxes/{{folder}}">{{folder}} </a> / 
+        <a (click)="navigateToDataboxPageSearch(folder, data?._id)">{{data?.databox_name}} </a> / 
+        {{data?.page_search_name}} Searched
+      </span>
+      </small>
+    </h1>
+  </div>
+</div>
+
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <button 
+    mat-raised-button 
+    class="mb-05" 
+    color="primary" 
+    routerLink="/databoxes/settings/{{data?._id}}">
+    Databox Settings
+  </button>
+
+  <button 
+    mat-raised-button 
+    class="mb-05" 
+    color="primary" 
+    routerLink="/databoxes/settings/algorithm/{{data?._id}}">
+    Algorithm
+  </button>
+
+  <button 
+    mat-raised-button 
+    class="mb-05" 
+    color="primary"
+    routerLink="/databoxes/settings/connect/{{data?._id}}">
+    Connect Your Data
+  </button>
+</div>
+<hr>
+
+<!-- If databox has data -->
+<div fxLayout="row" fxLayoutWrap="wrap" [hidden]="!!data?.first_create" #tableScroll>
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ x:'300px', delay:'400ms' }}">
+
+    <div class="page-search mat-bg-success">
+      <p><a class="see-databox-search" (click)="navigateToDataboxPageSearch(folder, data?._id)">Back to Databox results</a>
+          <span fxFlex></span>
+          {{data?.mentions}} mentions     |    Last Updated: {{data?.last_updated}}
+      </p>
+    </div>
+
+    <div class="mat-elevation-z8">
+      <table mat-table #table 
+        [dataSource]="dataSource" 
+        matSort>
+
+        <!-- Page Search Column -->
+        <ng-container matColumnDef="page_name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{data?.page_search_name}} Name</th>
+          <td mat-cell *matCellDef="let row"  width="750px">{{row.page_name}}</td>
+        </ng-container>
+
+        <!-- Content Column -->
+        <ng-container matColumnDef="content">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header width="550px"></th>
+          <td mat-cell *matCellDef="let row"><p></p></td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div class="table-foot">
+        <!--
+        <div><button mat-raised-button>Add Row</button></div>-->
+        <span fxFlex></span>
+        <mat-paginator #paginator [hidden]="!dataSource"
+          [length]="dataSource.data.length"
+          [pageIndex]="0"
+          [pageSize]="10"
+          [pageSizeOptions]="[10, 20, 50, 100]">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div fxLayout="row" fxLayoutWrap="wrap" [hidden]="!!data?.first_create">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+    <div class="bottom-data">
+      <h2 class="mat-h1">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
+      <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
+
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{data?.page_search_name}} Name">
+        </mat-form-field>
+         
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="{{data?.page_search_name}} ID" >
+        </mat-form-field>
+      </form>
+
+      <button mat-raised-button>Send</button>
+
+      <h2 class="mat-h1">Do you want to reset the values in this table to the original value?</h2>
+      <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
+      <button mat-raised-button>Reset</button><br><br>
+    </div>
+  </div>
+</div>
+
+<!-- If databox is newly created -->
+<div fxLayout="row" fxLayoutWrap="wrap" [hidden]="!data?.first_create" [@animate]="{value:'*', params:{ x:'300px', delay:'400ms' }}">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+
+    <mat-card class="p-0">
+      <mat-card-header class="mat-bg-warn align-right">
+        <mat-card-title>
+          <p>No configuration yet. Please go to your Databox Settings and create a query   </p>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <br><br>
+        <div class="text-center">
+          <h1 class="mat-h1 text-muted">No Data Yet</h1>
+          <img src="/assets/images/image-placeholder.png" alt="" class="minerva-logo">
+          <h5 class="mat-h4">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere <br> qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, <br> veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h5>
+          <br>
+          <button mat-raised-button routerLink="/databoxes/settings/query/{{data?._id}}">Create your query</button>&nbsp;
+          
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<br><br>

@@ -1,0 +1,55 @@
+<div>
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <form *ngIf="data.input; else showText">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="{{data.data}}" [(ngModel)]="folderName" [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+        </form>
+
+        <ng-template #showText>
+            {{data.data}}
+        </ng-template>
+
+        <div *ngIf="data.folder === 'Power BI' 
+            || data.folder === 'Tableau' 
+            || data.folder === 'Data Studio'">
+                <hr> 
+                <h3 class="mat-h3 mat-color-primary">See Templates for {{data.folder}}</h3>
+                
+                <img src="/assets/images/image-placeholder.png">
+        </div>
+    </div>
+    <br>
+    <div mat-dialog-actions>
+
+        <span fxFlex></span>
+
+        <div *ngIf="data.folder !== 'Power BI' 
+            && data.folder !== 'Tableau' 
+            && data.folder !== 'Data Studio'">
+                <button *ngIf="data.title !== 'Create Folder' && data.title !== 'Delete Folder'"
+                type="button" 
+                mat-raised-button
+                color="primary" 
+                (click)="dialogRef.close(true)">{{data.title}}</button>
+
+                <button *ngIf="data.title === 'Create Folder'"
+                type="button" 
+                mat-raised-button
+                color="primary" 
+                (click)="addFolder()">{{data.title}}</button>
+
+                <button *ngIf="data.title === 'Delete Folder'"
+                type="button" 
+                mat-raised-button
+                color="warn" 
+                (click)="deleteFolder(data.folder)">{{data.title}}</button>
+        </div>&nbsp;&nbsp;
+        
+        <button 
+        type="button"
+        mat-raised-button 
+        (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+</div>

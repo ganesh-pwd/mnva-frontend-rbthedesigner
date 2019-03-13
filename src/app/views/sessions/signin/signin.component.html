@@ -1,0 +1,53 @@
+
+<div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap"
+  [@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
+  <div class="container" id="scroll-signin" fxLayoutAlign="center">
+    <div fxFlex="100" fxFlex.gt-sm="73" class="box">
+      <mat-card>
+        <div fxFlex="100" fxFlex.gt-sm="35" class="minerva-icon">
+          <mat-card>
+            <mat-card-content>
+              <div class="text-center pb-1">
+                <img src="assets/images/logo_minerva.svg" class="mb-05">
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div fxFlex="100" fxFlex.gt-sm="65">
+          <mat-card>
+            <div class="minerva-sm">
+              <mat-card-header>
+                <img src="assets/images/logo_minerva.svg" class="mb-05">
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+            </div>
+
+            <mat-card-content>
+              <div class="text-center pb-1">
+                <h4 class="text-muted m-0">Log in to your account</h4>
+                <p class="copyright text-muted">
+                  Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </div>
+              <form>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Facebook</button>
+
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button>
+                <div class="text-center">
+                  <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Are you a new user? Sign Up Here</a><br>
+
+                  <div class="copyright text-muted">
+                    <p>©2001-2018 All Rights Reserved. Minerva® is a registered trademark. By clicking this button, you agree to Minerva Anti-spam Policy & Terms of Use. </p>
+                  </div>
+                </div>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

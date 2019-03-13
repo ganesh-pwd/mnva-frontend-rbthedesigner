@@ -1,0 +1,13 @@
+.search-article{
+	display: inline-flex !important;
+	vertical-align: middle !important;
+
+	mat-form-field{
+		width: 500px !important;
+	}
+
+	mat-icon{
+		padding-top: 15px;
+		cursor: pointer;
+	}
+}

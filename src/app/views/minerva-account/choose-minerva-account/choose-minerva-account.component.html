@@ -1,0 +1,41 @@
+
+<div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap" 
+[@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
+<div class="container" id="scroll-signin" fxLayoutAlign="center">
+	<div fxFlex="100" fxFlex.gt-sm="65" class="box">
+		<mat-card>
+			<div fxFlex="100" fxFlex.gt-sm="100">
+				<mat-card>
+					<div class="minerva-logo">
+						<mat-card-header>
+							<img src="assets/images/logo_minerva.svg" class="mb-05">
+						</mat-card-header>
+						
+					</div>
+
+					<mat-card-content>
+						<div class="text-center pb-1">					
+							<h4 class="text-muted m-0">Choose a Minerva Account</h4>
+							<p class="copyright text-muted">
+								Please select your account. Once you selected an account it will load all the settings and details for this account.
+							</p>
+						</div>
+						<form>
+							<mat-radio-group>
+							  	<mat-radio-button value="CCK">CCK</mat-radio-button>
+							  	<mat-radio-button value="Paprika Digital">Paprika Digital</mat-radio-button>
+							  	<mat-radio-button value="Pepsi Costa Rica">Pepsi Costa Rica</mat-radio-button>
+							</mat-radio-group>
+
+							<button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Select an Account</button>
+							<div class="text-center">
+								
+							</div>
+						</form>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</mat-card>
+	</div>
+</div>
+</div>

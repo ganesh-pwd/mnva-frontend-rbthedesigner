@@ -1,0 +1,47 @@
+<div>
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <form>
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Category Name"
+                [(ngModel)]="categoryName" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Choose a Type">
+                    <mat-option>Category</mat-option>
+                    <mat-option>Sub Category</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <textarea matInput placeholder="Add Query" rows="4" cols="80"></textarea>
+            </mat-form-field>
+
+            <div class="mat-h3 text-muted query-help">
+                <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                <a>Show Simple Example</a>
+
+                <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                <a>Show Complex Example</a>
+
+                <mat-icon class="query-icon">help_outline</mat-icon>
+                <a>Need More Help?</a>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button
+          class="mb-05 mat-bg-success">
+          Add Expression
+        </button>
+
+        <button mat-raised-button
+          class="mb-05 mat-bg-red"
+          (click)="dialogRef.close(false)">
+          Cancel
+        </button>
+    </div>
+</div>

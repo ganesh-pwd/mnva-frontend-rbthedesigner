@@ -1,0 +1,45 @@
+<div>
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div mat-dialog-content>
+    	<p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
+    </div>
+
+    <table>
+    	<thead>
+    		<tr>
+    			<th>Algorithm</th>
+    			<th>Topic Recognition</th>
+    		</tr>
+    	</thead>
+      	<tbody>
+	        <tr>
+	            <td>Cost</td>
+	            <td>$0.03 / Mention</td>
+	        </tr>
+
+	        <tr>
+	            <td>Current Mentions</td>
+	            <td>10,000</td>
+	        </tr>
+
+	        <tr>
+	            <td>Total Cost</td>
+	            <td>$300</td>
+	        </tr>
+
+      	</tbody>
+    </table>
+
+    <br>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button type="button" 
+        mat-raised-button
+        color="primary">Apply</button>
+        
+        <button 
+        type="button"
+        mat-raised-button 
+        (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+</div>

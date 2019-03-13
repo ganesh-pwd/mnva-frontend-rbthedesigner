@@ -1,0 +1,175 @@
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+	<h1 class="mat-h1">
+		<mat-icon>person</mat-icon>
+		Users
+		<small>   |     Account / Users </small>
+	</h1>
+</div>
+
+
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <button
+    class="mb-05"
+    color="primary"
+    mat-raised-button
+    (click)="openDialog('Add New User')">
+		Add User
+	</button>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
+
+		<mat-card class="profile-sidebar mb-1 pb-0">
+      <div class="text-center app-user">
+        <div class="app-user-photo" (click)="changeImageDialog('Change Image')">
+          <img src="{{userImage}}" alt="">
+        </div><br>
+        <h1 class="mat-h3">CCK</h1>
+      </div>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="profile-nav">
+        <mat-nav-list>
+          <mat-list-item routerLink="/accounts/minerva-news" routerLinkActive="list-item-active">
+            <mat-icon>home</mat-icon>
+            Minerva News
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
+            <mat-icon>settings</mat-icon>
+            Settings
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/users" routerLinkActive="list-item-active">
+            <mat-icon>group</mat-icon>
+            Users
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item routerLink="/accounts/billings" routerLinkActive="list-item-active">
+            <mat-icon>monetization_on</mat-icon>
+            Billing
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+		</mat-card>
+	</div>
+
+	<!-- Users -->
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+		<div fxLayout="row" fxLayoutWrap="wrap">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+				<mat-card>
+					<mat-card-header>
+
+					  	<mat-card-title class="mat-color-primary">
+					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
+					  		<p>Snow Benton</p>
+
+					  	</mat-card-title>
+
+					  	<span fxFlex></span>
+					  	<button mat-icon-button [matMenuTriggerFor]="userMenu">
+					      	<mat-icon class="">more_vert</mat-icon>
+					  	</button>
+					  	<mat-menu #userMenu="matMenu">
+					      	<button mat-menu-item (click)="openDialog('Edit User')">
+					      	Edit User</button>
+					      	<button mat-menu-item>Delete User</button>
+					  	</mat-menu>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<br>
+					<mat-card-content>
+						<span class="mat-h3 user-details">
+							<mat-icon>account_circle</mat-icon> Administrator
+						</span><br>
+						<span class="mat-h3 user-details">
+							<mat-icon>email</mat-icon> snowbenton@mnrva
+						</span><br>
+						<span class="mat-h3 user-details">
+							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
+						</span><br>
+					</mat-card-content>
+				</mat-card>
+			</div>
+
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+				<mat-card>
+					<mat-card-header>
+
+					  	<mat-card-title class="mat-color-primary">
+					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
+					  		<p>Snow Benton</p>
+
+					  	</mat-card-title>
+
+					  	<span fxFlex></span>
+					  	<button mat-icon-button [matMenuTriggerFor]="userMenu">
+					      	<mat-icon class="">more_vert</mat-icon>
+					  	</button>
+					  	<mat-menu #userMenu="matMenu">
+					      	<button mat-menu-item (click)="openDialog('Edit User')">
+					      	Edit User</button>
+					      	<button mat-menu-item>Delete User</button>
+					  	</mat-menu>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<br>
+					<mat-card-content>
+						<span class="mat-h3 user-details">
+							<mat-icon>account_circle</mat-icon> Administrator
+						</span><br>
+						<span class="mat-h3 user-details">
+							<mat-icon>email</mat-icon> snowbenton@mnrva
+						</span><br>
+						<span class="mat-h3 user-details">
+							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
+						</span><br>
+					</mat-card-content>
+				</mat-card>
+			</div>
+
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+				<mat-card>
+					<mat-card-header>
+
+					  	<mat-card-title class="mat-color-primary">
+					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
+					  		<p>Snow Benton</p>
+
+					  	</mat-card-title>
+
+					  	<span fxFlex></span>
+					  	<button mat-icon-button [matMenuTriggerFor]="userMenu">
+					      	<mat-icon class="">more_vert</mat-icon>
+					  	</button>
+					  	<mat-menu #userMenu="matMenu">
+					      	<button mat-menu-item (click)="openDialog('Edit User')">
+					      	Edit User</button>
+					      	<button mat-menu-item>Delete User</button>
+					  	</mat-menu>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<br>
+					<mat-card-content>
+						<span class="mat-h3 user-details">
+							<mat-icon>account_circle</mat-icon> Administrator
+						</span><br>
+						<span class="mat-h3 user-details">
+							<mat-icon>email</mat-icon> snowbenton@mnrva
+						</span><br>
+						<span class="mat-h3 user-details">
+							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
+						</span><br>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+	</div>
+</div>

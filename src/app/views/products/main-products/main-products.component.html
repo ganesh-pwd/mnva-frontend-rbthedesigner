@@ -1,0 +1,247 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+    <h1 class="mat-h1">
+        <mat-icon>shopping_cart</mat-icon>
+        Products
+        <small>   |    
+          <span class="main-route">
+            <a routerLink="/products">Products</a>
+          </span> / Databoxes</small>
+      </h1>
+  </div>
+</div>
+
+<mat-card class="p-0 pb-1" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+  <div class="full-width mb-1 mt-1 add-cart">
+    <button mat-raised-button color="primary" routerLink="/products/cart">
+      <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
+    </button>
+  </div>
+
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <!-- Pricing box -->
+      <div fxFlex="100" fxFlex.gt-sm="33">
+        <mat-card class="plan-pricing text-center p-0">
+          <mat-card-title class="mat-bg-gray">
+            <div class="card-title-text">
+              <div class="">Standard</div>
+              <div class="text-sm">For new members</div>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-title>
+          <mat-card-content class="p-0">
+            <div class="p-0">
+              <h3><strong>$<span>{{standardDatabox}} /Mo</span></strong></h3>
+              <mat-list dense class="mb-1">
+                <mat-list-item>1 Data source</mat-list-item>
+                <mat-list-item>1 Country</mat-list-item>
+                <mat-list-item>1 Keywords</mat-list-item>
+                <mat-list-item>1 Categories</mat-list-item>
+                <mat-list-item>1 Sub-Categories</mat-list-item>
+                <mat-list-item>7 Days Historical</mat-list-item>
+              </mat-list>
+            </div>
+            <br>
+            <table>
+              <tbody>
+                <tr><td>Alerts</td></tr>
+                <tr><td>Email Reports</td></tr>
+                <tr><td>Enrichments</td></tr>
+                <tr><td>Connectors</td></tr>
+              </tbody>
+            </table>
+
+          </mat-card-content>
+        </mat-card>
+        <mat-select placeholder="5 boxes" class="choose-version mb-1" [(ngModel)]="standardDatabox">
+          <mat-option value="8">1 boxes</mat-option>
+          <mat-option value="16">2 boxes</mat-option>
+          <mat-option value="24">3 boxes</mat-option>
+          <mat-option value="32">4 boxes</mat-option>
+          <mat-option value="40" selected>5 boxes</mat-option>
+        </mat-select>
+        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
+          <mat-icon>shopping_cart</mat-icon> Add to cart
+        </button>
+      </div>
+      <!-- Pricing box -->
+      <div fxFlex="100" fxFlex.gt-sm="33">
+        <mat-card class="plan-pricing text-center p-0">
+          <mat-card-title class="mat-bg-gray">
+            <div class="card-title-text">
+              <div class="">Plus</div>
+              <div class="text-sm">For new members</div>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-title>
+          <mat-card-content class="p-0">
+            <div class="p-0">
+              <h3>
+                <strong>$
+                <span>{{plusDatabox}} /Mo</span>
+                </strong>
+              </h3>
+              <mat-list dense class="mb-1">
+                <mat-list-item>1 Data source</mat-list-item>
+                <mat-list-item>1 Country</mat-list-item>
+                <mat-list-item>5 Keywords</mat-list-item>
+                <mat-list-item>5 Categories</mat-list-item>
+                <mat-list-item>5 Sub-Categories</mat-list-item>
+                <mat-list-item>7 Days Historical</mat-list-item>
+              </mat-list>
+            </div>
+          </mat-card-content>
+          <br>
+          <table>
+            <tbody>
+              <tr><td>Alerts</td></tr>
+              <tr><td>Email Reports</td></tr>
+              <tr><td>Enrichments</td></tr>
+              <tr><td>Connectors</td></tr>
+            </tbody>
+          </table>
+        </mat-card>
+        <mat-select placeholder="5 boxes" class="choose-version mb-1" [(ngModel)]="plusDatabox">
+          <mat-option value="70">5 boxes</mat-option>
+          <mat-option value="140">10 boxes</mat-option>
+          <mat-option value="210">15 boxes</mat-option>
+          <mat-option value="280">20 boxes</mat-option>
+        </mat-select>
+        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Plus', plusDatabox)">
+          <mat-icon>shopping_cart</mat-icon> Add to cart
+        </button>
+      </div>
+      <!-- Pricing box -->
+      <div fxFlex="100" fxFlex.gt-sm="33">
+        <mat-card class="plan-pricing text-center p-0">
+          <mat-card-title class="mat-bg-gray">
+            <div class="card-title-text">
+              <div class="">Custom</div>
+              <div class="text-sm">For new members</div>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-title>
+          <mat-card-content class="p-0">
+            <div class="p-0">
+              <h3>
+                <strong>$<span>{{customDatabox === 0 ? '-' : customDatabox}} /Mo</span></strong>
+              </h3>
+              <mat-list dense class="mb-1">
+                <mat-list-item>1 Datasource</mat-list-item>
+                <mat-list-item>1 Country</mat-list-item>
+                <mat-select placeholder="Keywords"
+                class="choose-version mb-1"
+                [(ngModel)]="customKeyword"
+                (ngModelChange)="computeTotal()">
+                  <mat-option [value]=17.5>5 Keywords</mat-option>
+                  <mat-option [value]=22.5>10 Keywords</mat-option>
+                  <mat-option [value]=27.5>15 Keywords</mat-option>
+                  <mat-option [value]=32.5>20 Keywords</mat-option>
+                  <mat-option [value]=37.5>25 Keywords</mat-option>
+                </mat-select>
+                <mat-select placeholder="Categories"
+                  class="choose-version mb-1"
+                  [(ngModel)]="customCategory"
+                  (ngModelChange)="computeTotal()">
+                  <mat-option [value]=17.5>5 Categories</mat-option>
+                  <mat-option [value]=22.5>10 Categories</mat-option>
+                  <mat-option [value]=27.5>15 Categories</mat-option>
+                  <mat-option [value]=32.5>20 Categories</mat-option>
+                  <mat-option [value]=37.5>25 Categories</mat-option>
+                </mat-select>
+                <mat-select placeholder="SubCategories"
+                  class="choose-version mb-1"
+                  [(ngModel)]="customSubCategory"
+                  (ngModelChange)="computeTotal()">
+                  <mat-option [value]=17.5>5 Sub-Categories</mat-option>
+                  <mat-option [value]=22.5>10 Sub-Categories</mat-option>
+                  <mat-option [value]=27.5>15 Sub-Categories</mat-option>
+                  <mat-option [value]=32.5>20 Sub-Categories</mat-option>
+                  <mat-option [value]=37.5>25 Sub-Categories</mat-option>
+                </mat-select>
+                <mat-select placeholder="Days"
+                  class="choose-version mb-1"
+                  [(ngModel)]="customDay"
+                  (ngModelChange)="computeTotal()">
+                  <mat-option [value]=17.5>7 Days Historical</mat-option>
+                  <mat-option [value]=22.5>14 Days Historical</mat-option>
+                  <mat-option [value]=27.5>28 Days Historical</mat-option>
+                  <mat-option [value]=32.5>49 Days Historical</mat-option>
+                  <mat-option [value]=37.5>100 Days Historical</mat-option>
+                </mat-select>
+              </mat-list>
+            </div>
+
+            <br>
+            <table>
+              <tbody>
+                <tr><td>Alerts</td></tr>
+                <tr><td>Email Reports</td></tr>
+                <tr><td>Enrichments</td></tr>
+                <tr><td>Connectors</td></tr>
+              </tbody>
+            </table>
+          </mat-card-content>
+        </mat-card>
+        <mat-select placeholder="5 boxes" class="choose-version mb-1" [(ngModel)]="customDatabox">
+          <mat-option [value]="customDatabox">5 boxes</mat-option>
+          <mat-option [value]="customDatabox * 2">10 boxes</mat-option>
+          <mat-option [value]="customDatabox * 3">15 boxes</mat-option>
+          <mat-option [value]="customDatabox * 4">20 boxes</mat-option>
+          <mat-option [value]="customDatabox * 5">25 boxes</mat-option>
+        </mat-select>
+        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Custom', customDatabox)">
+          <mat-icon>shopping_cart</mat-icon> Add to cart
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!-- FAQ's -->
+<div fxLayout="row" fxLayoutWrap="wrap" class="faq"
+  [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+    <h1 class="mat-h1 faq-header">Frequently Asked Questions</h1>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+    <div class="faq-inner">
+      <h2 class="mat-h3 mat-color-primary">Question 1</h2>
+      <p>
+        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+      </p>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+    <div class="faq-inner">
+      <h2 class="mat-h3 mat-color-primary">Question 1</h2>
+      <p>
+        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+      </p>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+    <div class="faq-inner">
+      <h2 class="mat-h3 mat-color-primary">Question 1</h2>
+      <p>
+        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+      </p>
+    </div>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+    <div class="faq-inner">
+      <h2 class="mat-h3 mat-color-primary">Question 1</h2>
+      <p>
+        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+      </p>
+    </div>
+  </div>
+
+</div><br><br>

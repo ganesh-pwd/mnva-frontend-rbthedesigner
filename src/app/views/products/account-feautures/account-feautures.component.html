@@ -1,0 +1,74 @@
+<br>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+    <h1 class="mat-h1">
+        <mat-icon>shopping_cart</mat-icon>
+        Products
+        <small>   |    
+          <span class="main-route">
+            <a routerLink="/products">Products</a>
+          </span> / Account Features</small>
+      </h1>
+  </div>
+</div>
+
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    <mat-card>
+      <mat-card-content>
+        <div class="full-width mb-1 mt-1">
+          <button mat-raised-button color="primary" routerLink="/products/cart">
+            <mat-icon>shopping_cart</mat-icon> Cart  ({{cartData.itemCount}})
+          </button>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap="wrap">
+          <h4>Account feautures</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Officiis asperiores, explicabo amet similique fuga optio laborum
+            iste culpa alias iure unde! Tenetur velit fuga sit suscipit nobis odio facilis?
+            Consequatur.</p>
+
+        </div>
+
+        <div>
+          <table  class="mat-elevation-z8">
+              <tbody>
+                <tr class="action mat-color-primary">
+                  <td>
+                      Account Feature
+                  </td>
+                  <td class="pt-30">
+                      Amount
+                  </td>
+                </tr>
+                <tr>
+                  <td>Users</td>
+                  <td>
+                    <mat-form-field>
+                      <mat-select placeholder="Select Users" [(ngModel)]="total">
+                        <mat-option [value]=50>1 Users</mat-option>
+                        <mat-option [value]=100>2 Users</mat-option>
+                        <mat-option [value]=150>3 Users</mat-option>
+                        <mat-option [value]=200>4 Users</mat-option>
+                        <mat-option [value]=250>5 Users</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr class="action mat-color-primary">
+                  <td>${{total}}</td>
+                  <td>
+                    <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart(total)">
+                      <mat-icon>shopping_cart</mat-icon> Add to cart
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

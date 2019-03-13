@@ -1,0 +1,19 @@
+mat-card{
+	border: none !important;
+	box-shadow: none !important;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+mat-radio-group{
+	padding-left: 15px !important;
+}
+
+.close{
+	cursor: pointer;
+}
+
+mat-accordion, #dialog-scroll{
+	height: 500px !important;
+}
+
