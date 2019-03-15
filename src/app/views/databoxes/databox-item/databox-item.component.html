@@ -2,7 +2,8 @@
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="folder">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
     <h1 class="mat-h1">
-      <mat-icon>widgets</mat-icon> {{data?.databox_name}}  
+      <!-- <mat-icon>widgets</mat-icon>  -->
+      {{data?.databox_name}}
       <small>
         <mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> | 
         <span class="main-route">
@@ -20,15 +21,16 @@
     class="mb-05" 
     color="primary" 
     routerLink="/databoxes/settings/{{data?._id}}">
-    Settings
+    Query
   </button>
 
-  <button 
+<!--   <button 
     mat-raised-button 
     class="mb-05 mat-bg-green" 
     routerLink="/databoxes/settings/algorithm/{{data?._id}}">
     Algorithms
   </button>
+ -->
 
   <button 
     mat-raised-button 
@@ -96,7 +98,6 @@
 
       <div class="bottom-data">
         <br>
-        <button mat-raised-button>Send this data as an Email Report</button>
         <button mat-raised-button class="download-csv" (click)="downloadCSV()" #exportFile>Download to CSV</button>
         <br>
         <h2 class="mat-h1">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
@@ -114,9 +115,10 @@
 
         <button mat-raised-button>Send</button> 
 
-        <h2 class="mat-h1">Do you want to rebuild this table to its original values?</h2>
+        <!-- <h2 class="mat-h1">Do you want to rebuild this table to its original values?</h2>
         <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
-        <button mat-raised-button (click)="resetAllRow()" class="mat-bg-success">Rebuild</button><br><br>
+        <button mat-raised-button (click)="resetAllRow()" class="mat-bg-success">Rebuild</button> -->
+        <br><br>
       </div>
     </div>
   </div>
