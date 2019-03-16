@@ -2,17 +2,14 @@
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 		<h1 class="mat-h1">
-			<mat-icon>widgets</mat-icon> {{databoxItemData?.databox_name}}  
 			<small>
 				<mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">
 				edit</mat-icon> | 
 				<span class="main-route">
 					<a routerLink="/databoxes/">Databoxes </a> / 
-					<a routerLink="/databoxes/{{databoxItemData?.folder}}">{{databoxItemData?.folder}} </a> / 
 					<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, data?.first_create)">
 					{{databoxItemData?.databox_name}}</a> /
-					<a routerLink="/databoxes/settings/{{databoxItemData?._id}}">Settings</a>
-				</span> / Connect Your Data
+				</span> Connect Your Data
 			</small>
 		</h1>
 	</div>

@@ -72,6 +72,10 @@
       -webkit-box-orient: horizontal;
       -webkit-box-direction: normal;
       text-decoration: none;
+      &:hover{
+        background: rgba(0, 0, 0, .08);
+        cursor: pointer;
+      }
       .mat-icon:not(.menu-caret) {
         text-align: center;
         margin-right: 3px;

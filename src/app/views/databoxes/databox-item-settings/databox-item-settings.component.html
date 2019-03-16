@@ -2,16 +2,16 @@
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" >
 		<h1 class="mat-h1">
-			<mat-icon>widgets</mat-icon> {{databoxItemData?.databox_name}}
+			<!-- <mat-icon>widgets</mat-icon>-->
+			{{databoxItemData?.databox_name}} 
 			<small>
 				<mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> |
 				<span class="main-route">
 					<a routerLink="/databoxes/">Databoxes </a> /
-					<a routerLink="/databoxes/{{databoxItemData?.folder}}">{{databoxItemData?.folder}} </a> /
 					<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, databoxItemData?.first_create)">
 					{{databoxItemData?.databox_name}}</a>
 				</span> /
-				Settings
+				Edit Query
 			</small>
 		</h1>
 	</div>
@@ -25,9 +25,9 @@
 	</button>
 </div>
 <hr>
-
 <br>
-<div fxLayout="row" fxLayoutWrap="wrap">
+
+<!-- <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
 		<div class="text-center" >
 			<mat-radio-group value="1" id="settings-radio">
@@ -48,175 +48,199 @@
 			</mat-radio-group>
 		</div>
 	</div>
-</div>
-
-<div class="control-btns" fxLayout="row" fxLayoutWrap="wrap">
-  <button mat-raised-button
-    class="mb-05 btn-right"
-    routerLink="/databoxes/settings/query/{{data?._id}}">
-    Next
-	</button>
-</div>
-
+</div> -->
 
 <div fxLayout="row" fxLayoutWrap="wrap">
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-		<mat-card>
-			<mat-card-content>
-				<div fxLayout="row" fxLayoutWrap="wrap" >
-					<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" >
-						<div class="text-center">
-							<br>
-							<img src="/assets/images/image-placeholder.png" alt="" class="minerva-logo">
-							<br>
-							<span class="text-muted">Change Image</span>
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
+			<h1 class="mat-h1 mat-color-primary">Query Editor</h1>
+		</div>
+		<div fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title class="mat-color-primary">
+							<span>Change Datasource</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content>
+						<br>
+						<form>
+							<mat-form-field class="full-width">
+								<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
+								<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
+								{{ singleDatasource.name }}
+								</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</form>
+					</mat-card-content>
+				</mat-card>
+			</div>
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title class="mat-color-primary">
+							<span>Change Country</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content>
+					<br>
+					<form>
+						<mat-form-field class="full-width">
+						  	<mat-select value="Costa Rica">
+							    <mat-option *ngFor="let country of countries" [value]="country.name">
+							      {{country.name}}
+							    </mat-option>
+						  	</mat-select>
+						</mat-form-field>
+					</form>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+		<div fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title class="mat-color-primary">
+							<span>Query</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content>
+						<br>
+						<div fxLayout="row" fxLayoutWrap="wrap" >
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">					
+							    <b class="mt-1">Optional Keywords</b>
+							    <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
+						    	<form>
+						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
+				                      <textarea style="padding: 25px;" matInput rows="10" cols="80" value="{{editorData}}"></textarea>
+						    		</mat-form-field>
+						    	</form>
+							</div>
 						</div>
-					</div>
-					<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="75">
-						<div class="text-left databox-data">
-							<br>
-							<h3 class="mat-h3 mat-color-primary">{{data?.databox_name}}
-								<mat-icon class="text-muted edit-databox" (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon>
-								<h4 class="mat-h4">
-									{{data?.databox_type}} Databox |
-									{{data?.datasource}}
-								</h4>
-							</h3> 
-						</div> 
-					</div>
-				</div>
-			</mat-card-content>
-		</mat-card>
+						<div fxLayout="row" fxLayoutWrap="wrap" >
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+							    <b class="mt-1">Required Keywords</b>
+							    <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
+						    	<form>
+						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
+				                      <textarea style="padding: 25px;" matInput rows="10" cols="80" value="{{editorData}}"></textarea>
+						    		</mat-form-field>
+						    	</form>
+							</div>
+						</div>
+						<div fxLayout="row" fxLayoutWrap="wrap" >
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+							    <b class="mt-1">Exclude Keywords</b>
+							    <p class="mt-1">Your Databox will not bring in mentions any of the following keywords.</p>
+						    	<form>
+						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
+				                      <textarea style="padding: 25px;" matInput rows="10" cols="80" value="{{editorData}}"></textarea>
+						    		</mat-form-field>
+						    	</form>						    	
+							</div>
+						</div>													
+					</mat-card-content>
+				</mat-card>
+			</div>	
+		</div>
+		<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
+  	      	<span fxFlex></span>
+		  	<button mat-raised-button class="mb-05 mat-bg-success">
+		    Test Query
+		  	</button>
+		</div>
 	</div>
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
+			<h1 class="mat-h1 mat-color-primary">Results Preview</h1>
+		</div>
+		<div fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<div style="text-align: center;">
+						<mat-card-title class="mat-color-primary">
+							<span>Total Results</span>
+						</mat-card-title>
+					</div>
+					<mat-divider></mat-divider>					
+					<mat-card-content style="padding: 25px 0; text-align: center;">
+						<span style="font-weight: 600; font-size: 18px;" class="mat-h3 mat-color-primary">
+							1250
+						</span>
+					</mat-card-content>
+				</mat-card>
+			</div>
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<div style="text-align: center;">
+						<mat-card-title class="mat-color-primary">
+							<span>Daily Average</span>
+						</mat-card-title>
+					</div>
 
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-		<mat-card>
-			<mat-card-content>
-				<h3 class="mat-h3 mat-color-primary">
-					Where should we send email notifications about this Databox?
-				</h3> 
-				<small class="text-muted">
-					<input type="email" matInput placeholder="test@minerva.io">
-					<span fxFlex></span>
-					<mat-slide-toggle
-					color="primary"
-					class="mb-1"
-					[checked]="checked" >
-				</mat-slide-toggle>
-			</small>
-		</mat-card-content>
-	</mat-card>
-</div>
-
-<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-	<mat-card>
-		<mat-card-header>
-			<mat-card-title class="mat-color-primary">
-				<span>Project Folder</span>
-			</mat-card-title>
-		</mat-card-header>
-
-		<mat-divider></mat-divider>
-
-		<mat-card-content>
-			<br>
-			<form>
-				<mat-form-field class="full-width">
-				  	<mat-select placeholder="Folder" value="Banco Popular">
-					  	<mat-option value="Demo">
-					  	  Demo
-					  	</mat-option>
-					    <mat-option value="Banco Popular">
-					      Banco Popular
-					    </mat-option>
-					    <mat-option value="Blank Folder">
-					      Blank Folder
-					    </mat-option>
-				  	</mat-select>
-				</mat-form-field>
-			</form>
-		</mat-card-content>
-	</mat-card>
-</div>
-<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-	<mat-card>
-		<mat-card-header>
-			<mat-card-title class="mat-color-primary">
-				<span>Upgrade Databox</span>
-			</mat-card-title>
-		</mat-card-header>
-
-		<mat-divider></mat-divider>
-
-		<mat-card-content>
-			<br>
-			<form>
-				<mat-form-field class="full-width">
-				  	<mat-select placeholder="Databox" value="Standard">
-					    <mat-option value="Standard">
-					      Standard
-					    </mat-option>
-					    <mat-option value="Plus">
-					      Plus
-					    </mat-option>
-					    <mat-option value="Custom">
-					      Custom
-					    </mat-option>
-				  	</mat-select>
-				</mat-form-field>
-			</form>
-		</mat-card-content>
-	</mat-card>
-</div>
-</div>
-
-<div fxLayout="row" fxLayoutWrap="wrap">
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-		<mat-card>
-			<mat-card-header>
-				<mat-card-title class="mat-color-primary">
-					<span>Change Datasource</span>
-				</mat-card-title>
-			</mat-card-header>
-
-			<mat-divider></mat-divider>
-
-			<mat-card-content>
-				<br>
-				<form>
-				<mat-form-field class="full-width">
-				  	<mat-select placeholder="Datasource" [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-              <mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-                {{ singleDatasource.name }}
-              </mat-option>
-				  	</mat-select>
-				</mat-form-field>
-			</form>
-			</mat-card-content>
-		</mat-card>
-	</div>
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="25" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-		<mat-card>
-			<mat-card-header>
-				<mat-card-title class="mat-color-primary">
-					<span>Change Country</span>
-				</mat-card-title>
-			</mat-card-header>
-
-			<mat-divider></mat-divider>
-			<mat-card-content>
-			<br>
-			<form>
-				<mat-form-field class="full-width">
-				  	<mat-select placeholder="Country" value="Costa Rica">
-					    <mat-option *ngFor="let country of countries" [value]="country.name">
-					      {{country.name}}
-					    </mat-option>
-				  	</mat-select>
-				</mat-form-field>
-			</form>
-			</mat-card-content>
-		</mat-card>
+					<mat-divider></mat-divider>				
+					<mat-card-content style="padding: 25px 0; text-align: center;">
+						<span style="font-weight: 600; font-size: 18px;" class="mat-h3 mat-color-primary">
+							1250
+						</span>
+					</mat-card-content>
+				</mat-card>
+			</div>
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<div style="text-align: center;">
+						<mat-card-title class="mat-color-primary">
+							<span>Mentions Remaining</span>
+						</mat-card-title>
+					</div>
+					
+					<mat-divider></mat-divider>							
+					<mat-card-content style="padding: 25px 0; text-align: center;">
+						<span style="font-weight: 600; font-size: 18px;" class="mat-h3 mat-color-primary">
+							1250
+						</span>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+		<!-- Line Chart -->
+		<div fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxFlex="100" fxFlex.gt-sm="100">
+				<mat-card class="p-0">
+				  <mat-card-content>
+				    <canvas 
+				      baseChart 
+				      class="chart"
+				      [datasets]="lineChartData"
+				      [labels]="lineChartLabels"
+				      [options]="lineChartOptions"
+				      [colors]="chartColors"
+				      [legend]="lineChartLegend"
+				      [chartType]="lineChartType"></canvas>
+				  </mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+		<div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<mat-card-content>
+						<h3 class="mat-h3 mat-color-primary">
+							Results
+						</h3>
+					</mat-card-content>
+				</mat-card>
+			</div>			
+		</div>		
 	</div>
 </div>
 <br>

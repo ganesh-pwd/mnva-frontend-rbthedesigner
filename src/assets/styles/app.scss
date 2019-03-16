@@ -140,20 +140,16 @@ body .mat-select-trigger, .mat-select-trigger {
   color: #247ba0 !important;
 }
 
-.databox-refreshing{
+.databox-draft{
 	color: #fb8a01 !important;
 }
 
-.databox-ready{
+.databox-active{
 	color: #35b729 !important;
 }
 
-.databox-expired{
+.databox-paused{
 	color: gray !important;
-}
-
-.databox-noconfig{
-	color: red !important;
 }
 
 .control-btns{

@@ -1,11 +1,13 @@
+<br>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-	<h1 class="mat-h1">
-		<mat-icon>person</mat-icon>
-		Users
-		<small>   |     Account / Users </small>
-	</h1>
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+    <h1 class="mat-h1">
+      Users
+      <small>   |     Account / Users </small>
+    </h1>
+  </div>
 </div>
-
+<hr>
 
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
   <button
@@ -33,7 +35,7 @@
         <mat-nav-list>
           <mat-list-item routerLink="/accounts/minerva-news" routerLinkActive="list-item-active">
             <mat-icon>home</mat-icon>
-            Minerva News
+            News
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
