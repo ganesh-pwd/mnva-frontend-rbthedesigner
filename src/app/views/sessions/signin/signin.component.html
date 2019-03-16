@@ -29,19 +29,69 @@
               <div class="text-center pb-1">
                 <h4 class="text-muted m-0">Log in to your account</h4>
                 <p class="copyright text-muted">
-                  Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                  Track, analyze, and react to everything said about your brand online.
                 </p>
               </div>
               <form>
+                <div class="">
+                  <mat-form-field class="full-width">
+                    <input
+                      matInput
+                      type="email"
+                      name="email"
+                      [formControl]="signinForm.controls['email']"
+                      placeholder="Email"
+                      value="">
+                  </mat-form-field>
+                  <small 
+                    *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched" 
+                    class="form-error-msg"> Email is required </small>
+                </div>
+
+                <div class="">
+                  <mat-form-field class="full-width">
+                    <input 
+                      type="password"
+                      name="password"
+                      matInput
+                      [formControl]="signinForm.controls['password']"
+                      placeholder="Password" 
+                      value="">
+                  </mat-form-field>
+                  <small 
+                    *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched" 
+                    class="form-error-msg"> Password is required </small>
+                </div>
+                
+                <div class="pb-1">
+                  <mat-checkbox
+                    name="rememberMe"
+                    [formControl]="signinForm.controls['rememberMe']"
+                    class="pb-1">Remember this computer</mat-checkbox>
+                </div>
+                
+                <button mat-raised-button class="mat-primary full-width mb-1" [disabled]="signinForm.invalid">Sign in</button>
+                <div class="text-center">
+                  <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
+                  <span fxFlex></span>
+                  <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Sign Up Here</a>
+                </div>
+                <div class="pb-1">
+                </div>
+
                 <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Facebook</button>
 
-                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button>
-                <div class="text-center">
-                  <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Are you a new user? Sign Up Here</a><br>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Google</button>
 
-                  <div class="copyright text-muted">
-                    <p>©2001-2018 All Rights Reserved. Minerva® is a registered trademark. By clicking this button, you agree to Minerva Anti-spam Policy & Terms of Use. </p>
-                  </div>
+                <div class="pb-1">
+                  <mat-checkbox
+                    name="agreed"
+                    [formControl]="signupForm.controls['agreed']"
+                    class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
+
+                    <small 
+                      *ngIf="signupForm.controls['agreed'].hasError('agreed') && signupForm.controls['agreed'].touched" 
+                      class="form-error-msg"> You must agree to the terms and conditions </small>
                 </div>
               </form>
             </mat-card-content>
