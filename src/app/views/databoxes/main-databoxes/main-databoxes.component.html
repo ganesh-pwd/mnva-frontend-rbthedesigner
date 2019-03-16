@@ -13,13 +13,6 @@
     (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
     Create Databox
   </button>
-
-<!--   <button
-    mat-raised-button
-    class="mb-05"
-    (click)="openDialog('Create Folder', 'Folder Name', true)">
-    Create Folder
-  </button> -->
   <br>
 </div>
 
@@ -36,8 +29,8 @@
       	    <mat-icon class="">more_vert</mat-icon>
       	</button>
       	<mat-menu #userMenu="matMenu">
-      	    <button mat-menu-item routerLink="/databoxes/settings/{{data._id}}">Settings</button>
-            <!-- <button mat-menu-item routerLink="/databoxes/settings/{{data._id}}">Remove From Folder</button> -->
+      	    <button mat-menu-item routerLink="/databoxes/settings/{{data._id}}">Edit Query</button>
+            <button mat-menu-item routerLink="/databoxes/settings/connect/{{data?._id}}">Connect Your Data</button>
       	</mat-menu>
       </mat-card-header>
 
@@ -45,24 +38,12 @@
 
       <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)">
         <div class="databox-details">
-            <!-- Last Updated: {{data.last_updated | date: 'EEEE, MMMM d, y'}}<br> -->
-            Results: <b>{{data.result}}</b>
+            Mentions: <b>{{data?.mentions}}</b>
+            <br>
+            Mentions per day: <b>{{data?.mentions_per_day}}</b>
             <br>
             <br>
             <br>
-            <br>
-            <!--{{data.keywords}} Keywords<br>
-            {{data.category}} Categories<br>
-            {{data.sub_category}} Sub Categories<br> 
-            Historical: {{data.historical}}<br>
-            <br>
-            Expiry Date:
-            <span *ngIf="data.expiry_date !== 'No Configuration'; else showNoConfig">
-              <b>{{data.expiry_date  | date: 'EEEE, MMMM d, y'}}</b>
-            </span>
-            <ng-template #showNoConfig>
-              <b>{{data.expiry_date}}</b>
-            </ng-template>-->
             <br>
         </div>
       </mat-card-content>
@@ -79,12 +60,8 @@
           </span>
         </h3>
       	<span fxFlex></span>
-        <!-- <button mat-button class="renew mat-color-green"
-      	  *ngIf="data.status!='Draft'" (click)="openDialog('Renew Databox', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false)">
-      	  Renew
-      	</button> -->
         <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Renew Databox', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false)">
-        Pause
+        On/Off
         </mat-slide-toggle>
       </mat-card-actions>
     </mat-card>

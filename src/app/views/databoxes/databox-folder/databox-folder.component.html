@@ -51,7 +51,7 @@
       <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)">
         <div class="databox-details">
             Last Updated: {{data.last_updated | date: 'EEEE, MMMM d, y'}}<br>
-            Results: <b>{{data.result}}</b>
+            Mentions: <b>{{data?.mentions}}</b>
               <br>
             <br>
             {{data.keywords}} Keywords<br>
