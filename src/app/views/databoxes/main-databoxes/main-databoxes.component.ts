@@ -23,6 +23,8 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   public selectedOption;
   public isFolderDeleted;
 
+  editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
+
   constructor(private databoxesService: DataboxesService,
     private createDataboxDialogService: CreateDataboxDialogService,
     private mainDataboxesDialogService: MainDataboxesDialogService,

@@ -4,12 +4,28 @@ import { MatPaginator, MatSort } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { databoxCategoryEditorDialogService } from '../../../shared/services/databoxes/dialogs-query/dialogs-query.services';
 import { DataboxTypeService } from '../../../shared/services/databoxes/databox-type-services';
 import { DataboxItemSearchService } from '../../../shared/services/databoxes/databox-item-search-services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataTableDataSource } from './databox-table-datasource';
 import * as Handsontable from 'handsontable-pro';
 import { HotTableRegisterer } from '@handsontable-pro/angular';
+import { DatasourceService } from '../../../shared/services/datasource/datasource.service';
+import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
+
+export interface Categories {
+  name: string;
+  type: string;
+  expression: string;
+}
+
+const categoryData: Categories[] = [
+  { name: 'Movistar', type: 'Category', expression: `movistar OR "movi"` },
+  { name: 'Kolbi', type: 'Category', expression: `kolbi OR "kolbi"` },
+  { name: 'Claro', type: 'Category', expression: `claro` },
+  { name: 'Internet', type: 'Sub Category', expression: `internet` },
+];
 
 @Component({
   selector: 'app-databox-item',
@@ -17,6 +33,7 @@ import { HotTableRegisterer } from '@handsontable-pro/angular';
   templateUrl: './databox-item.component.html',
   styleUrls: ['./databox-item.component.scss']
 })
+
 export class DataboxItemComponent implements OnInit, OnDestroy {
   private getItemSub: Subscription;
   private getTableReq: Subscription;
@@ -26,10 +43,17 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   private req: Subscription;
 
   public data: any;
+  public databoxItemData: any;
+  public checked: boolean = true;  
   public arrayData: any;
   public paginatedData: any;
   public folder: string;
   public selectedOption;
+  public BasicQueryEditor: boolean = false;
+
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
+  dataSource = categoryData;
 
   @ViewChild('hot') hot;
   @ViewChild('exportFile') exportFile;
@@ -44,8 +68,13 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private hotRegisterer: HotTableRegisterer,
     private databoxesService: DataboxesService,
+    private databoxAlgorithmDialogService: DataboxAlgorithmDialogService,    
+    private databoxCategoryEditorDialogService: databoxCategoryEditorDialogService,    
     private databoxItemSearchService: DataboxItemSearchService,
-    private mainDataboxesDialogService: MainDataboxesDialogService) {
+    private mainDataboxesDialogService: MainDataboxesDialogService,
+    private datasourceService: DatasourceService
+    ) {
+    this.databoxesService.apiData$.subscribe(result => this.databoxItemData = result);    
   }
 
   ngOnInit() {
@@ -55,6 +84,9 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       if (this.getItemSub) this.getItemSub.unsubscribe();
       this.getSingleItem();
     });
+    if (this.datasourceService.getSelectedDatasource() === 'Twitter') {
+      this.BasicQueryEditor = true;
+    };
 
     // load databox item table data
     this.getDataboxItemSearch();
@@ -297,6 +329,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.router.navigate([route]);
   }
 
+  // open databox dialog
   openDialog(title: string, data: string, input: boolean, folder: string) {
     this.mainDataboxesDialogService.confirm({
       title: title,
@@ -307,4 +340,23 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       this.selectedOption = result;
     });
   }
+
+  // open category editor dialog
+  openQueryDialog(title: string) {
+    this.databoxCategoryEditorDialogService.confirm({ title: title })
+      .subscribe((result) => { });
+  }
+
+  // navigate to databox details
+  navigateToDatabox(folder: string, id: string, first: boolean) {
+    const route = !first ? `databoxes/${folder.replace(/\s/, '-')}/${id}`
+      : `databoxes/${folder.replace(/\s/, '-')}/${id}/initialize`;
+    this.router.navigate([route]);
+  }
+
+  // open databox query dialog
+  openMentionsDialog(title: string) {
+    this.databoxMentionsDialogService.confirm({ title: title })
+      .subscribe((result) => { });
+  }  
 }

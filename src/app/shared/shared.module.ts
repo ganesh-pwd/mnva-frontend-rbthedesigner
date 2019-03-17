@@ -64,6 +64,7 @@ import { AppLoaderService } from './services/app-loader/app-loader.service';
 import { MainDataboxDialogComponent } from './services/databoxes/dialogs/main-databoxes-dialog.component';
 import { CreateDataboxDialogComponent } from './services/databoxes/dialogs-create/create-databox-dialog.component';
 import { DataboxDialogsAlgorithmComponent } from './services/databoxes/dialogs-algorithm/dialogs-algorithm.component';
+import { DataboxDialogsMentionsComponent } from './services/databoxes/dialogs-mentions/dialogs-mentions.component';
 import { DataboxDialogsConnectivityComponent } from './services/databoxes/dialogs-connectivity/dialogs-connectivity.component';
 import { DataboxDialogsQueryComponent } from './services/databoxes/dialogs-query/dialogs-query.component';
 import { MinervaAccountDialogComponent } from './services/minerva-account/minerva-account-dialog/minerva-account-dialog.component';
@@ -88,6 +89,7 @@ const classesToInclude = [
   MainDataboxDialogComponent,
   CreateDataboxDialogComponent,
   DataboxDialogsAlgorithmComponent,
+  DataboxDialogsMentionsComponent,
   DataboxDialogsConnectivityComponent,
   DataboxDialogsQueryComponent,
   MinervaAccountDialogComponent,
@@ -136,6 +138,7 @@ const classesToInclude = [
     MainDataboxDialogComponent, 
     CreateDataboxDialogComponent,
     DataboxDialogsAlgorithmComponent,
+    DataboxDialogsMentionsComponent,    
     DataboxDialogsConnectivityComponent,
     DataboxDialogsQueryComponent,
     MinervaAccountDialogComponent,

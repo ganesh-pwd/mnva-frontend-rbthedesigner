@@ -11,7 +11,7 @@ interface confirmData {
 @Injectable({
   providedIn: 'root'
 })
-export class DataboxQueryDialogService {
+export class databoxCategoryEditorDialogService {
   constructor(private dialog: MatDialog) {
   }
 

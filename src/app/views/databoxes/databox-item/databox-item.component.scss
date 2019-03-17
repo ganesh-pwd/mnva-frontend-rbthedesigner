@@ -38,28 +38,9 @@ small{
 	
 }
 
-
-.main-route{
-	padding-left: 1%;
-	color: gray;
-
-	a{
-		color: #0d4b73;
-		
-		&:hover{
-			text-decoration: underline;
-		}
-	}
-}
-
 mat-icon{
 	cursor: pointer !important;
 	font-size: 18px;
-}
-
-.mat-elevation-z8{
-	margin-left: 1% !important;
-	margin-right: 1% !important;
 }
 
 .bottom-data{
@@ -95,7 +76,6 @@ mat-icon{
 
 
 .page-search{
-	margin: 0 12px;
 	>div {
 		margin: 10px 0px;
 		padding: 0px 10px;
@@ -141,9 +121,78 @@ mat-icon{
 	}
 }
 
-
 .see-databox-search{
 	&:hover{
 		text-decoration: underline !important;
+	}
+}
+
+.query-category{
+	left: 30px;
+	bottom: 50px;
+	position: absolute;
+}
+
+.main-route{
+	padding-left: 1%;
+	color: gray;
+
+	a{
+		color: #0d4b73;
+		
+		&:hover{
+			text-decoration: underline;
+		}
+	}
+}
+
+.algorithm-header{
+	top: 7%;
+	margin-left: 30px;
+	font-size: 20px;
+	position: absolute;
+}
+
+.category-header{
+	font-size: 20px;
+}
+
+.icon-header{
+	font-size: 35px;
+}
+
+.card-content{
+	padding-left: 30px;
+}
+
+.airplane{
+	transform: rotate(45deg); 
+	transition: transform 2s;
+}
+
+.mentions{
+	margin-right: 2%;
+}
+
+.credits{
+	color: green;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.faq{
+	margin-top: 4%;
+
+	.faq-header{
+		padding-left: 2%;
+	}
+
+	.faq-inner{
+		padding: 0 5%;
 	}
 }
