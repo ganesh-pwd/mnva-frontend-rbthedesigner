@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatButton } from '@angular/material';
+import { MatProgressBar, MatButton } from '@angular/material';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { map } from 'rxjs/operators';
@@ -12,17 +12,18 @@ import { egretAnimations } from '../../../shared/animations/egret-animations';
   styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
+  @ViewChild(MatProgressBar) progressBar: MatProgressBar;
   @ViewChild(MatButton) submitButton: MatButton;
 
   signinForm: FormGroup;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.signinForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
-      rememberMe: new FormControl(true)
+      rememberMe: new FormControl(false)
     })
   }
 
@@ -31,9 +32,7 @@ export class SigninComponent implements OnInit {
     console.log(signinData);
 
     this.submitButton.disabled = true;
-  }
-
-  ngOnDestroy() {
+    this.progressBar.mode = 'indeterminate';
   }
 
 }
