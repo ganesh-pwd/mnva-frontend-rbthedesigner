@@ -28,9 +28,24 @@
     routerLink="/databoxes/settings/connect/{{data?._id}}">
     Connect Your Data
   </button>
-  <mat-slide-toggle style="position: absolute; right: 24px; margin-top: 10.5px;" color="primary" class="mb-1" [checked]="checked">
+<!--   <mat-slide-toggle style="position: absolute; right: 24px; margin-top: 10.5px;" color="primary" class="mb-1" [checked]="checked">
     On/Off
-  </mat-slide-toggle>  
+  </mat-slide-toggle> -->
+  <span fxFlex></span>
+  <div class="mr-1">
+    <h3 class="mat-h4 mr-1">Status:
+      <span [ngClass]="
+          data.status === 'Active' ? 'databox-active' :
+          data.status === 'Paused' ? 'databox-paused':
+          data.status === 'Draft'? 'databox-draft' :
+          ''"> {{data.status}}
+      </span>
+    </h3>
+    <span fxFlex></span>
+    <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+      On/Off
+    </mat-slide-toggle>
+  </div>
 </div>
 
 <!-- Tabs -->
@@ -38,17 +53,35 @@
   <mat-tab-group>
     <!-- Results -->
     <mat-tab label="Results">
+      <!-- Line Chart -->
+      <div fxLayout="row" fxLayoutWrap="wrap" >
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+          <mat-card class="p-0">
+            <mat-card-content>
+              <canvas 
+                baseChart 
+                class="chart"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="chartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
       <div fxLayout="row" fxLayoutWrap="wrap">
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
           <div>
             <p>
-                {{data?.mentions}} mentions     |    Last Updated: {{data?.last_updated}}
+                <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b>{{data?.mentions_per_day}}
             </p>
           </div>
           <span fxFlex></span>
           <div style="position: absolute; right: 24px;">
             <a>
-            Not Finding a Result?
+            <b>Not Finding a Result?</b>
             </a>
           </div>
         </div>
@@ -112,6 +145,9 @@
               </mat-form-field>            </form>
             <button mat-raised-button>Send</button> 
             <br><br>
+            <h2 class="mat-h1">Delete Databox</h2>
+            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
+            <button mat-raised-button (click)="openDialog('Delete Databox', 'Write down databox name to delete', true, '')">Delete Databox</button>
           </div>
         </div>
       </div>
@@ -205,16 +241,23 @@
                 </button>
                 <span fxFlex></span>
                 <p class="text-muted">Category Remaining: 5<br>
-                Sub Category Remaining: 5
+                SubCategory Remaining: 5
                 </p>
               </mat-card-actions>
           </mat-card>
+          <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
+            <span fxFlex></span>
+            <button mat-raised-button class="mb-05 mat-bg-success">
+            Categorize Your Data
+            </button>
+          </div>
         </div>
         <!-- Column2 -->
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
           <!-- Doughnut Chart -->
           <div fxLayout="row" fxLayoutWrap="wrap" >
-            <div fxFlex="100" fxFlex.gt-sm="100">
+            <!-- Doughnut Chart para Categorias -->
+            <div fxFlex="100" fxFlex.gt-sm="50">
               <mat-card class="p-0">
                 <mat-card-content>
                   <canvas 
@@ -228,6 +271,21 @@
                 </mat-card-content>
               </mat-card>
             </div>
+            <!-- Doughnut Chart para SubCategorias -->
+            <div fxFlex="100" fxFlex.gt-sm="50">
+              <mat-card class="p-0">
+                <mat-card-content>
+                  <canvas 
+                    baseChart 
+                    class="chart"
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [options]="doughnutOptions"
+                    [colors]="doughnutChartColors"
+                    [chartType]="doughnutChartType"></canvas>
+                </mat-card-content>
+              </mat-card>
+            </div>            
           </div>
           <!-- Result Preview -->
           <div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >

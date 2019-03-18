@@ -14,19 +14,113 @@
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="full-width">
-                <textarea matInput placeholder="Add Query" rows="4" cols="80"></textarea>
-            </mat-form-field>
-
-            <div class="mat-h3 text-muted query-help">
-                <mat-icon class="query-icon">remove_red_eye</mat-icon>
-                <a>Show Simple Example</a>
-
-                <mat-icon class="query-icon">remove_red_eye</mat-icon>
-                <a>Show Complex Example</a>
-
-                <mat-icon class="query-icon">help_outline</mat-icon>
-                <a>Need More Help?</a>
+            <!-- Query Editor -->
+            <div fxLayout="row" fxLayoutWrap="wrap" >
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                    <br>
+                    <!--Query Menu -->
+                    <div fxLayout="row" fxLayoutWrap="wrap" >
+                        <button mat-raised-button mat-color-primary class="query_type">Basic Query</button>
+                        <button mat-raised-button class="query_type">Advanced Query</button>
+                    </div>
+                    <!--Basic Query Editor -->
+                    <mat-card-content>
+                        <br>
+                        <div fxLayout="row" fxLayoutWrap="wrap" >
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                                <b class="mt-1">Optional Keywords</b>
+                                <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
+                                <form>
+                                    <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                        <div class="p-1">
+                                            <textarea matInput rows="5" cols="80" value="{{editorData}}"></textarea>
+                                        </div>  
+                                    </mat-form-field>
+                                </form>
+                            </div>
+                            <span fxFlex></span>
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                                <b class="mt-1">Required Keywords</b>
+                                <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
+                                <form>
+                                    <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                        <div class="p-1">
+                                            <textarea matInput rows="5" cols="80" value="{{editorData}}"></textarea>
+                                        </div>
+                                    </mat-form-field>
+                                </form>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutWrap="wrap" >
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                                <b class="mt-1">Exclude Keywords</b>
+                                <p class="mt-1">Your Databox will not bring in mentions any of the following keywords.</p>
+                                <form>
+                                    <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                        <div class="p-1">
+                                            <textarea matInput rows="5" cols="80" value="{{editorData}}"></textarea>
+                                        </div>
+                                    </mat-form-field>
+                                </form>                             
+                            </div>
+                        </div>                                                  
+                    </mat-card-content>
+                    <!--Avanced Query Editor -->
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                <mat-card-header>
+                                  <mat-card-title class="mat-color-primary">
+                                    <span>Advanced Query</span>
+                                  </mat-card-title>
+                                  <mat-card-subtitle>
+                                    <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+                                  </mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-divider></mat-divider>
+                                <br>
+                                <mat-card-content>
+                                    <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
+                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                            <mat-card class="p-0">
+                                                <mat-card-content class="p-0">
+                                                    <form>
+                                                        <mat-form-field class="full-width">
+                                                          <textarea matInput placeholder="Query" rows="10" cols="80" value="{{editorData}}"></textarea>
+                                                        </mat-form-field>
+                                                    </form>
+                                                </mat-card-content>
+                                                <div class="text-muted query-help">
+                                                    <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                                                    <a>Show Simple Example</a>
+                                                    <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                                                    <a>Show Complex Example</a>
+                                                    <mat-icon class="query-icon">help_outline</mat-icon>
+                                                    <a>Need More Help?</a>
+                                                </div>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                    <div fxLayout="row" fxLayoutWrap="wrap">
+                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                            <mat-card class="query-right-side">
+                                                <mat-card-content>
+                                                    <h3 class="mat-h3">Boolean Operations: Booleans help you create your query.</h3>
+                                                    <p class="mat-color-primary query-info"matTooltip="OR operators are used to expand your query. For example: car OR bus OR train">OR = OR's help you expand your query
+                                                    </p>
+                                                    <p class="mat-color-primary query-info"matTooltip="AND operators are used to expand your query. For example: car AND bus AND train">AND = AND's help you be more exact
+                                                    </p>
+                                                    <p class="mat-color-primary query-info"matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train">NOT = NOT's help you exclude information
+                                                    </p>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </mat-card-content>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </div>
             </div>
         </form>
     </div>
@@ -34,7 +128,7 @@
     <div mat-dialog-actions>
         <span fxFlex></span>
         <button mat-raised-button
-          class="mb-05 mat-bg-success">
+          class="mb-05">
           Add Expression
         </button>
 
