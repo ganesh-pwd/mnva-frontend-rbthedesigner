@@ -5,7 +5,7 @@
       <!-- <mat-icon>widgets</mat-icon>  -->
       {{data?.databox_name}}
       <small>
-        <mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> | 
+        <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> | 
         <span class="main-route">
         <a routerLink="/databoxes/">Databoxes </a> / {{data?.databox_name}}</span>
       </small>
@@ -106,8 +106,10 @@
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="{{data?.page_search_name}} ID" >
               </mat-form-field>
-            </form>
-
+              &nbsp;
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{data?.page_search_name}} Country" >
+              </mat-form-field>            </form>
             <button mat-raised-button>Send</button> 
             <br><br>
           </div>
@@ -149,7 +151,7 @@
           <mat-card>
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
-                <span class="category-header">Category Creator</span>
+                <span>Category Creator</span>
               </mat-card-title>
               <mat-card-subtitle>
                 <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>

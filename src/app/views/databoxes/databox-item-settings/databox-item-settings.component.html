@@ -5,7 +5,7 @@
 			<!-- <mat-icon>widgets</mat-icon>-->
 			{{databoxItemData?.databox_name}} 
 			<small>
-				<mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> |
+				<mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> |
 				<span class="main-route">
 					<a routerLink="/databoxes/">Databoxes </a> /
 					<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, databoxItemData?.first_create)">
@@ -50,13 +50,12 @@
 	</div>
 </div> -->
 
-<!-- Query Editor -->
 <div fxLayout="row" fxLayoutWrap="wrap">
-	<!-- Column 1 -->
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
 			<h1 class="mat-h1 mat-color-primary">Query Editor</h1>
 		</div>
+		<!-- Change Datasource & Country -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
 			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 				<mat-card>
@@ -105,6 +104,7 @@
 				</mat-card>
 			</div>
 		</div>
+		<!--Basic Query Editor -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
 			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 				<mat-card>
@@ -117,6 +117,10 @@
 					<mat-divider></mat-divider>
 					<mat-card-content>
 						<br>
+						<div fxLayout="row" fxLayoutWrap="wrap" >
+				      	    <button mat-raised-button mat-color-primary class="query_type">Basic Query</button>
+				            <button mat-raised-button class="query_type">Advanced Query</button>
+						</div>
 						<div fxLayout="row" fxLayoutWrap="wrap" >
 							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">					
 							    <b class="mt-1">Optional Keywords</b>
@@ -160,12 +164,70 @@
 				</mat-card>
 			</div>	
 		</div>
+		<!--Avanced Query Editor -->
+		<div fxLayout="row" fxLayoutWrap="wrap">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+
+				<mat-card>
+		            <mat-card-header>
+		              <mat-card-title class="mat-color-primary">
+		                <span>Advanced Query</span>
+		              </mat-card-title>
+		              <mat-card-subtitle>
+		                <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+		              </mat-card-subtitle>
+		            </mat-card-header>
+					<mat-divider></mat-divider>
+					<br>
+					<mat-card-content>
+						<div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+								<mat-card class="p-0">
+								  	<mat-card-content class="p-0">
+								    	<form>
+								    		<mat-form-field class="full-width">
+						                      <textarea matInput placeholder="Query" rows="10" cols="80" value="{{editorData}}"></textarea>
+								    		</mat-form-field>
+								    	</form>
+								  	</mat-card-content>
+								  	<mat-divider *ngIf="!BasicQueryEditor"></mat-divider>
+								  	<br>
+								  	<mat-card-actions>
+								  		<div class="mat-h3 text-muted query-help">
+								  			<mat-icon class="query-icon">remove_red_eye</mat-icon>
+								  			<a>Show Simple Example</a>
+								  			<mat-icon class="query-icon">remove_red_eye</mat-icon>
+								  			<a>Show Complex Example</a>
+								  			<mat-icon class="query-icon">help_outline</mat-icon>
+								  			<a>Need More Help?</a>
+								  		</div>
+								  	</mat-card-actions>
+								</mat-card>
+							</div>
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+								<mat-card class="query-right-side">
+								  	<mat-card-content>
+								    	<h3 class="mat-h3">Boolean Operations: Booleans help you create your query.</h3>
+								    	<p class="mat-color-primary query-info"matTooltip="OR operators are used to expand your query. For example: car OR bus OR train">OR = OR's help you expand your query
+								    	</p>
+								    	<p class="mat-color-primary query-info"matTooltip="AND operators are used to expand your query. For example: car AND bus AND train">AND = AND's help you be more exact
+								    	</p>
+								    	<p class="mat-color-primary query-info"matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train">NOT = NOT's help you exclude information
+					                    </p>
+								  	</mat-card-content>
+								</mat-card>
+							</div>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
 		<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
   	      	<span fxFlex></span>
 		  	<button mat-raised-button class="mb-05 mat-bg-success">
 		    Test Query
 		  	</button>
-		</div>
+		</div>		
 	</div>
 	<!-- Column2 -->
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
@@ -268,7 +330,7 @@
   	</button>
   	<button mat-raised-button
     class="mb-05 mat-bg-green"
-    (click)="openMentionsDialog('Apply Enrichment')">
+    (click)="openMentionsDialog('Create Databox')">
     Create Databox
 	</button>
 </div>

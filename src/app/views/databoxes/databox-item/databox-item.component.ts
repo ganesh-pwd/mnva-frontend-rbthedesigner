@@ -49,7 +49,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public paginatedData: any;
   public folder: string;
   public selectedOption;
-  public BasicQueryEditor: boolean = false;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
@@ -84,9 +83,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       if (this.getItemSub) this.getItemSub.unsubscribe();
       this.getSingleItem();
     });
-    if (this.datasourceService.getSelectedDatasource() === 'Twitter') {
-      this.BasicQueryEditor = true;
-    };
 
     // load databox item table data
     this.getDataboxItemSearch();
@@ -101,16 +97,16 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     });
 
     this.arrayData = [
-      [0, '15/01/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_1', 100],
-      [1, '15/02/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_2', 100],
-      [2, '15/03/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_3', 100],
-      [3, '15/04/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_4', 100],
-      [4, '15/05/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_5', 100],
-      [5, '15/06/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_6', 100],
-      [6, '15/07/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_7', 100],
-      [7, '15/08/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_8', 100],
-      [8, '15/09/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_9', 100],
-      [9, '15/10/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_10', 100]
+      [0, '15/01/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_1', 'Category1', 'SubCategory1', 100, 100, 100, 100, 100, 100, 100,100],
+      [1, '15/02/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_2', 'Category1', 'SubCategory1', 100, 100, 100, 100, 100, 100, 100,100],
+      [2, '15/03/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_3', 'Category1', 'SubCategory1', 100, 100, 100, 100, 100, 100, 100,100],
+      [3, '15/04/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_4', 'Category1', 'SubCategory1', 100, 100, 100, 100, 100, 100, 100,100],
+      [4, '15/05/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_5', 'Category2', 'SubCategory1', 100, 100, 100, 100, 100, 100, 100,100],
+      [5, '15/06/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_6', 'Category2', 'SubCategory2', 100, 100, 100, 100, 100, 100, 100,100],
+      [6, '15/07/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_7', 'Category2', 'SubCategory2',100, 100, 100, 100, 100, 100, 100,100],
+      [7, '15/08/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_8', 'Category3', 'SubCategory2', 100, 100, 100, 100, 100, 100, 100,100],
+      [8, '15/09/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_9', 'Category3', 'SubCategory2', 100, 100, 100, 100, 100, 100, 100,100],
+      [9, '15/10/2018', 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees', 'NULL', 'Sabores a lo Tico_10', 'Category3', 'SubCategory3', 100, 100, 100, 100, 100, 100, 100,100]
     ]
 
     this.createTable();
@@ -146,9 +142,18 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       columns: [
         { data: 'date', title: '  Date', type: 'date', width: '100px' },
         { data: 'content', title: '  Content', width: '300px' },
-        { data: 'paren', title: '  Paren  ' },
+        { data: 'paren', title: '  Parent  ' },
         { data: 'author', title: '  Author  ' },
+        { data: 'category', title: 'Category' },
+        { data: 'subcategory', title: 'SubCategory' },
         { data: 'like', title: '  Like  ', className: "htCenter" },
+        { data: 'share', title: 'Share', className: "htCenter" },
+        { data: 'comment', title: 'Comment', className: "htCenter" },
+        { data: 'love', title: 'Love', className: "htCenter" },
+        { data: 'sad', title: 'Sad', className: "htCenter" },
+        { data: 'angry', title: 'Angry', className: "htCenter" },
+        { data: 'pride', title: 'Pride', className: "htCenter" },
+        { data: 'laugh', title: 'Laugh', className: "htCenter" },
         { data: 'report_sent', type: 'checkbox', checkedTemplate: 'yes', className: "htCenter", uncheckedTemplate: 'no', title: '  Report Sent' },
         { data: 'alert_sent', type: 'checkbox', checkedTemplate: 'yes', className: "htCenter", uncheckedTemplate: 'no', title: '  Alert Sent' },
         {
@@ -355,8 +360,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   // open databox query dialog
-  openMentionsDialog(title: string) {
-    this.databoxMentionsDialogService.confirm({ title: title })
+  openAlgorithmDialog(title: string) {
+    this.databoxAlgorithmDialogService.confirm({ title: title })
       .subscribe((result) => { });
   }  
 }
