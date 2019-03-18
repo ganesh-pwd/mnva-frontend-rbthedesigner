@@ -14,7 +14,6 @@
           </mat-card>
         </div>
         <div fxFlex="100" fxFlex.gt-sm="65">
-<<<<<<< HEAD
           <mat-card>
             <div class="minerva-sm">
               <mat-card-header>
@@ -79,82 +78,16 @@
                 
                 <div class="pb-1">
                 </div>
-=======
-          <div class="page-wrap">
-            <div class="session-form-hold">
-              <mat-card>
-                <mat-card-content>
-                  <div class="text-center pb-1">
-                    <h3 class="text-muted m-0">Sign in to your account</h3>
-                  </div>
-                  <form [formGroup]="signinForm" (ngSubmit)="signin()">
-                    <div class="">
-                      <mat-form-field class="full-width">
-                        <input
-                          matInput
-                          name="username"
-                          [formControl]="signinForm.controls['username']"
-                          placeholder="Username"
-                          value="">
-                      </mat-form-field>
-                      <small 
-                        *ngIf="signinForm.controls['username'].hasError('required') && signinForm.controls['username'].touched" 
-                        class="form-error-msg"> Username is required </small>
-                    </div>
 
-                    <div class="">
-                      <mat-form-field class="full-width">
-                        <input 
-                          type="password"
-                          name="password"
-                          matInput
-                          [formControl]="signinForm.controls['password']"
-                          placeholder="Password" 
-                          value="">
-                      </mat-form-field>
-                      <small 
-                        *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched" 
-                        class="form-error-msg"> Password is required </small>
-                    </div>
-                    
-                    <button mat-raised-button class="mat-primary full-width mb-1" [disabled]="signinForm.invalid">Sign in</button>
-                    <div class="text-center">
-                      <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
-                      <span fxFlex></span>
-                      <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Create a new account</a>
-                    </div>
->>>>>>> 5b23fc1deadab64d1841200b143b364d0d0f1ac5
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Facebook</button>
 
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Google</button>
 
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Facebook</button>
-
-<<<<<<< HEAD
               </form>
             </mat-card-content>
           </mat-card>
-=======
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Log In With Google</button>
-
-                    <div class="pb-1">
-                      <mat-checkbox
-                        name="agreed"
-                        [formControl]="signupForm.controls['agreed']"
-                        class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
-                        <small 
-                          *ngIf="signupForm.controls['agreed'].hasError('agreed') && signupForm.controls['agreed'].touched" 
-                          class="form-error-msg"> You must agree to the terms and conditions 
-                        </small>
-                    </div>
-                  </form>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </div>
->>>>>>> 5b23fc1deadab64d1841200b143b364d0d0f1ac5
         </div>
       </mat-card>
     </div>
   </div>
 </div>
-
