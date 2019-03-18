@@ -1,5 +1,5 @@
 export class AlgorithmCreditsDB {
-  public algorithm_credits = [
+  public algorithm_credit = [
     {
       'id': 0,
       'algorithm': 'Sentiment',

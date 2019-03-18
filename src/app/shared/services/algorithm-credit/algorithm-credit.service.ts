@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlgorithmCreditsDB } from '../../fake-db/algorithm-credits';
+import { AlgorithmCreditsDB } from '../../fake-db/algorithm-credit';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -7,17 +7,17 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AlgorithmCreditService {
-  private algorithm_credits: any[];
+  private algorithm_credit: any[];
 
   constructor() {
     const algorithmCreditsDB = new AlgorithmCreditsDB();
 
-    this.algorithm_credits = algorithmCreditsDB.algorithm_credits;
+    this.algorithm_credit = algorithmCreditsDB.algorithm_credit;
   }
 
   // ******* Implement your APIs ********
   getItems(): Observable<any> {
-    const rows = this.algorithm_credits;
+    const rows = this.algorithm_credit;
     return  of(rows.slice()).pipe(delay(500));
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
-import { AlgorithmCreditService } from '../../../shared/services/algorithm-credits/algorithm-credit.service';
+import { AlgorithmCreditService } from '../../../shared/services/algorithm-credit/algorithm-credit.service';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataTableDataSource } from './algorithm-credit.datasource';
 import { ProductShopService, CartItem } from '../products-shop.service';
@@ -19,7 +19,7 @@ import { Product } from '../../../shared/models/product.model';
 })
 export class AlgorithmCreditComponent implements OnInit {
 
-  public algorithm_credits: any[];
+  public algorithm_credit: any[];
   displayedColumns = ['algorithm', 'price'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
