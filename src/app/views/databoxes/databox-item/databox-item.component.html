@@ -42,8 +42,8 @@
       </span>
     </h3>
     <span fxFlex></span>
-    <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
-      On/Off
+    <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Pause Your Databox', 'Are you sure you want to pause your databox. Data will stop comming into your Databox, and mentions will stop being deducted from your plan.', false)">
+    On/Off
     </mat-slide-toggle>
   </div>
 </div>

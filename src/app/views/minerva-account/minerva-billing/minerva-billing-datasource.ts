@@ -20,7 +20,7 @@ export interface DataTableItem {
 const EXAMPLE_DATA: DataTableItem[] = [
   {
     id: 0, 
-    product_type: 'Plus Databox',
+    product_type: 'Databox',
     product_name: 'Banco Popular <br>Facebook | Costa Rica',
     status: 'No Configuration',
     date_created: '12 July 2018',
@@ -31,7 +31,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
   },
   {
     id: 1, 
-    product_type: 'Standard Databox',
+    product_type: 'Databox',
     product_name: 'Banco Popular <br>Twitter | Costa Rica',
     status: 'No Configuration',
     date_created: '12 July 2018',
@@ -42,7 +42,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
   },
   {
     id: 2, 
-    product_type: 'Standard Databox',
+    product_type: 'Databox',
     product_name: 'Banco Popular <br>Web | Costa Rica',
     status: 'Data Refreshing',
     date_created: '12 July 2018',
@@ -53,7 +53,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
   },
   {
     id: 3, 
-    product_type: 'Standard Databox',
+    product_type: 'Databox',
     product_name: '',
     status: 'Expired',
     date_created: '12 July 2018',

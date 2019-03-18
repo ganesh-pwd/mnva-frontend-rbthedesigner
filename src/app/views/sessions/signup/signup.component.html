@@ -96,11 +96,11 @@
                   <p class="mat-primary text-center full-width">Or</p>
                 </div>
 
-                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Sign In With Facebook</button>
-                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Sign In With Google</button>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" [routerLink]="/accounts">Sign In With Facebook</button>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" [routerLink]="'/accounts'">Sign In With Google</button>
                 <div class="text-center">
-                  <a [routerLink]="'/sessions/signin'" class="mat-primary text-center full-width">Already Have an Account? Login here</a><br>
-
+                  Already Have an Account?
+                  <a [routerLink]="/sessions/signin" class="mat-primary text-center full-width">Login here</a><br>
                 </div>
               </form>
             </mat-card-content>

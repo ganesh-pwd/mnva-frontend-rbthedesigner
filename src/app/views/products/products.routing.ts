@@ -17,10 +17,10 @@ export const ProductRoutes: Routes = [
   },
 
   {
-    path: 'databoxes',
+    path: 'account-type',
     component: MainProductsComponent,
     data: {
-      title: 'Databoxes', breadcrumb: 'Databoxes'
+      title: 'Account Type', breadcrumb: 'Account Type'
     }
   },
   {

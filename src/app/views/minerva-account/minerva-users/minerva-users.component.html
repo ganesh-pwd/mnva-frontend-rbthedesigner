@@ -1,6 +1,6 @@
 <br>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Users
       <small>   |     Account / Users </small>
@@ -8,17 +8,66 @@
   </div>
 </div>
 <hr>
+<!-- Account Settings -->
 
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <button
-    class="mb-05"
-    color="primary"
-    mat-raised-button
-    (click)="openDialog('Add New User')">
-		Add User
-	</button>
+<!-- Plan and Credit -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+		<mat-card class="p-0">
+		  <mat-card-title class="">
+		    <div class="card-title-text mt-05">Account Type</div>
+		    <mat-divider></mat-divider>
+		  </mat-card-title>
+		  <mat-card-content>
+		    <div class="pb-1">
+		      <h2>Standard</h2>
+		      <p><a class="text-muted">Upgrade your plan</a></p>
+		    </div>
+		  </mat-card-content>
+		</mat-card>
+	</div>
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+		<mat-card class="p-0">
+		  <mat-card-title class="">
+		    <div class="card-title-text mt-05">Mentions Plan</div>
+		    <span fxFlex></span>
+		    <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+		    <mat-divider></mat-divider>
+		  </mat-card-title>
+		  <mat-card-content>
+		    <div class="pb-1">
+		      <h6>Mentions Remaining</h6>
+		      <p class="text-muted">Mentions</p>
+		      <mat-progress-bar
+		      [mode]="'determinate'"
+		      [value]="60">
+		      </mat-progress-bar>
+		    </div>
+		  </mat-card-content>
+		</mat-card>
+	</div>
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+		<mat-card class="p-0">
+		  <mat-card-title class="">
+		    <div class="card-title-text mt-05">Algorithm Credit</div>
+		    <span fxFlex></span>
+		    <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+		    <mat-divider></mat-divider>
+		  </mat-card-title>
+		  <mat-card-content>
+		    <div class="pb-1">
+		      <h6>Algorithm Credit Remaining</h6>
+		      <p class="text-muted">Credit</p>
+		      <mat-progress-bar
+		      [mode]="'determinate'"
+		      [value]="60">
+		      </mat-progress-bar>
+		    </div>
+		  </mat-card-content>
+		</mat-card>
+	</div>	
 </div>
-
+<!-- Account Settings -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
 
@@ -56,11 +105,8 @@
       </div>
 		</mat-card>
 	</div>
-
 	<!-- Users -->
-
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-
 		<div fxLayout="row" fxLayoutWrap="wrap">
 			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
 				<mat-card>
@@ -172,6 +218,14 @@
 					</mat-card-content>
 				</mat-card>
 			</div>
+		</div>
+		<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+			<button
+			class="mb-05"
+			color="primary"
+			mat-raised-button
+			(click)="openDialog('Add New User')"> Add User
+			</button>
 		</div>
 	</div>
 </div>

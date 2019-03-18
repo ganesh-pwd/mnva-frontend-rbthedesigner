@@ -1,79 +1,86 @@
 <br>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
-    <h1 class="mat-h1">
-        <mat-icon>shopping_cart</mat-icon>
-        Products
-        <small>   |    
-          <span class="main-route">
-            <a routerLink="/products">Products</a>
-          </span> / Algorithm Credit</small>
-      </h1>
-  </div>
+   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+   <h1 class="mat-h1">
+      <mat-icon>shopping_cart</mat-icon>
+      Products
+      <small>   |    
+      <span class="main-route">
+      <a routerLink="/products">Products</a>
+      </span> / Algorithm Credit</small>
+   </h1>
 </div>
-
+</div>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-      <mat-card>
-        <mat-card-content>
-          <div class="full-width mb-1 mt-1">
-            <button mat-raised-button color="primary" routerLink="/products/cart">
-              <mat-icon>shopping_cart</mat-icon> Cart  ({{cartData.itemCount}})
+   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+   <mat-card>
+      <mat-card-header>
+         <mat-card-title class="mat-color-primary">
+            <div class="mt-05">Algorithm Credit</div>
+            <span fxFlex></span>
+            <button style="position: absolute; right:24px;" mat-raised-button color="primary" routerLink="/products/cart">
+             <mat-icon>shopping_cart</mat-icon>
+             Cart  ({{cartData.itemCount}})
             </button>
-          </div>
-
-          <div fxLayout="row" fxLayoutWrap="wrap" fxAlignLayout="center">
-            <h4>Algorithm Credit</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Officiis asperiores, explicabo amet similique fuga optio laborum
-              iste culpa alias iure unde! Tenetur velit fuga sit suscipit nobis odio facilis?
-              Consequatur.</p>
-
+         </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+         <mat-card-subtitle>
+            <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+         </mat-card-subtitle>
+         <div fxLayout="row" fxLayoutWrap="wrap" fxAlignLayout="center">
             <mat-paginator #paginator [hidden]="dataSource"
-              [length]="dataSource.data.length"
-              [pageIndex]="0"
-              [pageSize]="10"
-              [pageSizeOptions]="[10, 20, 50, 100]">
+            [length]="dataSource.data.length"
+            [pageIndex]="0"
+            [pageSize]="10"
+            [pageSizeOptions]="[10, 20, 50, 100]">
             </mat-paginator>
-
             <table class="mat-elevation-z8">
-              <tbody>
-                <tr class="action mat-color-primary">
-                  <td>
-                      Algorithm
-                  </td>
-                  <td class="pt-30">
-                      Price
-                  </td>
-                </tr>
-                <tr *ngFor="let algorithmRow of algorithms">
-                  <td>{{ algorithmRow.algorithm }}</td>
-                  <td class="pt-30">
-                    {{ algorithmRow.price }}
-                  </td>
-                </tr>
-                <tr class="action mat-color-primary">
-                  <td width="450px">
-                    <mat-form-field>
-                      <mat-select value="$250">
-                        <mat-option value="$50" style="font-size: 18px !important;">$50</mat-option>
-                        <mat-option value="$100" style="font-size: 18px !important;">$100</mat-option>
-                        <mat-option value="$150" style="font-size: 18px !important;">$150</mat-option>
-                        <mat-option value="$250" style="font-size: 18px !important;">$250</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </td>
-                  <td class="pl-1">
-                    <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart(50)">
-                      <mat-icon>shopping_cart</mat-icon> Add to cart
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+               <tbody>
+                    <tr class="action mat-color-primary">
+                     <td></td>
+                     <td>
+                        <mat-form-field>
+                           <mat-select value="$250">
+                              <mat-option value="$50" style="font-size: 18px !important;">$50</mat-option>
+                              <mat-option value="$100" style="font-size: 18px !important;">$100</mat-option>
+                              <mat-option value="$150" style="font-size: 18px !important;">$150</mat-option>
+                              <mat-option value="$250" style="font-size: 18px !important;">$250</mat-option>
+                           </mat-select>
+                        </mat-form-field>
+                        <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addToCart(50)">
+                           <mat-icon>shopping_cart</mat-icon>
+                           Add to cart
+                        </button>                     
+                     </td>
+                     <td>
+                     </td>
+                  </tr>
+                  <tr class="action mat-color-primary">
+                     <td>
+                        Algorithm
+                     </td>
+                     <td>
+                        Description
+                     </td>                     <td class="pt-30">
+                        Price
+                     </td>
+                  </tr>
+                  <tr *ngFor="let algorithmRow of algorithms">
+                     <td>{{ algorithmRow.algorithm }}</td>
+                     <td class="pt-30">
+                        {{ algorithmRow.description }}
+                     </td>
+                     <td class="pt-30">
+                        {{ algorithmRow.price }}
+                     </td>
+                  </tr>
+               </tbody>
             </table>
-          </div>
-
-        </mat-card-content>
-      </mat-card>
+         </div>
+      </mat-card-content>
+   </mat-card>
   </div>
 </div>

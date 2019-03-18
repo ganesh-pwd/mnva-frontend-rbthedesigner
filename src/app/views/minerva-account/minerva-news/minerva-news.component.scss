@@ -1,10 +1,12 @@
 button{
 	margin-right: 10px !important;
 }
-
+mat-card {
+	min-height: 212px;
+}
 mat-card-content{
 	padding-left: -30px !important;
-	cursor: pointer;
+	cursor: initial;
 }
 
 mat-card-actions{

@@ -108,11 +108,11 @@ export class NavigationService {
     const template_gallery = this.initializeGallery(this.template_gallery);
 
     const arr = [{
-        name: 'Databoxes',
+        name: 'Account Type',
         type: 'dropDown',
-        tooltip: 'Databox',
+        tooltip: 'Acocunt Type',
         icon: 'widgets',
-        state: 'databoxes',
+        state: 'account-type',
         sub: [...databoxMenu]
       },
       {
@@ -130,7 +130,7 @@ export class NavigationService {
         icon: 'shopping_cart',
         state: 'products',
         sub: [
-          { name: 'Databoxes', state: 'databoxes' },
+          { name: 'Account Type', state: 'account-type' },
           { name: 'Algorithm Credit', state: 'algorithm-credit' },
           { name: 'Account Features', state: 'account-feautures' },
           { name: 'Licenses', state: 'licenses' },
