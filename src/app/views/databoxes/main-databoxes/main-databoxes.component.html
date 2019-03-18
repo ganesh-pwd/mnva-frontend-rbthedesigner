@@ -7,13 +7,23 @@
   </h1>
 </div>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <button
-    mat-raised-button
-    class="mb-05 mat-color-green"
-    (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
-    Create Databox
-  </button>
-  <br>
+  <div fxFlex="100" fxFlex.gt-xs="33" class="mt-05">
+    <button
+      mat-raised-button
+      class="mat-color-green"
+      (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
+      Create Databox
+    </button>
+  </div>  
+  <div fxFlex="100" fxFlex.gt-xs="33">
+    <mat-form-field class="margin-333" style="width: 100%">
+      <input 
+      matInput 
+      placeholder="Type to filter by name, datasource or query" 
+      value=""
+      (keyup)='updateFilter($event)'>
+    </mat-form-field>
+  </div>  
 </div>
 
 <hr>
@@ -42,7 +52,10 @@
             <br>
             Mentions per day: <b>{{data?.mentions_per_day}}</b>
             <br>
-            <br>
+            <div class="mt-1">
+              <b>Query</b>
+              <p>{{data?.query}}</p>
+            </div>
             <br>
             <br>
         </div>
@@ -60,7 +73,7 @@
           </span>
         </h3>
       	<span fxFlex></span>
-        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Renew Databox', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false)">
+        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Pause Your Databox', 'Are you sure you want to pause your databox. Data will stop comming into your Databox, and mentions will stop being deducted from your plan.', false)">
         On/Off
         </mat-slide-toggle>
       </mat-card-actions>

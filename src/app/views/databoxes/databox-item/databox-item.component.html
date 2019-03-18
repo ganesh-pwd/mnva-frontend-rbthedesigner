@@ -5,7 +5,7 @@
       <!-- <mat-icon>widgets</mat-icon>  -->
       {{data?.databox_name}}
       <small>
-        <mat-icon (click)="openDialog('Edit Databox', 'Databox Name', true, '')">edit</mat-icon> | 
+        <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> | 
         <span class="main-route">
         <a routerLink="/databoxes/">Databoxes </a> / {{data?.databox_name}}</span>
       </small>
@@ -13,6 +13,7 @@
   </div>
 </div>
 
+<!-- Upper Menu -->
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" style="border-bottom: 1px solid gray;">
   <button 
     mat-raised-button 
@@ -27,30 +28,65 @@
     routerLink="/databoxes/settings/connect/{{data?._id}}">
     Connect Your Data
   </button>
-  <mat-slide-toggle style="position: absolute; right: 24px; margin-top: 10.5px;" color="primary" class="mb-1" [checked]="checked">
+<!--   <mat-slide-toggle style="position: absolute; right: 24px; margin-top: 10.5px;" color="primary" class="mb-1" [checked]="checked">
     On/Off
-  </mat-slide-toggle>  
+  </mat-slide-toggle> -->
+  <span fxFlex></span>
+  <div class="mr-1">
+    <h3 class="mat-h4 mr-1">Status:
+      <span [ngClass]="
+          data.status === 'Active' ? 'databox-active' :
+          data.status === 'Paused' ? 'databox-paused':
+          data.status === 'Draft'? 'databox-draft' :
+          ''"> {{data.status}}
+      </span>
+    </h3>
+    <span fxFlex></span>
+    <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+      On/Off
+    </mat-slide-toggle>
+  </div>
 </div>
 
+<!-- Tabs -->
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
   <mat-tab-group>
+    <!-- Results -->
     <mat-tab label="Results">
+      <!-- Line Chart -->
+      <div fxLayout="row" fxLayoutWrap="wrap" >
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+          <mat-card class="p-0">
+            <mat-card-content>
+              <canvas 
+                baseChart 
+                class="chart"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="chartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
       <div fxLayout="row" fxLayoutWrap="wrap">
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
           <div>
             <p>
-                {{data?.mentions}} mentions     |    Last Updated: {{data?.last_updated}}
+                <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b>{{data?.mentions_per_day}}
             </p>
           </div>
           <span fxFlex></span>
           <div style="position: absolute; right: 24px;">
             <a>
-            Not Finding a Result?
+            <b>Not Finding a Result?</b>
             </a>
           </div>
         </div>
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <div class="mat-elevation-z8 hot-container">
+          <div class="hot-container">
             <hot-table id="scroll-area" [hotId]="hotId" [settings]="tableSettings"></hot-table>
 
             <div class="table-foot">
@@ -103,10 +139,15 @@
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="{{data?.page_search_name}} ID" >
               </mat-form-field>
-            </form>
-
+              &nbsp;
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{data?.page_search_name}} Country" >
+              </mat-form-field>            </form>
             <button mat-raised-button>Send</button> 
             <br><br>
+            <h2 class="mat-h1">Delete Databox</h2>
+            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
+            <button mat-raised-button (click)="openDialog('Delete Databox', 'Write down databox name to delete', true, '')">Delete Databox</button>
           </div>
         </div>
       </div>
@@ -138,17 +179,369 @@
 
       <br><br>
     </mat-tab>
+    <!-- Categorize Your Data -->
     <mat-tab label="Categorize Your Data">
-      <p class="pt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis quod dolores explicabo at nisi voluptatum doloribus,
-        natus consequatur voluptate reprehenderit, obcaecati nulla quibusdam porro iste autem. Quia, quod possimus voluptas?
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis quod dolores explicabo at nisi voluptatum doloribus,
-        natus consequatur voluptate reprehenderit, obcaecati nulla quibusdam porro iste autem. Quia, quod possimus voluptas?</p>
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <!-- Column 1 -->
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title class="mat-color-primary">
+                <span>Category Creator</span>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-content>
+              <table mat-table [dataSource]="dataSource">
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Name. </th>
+                  <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="type">
+                  <th mat-header-cell *matHeaderCellDef> Type </th>
+                  <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="expression">
+                  <th mat-header-cell *matHeaderCellDef> Expression </th>
+                  <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let row">
+                        <mat-icon class="text-muted">edit</mat-icon> 
+                        <mat-icon class="text-muted">delete</mat-icon>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card-content>
+            <br>
+            <mat-card-actions class="p-0">
+                <button (click)="openQueryDialog('Create Category')"
+                  mat-raised-button
+                  color="primary"
+                  class="query-category">
+                  Add Category
+                </button>
+                <span fxFlex></span>
+                <p class="text-muted">Category Remaining: 5<br>
+                SubCategory Remaining: 5
+                </p>
+              </mat-card-actions>
+          </mat-card>
+          <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
+            <span fxFlex></span>
+            <button mat-raised-button class="mb-05 mat-bg-success">
+            Categorize Your Data
+            </button>
+          </div>
+        </div>
+        <!-- Column2 -->
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <!-- Doughnut Chart -->
+          <div fxLayout="row" fxLayoutWrap="wrap" >
+            <!-- Doughnut Chart para Categorias -->
+            <div fxFlex="100" fxFlex.gt-sm="50">
+              <mat-card class="p-0">
+                <mat-card-content>
+                  <canvas 
+                    baseChart 
+                    class="chart"
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [options]="doughnutOptions"
+                    [colors]="doughnutChartColors"
+                    [chartType]="doughnutChartType"></canvas>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <!-- Doughnut Chart para SubCategorias -->
+            <div fxFlex="100" fxFlex.gt-sm="50">
+              <mat-card class="p-0">
+                <mat-card-content>
+                  <canvas 
+                    baseChart 
+                    class="chart"
+                    [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels"
+                    [options]="doughnutOptions"
+                    [colors]="doughnutChartColors"
+                    [chartType]="doughnutChartType"></canvas>
+                </mat-card-content>
+              </mat-card>
+            </div>            
+          </div>
+          <!-- Result Preview -->
+          <div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+              <mat-card>
+                <mat-card-title>
+                  <h3 class="mat-h3 mat-color-primary">Results</h3>
+                </mat-card-title>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                </mat-card-content>
+              </mat-card>
+            </div>      
+          </div>    
+        </div>
+      </div>
     </mat-tab>
+    <!-- Process Your Results -->
     <mat-tab label="Process Your Data">
-      <p class="pt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis quod dolores explicabo at nisi voluptatum doloribus,
-        natus consequatur voluptate reprehenderit, obcaecati nulla quibusdam porro iste autem. Quia, quod possimus voluptas?
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis quod dolores explicabo at nisi voluptatum doloribus,
-        natus consequatur voluptate reprehenderit, obcaecati nulla quibusdam porro iste autem. Quia, quod possimus voluptas?</p>
+      <!-- Credits -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100"
+          [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+          <div>
+            <span fxFlex></span>
+            <h3 class="mat-h3">Credits Remaining:
+              <span class="credits">$100</span>   |   
+              <button mat-raised-button class="mat-color-green">Buy More</button>
+            </h3>
+            <br>
+          </div>
+
+          <div class="mentions">
+            <span fxFlex></span>
+            <h3 class="mat-h4 text-muted">Current Mentions: 10,000 mentions
+            </h3>
+            <br>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <!-- Algorithm Option -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <!-- Sentiment -->
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title class="mat-color-primary">
+                <mat-icon class="icon-header">add</mat-icon>
+                <span class="algorithm-header">Sentiment</span>
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <br>
+            <p class="card-content">
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+            <mat-card-content>
+              <br>
+              <div class="databox-details">
+                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                  Apply Automatically
+                </mat-slide-toggle>
+                <span fxFlex></span>
+                <button mat-raised-button class="truncate"
+                  (click)="openAlgorithmDialog('Apply Enrichment')">
+                  Apply only to unprocessed data
+                </button>
+              </div>
+              <div class="databox-details-below">
+                <p> (Unprocessed + New Data)</p>
+              </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-actions>
+              <span fxFlex></span>
+              <h2 class="mat-h3">Cost / Mention: Free</h2>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        
+        <!-- Topic Recognition -->
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title class="mat-color-primary">
+                <mat-icon class="icon-header airplane">airplanemode_active</mat-icon>
+                <span class="algorithm-header">Topic Recognition</span>
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <br>
+            <p class="card-content">
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+            <mat-card-content>
+              <br>
+              <div class="databox-details">
+                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" >
+                  Apply Automatically
+                </mat-slide-toggle>
+                <span fxFlex></span>
+                <button mat-raised-button class="truncate"
+                  (click)="openAlgorithmDialog('Apply Enrichment')">
+                  Apply only to unprocessed data
+                </button>
+              </div>
+              <div class="databox-details-below">
+                <p> (Unprocessed + New Data)</p>
+              </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-actions>
+              <span fxFlex></span>
+              <h2 class="mat-h3">Cost / Mention: $0.03</h2>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+
+        <!-- Gender Author -->
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title class="mat-color-primary">
+                <mat-icon class="icon-header">people</mat-icon>
+                <span class="algorithm-header">Gender Author</span>
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <br>
+            <p class="card-content">
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+            <mat-card-content>
+              <br>
+              <div class="databox-details">
+                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                  Apply Automatically
+                </mat-slide-toggle>
+                <span fxFlex></span>
+                <button mat-raised-button class="truncate"
+                  (click)="openAlgorithmDialog('Apply Enrichment')">
+                  Apply only to unprocessed data
+                </button>
+              </div>
+              <div class="databox-details-below">
+                <p> (Unprocessed + New Data)</p>
+
+              </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-actions>
+              <span fxFlex></span>
+              <h2 class="mat-h3">Cost / Mention: Free</h2>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+        <!-- Entity Recognition -->
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title class="mat-color-primary">
+                <mat-icon class="icon-header">location_city</mat-icon>
+                <span class="algorithm-header">Entity Recognition</span>
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <br>
+            <p class="card-content">
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+            <mat-card-content>
+              <br>
+              <div class="databox-details">
+                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                  Apply Automatically
+                </mat-slide-toggle>
+                <span fxFlex></span>
+                <button mat-raised-button class="truncate"
+                  (click)="openAlgorithmDialog('Apply Enrichment')">
+                  Apply only to unprocessed data
+                </button>
+              </div>
+              <div class="databox-details-below">
+                <p> (Unprocessed + New Data)</p>
+              </div>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+            <br>
+            <mat-card-actions>
+              <span fxFlex></span>
+              <h2 class="mat-h3">Cost / Mention: $0.03</h2>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div> -->
+
+      <!-- FAQ's -->
+      <div fxLayout="row" fxLayoutWrap="wrap" class="faq"
+        [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <h1 class="mat-h1 faq-header">Frequently Asked Questions</h1>
+        </div>
+
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+          <div class="faq-inner">
+            <h2 class="mat-h3 mat-color-primary">Apply Automatically</h2>
+            <p>
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+          <div class="faq-inner">
+            <h2 class="mat-h3 mat-color-primary">Apply to Unprocessed Data</h2>
+            <p>
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+          <div class="faq-inner">
+            <h2 class="mat-h3 mat-color-primary">Cost / Mention</h2>
+            <p>
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+          </div>
+        </div>
+
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+          <div class="faq-inner">
+            <h2 class="mat-h3 mat-color-primary">How to buy credit</h2>
+            <p>
+              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+            </p>
+          </div>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>

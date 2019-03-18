@@ -6,7 +6,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_1',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 1, 
@@ -14,7 +23,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_2',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 2, 
@@ -22,7 +40,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_3',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 3, 
@@ -30,7 +57,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_4',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100 
     },
     {
       'id': 4, 
@@ -38,7 +74,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_5',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100 
     },
     {
       'id': 5, 
@@ -46,7 +91,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_6',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100 
     },
     {
       'id': 6, 
@@ -54,7 +108,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_7',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 7, 
@@ -62,7 +125,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_8',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory1',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 8, 
@@ -70,7 +142,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_9',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory2',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 9, 
@@ -78,7 +159,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_10',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory2',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 10, 
@@ -86,7 +176,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_11',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory2',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 11, 
@@ -94,7 +193,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_12',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory2',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
     {
       'id': 12, 
@@ -102,7 +210,16 @@ export class DataboxItemSearch {
       'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
       'paren': 'NULL',
       'author': 'Sabores a lo Tico_13',
-      'like': 100
+      'category': 'Category 1',
+      'subcategory': 'SubCategory2',
+      'like': 100,
+      'share': 100,
+      'comment': 100,
+      'love': 100,
+      'sad': 100,
+      'angry': 100,
+      'pride': 100,
+      'laugh': 100
     },
   ];
 }

@@ -85,14 +85,35 @@ small{
 	margin-left: 30px;
 	font-size: 20px;
 	position: absolute;
-}
-
-.icon-header{
-	font-size: 35px;
+	font-size: 20px;	
 }
 
 .settings{
 	padding-left: 2%;
+}
+
+.databox-data{
+	margin-left: 4rem;
+}
+
+.buttonRow{
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+
+button.query_type{
+	line-height: 28px;
+	margin: -1px !important;
+	box-shadow: none;
+	border: 1px solid gray;
+	&:hover{
+		background-color: gray;
+		color: white;
+	}
+}
+
+.icon-header{
+	font-size: 35px;
 }
 
 .card-content{
@@ -112,11 +133,33 @@ small{
 	margin-left: 5px;
 }
 
-.databox-data{
-	margin-left: 4rem;
+.query-category{
+	left: 30px;
+	bottom: 50px;
+	position: absolute;
 }
 
-.deleteButtonRow{
-  justify-content: flex-end;
-  padding-right: 10px;
+.query-inner{
+	mat-card{
+		border: none;
+		box-shadow: none;
+	}
+}
+
+.query-right-side{
+	background: whitesmoke;
+}
+
+.query-info{
+	cursor: pointer;
+}
+
+.query-help{
+	display: inline-flex !important;
+	vertical-align: middle !important;
+
+	a{
+		padding-right: 30px;
+		padding-left: 10px;
+	}
 }

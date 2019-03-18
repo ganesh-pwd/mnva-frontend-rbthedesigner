@@ -6,6 +6,8 @@ import { CountryService } from '../../../shared/services/countries/country.servi
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { Subscription } from 'rxjs';
 import { DatasourceService } from '../../../shared/services/datasource/datasource.service';
+import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
+import { DataboxMentionsDialogService } from '../../../shared/services/databoxes/dialogs-mentions/dialogs-mentions.services';
 
 @Component({
   selector: 'app-databox-item-settings',
@@ -25,10 +27,15 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public datasource: any;
   public selectedDatasource: string = 'Facebook';
 
+  // tslint:disable-next-line:max-line-length
+  editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
+  
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private countryService: CountryService,
     private databoxesService: DataboxesService,
+    private databoxAlgorithmDialogService: DataboxAlgorithmDialogService,    
+    private databoxMentionsDialogService: DataboxMentionsDialogService,    
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private datasourceService: DatasourceService
   ) {
@@ -100,4 +107,10 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       this.selectedOption = result;
     });
   }
+ 
+  // open databox query dialog
+  openMentionsDialog(title: string) {
+    this.databoxMentionsDialogService.confirm({ title: title })
+      .subscribe((result) => { });
+  }  
 }

@@ -1,3 +1,41 @@
+.title-header{
+	top: 7%;
+	margin-left: 30px;
+	font-size: 20px;
+	position: absolute;
+	font-size: 20px;	
+}
+
+button.query_type{
+	line-height: 28px;
+	margin: -1px !important;
+	box-shadow: none;
+	border: 1px solid gray;
+	&:hover{
+		background-color: gray;
+		color: white;
+	}
+}
+
+.card-content{
+	padding-left: 30px;
+}
+
+.query-inner{
+	mat-card{
+		border: none;
+		box-shadow: none;
+	}
+}
+
+.query-right-side{
+	background: whitesmoke;
+}
+
+.query-info{
+	cursor: pointer;
+}
+
 .query-help{
 	display: inline-flex !important;
 	vertical-align: middle !important;
