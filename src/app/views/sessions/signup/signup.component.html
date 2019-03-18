@@ -38,7 +38,7 @@
                       matInput
                       type="email"
                       name="email"
-                      [formControl]="signupForm.controls['email']"
+                      formControl="signupForm.controls['email']"
                       placeholder="Your Email"
                       value="">
                   </mat-form-field>
@@ -57,7 +57,7 @@
                       type="password"
                       name="password"
                       matInput
-                      [formControl]="signupForm.controls['password']"
+                      formControl="signupForm.controls['password']"
                       placeholder="Password" 
                       value="">
                   </mat-form-field>
@@ -72,7 +72,7 @@
                       type="password"
                       name="confirmPassword"
                       matInput
-                      [formControl]="signupForm.controls['confirmPassword']"
+                      formControl="signupForm.controls['confirmPassword']"
                       placeholder="Confirm Password"
                       value="">
                   </mat-form-field>
@@ -83,7 +83,7 @@
                 <div class="pb-1">
                   <mat-checkbox
                     name="agreed"
-                    [formControl]="signupForm.controls['agreed']"
+                    formControl="signupForm.controls['agreed']"
                     class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
 
                     <small 
@@ -91,13 +91,13 @@
                       class="form-error-msg"> You must agree to the terms and conditions </small>
                 </div>
 
-                <button mat-raised-button class="mat-primary full-width mb-1" [disabled]="signupForm.invalid">Sign up</button>
+                <button routerLink="/databoxes" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Sign up</button>
                 <div class="text-center">
                   <p class="mat-primary text-center full-width">Or</p>
                 </div>
 
-                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Sign In With Facebook</button>
-                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/accounts">Sign In With Google</button>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="">Sign In With Facebook</button>
+                <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="">Sign In With Google</button>
                 <div class="text-center">
                   <a [routerLink]="'/sessions/signin'" class="mat-primary text-center full-width">Already Have an Account? Login here</a><br>
 

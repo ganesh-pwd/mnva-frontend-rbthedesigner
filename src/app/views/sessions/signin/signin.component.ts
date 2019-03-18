@@ -17,17 +17,22 @@ export class SigninComponent implements OnInit {
 
   signinForm: FormGroup;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
+    this.signinForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      rememberMe: new FormControl(false)
+    })
   }
 
   signin() {
-    this.submitButton.disabled = false;
-    this.progressBar.mode = 'indeterminate';
-  }
+    const signinData = this.signinForm.value
+    console.log(signinData);
 
-  ngOnDestroy() {
+    this.submitButton.disabled = true;
+    this.progressBar.mode = 'indeterminate';
   }
 
 }
