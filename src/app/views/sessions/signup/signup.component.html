@@ -31,14 +31,14 @@
                   Track, analyze, and react to everything said about your brand online.
                 </p>
               </div>
-              <form>
+              <form [formGroup]="signupForm"  (ngSubmit)="signup()">
                 <div class="">
                   <mat-form-field class="full-width">
                     <input
                       matInput
                       type="email"
                       name="email"
-                      formControl="signupForm.controls['email']"
+                      [formControl]="signupForm.controls['email']"
                       placeholder="Your Email"
                       value="">
                   </mat-form-field>
@@ -57,12 +57,12 @@
                       type="password"
                       name="password"
                       matInput
-                      formControl="signupForm.controls['password']"
+                      [formControl]="signupForm.controls['password']"
                       placeholder="Password" 
                       value="">
                   </mat-form-field>
                   <small 
-                    *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched" 
+                    *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched"
                     class="form-error-msg"> Password is required </small>
                 </div>
                 
@@ -72,7 +72,7 @@
                       type="password"
                       name="confirmPassword"
                       matInput
-                      formControl="signupForm.controls['confirmPassword']"
+                      [formControl]="signupForm.controls['confirmPassword']"
                       placeholder="Confirm Password"
                       value="">
                   </mat-form-field>
@@ -83,7 +83,7 @@
                 <div class="pb-1">
                   <mat-checkbox
                     name="agreed"
-                    formControl="signupForm.controls['agreed']"
+                    [formControl]="signupForm.controls['agreed']"
                     class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
 
                     <small 
