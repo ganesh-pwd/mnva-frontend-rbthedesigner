@@ -26,7 +26,6 @@ export class AlgorithmCreditComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: DataTableDataSource;
-  public customDatabox: number = 0;
   public products$: Observable<Product[]>;
   public cart: CartItem[];
   public cartData: any;

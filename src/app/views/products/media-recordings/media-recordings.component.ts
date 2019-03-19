@@ -16,7 +16,6 @@ import { MatSnackBar } from '@angular/material';
 })
 export class MediaRecordingsComponent implements OnInit {
   public total: number = 250;
-  public customDatabox: number = 0;
   public products$: Observable<Product[]>;
   public cart: CartItem[];
   public cartData: any;

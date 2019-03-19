@@ -134,7 +134,7 @@ export class NavigationService {
           { name: 'Algorithm Credit', state: 'algorithm-credit' },
           { name: 'Account Features', state: 'account-feautures' },
           { name: 'Licenses', state: 'licenses' },
-          { name: 'Advance Templates', state: 'advanced-templates' },
+          { name: 'Advanced Templates', state: 'advanced-templates' },
           { name: 'Media Recordings', state: 'media-recordings' }
         ]
       }];

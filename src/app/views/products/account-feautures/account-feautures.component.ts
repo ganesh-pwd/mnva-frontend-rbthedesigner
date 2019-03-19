@@ -19,8 +19,6 @@ export class AccountFeauturesComponent implements OnInit {
   public rows = [];
   public columns = [];
   public total: number = 250;
-
-  public customDatabox: number = 0;
   public products$: Observable<Product[]>;
   public cart: CartItem[];
   public cartData: any;

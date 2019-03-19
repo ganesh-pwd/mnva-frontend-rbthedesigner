@@ -68,7 +68,7 @@ export const ProductRoutes: Routes = [
       {
         path: '', component: AdvancedTemplatesComponent,
           data: {
-            title: 'Advance Templates', breadcrumb: 'Advance Templates'
+            title: 'Advanced Templates', breadcrumb: 'Advanced Templates'
           }
       }
     ]
