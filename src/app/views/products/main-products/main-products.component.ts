@@ -16,11 +16,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class MainProductsComponent implements OnInit {
   public standardDatabox: number = 40;
   public plusDatabox: number = 70;
-  public customKeyword: number = 0;
-  public customCategory: number = 0;
-  public customSubCategory: number = 0;
-  public customDay: number = 0;
-  public customDatabox: number = 0;
+  public enterpriseDatabox: number = 100;
   public products$: Observable<Product[]>;
   public cart: CartItem[];
   public cartData: any;
@@ -34,7 +30,6 @@ export class MainProductsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.customDatabox = this.customKeyword + this.customCategory + this.customSubCategory + this.customDay;
     this.buildFilterForm(this.shopService.initialFilters);
 
     this.products$ = this.shopService
@@ -90,7 +85,4 @@ export class MainProductsComponent implements OnInit {
     });
   }
 
-  computeTotal() {
-    this.customDatabox = this.customKeyword + this.customCategory + this.customSubCategory + this.customDay
-  }
 }

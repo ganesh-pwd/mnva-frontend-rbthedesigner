@@ -35,21 +35,14 @@
             <div class="p-0">
               <h3><strong>$<span>{{standardDatabox}} /Mo</span></strong></h3>
               <mat-list dense class="mb-1">
-                <mat-list-item>1 Data source</mat-list-item>
-                <mat-list-item>1 Country</mat-list-item>
-                <mat-list-item>1 Keywords</mat-list-item>
-                <mat-list-item>1 Categories</mat-list-item>
-                <mat-list-item>1 Sub-Categories</mat-list-item>
-                <mat-list-item>7 Days Historical</mat-list-item>
+                <mat-list-item>Facebook</mat-list-item>
               </mat-list>
             </div>
             <br>
             <table>
               <tbody>
-                <tr><td>Alerts</td></tr>
-                <tr><td>Email Reports</td></tr>
-                <tr><td>Enrichments</td></tr>
-                <tr><td>Connectors</td></tr>
+                <tr><td>Email Alerts</td></tr>
+                <tr><td>Google Data Studio</td></tr>
               </tbody>
             </table>
 
@@ -72,7 +65,7 @@
           <mat-card-title class="mat-bg-gray">
             <div class="card-title-text">
               <div class="">Plus</div>
-              <div class="text-sm">For new members</div>
+              <div class="text-sm">For professional members</div>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
@@ -118,7 +111,7 @@
         <mat-card class="plan-pricing text-center p-0">
           <mat-card-title class="mat-bg-gray">
             <div class="card-title-text">
-              <div class="">Plus</div>
+              <div class="">Enterprise</div>
               <div class="text-sm">For new members</div>
             </div>
             <mat-divider></mat-divider>
@@ -127,7 +120,7 @@
             <div class="p-0">
               <h3>
                 <strong>$
-                <span>{{plusDatabox}} /Mo</span>
+                <span>{{enterpriseDatabox}} /Mo</span>
                 </strong>
               </h3>
               <mat-list dense class="mb-1">
@@ -156,7 +149,7 @@
           <mat-option value="210">15 boxes</mat-option>
           <mat-option value="280">20 boxes</mat-option>
         </mat-select> -->
-        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Plus', plusDatabox)">
+        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Enterprise', enterpriseDatabox)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
       </div>
