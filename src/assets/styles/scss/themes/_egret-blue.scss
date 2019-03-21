@@ -1,21 +1,21 @@
-$black-87-opacity: rgba(0,0,0, .87);
+$black-87-opacity: #3c3c50;
 
 // You can define colors here (using http://mcg.mbitson.com)
 $mat-primary: (
-    50 : #e5eff4,
-    100 : #bdd7e3,
-    200 : #92bdd0,
-    300 : #66a3bd,
-    400 : #458fae,
-    500 : #247ba0,
-    600 : #207398,
-    700 : #1b688e,
-    800 : #165e84,
-    900 : #0d4b73,
-    A100 : #a6d8ff,
-    A200 : #73c2ff,
-    A400 : #40acff,
-    A700 : #26a1ff,
+    50 : #e3f6fa,
+    100 : #bae9f3,
+    200 : #8cdaeb,
+    300 : #5ecbe3,
+    400 : #3cbfdd,
+    500 : #19b4d7,
+    600 : #16add3,
+    700 : #12a4cd,
+    800 : #0e9cc7,
+    900 : #088cbe,
+    A100 : #e8f8ff,
+    A200 : #b5e9ff,
+    A400 : #82d9ff,
+    A700 : #69d2ff,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -35,20 +35,20 @@ $mat-primary: (
 );
 
 $mat-accent: (
-    50 : #fffaef,
-    100 : #fff4d8,
-    200 : #ffecbe,
-    300 : #ffe4a4,
-    400 : #ffdf91,
-    500 : #ffd97d,
-    600 : #ffd575,
-    700 : #ffcf6a,
-    800 : #ffca60,
-    900 : #ffc04d,
+    50 : #fff2e5,
+    100 : #ffe0bf,
+    200 : #ffcb94,
+    300 : #ffb669,
+    400 : #ffa648,
+    500 : #ff9628,
+    600 : #ff8e24,
+    700 : #ff831e,
+    800 : #ff7918,
+    900 : #ff680f,
     A100 : #ffffff,
-    A200 : #ffffff,
-    A400 : #fffbf3,
-    A700 : #fff1da,
+    A200 : #fffaf7,
+    A400 : #ffd8c4,
+    A700 : #ffc7ab,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -109,7 +109,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
     }
     .sidebar-compact ul.submenu,
     .default-bg {
-        background: #ffffff !important;
+        background: none !important;
     }
     /* Hopscotch Tour */ 
     div.hopscotch-bubble {
@@ -166,7 +166,7 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
         color: #f44336;
     }
     .mat-color-default {
-        color: rgba(0, 0, 0, 0.87);
+        color: #3c3c50;
     }
 }
 

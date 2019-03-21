@@ -35,6 +35,8 @@
   width: 100%;
   padding: 1rem 0 .4rem;
   margin: 20px auto;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding-bottom: 30px;
   .app-user-photo {
     width: 72px;
@@ -65,6 +67,7 @@
 
   a{
     font-size: 13px;
+    text-align: left;
   }
 }
 [dir=rtl] {

@@ -24,7 +24,7 @@ export class ThemeService {
     "isActive": false
   }, {
     "name": "egret-blue",
-    "baseColor": "#247ba0",
+    "baseColor": "#19b4d7",
     "isActive": true 
   }];
   public activatedTheme: ITheme;

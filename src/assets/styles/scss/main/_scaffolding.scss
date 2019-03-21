@@ -23,7 +23,7 @@ body {
   padding: 0;
   font-weight: $font-weight-base;
   font-size: $font-size-base;
-  color: rgba(0, 0, 0, 0.87);
+  color: #3C4650;
   line-height: 1.5;
   font-family: $font-family-base;
 }
@@ -231,7 +231,7 @@ code {
   background: rgba(0, 0, 0, .08);
 }
 .mat-blue {
-  background: #247ba0;
+  background: #19b4d7;
   color: #FEFEFE;
 }
 .mat-red {
@@ -423,8 +423,8 @@ code {
   box-sizing: border-box;
 }
 .mat-icon-button.img-button img {
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
 }
 .compact-list .mat-list-item {
@@ -723,7 +723,7 @@ body .mat-select-trigger {
 
 /*------ Map ------*/
 .agm-info-window-content {
-  color: rgba(0, 0, 0, .87);
+  color: #3c3c50;
 }
 /*-------- Chart js ---------*/
 .chart {
@@ -750,7 +750,7 @@ div.hopscotch-bubble .hopscotch-bubble-number {
   width: 32px;
   line-height: 32px;
   background: transparent;
-  color: rgba(0, 0, 0, 0.87);
+  color: #3c3c50;
 }
 div.hopscotch-bubble .hopscotch-title {
   font-size: 17px;
@@ -812,7 +812,7 @@ div.hopscotch-bubble .hopscotch-nav-button:focus {
 div.hopscotch-bubble .hopscotch-nav-button.prev,
 div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
   background-color: #ffffff;
-  color: rgba(0, 0, 0, .87);
+  color: #3c3c50;
 }
 
 [dir=rtl] {

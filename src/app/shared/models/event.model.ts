@@ -39,8 +39,8 @@ export class EgretCalendarEvent implements CalendarEvent {
     this._id = data._id || '';
     this.title = data.title || '';
     this.color = {
-      primary: data.color && data.color.primary || '#247ba0',
-      secondary: data.color && data.color.secondary || '#D1E8FF'
+      primary: data.color && data.color.primary || '#19b4d7',
+      secondary: data.color && data.color.secondary || '#ff9628'
     };
     this.draggable = data.draggable || true;
     this.resizable = {

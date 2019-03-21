@@ -2,6 +2,10 @@ button{
 	margin-right: 10px !important;
 }
 
+mat-card-header{
+	background-color: gray;
+}
+
 mat-card-content{
 	padding-left: -30px !important;
 	cursor: pointer;
@@ -12,12 +16,8 @@ mat-card-actions{
 
 }
 
-mat-card.mat-card:hover{
-    border: 1px solid #d0d0d0;
-}
-
 .databox-details{
-	padding: 6% 4%;
+	padding: 6% 8px;
 }
 
 .renew{
@@ -37,4 +37,16 @@ mat-card-title{
 	&:hover{
 		text-decoration: underline;
 	}
+}
+
+.gallery-icons{
+	display: inline-flex !important;
+	vertical-align: middle !important;
+	i{
+		img{
+			padding-top: 10px !important;
+			width: 50%;
+		}
+	}
+
 }

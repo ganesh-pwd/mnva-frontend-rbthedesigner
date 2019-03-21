@@ -135,11 +135,11 @@
     }
     &.open > div > a .menu-caret,
     &.open > a .menu-caret {
-      transform: rotate(90deg)
+      transform: rotate(90deg);
     }
   }
   a {
-    height: 48px;
+    height: 60px;
     // padding: 0 16px 0 0;
   }
 }

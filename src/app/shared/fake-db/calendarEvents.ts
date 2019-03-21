@@ -17,8 +17,8 @@ export class CalendarEventDB {
       secondary: '#FAE3E3'
     },
     blue: {
-      primary: '#247ba0 ',
-      secondary: '#D1E8FF'
+      primary: '#19b4d7 ',
+      secondary: '#ff9628'
     },
     yellow: {
       primary: '#ffd97d',
