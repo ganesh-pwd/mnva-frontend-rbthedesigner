@@ -27,9 +27,9 @@
 <hr>
 <div fxLayout="row" fxLayoutWrap="wrap" >
   <div fxFlex="100" fxFlex.gt-xs="33" *ngFor="let data of databoxes" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-    <mat-card>
-      <mat-card-header>
-      	<mat-card-title class="mat-color-primary" (click)="navigateToFolder(data.folder)">{{data.databox_name}}</mat-card-title>
+    <mat-card class="p-0">
+      <mat-card-header class="m-0 p-1">
+      	<mat-card-title class="" (click)="navigateToFolder(data.folder)">{{data.databox_name}}</mat-card-title>
       	<mat-card-subtitle (click)="navigateToDatabox(data.folder, data._id, data.first_create)">{{data.datasource}} | {{data.location}}</mat-card-subtitle>
 
       	<span fxFlex></span>
@@ -44,10 +44,9 @@
 
       <mat-divider></mat-divider>
 
-      <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)">
-        <div class="databox-details">
+      <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)" class="p-1">
+        <div>
             <div class="mt-1">
-              <b>Query:</b>
               <p>{{data?.query}}</p>
             </div>
             <br>
@@ -66,7 +65,7 @@
 
       <mat-divider></mat-divider>
       <br>
-      <mat-card-actions>
+      <mat-card-actions class="m-0 p-05">
       	<h3 class="mat-h4">Status:
           <span [ngClass]="
               data.status === 'Active' ? 'databox-active' :

@@ -51,7 +51,7 @@ export class NavigationService {
 
       result[el.folder].push({
           name: `<span class="databox-name">${el.databox_name}</span>
-                <br> ${el.datasource} | ${el.location}`,
+                <br> <p>${el.datasource} | ${el.location}</p>`,
           state: el.first_create ? `${el._id}/initialize` : `${el._id}`
       });
 

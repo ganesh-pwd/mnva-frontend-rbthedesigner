@@ -3,21 +3,20 @@ button{
 }
 
 mat-card-header{
-	background-color: gray;
+	padding-bottom: 0px !important;
+}
+mat-card-title{
+	font-weight: 600;
+	font-size: 18px;
 }
 
 mat-card-content{
-	padding-left: -30px !important;
 	cursor: pointer;
+	margin: 0 8px;
+	color: rgba(0, 0, 0, 0.54);
 }
-
 mat-card-actions{
-	padding: 0 5% !important;
-
-}
-
-.databox-details{
-	padding: 6% 8px;
+	margin: 0 8px !important;
 }
 
 .renew{

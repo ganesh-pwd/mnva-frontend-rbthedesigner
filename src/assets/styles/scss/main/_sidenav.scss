@@ -227,9 +227,6 @@
       text-align: center;
       display: block !important;
       padding: 16px 0;
-      .item-name.lvl1 {
-        // font-size: 1rem;
-      }
     }
     .mat-icon:not(.menu-caret) {
       height: 36px;
@@ -300,4 +297,8 @@
       }
     }
   }
+}
+
+span.lvl1{
+  font-size: 1rem;
 }
