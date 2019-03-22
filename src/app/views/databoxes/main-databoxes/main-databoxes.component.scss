@@ -49,28 +49,3 @@ mat-card-title{
 	}
 
 }
-
-.header-row h1{
-	margin-left: 55px;
-}
-
-img.icon-header{
-	max-width: 40px;
-	max-height: 40px;
-	position: absolute;
-	top: 26px;
-}
-small{
-	font-size: 15px !important;
-	width: 100%;
-	margin-left: 45px;
-	margin-top: 8px; 	
-	position: relative;
-	mat-icon{
-		cursor: pointer;
-		font-size: 18px;
-		color: gray;
-		position:absolute;
-		left: -25px;
-	}
-}

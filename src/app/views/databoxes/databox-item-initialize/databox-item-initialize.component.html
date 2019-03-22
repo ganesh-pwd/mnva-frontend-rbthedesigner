@@ -1,8 +1,8 @@
 <br>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="folder">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+  <div class="header-row" fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
     <h1 class="mat-h1">
-      <mat-icon>widgets</mat-icon> {{data?.databox_name}}
+      <img src="assets/images/icon-box.png">
       <small>
         <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon>
         <mat-icon (click)="openDialog('Delete Databox', 'Are you sure you want to delete this databox?', false, '')">delete

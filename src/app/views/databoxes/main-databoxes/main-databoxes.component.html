@@ -1,7 +1,7 @@
 <br>
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap"
+<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap"
   [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
-  <mat-icon class="mr-1">widgets</mat-icon>
+  <img src="assets/images/icon-box.png">
   <h1 class="mat-h1">
     Databoxes
   </h1>
@@ -47,7 +47,11 @@
       <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)" class="p-1">
         <div>
             <div class="mt-1">
-              <p>{{data?.query}}</p>
+              <div>
+                <p>
+                    {{data?.mentions}} mentions&nbsp;&nbsp;|&nbsp;&nbsp;{{data?.mentions_per_day}} per day
+                </p>
+              </div>
             </div>
             <br>
             <br>
