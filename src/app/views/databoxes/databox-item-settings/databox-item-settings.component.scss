@@ -34,19 +34,6 @@ h5{
 	padding-top: 2%;
 }
 
-small{
-	mat-icon{
-		cursor: pointer;
-		font-size: 18px;
-		color: gray;
-		margin-left: 1%;
-	}
-
-	font-size: 15px !important;
-
-}
-
-
 .main-route{
 	padding-left: 1%;
 	color: gray;
@@ -166,4 +153,27 @@ button.query_type{
 
 .fixed-height{
 	max-height: 170px;
+}
+
+.header-row {
+	h1{
+	margin-left: 55px;
+	}
+	img{
+		max-width: 40px;
+		max-height: 40px;
+		position: absolute;
+		top: 26px;
+	}
+	small{
+		font-size: 15px !important;
+		width: 100%;
+		margin-left: 15px;
+		margin-top: 8px;
+		mat-icon{
+			cursor: pointer;
+			font-size: 18px;
+			color: gray;
+		}
+	}
 }

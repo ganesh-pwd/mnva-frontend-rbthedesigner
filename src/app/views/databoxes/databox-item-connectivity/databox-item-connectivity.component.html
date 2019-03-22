@@ -1,19 +1,22 @@
 <br>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+	<div class="header-row" fxLayout="row" fxFlex="100" fxFlex.gt-md="100">
+    	<img src="assets/images/icon-box.png">
 		<h1 class="mat-h1">
-			<small>
-				<mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">
-				edit</mat-icon> | 
-				<span class="main-route">
-					<a routerLink="/databoxes/">Databoxes </a> / 
-					<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, data?.first_create)">
-					{{databoxItemData?.databox_name}}</a> /
-				</span> Connect Your Data
-			</small>
+			{{data?.databox_name}}
 		</h1>
+		<small>
+			<mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">
+			edit</mat-icon> | 
+			<span class="main-route">
+				<a routerLink="/databoxes/">Databoxes </a> / 
+				<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, data?.first_create)">
+				{{databoxItemData?.databox_name}}</a> /
+			</span> Connect Your Data
+		</small>
 	</div>
 </div>
+
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
 	<button mat-raised-button 
 	class="mb-05" 
