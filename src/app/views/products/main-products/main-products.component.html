@@ -23,17 +23,20 @@
     <div fxLayout="row" fxLayoutWrap="wrap">
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
-        <mat-card class="plan-pricing text-center p-0">
-          <mat-card-title class="mat-bg-gray">
-            <div class="card-title-text">
-              <div class="">Standard</div>
-              <div class="text-sm">For new members</div>
+        <mat-card class="plan-pricing text-center green">
+          <img src="assets/images/icon-box.png">
+          <mat-card-title>
+            <div class="pt-1 pb-1">
+              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+              <h3 class="">Standard Account</h3>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
-          <mat-card-content class="p-0">
-            <div class="p-0">
-              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+          <mat-card-content class="">
+            <div class="text-sm">
+              <strong><h5>For new members</h5></strong>
+            </div>
+            <div class="">
               <mat-list dense class="mb-1">
                 <mat-list-item>3,000 mentions</mat-list-item>
                 <mat-list-item>Facebook</mat-list-item>
@@ -43,49 +46,41 @@
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>
             </div>
-          </mat-card-content>
             <br>
             <table>
               <tbody>
-                <tr><td>2 Users</td></tr>
-                <tr><td>Email Alerts</td></tr>
-                <tr><td>Google Data Studio</td></tr>
-                <tr><td>Tableau Connector</td></tr>
-                <tr><td>Power BI Connector</td></tr>
-                <tr><td>Slack Alerts</td></tr>
+                <tr><td class="">2 Users</td></tr>
+                <tr><td class="">Email Alerts</td></tr>
+                <tr><td class="disabled">Google Data Studio</td></tr>
+                <tr><td class="disabled">Tableau Connector</td></tr>
+                <tr><td class="disabled">Power BI Connector</td></tr>
+                <tr><td class="disabled">Slack Alerts</td></tr>
               </tbody>
             </table>
+          </mat-card-content>
         </mat-card>
-        <!--<mat-select placeholder="5 boxes" class="choose-version mb-1" [(ngModel)]="standardDatabox">
-          <mat-option value="8">1 boxes</mat-option>
-          <mat-option value="16">2 boxes</mat-option>
-          <mat-option value="24">3 boxes</mat-option>
-          <mat-option value="32">4 boxes</mat-option>
-          <mat-option value="40" selected>5 boxes</mat-option>
-        </mat-select> -->
-        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
+        <button mat-raised-button class="mat-color-green btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
-        <mat-card class="plan-pricing text-center p-0">
-          <mat-card-title class="mat-bg-gray">
-            <div class="card-title-text">
-              <div class="">Plus</div>
-              <div class="text-sm">For professional members</div>
+        <mat-card class="plan-pricing text-center blue">
+          <img src="assets/images/icon-box.png">
+          <mat-card-title>
+            <div class="pt-1 pb-1">
+              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+              <h3 class="">Standard Account</h3>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
-          <mat-card-content class="p-0">
-            <div class="p-0">
-              <h1>
-                <strong>$
-                <span>{{plusDatabox}} /Mo</span>
-                </strong>
-              </h1>
+          <mat-card-content class="">
+            <div class="text-sm">
+              <strong><h5>For new members</h5></strong>
+            </div>
+            <div class="">
               <mat-list dense class="mb-1">
-                <mat-list-item>5,000 mentions</mat-list-item>
+                <mat-list-item>3,000 mentions</mat-list-item>
                 <mat-list-item>Facebook</mat-list-item>
                 <mat-list-item>Twitter</mat-list-item>
                 <mat-list-item>Web</mat-list-item>
@@ -93,48 +88,41 @@
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>
             </div>
+            <br>
+            <table>
+              <tbody>
+                <tr><td class="">2 Users</td></tr>
+                <tr><td class="">Email Alerts</td></tr>
+                <tr><td class="">Google Data Studio</td></tr>
+                <tr><td class="">Tableau Connector</td></tr>
+                <tr><td class="disabled">Power BI Connector</td></tr>
+                <tr><td class="disabled">Slack Alerts</td></tr>
+              </tbody>
+            </table>
           </mat-card-content>
-          <br>
-          <table>
-            <tbody>
-                <tr><td>5 Users</td></tr>
-                <tr><td>Email Alerts</td></tr>
-                <tr><td>Google Data Studio</td></tr>
-                <tr><td>Tableau Connector</td></tr>
-                <tr><td>Power BI Connector</td></tr>
-                <tr><td>Slack Alerts</td></tr>
-            </tbody>
-          </table>
         </mat-card>
-        <!-- <mat-select placeholder="5 boxes" class="choose-version mb-1" [(ngModel)]="plusDatabox">
-          <mat-option value="70">5 boxes</mat-option>
-          <mat-option value="140">10 boxes</mat-option>
-          <mat-option value="210">15 boxes</mat-option>
-          <mat-option value="280">20 boxes</mat-option>
-        </mat-select> -->
-        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Plus', plusDatabox)">
+        <button mat-raised-button class="mat-color-green btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
-        <mat-card class="plan-pricing text-center p-0">
-          <mat-card-title class="mat-bg-gray">
-            <div class="card-title-text">
-              <div class="">Enterprise</div>
-              <div class="text-sm">For new members</div>
+        <mat-card class="plan-pricing text-center orange">
+          <img src="assets/images/icon-box.png">
+          <mat-card-title>
+            <div class="pt-1 pb-1">
+              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+              <h3 class="">Standard Account</h3>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
-          <mat-card-content class="p-0">
-            <div class="p-0">
-              <h1>
-                <strong>$
-                <span>{{enterpriseDatabox}} /Mo</span>
-                </strong>
-              </h1>
+          <mat-card-content class="">
+            <div class="text-sm">
+              <strong><h5>For new members</h5></strong>
+            </div>
+            <div class="">
               <mat-list dense class="mb-1">
-                <mat-list-item>Customized mentions</mat-list-item>
+                <mat-list-item>3,000 mentions</mat-list-item>
                 <mat-list-item>Facebook</mat-list-item>
                 <mat-list-item>Twitter</mat-list-item>
                 <mat-list-item>Web</mat-list-item>
@@ -142,26 +130,20 @@
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>
             </div>
+            <br>
+            <table>
+              <tbody>
+                <tr><td class="">2 Users</td></tr>
+                <tr><td class="">Email Alerts</td></tr>
+                <tr><td class="">Google Data Studio</td></tr>
+                <tr><td class="">Tableau Connector</td></tr>
+                <tr><td class="">Power BI Connector</td></tr>
+                <tr><td class="">Slack Alerts</td></tr>
+              </tbody>
+            </table>
           </mat-card-content>
-          <br>
-          <table>
-            <tbody>
-                <tr><td>Unlimited Users</td></tr>
-                <tr><td>Email Alerts</td></tr>
-                <tr><td>Google Data Studio</td></tr>
-                <tr><td>Tableau Connector</td></tr>
-                <tr><td>Power BI Connector</td></tr>
-                <tr><td>Slack Alerts</td></tr>
-            </tbody>
-          </table>
         </mat-card>
-        <!-- <mat-select placeholder="5 boxes" class="choose-version mb-1" [(ngModel)]="plusDatabox">
-          <mat-option value="70">5 boxes</mat-option>
-          <mat-option value="140">10 boxes</mat-option>
-          <mat-option value="210">15 boxes</mat-option>
-          <mat-option value="280">20 boxes</mat-option>
-        </mat-select> -->
-        <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart('Enterprise', enterpriseDatabox)">
+        <button mat-raised-button class="mat-color-green btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
       </div>

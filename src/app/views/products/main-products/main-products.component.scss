@@ -1,3 +1,16 @@
+mat-card{
+  box-shadow: none !important;
+  h1, h3{
+    margin: 0;
+  }
+  mat-list-item:last-child, td{
+    border: none;
+  }
+  .disabled{
+    color: lightgray;
+  }
+}
+
 .full-width {
   display: flex;
   flex-direction: row-reverse;

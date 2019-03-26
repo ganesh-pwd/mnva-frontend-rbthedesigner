@@ -16,8 +16,36 @@
             || data.folder === 'Data Studio'">
                 <hr> 
                 <h3 class="mat-h3 mat-color-primary">See Templates for {{data.folder}}</h3>
-                
-                <img src="/assets/images/image-placeholder.png">
+        </div>
+        <div *ngIf="data.folder === 'Power BI' || data.folder === 'Tableau' || data.folder === 'Data Studio'" fxLayout="row" fxLayoutWrap="wrap">
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
+                <div class="text-center" >
+                    <mat-horizontal-stepper [linear]="true">
+                      <mat-step [stepControl]="firstFormGroup">
+                        <ng-template [ngIf]="data.folder === 'Power BI'"><div>Power BI Step 1</div></ng-template>
+                        <ng-template [ngIf]="data.folder === 'Tableau'"><div>Tableau Step 1</div></ng-template>
+                        <ng-template [ngIf]="data.folder === 'Data Studio'"><div>Data Studio Step 1</div></ng-template>
+                      </mat-step>
+                      <mat-step [stepControl]="secondFormGroup">
+                        <ng-template [ngIf]="data.folder === 'Power BI'"><div>Power BI Step 2</div></ng-template>
+                        <ng-template [ngIf]="data.folder === 'Tableau'"><div>Tableau Step 2</div></ng-template>
+                        <ng-template [ngIf]="data.folder === 'Data Studio'"><div>Data Studio Step 2</div></ng-template>
+                      </mat-step>
+                      <mat-step>
+                        <ng-template matStepLabel>Done</ng-template>
+                        <div>
+                          <mat-icon class="pt-1" [style.fontSize]="'36px'">check</mat-icon>
+                        </div>
+                        <div class="pb-1 mb-1"> You Are Done.</div>
+                        <div fxLayout="row">
+                          <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                          <span fxFlex="8px"></span>
+                          <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+                        </div>
+                      </mat-step>
+                    </mat-horizontal-stepper>
+                </div>
+            </div>
         </div>
     </div>
     <br>

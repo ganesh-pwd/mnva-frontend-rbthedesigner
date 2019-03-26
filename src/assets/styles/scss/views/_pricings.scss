@@ -4,3 +4,30 @@
   text-align: center;
   font-size: .875rem !important;
 }
+
+.plan-pricing.green{
+	h1,h3{
+		color: #22d9c9;
+	}
+	mat-list-item{
+		border-bottom: 1px solid #22d9c9;
+	}
+}
+
+.plan-pricing.blue{
+	h1,h3{
+		color: #19b4d7;
+	}
+	mat-list-item{
+		border-bottom: 1px solid #19b4d7;
+	}
+}
+
+.plan-pricing.orange{
+	h1,h3{
+		color: #ff9628;
+	}
+	mat-list-item{
+		border-bottom: 1px solid #ff9628;
+	}
+}

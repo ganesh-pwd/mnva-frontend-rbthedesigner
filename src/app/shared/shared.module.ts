@@ -24,6 +24,7 @@ import {
   MatDialogModule,
   MatInputModule,
   MatExpansionModule,
+  MatStepperModule,
   MatSlideToggleModule
 } from '@angular/material';
 
@@ -126,6 +127,7 @@ const classesToInclude = [
     MatRadioModule,
     MatCheckboxModule,
     MatCardModule,
+    MatStepperModule,
     MatProgressSpinnerModule,
     MatRippleModule,
     MatDialogModule,
