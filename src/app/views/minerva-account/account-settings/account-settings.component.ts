@@ -24,6 +24,9 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     private minervaAccountChangeService: MinervaAccountChangeService
     ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+    if ('photoUrl' in sessionStorage) {
+      this.userImage = sessionStorage.getItem('photoUrl');
+    }
   }
 
   ngOnInit() {

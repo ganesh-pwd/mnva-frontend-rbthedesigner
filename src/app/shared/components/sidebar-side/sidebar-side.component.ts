@@ -28,8 +28,11 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
     private navService: NavigationService,
     public themeService: ThemeService,
     public minervaAccountChangeService: MinervaAccountChangeService
-  ) { 
-    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result)
+  ) {
+    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+    if ('photoUrl' in sessionStorage) {
+      this.userImage = sessionStorage.getItem('photoUrl');
+    }
   }
 
   ngOnInit() {

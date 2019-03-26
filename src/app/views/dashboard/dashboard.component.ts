@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable-pro/angular';
 
 @Component({
@@ -7,6 +7,10 @@ import { HotTableRegisterer } from '@handsontable-pro/angular';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  // @Input()
+  // username: string;
+
   dataset: any[] = [
     { id: 1, name: 'Ted Right', address: 'Wall Street' },
     { id: 2, name: 'Frank Honest', address: 'Pennsylvania Avenue' },
@@ -20,7 +24,9 @@ export class DashboardComponent implements OnInit {
 
   tableSettings: any;
   hotId: string = 'databoxItemTable';
-  constructor(private hotRegisterer: HotTableRegisterer) { }
+  constructor(private hotRegisterer: HotTableRegisterer) {
+    console.log('Dash board Comp onent this username:');
+   }
 
   ngOnInit() {
     this.createTable()

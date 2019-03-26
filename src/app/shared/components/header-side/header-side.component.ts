@@ -4,6 +4,11 @@ import { LayoutService } from '../../services/layout.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { Subscription } from 'rxjs';
+
+import { AmplifyService } from 'aws-amplify-angular';
+import { Router} from '@angular/router';
+import { AuthService } from 'angularx-social-login';
+
 @Component({
   selector: 'app-header-side',
   templateUrl: './header-side.template.html'
@@ -23,15 +28,26 @@ export class HeaderSideComponent implements OnInit {
   public notificationCount:any;
   private getReqImage: Subscription;
   public userImage: string;
+  public userName: string;
 
   constructor(
     private themeService: ThemeService,
     private layout: LayoutService,
     public translate: TranslateService,
     private renderer: Renderer2,
-    public minervaAccountChangeService: MinervaAccountChangeService
+    public minervaAccountChangeService: MinervaAccountChangeService,
+    private amplifyService: AmplifyService,
+    private socialAuthService: AuthService,
+    private router: Router
   ) {
-    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result)
+    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+    this.userName = 'Stephan Trussart';
+    if ('userName' in sessionStorage) {
+      this.userName = sessionStorage.getItem('userName');
+    }
+    if ('photoUrl' in sessionStorage) {
+      this.userImage = sessionStorage.getItem('photoUrl');
+    }
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
   }
   ngOnInit() {
@@ -73,4 +89,20 @@ export class HeaderSideComponent implements OnInit {
     }, {transitionClass: true})
 
   }
+  signOut() {
+    console.log('Sign out Component');
+    sessionStorage.clear();
+
+    this.socialAuthService.signOut()
+    .then(data => {
+      console.log('user name sign Out::');
+      this.router.navigate(['/sessions/signin']);
+    })
+    .catch(err => {
+      console.log(err);
+      console.log('Error message:', err.message);
+      this.router.navigate(['/sessions/signin']);
+    });
+  }
+
 }

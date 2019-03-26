@@ -33,6 +33,8 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
 
     this.isFolderDeleted = sessionStorage.getItem('delete_databox_folder');
     if (this.isFolderDeleted) this.openSnackBar(this.isFolderDeleted);
+    console.log('Dashboard Service');
+
   }
 
   ngOnInit() {
