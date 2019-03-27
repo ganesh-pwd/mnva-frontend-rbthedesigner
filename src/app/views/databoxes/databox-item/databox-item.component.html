@@ -1,7 +1,7 @@
 <br>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="folder">
   <div class="header-row" fxLayout="row" fxFlex="100" fxFlex.gt-md="100">
-    <img src="assets/images/icon-box.png">
+    <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
       {{data?.databox_name}}
     </h1>
@@ -306,7 +306,7 @@
     <!-- Process Your Results -->
     <mat-tab label="Process Your Data">
       <!-- Credits -->
-      <div fxLayout="row" fxLayoutWrap="wrap">
+      <div class="mt-1" fxLayout="row" fxLayoutWrap="wrap">
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100"
           [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 
@@ -327,8 +327,6 @@
           </div>
         </div>
       </div>
-      <br>
-
       <!-- Algorithm Option -->
       <div fxLayout="row" fxLayoutWrap="wrap">
         <!-- Sentiment -->
@@ -349,17 +347,14 @@
             <mat-card-content>
               <br>
               <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                <mat-slide-toggle matTooltip="New incomming data will be processed automatically, plus all the current data in your Databox" color="primary" class="mb-1" [checked]="checked">
                   Apply Automatically
                 </mat-slide-toggle>
                 <span fxFlex></span>
-                <button mat-raised-button class="truncate"
+                <button mat-raised-button matTooltip="Only current data in your Databox will be processed." class="truncate"
                   (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
+                  Apply to unprocessed data
                 </button>
-              </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
               </div>
             </mat-card-content>
 
@@ -390,17 +385,14 @@
             <mat-card-content>
               <br>
               <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" >
+                <mat-slide-toggle matTooltip="New incomming data will be processed automatically, plus all the current data in your Databox" color="primary" class="mb-1" [checked]="checked">
                   Apply Automatically
                 </mat-slide-toggle>
                 <span fxFlex></span>
-                <button mat-raised-button class="truncate"
+                <button mat-raised-button matTooltip="Only current data in your Databox will be processed." class="truncate"
                   (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
+                  Apply to unprocessed data
                 </button>
-              </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
               </div>
             </mat-card-content>
 
@@ -432,18 +424,14 @@
             <mat-card-content>
               <br>
               <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                <mat-slide-toggle matTooltip="New incomming data will be processed automatically, plus all the current data in your Databox" color="primary" class="mb-1" [checked]="checked">
                   Apply Automatically
                 </mat-slide-toggle>
                 <span fxFlex></span>
-                <button mat-raised-button class="truncate"
+                <button mat-raised-button matTooltip="Only current data in your Databox will be processed." class="truncate"
                   (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
+                  Apply to unprocessed data
                 </button>
-              </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
-
               </div>
             </mat-card-content>
 
@@ -474,17 +462,14 @@
             <mat-card-content>
               <br>
               <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                <mat-slide-toggle matTooltip="New incomming data will be processed automatically, plus all the current data in your Databox" color="primary" class="mb-1" [checked]="checked">
                   Apply Automatically
                 </mat-slide-toggle>
                 <span fxFlex></span>
-                <button mat-raised-button class="truncate"
+                <button mat-raised-button matTooltip="Only current data in your Databox will be processed." class="truncate"
                   (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
+                  Apply to unprocessed data
                 </button>
-              </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
               </div>
             </mat-card-content>
 
@@ -508,7 +493,7 @@
 
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">Apply Automatically</h2>
+            <h2 class="mat-h3">Apply Automatically</h2>
             <p>
               Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
             </p>
@@ -517,7 +502,7 @@
 
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">Apply to Unprocessed Data</h2>
+            <h2 class="mat-h3">Apply to Unprocessed Data</h2>
             <p>
               Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
             </p>
@@ -526,7 +511,7 @@
 
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">Cost / Mention</h2>
+            <h2 class="mat-h3">Cost / Mention</h2>
             <p>
               Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
             </p>
@@ -535,7 +520,7 @@
 
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">How to buy credit</h2>
+            <h2 class="mat-h3">How to buy credit</h2>
             <p>
               Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
             </p>

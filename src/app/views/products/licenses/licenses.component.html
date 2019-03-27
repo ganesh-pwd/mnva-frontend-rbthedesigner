@@ -1,7 +1,7 @@
 <br>
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
-    <img src="assets/images/icon-box.png">
+    <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
         Products
         <small>   |    
@@ -56,10 +56,10 @@
               <div class="main-info">
                 <h3 class="title" (click)="addToCart(product)">{{product.name}}</h3>
                 <p class="text-muted p-line">{{product?.description}}</p>
-                <p class="text-muted p-line">
+                <!--<p class="text-muted p-line">
                   <strong>Tags:</strong>
                   <span *ngFor="let t of product.tags">{{t}} </span>
-                </p>
+                </p> -->
               </div>
               <div class="actions">
                 <div class="price-rating">

@@ -1,16 +1,15 @@
 <br>
-<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap"
-  [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
-  <img src="assets/images/icon-box.png">
+<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <img src="assets/images/icon-databox.png">
   <h1 class="mat-h1">
     Databoxes
   </h1>
 </div>
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxFlex="100" fxFlex.gt-xs="33" class="mt-05">
+  <div fxFlex="100" fxFlex.gt-xs="33">
     <button
       mat-raised-button
-      class="mat-color-green"
+      class="mat-bg-success"
       (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
       Create Databox
     </button>
@@ -29,7 +28,7 @@
   <div fxFlex="100" fxFlex.gt-xs="33" *ngFor="let data of databoxes" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
     <mat-card class="p-0">
       <mat-card-header class="m-0 p-1">
-      	<mat-card-title class="" (click)="navigateToFolder(data.folder)">{{data.databox_name}}</mat-card-title>
+      	<mat-card-title class="mat-color-primary" (click)="navigateToFolder(data.folder)">{{data.databox_name}}</mat-card-title>
       	<mat-card-subtitle (click)="navigateToDatabox(data.folder, data._id, data.first_create)">{{data.datasource}} | {{data.location}}</mat-card-subtitle>
 
       	<span fxFlex></span>
@@ -57,9 +56,9 @@
             <br>
         </div>
         <div class="gallery-icons text-center">
-          <button mat-icon-button><i class="fa fa-facebook mat-color-primary"></i></button>
-          <button mat-icon-button><i class="fa fa-twitter mat-color-primary"></i></button>
-          <button mat-icon-button><i class="fa fa-globe mat-color-primary"></i></button>
+          <button mat-icon-button><i class="fa fa-facebook"></i></button>
+          <button mat-icon-button><i class="fa fa-twitter"></i></button>
+          <button mat-icon-button><i class="fa fa-globe"></i></button>
           <button mat-icon-button><i><img src="/assets/images/tableau.png"></i></button>
           <button mat-icon-button><i><img src="/assets/images/power_bi.png"></i></button>
           <button mat-icon-button><i class="fa fa-cut text-muted"></i></button>

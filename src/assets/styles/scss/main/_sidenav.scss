@@ -143,6 +143,9 @@
     // padding: 0 16px 0 0;
   }
 }
+.sidenav-hold .sidenav li.open > div > a {
+  background-color: #19B4D7 !important;
+}
 
 .sidebar-compact .sidenav-hold,
 .sidebar-compact-big .sidenav-hold {

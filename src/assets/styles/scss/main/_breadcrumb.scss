@@ -73,3 +73,16 @@
     }
   }
 }
+
+.main-route{
+  padding-left: 1%;
+  color: gray;
+  font-weight: initial;
+  a{
+    color: #0d4b73;
+    
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}

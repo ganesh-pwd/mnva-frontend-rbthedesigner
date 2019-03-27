@@ -254,6 +254,16 @@ code {
   background-color: #9c27b0!important;
   color: hsla(0,0%,100%,.87)!important;
 }
+.color-facebook{
+  color:#3C5A99;
+}
+.color-twitter{
+  color:#1DA1F2;
+}
+.color-web{
+  color: green;
+}
+
 .fz-1 {
   font-size: 1rem !important;
 }
@@ -332,6 +342,14 @@ code {
   line-height: 1;
   font-weight: 400;
 }
+.mat-card-title{
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  color: #fb8a01;
+}
+.mat-card-subtitle{
+  color: initial !important;
+}
 .mat-card.default>:first-child {
   border-radius: 2px 2px 0 0;
 }
@@ -391,6 +409,7 @@ code {
 .mat-button,
 .mat-raised-button {
   font-weight: 400 !important;
+  font-size: 1rem !important;
 }
 [mat-lg-button] {
   padding: 0 32px !important;
@@ -519,9 +538,7 @@ code {
   vertical-align: sub;
   margin: 0 2px;
 }
-.mat-card-title {
-  font-size: 1rem !important;
-}
+
 .icon-chip {
   font-size: 11px !important;
   padding: 4px 8px !important;

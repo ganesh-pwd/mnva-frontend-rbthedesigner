@@ -94,12 +94,12 @@ $primary-dark: darken( map-get($mat-primary, 500), 8% );
         color: #ffffff !important;
     }
     .mat-color-primary,
-    .list-item-active,
-    .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
-    .sidenav-hold .sidenav li.open > div > a > span:not(.menuitem-badge),
-    .sidenav-hold .sidenav li.open > a > span {
+    .list-item-active, .sidenav-hold .sidenav li.open > a > span {
         color: map-get($mat-primary, 500) !important;
-        font-weight: 500;
+    }
+    .sidenav-hold .sidenav li.open a .mat-icon:not(.menu-caret),
+    .sidenav-hold .sidenav li.open > div > a > span:not(.menuitem-badge){
+        color: white;
     }
     .topnav ul.menu > li > div.open > a,
     .topnav ul.menu > li > div.open > div,

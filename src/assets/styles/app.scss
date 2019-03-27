@@ -114,9 +114,20 @@ tbody {
   color: red;
 }
 
+.mat-color-orange{
+  color:#ff9628;
+}
+.mat-color-dark-orange{
+  color:#ff7105;
+}
+
+.mat-color-dark-blue{
+  color:#005580;
+}
+
 // background gray
 .mat-bg-gray{
-  background: gray !important;
+  background: #3C4650 !important;
   color: whitesmoke !important;
 }
 
@@ -132,16 +143,11 @@ tbody {
 
 body .mat-select-trigger, .mat-select-trigger {
   font-weight: 600 !important;
-  font-size: 18px !important;
-  color: white !important;
+  font-size: 1rem !important;
 }
 
-.egret-blue .mat-select-value {
+.egret-blue .mat-select-value, .databox-draft {
   color: #19b4d7 !important;
-}
-
-.databox-draft{
-	color: #fb8a01 !important;
 }
 
 .databox-active{
@@ -234,12 +240,13 @@ hot-table{
 .header-row {
   h1{
   margin-left: 55px;
+  font-weight: 500;
   }
   img{
-    max-width: 40px;
-    max-height: 40px;
+    max-width: 50px;
+    max-height: 50px;
     position: absolute;
-    top: 26px;
+    top: 22px;
   }
   small{
     font-size: 15px !important;
