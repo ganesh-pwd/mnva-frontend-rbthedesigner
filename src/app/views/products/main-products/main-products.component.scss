@@ -1,4 +1,5 @@
-mat-card{
+mat-card.account-type {
+  background: none;
   h1, h3{
     margin: 0;
   }
@@ -7,6 +8,9 @@ mat-card{
   }
   .disabled{
     color: lightgray;
+  }
+  mat-card{
+    box-shadow: none;
   }
 }
 

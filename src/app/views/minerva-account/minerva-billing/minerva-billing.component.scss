@@ -153,18 +153,20 @@ small{
 	}
 }
 
-mat-card-title{
-	display: inline-flex !important;
-	vertical-align: middle !important;
-	p{
-		margin-left: 10px;
-		margin-top: 15px;
+.billing{
+	mat-card-title{
+		display: inline-flex !important;
+		vertical-align: middle !important;
+		p{
+			margin-left: 10px;
+			margin-top: 15px;
+		}
 	}
-}
 
-mat-card-header{
-	padding: 0 !important;
-	margin: 0 !important;
+	mat-card-header{
+		padding: 0 !important;
+		margin: 0 !important;
+	}
 }
 
 

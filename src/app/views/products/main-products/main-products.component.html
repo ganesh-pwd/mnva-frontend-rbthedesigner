@@ -1,6 +1,6 @@
 <br>
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
         Products
@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<mat-card class="p-0 pb-1" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+<mat-card class="account-type p-0 pb-1" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
   <div class="full-width mb-1 mt-1 add-cart">
     <button mat-raised-button color="primary" routerLink="/products/cart">
       <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})

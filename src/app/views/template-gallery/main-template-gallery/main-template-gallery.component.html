@@ -1,6 +1,6 @@
 <br>
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'-200px', delay:'400ms' }}">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
       Template Gallery
@@ -12,7 +12,7 @@
 <div fxLayout="row" fxLayoutWrap="wrap"  [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
   <div fxFlex="100" fxFlex.gt-xs="33">
     <mat-card class="p-0">
-      <img mat-card-image src="assets/images/image-placeholder.png">
+      <img [routerLink]="'/template-gallery/reputation-management'" mat-card-image src="assets/images/image-placeholder.png">
       <mat-card-content>
         <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/reputation-management'">Reputation Management</a></h2>
         <small>By: Minerva</small>
@@ -37,7 +37,7 @@
 
   <div fxFlex="100" fxFlex.gt-xs="33">
     <mat-card class="p-0">
-      <img mat-card-image src="assets/images/image-placeholder.png">
+      <img [routerLink]="'/template-gallery/influencers'" mat-card-image src="assets/images/image-placeholder.png">
       <mat-card-content>
         <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/influencers'">Influencers</a></h2>
         <small>By: Minerva</small>
@@ -62,7 +62,7 @@
 
   <div fxFlex="100" fxFlex.gt-xs="33">
     <mat-card class="p-0">
-      <img mat-card-image src="assets/images/image-placeholder.png">
+      <img [routerLink]="'/template-gallery/insight-generations'" mat-card-image src="assets/images/image-placeholder.png">
       <mat-card-content>
         <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/insight-generations'">Insight Generations</a></h2>
         <small>By: Minerva</small>
