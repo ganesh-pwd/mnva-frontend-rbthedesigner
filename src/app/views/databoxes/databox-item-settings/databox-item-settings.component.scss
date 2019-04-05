@@ -140,3 +140,18 @@ button.query_type{
 .fixed-height{
 	max-height: 170px;
 }
+
+.credits{
+	color: green;
+}
+
+.page-search{
+	margin: .333333rem;
+	>div {
+		margin: 10px 0px;
+		padding: 0px 10px;
+		p{
+			margin: 0px;
+		}
+	}
+}

@@ -1,15 +1,15 @@
 <br>
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="folder">
-  <div class="header-row" fxLayout="row" fxFlex="100" fxFlex.gt-md="100">
+<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
-      {{data?.databox_name}}
-    </h1>
-    <small>
-      <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> |   
-      <span class="main-route">
-      <a routerLink="/databoxes/">Databoxes </a> / {{data?.databox_name}}</span>
-    </small>
+        {{databoxItemData?.databox_name}} 
+        <small>
+      <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> | 
+          <span class="main-route">
+            <a routerLink="/databoxes/">Databoxes </a>
+          </span> / {{data?.databox_name}} </small>
+      </h1>
   </div>
 </div>
 
@@ -28,12 +28,9 @@
     routerLink="/databoxes/settings/connect/{{data?._id}}">
     Connect Your Data
   </button>
-<!--   <mat-slide-toggle style="position: absolute; right: 24px; margin-top: 10.5px;" color="primary" class="mb-1" [checked]="checked">
-    On/Off
-  </mat-slide-toggle> -->
   <span fxFlex></span>
   <div class="mr-1">
-    <h3 class="mat-h4 mr-1">Status:
+    <h3 class="mat-h3 mr-1">Status:
       <span [ngClass]="
           data.status === 'Active' ? 'databox-active' :
           data.status === 'Paused' ? 'databox-paused':
@@ -167,7 +164,7 @@
               <div class="text-center">
                 <h1 class="mat-h1 text-muted">No Data Yet</h1>
                 <img src="/assets/images/image-placeholder.png" alt="" class="minerva-logo">
-                <h5 class="mat-h4">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere <br> qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, <br> veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h5>
+                <h5 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere <br> qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, <br> veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h5>
                 <br>
                 <button mat-raised-button routerLink="/databoxes/settings/query/{{data?._id}}">Create your query</button>&nbsp;
                 
@@ -321,7 +318,7 @@
 
           <div class="mentions">
             <span fxFlex></span>
-            <h3 class="mat-h4 text-muted">Current Mentions: 10,000 mentions
+            <h3 class="mat-h3 text-muted">Current Mentions: 10,000 mentions
             </h3>
             <br>
           </div>
