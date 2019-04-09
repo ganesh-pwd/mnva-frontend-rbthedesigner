@@ -142,7 +142,7 @@ tbody {
 }
 
 body .mat-select-trigger, .mat-select-trigger {
-  font-size: 1rem !important;
+  font-size: 0.875rem !important;
 }
 
 .egret-blue .mat-select-value, .databox-draft {
@@ -238,7 +238,7 @@ hot-table{
 
 .header-row {
   h1{
-  margin-left: 55px;
+  margin-left: 63px;
   font-weight: 500;
   }
   img{
@@ -250,12 +250,17 @@ hot-table{
   small{
     font-size: 14px !important;
     width: 50%;
-    margin-left: 15px;
+    margin-left: 35px;
     margin-top: 8px;
+    position: absolute;
+    top: 27px;
     mat-icon{
       cursor: pointer;
       font-size: 18px;
       color: gray;
+      position: absolute;
+      left: -23px;
+      bottom: 3px;
     }
   }
 }

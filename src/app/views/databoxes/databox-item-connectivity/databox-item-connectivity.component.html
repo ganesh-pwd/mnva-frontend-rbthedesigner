@@ -5,7 +5,7 @@
     <h1 class="mat-h1">
         {{databoxItemData?.databox_name}} 
         <small>
-		  <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> | 
+		  <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon>
           <span class="main-route">
             <a routerLink="/databoxes/">Databoxes </a> /
 				<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, databoxItemData?.first_create)">
@@ -29,7 +29,7 @@
 <!-- Connectors -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-		<h1 class="mat-h1 mat-color-primary connector">Connectors</h1>
+		<h1 class="mat-h2 mat-color-primary connector">Connectors</h1>
 	</div>
 
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
@@ -101,7 +101,7 @@
 <div fxLayout="row" fxLayoutWrap="wrap" 
 	[@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-		<h1 class="mat-h1 mat-color-primary connector">Notification</h1>
+		<h1 class="mat-h2 mat-color-primary connector">Notification</h1>
 	</div>
 
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >

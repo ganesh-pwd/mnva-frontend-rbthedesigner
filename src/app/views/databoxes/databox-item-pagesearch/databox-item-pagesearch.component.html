@@ -6,7 +6,7 @@
       <small>
         <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> 
         <mat-icon (click)="openDialog('Delete Databox', 'Are you sure you want to delete this databox?', false, '')">delete
-        </mat-icon> | 
+        </mat-icon>
         <span class="main-route">
         <a routerLink="/databoxes/">Databoxes </a> / 
         <a routerLink="/databoxes/{{folder}}">{{folder}} </a> / 
@@ -98,7 +98,7 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 
     <div class="bottom-data">
-      <h2 class="mat-h1">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
+      <h2 class="mat-h2">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
       <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
 
       <form class="example-form">
@@ -113,7 +113,7 @@
 
       <button mat-raised-button>Send</button>
 
-      <h2 class="mat-h1">Do you want to reset the values in this table to the original value?</h2>
+      <h2 class="mat-h2">Do you want to reset the values in this table to the original value?</h2>
       <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
       <button mat-raised-button>Reset</button><br><br>
     </div>

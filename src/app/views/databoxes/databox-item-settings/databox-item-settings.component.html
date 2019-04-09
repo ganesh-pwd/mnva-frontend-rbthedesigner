@@ -5,7 +5,7 @@
     <h1 class="mat-h1">
         {{databoxItemData?.databox_name}} 
         <small>
-		  <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon> | 
+		  <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon>
           <span class="main-route">
             <a routerLink="/databoxes/">Databoxes </a> /
 				<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, databoxItemData?.first_create)">
@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID style="position:relative;">
 	<button mat-raised-button
 	class="mb-05"
 	color="primary"
@@ -23,8 +23,8 @@
 	Back to Databox
 	</button>
 	<span fxFlex></span>
-	<div class="mr-1">
-		<h3 class="mat-h3 mr-1">Mentions Remaining:
+	<div style="position: absolute; right: 0px; top: 6px;">
+		<h3 class="mat-h4 mr-1">Mentions Remaining:
 		  <span class="credits"> 10,000
 		  </span>
 		</h3>
@@ -58,13 +58,13 @@
 
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<!-- Column1 -->
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-			<h1 class="mat-h1">Query Editor</h1>
+			<h1 class="mat-h2">Query Editor</h1>
 		</div>
 		<!-- Change Datasource & Country -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="50">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
@@ -87,7 +87,7 @@
 					</mat-card-content>
 				</mat-card>
 			</div>
-			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="50">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
@@ -113,7 +113,7 @@
 		</div>
 		<!-- Max Results & Historical -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<div fxLayout="column" fxFlex.gt-sm="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
@@ -151,41 +151,17 @@
 					</mat-card-content>
 				</mat-card>
 			</div>
-			<div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Max Results</span>
-						</mat-card-title>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-					    <mat-radio-button value="1">All mentions found</mat-radio-button>
-				    	<mat-radio-button class="ml-1" value="1">Specific amount</mat-radio-button>
-    					<form>
-							<mat-form-field class="full-width">
-								<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-								<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-								{{ singleDatasource.name }}
-								</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</form>
-					</mat-card-content>
-				</mat-card>
-			</div>
 		</div>
 		<!-- Query Editor -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
 							<span>Query</span>
 						</mat-card-title>
 						<span fxFlex></span>
-						<a>Expand</a>
+						<mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
 					</mat-card-header>
 					<mat-divider></mat-divider>
 					<br>
@@ -193,15 +169,12 @@
 					<div fxLayout="row" fxLayoutWrap="wrap" >
 			      	    <button mat-raised-button mat-color-primary class="query_type">Basic Query</button>
 			            <button mat-raised-button class="query_type">Advanced Query</button>
-						<span fxFlex></span>
-		              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
-					  	</mat-slide-toggle>
 					</div>
 					<!--Basic Query Editor -->
 					<mat-card-content>
 						<br>
 						<div fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
 							    <b class="mt-1">Optional Keywords</b>
 							    <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
 						    	<form>
@@ -214,7 +187,7 @@
 							</div>
 						</div>
 						<div fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
 							    <b class="mt-1">Required Keywords</b>
 							    <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
 						    	<form>
@@ -227,7 +200,7 @@
 							</div>
 						</div>
 						<div fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
 							    <b class="mt-1">Exclude Keywords</b>
 							    <p class="mt-1">Your Databox will not bring in mentions any of the following keywords.</p>
 						    	<form>
@@ -243,7 +216,7 @@
                     <!--Avanced Query Editor -->
                     <mat-card-content>
                         <div fxLayout="row" fxLayoutWrap="wrap">
-                            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
                                 <mat-card-header>
                                   <mat-card-title class="mat-color-primary">
                                     <span>Advanced Query</span>
@@ -256,7 +229,7 @@
                                 <br>
                                 <mat-card-content>
                                     <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
-                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
                                             <mat-card class="p-0">
                                                 <mat-card-content class="p-0">
                                                     <form>
@@ -277,7 +250,7 @@
                                         </div>
                                     </div>
                                     <div fxLayout="row" fxLayoutWrap="wrap">
-                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
                                             <mat-card class="query-right-side">
                                                 <mat-card-content>
                                                     <h3 class="mat-h3">Boolean Operations: Booleans help you create your query.</h3>
@@ -300,17 +273,43 @@
 		</div>
 		<!-- Monitored Pages -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<!-- <div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title>
+							<span>Max Results</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content class="mt-1">
+					    <mat-radio-button value="1">All mentions found</mat-radio-button>
+				    	<mat-radio-button class="ml-1" value="1">Specific amount</mat-radio-button>
+    					<form>
+							<mat-form-field class="full-width">
+								<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
+								<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
+								{{ singleDatasource.name }}
+								</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</form>
+					</mat-card-content>
+				</mat-card>
+			</div> -->
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
 							<span>Monitored Pages</span>
 						</mat-card-title>
 						<span fxFlex></span>
-						<a>Expand</a>
+						<mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
 					</mat-card-header>
 					<mat-divider></mat-divider>
 					<br>
+	              	<!-- <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
+				  	</mat-slide-toggle> -->
 					<mat-card-content>
 						<div fxLayout="row" fxLayoutWrap="wrap" >
 							<div fxLayout="row" class="mb-1" fxFlex="100" fxFlex.gt-sm="100">
@@ -342,9 +341,9 @@
 		</div>		
 	</div>
 	<!-- Column2 -->
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-			<h1 class="mat-h1">Results Preview</h1>
+			<h1 class="mat-h2">Results Preview</h1>
 		</div>
 		<!-- Metrics -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
@@ -375,7 +374,7 @@
 			</div>
 		</div>
 		<div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>

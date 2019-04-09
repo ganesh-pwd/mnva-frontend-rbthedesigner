@@ -57,6 +57,9 @@ bdo[dir=ltr] {
 .mat-card {
   font-size: .875rem;
 }
+.mat-card-header-text{
+  margin:0 !important;
+}
 img {
   max-width: 100%;
 }
@@ -343,8 +346,6 @@ code {
   font-weight: 400;
 }
 .mat-card-title{
-  font-size: 20px !important;
-  font-weight: 400 !important;
   color: #fb8a01;
 }
 .mat-card-subtitle{
@@ -409,7 +410,7 @@ code {
 .mat-button,
 .mat-raised-button {
   font-weight: 400 !important;
-  font-size: 1rem !important;
+  font-size: 0.875rem !important;
 }
 [mat-lg-button] {
   padding: 0 32px !important;
@@ -603,7 +604,7 @@ mat-nav-list mat-list-item .mat-list-item-content,
 [mat-menu-item],
 .mat-option, 
 body .mat-select-trigger {
-    font-size: 1rem !important;
+    font-size: 0.875rem !important;
 }
 .mat-ripple {
   position: relative;
