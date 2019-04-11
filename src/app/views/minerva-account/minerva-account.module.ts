@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MinervaAccountRoutes } from './minerva-account.routing';
 import { MainMinervaAccountComponent } from './main-minerva-account/main-minerva-account.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatListModule,
   MatIconModule,
@@ -23,9 +21,9 @@ import {
   MatDialogModule,
   MatProgressBarModule,
   MatSnackBarModule,
-  MatTableModule, 
-  MatPaginatorModule, 
-  MatSortModule 
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -55,22 +53,22 @@ import { ChooseMinervaAccountComponent } from './choose-minerva-account/choose-m
     MatDialogModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatTableModule, 
-    MatPaginatorModule, 
+    MatTableModule,
+    MatPaginatorModule,
     MatSortModule,
     FlexLayoutModule,
     NgxDatatableModule,
     ChartsModule,
     FileUploadModule,
     CommonModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     LayoutModule,
     RouterModule.forChild(MinervaAccountRoutes)
   ],
   declarations: [
-    MainMinervaAccountComponent, 
-    CreateMinervaAccountComponent, 
+    MainMinervaAccountComponent,
+    CreateMinervaAccountComponent,
     CreateMinervaEmailComponent,
     ChooseMinervaAccountComponent
   ]

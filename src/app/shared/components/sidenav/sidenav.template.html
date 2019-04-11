@@ -26,7 +26,8 @@
           appDropdownToggle 
           matRipple 
           *ngIf="item.type === 'link'">
-              <mat-icon>{{item.icon}}</mat-icon>
+              <!-- <mat-icon>{{item.icon}}</mat-icon> -->
+              <img src="{{item.image_icon}}" class="side-image-icon">
               <span class="item-name lvl1">
                 {{item.name | translate}}
               </span>
@@ -57,7 +58,8 @@
           appDropdownToggle 
           matRipple 
           routerLink="/{{item.state}}">
-              <mat-icon>{{item.icon}}</mat-icon>
+              <!-- <mat-icon>{{item.icon}}</mat-icon> -->
+              <img src="{{item.image_icon}}" class="side-image-icon">
               <span class="item-name lvl1">
                 {{item.name | translate}}
               </span>
@@ -74,7 +76,9 @@
         <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'dropDown'">
           <li *ngFor="let itemLvL2 of item.sub" appDropdownLink>
 
-            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}" 
+            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}"
+              routerLinkActive="mat-color-primary"
+              [routerLinkActiveOptions]="{exact:true}"
               appDropdownToggle 
               *ngIf="itemLvL2.type !== 'dropDown'" 
               matRipple>

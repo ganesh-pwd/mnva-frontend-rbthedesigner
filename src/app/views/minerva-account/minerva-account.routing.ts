@@ -5,8 +5,8 @@ import { CreateMinervaEmailComponent } from './create-minerva-email/create-miner
 import { ChooseMinervaAccountComponent } from './choose-minerva-account/choose-minerva-account.component';
 
 export const MinervaAccountRoutes: Routes = [
-	{ path: '', component: MainMinervaAccountComponent },
-	{ path: 'create', component: CreateMinervaAccountComponent },
-	{ path: 'select', component: ChooseMinervaAccountComponent },
-	{ path: 'email', component: CreateMinervaEmailComponent }
+  { path: '', component: MainMinervaAccountComponent },
+  { path: 'create', component: CreateMinervaAccountComponent },
+  { path: 'select', component: ChooseMinervaAccountComponent },
+  { path: 'email', component: CreateMinervaEmailComponent }
 ];

@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { DataboxesRoutes } from './databoxes.routing';
 import { MainDataboxesComponent } from './main-databoxes/main-databoxes.component';
 import { DataboxItemInitializeComponent } from './databox-item-initialize/databox-item-initialize.component';
-import { SearchPipe } from '../../shared/pipes/search-pipe';
 import {
   MatListModule,
   MatIconModule,
@@ -24,8 +21,8 @@ import {
   MatDialogModule,
   MatProgressBarModule,
   MatSnackBarModule,
-  MatTableModule, 
-  MatPaginatorModule, 
+  MatTableModule,
+  MatPaginatorModule,
   MatSortModule,
   MatSelectModule,
 } from '@angular/material';
@@ -36,12 +33,11 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { FileUploadModule } from 'ng2-file-upload/ng2-file-upload';
 import { SharedModule } from '../../shared/shared.module';
 import { DataboxItemComponent } from './databox-item/databox-item.component';
-import { DataboxFolderComponent } from './databox-folder/databox-folder.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DataboxItemSettingsComponent } from './databox-item-settings/databox-item-settings.component';
 import { DataboxItemConnectivityComponent } from './databox-item-connectivity/databox-item-connectivity.component';
-import { DataboxItemPagesearchComponent } from './databox-item-pagesearch/databox-item-pagesearch.component';
 import { HotTableModule } from '@handsontable-pro/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -61,8 +57,8 @@ import { HotTableModule } from '@handsontable-pro/angular';
     MatDialogModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatTableModule, 
-    MatPaginatorModule, 
+    MatTableModule,
+    MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
     FlexLayoutModule,
@@ -70,21 +66,18 @@ import { HotTableModule } from '@handsontable-pro/angular';
     ChartsModule,
     FileUploadModule,
     CommonModule,
-    FormsModule,
     LayoutModule,
     SharedModule,
     HotTableModule,
+    FormsModule, ReactiveFormsModule,
     RouterModule.forChild(DataboxesRoutes)
   ],
   declarations: [
-    MainDataboxesComponent, 
+    MainDataboxesComponent,
     DataboxItemComponent,
-    DataboxFolderComponent, 
-    DataboxItemInitializeComponent, 
-    DataboxItemSettingsComponent, 
-    DataboxItemConnectivityComponent, 
-    DataboxItemPagesearchComponent,
-    SearchPipe,
+    DataboxItemInitializeComponent,
+    DataboxItemSettingsComponent,
+    DataboxItemConnectivityComponent
   ]
 })
 export class DataboxesModule { }

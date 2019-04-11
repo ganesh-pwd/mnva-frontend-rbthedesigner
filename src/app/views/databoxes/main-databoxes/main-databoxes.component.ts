@@ -3,7 +3,6 @@ import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
 
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
-import { CreateDataboxDialogService } from '../../../shared/services/databoxes/dialogs-create/create-databox-dialog.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,66 +15,78 @@ import { Subscription } from 'rxjs';
 })
 export class MainDataboxesComponent implements OnInit, OnDestroy {
   private getItemSub: Subscription;
-  private getSelectedSub: Subscription;
 
   public databoxes: any[];
-  public folderName: string;
   public selectedOption;
-  public isFolderDeleted;
+
+  public isDataboxDeleted;
+  public isDataboxAdded;
+  public isDataboxUpdated;
+
+  public databoxSearch: string;
+  public databox_id_new: string;
 
   editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
 
   constructor(private databoxesService: DataboxesService,
-    private createDataboxDialogService: CreateDataboxDialogService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private router: Router,
     public snackBar: MatSnackBar) {
 
-    this.isFolderDeleted = sessionStorage.getItem('delete_databox_folder');
-    if (this.isFolderDeleted) this.openSnackBar(this.isFolderDeleted);
+    this.isDataboxDeleted = sessionStorage.getItem('deleted_databox_true');
+    if (this.isDataboxDeleted) this.openSnackBar(this.isDataboxDeleted);  
+
+    this.isDataboxAdded = sessionStorage.getItem('databox_new');
+    if (this.isDataboxAdded) this.openSnackBar(this.isDataboxAdded);  
+
+    this.isDataboxUpdated = sessionStorage.getItem('databox_updated');
+    if (this.isDataboxUpdated) this.openSnackBar(this.isDataboxUpdated);  
   }
 
   ngOnInit() {
+    this.databox_id_new = this.generateID();
+
+    // get databox items
     this.getDataboxes();
   }
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
-    sessionStorage.removeItem('delete_databox_folder');
   }
 
   // open confirmation dialog
   openDialog(title: string, data: string, input: boolean) {
     this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
-      .subscribe((result) => {
-        this.selectedOption = result;
-      });
+      .subscribe((result) => this.selectedOption = result);
   }
 
   // open create databox dialog
   createDatabox(title: string = 'my title', data: string = 'my data', input: boolean) {
-    this.createDataboxDialogService.confirm({ title: title, data: data, input: input })
-      .subscribe((result) => {
-        this.selectedOption = result;
-      });
+    this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
+      .subscribe((result) => this.selectedOption = result);
   }
 
   // open snackbar
   openSnackBar(message: string) {
-    this.snackBar.open(message, 'close', { duration: 5000 });
+    this.snackBar.open(message, 'close');
+
+    setTimeout(() => {
+      /**/
+      if(this.isDataboxAdded) sessionStorage.removeItem('databox_new');
+      if(this.isDataboxDeleted) sessionStorage.removeItem('deleted_databox_true');
+      if(this.isDataboxUpdated) sessionStorage.removeItem('databox_updated');
+
+      this.snackBar.dismiss();
+    }, 3000);
   }
 
   // navigate to databox details
-  navigateToDatabox(folder: string, id: string, first: boolean) {
-    const route = !first ? `databoxes/${folder.replace(/\s/, '-')}/${id}`
-      : `databoxes/${folder.replace(/\s/, '-')}/${id}/initialize`;
-    this.router.navigate([route]);
-  }
+  navigateToDatabox(id: string, first: boolean, status: string) {
+    const route = !first ? `databoxes/${id}` : `databoxes/${id}/initialize`;
 
-  // navigate to folder
-  navigateToFolder(folder: string) {
-    const route = `databoxes/${folder.replace(/\s/, '-')}`;
+    console.log(id, first, status)
 
-    this.router.navigate([route]);
+    if(status === 'Draft') this.router.navigate([`/databoxes/create-databox/${id}`]);
+    else this.router.navigate([route]);
   }
 
   // Get databox items created by users
@@ -86,5 +97,30 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
           this.databoxes = data;
         }
       });
+  }
+
+  // generate id with length 24
+  generateID() {
+    let id = '';
+    const possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (let i = 0; i < 24; i++) {
+      id += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return id;
+  }
+
+  // generate guID
+  generateGUID() {
+    return Math.round(Math.random() * 500000).toString();
+  }
+
+  // initialize create new database if no dialog
+  createDataboxInit() {
+    sessionStorage.setItem('databox_name_new', `${this.generateGUID()}`);
+    sessionStorage.setItem('databox_id_new', this.databox_id_new );
+    sessionStorage.removeItem('databox_edited_name');
+    this.router.navigate([`/databoxes/create-databox/${this.databox_id_new}`]);
   }
 }

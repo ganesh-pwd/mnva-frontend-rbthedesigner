@@ -4,7 +4,7 @@
     <h1 class="mat-h1">
         <mat-icon>shopping_cart</mat-icon>
         Products
-        <small>
+        <small>   |    
           <span class="main-route">
             <a routerLink="/products">Products</a>
           </span> / Cart</small>
@@ -23,6 +23,7 @@
           <th class="text-muted">Product</th>
           <th class="text-muted">Price</th>
           <th class="text-muted">Quantity</th>
+          <th class="text-muted" *ngIf="checkIfAccountType()">Bill Monthly or Anually</th> 
           <th class="text-muted">Total</th>
         </tr>
       </thead>
@@ -31,9 +32,30 @@
           <td><button mat-icon-button color="warn" (click)="removeProduct(item)"><mat-icon>close</mat-icon></button> </td>
           <td><img class="cart-thumbnail" [src]="item.product.photo" style="cursor: pointer" [routerLink]="['/products/advanced-templates', item.product._id]"></td>
           <td><span style="cursor: pointer" [routerLink]="['/products/advanced-templates', item.product._id]">{{item.product.name}}</span></td>
-          <td>{{item.product.price.sale | currency}}</td>
-          <td><input class="quantity-input default-bg" id="quantity" min="1" name="quantity" type="number" (change)="onQuantityChange()" [(ngModel)]="item.data.quantity"></td>
-          <td>{{item.product.price.sale * item.data.quantity | currency}}</td>
+          <td>${{item.product.price.sale}}
+            {{item.product.category === 'Account Type' ? '/month' : ''}}
+            {{item.product.category === 'Credit' ? '/mentions' : ''}}
+          </td>
+          <td>
+            <input *ngIf="item.product.category !== 'Account Type'"
+            class="quantity-input default-bg" 
+            id="quantity" min="1" name="quantity" 
+            type="number" 
+            (change)="onQuantityChange()" 
+            [(ngModel)]="item.data.quantity">
+            <div *ngIf="item.product.category === 'Account Type'">1</div>
+          </td>
+          <td *ngIf="checkIfAccountType() && item.product.category === 'Account Type'">
+            <mat-slide-toggle *ngIf="checkIfAccountType() && item.product.category === 'Account Type'"
+              color="primary"
+              class="mb-1"
+              [ngModel]="billYearly"
+              (change)="onBillMonthlyYearly($event, item.product.price.sale)">
+            </mat-slide-toggle>
+             
+          </td> 
+          <td *ngIf="checkIfAccountType() && item.product.category !== 'Account Type'"></td>
+          <td>${{getItemTotal(item.product.price.sale, item.data.quantity, item.product.category)}}</td>
         </tr>
       </tbody>
     </table>
@@ -48,7 +70,7 @@
             <span class="text-muted">${{subTotal}}</span>
           </div>
           <div class="line mb-1">
-            <span class="fw-500">VAT:</span>
+            <span class="fw-500">IVA:</span>
             <span fxFlex></span>
             <span class="text-muted">{{vat}}%</span>
           </div>

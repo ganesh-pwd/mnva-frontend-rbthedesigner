@@ -1,83 +1,182 @@
-<div>
-    <h1 matDialogTitle>{{ data.title }}</h1>
-    <div mat-dialog-content>
-        <form *ngIf="data.input; else showText">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="{{data.data}}" [(ngModel)]="folderName" [ngModelOptions]="{standalone: true}">
-          </mat-form-field>
-        </form>
+<div *ngIf="deleteDataInfo">
+  <div class="default-bg" [@animate]="{value:'*', params:{ scale:'0.8', delay:'200ms' }}">
+      <div>
+          <div>
+              <h1 matDialogTitle>Error Deleting Databox</h1>
+              
+              <div mat-dialog-content>
+                  <div>Oops! There has been an error while deleting your databox. Please check your input and try again!</div>
+              </div>
 
-        <ng-template #showText>
-            {{data.data}}
-        </ng-template>
+              <div mat-dialog-actions>
+                  <span fxFlex></span>
+                  <button 
+                  type="button"
+                  mat-raised-button 
+                  (click)="close()">Ok</button>
+              </div>
+          </div>
+      </div>
+  </div>
 
-        <div *ngIf="data.folder === 'Power BI' 
-            || data.folder === 'Tableau' 
-            || data.folder === 'Data Studio'">
-                <hr> 
-                <h3 class="mat-h3 mat-color-primary">See Templates for {{data.folder}}</h3>
-        </div>
-        <div *ngIf="data.folder === 'Power BI' || data.folder === 'Tableau' || data.folder === 'Data Studio'" fxLayout="row" fxLayoutWrap="wrap">
-            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
-                <div class="text-center" >
-                    <mat-horizontal-stepper [linear]="true">
-                      <mat-step [stepControl]="firstFormGroup">
-                        <ng-template [ngIf]="data.folder === 'Power BI'"><div>Power BI Step 1</div></ng-template>
-                        <ng-template [ngIf]="data.folder === 'Tableau'"><div>Tableau Step 1</div></ng-template>
-                        <ng-template [ngIf]="data.folder === 'Data Studio'"><div>Data Studio Step 1</div></ng-template>
-                      </mat-step>
-                      <mat-step [stepControl]="secondFormGroup">
-                        <ng-template [ngIf]="data.folder === 'Power BI'"><div>Power BI Step 2</div></ng-template>
-                        <ng-template [ngIf]="data.folder === 'Tableau'"><div>Tableau Step 2</div></ng-template>
-                        <ng-template [ngIf]="data.folder === 'Data Studio'"><div>Data Studio Step 2</div></ng-template>
-                      </mat-step>
-                      <mat-step>
-                        <ng-template matStepLabel>Done</ng-template>
-                        <div>
-                          <mat-icon class="pt-1" [style.fontSize]="'36px'">check</mat-icon>
-                        </div>
-                        <div class="pb-1 mb-1"> You Are Done.</div>
-                        <div fxLayout="row">
-                          <button mat-raised-button color="accent" matStepperPrevious>Back</button>
-                          <span fxFlex="8px"></span>
-                          <button mat-raised-button color="primary" (click)="submit()">Submit</button>
-                        </div>
-                      </mat-step>
-                    </mat-horizontal-stepper>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div mat-dialog-actions>
+</div>
 
-        <span fxFlex></span>
+<div class="height-full" *ngIf="!deleteDataInfo" 
+  [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+  <h1 matDialogTitle>{{ data.title }}</h1>
+  <div mat-dialog-content>
+      <!-- Input Data -->
+      <form *ngIf="data.input; else showText">
+        <mat-form-field class="full-width">
+          <input matInput 
+            placeholder="{{data.data}}" 
+            [(ngModel)]="inputData" 
+            [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+      </form>
 
-        <div *ngIf="data.folder !== 'Power BI' 
-            && data.folder !== 'Tableau' 
-            && data.folder !== 'Data Studio'">
-                <button *ngIf="data.title !== 'Create Folder' && data.title !== 'Delete Folder'"
-                type="button" 
-                mat-raised-button
-                color="primary" 
-                (click)="dialogRef.close(true)">{{data.title}}</button>
+      <ng-template #showText>
+          {{data.data}}
+      </ng-template>
 
-                <button *ngIf="data.title === 'Create Folder'"
-                type="button" 
-                mat-raised-button
-                color="primary" 
-                (click)="addFolder()">{{data.title}}</button>
+      <div *ngIf="data.folder === 'Power BI' 
+          || data.folder === 'Tableau' 
+          || data.folder === 'Data Studio'">
+              <hr> 
+              <h3 class="mat-h3 mat-color-primary">See Templates for {{data.folder}}</h3>
+      </div>
 
-                <button *ngIf="data.title === 'Delete Folder'"
-                type="button" 
-                mat-raised-button
-                color="warn" 
-                (click)="deleteFolder(data.folder)">{{data.title}}</button>
-        </div>&nbsp;&nbsp;
-        
-        <button 
-        type="button"
-        mat-raised-button 
-        (click)="dialogRef.close(false)">Cancel</button>
-    </div>
+      <!-- For Databox Connectivity Only -->
+      <div *ngIf="data.folder === 'Power BI' 
+        || data.folder === 'Tableau' 
+        || data.folder === 'Data Studio'"
+        fxLayout="row" fxLayoutWrap="wrap">
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
+              <div class="text-center" >
+                  <mat-horizontal-stepper [linear]="true">
+                    <mat-step [stepControl]="firstFormGroup">
+                      <ng-template [ngIf]="data.folder === 'Power BI'">
+                        <div>Power BI Step 1</div>
+                      </ng-template>
+                      <ng-template [ngIf]="data.folder === 'Tableau'">
+                        <div>Tableau Step 1</div>
+                      </ng-template>
+                      <ng-template [ngIf]="data.folder === 'Data Studio'">
+                        <div>Data Studio Step 1</div>
+                      </ng-template>
+                    </mat-step>
+
+                    <mat-step [stepControl]="secondFormGroup">
+                      <ng-template [ngIf]="data.folder === 'Power BI'">
+                        <div>Power BI Step 2</div>
+                      </ng-template>
+                      <ng-template [ngIf]="data.folder === 'Tableau'">
+                        <div>Tableau Step 2</div>
+                      </ng-template>
+                      <ng-template [ngIf]="data.folder === 'Data Studio'">
+                        <div>Data Studio Step 2</div>
+                      </ng-template>
+                    </mat-step>
+
+                    <mat-step>
+                      <ng-template matStepLabel>Done</ng-template>
+                      <div>
+                        <mat-icon class="pt-1" [style.fontSize]="'36px'">check</mat-icon>
+                      </div>
+                      <div class="pb-1 mb-1"> You Are Done.</div>
+                      <div fxLayout="row">
+                        <button mat-raised-button color="accent" matStepperPrevious>Back</button>
+                        <span fxFlex="8px"></span>
+                        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+                      </div>
+                    </mat-step>
+                  </mat-horizontal-stepper>
+              </div>
+          </div>
+      </div>
+  </div>
+  <br>
+
+  <!-- Action Buttons -->
+  <div mat-dialog-actions>
+      <span fxFlex></span>
+
+      <div *ngIf="data.folder !== 'Power BI' 
+          && data.folder !== 'Tableau' 
+          && data.folder !== 'Data Studio'">
+              <button *ngIf="data.title !== 'Create Databox' 
+              && data.title !== 'Delete Databox' 
+              && data.title !== 'Save as Draft'
+              && data.title !== 'Exit without saving changes?'
+              && data.title !== 'Set Databox Name'
+              && data.title !== 'Edit Databox Name'
+              && data.title !== 'Run Query'
+              && data.title !== 'Create a New Databox'"
+              type="button" 
+              mat-raised-button
+              color="primary" 
+              (click)="dialogRef.close(true)">{{data.title}}</button>
+
+              <!-- Save as Draft without update -->
+              <button *ngIf="data.title === 'Save as Draft' && !data.update"
+              type="button" 
+              mat-raised-button
+              color="primary" 
+              (click)="saveAsDraft()">{{data.title}}</button>
+
+              <!-- Save as Draft with update -->
+              <button *ngIf="data.title === 'Save as Draft' && data.update"
+              type="button" 
+              mat-raised-button
+              color="primary" 
+              (click)="updateDatabox()">{{data.title}}</button>
+
+              <!-- Run Query and Save the Details -->
+              <button *ngIf="data.title === 'Run Query' && data.update"
+              type="button" 
+              mat-raised-button
+              color="primary" 
+              (click)="updateDatabox()">{{data.title}}</button>
+
+              <!-- Create databox -->
+              <button *ngIf="data.title === 'Create a New Databox'"
+              type="button" 
+              mat-raised-button
+              color="primary" 
+              (click)="createDataboxInit()">{{data.title}}</button>
+
+              <!-- Edit Databox -->
+              <button *ngIf="data.title === 'Set Databox Name'"
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="editDataboxNotCreated()">{{data.title}}
+              </button>
+
+              <!-- Edit Databox -->
+              <button *ngIf="data.title === 'Edit Databox Name'"
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="editDataboxCreated()">{{data.title}}
+              </button>
+
+              <!-- Delete databox -->
+              <button *ngIf="data.title === 'Delete Databox' && !data.update"
+              type="button" 
+              mat-raised-button
+              color="warn" 
+              (click)="deleteDatabox()">{{data.title}}</button>
+
+              <!-- Cancel Changes -->
+              <button *ngIf="data.title === 'Exit without saving changes?'"
+              type="button"
+              mat-raised-button
+              color="warn"
+              (click)="cancelChanges()">{{data.title}}
+              </button>
+      </div>&nbsp;&nbsp;
+      
+      <button (click)="dialogRef.close(false)" type="button" mat-raised-button>Cancel</button>
+  </div>
 </div>

@@ -38,9 +38,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductShopService } from './products-shop.service';
 import { AlgorithmCreditComponent } from './algorithm-credit/algorithm-credit.component';
-import { AccountFeauturesComponent } from './account-feautures/account-feautures.component';
 import { ProductsCartComponent } from './cart/cart.component';
 import { ProductCheckoutComponent } from './checkout/checkout.component';
+import { MentionsCreditComponent } from './mentions-credit/mentions-credit.component';
 
 @NgModule({
   imports: [
@@ -82,9 +82,9 @@ import { ProductCheckoutComponent } from './checkout/checkout.component';
     AdvancedTemplatesComponent,
     MediaRecordingsComponent,
     AlgorithmCreditComponent,
-    AccountFeauturesComponent,
     ProductsCartComponent,
-    ProductCheckoutComponent
+    ProductCheckoutComponent,
+    MentionsCreditComponent
   ],
   providers: [
     MatDatepickerModule,

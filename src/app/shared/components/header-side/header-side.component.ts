@@ -1,12 +1,14 @@
-import { Component, OnInit, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, Renderer2 } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { LayoutService } from '../../services/layout.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { Subscription } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-header-side',
-  templateUrl: './header-side.template.html'
+  templateUrl: './header-side.template.html',
+  styleUrls: ['./header-side.component.scss']
 })
 export class HeaderSideComponent implements OnInit {
   @Input() notificPanel;
@@ -17,60 +19,78 @@ export class HeaderSideComponent implements OnInit {
   }, {
     name: 'Spanish',
     code: 'es',
-  }]
+  }];
   public egretThemes;
-  public layoutConf:any;
-  public notificationCount:any;
+  public layoutConf: any;
+  public notificationCount: any;
   private getReqImage: Subscription;
   public userImage: string;
+  public userFullName: string;
 
   constructor(
     private themeService: ThemeService,
     private layout: LayoutService,
     public translate: TranslateService,
     private renderer: Renderer2,
+    private router: Router,
     public minervaAccountChangeService: MinervaAccountChangeService
   ) {
-    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result)
+    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
+    this.userFullName = JSON.parse(sessionStorage.getItem('loggedInUser')).name || 'Stephan Trussart';
   }
+
   ngOnInit() {
     this.egretThemes = this.themeService.egretThemes;
     this.layoutConf = this.layout.layoutConf;
     this.translate.use(this.currentLang);
+    this.router.events.subscribe((routeChange) => {
+      if (routeChange instanceof NavigationEnd) {
+        this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
+      }
+    });
   }
+
   setLang(e) {
     this.translate.use(this.currentLang);
   }
+
   changeTheme(theme) {
     this.themeService.changeTheme(this.renderer, theme);
   }
+
   toggleNotific() {
     this.notificPanel.toggle();
   }
+
   toggleSidenav() {
-    if(this.layoutConf.sidebarStyle === 'closed') {
+    if (this.layoutConf.sidebarStyle === 'closed') {
       return this.layout.publishLayoutChange({
         sidebarStyle: 'full'
-      })
+      });
     }
     this.layout.publishLayoutChange({
       sidebarStyle: 'closed'
-    })
+    });
   }
 
   toggleCollapse() {
     // compact --> full
-    if(this.layoutConf.sidebarStyle === 'compact') {
+    if (this.layoutConf.sidebarStyle === 'compact') {
       return this.layout.publishLayoutChange({
         sidebarStyle: 'full'
-      }, {transitionClass: true})
+      }, {transitionClass: true});
     }
 
     // * --> compact
     this.layout.publishLayoutChange({
       sidebarStyle: 'compact'
-    }, {transitionClass: true})
+    }, {transitionClass: true});
 
+  }
+
+  signOut() {
+    sessionStorage.clear();
+    this.router.navigate(['/sessions/signin']).then(() => window.location.reload());
   }
 }

@@ -31,21 +31,21 @@ export class TemplateGalleryLinkComponent implements OnInit {
   ngOnInit() {
     this.getSingleItem();
     // watch for route change
-    this.req = this.router.events.subscribe((event) => {
-      this.getSingleItem();
-    });
+    this.req = this.router.events.subscribe((event) => this.getSingleItem());
   }
 
   // Get databox items created by users with parameter id
-  getSingleItem(){
+  getSingleItem() {
     const template = this.activatedRoute.snapshot.paramMap.get('template');
     this.template = template;
 
-    this.getItemSub = this.templateGalleryService.getItemByLink(template).subscribe(data => {
-      if (data) {
-        this.data = data;
-      }
-    });
+    this.getItemSub = this.templateGalleryService.getItemByLink(template)
+   .subscribe(data => {
+     if (data) { this.data = data; }
+     // if not found
+     else this.router.navigate(['/sessions/404']);
+   // if there's error
+   }, err => this.router.navigate(['/sessions/404']));
   }
 
 }

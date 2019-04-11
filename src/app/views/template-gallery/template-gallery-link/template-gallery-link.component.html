@@ -30,9 +30,9 @@
           <br>
           <mat-divider></mat-divider>
           <br><br>
-          <div class="text-center">
+          <div class="text-center" *ngIf="data">
             <mat-select placeholder="Choose a version" class="choose-version mb-1">
-              <mat-option *ngFor="let version of versions" [value]="version.value" ngDefaultControl>
+              <mat-option *ngFor="let version of data.version" [value]="version.value" ngDefaultControl>
                 {{version.viewValue}}
               </mat-option>
             </mat-select><br>
@@ -43,14 +43,9 @@
   </div>
 
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="60" [@animate]="{value:'*', params:{ x:'300px', delay:'400ms' }}">
-    <mat-card class="default">
+    <mat-card class="default" *ngFor="let images of data?.image_contents">
       <mat-card-content class="p-0">
-        <img src="/assets/images/image-placeholder.png" class="img-fluid" alt="Responsive image">
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="default">
-      <mat-card-content class="p-0">
-        <img src="/assets/images/image-placeholder.png" class="img-fluid" alt="Responsive image">
+        <img src="{{images}}" class="img-fluid" alt="Responsive image">
       </mat-card-content>
     </mat-card>
   </div>

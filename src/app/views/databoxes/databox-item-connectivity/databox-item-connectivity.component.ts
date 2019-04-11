@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit  } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
-import { DataboxTypeService } from '../../../shared/services/databoxes/databox-type-services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxConnectivityDialogService } from '../../../shared/services/databoxes/dialogs-connectivity/dialogs-connectivity.services';
 import { Subscription } from 'rxjs';
-import { MatPaginator, MatSort } from '@angular/material';
 
 
 @Component({
@@ -23,21 +21,20 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   public databoxItemData: any;
   public selectedOption;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private databoxesService: DataboxesService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
-    private databoxConnectivityDialogService: DataboxConnectivityDialogService,
-    private databoxTypeService: DataboxTypeService) {
-    this.databoxesService.apiData$.subscribe(result => this.databoxItemData = result);
+    private databoxConnectivityDialogService: DataboxConnectivityDialogService
+  ) {
+    this.databoxesService.apiData$.subscribe(
+      result => (this.databoxItemData = result)
+    );
   }
 
   ngOnInit() {
     this.getSingleItem();
-    // watch for route change
-    this.req = this.router.events.subscribe((event) => {
-      this.getSingleItem();
-    });
   }
 
   ngOnDestroy() {
@@ -47,36 +44,43 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   // Get databox items created by users with parameter id
   getSingleItem() {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const id = this.activatedRoute.snapshot.paramMap.get("id");
 
-    this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(data => {
-      if (data) {
-        this.data = data;
-      }
-    });
+    this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
+      data => {
+        if (data) this.data = data;
+        else this.router.navigate(["/sessions/404"]);
+      },
+      // if there's error
+      error => this.router.navigate(["/sessions/404"])
+    );
   }
 
   // navigate to databox details
-  navigateToDatabox(folder: string, id: string, first: boolean) {
-    const route = !first ? `databoxes/${folder.replace(/\s/, '-')}/${id}`
-      : `databoxes/${folder.replace(/\s/, '-')}/${id}/initialize`;
+  navigateToDatabox(id: string, first: boolean) {
+    const route = !first ? `databoxes/${id}` : `databoxes/${id}/initialize`;
     this.router.navigate([route]);
   }
 
-  openDialog(title: string, data: string, input: boolean, folder: string) {
-    this.getItemSub = this.mainDataboxesDialogService.confirm({
-      title: title,
-      data: data,
-      input: input,
-      folder: folder
-    }).subscribe((result) => {
-      this.selectedOption = result;
-    });
+  // open main databox dialog
+  openDialog(title: string, data: string, input: boolean) {
+    this.getItemSub = this.mainDataboxesDialogService
+      .confirm({
+        title: title,
+        data: data,
+        input: input
+      })
+      .subscribe(result => {
+        this.selectedOption = result;
+      });
   }
 
+  // open notification dialog
   openNotificationDialog(title: string) {
-    this.getItemSub = this.databoxConnectivityDialogService.confirm({
-      title: title
-    }).subscribe((result) => { });
+    this.getItemSub = this.databoxConnectivityDialogService
+      .confirm({
+        title: title
+      })
+      .subscribe(result => {});
   }
 }

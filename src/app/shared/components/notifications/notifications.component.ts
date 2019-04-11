@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatSidenav } from '@angular/material';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -9,13 +8,12 @@ import { Router, NavigationEnd } from '@angular/router';
 export class NotificationsComponent implements OnInit {
   @Input() notificPanel;
 
-  public isFolderDeleted;
-  public isFolderAdded;
   public isDataboxAdded;
-
+  public isDataboxDeleted;
+  public isDataboxUpdated;
 
   // Dummy notifications
-  notifications: any[] = [{
+  notifications: any[] = JSON.parse(sessionStorage.getItem('notifications')) || [{
     message: 'New contact added',
     icon: 'assignment_ind',
     time: '1 min ago',
@@ -33,59 +31,77 @@ export class NotificationsComponent implements OnInit {
     time: '12 min ago',
     route: '/charts',
     color: 'warn'
-  }]
+  }];
 
-  constructor(private router: Router) {
-    this.isFolderAdded   = sessionStorage.getItem('added_databox_folder');
-    this.isFolderDeleted = sessionStorage.getItem('delete_databox_folder');
-    this.isDataboxAdded  = sessionStorage.getItem('databox_new');
+  constructor(private router: Router) {}
 
-    if(this.isFolderAdded){
-      this.notifications.push({
-        message: this.isFolderAdded,
-        icon: 'widgets',
-        time: '1 min ago',
-        route: '/databoxes/' + this.isFolderAdded.replace(/\s/g, '-'),
-        color: 'primary'
-      })
 
-      sessionStorage.setItem('notificationCount', '4');
-    } 
+  ngOnInit() {
+    this.router.events.subscribe((routeChange) => {
+        if (routeChange instanceof NavigationEnd) {
+          this.isDataboxAdded  = sessionStorage.getItem('databox_new');
+          this.isDataboxDeleted = sessionStorage.getItem('deleted_databox_true');
+          this.isDataboxUpdated = sessionStorage.getItem('databox_updated');
 
-    if(this.isFolderDeleted){
-      this.notifications.push({
-        message: this.isFolderDeleted,
-        icon: 'widgets',
-        time: '1 min ago',
-        route: '/databoxes',
-        color: 'warn'
-      })
+          if (this.isDataboxAdded) {
+            this.notifications.push({
+              message: this.isDataboxAdded,
+              icon: 'widgets',
+              time: '1 min ago',
+              route: '/databoxes',
+              color: 'primary'
+            });
 
-      sessionStorage.setItem('notificationCount', '4');
-    } 
+            sessionStorage.setItem('notifications', JSON.stringify(this.notifications));
+            sessionStorage.setItem('notificationCount', `${this.notifications.length}`);
+          }
 
-    if(this.isDataboxAdded){
+          if (this.isDataboxDeleted) {
+            this.notifications.push({
+              message: this.isDataboxDeleted,
+              icon: 'widgets',
+              time: '1 min ago',
+              route: '/databoxes',
+              color: 'warn'
+            });
+
+            sessionStorage.setItem('notifications', JSON.stringify(this.notifications));
+            sessionStorage.setItem('notificationCount', `${this.notifications.length}`);
+          }
+
+          if (this.isDataboxUpdated) {
+            this.notifications.push({
+              message: this.isDataboxUpdated,
+              icon: 'widgets',
+              time: '1 min ago',
+              route: '/databoxes',
+              color: 'primary'
+            });
+
+            sessionStorage.setItem('notifications', JSON.stringify(this.notifications));
+            sessionStorage.setItem('notificationCount', `${this.notifications.length}`);
+          }
+
+          this.notificPanel.close();
+        }
+    });
+  }
+
+  updateNotif(data) {
+    if (this.isDataboxAdded) {
       this.notifications.push({
         message: this.isDataboxAdded,
         icon: 'widgets',
         time: '1 min ago',
         route: '/databoxes',
         color: 'primary'
-      })
+      });
 
-      sessionStorage.setItem('notificationCount', '4');
-    } 
-
-    
+      sessionStorage.setItem('notifications', JSON.stringify(this.notifications));
+      sessionStorage.setItem('notificationCount', `${this.notifications.length}`);
+    }
   }
 
-  ngOnInit() {
-    this.router.events.subscribe((routeChange) => {
-        if (routeChange instanceof NavigationEnd) {
-          this.notificPanel.close();
-        }
-    });
-  }
   clearAll(e) {
     e.preventDefault();
     this.notifications = [];

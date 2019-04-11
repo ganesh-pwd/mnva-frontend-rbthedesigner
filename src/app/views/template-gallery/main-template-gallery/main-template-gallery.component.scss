@@ -1,18 +1,33 @@
-.mat-card-image{
-	cursor: pointer;
+.mat-card-image {
+  cursor: pointer;
 }
 
-.gallery-icons{
-	display: inline-flex !important;
-	vertical-align: middle !important;
-	padding-top: 10px;
+.gallery-icons {
+  display: inline-flex !important;
+  vertical-align: middle !important;
+  padding-top: 10px;
 
-	i{
-		img{
-			padding-top: 10px !important;
-			width: 50%;
-		}
-	}
-
+  i {
+    img {
+      padding-top: 10px !important;
+      width: 50%;
+    }
+  }
 }
 
+.limit-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 21px;
+  max-height: 82px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.no-template-gallery {
+  width: 100%;
+  div {
+    height: calc(100vh - 240px);
+  }
+}

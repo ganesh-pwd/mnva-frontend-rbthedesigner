@@ -76,6 +76,16 @@
         background: rgba(0, 0, 0, .08);
         cursor: pointer;
       }
+      .side-image-icon{
+        margin-right: 10px;
+        height: 30px;    
+        width: 30px;
+        margin-left: 3px !important;
+        line-height: 30px;
+        padding: 5px !important;
+        border-left: 3px solid;
+        border-color: transparent;
+      }
       .mat-icon:not(.menu-caret) {
         text-align: center;
         margin-right: 3px;

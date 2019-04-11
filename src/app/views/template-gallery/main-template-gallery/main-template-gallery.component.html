@@ -1,87 +1,141 @@
-<br>
+<br />
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-    <img src="assets/images/icon-databox.png">
+    <img src="assets/images/icon-databox.png" />
     <h1 class="mat-h1">
       Template Gallery
     </h1>
   </div>
 </div>
-<hr>
 
-<div fxLayout="row" fxLayoutWrap="wrap"  [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-  <div fxFlex="100" fxFlex.gt-xs="33">
-    <mat-card class="p-0">
-      <img [routerLink]="'/template-gallery/reputation-management'" mat-card-image src="assets/images/image-placeholder.png">
-      <mat-card-content>
-        <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/reputation-management'">Reputation Management</a></h2>
-        <small>By: Minerva</small>
-        <p class="mt-1">
-          Adipisci quas repellat sed. Quasi quaerat aut nam possimus vitae dignissimos, sapiente est atque tenetur eveniet iste iusto
-          veritatis. Adipisci quas repellat sed. Quasi quaerat aut.
-        </p>
-        <mat-divider class="mb-1"></mat-divider>
-        <div class="gallery-icons text-center">
-          <button mat-icon-button><i class="fa fa-facebook color-facebook"></i></button>
-          <button mat-icon-button><i class="fa fa-twitter color-twitter"></i></button>
-          <button mat-icon-button><i class="fa fa-globe color-web"></i></button>
-          <button mat-icon-button><i><img src="/assets/images/tableau.png"></i></button>
-          <button mat-icon-button><i><img src="/assets/images/power_bi.png"></i></button>
-          <button mat-icon-button><i class="fa fa-cut text-muted"></i></button>
-          <button mat-icon-button><i class="fa fa-plus text-muted"></i></button>
-        </div>
-        
-      </mat-card-content>
-    </mat-card>
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <!-- Filters -->
+  <div class="full-width">
+    <!-- Search Form -->
+    <div fxLayout="row" fxLayout.lt-sm="column" class="shop-top-toolbar">
+      <button mat-icon-button class="mr-1">
+        <mat-icon>short_text</mat-icon>
+      </button>
+      <div class="product-search-wrap">
+        <form>
+          <input
+            type="text"
+            name="searchProduct"
+            placeholder="Search product"
+            class="product-search default-bg full-width"
+            [(ngModel)]="searchGallery"
+          />
+        </form>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div fxFlex="100" fxFlex.gt-xs="33">
-    <mat-card class="p-0">
-      <img [routerLink]="'/template-gallery/influencers'" mat-card-image src="assets/images/image-placeholder.png">
+<hr />
+<br />
+
+<div
+  fxLayout="row"
+  fxLayoutWrap="wrap"
+  *ngIf="data"
+  [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+>
+  <div
+    fxFlex="100"
+    fxFlex.gt-xs="33"
+    *ngFor="let template_gallery of (data | MenuFilter: searchGallery)"
+  >
+    <mat-card class="p-0" *ngIf="data">
+      <img
+        routerLink="/template-gallery/{{ template_gallery.link }}"
+        mat-card-image
+        src="{{ template_gallery.image_head }}"
+      />
       <mat-card-content>
-        <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/influencers'">Influencers</a></h2>
-        <small>By: Minerva</small>
-        <p class="mt-1">
-          Adipisci quas repellat sed. Quasi quaerat aut nam possimus vitae dignissimos, sapiente est atque tenetur eveniet iste iusto
-          veritatis. Adipisci quas repellat sed. Quasi quaerat aut.
-        </p>
+        <h2 class="mat-h2 m-0">
+          <a [routerLink]="'/template-gallery/reputation-management'">
+            {{ template_gallery.type }}</a
+          >
+        </h2>
+        <small
+          >By: <strong>{{ template_gallery.author }}</strong></small
+        >
+        <p class="mt-1 limit-2" [innerHtml]="template_gallery.content"></p>
         <mat-divider class="mb-1"></mat-divider>
         <div class="gallery-icons text-center">
-          <button mat-icon-button><i class="fa fa-facebook color-facebook"></i></button>
-          <button mat-icon-button><i class="fa fa-twitter color-twitter"></i></button>
+          <button mat-icon-button>
+            <i class="fa fa-facebook color-facebook"></i>
+          </button>
+          <button mat-icon-button>
+            <i class="fa fa-twitter color-twitter"></i>
+          </button>
           <button mat-icon-button><i class="fa fa-globe color-web"></i></button>
-          <button mat-icon-button><i><img src="/assets/images/tableau.png"></i></button>
-          <button mat-icon-button><i><img src="/assets/images/power_bi.png"></i></button>
+          <button mat-icon-button>
+            <i><img src="/assets/images/tableau.png"/></i>
+          </button>
+          <button mat-icon-button>
+            <i><img src="/assets/images/power_bi.png"/></i>
+          </button>
           <button mat-icon-button><i class="fa fa-cut text-muted"></i></button>
           <button mat-icon-button><i class="fa fa-plus text-muted"></i></button>
         </div>
-        
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div fxFlex="100" fxFlex.gt-xs="33">
-    <mat-card class="p-0">
-      <img [routerLink]="'/template-gallery/insight-generations'" mat-card-image src="assets/images/image-placeholder.png">
-      <mat-card-content>
-        <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/insight-generations'">Insight Generations</a></h2>
-        <small>By: Minerva</small>
-        <p class="mt-1">
-          Adipisci quas repellat sed. Quasi quaerat aut nam possimus vitae dignissimos, sapiente est atque tenetur eveniet iste iusto
-          veritatis. Adipisci quas repellat sed. Quasi quaerat aut.
-        </p>
-        <mat-divider class="mb-1"></mat-divider>
-        <div class="gallery-icons text-center">
-          <button mat-icon-button><i class="fa fa-facebook color-facebook"></i></button>
-          <button mat-icon-button><i class="fa fa-twitter color-twitter"></i></button>
-          <button mat-icon-button><i class="fa fa-globe color-web"></i></button>
-          <button mat-icon-button><i><img src="/assets/images/tableau.png"></i></button>
-          <button mat-icon-button><i><img src="/assets/images/power_bi.png"></i></button>
-          <button mat-icon-button><i class="fa fa-cut text-muted"></i></button>
-          <button mat-icon-button><i class="fa fa-plus text-muted"></i></button>
-        </div>
-        
       </mat-card-content>
     </mat-card>
   </div>
 </div>
+
+<div class="no-template-gallery">
+  <div fxLayout="column" fxlayoutalign="center center" class="text-center" *ngIf="data?.length == 0">
+    <h3>There are currently no Template Gallery Items for this user.</h3>
+  </div>
+</div>
+
+<!--
+<div fxFlex="100" fxFlex.gt-xs="33">
+  <mat-card class="p-0">
+    <img [routerLink]="'/template-gallery/influencers'" mat-card-image src="assets/images/image-placeholder.png">
+    <mat-card-content>
+      <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/influencers'">Influencers</a></h2>
+      <small>By: Minerva</small>
+      <p class="mt-1">
+        Adipisci quas repellat sed. Quasi quaerat aut nam possimus vitae dignissimos, sapiente est atque tenetur eveniet iste iusto
+        veritatis. Adipisci quas repellat sed. Quasi quaerat aut.
+      </p>
+      <mat-divider class="mb-1"></mat-divider>
+      <div class="gallery-icons text-center">
+        <button mat-icon-button><i class="fa fa-facebook color-facebook"></i></button>
+        <button mat-icon-button><i class="fa fa-twitter color-twitter"></i></button>
+        <button mat-icon-button><i class="fa fa-globe color-web"></i></button>
+        <button mat-icon-button><i><img src="/assets/images/tableau.png"></i></button>
+        <button mat-icon-button><i><img src="/assets/images/power_bi.png"></i></button>
+        <button mat-icon-button><i class="fa fa-cut text-muted"></i></button>
+        <button mat-icon-button><i class="fa fa-plus text-muted"></i></button>
+      </div>
+      
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div fxFlex="100" fxFlex.gt-xs="33">
+  <mat-card class="p-0">
+    <img [routerLink]="'/template-gallery/insight-generations'" mat-card-image src="assets/images/image-placeholder.png">
+    <mat-card-content>
+      <h2 class="mat-h2 m-0"><a [routerLink]="'/template-gallery/insight-generations'">Insight Generations</a></h2>
+      <small>By: Minerva</small>
+      <p class="mt-1">
+        Adipisci quas repellat sed. Quasi quaerat aut nam possimus vitae dignissimos, sapiente est atque tenetur eveniet iste iusto veritatis. Adipisci quas repellat sed. Quasi quaerat aut.
+      </p>
+      <mat-divider class="mb-1"></mat-divider>
+      <div class="gallery-icons text-center">
+        <button mat-icon-button><i class="fa fa-facebook color-facebook"></i></button>
+        <button mat-icon-button><i class="fa fa-twitter color-twitter"></i></button>
+        <button mat-icon-button><i class="fa fa-globe color-web"></i></button>
+        <button mat-icon-button><i><img src="/assets/images/tableau.png"></i></button>
+        <button mat-icon-button><i><img src="/assets/images/power_bi.png"></i></button>
+        <button mat-icon-button><i class="fa fa-cut text-muted"></i></button>
+        <button mat-icon-button><i class="fa fa-plus text-muted"></i></button>
+      </div>
+      
+    </mat-card-content>
+  </mat-card>
+</div>-->

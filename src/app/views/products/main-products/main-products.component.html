@@ -4,7 +4,7 @@
     <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
         Products
-        <small>
+        <small>   |    
           <span class="main-route">
             <a routerLink="/products">Products</a>
           </span> / Account Type</small>
@@ -13,6 +13,13 @@
 </div>
 
 <mat-card class="account-type p-0 pb-1" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+  Billed Montly
+  <mat-slide-toggle
+    color="primary"
+    class="mb-1"
+  >
+    Billed Anually
+  </mat-slide-toggle>
   <div class="full-width mb-1 mt-1 add-cart">
     <button mat-raised-button color="primary" routerLink="/products/cart">
       <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
@@ -27,30 +34,31 @@
           <img src="assets/images/box-green.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
-              <h2 class="mat-h2">Standard Account</h2>
+              <h1><strong>$<span>{{standardAccount}} /Mo</span></strong></h1>
+              <h3 class="">Basic Account</h3>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <h4 class="mat-h4">For new members</h4>
+              <strong><h5>For new members</h5></strong>
             </div>
             <div class="">
               <mat-list dense class="mb-1">
                 <mat-list-item>3,000 mentions</mat-list-item>
                 <mat-list-item>Facebook</mat-list-item>
-                <mat-list-item>Twitter</mat-list-item>
-                <mat-list-item>Web</mat-list-item>
-                <mat-list-item>Airbnb</mat-list-item>
-                <mat-list-item>Waze</mat-list-item>
+                <mat-list-item class="disabled">Twitter</mat-list-item>
+                <mat-list-item class="disabled">Web</mat-list-item>
+                <mat-list-item class="disabled">Airbnb</mat-list-item>
+                <mat-list-item class="disabled">Waze</mat-list-item>
               </mat-list>
             </div>
+            <br>
             <table>
               <tbody>
-                <tr><td class="">2 Users</td></tr>
-                <tr><td class="">Email Alerts</td></tr>
-                <tr><td class="disabled">Google Data Studio</td></tr>
+                <tr><td>2 Users</td></tr>
+                <tr><td>Email Alerts</td></tr>
+                <tr><td>Google Data Studio</td></tr>
                 <tr><td class="disabled">Tableau Connector</td></tr>
                 <tr><td class="disabled">Power BI Connector</td></tr>
                 <tr><td class="disabled">Slack Alerts</td></tr>
@@ -58,50 +66,13 @@
             </table>
           </mat-card-content>
         </mat-card>
-        <button mat-raised-button class="mat-color-green btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
+        <button 
+        *ngIf="loggedInUser.accountType !== 'Basic'"
+        mat-raised-button class="mat-color-green btn-add-to-cart mt-1" 
+        (click)="addToCart('Basic Account', standardAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-      </div>
-      <!-- Pricing box -->
-      <div fxFlex="100" fxFlex.gt-sm="33">
-        <mat-card class="plan-pricing text-center orange">
-          <img src="assets/images/box-orange.png">
-          <mat-card-title>
-            <div class="pt-1 pb-1">
-              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
-              <h2 class="mat-h2">Standard Account</h2>
-            </div>
-            <mat-divider></mat-divider>
-          </mat-card-title>
-          <mat-card-content class="">
-            <div class="text-sm">
-              <h4 class="mat-h4">For new members</h4>
-            </div>
-            <div class="">
-              <mat-list dense class="mb-1">
-                <mat-list-item>3,000 mentions</mat-list-item>
-                <mat-list-item>Facebook</mat-list-item>
-                <mat-list-item>Twitter</mat-list-item>
-                <mat-list-item>Web</mat-list-item>
-                <mat-list-item>Airbnb</mat-list-item>
-                <mat-list-item>Waze</mat-list-item>
-              </mat-list>
-            </div>
-            <table>
-              <tbody>
-                <tr><td class="">2 Users</td></tr>
-                <tr><td class="">Email Alerts</td></tr>
-                <tr><td class="disabled">Google Data Studio</td></tr>
-                <tr><td class="disabled">Tableau Connector</td></tr>
-                <tr><td class="disabled">Power BI Connector</td></tr>
-                <tr><td class="disabled">Slack Alerts</td></tr>
-              </tbody>
-            </table>
-          </mat-card-content>
-        </mat-card>
-        <button mat-raised-button class="mat-bg-success btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
-          <mat-icon>shopping_cart</mat-icon> Select Plan
-        </button>
+        <h4 class="text-center" *ngIf="loggedInUser.accountType === 'Basic'">Selected Plan</h4>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
@@ -109,18 +80,64 @@
           <img src="assets/images/box-blue.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
-              <h2 class="mat-h2">Standard Account</h2>
+              <h1><strong>$<span>{{plusAccount}} /Mo</span></strong></h1>
+              <h3 class="">Professional Account</h3>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <h4 class="mat-h4">For new members</h4>
+              <strong><h5>For new members</h5></strong>
             </div>
             <div class="">
               <mat-list dense class="mb-1">
-                <mat-list-item>3,000 mentions</mat-list-item>
+                <mat-list-item>5,000 mentions</mat-list-item>
+                <mat-list-item>Facebook</mat-list-item>
+                <mat-list-item>Twitter</mat-list-item>
+                <mat-list-item>Web</mat-list-item>
+                <mat-list-item class="disabled">Airbnb</mat-list-item>
+                <mat-list-item class="disabled">Waze</mat-list-item>
+              </mat-list>
+            </div>
+            <br>
+            <table>
+              <tbody>
+                <tr><td>5 Users</td></tr>
+                <tr><td>Email Alerts</td></tr>
+                <tr><td>Google Data Studio</td></tr>
+                <tr><td>Tableau Connector</td></tr>
+                <tr><td>Power BI Connector</td></tr>
+                <tr><td>Slack Alerts</td></tr>
+              </tbody>
+            </table>
+          </mat-card-content>
+        </mat-card>
+        <button 
+        *ngIf="loggedInUser.accountType !== 'Professional'"
+        mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" 
+        (click)="addToCart('Professional Account', plusAccount)">
+          <mat-icon>shopping_cart</mat-icon> Select Plan
+        </button>
+        <h4 class="text-center" *ngIf="loggedInUser.accountType === 'Professional'">Selected Plan</h4>
+      </div>
+      <!-- Pricing box -->
+      <div fxFlex="100" fxFlex.gt-sm="33">
+        <mat-card class="plan-pricing text-center orange">
+          <img src="assets/images/box-orange.png">
+          <mat-card-title>
+            <div class="pt-1 pb-1">
+              <h1><strong>$<span>{{enterpriseAccount}} /Mo</span></strong></h1>
+              <h3 class="">Enterprise Account</h3>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-title>
+          <mat-card-content class="">
+            <div class="text-sm">
+              <strong><h5>For new members</h5></strong>
+            </div>
+            <div class="">
+              <mat-list dense class="mb-1">
+                <mat-list-item>Unlimited mentions</mat-list-item>
                 <mat-list-item>Facebook</mat-list-item>
                 <mat-list-item>Twitter</mat-list-item>
                 <mat-list-item>Web</mat-list-item>
@@ -128,21 +145,27 @@
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>
             </div>
+            <br>
             <table>
               <tbody>
-                <tr><td class="">2 Users</td></tr>
-                <tr><td class="">Email Alerts</td></tr>
-                <tr><td class="disabled">Google Data Studio</td></tr>
-                <tr><td class="disabled">Tableau Connector</td></tr>
-                <tr><td class="disabled">Power BI Connector</td></tr>
-                <tr><td class="disabled">Slack Alerts</td></tr>
+                <tr><td>Unlimited Users</td></tr>
+                <tr><td>Email Alerts</td></tr>
+                <tr><td>Google Data Studio</td></tr>
+                <tr><td>Tableau Connector</td></tr>
+                <tr><td>Power BI Connector</td></tr>
+                <tr><td>Slack Alerts</td></tr>
               </tbody>
             </table>
           </mat-card-content>
         </mat-card>
-        <button mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
+        <button mat-raised-button 
+        *ngIf="loggedInUser.accountType !== 'Enterprise'"
+        class="mat-bg-success btn-add-to-cart mt-1" 
+        (click)="addToCart('Enterprise Account', enterpriseAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
+
+        <h4 class="text-center" *ngIf="loggedInUser.accountType === 'Enterprise'">Selected Plan</h4>
       </div>
     </div>
   </mat-card-content>

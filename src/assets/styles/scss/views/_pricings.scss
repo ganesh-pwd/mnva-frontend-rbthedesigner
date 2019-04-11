@@ -1,33 +1,33 @@
 /*---- Plans & Pricings -----*/
 .plan-pricing .mat-list-item .mat-list-item-content {
-  display: inline-flex !important;
-  text-align: center;
-  font-size: 12px !important;
-}
-
-.plan-pricing.green{
-	h1,h2{
-		color: #22d9c9;
-	}
-	mat-list-item{
-		border-bottom: 1px solid #22d9c9;
-	}
-}
-
-.plan-pricing.blue{
-	h1,h2{
-		color: #19b4d7;
-	}
-	mat-list-item{
-		border-bottom: 1px solid #19b4d7;
-	}
-}
-
-.plan-pricing.orange{
-	h1,h2{
-		color: #ff9628;
-	}
-	mat-list-item{
-		border-bottom: 1px solid #ff9628;
-	}
-}
+	display: inline-flex !important;
+	text-align: center;
+	font-size: 12px !important;
+  }
+  
+  .plan-pricing.green{
+	  h1,h2{
+		  color: #22d9c9;
+	  }
+	  mat-list-item{
+		  border-bottom: 1px solid #22d9c9;
+	  }
+  }
+  
+  .plan-pricing.blue{
+	  h1,h2{
+		  color: #19b4d7;
+	  }
+	  mat-list-item{
+		  border-bottom: 1px solid #19b4d7;
+	  }
+  }
+  
+  .plan-pricing.orange{
+	  h1,h2{
+		  color: #ff9628;
+	  }
+	  mat-list-item{
+		  border-bottom: 1px solid #ff9628;
+	  }
+  }

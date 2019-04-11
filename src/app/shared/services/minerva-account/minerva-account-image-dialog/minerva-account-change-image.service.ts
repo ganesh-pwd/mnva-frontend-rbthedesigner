@@ -13,13 +13,17 @@ interface confirmData {
 export class MinervaAccountChangeService {
   private image = new BehaviorSubject<string>(null);
   public image$ = this.image.asObservable();
+  public loggedInUser: any;
 
   constructor(private dialog: MatDialog) {
-    this.setImage('assets/images/face-7.jpg')
+    this.loggedInUser = sessionStorage.getItem('loggedInUser')
+      ? JSON.parse(sessionStorage.getItem('loggedInUser')).profile_image
+      : '../assets/images/face-7.jpg';
+
+    this.setImage(this.loggedInUser);
   }
 
-  setImage(image){
+  setImage(image) {
     this.image.next(image);
-
   }
 }

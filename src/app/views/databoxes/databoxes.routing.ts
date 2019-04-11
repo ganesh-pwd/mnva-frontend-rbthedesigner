@@ -1,44 +1,42 @@
 import { Routes } from '@angular/router';
 import { MainDataboxesComponent } from './main-databoxes/main-databoxes.component';
 import { DataboxItemComponent } from './databox-item/databox-item.component';
-import { DataboxFolderComponent } from './databox-folder/databox-folder.component';
 import { DataboxItemInitializeComponent } from './databox-item-initialize/databox-item-initialize.component';
 import { DataboxItemSettingsComponent } from './databox-item-settings/databox-item-settings.component';
 import { DataboxItemConnectivityComponent } from './databox-item-connectivity/databox-item-connectivity.component';
-import { DataboxItemPagesearchComponent } from './databox-item-pagesearch/databox-item-pagesearch.component';
 
 export const DataboxesRoutes: Routes = [
-	{ path: '', component: MainDataboxesComponent },
-	{ path: 'settings', 
-		children: [
-			{ 
-				path: ':id', 
-				component: DataboxItemSettingsComponent
-			},
-			{ 
-				path: 'connect/:id', 
-				component: DataboxItemConnectivityComponent
-			},
-		]
-	},
-	{ 
-		path: ':folder', 
-		component: DataboxFolderComponent
-	},
-	{ 
-		path: ':folder/page-search/:id', 
-		component: DataboxItemPagesearchComponent
-	},
-	{ 
-		path: ':folder/:id/initialize', 
-		component: DataboxItemInitializeComponent
-	},
-	{ 
-		path: ':folder/:id', 
-		component: DataboxItemComponent
-	},
-	{ 
-		path: ':folder/:id/:page', 
-		component: DataboxItemComponent
-	},
+  { path: '', component: MainDataboxesComponent },
+  { path: 'create-databox/:id', component: DataboxItemSettingsComponent },
+  { path: 'edit-query/:id', component: DataboxItemSettingsComponent },
+  {
+    path: 'settings',
+    children: [
+      /*
+      //temporary remove databoxes/settings/id and replaced with create and edit databox
+
+      {
+        path: ':id',
+        component: DataboxItemSettingsComponent
+      },
+
+      */
+      {
+        path: 'connect/:id',
+        component: DataboxItemConnectivityComponent
+      }
+    ]
+  },
+  {
+    path: ':id',
+    component: DataboxItemComponent
+  },
+  {
+    path: ':id/:page',
+    component: DataboxItemComponent
+  },
+  {
+    path: ':id/initialize',
+    component: DataboxItemInitializeComponent
+  }
 ];

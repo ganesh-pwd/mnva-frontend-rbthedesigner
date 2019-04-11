@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { DataboxDB } from '../fake-db/databox-items';
-import { DataboxFolderDB } from '../fake-db/databox-folders';
 import { TemplateGalleryDB } from '../fake-db/template-gallery';
+import { TemplateGalleryService } from '../services/template-gallery/template-gallery.service';
 
 interface IMenuItem {
   type: string;       // Possible values: link/dropDown/icon/separator/extLink
@@ -29,91 +29,63 @@ interface IBadge {
 
 @Injectable()
 export class NavigationService {
+  private templateGalleryReq: Subscription;
+
   databox_items: any[];
-  databox_folder: any[];
   template_gallery: any[];
+  databoxDB: any;
 
-  constructor() {
+  constructor(private templateGalleryService: TemplateGalleryService) {
     const databoxDB = new DataboxDB();
-    const databoxFolderDB = new DataboxFolderDB();
-    const templateGalleryDB = new TemplateGalleryDB();
+    //const templateGalleryDB = new TemplateGalleryDB();
 
-    this.databox_items = JSON.parse(sessionStorage.getItem('databox_item')) ||  databoxDB.databox_items;
-    this.databox_folder = JSON.parse(sessionStorage.getItem('databox_folder')) || databoxFolderDB.databox_folders;
-    this.template_gallery = templateGalleryDB.template_gallery_type;
+    this.databoxDB = databoxDB;
+    //this.template_gallery = templateGalleryDB.template_gallery_type;
 
+    // filter template gallery by currently logged in user
+    this.templateGalleryReq = templateGalleryService.getAllItems()
+    .subscribe(result => this.template_gallery = result.map(el => el));
   }
 
-  // initialize databox menu items
-  initDataboxItems(databox_item_rows): any[] {
-    return databox_item_rows.reduce((result, el) => {
-      result[el.folder] = result[el.folder] || [];
+  // initialize databox without folders menu items
+  initDataboxWithoutFolders(): any[] {
+    const databox_items = JSON.parse(sessionStorage.getItem('databox_item')) || this.databoxDB.databox_items;
 
-      result[el.folder].push({
-          name: `<span class="databox-name">${el.databox_name}</span>
-                <br> <p>${el.datasource} | ${el.location}</p>`,
-          state: el.first_create ? `${el._id}/initialize` : `${el._id}`
-      });
-
-      return result;
-    }, {});
-  }
-
-  // initialize databox folders menu items
-  initDataboxFolders(folder_rows, databox_items): any[] {
-    return folder_rows.reduce((result, el) => {
-      result = result || [];
-
-      if (el.databoxes.length <= 0) {
-        result.push({
-          name: el.folder,
-          state: `${el.folder.replace(/\s/g, '-')}`,
-          type: 'dropDown',
-          sub: []
-        });
-      } else {
-        result.push({
-          name: el.folder,
-          type: 'dropDown',
-          state: `${el.folder.replace(/\s/g, '-')}`,
-          sub: [
-            ...databox_items[el.folder]
-          ]
-        });
-      }
-
-      return result;
-    }, []);
+    return databox_items.map(el => {
+      return {
+        name: el.databox_name,
+        state: `${el._id}`,
+        type: 'dropDown'
+      };
+    });
   }
 
   initializeGallery(gallery) {
-    return gallery.reduce((result, el) => {
-      result = result || [];
+    if (gallery) {
+      return gallery.reduce((result, el) => {
+        result = result || [];
 
-      result.push({
-          name: el.type,
-          state: `${el.link}`
-      })
+        result.push({
+            name: el.type,
+            state: `${el.link}`
+        });
 
-      return result;
-    }, []);
+        return result;
+      }, []);
+    } else return []
   }
 
   // get databoxes dynamically
   getNavigationSidebar() {
-    const databox_item_rows   = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
-    const databox_folder_rows = JSON.parse(sessionStorage.getItem('databox_folder')) || this.databox_folder;
-    const databoxItems = this.initDataboxItems(databox_item_rows);
-    const databoxMenu  = this.initDataboxFolders(databox_folder_rows, databoxItems);
     const template_gallery = this.initializeGallery(this.template_gallery);
 
     const arr = [{
         name: 'Databoxes',
-        type: 'dropDown',
-        tooltip: 'Acocunt Type',
+        type: 'link',
+        tooltip: 'Databoxes',
         icon: 'widgets',
         state: 'databoxes',
-        sub: [...databoxMenu]
+        image_icon: '../assets/images/icon-databox.png'
       },
       {
         name: 'Template Gallery',
@@ -121,6 +93,7 @@ export class NavigationService {
         tooltip: 'charts',
         icon: 'pie_chart',
         state: 'template-gallery',
+        image_icon: '../assets/images/icon-gallery.png',
         sub: [...template_gallery]
       },
       {
@@ -129,10 +102,11 @@ export class NavigationService {
         tooltip: 'shopping_cart',
         icon: 'shopping_cart',
         state: 'products',
+        image_icon: '../assets/images/icon-products.png',
         sub: [
           { name: 'Account Type', state: 'account-type' },
           { name: 'Algorithm Credit', state: 'algorithm-credit' },
-          { name: 'Account Features', state: 'account-feautures' },
+          { name: 'Mentions Credit', state: 'mentions-credit' },
           { name: 'Licenses', state: 'licenses' },
           { name: 'Advanced Templates', state: 'advanced-templates' },
           { name: 'Media Recordings', state: 'media-recordings' }

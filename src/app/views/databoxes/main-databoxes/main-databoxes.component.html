@@ -9,15 +9,14 @@
   <div fxFlex="100" fxFlex.gt-xs="33">
     <button
       mat-raised-button
-      class="mat-bg-success"
-      (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
+      class="mat-bg-success" (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
       Create Databox
     </button>
   </div>  
   <div fxFlex="100" fxFlex.gt-xs="33">
     <div class="product-search-wrap">
       <form>
-        <input type="text" name="searchProduct" placeholder="Search databoxes, datasource or query" class="product-search default-bg full-width">
+        <input type="text" name="searchProduct" placeholder="Search databoxes, datasource or query" class="product-search default-bg full-width" [(ngModel)]="databoxSearch">
       </form>
     </div>
   </div>  
@@ -25,11 +24,11 @@
 
 <hr>
 <div fxLayout="row" fxLayoutWrap="wrap" >
-  <div fxFlex="100" fxFlex.gt-xs="33" *ngFor="let data of databoxes" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+  <div fxFlex="100" fxFlex.gt-xs="33" *ngFor="let data of databoxes | MenuFilter: databoxSearch" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
     <mat-card class="p-0">
-      <mat-card-header class="m-0 p-1">
-      	<mat-card-title class="mat-color-primary" (click)="navigateToFolder(data.folder)">{{data.databox_name}}</mat-card-title>
-      	<mat-card-subtitle (click)="navigateToDatabox(data.folder, data._id, data.first_create)">{{data.datasource}} | {{data.location}}</mat-card-subtitle>
+      <mat-card-header class="m-0 p-1" (click)="navigateToDatabox(data._id, data.first_create, data.status)">
+      	<mat-card-title class="" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.databox_name}}</mat-card-title>
+      	<mat-card-subtitle (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.datasource}} | {{data.location}}</mat-card-subtitle>
 
       	<span fxFlex></span>
       	<button mat-icon-button [matMenuTriggerFor]="userMenu" class="">
@@ -43,7 +42,7 @@
 
       <mat-divider></mat-divider>
 
-      <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)" class="m-0 p-1">
+      <mat-card-content (click)="navigateToDatabox(data._id, data.first_create, data.status)" class="m-0 p-1">
         <div>
             <div class="mt-1">
               <div>
@@ -69,23 +68,23 @@
       <mat-divider></mat-divider>
       <br>
       <mat-card-actions class="m-0 p-05">
-      	<h4 class="mat-h4">Status:
-          <span [ngClass]="
-              data.status === 'Active' ? 'databox-active' :
-              data.status === 'Paused' ? 'databox-paused':
-              data.status === 'Draft'? 'databox-draft' :
-              ''"> {{data.status}}
-          </span>
-        </h4>
-        <span fxFlex></span>
-        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Pause Your Databox', 'Are you sure you want to pause your databox. Data will stop comming into your Databox, and mentions will stop being deducted from your plan.', false)">
-        <span class="mat-color-gray fz-12">On/Off</span>
-        </mat-slide-toggle>
+      	<app-slide-toggle [id]="data._id"></app-slide-toggle>
       </mat-card-actions>
     </mat-card>
+  </div>
+  <div class="no-databoxes">
+    <div fxLayout="column" fxlayoutalign="center center" class="text-center" *ngIf="databoxes?.length == 0">
+      <h2>There are no databoxes. Please create one.</h2>
+      <div fxFlex="100">
+        <button
+          mat-raised-button
+          class="mt-1 mat-bg-success"
+          (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
+          Create Databox
+        </button>
+      </div> 
+    </div>
   </div>
 </div>
 <br>
 <br>
-
-

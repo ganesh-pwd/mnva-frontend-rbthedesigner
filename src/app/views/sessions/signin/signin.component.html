@@ -33,7 +33,7 @@
                           value="">
                       </mat-form-field>
                       <small 
-                        *ngIf="signinForm.controls['username'].hasError('required') && signinForm.controls['username'].touched" 
+                        *ngIf="!signinForm.controls['username'].valid && signinForm.controls['username'].touched" 
                         class="form-error-msg"> Username is required </small>
                     </div>
 
@@ -48,16 +48,18 @@
                           value="">
                       </mat-form-field>
                       <small 
-                        *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched" 
+                        *ngIf="!signinForm.controls['password'].valid && signinForm.controls['password'].touched" 
                         class="form-error-msg"> Password is required </small>
                     </div>
                     
-                    <button mat-raised-button class="mat-primary full-width mb-1" [disabled]="signinForm.invalid">Sign in</button>
-                    <div class="text-center">
+                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="!signinForm.valid">Sign in</button>
+                    <div class="text-center"><br>
                       <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
                       <span fxFlex></span>
                       <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Create a new account</a>
                     </div>
+
+                    <br>
 
                     <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button>
 
@@ -65,13 +67,13 @@
 
                     <button mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Google</button>
 
-                    <div class="pb-1">
+                    <div class="pb-1 text-center">
                       <mat-checkbox
                         name="agreed"
-                        [formControl]="signupForm.controls['agreed']"
+                        [formControl]="signinForm.controls['agreed']"
                         class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
                         <small 
-                          *ngIf="signupForm.controls['agreed'].hasError('agreed') && signupForm.controls['agreed'].touched" 
+                          *ngIf="!signinForm.controls['agreed'].valid && signinForm.controls['agreed'].touched" 
                           class="form-error-msg"> You must agree to the terms and conditions 
                         </small>
                     </div>

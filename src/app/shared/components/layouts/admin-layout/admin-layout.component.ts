@@ -1,49 +1,52 @@
-import { Component, OnInit, AfterViewInit, ViewChild, HostListener } from '@angular/core';
-import { 
-  Router, 
-  NavigationEnd, 
-  RouteConfigLoadStart, 
-  RouteConfigLoadEnd, 
-  ResolveStart, 
-  ResolveEnd 
+import { Component, OnInit, AfterViewInit, HostListener, OnDestroy } from '@angular/core';
+import {
+  Router,
+  NavigationEnd,
+  RouteConfigLoadStart,
+  RouteConfigLoadEnd,
+  ResolveStart,
+  ResolveEnd
 } from '@angular/router';
-import { Subscription } from "rxjs";
-import { MatSidenav } from '@angular/material';
-import { MediaChange, ObservableMedia } from "@angular/flex-layout";
+import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../services/theme.service';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { LayoutService } from '../../../services/layout.service';
 import { filter } from 'rxjs/operators';
+import { UserService } from '../../../services/auth/user-services'
 
 @Component({
   selector: 'app-admin-layout',
-  templateUrl: './admin-layout.template.html'
+  templateUrl: './admin-layout.template.html',
+  styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent implements OnInit, AfterViewInit {
-  public isModuleLoading: Boolean = false;
+export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+  private reqUser: Subscription;
   private moduleLoaderSub: Subscription;
   private layoutConfSub: Subscription;
   private routerEventSub: Subscription;
   private mediaSub: Subscription;
+
   // private sidebarPS: PerfectScrollbar;
   private bodyPS: PerfectScrollbar;
   private headerFixedBodyPS: PerfectScrollbar;
+
   public layoutConf: any = {};
+  public isModuleLoading: Boolean = false;
 
   constructor(
     private router: Router,
     public translate: TranslateService,
     public themeService: ThemeService,
-    private layout: LayoutService,
-    private media: ObservableMedia
+    private userService: UserService,
+    private layout: LayoutService
   ) {
     // Close sidenav after route change in mobile
     this.routerEventSub = router.events.pipe(filter(event => event instanceof NavigationEnd))
     .subscribe((routeChange: NavigationEnd) => {
       this.layout.adjustLayout({ route: routeChange.url });
     });
-    
+
     // Translator init
     const browserLang: string = translate.getBrowserLang();
     translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
@@ -61,18 +64,23 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         this.isModuleLoading = false;
       }
     });
+
+    // temporary select logged in user
+    this.selectUserAsLogged();
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.layout.adjustLayout(event);
   }
-  
+
   ngAfterViewInit() {
     this.layoutConfSub = this.layout.layoutConf$.subscribe(change => {
-      this.initBodyPS(change)
-    })
+      this.initBodyPS(change);
+    });
   }
-  initBodyPS(layoutConf:any = {}) {
+
+  initBodyPS(layoutConf: any = {}) {
     if(layoutConf.navigationPos === 'side' && layoutConf.topbarFixed) {
       if (this.bodyPS) this.bodyPS.destroy();
       if (this.headerFixedBodyPS) this.headerFixedBodyPS.destroy();
@@ -89,27 +97,43 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
       this.scrollToTop('.main-content-wrap');
     }
   }
+
   scrollToTop(selector: string) {
-    if(document) {
-      let element = <HTMLElement>document.querySelector(selector);
+    if (document) {
+      const element = <HTMLElement>document.querySelector(selector);
       element.scrollTop = 0;
     }
   }
+
+  /* TEMPORARY SELECT USER */
+  selectUserAsLogged() {
+    this.reqUser = this.userService.selectUser()
+    .subscribe((result) => {
+      let session = sessionStorage.getItem('loggedInUser');
+        if (!session) {
+          sessionStorage.setItem('loggedInUser', JSON.stringify(result[0]));
+          window.location.reload();
+        }
+    });
+
+  }
+
+
   ngOnDestroy() {
-    if(this.moduleLoaderSub) {
-      this.moduleLoaderSub.unsubscribe()
+    if (this.moduleLoaderSub) {
+      this.moduleLoaderSub.unsubscribe();
     }
-    if(this.layoutConfSub) {
-      this.layoutConfSub.unsubscribe()
+    if (this.layoutConfSub) {
+      this.layoutConfSub.unsubscribe();
     }
-    if(this.routerEventSub) {
-      this.routerEventSub.unsubscribe()
+    if (this.routerEventSub) {
+      this.routerEventSub.unsubscribe();
     }
   }
+
   closeSidebar() {
     this.layout.publishLayoutChange({
       sidebarStyle: 'closed'
-    })
+    });
   }
-  
 }

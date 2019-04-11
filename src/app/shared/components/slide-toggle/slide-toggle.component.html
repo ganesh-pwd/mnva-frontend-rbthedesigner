@@ -1,0 +1,20 @@
+<h4 class="mat-h4 mr-1">
+  Status:
+  <span [ngClass]="status === 'Active'? 'databox-active'
+          : status === 'Paused' ? 'databox-paused'
+          : status === 'Draft' ? 'databox-draft'
+          : ''
+      ">
+    {{ status }}
+  </span>
+</h4>
+<span fxFlex></span>
+<mat-slide-toggle
+  color="primary"
+  class="mb-1"
+  [(ngModel)]="selectedOption"
+  *ngIf="status != 'Draft'"
+  (click)="openDialog()"
+>
+  <span class="mat-color-gray fz-12">On/Off</span>
+</mat-slide-toggle>

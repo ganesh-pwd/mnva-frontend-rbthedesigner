@@ -3,7 +3,7 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small class="fw-400">    Account / Users </small>
+      <small>  Account / Users </small>
     </h1>
   </div>
 </div>
@@ -17,8 +17,8 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div>
-          <h1 class="mat-h1 fw-400">Standard</h1>
+        <div class="pb-1">
+          <h1 class="mat-h1 fw-400">{{loggedInUser.accountType}}</h1>
           <p><a class="text-muted mat-color-primary">Upgrade your plan</a></p>
         </div>
       </mat-card-content>
@@ -64,7 +64,7 @@
       </mat-card-content>
     </mat-card>
   </div>  
-</div>
+</div>  
 <!-- Account Settings -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
@@ -80,9 +80,9 @@
       <br>
       <div class="profile-nav">
         <mat-nav-list>
-          <mat-list-item routerLink="/accounts/minerva-news" routerLinkActive="list-item-active">
+          <mat-list-item routerLink="/accounts/minerva-notifications" routerLinkActive="list-item-active">
             <mat-icon>home</mat-icon>
-            News
+            Notifications
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
@@ -106,49 +106,13 @@
 	<!-- Users -->
 	<div class="users" fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 		<div fxLayout="row" fxLayoutWrap="wrap">
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2" *ngFor="let user of data">
 				<mat-card>
 					<mat-card-header>
 
 					  	<mat-card-title class="mat-color-primary">
-					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
-					  		<h4 class="mat-h4 mt-1 ml-1">Snow Benton</h4>
-					  	</mat-card-title>
-
-					  	<span fxFlex></span>
-					  	<button mat-icon-button [matMenuTriggerFor]="userMenu">
-					      	<mat-icon class="">more_vert</mat-icon>
-					  	</button>
-					  	<mat-menu #userMenu="matMenu">
-					      	<button mat-menu-item (click)="openDialog('Edit User')">
-					      	Edit User</button>
-					      	<button mat-menu-item>Delete User</button>
-					  	</mat-menu>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<br>
-					<mat-card-content>
-						<p class="user-details">
-							<mat-icon>account_circle</mat-icon> Administrator
-						</p><br>
-						<p class="user-details">
-							<mat-icon>email</mat-icon> snowbenton@mnrva
-						</p><br>
-						<p class="user-details">
-							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
-						</p><br>
-					</mat-card-content>
-				</mat-card>
-			</div>
-
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
-				<mat-card>
-					<mat-card-header>
-
-					  	<mat-card-title class="mat-color-primary">
-					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
-					  		<h4 class="mat-h4 mt-1 ml-1">Snow Benton</h4>
+					  		<img class="user-image" src="{{user.profile_image}}" alt="">
+					  		<h4 class="mat-h4 mt-1 ml-1">{{user.name}}</h4>
 
 					  	</mat-card-title>
 
@@ -167,62 +131,29 @@
 					<br>
 					<mat-card-content>
 						<p class="user-details">
-							<mat-icon>account_circle</mat-icon> Administrator
+							<mat-icon>account_circle</mat-icon> {{user.user_type}}
 						</p><br>
 						<p class="user-details">
-							<mat-icon>email</mat-icon> snowbenton@mnrva
+							<mat-icon>email</mat-icon> {{user.email}}
 						</p><br>
 						<p class="user-details">
-							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
+							<mat-icon>calendar_today</mat-icon> Member since: 
+							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}
 						</p><br>
 					</mat-card-content>
 				</mat-card>
-			</div>
-
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
-				<mat-card>
-					<mat-card-header>
-
-					  	<mat-card-title class="mat-color-primary">
-					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
-					  		<h4 class="mat-h4 mt-1 ml-1">Snow Benton</h4>
-
-					  	</mat-card-title>
-
-					  	<span fxFlex></span>
-					  	<button mat-icon-button [matMenuTriggerFor]="userMenu">
-					      	<mat-icon class="">more_vert</mat-icon>
-					  	</button>
-					  	<mat-menu #userMenu="matMenu">
-					      	<button mat-menu-item (click)="openDialog('Edit User')">
-					      	Edit User</button>
-					      	<button mat-menu-item>Delete User</button>
-					  	</mat-menu>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<br>
-					<mat-card-content>
-						<p class="user-details">
-							<mat-icon>account_circle</mat-icon> Administrator
-						</p><br>
-						<p class="user-details">
-							<mat-icon>email</mat-icon> snowbenton@mnrva
-						</p><br>
-						<p class="user-details">
-							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
-						</p><br>
-					</mat-card-content>
-				</mat-card>
-			</div>
+			</div>	
 		</div>
 		<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
 			<button
 			class="mb-05"
 			color="primary"
 			mat-raised-button
+			[disabled]="data.length === loggedInUser.max_created_users"
 			(click)="openDialog('Add New User')"> Add User
 			</button>
+
+			<p>{{data.length}} / {{loggedInUser.max_created_users}} users remaining</p>
 		</div>
 	</div>
 </div>

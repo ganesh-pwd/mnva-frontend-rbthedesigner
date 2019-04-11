@@ -3,11 +3,12 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small class="fw-400">    Account / Billing </small>
+      <small class="fw-400">   Account / Billing </small>
     </h1>
   </div>
 </div>
 <hr>
+
 <!-- Plan and Credit -->
 <div fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
@@ -17,8 +18,8 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div>
-          <h1 class="mat-h1 fw-400">Standard</h1>
+        <div class="pb-1">
+          <h1 class="mat-h1 fw-400">{{loggedInUser.accountType}}</h1>
           <p><a class="text-muted mat-color-primary">Upgrade your plan</a></p>
         </div>
       </mat-card-content>
@@ -33,7 +34,7 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div>
+        <div class="pb-1">
           <h6>Mentions Remaining</h6>
           <p class="text-muted">3000 mentions remaining</p>
           <mat-progress-bar
@@ -64,7 +65,7 @@
       </mat-card-content>
     </mat-card>
   </div>  
-</div>
+</div>  
 <!-- Account Settings -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
@@ -79,9 +80,9 @@
       <br>
       <div class="profile-nav">
         <mat-nav-list>
-          <mat-list-item routerLink="/accounts/minerva-news" routerLinkActive="list-item-active">
+          <mat-list-item routerLink="/accounts/minerva-notifications" routerLinkActive="list-item-active">
             <mat-icon>home</mat-icon>
-            News
+            Notifications
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
@@ -125,7 +126,7 @@
 				  		  	<!-- Content Product Name -->
 				  		  	<ng-container matColumnDef="product_name">
 				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
-				  		    	<td mat-cell *matCellDef="let row"><p class="m-0" [innerHtml]="row.product_name"></p></td>
+				  		    	<td mat-cell *matCellDef="let row"><p [innerHtml]="row.product_name"></p></td>
 				  		  	</ng-container>
 
 				  		  	<!-- Content Status -->
@@ -140,39 +141,10 @@
 				  		    	<td mat-cell *matCellDef="let row" width="130px">{{row.date_created}}</td>
 				  		  	</ng-container>
 
-				  		  	<!-- Content Auto Renew -->
-				  		  	<ng-container matColumnDef="auto_renew">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Auto Renew</th>
-				  		    	<td mat-cell *matCellDef="let row">
-				  		    		<mat-slide-toggle
-				  			    		*ngIf="row.auto_renew !== 'Renew'
-				  			    		&& row.auto_renew !== 'One Time Purchase';
-				  			    		else showRenew" color="primary" class="mb-1"
-				  			    		[checked]="row.auto_renew">
-				  		    		</mat-slide-toggle>
-
-                      <button
-                        class="mat-bg-green"
-                        mat-raised-button *ngIf="row.auto_renew === 'Renew'">
-                        Renew
-                      </button>
-
-				  		    		<span *ngIf="row.auto_renew === 'One Time Purchase'">
-				  		    			{{row.auto_renew}}
-				  		    		</span>
-				  		    	</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Duration -->
-				  		  	<ng-container matColumnDef="duration">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
-				  		    	<td mat-cell *matCellDef="let row">{{row.duration}}</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Expiration -->
-				  		  	<ng-container matColumnDef="expiration">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Expiration</th>
-				  		    	<td mat-cell *matCellDef="let row">{{row.expiration}}</td>
+				  		  	<!-- Content Period -->
+				  		  	<ng-container matColumnDef="period">
+				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Period</th>
+				  		    	<td mat-cell *matCellDef="let row">{{row.period}}</td>
 				  		  	</ng-container>
 
 				  		  	<ng-container matColumnDef="price">
@@ -325,93 +297,60 @@
 		  			  [pageSize]="10"
 		  			  [pageSizeOptions]="[10, 20, 50, 100]">
 		  			</mat-paginator>
-			  	</mat-tab>
-
-				<!-- Databox Quota -->
-			  	<mat-tab label="Databox Quota">
-				  	<mat-card-content>
-				  		<br>
-				  		<table mat-table #table
-				  		  	[dataSource]="dataSource"
-				  		  	matSort="sort"
-				  		  	class="default-table">
-
-				  		  	<!-- Date Product Type -->
-				  		  	<ng-container matColumnDef="product_type">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Type</th>
-				  		    	<td mat-cell *matCellDef="let row"  width="150px">{{row.product_type}}</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Product Name -->
-				  		  	<ng-container matColumnDef="product_name">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
-				  		    	<td mat-cell *matCellDef="let row"><p [innerHtml]="row.product_name"></p></td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Status -->
-				  		  	<ng-container matColumnDef="status">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-				  		    	<td mat-cell *matCellDef="let row" width="130px">{{row.status}}</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Date Created -->
-				  		  	<ng-container matColumnDef="date_created">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
-				  		    	<td mat-cell *matCellDef="let row" width="130px">{{row.date_created}}</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Auto Renew -->
-				  		  	<ng-container matColumnDef="auto_renew">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Auto Renew</th>
-				  		    	<td mat-cell *matCellDef="let row">
-				  		    		<mat-slide-toggle
-				  			    		*ngIf="row.auto_renew !== 'Renew'
-				  			    		&& row.auto_renew !== 'One Time Purchase';
-				  			    		else showRenew" color="primary" class="mb-1"
-				  			    		[checked]="row.auto_renew">
-				  		    		</mat-slide-toggle>
-
-                      <button
-                        class="mat-bg-green"
-                        mat-raised-button *ngIf="row.auto_renew === 'Renew'">
-                        Renew
-                      </button>
-
-				  		    		<span *ngIf="row.auto_renew === 'One Time Purchase'">
-				  		    			{{row.auto_renew}}
-				  		    		</span>
-				  		    	</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Duration -->
-				  		  	<ng-container matColumnDef="duration">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Duration</th>
-				  		    	<td mat-cell *matCellDef="let row">{{row.duration}}</td>
-				  		  	</ng-container>
-
-				  		  	<!-- Content Expiration -->
-				  		  	<ng-container matColumnDef="expiration">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Expiration</th>
-				  		    	<td mat-cell *matCellDef="let row">{{row.expiration}}</td>
-				  		  	</ng-container>
-
-				  		  	<ng-container matColumnDef="price">
-				  		    	<th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-				  		    	<td mat-cell *matCellDef="let row">${{row.price}}</td>
-				  		  	</ng-container>
-
-				  		  	<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-				  		  	<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-				  		</table>
-
-				  		<mat-paginator #paginator [hidden]="!dataSource"
-				  		  [length]="dataSource.data.length"
-				  		  [pageIndex]="0"
-				  		  [pageSize]="10"
-				  		  [pageSizeOptions]="[10, 20, 50, 100]">
-				  		</mat-paginator>
-				  	</mat-card-content>
-			  	</mat-tab>			
+					</mat-tab>
+					
+					<!-- Databox Quota -->
+					<mat-tab label="Databox Quota">
+						<mat-card-content>
+							<br>
+							<table mat-table #table [dataSource]="dataSource" matSort="sort" class="default-table">
+					
+								<!-- Date Product Type -->
+								<ng-container matColumnDef="product_type">
+									<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Type</th>
+									<td mat-cell *matCellDef="let row" width="150px">{{row.product_type}}</td>
+								</ng-container>
+					
+								<!-- Content Product Name -->
+								<ng-container matColumnDef="product_name">
+									<th mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</th>
+									<td mat-cell *matCellDef="let row">
+										<p [innerHtml]="row.product_name"></p>
+									</td>
+								</ng-container>
+					
+								<!-- Content Status -->
+								<ng-container matColumnDef="status">
+									<th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+									<td mat-cell *matCellDef="let row" width="130px">{{row.status}}</td>
+								</ng-container>
+					
+								<!-- Content Date Created -->
+								<ng-container matColumnDef="date_created">
+									<th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
+									<td mat-cell *matCellDef="let row" width="130px">{{row.date_created}}</td>
+								</ng-container>
+					
+								<!-- Content Period -->
+								<ng-container matColumnDef="period">
+									<th mat-header-cell *matHeaderCellDef mat-sort-header>Period</th>
+									<td mat-cell *matCellDef="let row">{{row.period}}</td>
+								</ng-container>
+					
+								<ng-container matColumnDef="price">
+									<th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+									<td mat-cell *matCellDef="let row">${{row.price}}</td>
+								</ng-container>
+					
+								<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+								<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+							</table>
+					
+							<mat-paginator #paginator [hidden]="!dataSource" [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="10"
+								[pageSizeOptions]="[10, 20, 50, 100]">
+							</mat-paginator>
+						</mat-card-content>
+					</mat-tab>
 			</mat-tab-group>
 		</mat-card>
 	</div>

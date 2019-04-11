@@ -1,14 +1,14 @@
 import { Observable, of } from 'rxjs';
-import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
-import { delay } from 'rxjs/operators';
 import { MainDataboxDialogComponent } from './main-databoxes-dialog.component';
 
-interface confirmData {
+interface ConfirmData {
   title?: string;
   data?: string;
   input?: boolean;
-  folder?: string;
+  update?: boolean;
+  details?: any;
 }
 
 @Injectable({
@@ -18,11 +18,12 @@ export class MainDataboxesDialogService {
   constructor(private dialog: MatDialog) {
   }
 
-  public confirm(data:confirmData = {}): Observable<boolean> {
+  public confirm(data: ConfirmData = {}): Observable<boolean> {
     data.title = data.title || 'Confirm';
     data.data  = data.data || 'Are you sure?';
     data.input = data.input;
-    data.folder = data.folder;
+    data.update = data.update || false;
+    data.details = data.details || {};
 
     let dialogRef: MatDialogRef<MainDataboxDialogComponent>;
     dialogRef = this.dialog.open(MainDataboxDialogComponent, {
@@ -32,7 +33,8 @@ export class MainDataboxesDialogService {
         title: data.title,
         data: data.data,
         input: data.input,
-        folder: data.folder
+        update: data.update,
+        details: data.details
       }
     });
 

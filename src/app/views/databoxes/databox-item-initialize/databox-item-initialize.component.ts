@@ -40,10 +40,6 @@ export class DataboxItemInitializeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getSingleItem();
-    // watch for route change
-    this.req = this.router.events.subscribe((event) => {
-      this.getSingleItem();
-    });
   }
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
@@ -122,12 +118,11 @@ export class DataboxItemInitializeComponent implements OnInit, OnDestroy {
     hopscotch.startTour(tour);
   }
 
-  openDialog(title: string, data: string, input: boolean, folder: string) {
+  openDialog(title: string, data: string, input: boolean) {
     this.mainDataboxesDialogService.confirm({
       title: title,
       data: data,
-      input: input,
-      folder: folder
+      input: input
     }).subscribe((result) => {
       this.selectedOption = result;
     });

@@ -1,147 +1,147 @@
-button{
-	margin-right: 10px !important;
+button {
+  margin-right: 10px !important;
 }
 
-mat-card-content{
-	padding-left: -30px !important;
-
+mat-card-content {
+  padding-left: -30px !important;
 }
 
-mat-card-actions{
-	padding: 0 5% !important;
-
+mat-card-actions {
+  padding: 0 5% !important;
 }
 
-.databox-details{
-	padding: 2% 8px;
+.databox-details {
+  padding: 2% 8px;
 }
 
-.minerva-logo{
-	width: 250px;
+.minerva-logo {
+  width: 250px;
 
-	margin-top: 2%;
+  margin-top: 2%;
 }
 
-h5{
-	padding-top: 2%;
+h5 {
+  padding-top: 2%;
 }
 
-.bottom-data{
-	margin-left: 1%;
-	margin-right: 1%;
+.bottom-data {
+  margin-left: 1%;
+  margin-right: 1%;
 
-	form{
-		margin-top: 2%;
-		margin-left: 5%;
-	}
+  form {
+    margin-top: 2%;
+    margin-left: 5%;
+  }
 
-	button{
-		margin-left: 5%;
-	}
+  button {
+    margin-left: 5%;
+  }
 
-	.download-csv{
-		margin-left: 1% !important;
-	}
+  .download-csv {
+    margin-left: 1% !important;
+  }
 }
 
-
-.mat-cell{
-	padding: 1% 1%;
+.mat-cell {
+  padding: 1% 1%;
 }
 
-.align-right{
-	text-align: right;
-	display:block;
-	width: 100%;
-	padding-top: 13px;
-	padding-bottom: 1px;
+.align-right {
+  text-align: right;
+  display: block;
+  width: 100%;
+  padding-top: 13px;
+  padding-bottom: 1px;
 }
 
-
-.page-search{
-	>div {
-		margin: 10px 0px;
-		padding: 0px 10px;
-		p{
-			margin: 0px;
-		}
-	}
+.mat-h1 {
+  width: 100% !important;
 }
 
-.table-foot{
-	background: white;
-
-	button{
-		margin-top: 10px;
-		margin-left: 10px;
-		margin-bottom: 10px;
-	}
-
-	p{
-		margin-top: 15px;
-		margin-left: 20px;
-	}
-
-	.paginate{
-		border: none !important;
-		color: gray;
-		cursor: pointer;
-		cursor: hand;
-		margin-right: 0px;
-		margin-left:  0px;
-		background: rgba(0,0,0,0);
-		padding: 0 13px !important;
-
-		&:hover{
-			border-radius: 70%;
-			background: rgba(242,242,242,0.5);
-			color: gray;
-		}
-
-		.disabled{
-			color: whitesmoke !important;
-		}
-	}
+.page-search {
+  > div {
+    margin: 10px 0px;
+    padding: 0px 10px;
+    p {
+      margin: 0px;
+    }
+  }
 }
 
-.see-databox-search{
-	&:hover{
-		text-decoration: underline !important;
-	}
+.table-foot {
+  background: white;
+
+  button {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-top: 15px;
+    margin-left: 20px;
+  }
+
+  .paginate {
+    border: none !important;
+    color: gray;
+    cursor: pointer;
+    cursor: hand;
+    margin-right: 0px;
+    margin-left: 0px;
+    background: rgba(0, 0, 0, 0);
+    padding: 0 13px !important;
+
+    &:hover {
+      border-radius: 70%;
+      background: rgba(242, 242, 242, 0.5);
+      color: gray;
+    }
+
+    .disabled {
+      color: whitesmoke !important;
+    }
+  }
 }
 
-.query-category{
-	left: 30px;
-	bottom: 50px;
-	position: absolute;
+.see-databox-search {
+  &:hover {
+    text-decoration: underline !important;
+  }
 }
 
-.algorithm-header{
-	top: 7%;
-	margin-left: 30px;
-	font-size: 18px;
-	position: absolute;
+.query-category {
+  left: 30px;
+  bottom: 50px;
+  position: absolute;
 }
 
-.category-header{
-	font-size: 18px;
+.algorithm-header {
+  top: 7%;
+  margin-left: 30px;
+  font-size: 18px;
+  position: absolute;
 }
 
-.icon-header{
-	font-size: 35px;
+.category-header {
+  font-size: 18px;
 }
 
-.airplane{
-	transform: rotate(45deg); 
-	transition: transform 2s;
+.icon-header {
+  font-size: 35px;
 }
 
-.mentions{
-	margin-right: 2%;
+.airplane {
+  transform: rotate(45deg);
+  transition: transform 2s;
 }
 
-.credits{
-	color: green;
+.mentions {
+  margin-right: 2%;
+}
+
+.credits {
+  color: green;
 }
 
 .truncate {
@@ -151,29 +151,42 @@ h5{
   text-overflow: ellipsis;
 }
 
-.faq{
-	margin-top: 4%;
+.faq {
+  margin-top: 4%;
 
-	.faq-header{
-		padding-left: 2%;
-	}
+  .faq-header {
+    padding-left: 2%;
+  }
 
-	.faq-inner{
-		padding: 0 5%;
-	}
+  .faq-inner {
+    padding: 0 5%;
+  }
 }
 
-.fixed-height{
-	max-height: 170px;
+.fixed-height {
+  height: 170px !important;
+  max-height: 170px;
 }
 
 mat-icon.download{
-	margin-top: -15px;
-	margin-right: 15px;
-	height: 15px;
-	width: 15px;
-	font-size: 18px;
-	position:absolute;
-	top: 15px;
-	left:-15px;
+  margin-top: -15px;
+  margin-right: 15px;
+  height: 15px;
+  width: 15px;
+  font-size: 18px;
+  position:absolute;
+  top: 15px;
+  left:-15px;
+}
+
+.not-find-link {
+  &:hover {
+    text-decoration: underline !important;
+    cursor: pointer !important;
+  }
+}
+
+.full-width {
+  display: flex;
+  flex-direction: row-reverse;
 }

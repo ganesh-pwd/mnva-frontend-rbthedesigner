@@ -10,114 +10,100 @@ export interface DataTableItem {
   content: string;
   paren: string;
   author: string;
-  like: number;
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: DataTableItem[] = [
+const DataboxResultItem: DataTableItem[] = [
   {
     id: 1, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 2, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 3, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 4, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 5, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 6, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 7, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 8, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 9, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 10, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 11, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 12, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
   {
     id: 13, 
     date: '15-07-2018', 
     content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     paren: 'null',
-    author: 'Sabores a lo Tico',
-    like: 100
+    author: 'Sabores a lo Tico'
   },
 ];
 
@@ -127,7 +113,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class DataTableDataSource extends DataSource<DataTableItem> {
-  data: DataTableItem[] = EXAMPLE_DATA;
+  data: DataTableItem[] = DataboxResultItem;
 
   constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();

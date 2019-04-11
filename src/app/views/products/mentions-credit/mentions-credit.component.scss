@@ -1,0 +1,58 @@
+.full-width {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  small{
+    mat-icon{
+      cursor: pointer;
+      font-size: 18px;
+      color: gray;
+      margin-left: 1%;
+    }
+  
+    font-size: 15px !important;
+  
+  }
+  
+  table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 99%;
+  }
+  
+  td, th {
+    border-top: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+  }
+  
+  .action{
+    background-color: whitesmoke;
+    td{
+      font-weight: 600;
+      font-size: 18px;
+      padding: 30px !important;
+    }
+  }
+  
+  .mat-form-field {
+    text-align: center;
+  }
+  
+  mat-icon{
+    cursor: pointer;
+  }
+  
+  mat-form-field{
+    padding-top: 10px;
+  }
+  
+  .pt-30{
+    padding: 30px;
+  }
+  
+  .mention{
+    font-size: 15px !important;
+  }

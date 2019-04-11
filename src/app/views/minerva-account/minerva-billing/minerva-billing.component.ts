@@ -30,8 +30,10 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   dataSourceBillingHistory: MinervaBillingHistoryDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['product_type', 'product_name', 'status', 'date_created', 'auto_renew', 'duration', 'expiration', 'price'];
+  displayedColumns = ['product_type', 'product_name', 'status', 'date_created', 'period', 'price'];
   displayedColumnsBillingHistory = ['payment_date', 'invoice_number', 'product', 'amount', 'download'];
+
+  public loggedInUser;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -39,6 +41,7 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
   }
 
   ngOnInit() {

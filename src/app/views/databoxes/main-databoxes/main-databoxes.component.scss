@@ -4,6 +4,7 @@ button{
 
 mat-card-header{
 	padding-bottom: 0px !important;
+	cursor: pointer;
 }
 
 mat-card-content{
@@ -46,6 +47,13 @@ mat-card-title{
 
 }
 
-.product-search-wrap .product-search{
-  font-family: "Roboto",Helvetica Neue,sans-serif;
+.no-databoxes {
+	width: 100%;
+	div {
+		height: calc(100vh - 240px);
+	}
+}
+
+.product-search-wrap .product-search {
+	font-family: "Roboto",Helvetica Neue,sans-serif;
 }

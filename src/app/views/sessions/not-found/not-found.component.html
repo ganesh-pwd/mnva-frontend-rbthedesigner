@@ -3,21 +3,26 @@
     <div class="fix">
       <mat-icon class="error-icon" color="warn">error</mat-icon>
       <div class="error-text">
-        <h1 class="error-title">404</h1>
-        <div class="error-subtitle">Page Not Found!</div>
+        <h1 class="error-title">500</h1>
+        <br />
+        <div class="error-subtitle">
+          Oops! There has been an error with your request. Please check the
+          request and your URL properly.
+        </div>
+
+        <div class="error-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            class="mb-1 mr-05"
+            [routerLink]="['/databoxes']"
+          >
+            Back to Dashboard
+          </button>
+
+          <button mat-raised-button color="warn">Report this Problem</button>
+        </div>
       </div>
-    </div>
-
-    <div class="error-actions">
-      <button
-      mat-raised-button
-      color="primary"
-      class="mb-1 mr-05"
-      [routerLink]="['/databoxes']">Back to Dashboard</button>
-
-      <button
-      mat-raised-button
-      color="warn">Report this Problem</button>
     </div>
   </div>
 </div>

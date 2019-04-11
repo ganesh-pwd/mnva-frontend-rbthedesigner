@@ -1,0 +1,33 @@
+mat-select {
+  text-align: center !important;
+}
+
+.branding a {
+  line-height: 0;
+}
+
+.app-user-photo {
+  z-index: 9;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0, 0, 0, 0.7);
+    &:before {
+      content: "  Change  ";
+      font-size: 12px;
+      margin-left: 1px;
+      width: 65px;
+      padding-left: 4px;
+      padding-right: 4px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border-bottom-right-radius: 500px;
+      border-bottom-left-radius: 500px;
+      color: white;
+      position: absolute;
+      top: 152px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+  width: 85px;
+  height: 85px;
+}

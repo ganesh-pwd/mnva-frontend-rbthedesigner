@@ -35,17 +35,48 @@
     <mat-icon>notifications</mat-icon>
     <span class="notification-number mat-bg-warn">{{notificationCount}}</span>
   </button>
-  <h4 class="topbar-button-right">Stephan Trussart</h4>  
+  <h4 class="topbar-button-right">{{userFullName}}</h4>  
   <!-- Top left user menu -->
   <button mat-icon-button [matMenuTriggerFor]="accountMenu" class="topbar-button-right img-button">
     <img src="{{userImage}}" alt="">
   </button>
   <mat-menu #accountMenu="matMenu">
-    <button mat-menu-item [routerLink]="['/accounts/minerva-news']">
+    <div class="account-type p16">
+      <span> <strong> Basic </strong></span>
+      <a href="#" class="menu-link">Upgrade </a>
+    </div>
+    <div class="mentions-remaining p16">
+      <p>0 Mentions Remaining</p>
+      <app-mentions-progress-bar></app-mentions-progress-bar>
+      <p class="mt-1">Your quota resets in 10 days</p>
+    </div>
+    <hr>
+    <div class="algorithm-credit p16 mt-1">
+      <span> 
+        <strong> Algorithm Credit </strong>
+      </span>
+      <a href="#" class="menu-link">Buy More </a>
+    </div>
+    <p class="credits p16 mt-1">$100</p>
+    <hr>
+    <button mat-menu-item [routerLink]="['/accounts/minerva-notifications']">
+      <mat-icon>home</mat-icon>
+      <span>Notifications</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/accounts/settings']">
       <mat-icon>settings</mat-icon>
       <span>Account Settings</span>
     </button>
-    <button mat-menu-item [routerLink]="['/sessions/signin']">
+    <button mat-menu-item [routerLink]="['/accounts/users']">
+      <mat-icon>group</mat-icon>
+      <span>Users</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/accounts/billings']">
+      <mat-icon>monetization_on</mat-icon>
+      <span>Billing</span>
+    </button>
+    <hr>
+    <button mat-menu-item (click)="signOut()">
       <mat-icon>exit_to_app</mat-icon>
       <span>Sign out</span>
     </button>

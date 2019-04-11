@@ -17,6 +17,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   private req: Subscription;
 
   userImage: string;
+  public loggedInUser;
 
   constructor(
     private minervaAccountDialogService: MinervaAccountDialogService,
@@ -24,6 +25,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     private minervaAccountChangeService: MinervaAccountChangeService
     ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
   }
 
   ngOnInit() {

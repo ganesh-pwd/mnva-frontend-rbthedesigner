@@ -10,78 +10,64 @@ export interface DataTableItem {
   product_name: string;
   status: string;
   date_created: string;
-  auto_renew: any;
-  duration: string;
-  expiration: string;
+  period: string;
   price: number;
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: DataTableItem[] = [
   {
-    id: 0, 
+    id: 0,
     product_type: 'Databox',
     product_name: 'Banco Popular <br>Facebook | Costa Rica',
     status: 'No Configuration',
     date_created: '12 July 2018',
-    auto_renew: true,
-    duration: '3 Months',
-    expiration: '10 days',
+    period: 'Monthly',
     price: 70,
   },
   {
-    id: 1, 
+    id: 1,
     product_type: 'Databox',
     product_name: 'Banco Popular <br>Twitter | Costa Rica',
     status: 'No Configuration',
     date_created: '12 July 2018',
-    auto_renew: true,
-    duration: '3 Months',
-    expiration: '10 days',
+    period: 'Credit',
     price: 70,
   },
   {
-    id: 2, 
+    id: 2,
     product_type: 'Databox',
     product_name: 'Banco Popular <br>Web | Costa Rica',
     status: 'Data Refreshing',
     date_created: '12 July 2018',
-    auto_renew: true,
-    duration: '3 Months',
-    expiration: '10 days',
+    period: 'Credit',
     price: 70,
   },
   {
-    id: 3, 
+    id: 3,
     product_type: 'Databox',
     product_name: '',
     status: 'Expired',
     date_created: '12 July 2018',
-    auto_renew: 'Renew',
-    duration: '3 Months',
-    expiration: 'Expired',
+    period: 'Monthly',
     price: 70,
   },
   {
-    id: 4, 
+    id: 4,
     product_type: 'Account Features',
     product_name: '15 Users',
     status: 'Ready',
     date_created: '12 July 2018',
-    auto_renew: 'One Time Purchase',
-    duration: '',
-    expiration: '',
+    period: 'Credit',
     price: 30,
   },
   {
-    id: 5, 
+    id: 5,
     product_type: 'Algorithms',
     product_name: 'Algorithm Credits',
     status: 'Ready',
     date_created: '12 July 2018',
-    auto_renew: '',
-    duration: '',
-    expiration: '$250 remaining',
+    period: 'Credit',
     price: 300,
   },
 ];

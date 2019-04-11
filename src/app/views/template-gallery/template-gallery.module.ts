@@ -6,6 +6,7 @@ import { MainTemplateGalleryComponent } from './main-template-gallery/main-templ
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TemplateGalleryLinkComponent } from './template-gallery-link/template-gallery-link.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'app/shared/shared.module';
 import {
   MatIconModule,
   MatCardModule,
@@ -33,6 +34,7 @@ import {
     MatListModule,
     MatGridListModule,
     FlexLayoutModule,
+    SharedModule,
     RouterModule.forChild(TemplateGalleryRoutes)
   ],
   declarations: [

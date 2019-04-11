@@ -12,6 +12,9 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   private deleteSubs: Subscription;
   public categoryName: string;
 
+  // tslint:disable-next-line:max-line-length
+  editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
+
   constructor(public dialogRef: MatDialogRef<DataboxDialogsQueryComponent>,
     public dialog: MatDialog, public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any

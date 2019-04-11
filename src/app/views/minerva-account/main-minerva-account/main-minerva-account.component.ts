@@ -6,29 +6,28 @@ import { map } from 'rxjs/operators';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 
 @Component({
-  	selector: 'app-main-minerva-account',
-  	animations: [egretAnimations],
-  	templateUrl: './main-minerva-account.component.html',
-  	styleUrls: ['./main-minerva-account.component.scss']
+  selector: "app-main-minerva-account",
+  animations: [egretAnimations],
+  templateUrl: "./main-minerva-account.component.html",
+  styleUrls: ["./main-minerva-account.component.scss"]
 })
 export class MainMinervaAccountComponent implements OnInit, OnDestroy {
-	@ViewChild(MatProgressBar) progressBar: MatProgressBar;
-	@ViewChild(MatButton) submitButton: MatButton;
+  @ViewChild(MatProgressBar) progressBar: MatProgressBar;
+  @ViewChild(MatButton) submitButton: MatButton;
 
-	signinForm: FormGroup;
+  signinForm: FormGroup;
+  public loggedInUser: any;
 
-	constructor() {}
+  constructor() {
+    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  }
 
-	ngOnInit() {
-	}
+  ngOnInit() {}
 
-	signin() {
-	  this.submitButton.disabled = false;
-	  this.progressBar.mode = 'indeterminate';
-	}
+  signin() {
+    this.submitButton.disabled = false;
+    this.progressBar.mode = 'indeterminate';
+  }
 
-
-	ngOnDestroy() {
-	}
-
+  ngOnDestroy() {}
 }

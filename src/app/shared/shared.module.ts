@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -25,8 +25,10 @@ import {
   MatInputModule,
   MatExpansionModule,
   MatStepperModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatProgressBarModule,
 } from '@angular/material';
+
 
 // ONLY REQUIRED FOR **SIDE** NAVIGATION LAYOUT
 import { HeaderSideComponent } from './components/header-side/header-side.component';
@@ -41,6 +43,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AppComfirmComponent } from './services/app-confirm/app-confirm.component';
 import { AppLoaderComponent } from './services/app-loader/app-loader.component';
+import { SlideToggleComponent } from './components/slide-toggle/slide-toggle.component';
+import { MentionsProgressBarComponent } from './components/mentions-progress-bar/mentions-progress-bar.component';
 
 // DIRECTIVES
 import { FontSizeDirective } from './directives/font-size.directive';
@@ -52,20 +56,21 @@ import { EgretSideNavToggleDirective } from './directives/egret-side-nav-toggle.
 
 // PIPES
 import { RelativeTimePipe } from './pipes/relative-time.pipe';
-import { ExcerptPipe } from "./pipes/excerpt.pipe";
+import { ExcerptPipe } from './pipes/excerpt.pipe';
+import { SearchPipe } from './pipes/search-pipe';
 
 // SERVICES
 import { ThemeService } from './services/theme.service';
 import { LayoutService } from './services/layout.service';
-import { NavigationService } from "./services/navigation.service";
+import { NavigationService } from './services/navigation.service';
 import { RoutePartsService } from './services/route-parts.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { AppConfirmService } from './services/app-confirm/app-confirm.service';
 import { AppLoaderService } from './services/app-loader/app-loader.service';
 import { MainDataboxDialogComponent } from './services/databoxes/dialogs/main-databoxes-dialog.component';
-import { CreateDataboxDialogComponent } from './services/databoxes/dialogs-create/create-databox-dialog.component';
 import { DataboxDialogsAlgorithmComponent } from './services/databoxes/dialogs-algorithm/dialogs-algorithm.component';
 import { DataboxDialogsMentionsComponent } from './services/databoxes/dialogs-mentions/dialogs-mentions.component';
+import { DataboxDialogAddSuggestionComponent } from './services/databoxes/dialog-add-suggestions/dialog-add-suggestions.component';
 import { DataboxDialogsConnectivityComponent } from './services/databoxes/dialogs-connectivity/dialogs-connectivity.component';
 import { DataboxDialogsQueryComponent } from './services/databoxes/dialogs-query/dialogs-query.component';
 import { MinervaAccountDialogComponent } from './services/minerva-account/minerva-account-dialog/minerva-account-dialog.component';
@@ -76,8 +81,18 @@ import { MinervaAccountImageDialogComponent } from './services/minerva-account/m
   (https://themeforest.net/item/angular-landing-material-design-angular-app-landing-page/21198258)
 */
 // import { LandingPageService } from '../shared/services/landing-page.service';
+const dialogComponents = [
+  MainDataboxDialogComponent,
+  DataboxDialogsAlgorithmComponent,
+  DataboxDialogsMentionsComponent,
+  DataboxDialogsConnectivityComponent,
+  DataboxDialogsQueryComponent,
+  DataboxDialogAddSuggestionComponent,
+  MinervaAccountDialogComponent,
+  MinervaAccountImageDialogComponent
+];
 
-const classesToInclude = [
+const mainLayoutComponent = [
   SidenavComponent,
   NotificationsComponent,
   SidebarSideComponent,
@@ -87,23 +102,31 @@ const classesToInclude = [
   BreadcrumbComponent,
   AppComfirmComponent,
   AppLoaderComponent,
-  MainDataboxDialogComponent,
-  CreateDataboxDialogComponent,
-  DataboxDialogsAlgorithmComponent,
-  DataboxDialogsMentionsComponent,
-  DataboxDialogsConnectivityComponent,
-  DataboxDialogsQueryComponent,
-  MinervaAccountDialogComponent,
-  MinervaAccountImageDialogComponent,
+  SlideToggleComponent,
+  MentionsProgressBarComponent
+];
+
+const stylingComponents = [
   FontSizeDirective,
   ScrollToDirective,
   AppDropdownDirective,
   DropdownAnchorDirective,
   DropdownLinkDirective,
   EgretSideNavToggleDirective,
+];
+
+const pipes = [
   RelativeTimePipe,
-  ExcerptPipe
-]
+  ExcerptPipe,
+  SearchPipe,
+];
+
+const classesToInclude = [
+  ...mainLayoutComponent,
+  ...dialogComponents,
+  ...stylingComponents,
+  ...pipes
+];
 
 @NgModule({
   imports: [
@@ -132,19 +155,14 @@ const classesToInclude = [
     MatRippleModule,
     MatDialogModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressBarModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
-    AppComfirmComponent, 
-    AppLoaderComponent, 
-    MainDataboxDialogComponent, 
-    CreateDataboxDialogComponent,
-    DataboxDialogsAlgorithmComponent,
-    DataboxDialogsMentionsComponent,    
-    DataboxDialogsConnectivityComponent,
-    DataboxDialogsQueryComponent,
-    MinervaAccountDialogComponent,
-    MinervaAccountImageDialogComponent
+    AppComfirmComponent,
+    AppLoaderComponent,
+    ...dialogComponents
   ],
   providers: [
     ThemeService,

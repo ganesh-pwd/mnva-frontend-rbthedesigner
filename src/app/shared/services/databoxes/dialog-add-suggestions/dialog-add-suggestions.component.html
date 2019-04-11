@@ -1,0 +1,46 @@
+<div>
+  <h1 matDialogTitle>{{ data.title }}</h1>
+  <form (submit)="addSuggestion()" [formGroup]="suggestResultForm">
+    <div mat-dialog-content>
+      <p>
+        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas
+        discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit
+        amet, veri modus conceptam mel cu, has in dictas discere qualisque,
+        saperet ullamcorper ad eum.
+      </p>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="{{ data.field }} Name"
+          formControlName="page-name"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="{{ data.field }} ID"
+          formControlName="page-id"
+        />
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="{{ data.field }} Country"
+          formControlName="page-country"
+        />
+      </mat-form-field>
+    </div>
+    <br />
+    <div mat-dialog-actions>
+      <span fxFlex></span>
+
+      <button type="button" mat-raised-button (click)="dialogRef.close(false)">
+        Cancel
+      </button>
+      <button type="submit" mat-raised-button color="primary">Send</button>
+    </div>
+  </form>
+</div>

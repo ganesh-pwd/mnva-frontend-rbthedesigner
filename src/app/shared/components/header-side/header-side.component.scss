@@ -1,0 +1,33 @@
+.p16 {
+    padding: 0 16px;
+}
+
+hr {
+    border: 1px solid #f7f7f7;
+}
+
+.account-type {
+    position: relative;
+    margin: 10px 0;
+}
+
+.algorithm-credit span {
+    margin-right: 75px;
+}
+
+.credits {
+    color: green;
+}
+
+.menu-link {
+    float: right;
+    color: #19b4d7;
+    font-weight: bold;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.mat-menu-item {
+    font-size: 14px !important;
+}

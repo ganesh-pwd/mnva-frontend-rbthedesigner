@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { Product } from '../../../shared/models/product.model';
 import { CartItem, ProductShopService } from '../products-shop.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { TablesService } from '../account-feautures/account-feautures.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({

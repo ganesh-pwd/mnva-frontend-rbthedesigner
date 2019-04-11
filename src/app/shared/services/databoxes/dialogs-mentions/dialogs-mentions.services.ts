@@ -1,11 +1,12 @@
 import { Observable, of } from 'rxjs';
-import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
-import { delay } from 'rxjs/operators';
 import { DataboxDialogsMentionsComponent } from './dialogs-mentions.component';
 
-interface confirmData {
+interface ConfirmData {
   title?: string;
+  data?: any;
+  update?: boolean;
 }
 
 @Injectable({
@@ -15,15 +16,19 @@ export class DataboxMentionsDialogService {
   constructor(private dialog: MatDialog) {
   }
 
-  public confirm(data: confirmData = {}): Observable<boolean> {
+  public confirm(data: ConfirmData = {}): Observable<boolean> {
     data.title = data.title || 'Apply Mentions';
+    data.update = data.update || false;
+    data.data = data.data || {};
 
     let dialogRef: MatDialogRef<DataboxDialogsMentionsComponent>;
     dialogRef = this.dialog.open(DataboxDialogsMentionsComponent, {
       width: '500px',
       disableClose: true,
       data: {
-        title: data.title
+        title : data.title,
+        data  : data.data,
+        update: data.update
       }
     });
 

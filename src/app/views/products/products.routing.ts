@@ -4,9 +4,9 @@ import { LicensesComponent } from './licenses/licences.component';
 import { AdvancedTemplatesComponent } from './advanced-templates/advanced-templates.component';
 import { MediaRecordingsComponent } from './media-recordings/media-recordings.component';
 import { AlgorithmCreditComponent } from './algorithm-credit/algorithm-credit.component';
-import { AccountFeauturesComponent } from './account-feautures/account-feautures.component';
 import { ProductsCartComponent } from './cart/cart.component';
 import { ProductCheckoutComponent } from './checkout/checkout.component';
+import { MentionsCreditComponent } from './mentions-credit/mentions-credit.component';
 
 export const ProductRoutes: Routes = [
   {
@@ -45,10 +45,10 @@ export const ProductRoutes: Routes = [
     }
   },
   {
-    path: 'account-feautures',
-    component: AccountFeauturesComponent,
+    path: 'mentions-credit',
+    component: MentionsCreditComponent,
     data: {
-      title: 'Account Feautures', breadcrumb: 'Account Feautures'
+      title: 'Mentions Credit', breadcrumb: 'Mentions Credit'
     }
   },
   {

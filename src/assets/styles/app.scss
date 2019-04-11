@@ -7,7 +7,7 @@
 
 // Third pirty style files
 // Sidebar Scroll
-@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
 
 //  star-rating styles (Used in Shop app)
 // @import "~css-star-rating/scss/star-rating.scss";
@@ -31,9 +31,7 @@
 // @import '~hopscotch/dist/css/hopscotch.min.css';
 
 // Page loader Topbar
-@import '../../vendor/pace/pace-theme-min.css';
-
-
+@import "../../vendor/pace/pace-theme-min.css";
 
 // Main Variables File
 @import "scss/variables";
@@ -54,10 +52,11 @@
   width: 100% !important;
 }
 
-table td[class*=col-], table th[class*=col-] {
-    position: static;
-    display: table-cell;
-    float: none;
+table td[class*="col-"],
+table th[class*="col-"] {
+  position: static;
+  display: table-cell;
+  float: none;
 }
 
 thead {
@@ -69,7 +68,7 @@ thead {
       text-align: left;
       padding: 1rem;
       font-weight: 500;
-      letter-spacing: .1px;
+      letter-spacing: 0.1px;
     }
   }
 }
@@ -83,81 +82,88 @@ tbody {
 }
 
 // font orange
-.mat-color-success{
+.mat-color-success {
   color: #fb8a01;
 }
 
 // background orange
-.mat-bg-success{
+.mat-bg-success {
   background: #fb8a01 !important;
   color: whitesmoke !important;
 }
 
 // background green
-.mat-color-green, .mat-bg-green{
-	background: #22d9c9 !important;
-	color: white !important;
+.mat-color-green,
+.mat-bg-green {
+  background: #22d9c9 !important;
+  color: white !important;
 }
 
 // background red
-.mat-bg-red{
+.mat-bg-red {
   background: red !important;
   color: white !important;
 }
 
 // font gray
-.mat-color-gray{
+.mat-color-gray {
   color: gray;
 }
 
-.mat-color-red{
+.mat-color-red {
   color: red;
 }
 
-.mat-color-orange{
-  color:#ff9628;
+.mat-color-orange {
+  color: #ff9628;
 }
-.mat-color-dark-orange{
-  color:#ff7105;
+.mat-color-dark-orange {
+  color: #ff7105;
 }
 
-.mat-color-dark-blue{
-  color:#005580;
+.mat-color-dark-blue {
+  color: #005580;
 }
 
 // background gray
-.mat-bg-gray{
-  background: #3C4650 !important;
+.mat-bg-gray {
+  background: #3c4650 !important;
   color: whitesmoke !important;
 }
 
 // font yellow
-.mat-color-info{
+.mat-color-info {
   color: #ffe082;
 }
 
 // background yellow
-.mat-bg-info{
+.mat-bg-info {
   background: #ffe082 !important;
 }
 
-body .mat-select-trigger, .mat-select-trigger {
+.mat-card-title {
+  font-size: 20px !important;
+}
+
+body .mat-select-trigger,
+.mat-select-trigger {
   font-size: 0.875rem !important;
 }
 
-.egret-blue .mat-select-value, .databox-draft {
+.egret-blue .mat-select-value,
+.databox-draft {
   color: #19b4d7 !important;
 }
 
-.databox-active{
-	color: #22d9c9 !important;
+.databox-active {
+  color: #22d9c9 !important;
 }
 
-.databox-paused{
-	color: gray !important;
+.databox-paused {
+  color: gray !important;
 }
 
-.control-btns{
+.control-btns {
   position: relative;
   margin-top: 20px;
   height: 60px;
@@ -172,88 +178,99 @@ body .mat-select-trigger, .mat-select-trigger {
 }
 
 // handsontable global css
-hot-table{
-	width: 100% !important;
-	.hot-container, .ht_clone_top {
-		width: 100% !important;
-	}
-	table {
-	    font-family: arial, sans-serif;
-	    border-collapse: collapse !important;
-	}
+hot-table {
+  width: 100% !important;
+  .hot-container,
+  .ht_clone_top {
+    width: 100% !important;
+  }
 
-	th{
-		font-family: arial, sans-serif;
-		background: whitesmoke !important;
-		color: gray !important;
-		padding-top: 15px !important;
-		font-weight: 600 !important;
-	}
+  /*
+  .handsontableInputHolder{
+    position: absolute !important;
+  }
 
-	td{
-	    padding: 18px !important;
-	    padding-left: 10px !important;
-	    font-size: 13px !important;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	    -o-text-overflow: ellipsis;
-	    width: 30px !important;
-	    checkbox{
-	    	background: red !important;
-	    }
-	}
+  .handsontableInput{
+    position: absolute !important;
+  } */
 
-	tr:nth-child(even) {
-	    background-color: #dddddd !important;
-	}
+  table {
+    font-family: arial, sans-serif !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
 
-	button {
-		background-color: rgba(0, 0, 0, 0);
-		border: none;
-		color: gray;
-		padding: 5px 10px;
-		cursor: pointer;
-		cursor: hand;
-	  	font-size: 18px !important;
-	}
+  th {
+    font-family: arial, sans-serif;
+    background: whitesmoke !important;
+    color: gray !important;
+    padding-top: 15px !important;
+    font-weight: 600 !important;
+  }
 
-	.htDimmed{
-		font-size: 13px !important;
-		background: white !important;
-		color: #919191 !important;
-	}
+  td {
+    padding: 18px !important;
+    padding-left: 10px !important;
+    font-size: 13px !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    width: 30px !important;
+    checkbox {
+      background: red !important;
+    }
+  }
 
-	.changeType{
-		font-size: 10px !important;
-		color: #bababa !important;
-		margin-right: 35px !important;
-		margin-left: 0 !important;
-	}
+  tr:nth-child(even) {
+    background-color: #dddddd !important;
+  }
 
-	.hot-check{
-		cursor: pointer !important;
-	}
+  button {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: gray;
+    padding: 5px 10px;
+    cursor: pointer;
+    cursor: hand;
+    font-size: 18px !important;
+  }
+
+  .htDimmed {
+    font-size: 13px !important;
+    background: white !important;
+    color: #919191 !important;
+  }
+
+  .changeType {
+    font-size: 10px !important;
+    color: #bababa !important;
+    margin-right: 35px !important;
+    margin-left: 0 !important;
+  }
+
+  .hot-check {
+    cursor: pointer !important;
+  }
 }
 
 .header-row {
-  h1{
-  margin-left: 63px;
+  h1 {
+    margin-left: 63px;
   }
-  img{
+  img {
     max-width: 50px;
     max-height: 50px;
     position: absolute;
     top: 22px;
   }
-  small{
+  small {
     font-size: 14px !important;
     width: 50%;
     margin-left: 35px;
     margin-top: 8px;
     position: absolute;
     top: 27px;
-    mat-icon{
+    mat-icon {
       cursor: pointer;
       font-size: 18px;
       color: gray;
@@ -263,3 +280,49 @@ hot-table{
     }
   }
 }
+
+.mat-tab-group, .mat-tab {
+  width: 100% !important;
+  overflow-x: hidden !important;
+  height: 100% !important; 
+  padding:0 !important; 
+  margin: 0 !important;
+}
+
+/* For databox item second table */
+.table-mat-card-content {
+  padding-left: 0 !important; 
+  padding-right: 0 !important;
+  width: 100% !important;
+}
+
+.table-mat-card {
+  max-height: 500px !important; 
+  width: 100% !important; 
+  overflow-y: scroll !important; 
+  padding-left: 0 !important; 
+  padding-right: 0 !important;
+}
+
+table {
+  width: 100%;
+  .mat-header-cell-databox {
+    font-family: arial, sans-serif !important;
+    background: whitesmoke !important;
+    color: gray !important;
+    padding-top: 15px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    padding-left: 10px !important;
+  }
+}
+
+.query-active {
+  background: gray !important;  
+  color: white !important;  
+}
+
+.cdk-overlay-pane {
+  margin-top: 45px !important;
+}
+

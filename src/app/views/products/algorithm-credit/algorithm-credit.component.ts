@@ -1,7 +1,6 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { MatPaginator, MatSort, MatSnackBar } from '@angular/material';
+import { MatPaginator, MatSort, MatSnackBar, MatSidenav } from '@angular/material';
 import { AlgorithmCreditService } from '../../../shared/services/algorithm-credit/algorithm-credit.service';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataTableDataSource } from './algorithm-credit.datasource';
@@ -20,17 +19,26 @@ import { Product } from '../../../shared/models/product.model';
 export class AlgorithmCreditComponent implements OnInit {
 
   public algorithm_credit: any[];
+  public searchInput;
   displayedColumns = ['algorithm', 'price'];
 
+  public currentPage: any;
+
+  @ViewChild(MatSidenav) private sideNav: MatSidenav;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource: DataTableDataSource;
+  public isSideNavOpen: boolean;
+  public viewMode: string = 'list-view';
+
+  public algorithms: any;
   public products$: Observable<Product[]>;
+  public categories$: Observable<any>;
+  public activeCategory: string = 'all';
+  public filterForm: FormGroup;
   public cart: CartItem[];
   public cartData: any;
-  public filterForm: FormGroup;
-  public algorithms: any;
 
   constructor(
     private algorithmCreditService: AlgorithmCreditService,
@@ -57,6 +65,11 @@ export class AlgorithmCreditComponent implements OnInit {
     this.cartData = this.shopService.cartData;
   }
 
+  // search input
+  searchAlgorithm(value) {
+    this.searchInput = value;
+  }
+
   getAlgorithms() {
     this.algorithmCreditService
     .getItems()
@@ -73,13 +86,14 @@ export class AlgorithmCreditComponent implements OnInit {
     });
   }
 
-  addToCart(price) {
+  addToCart(algorithm) {
     const productBuild = {
-      name: 'Algorithm Credit',
+      name: algorithm.name,
       _id: Date.now().toString(),
       price: {
-        sale: price
+        sale: algorithm.price.sale
       },
+      category: 'Credit',
       photo: 'https://via.placeholder.com/140x140'
     };
     const cartItem: CartItem = {
@@ -105,6 +119,15 @@ export class AlgorithmCreditComponent implements OnInit {
       minRating: [filterData.minRating],
       maxRating: [filterData.maxRating]
     });
+  }
+
+  setActiveCategory(category) {
+    this.activeCategory = category;
+    this.filterForm.controls['category'].setValue(category)
+  }
+
+  toggleSideNav() {
+    this.sideNav.opened = !this.sideNav.opened;
   }
 
 }

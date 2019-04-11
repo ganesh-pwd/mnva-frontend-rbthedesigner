@@ -1,348 +1,563 @@
-<br>
-<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap" *ngIf="databoxItemData?.folder">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-    <img src="assets/images/icon-databox.png">
-    <h1 class="mat-h1">
-        {{databoxItemData?.databox_name}} 
+<br />
+<!-- Header and Breadcrumb for Databox with Status Active -->
+<div *ngIf="checkIfCreateOrEdit === 'Create'">
+  <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
+    <div class="header-row" fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+      <img src="assets/images/icon-databox.png" />
+      <h1 class="mat-h1">
+        {{ databoxItemData || data?.databox_name }}
         <small>
-		  <mat-icon (click)="openDialog('Edit Databox Name', 'Databox Name', true, '')">edit</mat-icon>
+          <mat-icon *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'"
+            (click)="openDialog('Edit Databox Name', 'Databox Name', true)"
+            >edit</mat-icon
+          >
+          <mat-icon *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'"
+            (click)="openDialog('Set Databox Name', 'Databox Name', true)"
+            >edit</mat-icon
+          >
+          |
           <span class="main-route">
             <a routerLink="/databoxes/">Databoxes </a> /
-				<a (click)="navigateToDatabox(databoxItemData?.folder, databoxItemData?._id, databoxItemData?.first_create)">
-				{{databoxItemData?.databox_name}}</a>
-          </span> / Edit Query </small>
+            {{ databoxItemData || data?.databox_name }}
+          </span>
+          / Create Databox
+        </small>
       </h1>
+    </div>
+  </div>
+
+  <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      routerLink="/databoxes"
+    >
+      Back to Databox
+    </button>
+    <span fxFlex></span>
+    <div class="mr-1">
+      <h3 class="mat-h3 mr-1">Mentions Remaining:
+        <span class="credits"> {{loggedInUser.mentions}}
+        </span>
+      </h3>
+    </div>
   </div>
 </div>
 
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID style="position:relative;">
-	<button mat-raised-button
-	class="mb-05"
-	color="primary"
-	(click)="navigateToDatabox(data?.folder, data?._id, data?.first_create)">
-	Back to Databox
-	</button>
-	<span fxFlex></span>
-	<div style="position: absolute; right: 0px; top: 6px;">
-		<h3 class="mat-h4 mr-1">Mentions Remaining:
-		  <span class="credits fw-400 mat-color-gray"> 10,000
-		  </span>
-		</h3>
-	</div>
+<!-- Header and Breadcrumb for Databox with Status Draft -->
+<div *ngIf="checkIfCreateOrEdit === 'Edit'">
+  <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+    <div class="header-row" fxLayout="row" fxFlex="100" fxFlex.gt-md="100">
+      <img src="assets/images/icon-databox.png" />
+      <h1 class="mat-h1">
+        {{ data?.databox_name }}
+        <small>
+          <mat-icon
+            (click)="openDialog('Edit Databox Name', 'Databox Name', true)"
+            >edit</mat-icon
+          >
+          |
+          <span class="main-route">
+            <a routerLink="/databoxes/">Databoxes </a> /
+            <a (click)="navigateToDatabox(data?._id, data?.first_create)">
+              {{ data?.databox_name }}</a
+            >
+          </span>
+          / Edit Query
+        </small>
+      </h1>
+    </div>
+  </div>
+
+  <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      (click)="navigateToDatabox(data?._id, data?.first_create)"
+    >
+      Back to Databox
+    </button>
+  </div>
 </div>
-<hr>
-<br>
+<hr />
+<br />
 
-<!-- <div fxLayout="row" fxLayoutWrap="wrap">
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
-		<div class="text-center" >
-			<mat-radio-group value="1" id="settings-radio">
-				<mat-radio-button value="1"
-					routerLink="/databoxes/settings/{{data?._id}}">
-					Configuration
-				</mat-radio-button>
-				-------------
-				<mat-radio-button value="2"
-					routerLink="/databoxes/settings/query/{{data?._id}}">
-					Query
-				</mat-radio-button>
-				-------------
-				<mat-radio-button value="3"
-					routerLink="/databoxes/settings/algorithm/{{data?._id}}">
-					Algorithms
-				</mat-radio-button>
-			</mat-radio-group>
-		</div>
-	</div>
-</div> -->
+<form [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
+  <!-- Column1 -->
+  <div
+    fxLayout="column"
+    fxFlex="100"
+    fxFlex.gt-md="50"
+    [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+  >
+    <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
+      <h1 class="mat-h1">Query Editor</h1>
+    </div>
+    <!-- Change Datasource & Country -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div
+        fxLayout="column"
+        class="fixed-height"
+        fxFlex.gt-sm="50"
+        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+      >
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Change Datasource</span>
+            </mat-card-title>
+          </mat-card-header>
 
-<div fxLayout="row" fxLayoutWrap="wrap">
-	<!-- Column1 -->
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-		<div class="settings" fxLayout="row" fxLayoutWrap="wrap">
-			<h1 class="mat-h3">Query Editor</h1>
-		</div>
-		<!-- Change Datasource & Country -->
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-select 
+                formControlName="datasource"
+                [(value)]="selectedDatasource" 
+                (selectionChange)="selectDatasource()">
+
+                  <mat-option *ngFor="let singleDatasource of loggedInUser?.datasources" 
+                  [value]="singleDatasource">
+                  {{ singleDatasource }}
+                
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div
+        fxLayout="column"
+        class="fixed-height"
+        fxFlex.gt-sm="50"
+        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+      >
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Change Country</span>
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <br />
+            <mat-form-field class="full-width">
+              <mat-select formControlName="country">
+                <mat-option
+                  *ngFor="let country of countries"
+                  [value]="country.name"
+                >
+                  {{ country.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Max Results & Historical -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="100">
+			<div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
-							<span>Change Datasource</span>
+							<span>Select Date Range</span>
 						</mat-card-title>
 					</mat-card-header>
 
 					<mat-divider></mat-divider>
-					<mat-card-content>
+					<mat-card-content class="mt-1">
 						<br>
-						<form>
+						<div fxLayout="column" class="mr-05" fxFlex.gt-sm="50">
+						    <p class="m-0">Start Date</p>
+	    					<form>
+								<mat-form-field class="full-width">
+									<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
+									<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
+									{{ singleDatasource.name }}
+									</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</form>
+						</div>
+						<div fxLayout="column" class="mr-05" fxFlex.gt-sm="50">
+						    <p class="m-0">End Date</p>
+	    					<form>
+								<mat-form-field class="full-width">
+									<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
+									<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
+									{{ singleDatasource.name }}
+									</mat-option>
+									</mat-select>
+								</mat-form-field>
+							</form>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+			<div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title>
+							<span>Max Results</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content class="mt-1">
+					    <mat-radio-button value="1">All mentions found</mat-radio-button>
+				    	<mat-radio-button class="ml-1" value="1">Specific amount</mat-radio-button>
+    					
+              <form>
 							<mat-form-field class="full-width">
-								<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-								<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-								{{ singleDatasource.name }}
-								</mat-option>
+								<mat-select 
+                  [(value)]="selectedDatasource" 
+                  (selectionChange)="selectDatasource()">
+
+    								<mat-option *ngFor="let singleDatasource of loggedInUser?.datasources" 
+                    [value]="singleDatasource">
+    								{{ singleDatasource }}
+
+  								</mat-option>
 								</mat-select>
 							</mat-form-field>
 						</form>
-					</mat-card-content>
-				</mat-card>
-			</div>
-		</div>
-		<!-- Historical -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex.gt-sm="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Historical Data</span>
-						</mat-card-title>
-					</mat-card-header>
 
-					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-						<br>
-						<div fxLayout="row" class="mr-05" fxFlex.gt-sm="100">
-						    <button mat-raised-button mat-color-primary class="query_type">Full Archive</button>
-						    <button mat-raised-button mat-color-primary class="query_type">1d</button>
-						    <button mat-raised-button mat-color-primary class="query_type">1w</button>
-						    <button mat-raised-button mat-color-primary class="query_type">2w</button>
-						    <button mat-raised-button mat-color-primary class="query_type">1m</button>
-						    <button mat-raised-button mat-color-primary class="query_type">3m</button>
-						    <button mat-raised-button mat-color-primary class="query_type">6m</button>
-						    <button mat-raised-button mat-color-primary class="query_type">1y</button>
-						</div>
 					</mat-card-content>
 				</mat-card>
 			</div>
 		</div>
-		<!-- Select Country -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex.gt-sm="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Country Selector</span>
-						</mat-card-title>
-					</mat-card-header>
 
-					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-						<br>
-						<div fxLayout="row" class="mr-05" fxFlex.gt-sm="100">
-			      	    <button mat-raised-button mat-color-primary class="query_type">Panamá</button>
-			            <button mat-raised-button class="query_type">Costa Rica</button>
-			            <button mat-raised-button class="query_type">Nicaragua</button>
-			            <button mat-raised-button class="query_type">El Salvador</button>
-			            <button mat-raised-button class="query_type">Honduras</button>
-			            <button mat-raised-button class="query_type">Guatemala</button>
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
-		</div>
-		<!-- Connect Your Page -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex.gt-sm="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Connect Your Page</span>
-						</mat-card-title>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-						<br>
-						<div fxLayout="row" class="mr-05" fxFlex.gt-sm="100">
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
-		</div>
-		<!-- Query Editor -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Query</span>
-						</mat-card-title>
-						<span fxFlex></span>
-						<mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
-					</mat-card-header>
-					<mat-divider></mat-divider>
-					<br>
-					<!--Query Menu -->
-					<div fxLayout="row" fxLayoutWrap="wrap" >
-			      	    <button mat-raised-button mat-color-primary class="query_type">Basic Query</button>
-			            <button mat-raised-button class="query_type">Advanced Query</button>
-					</div>
-					<!--Basic Query Editor -->
-					<mat-card-content>
-						<div class="mt-1" fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <b>Optional Keywords</b>
-							    <p>Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
-						    	<form>
-						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
-						    			<div class="p-1">
-				                      		<textarea matInput rows="10" cols="80" value="{{editorData}}"></textarea>
-				                      	</div>	
-						    		</mat-form-field>
-						    	</form>
-							</div>
-						</div>
-						<div class="mt-1" fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <b>Required Keywords</b>
-							    <p>Your Databox will collect mentions that contain all of these keywords.</p>
-						    	<form>
-						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
-						    			<div class="p-1">
-				                      		<textarea matInput rows="10" cols="80" value="{{editorData}}"></textarea>
-				                      	</div>
-						    		</mat-form-field>
-						    	</form>
-							</div>
-						</div>
-						<div class="mt-1" fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <b>Exclude Keywords</b>
-							    <p>Your Databox will not bring in mentions any of the following keywords.</p>
-						    	<form>
-						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
-						    			<div class="p-1">
-				                      		<textarea matInput rows="10" cols="80" value="{{editorData}}"></textarea>
-				                      	</div>
-						    		</mat-form-field>
-						    	</form>						    	
-							</div>
-						</div>													
-					</mat-card-content>
-                    <!--Avanced Query Editor -->
-                    <mat-card-content>
-                        <div fxLayout="row" fxLayoutWrap="wrap">
-                            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
-                                <mat-card-header>
-                                  <mat-card-title class="mat-color-primary">
-                                    <span>Advanced Query</span>
-                                  </mat-card-title>
-                                  <mat-card-subtitle>
-                                    <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
-                                  </mat-card-subtitle>
-                                </mat-card-header>
-                                <mat-divider></mat-divider>
-                                <br>
-                                <mat-card-content>
-                                    <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
-                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
-                                            <mat-card class="p-0">
-                                                <mat-card-content class="p-0">
-                                                    <form>
-                                                        <mat-form-field class="full-width">
-                                                          <textarea matInput placeholder="Query" rows="10" cols="80" value="{{editorData}}"></textarea>
-                                                        </mat-form-field>
-                                                    </form>
-                                                </mat-card-content>
-                                                <div class="text-muted query-help">
-                                                    <mat-icon class="query-icon">remove_red_eye</mat-icon>
-                                                    <a>Show Simple Example</a>
-                                                    <mat-icon class="query-icon">remove_red_eye</mat-icon>
-                                                    <a>Show Complex Example</a>
-                                                    <mat-icon class="query-icon">help_outline</mat-icon>
-                                                    <a>Need More Help?</a>
-                                                </div>
-                                            </mat-card>
-                                        </div>
-                                    </div>
-                                    <div fxLayout="row" fxLayoutWrap="wrap">
-                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
-                                            <mat-card class="query-right-side">
-                                                <mat-card-content>
-                                                    <p>Boolean Operations: Booleans help you create your query.</p>
-                                                    <p class="mat-color-primary query-info"matTooltip="OR operators are used to expand your query. For example: car OR bus OR train">OR = OR's help you expand your query
-                                                    </p>
-                                                    <p class="mat-color-primary query-info"matTooltip="AND operators are used to expand your query. For example: car AND bus AND train">AND = AND's help you be more exact
-                                                    </p>
-                                                    <p class="mat-color-primary query-info"matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train">NOT = NOT's help you exclude information
-                                                    </p>
-                                                </mat-card-content>
-                                            </mat-card>
-                                        </div>
-                                    </div>
-                                </mat-card-content>
-                            </div>
+    <!-- Query Editor -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div
+        fxLayout="column"
+        fxFlex="100"
+        fxFlex.gt-md="100"
+        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+      >
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Query</span>
+            </mat-card-title>
+            <span fxFlex></span>
+            <a>Expand</a>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br />
+          <!--Query Menu -->
+          <div fxLayout="row" fxLayoutWrap="wrap">
+            <button mat-raised-button mat-color-primary 
+            (click)="showBasicQuery()"
+            class="query_type" 
+            [ngClass]="showQuery === 'basic' ? 'query-active': ''">
+              Basic Query
+            </button>
+            <button mat-raised-button 
+            class="query_type"
+            [ngClass]="showQuery === 'advance' ? 'query-active': ''"
+            (click)="showAdvanceQuery()">
+            Advanced Query</button>
+            <span fxFlex></span>
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">
+              Include Comments
+            </mat-slide-toggle>
+          </div>
+          <!--Basic Query Editor -->
+          <mat-card-content *ngIf="showQuery == 'basic'" 
+            [@animate]="{
+              value: '*',
+              params: { x: '200px', delay: '400ms' }
+            }">
+            <mat-card-title class="mat-color-primary query-header">
+              <span>Basic Query</span>
+            </mat-card-title>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div
+                fxLayout="column"
+                fxFlex="100"
+                fxFlex.gt-sm="100"
+              >
+                <b>Optional Keywords</b>
+                <p class="mt-1">
+                  Your Databox will collect mentions that contain at least one
+                  of these keywords, plus all required keywords.
+                </p>
+                <mat-form-field
+                  style="border: 1px solid gray;"
+                  class="full-width"
+                >
+                  <div class="p-1">
+                    <textarea
+                      matInput
+                      rows="10"
+                      cols="80"
+                      formControlName="optional-keywords"
+                    ></textarea>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div
+                fxLayout="column"
+                fxFlex="100"
+                fxFlex.gt-sm="100"
+                [@animate]="{
+                  value: '*',
+                  params: { x: '200px', delay: '400ms' }
+                }"
+              >
+                <b class="mt-1">Required Keywords</b>
+                <p class="mt-1">
+                  Your Databox will collect mentions that contain all of these
+                  keywords.
+                </p>
+                <mat-form-field
+                  style="border: 1px solid gray;"
+                  class="full-width"
+                >
+                  <div class="p-1">
+                    <textarea
+                      matInput
+                      rows="10"
+                      cols="80"
+                      formControlName="required-keywords"
+                    ></textarea>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div
+                fxLayout="column"
+                fxFlex="100"
+                fxFlex.gt-sm="100"
+                [@animate]="{
+                  value: '*',
+                  params: { x: '200px', delay: '400ms' }
+                }"
+              >
+                <b class="mt-1">Exclude Keywords</b>
+                <p class="mt-1">
+                  Your Databox will not bring in mentions any of the following
+                  keywords.
+                </p>
+                <mat-form-field
+                  style="border: 1px solid gray;"
+                  class="full-width"
+                >
+                  <div class="p-1">
+                    <textarea
+                      matInput
+                      rows="10"
+                      cols="80"
+                      value="{{ editorData }}"
+                      formControlName="excluded-keywords"
+                    ></textarea>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <!--Avanced Query Editor -->
+          <mat-card-content>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div
+                fxLayout="column"
+                fxFlex="100"
+                fxFlex.gt-md="100"
+                fxLayoutAlign="center"
+              >
+                <mat-card-header class="query-header" 
+                *ngIf="showQuery === 'advance'"
+                [@animate]="{
+                  value: '*',
+                  params: { x: '200px', delay: '400ms' }
+                }">
+                  <mat-card-title class="mat-color-primary">
+                    <span>Advanced Query</span>
+                  </mat-card-title>
+                  <mat-card-subtitle>
+                    <p>
+                      Lorem ipsum dolor sit amet, et vel error viris democritum,
+                      ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque
+                      omittantur definitionem et, meliore intellegebat an cum.
+                      Vim falli insolens persequeris no. Eu pri aeque semper,
+                      dicunt malorum reprehendunt ex mea, viderer inimicus vim
+                      ne. Cu causae impetus eam, et atqui tibique consectetuer
+                      nam, in erroribus incorrupte vim. Ea voluptua eloquentiam
+                      has.
+                    </p>
+                  </mat-card-subtitle>
+                </mat-card-header>
+                
+                <br />
+                <mat-card-content 
+                  *ngIf="showQuery === 'advance'"
+                  [@animate]="{
+                    value: '*',
+                    params: { x: '200px', delay: '400ms' }
+                  }">
+                  <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
+                    <div
+                      fxLayout="column"
+                      fxFlex="100"
+                      fxFlex.gt-md="100"
+                      fxLayoutAlign="center"
+                    >
+                      <mat-card class="p-0">
+                        <mat-divider></mat-divider>
+                        <mat-card-content class="p-0">
+                          <mat-form-field class="full-width">
+                            <textarea
+                              matInput
+                              placeholder="Query"
+                              rows="10"
+                              cols="80"
+                              formControlName="advance-query"
+                            ></textarea>
+                          </mat-form-field>
+                        </mat-card-content>
+                        <div class="text-muted query-help">
+                          <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                          <a>Show Simple Example</a>
+                          <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                          <a>Show Complex Example</a>
+                          <mat-icon class="query-icon">help_outline</mat-icon>
+                          <a>Need More Help?</a>
                         </div>
-                    </mat-card-content>
-				</mat-card>
-			</div>	
-		</div>
-		<!-- Monitored Pages -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Advanced Settings</span>
-						</mat-card-title>
-						<span fxFlex></span>
-						<mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
-					</mat-card-header>
-					<mat-divider></mat-divider>
-					<br>
-	              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
-				  	</mat-slide-toggle>
-				  	<br>
-				  	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Specify the máximum number of results your query will retrieve">Specify Maximum Number of Results
-				  	</mat-slide-toggle>
-					<br>
-	              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor only news media">Monitor only News Media
-				  	</mat-slide-toggle>
-				  	<br>
-	              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor specific pages">Monitor Specific Pages
-			  		</mat-slide-toggle>
-					<div fxLayout="row" fxLayoutWrap="wrap" >
-						<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-						    <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
-					    	<form>
-					    		<mat-form-field style="border: 1px solid gray;" class="full-width">
-					    			<div class="p-1">
-			                      		<textarea matInput rows="10" cols="80" value=""></textarea>
-			                      	</div>	
-					    		</mat-form-field>
-					    	</form>
-					    </div>
-					</div>
-				</mat-card>
-			</div>
-		</div>
-		<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
-  	      	<span fxFlex></span>
-		  	<button mat-raised-button class="mb-05 mat-bg-success">
-		    Test Query
-		  	</button>
-		</div>		
-	</div>
-	<!-- Column2 -->
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-		<div class="settings" fxLayout="row" fxLayoutWrap="wrap">
-			<h1 class="mat-h3">Results Preview</h1>
-		</div>
-		<!-- Metrics -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-	        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
-	          <div>
-	            <p>
-	                <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day}}
-	            </p>
-	          </div>
-	        </div>
-    	</div>
-		<!-- Line Chart -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxFlex="100" fxFlex.gt-sm="100">
-				<mat-card class="p-0">
-				  <mat-card-content class="p-0" style="max-height: 159px;">
+                      </mat-card>
+                    </div>
+                  </div>
+                </mat-card-content>
+
+                <mat-card-content>
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div
+                      fxLayout="column"
+                      fxFlex="100"
+                      fxFlex.gt-md="100"
+                      [@animate]="{
+                        value: '*',
+                        params: { y: '200px', delay: '400ms' }
+                      }"
+                      fxLayoutAlign="center"
+                    >
+                      <mat-card class="query-right-side">
+                        <mat-card-content>
+                          <h3 class="mat-h3">
+                            Boolean Operations: Booleans help you create your
+                            query.
+                          </h3>
+                          <p
+                            class="mat-color-primary query-info"
+                            matTooltip="OR operators are used to expand your query. For example: car OR bus OR train"
+                          >
+                            OR = OR's help you expand your query
+                          </p>
+                          <p
+                            class="mat-color-primary query-info"
+                            matTooltip="AND operators are used to expand your query. For example: car AND bus AND train"
+                          >
+                            AND = AND's help you be more exact
+                          </p>
+                          <p
+                            class="mat-color-primary query-info"
+                            matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train"
+                          >
+                            NOT = NOT's help you exclude information
+                          </p>
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Monitored Pages -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Monitored Pages</span>
+            </mat-card-title>
+            <span fxFlex></span>
+            <a>Expand</a>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+            <div fxLayout="row" fxLayoutWrap="wrap">
+              <div fxLayout="row" class="mb-1" fxFlex="100" fxFlex.gt-sm="100">
+                <mat-radio-button value="1">Monitor a News Media list created by our community</mat-radio-button>
+                <span fxFlex></span>
+                <a class="mat-color-gray">Suggest Media</a>
+              </div>
+              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+                <mat-radio-button value="1">Specific Pages</mat-radio-button>
+                <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
+                <form>
+                  <mat-form-field style="border: 1px solid gray;" class="full-width">
+                    <div class="p-1">
+                      <textarea matInput rows="10" cols="80" value=""></textarea>
+                    </div>
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+      <span fxFlex></span>
+      <button mat-raised-button class="mb-05 mat-bg-success">
+        Test Query
+      </button>
+    </div>
+  </div>
+  <!-- Column2 -->
+  <div
+    fxLayout="column"
+    fxFlex="100"
+    fxFlex.gt-md="50"
+    [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+  >
+    <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
+      <h1 class="mat-h1">Results Preview</h1>
+    </div>
+
+    <!-- Metrics -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
+        <div>
+          <p>
+            <b>Mentions:</b> {{data?.mentions || 7.5}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day || 1200}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Line Chart -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxFlex="100" fxFlex.gt-sm="100">
+        <mat-card class="p-0">
+          <mat-card-content class="p-0" style="max-height: 159px;">
+            <!-- Line Chart
 				    <canvas 
 				      baseChart 
 				      class="chart"
@@ -351,45 +566,134 @@
 				      [options]="lineChartOptions"
 				      [colors]="chartColors"
 				      [legend]="lineChartLegend"
-				      [chartType]="lineChartType"></canvas>
-				  </mat-card-content>
-				</mat-card>
-			</div>
-		</div>
-		<div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Results Preview</span>
-						</mat-card-title>
-					</mat-card-header>
-					<mat-divider></mat-divider>
-	                <mat-card-content>
-	                </mat-card-content>	                
-				</mat-card>
-			</div>			
-		</div>		
-	</div>
-</div>
-<br>
+				      [chartType]="lineChartType"></canvas> -->
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div
+      style="position: -webkit-sticky; position: sticky;top: 0;"
+      fxLayout="row"
+      fxLayoutWrap="wrap"
+    >
+      <div
+        fxLayout="column"
+        fxFlex="100"
+        fxFlex.gt-sm="100"
+        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+      >
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Results</span>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>No results yet, please Create a Query and then clic “Test Query” to see results.</p>
+          </mat-card-content>
+          <mat-divider></mat-divider>
+          <mat-card-content> </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</form>
+<br />
 
-<mat-divider></mat-divider><br>
+<mat-divider></mat-divider><br />
 <div class="buttonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
-  	<button mat-raised-button
-    class="mb-05"
-    (click)="openDialog('Exit without saving changes?', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, '')">
-    Cancel
-  	</button>
-  	<button mat-raised-button
-    class="mb-05 mat-bg-gray"
-    (click)="openDialog('Save as Draft', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, '')">
-    Save as Draft
-  	</button>
-  	<button mat-raised-button
-    class="mb-05 mat-bg-green"
-    (click)="openMentionsDialog('Create Databox')">
-    Create Databox
-	</button>
+  
+  <!-- Dialogs for New Creation of Databox with no Status -->
+  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      (click)="cancelChanges()"
+    >
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-gray"
+      (click)="
+        openDialog(
+          'Save as Draft',
+          'Are you sure you want to save this databox as draft? You can edit the details later. Please confirm to continue.',
+          false
+        )
+      "
+    >
+      Save as Draft
+    </button>
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-green"
+      (click)="openMentionsDialog('Create Databox')"
+    >
+      Create Databox
+    </button>
+  </div>
+
+  <!-- Dialogs for already Created Databox with Status as Draft -->
+  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      (click)="
+        openDialog(
+          'Exit without saving changes?',
+          'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
+          false
+        )
+      "
+    >
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-gray"
+      (click)="
+        openDialogUpdate(
+          'Save as Draft',
+          'Are you sure you want to save this databox as draft? You can edit the details later. Please confirm to continue.'
+        )
+      "
+    >
+      Save as Draft
+    </button>
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-green"
+      (click)="openMentionsDialogUpdate('Create Databox')"
+    >
+      Create Databox
+    </button>
+  </div>
+
+  <!-- Dialogs for already Created Databox with Status as Active -->
+  <div *ngIf="checkIfCreateOrEdit === 'Edit'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      (click)="cancelChanges()"
+    >
+      Cancel
+    </button>
+    
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-gray"
+      (click)="
+        openDialogUpdate(
+          'Run Query',
+          'Are you sure you want to save your details and run the query?'
+        )
+      "
+    >
+      Run Query
+    </button>
+  </div>
 </div>
-<br><br>
+<br /><br />
