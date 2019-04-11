@@ -40,7 +40,7 @@
     </h4>
     <span fxFlex></span>
     <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Pause Your Databox', 'Are you sure you want to pause your databox. Data will stop comming into your Databox, and mentions will stop being deducted from your plan.', false)">
-    On/Off
+    <span class="mat-color-gray fz-12">On/Off</span>
     </mat-slide-toggle>
   </div>
 </div>
@@ -77,9 +77,8 @@
           </div>
           <span fxFlex></span>
           <div style="position: absolute; right: 24px;">
-            <a>
-            <b>Not Finding a Result?</b>
-            </a>
+            <a class="mr-1"><mat-icon class="download">file_download</mat-icon><b>Download</b></a>
+            <a><b>Not Finding a Result?</b></a>
           </div>
         </div>
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
@@ -119,15 +118,14 @@
       <br>
 
       <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+        <div fxLayout="column" fxFlex="80" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 
           <div class="bottom-data">
             <br>
-            <button mat-raised-button class="download-csv" (click)="downloadCSV()" #exportFile>Download to CSV</button>
+            <!-- <button mat-raised-button class="download-csv" (click)="downloadCSV()" #exportFile>Download to CSV</button>
             <br>
-            <h2 class="mat-h2">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
-            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
-
+            <h3 class="mat-h3">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h3>
+            <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
             <form class="example-form">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="{{data?.page_search_name}} Name">
@@ -140,10 +138,9 @@
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="{{data?.page_search_name}} Country" >
               </mat-form-field>            </form>
-            <button mat-raised-button>Send</button> 
-            <br><br>
-            <h2 class="mat-h2">Delete Databox</h2>
-            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
+            <button mat-raised-button>Send</button>  -->
+            <h3 class="mat-h3">Delete Databox</h3>
+            <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
             <button mat-raised-button (click)="openDialog('Delete Databox', 'Write down databox name to delete', true, '')">Delete Databox</button>
           </div>
         </div>
@@ -309,16 +306,9 @@
 
           <div>
             <span fxFlex></span>
-            <h3 class="mat-h3">Credits Remaining:
+            <h3 class="mat-h4">Credits Remaining:
               <span class="credits">$100</span>   |   
               <button mat-raised-button class="mat-color-green">Buy More</button>
-            </h3>
-            <br>
-          </div>
-
-          <div class="mentions">
-            <span fxFlex></span>
-            <h3 class="mat-h3 text-muted">Current Mentions: 10,000 mentions
             </h3>
             <br>
           </div>
@@ -328,7 +318,7 @@
       <div fxLayout="row" fxLayoutWrap="wrap">
         <!-- Sentiment -->
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card>
+          <mat-card class="p-1">
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
                 <mat-icon class="icon-header">add</mat-icon>
@@ -359,14 +349,14 @@
             <br>
             <mat-card-actions>
               <span fxFlex></span>
-              <h2 class="mat-h3">Cost / Mention: Free</h2>
+              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
             </mat-card-actions>
           </mat-card>
         </div>
         
         <!-- Topic Recognition -->
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card>
+          <mat-card class="p-1">
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
                 <mat-icon class="icon-header airplane">airplanemode_active</mat-icon>
@@ -397,7 +387,7 @@
             <br>
             <mat-card-actions>
               <span fxFlex></span>
-              <h2 class="mat-h3">Cost / Mention: $0.03</h2>
+              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -405,7 +395,7 @@
 
         <!-- Gender Author -->
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card>
+          <mat-card class="p-1">
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
                 <mat-icon class="icon-header">people</mat-icon>
@@ -436,14 +426,14 @@
             <br>
             <mat-card-actions>
               <span fxFlex></span>
-              <h2 class="mat-h3">Cost / Mention: Free</h2>
+              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
             </mat-card-actions>
           </mat-card>
         </div>
 
         <!-- Entity Recognition -->
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card>
+          <mat-card class="p-1">
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
                 <mat-icon class="icon-header">location_city</mat-icon>
@@ -474,7 +464,7 @@
             <br>
             <mat-card-actions>
               <span fxFlex></span>
-              <h2 class="mat-h3">Cost / Mention: $0.03</h2>
+              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
             </mat-card-actions>
           </mat-card>
         </div>

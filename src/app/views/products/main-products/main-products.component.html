@@ -27,14 +27,14 @@
           <img src="assets/images/box-green.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
-              <h3 class="">Standard Account</h3>
+              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+              <h2 class="mat-h2">Standard Account</h2>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <strong><h5>For new members</h5></strong>
+              <h4 class="mat-h4">For new members</h4>
             </div>
             <div class="">
               <mat-list dense class="mb-1">
@@ -46,7 +46,6 @@
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>
             </div>
-            <br>
             <table>
               <tbody>
                 <tr><td class="">2 Users</td></tr>
@@ -65,18 +64,18 @@
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
-        <mat-card class="plan-pricing text-center blue">
-          <img src="assets/images/box-blue.png">
+        <mat-card class="plan-pricing text-center orange">
+          <img src="assets/images/box-orange.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
-              <h3 class="">Standard Account</h3>
+              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+              <h2 class="mat-h2">Standard Account</h2>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <strong><h5>For new members</h5></strong>
+              <h4 class="mat-h4">For new members</h4>
             </div>
             <div class="">
               <mat-list dense class="mb-1">
@@ -88,13 +87,53 @@
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>
             </div>
-            <br>
             <table>
               <tbody>
                 <tr><td class="">2 Users</td></tr>
                 <tr><td class="">Email Alerts</td></tr>
-                <tr><td class="">Google Data Studio</td></tr>
-                <tr><td class="">Tableau Connector</td></tr>
+                <tr><td class="disabled">Google Data Studio</td></tr>
+                <tr><td class="disabled">Tableau Connector</td></tr>
+                <tr><td class="disabled">Power BI Connector</td></tr>
+                <tr><td class="disabled">Slack Alerts</td></tr>
+              </tbody>
+            </table>
+          </mat-card-content>
+        </mat-card>
+        <button mat-raised-button class="mat-bg-success btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
+          <mat-icon>shopping_cart</mat-icon> Select Plan
+        </button>
+      </div>
+      <!-- Pricing box -->
+      <div fxFlex="100" fxFlex.gt-sm="33">
+        <mat-card class="plan-pricing text-center blue">
+          <img src="assets/images/box-blue.png">
+          <mat-card-title>
+            <div class="pt-1 pb-1">
+              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
+              <h2 class="mat-h2">Standard Account</h2>
+            </div>
+            <mat-divider></mat-divider>
+          </mat-card-title>
+          <mat-card-content class="">
+            <div class="text-sm">
+              <h4 class="mat-h4">For new members</h4>
+            </div>
+            <div class="">
+              <mat-list dense class="mb-1">
+                <mat-list-item>3,000 mentions</mat-list-item>
+                <mat-list-item>Facebook</mat-list-item>
+                <mat-list-item>Twitter</mat-list-item>
+                <mat-list-item>Web</mat-list-item>
+                <mat-list-item>Airbnb</mat-list-item>
+                <mat-list-item>Waze</mat-list-item>
+              </mat-list>
+            </div>
+            <table>
+              <tbody>
+                <tr><td class="">2 Users</td></tr>
+                <tr><td class="">Email Alerts</td></tr>
+                <tr><td class="disabled">Google Data Studio</td></tr>
+                <tr><td class="disabled">Tableau Connector</td></tr>
                 <tr><td class="disabled">Power BI Connector</td></tr>
                 <tr><td class="disabled">Slack Alerts</td></tr>
               </tbody>
@@ -102,48 +141,6 @@
           </mat-card-content>
         </mat-card>
         <button mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
-          <mat-icon>shopping_cart</mat-icon> Select Plan
-        </button>
-      </div>
-      <!-- Pricing box -->
-      <div fxFlex="100" fxFlex.gt-sm="33">
-        <mat-card class="plan-pricing text-center orange">
-          <img src="assets/images/box-orange.png">
-          <mat-card-title>
-            <div class="pt-1 pb-1">
-              <h1><strong>$<span>{{standardDatabox}} /Mo</span></strong></h1>
-              <h3 class="">Standard Account</h3>
-            </div>
-            <mat-divider></mat-divider>
-          </mat-card-title>
-          <mat-card-content class="">
-            <div class="text-sm">
-              <strong><h5>For new members</h5></strong>
-            </div>
-            <div class="">
-              <mat-list dense class="mb-1">
-                <mat-list-item>3,000 mentions</mat-list-item>
-                <mat-list-item>Facebook</mat-list-item>
-                <mat-list-item>Twitter</mat-list-item>
-                <mat-list-item>Web</mat-list-item>
-                <mat-list-item>Airbnb</mat-list-item>
-                <mat-list-item>Waze</mat-list-item>
-              </mat-list>
-            </div>
-            <br>
-            <table>
-              <tbody>
-                <tr><td class="">2 Users</td></tr>
-                <tr><td class="">Email Alerts</td></tr>
-                <tr><td class="">Google Data Studio</td></tr>
-                <tr><td class="">Tableau Connector</td></tr>
-                <tr><td class="">Power BI Connector</td></tr>
-                <tr><td class="">Slack Alerts</td></tr>
-              </tbody>
-            </table>
-          </mat-card-content>
-        </mat-card>
-        <button mat-raised-button class="mat-bg-success btn-add-to-cart mt-1" (click)="addToCart('Standard', standardDatabox)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
       </div>

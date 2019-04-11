@@ -54,12 +54,14 @@ bdo[dir=ltr] {
   direction: ltr;
   unicode-bidi: bidi-override;
 }
-.mat-card {
-  font-size: .875rem;
-}
+
 .mat-card-header-text{
   margin:0 !important;
 }
+.mat-card{
+  padding: 1rem !important;
+}
+
 img {
   max-width: 100%;
 }
@@ -71,6 +73,7 @@ a {
 }
 p {
   margin: 0 0 16px;
+  font-size: 12px !important;
 }
 .h1, 
 .h2, 
@@ -273,6 +276,9 @@ code {
 .fz-2 {
   font-size: 2rem !important;
 }
+.fz-12 {
+  font-size: 12px !important;
+}
 .text-center {
   text-align: center;
 }
@@ -334,6 +340,10 @@ code {
   height: 13px;
   width: 13px;
 }
+mat-card-title{
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
 
 .mat-card.default {
   padding: 0;
@@ -343,7 +353,6 @@ code {
   padding-left: 1rem;
   padding-right: 1rem;
   line-height: 1;
-  font-weight: 400;
 }
 .mat-card-title{
   color: #fb8a01;
@@ -385,14 +394,16 @@ code {
   margin-right: -24px;
 }
 
-.mat-card.p-0 .mat-card-title .card-title-text {
-  padding: 1rem 1.5rem;
+.mat-card .mat-card-title .card-title-text {
+  padding: 1rem 1rem;
 }
+
 .mat-card.p-0 .mat-card-title .card-title-text .card-control {
   height: 24px;
   width: 24px;
   line-height: 24px;
 }
+
 .mat-card.p-0 .mat-card-title .card-title-text .mat-card-subtitle {
   margin: 0;
 }
@@ -405,13 +416,14 @@ code {
   margin: 0 0 1rem !important;
 }
 .mat-card.p-0 .mat-card-content {
-  padding:  0 1.5rem 1.5rem;
+  padding:  0 1rem 1rem;
 }
 .mat-button,
 .mat-raised-button {
   font-weight: 400 !important;
   font-size: 0.875rem !important;
 }
+
 [mat-lg-button] {
   padding: 0 32px !important;
   font-size: 18px;
@@ -541,7 +553,7 @@ code {
 }
 
 .icon-chip {
-  font-size: 11px !important;
+  font-size: 12px !important;
   padding: 4px 8px !important;
   display: flex !important;
   flex-direction: row;

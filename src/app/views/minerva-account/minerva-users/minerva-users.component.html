@@ -3,7 +3,7 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small>   |     Account / Users </small>
+      <small class="fw-400">    Account / Users </small>
     </h1>
   </div>
 </div>
@@ -17,9 +17,9 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
-          <h2>Standard</h2>
-          <p><a class="text-muted">Upgrade your plan</a></p>
+        <div>
+          <h1 class="mat-h1 fw-400">Standard</h1>
+          <p><a class="text-muted mat-color-primary">Upgrade your plan</a></p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -29,13 +29,13 @@
       <mat-card-title class="">
         <div class="card-title-text mt-05">Mentions Plan</div>
         <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+        <div class="card-title-text"><button mat-raised-button>Add Mentions</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
+        <div>
           <h6>Mentions Remaining</h6>
-          <p class="text-muted">Mentions</p>
+          <p class="text-muted">3000 mentions remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -49,13 +49,13 @@
       <mat-card-title class="">
         <div class="card-title-text mt-05">Algorithm Credit</div>
         <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+        <div class="card-title-text"><button mat-raised-button>Add Credit</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
+        <div>
           <h6>Algorithm Credit Remaining</h6>
-          <p class="text-muted">Credit</p>
+          <p class="text-muted">$100 in credit remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -64,7 +64,7 @@
       </mat-card-content>
     </mat-card>
   </div>  
-</div>  
+</div>
 <!-- Account Settings -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
@@ -112,8 +112,7 @@
 
 					  	<mat-card-title class="mat-color-primary">
 					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
-					  		<p>Snow Benton</p>
-
+					  		<h4 class="mat-h4 mt-1 ml-1">Snow Benton</h4>
 					  	</mat-card-title>
 
 					  	<span fxFlex></span>
@@ -130,15 +129,15 @@
 					<mat-divider></mat-divider>
 					<br>
 					<mat-card-content>
-						<span class="mat-h3 user-details">
+						<p class="user-details">
 							<mat-icon>account_circle</mat-icon> Administrator
-						</span><br>
-						<span class="mat-h3 user-details">
+						</p><br>
+						<p class="user-details">
 							<mat-icon>email</mat-icon> snowbenton@mnrva
-						</span><br>
-						<span class="mat-h3 user-details">
+						</p><br>
+						<p class="user-details">
 							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
-						</span><br>
+						</p><br>
 					</mat-card-content>
 				</mat-card>
 			</div>
@@ -149,7 +148,7 @@
 
 					  	<mat-card-title class="mat-color-primary">
 					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
-					  		<p>Snow Benton</p>
+					  		<h4 class="mat-h4 mt-1 ml-1">Snow Benton</h4>
 
 					  	</mat-card-title>
 
@@ -167,15 +166,15 @@
 					<mat-divider></mat-divider>
 					<br>
 					<mat-card-content>
-						<span class="mat-h3 user-details">
+						<p class="user-details">
 							<mat-icon>account_circle</mat-icon> Administrator
-						</span><br>
-						<span class="mat-h3 user-details">
+						</p><br>
+						<p class="user-details">
 							<mat-icon>email</mat-icon> snowbenton@mnrva
-						</span><br>
-						<span class="mat-h3 user-details">
+						</p><br>
+						<p class="user-details">
 							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
-						</span><br>
+						</p><br>
 					</mat-card-content>
 				</mat-card>
 			</div>
@@ -186,7 +185,7 @@
 
 					  	<mat-card-title class="mat-color-primary">
 					  		<img class="user-image" src="assets/images/face-1.jpg" alt="">
-					  		<p>Snow Benton</p>
+					  		<h4 class="mat-h4 mt-1 ml-1">Snow Benton</h4>
 
 					  	</mat-card-title>
 
@@ -204,15 +203,15 @@
 					<mat-divider></mat-divider>
 					<br>
 					<mat-card-content>
-						<span class="mat-h3 user-details">
+						<p class="user-details">
 							<mat-icon>account_circle</mat-icon> Administrator
-						</span><br>
-						<span class="mat-h3 user-details">
+						</p><br>
+						<p class="user-details">
 							<mat-icon>email</mat-icon> snowbenton@mnrva
-						</span><br>
-						<span class="mat-h3 user-details">
+						</p><br>
+						<p class="user-details">
 							<mat-icon>calendar_today</mat-icon> Member since: Jul 9, 2016
-						</span><br>
+						</p><br>
 					</mat-card-content>
 				</mat-card>
 			</div>

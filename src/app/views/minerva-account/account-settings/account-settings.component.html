@@ -3,12 +3,11 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small>   |     Account / Settings </small>
+      <small class="fw-400">    Account / Settings </small>
     </h1>
   </div>
 </div>
 <hr>
-
 <!-- Plan and Credit -->
 <div fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
@@ -18,9 +17,9 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
-          <h2>Standard</h2>
-          <p><a class="text-muted">Upgrade your plan</a></p>
+        <div>
+          <h1 class="mat-h1 fw-400">Standard</h1>
+          <p><a class="text-muted mat-color-primary">Upgrade your plan</a></p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -30,13 +29,13 @@
       <mat-card-title class="">
         <div class="card-title-text mt-05">Mentions Plan</div>
         <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+        <div class="card-title-text"><button mat-raised-button>Add Mentions</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
+        <div>
           <h6>Mentions Remaining</h6>
-          <p class="text-muted">Mentions</p>
+          <p class="text-muted">3000 mentions remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -50,13 +49,13 @@
       <mat-card-title class="">
         <div class="card-title-text mt-05">Algorithm Credit</div>
         <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+        <div class="card-title-text"><button mat-raised-button>Add Credit</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
+        <div>
           <h6>Algorithm Credit Remaining</h6>
-          <p class="text-muted">Credit</p>
+          <p class="text-muted">$100 in credit remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -65,7 +64,7 @@
       </mat-card-content>
     </mat-card>
   </div>  
-</div>  
+</div>
 <!-- Account Settings -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">
@@ -108,19 +107,17 @@
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 		<mat-card>
 			<mat-card-content>
-				<h1 class="mat-h2">Change Account Name</h1>
-				<br>
-
+				<h4 class="mat-h4">Change Account Name</h4>
 				<mat-form-field>
 				    <input matInput placeholder="Account Name" value="CCK">
 				</mat-form-field>
 
-				<h1 class="mat-h2">Email From Minerva</h1>
+				<h4 class="mat-h4">Email From Minerva</h4>
 				<mat-checkbox>When New User Joins</mat-checkbox><br>
 				<mat-checkbox checked=true>When New Data Sources are Released</mat-checkbox><br>
-				<mat-checkbox>When An Invoice is Generated</mat-checkbox><br><br><br>
+				<mat-checkbox>When An Invoice is Generated</mat-checkbox><br><br>
 
-				<h1 class="mat-h2">Delete Account</h1>
+				<h4 class="mat-h4">Delete Account</h4>
 				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique.</p>
 				<button mat-raised-button color="warn" (click)="deleteAccountDialog('Delete Account')">Delete Account</button>
 

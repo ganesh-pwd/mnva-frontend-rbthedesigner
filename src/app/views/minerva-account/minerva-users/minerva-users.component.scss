@@ -87,12 +87,6 @@ small{
 	font-size: 35px;
 }
 
-.card-content{
-	padding-left: 30px;
-}
-
-
-
 .edit-databox{
 	font-size: 16px !important;
 	cursor: pointer;
@@ -155,6 +149,7 @@ small{
 	vertical-align: middle !important;
 	mat-icon{
 		margin-right: 10px;
+		margin-top: -4px;
 	}
 }
 
@@ -175,5 +170,5 @@ small{
 }
 
 .fixed-height{
-	min-height: 230px;
+	min-height: 177px;
 }

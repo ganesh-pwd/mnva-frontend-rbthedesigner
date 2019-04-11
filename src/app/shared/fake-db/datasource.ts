@@ -1,7 +1,9 @@
 export class DatasourceDB {
   public countries = [
-    { name: 'Facebook'},
-    { name: 'Twitter'},
-    { name: 'Web'}
+    { name: 'All Facebook Pages'},
+    { name: 'Owned Facebook Profile'},
+    { name: 'All Twitter Profiles'},
+    { name: 'Owned Twitter Profile'},
+    { name: 'Media Websites'}
   ];
 }

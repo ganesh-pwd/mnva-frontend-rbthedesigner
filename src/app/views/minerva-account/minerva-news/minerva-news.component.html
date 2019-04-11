@@ -3,7 +3,7 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small>   |     Account / News </small>
+      <small class="fw-400">    Account / News </small>
     </h1>
   </div>
 </div>
@@ -17,9 +17,9 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
-          <h2>Standard</h2>
-          <p><a class="text-muted">Upgrade your plan</a></p>
+        <div>
+          <h1 class="mat-h1 fw-400">Standard</h1>
+          <p><a class="text-muted mat-color-primary">Upgrade your plan</a></p>
         </div>
       </mat-card-content>
     </mat-card>
@@ -29,13 +29,13 @@
       <mat-card-title class="">
         <div class="card-title-text mt-05">Mentions Plan</div>
         <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+        <div class="card-title-text"><button mat-raised-button>Add Mentions</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
+        <div>
           <h6>Mentions Remaining</h6>
-          <p class="text-muted">Mentions</p>
+          <p class="text-muted">3000 mentions remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -49,13 +49,13 @@
       <mat-card-title class="">
         <div class="card-title-text mt-05">Algorithm Credit</div>
         <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Upgrade</button></div>
+        <div class="card-title-text"><button mat-raised-button>Add Credit</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div class="pb-1">
+        <div>
           <h6>Algorithm Credit Remaining</h6>
-          <p class="text-muted">Credit</p>
+          <p class="text-muted">$100 in credit remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -64,7 +64,7 @@
       </mat-card-content>
     </mat-card>
   </div>  
-</div>  
+</div>
 <!-- Account Settings -->
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="20">

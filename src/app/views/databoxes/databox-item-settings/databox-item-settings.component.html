@@ -25,7 +25,7 @@
 	<span fxFlex></span>
 	<div style="position: absolute; right: 0px; top: 6px;">
 		<h3 class="mat-h4 mr-1">Mentions Remaining:
-		  <span class="credits"> 10,000
+		  <span class="credits fw-400 mat-color-gray"> 10,000
 		  </span>
 		</h3>
 	</div>
@@ -59,12 +59,12 @@
 <div fxLayout="row" fxLayoutWrap="wrap">
 	<!-- Column1 -->
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-			<h1 class="mat-h2">Query Editor</h1>
+		<div class="settings" fxLayout="row" fxLayoutWrap="wrap">
+			<h1 class="mat-h3">Query Editor</h1>
 		</div>
 		<!-- Change Datasource & Country -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="50">
+			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
@@ -87,66 +87,73 @@
 					</mat-card-content>
 				</mat-card>
 			</div>
-			<div fxLayout="column" class="fixed-height" fxFlex.gt-sm="50">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Change Country</span>
-						</mat-card-title>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<mat-card-content>
-					<br>
-					<form>
-						<mat-form-field class="full-width">
-						  	<mat-select value="Costa Rica">
-							    <mat-option *ngFor="let country of countries" [value]="country.name">
-							      {{country.name}}
-							    </mat-option>
-						  	</mat-select>
-						</mat-form-field>
-					</form>
-					</mat-card-content>
-				</mat-card>
-			</div>
 		</div>
-		<!-- Max Results & Historical -->
+		<!-- Historical -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
 			<div fxLayout="column" fxFlex.gt-sm="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
-							<span>Select Date Range</span>
+							<span>Historical Data</span>
 						</mat-card-title>
 					</mat-card-header>
 
 					<mat-divider></mat-divider>
 					<mat-card-content class="mt-1">
 						<br>
-						<div fxLayout="column" class="mr-05" fxFlex.gt-sm="50">
-						    <p class="m-0">Start Date</p>
-	    					<form>
-								<mat-form-field class="full-width">
-									<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-									<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-									{{ singleDatasource.name }}
-									</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</form>
+						<div fxLayout="row" class="mr-05" fxFlex.gt-sm="100">
+						    <button mat-raised-button mat-color-primary class="query_type">Full Archive</button>
+						    <button mat-raised-button mat-color-primary class="query_type">1d</button>
+						    <button mat-raised-button mat-color-primary class="query_type">1w</button>
+						    <button mat-raised-button mat-color-primary class="query_type">2w</button>
+						    <button mat-raised-button mat-color-primary class="query_type">1m</button>
+						    <button mat-raised-button mat-color-primary class="query_type">3m</button>
+						    <button mat-raised-button mat-color-primary class="query_type">6m</button>
+						    <button mat-raised-button mat-color-primary class="query_type">1y</button>
 						</div>
-						<div fxLayout="column" class="mr-05" fxFlex.gt-sm="50">
-						    <p class="m-0">End Date</p>
-	    					<form>
-								<mat-form-field class="full-width">
-									<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-									<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-									{{ singleDatasource.name }}
-									</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</form>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+		<!-- Select Country -->
+		<div fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxLayout="column" fxFlex.gt-sm="100">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title>
+							<span>Country Selector</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content class="mt-1">
+						<br>
+						<div fxLayout="row" class="mr-05" fxFlex.gt-sm="100">
+			      	    <button mat-raised-button mat-color-primary class="query_type">Panamá</button>
+			            <button mat-raised-button class="query_type">Costa Rica</button>
+			            <button mat-raised-button class="query_type">Nicaragua</button>
+			            <button mat-raised-button class="query_type">El Salvador</button>
+			            <button mat-raised-button class="query_type">Honduras</button>
+			            <button mat-raised-button class="query_type">Guatemala</button>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+		<!-- Connect Your Page -->
+		<div fxLayout="row" fxLayoutWrap="wrap" >
+			<div fxLayout="column" fxFlex.gt-sm="100">
+				<mat-card>
+					<mat-card-header>
+						<mat-card-title>
+							<span>Connect Your Page</span>
+						</mat-card-title>
+					</mat-card-header>
+
+					<mat-divider></mat-divider>
+					<mat-card-content class="mt-1">
+						<br>
+						<div fxLayout="row" class="mr-05" fxFlex.gt-sm="100">
 						</div>
 					</mat-card-content>
 				</mat-card>
@@ -172,11 +179,10 @@
 					</div>
 					<!--Basic Query Editor -->
 					<mat-card-content>
-						<br>
-						<div fxLayout="row" fxLayoutWrap="wrap" >
+						<div class="mt-1" fxLayout="row" fxLayoutWrap="wrap" >
 							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <b class="mt-1">Optional Keywords</b>
-							    <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
+							    <b>Optional Keywords</b>
+							    <p>Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
 						    	<form>
 						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
 						    			<div class="p-1">
@@ -186,10 +192,10 @@
 						    	</form>
 							</div>
 						</div>
-						<div fxLayout="row" fxLayoutWrap="wrap" >
+						<div class="mt-1" fxLayout="row" fxLayoutWrap="wrap" >
 							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <b class="mt-1">Required Keywords</b>
-							    <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
+							    <b>Required Keywords</b>
+							    <p>Your Databox will collect mentions that contain all of these keywords.</p>
 						    	<form>
 						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
 						    			<div class="p-1">
@@ -199,10 +205,10 @@
 						    	</form>
 							</div>
 						</div>
-						<div fxLayout="row" fxLayoutWrap="wrap" >
+						<div class="mt-1" fxLayout="row" fxLayoutWrap="wrap" >
 							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <b class="mt-1">Exclude Keywords</b>
-							    <p class="mt-1">Your Databox will not bring in mentions any of the following keywords.</p>
+							    <b>Exclude Keywords</b>
+							    <p>Your Databox will not bring in mentions any of the following keywords.</p>
 						    	<form>
 						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
 						    			<div class="p-1">
@@ -253,7 +259,7 @@
                                         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
                                             <mat-card class="query-right-side">
                                                 <mat-card-content>
-                                                    <h3 class="mat-h3">Boolean Operations: Booleans help you create your query.</h3>
+                                                    <p>Boolean Operations: Booleans help you create your query.</p>
                                                     <p class="mat-color-primary query-info"matTooltip="OR operators are used to expand your query. For example: car OR bus OR train">OR = OR's help you expand your query
                                                     </p>
                                                     <p class="mat-color-primary query-info"matTooltip="AND operators are used to expand your query. For example: car AND bus AND train">AND = AND's help you be more exact
@@ -273,63 +279,40 @@
 		</div>
 		<!-- Monitored Pages -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<!-- <div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Max Results</span>
-						</mat-card-title>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-					    <mat-radio-button value="1">All mentions found</mat-radio-button>
-				    	<mat-radio-button class="ml-1" value="1">Specific amount</mat-radio-button>
-    					<form>
-							<mat-form-field class="full-width">
-								<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-								<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-								{{ singleDatasource.name }}
-								</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</form>
-					</mat-card-content>
-				</mat-card>
-			</div> -->
 			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
-							<span>Monitored Pages</span>
+							<span>Advanced Settings</span>
 						</mat-card-title>
 						<span fxFlex></span>
 						<mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
 					</mat-card-header>
 					<mat-divider></mat-divider>
 					<br>
-	              	<!-- <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
-				  	</mat-slide-toggle> -->
-					<mat-card-content>
-						<div fxLayout="row" fxLayoutWrap="wrap" >
-							<div fxLayout="row" class="mb-1" fxFlex="100" fxFlex.gt-sm="100">
-							    <mat-radio-button value="1">Monitor a News Media list created by our community</mat-radio-button>
-							    <span fxFlex></span>
-								<a class="mat-color-gray">Suggest Media</a>
-							</div>
-							<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-							    <mat-radio-button value="1">Specific Pages</mat-radio-button>
-							    <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
-						    	<form>
-						    		<mat-form-field style="border: 1px solid gray;" class="full-width">
-						    			<div class="p-1">
-				                      		<textarea matInput rows="10" cols="80" value=""></textarea>
-				                      	</div>	
-						    		</mat-form-field>
-						    	</form>
-						    </div>
-						</div>
-					</mat-card-content>
+	              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
+				  	</mat-slide-toggle>
+				  	<br>
+				  	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Specify the máximum number of results your query will retrieve">Specify Maximum Number of Results
+				  	</mat-slide-toggle>
+					<br>
+	              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor only news media">Monitor only News Media
+				  	</mat-slide-toggle>
+				  	<br>
+	              	<mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor specific pages">Monitor Specific Pages
+			  		</mat-slide-toggle>
+					<div fxLayout="row" fxLayoutWrap="wrap" >
+						<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+						    <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
+					    	<form>
+					    		<mat-form-field style="border: 1px solid gray;" class="full-width">
+					    			<div class="p-1">
+			                      		<textarea matInput rows="10" cols="80" value=""></textarea>
+			                      	</div>	
+					    		</mat-form-field>
+					    	</form>
+					    </div>
+					</div>
 				</mat-card>
 			</div>
 		</div>
@@ -342,8 +325,8 @@
 	</div>
 	<!-- Column2 -->
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-		<div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-			<h1 class="mat-h2">Results Preview</h1>
+		<div class="settings" fxLayout="row" fxLayoutWrap="wrap">
+			<h1 class="mat-h3">Results Preview</h1>
 		</div>
 		<!-- Metrics -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
@@ -378,7 +361,7 @@
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
-							<span>Results</span>
+							<span>Results Preview</span>
 						</mat-card-title>
 					</mat-card-header>
 					<mat-divider></mat-divider>

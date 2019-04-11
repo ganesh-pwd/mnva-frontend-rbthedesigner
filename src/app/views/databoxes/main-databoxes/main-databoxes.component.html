@@ -43,7 +43,7 @@
 
       <mat-divider></mat-divider>
 
-      <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)" class="p-1">
+      <mat-card-content (click)="navigateToDatabox(data.folder, data._id, data.first_create)" class="m-0 p-1">
         <div>
             <div class="mt-1">
               <div>
@@ -69,17 +69,17 @@
       <mat-divider></mat-divider>
       <br>
       <mat-card-actions class="m-0 p-05">
-      	<h3 class="mat-h4">Status:
+      	<h4 class="mat-h4">Status:
           <span [ngClass]="
               data.status === 'Active' ? 'databox-active' :
               data.status === 'Paused' ? 'databox-paused':
               data.status === 'Draft'? 'databox-draft' :
               ''"> {{data.status}}
           </span>
-        </h3>
+        </h4>
         <span fxFlex></span>
         <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" *ngIf="data.status!='Draft'" (click)="openDialog('Pause Your Databox', 'Are you sure you want to pause your databox. Data will stop comming into your Databox, and mentions will stop being deducted from your plan.', false)">
-        On/Off
+        <span class="mat-color-gray fz-12">On/Off</span>
         </mat-slide-toggle>
       </mat-card-actions>
     </mat-card>

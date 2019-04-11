@@ -79,10 +79,6 @@ small{
 	font-size: 35px;
 }
 
-.card-content{
-	padding-left: 30px;
-}
-
 .change{
 	cursor: pointer;
 	&:hover{
@@ -172,6 +168,7 @@ small{
 
 .mat-cell{
 	padding: 1% 1%;
+	font-size: 12px;
 }
 
 table{
@@ -194,5 +191,5 @@ table{
     transform: rotate(45deg);
 }
 .fixed-height{
-	min-height: 230px;
+	min-height: 177px;
 }

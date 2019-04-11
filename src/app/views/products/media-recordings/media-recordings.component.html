@@ -15,18 +15,23 @@
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
     <mat-card>
+      <mat-card-header>
+         <mat-card-title class="mat-color-primary">
+            <div class="mt-05">Media Recordings</div>
+            <span fxFlex></span>
+            <button style="position: absolute; right:24px;" mat-raised-button color="primary" routerLink="/products/cart">
+             <mat-icon>shopping_cart</mat-icon>
+             Cart  ({{cartData.itemCount}})
+            </button>
+         </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
       <mat-card-content>
-        <div class="full-width mb-1 mt-1">
-          <button mat-raised-button color="primary" routerLink="/products/cart">
-            <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
-          </button>
-        </div>
-
-        <h4>Media Recordings</h4>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis asperiores, explicabo amet similique fuga optio laborum iste culpa alias iure unde! Tenetur velit fuga sit suscipit nobis odio facilis? Consequatur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis asperiores, explicabo amet similique fuga optio laborum iste culpa alias iure unde! Tenetur velit fuga sit suscipit nobis odio facilis? Consequatur.
-        </p>
-
-        <div>
+         <mat-card-subtitle>
+            <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+         </mat-card-subtitle>        
+         <div>
           <table class="mat-elevation-z8">
               <tbody>
                 <tr>

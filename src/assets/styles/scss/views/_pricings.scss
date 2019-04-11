@@ -2,11 +2,11 @@
 .plan-pricing .mat-list-item .mat-list-item-content {
   display: inline-flex !important;
   text-align: center;
-  font-size: .875rem !important;
+  font-size: 12px !important;
 }
 
 .plan-pricing.green{
-	h1,h3{
+	h1,h2{
 		color: #22d9c9;
 	}
 	mat-list-item{
@@ -15,7 +15,7 @@
 }
 
 .plan-pricing.blue{
-	h1,h3{
+	h1,h2{
 		color: #19b4d7;
 	}
 	mat-list-item{
@@ -24,7 +24,7 @@
 }
 
 .plan-pricing.orange{
-	h1,h3{
+	h1,h2{
 		color: #ff9628;
 	}
 	mat-list-item{
