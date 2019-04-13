@@ -13,13 +13,9 @@
 </div>
 
 <mat-card class="account-type p-0 pb-1" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-  Billed Montly
-  <mat-slide-toggle
-    color="primary"
-    class="mb-1"
-  >
-    Billed Anually
-  </mat-slide-toggle>
+  <div style="position: absolute;left: 24px; top: 24px;">
+    Billed Montly <mat-slide-toggle color="primary" class="mb-1"> Billed Anually</mat-slide-toggle>
+  </div>
   <div class="full-width mb-1 mt-1 add-cart">
     <button mat-raised-button color="primary" routerLink="/products/cart">
       <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
@@ -34,14 +30,14 @@
           <img src="assets/images/box-green.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1><strong>$<span>{{standardAccount}} /Mo</span></strong></h1>
-              <h3 class="">Basic Account</h3>
+              <h1 class="mat-h1 mb-0"><strong>$<span>{{standardAccount}} /Mo</span></strong></h1>
+              <h2 class="mat-h2">Basic Account</h2>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <strong><h5>For new members</h5></strong>
+              <h4 class="mat-h4">For new members</h4>
             </div>
             <div class="">
               <mat-list dense class="mb-1">
@@ -72,7 +68,7 @@
         (click)="addToCart('Basic Account', standardAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <h4 class="text-center" *ngIf="loggedInUser.accountType === 'Basic'">Selected Plan</h4>
+        <h3 class="text-center mat-h3 mt-1" *ngIf="loggedInUser.accountType === 'Basic'">Current Plan</h3>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
@@ -80,14 +76,14 @@
           <img src="assets/images/box-blue.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1><strong>$<span>{{plusAccount}} /Mo</span></strong></h1>
-              <h3 class="">Professional Account</h3>
+              <h1 class="mat-h1 mb-0"><strong>$<span>{{plusAccount}} /Mo</span></strong></h1>
+              <h2 class="mat-h2">Professional Account</h2>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <strong><h5>For new members</h5></strong>
+              <h4 class="mat-h4">For new members</h4>
             </div>
             <div class="">
               <mat-list dense class="mb-1">
@@ -126,14 +122,14 @@
           <img src="assets/images/box-orange.png">
           <mat-card-title>
             <div class="pt-1 pb-1">
-              <h1><strong>$<span>{{enterpriseAccount}} /Mo</span></strong></h1>
-              <h3 class="">Enterprise Account</h3>
+              <h1 class="mat-h1 mb-0"><strong>$<span>{{enterpriseAccount}} /Mo</span></strong></h1>
+              <h2 class="mat-h2">Enterprise Account</h2>
             </div>
             <mat-divider></mat-divider>
           </mat-card-title>
           <mat-card-content class="">
             <div class="text-sm">
-              <strong><h5>For new members</h5></strong>
+              <h4 class="mat-h4">For new members</h4>
             </div>
             <div class="">
               <mat-list dense class="mb-1">

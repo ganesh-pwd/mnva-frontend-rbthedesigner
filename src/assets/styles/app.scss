@@ -142,7 +142,7 @@ tbody {
 }
 
 .mat-card-title {
-  font-size: 20px !important;
+  font-size: 16px !important;
 }
 
 body .mat-select-trigger,
@@ -318,8 +318,9 @@ table {
 }
 
 .query-active {
-  background: gray !important;  
-  color: white !important;  
+  background: #22d9c9 !important; 
+  border: 1px solid #22d9c9 !important; 
+  color: white !important;
 }
 
 .cdk-overlay-pane {

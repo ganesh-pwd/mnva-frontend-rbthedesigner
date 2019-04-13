@@ -52,10 +52,22 @@
       </mat-card-header>
       <mat-divider></mat-divider>
       <br>
-
       <mat-card-content>
          <mat-card-subtitle>
             <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+            <br>
+            <mat-form-field>
+                 <mat-select value="$250">
+                    <mat-option value="$50" style="font-size: 14px !important;">$50</mat-option>
+                    <mat-option value="$100" style="font-size: 14px !important;">$100</mat-option>
+                    <mat-option value="$150" style="font-size: 14px !important;">$150</mat-option>
+                    <mat-option value="$250" style="font-size: 14px !important;">$250</mat-option>
+                 </mat-select>
+            </mat-form-field>
+            <button mat-raised-button class="mat-primary btn-add-to-cart ml-1">
+              <mat-icon>shopping_cart</mat-icon>
+                 Add to cart
+            </button>
          </mat-card-subtitle>
       </mat-card-content>
    </mat-card>
@@ -75,64 +87,25 @@
             <!-- Product Box -->
             <div class="product-wrap" *ngFor="let product of algorithms | MenuFilter: searchInput | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
              [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-              <div class="product-inner default-bg">
-                <div class="featured-img" (click)="addToCart(product)">
+              <div class="product-inner mb-05 default-bg">
+                <div class="featured-img algorithms" (click)="addToCart(product)">
                   <img [src]="product.photo" alt="">
                 </div>
                 <div class="info-wrap p-1">
                   <div class="main-info">
-                    <h3 class="title" (click)="addToCart(product)">{{product.name}}</h3>
+                    <h3 class="mat-h3 title" (click)="addToCart(product)">{{product.name}}</h3>
                     <p class="text-muted p-line">{{product?.description}}</p>
                   </div>
                   <div class="actions">
                     <div class="price-rating">
                       <div class="price">
-                        <span class="mention">${{product?.price?.sale.toFixed(5)}}/mentions</span>
+                        <span fxFlex></span>
+                        <span class="mention">${{product?.price?.sale.toFixed(5)}}/mention</span>
                         <!--<del class="text-muted">{{product?.price?.sale.toFixed(5)}}</del>-->
                       </div>
-
-                    </div>
-                    <div class="add-to-cart">
-                      <span fxFlex></span>
-                      <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart(product)">
-                        <mat-icon>shopping_cart</mat-icon>
-                      </button>
                     </div>
                   </div>
                 </div>
-                <!-- Visible when viewMode === list-view -->
-                <div class="more-info-wrap p-1" *ngIf="viewMode === 'list-view'">
-                  <div class="more-info">
-                    <div class="more-actions mb-1">
-                      <span fxFlex></span>
-                      <button mat-icon-button>
-                        <mat-icon>playlist_add</mat-icon>
-                      </button>
-                      <button mat-icon-button>
-                        <mat-icon>favorite</mat-icon>
-                      </button>
-                    </div>
-
-                    <div>
-                      <ul>
-                        <li>
-                          <mat-icon>check</mat-icon> Heavy duty
-                        </li>
-                        <li>
-                          <mat-icon>check</mat-icon> Water resistance
-                        </li>
-                        <li>
-                          <mat-icon>check</mat-icon> Clean design
-                        </li>
-                        <li>
-                          <mat-icon>check</mat-icon> High quality raw materials
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </div>
-
               </div>
             </div>
             <!-- End Product -->

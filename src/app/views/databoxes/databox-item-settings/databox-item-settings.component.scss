@@ -129,9 +129,9 @@ button.query_type{
 .query-help{
 	display: inline-flex !important;
 	vertical-align: middle !important;
-
+	font-size: 10px;
 	a{
-		padding-right: 30px;
+		padding-right: 10px;
 		padding-left: 10px;
 	}
 }
@@ -146,7 +146,7 @@ button.query_type{
 }
 
 .query-header{
-	margin-top:  40px !important; 
+	margin-top:  20px !important; 
 }
 
 .page-search{

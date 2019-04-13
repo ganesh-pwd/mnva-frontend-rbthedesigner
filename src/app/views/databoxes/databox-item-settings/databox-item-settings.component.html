@@ -71,12 +71,7 @@
   </div>
 
   <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
-    <button
-      mat-raised-button
-      class="mb-05"
-      color="primary"
-      (click)="navigateToDatabox(data?._id, data?.first_create)"
-    >
+    <button mat-raised-button class="mb-05" color="primary" (click)="navigateToDatabox(data?._id, data?.first_create)">
       Back to Databox
     </button>
   </div>
@@ -86,23 +81,13 @@
 
 <form [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
   <!-- Column1 -->
-  <div
-    fxLayout="column"
-    fxFlex="100"
-    fxFlex.gt-md="50"
-    [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-  >
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
     <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
       <h1 class="mat-h1">Query Editor</h1>
     </div>
-    <!-- Change Datasource & Country -->
+    <!-- Change Datasource -->
     <div fxLayout="row" fxLayoutWrap="wrap">
-      <div
-        fxLayout="column"
-        class="fixed-height"
-        fxFlex.gt-sm="50"
-        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-      >
+      <div fxLayout="column" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
         <mat-card>
           <mat-card-header>
             <mat-card-title>
@@ -129,106 +114,69 @@
           </mat-card-content>
         </mat-card>
       </div>
-      <div
-        fxLayout="column"
-        class="fixed-height"
-        fxFlex.gt-sm="50"
-        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-      >
+    </div> 
+
+    <!-- Change Country -->
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxLayout="column" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
         <mat-card>
           <mat-card-header>
             <mat-card-title>
               <span>Change Country</span>
             </mat-card-title>
           </mat-card-header>
-
           <mat-divider></mat-divider>
           <mat-card-content>
-            <br />
-            <mat-form-field class="full-width">
-              <mat-select formControlName="country">
-                <mat-option
-                  *ngFor="let country of countries"
-                  [value]="country.name"
-                >
-                  {{ country.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <br>
+            <button mat-raised-button mat-color-primary class="query_type">Panamá</button>
+            <button mat-raised-button class="query_type">Costa Rica</button>
+            <button mat-raised-button class="query_type">Nicaragua</button>
+            <button mat-raised-button class="query_type">El Salvador</button>
+            <button mat-raised-button class="query_type">Honduras</button>
+            <button mat-raised-button class="query_type">Guatemala</button>
           </mat-card-content>
         </mat-card>
       </div>
     </div>
 
-    <!-- Max Results & Historical -->
+    <!-- Connect Your Page -->
+    <div fxLayout="row" fxLayoutWrap="wrap" >
+      <div fxLayout="column" fxFlex.gt-sm="100">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Connect Your Page</span>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <mat-card-content>
+            <br>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <!-- Historical -->
 		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 				<mat-card>
 					<mat-card-header>
 						<mat-card-title>
-							<span>Select Date Range</span>
+							<span>Historical</span>
 						</mat-card-title>
 					</mat-card-header>
-
 					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-						<br>
-						<div fxLayout="column" class="mr-05" fxFlex.gt-sm="50">
-						    <p class="m-0">Start Date</p>
-	    					<form>
-								<mat-form-field class="full-width">
-									<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-									<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-									{{ singleDatasource.name }}
-									</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</form>
-						</div>
-						<div fxLayout="column" class="mr-05" fxFlex.gt-sm="50">
-						    <p class="m-0">End Date</p>
-	    					<form>
-								<mat-form-field class="full-width">
-									<mat-select [(value)]="selectedDatasource" (selectionChange)="selectDatasource()">
-									<mat-option *ngFor="let singleDatasource of datasource" [value]="singleDatasource.name">
-									{{ singleDatasource.name }}
-									</mat-option>
-									</mat-select>
-								</mat-form-field>
-							</form>
-						</div>
-					</mat-card-content>
-				</mat-card>
-			</div>
-			<div fxLayout="column" fxFlex.gt-sm="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Max Results</span>
-						</mat-card-title>
-					</mat-card-header>
-
-					<mat-divider></mat-divider>
-					<mat-card-content class="mt-1">
-					    <mat-radio-button value="1">All mentions found</mat-radio-button>
-				    	<mat-radio-button class="ml-1" value="1">Specific amount</mat-radio-button>
-    					
-              <form>
-							<mat-form-field class="full-width">
-								<mat-select 
-                  [(value)]="selectedDatasource" 
-                  (selectionChange)="selectDatasource()">
-
-    								<mat-option *ngFor="let singleDatasource of loggedInUser?.datasources" 
-                    [value]="singleDatasource">
-    								{{ singleDatasource }}
-
-  								</mat-option>
-								</mat-select>
-							</mat-form-field>
-						</form>
-
-					</mat-card-content>
+          <mat-card-content>
+            <br>
+            <button mat-raised-button mat-color-primary class="query_type">Full Archive</button>
+            <button mat-raised-button mat-color-primary class="query_type">1d</button>
+            <button mat-raised-button mat-color-primary class="query_type">1w</button>
+            <button mat-raised-button mat-color-primary class="query_type">2w</button>
+            <button mat-raised-button mat-color-primary class="query_type">1m</button>
+            <button mat-raised-button mat-color-primary class="query_type">3m</button>
+            <button mat-raised-button mat-color-primary class="query_type">6m</button>
+            <button mat-raised-button mat-color-primary class="query_type">1y</button>
+          </mat-card-content>
 				</mat-card>
 			</div>
 		</div>
@@ -247,7 +195,7 @@
               <span>Query</span>
             </mat-card-title>
             <span fxFlex></span>
-            <a>Expand</a>
+            <mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
           </mat-card-header>
           <mat-divider></mat-divider>
           <br />
@@ -264,10 +212,6 @@
             [ngClass]="showQuery === 'advance' ? 'query-active': ''"
             (click)="showAdvanceQuery()">
             Advanced Query</button>
-            <span fxFlex></span>
-            <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">
-              Include Comments
-            </mat-slide-toggle>
           </div>
           <!--Basic Query Editor -->
           <mat-card-content *ngIf="showQuery == 'basic'" 
@@ -285,7 +229,7 @@
                 fxFlex.gt-sm="100"
               >
                 <b>Optional Keywords</b>
-                <p class="mt-1">
+                <p class="mt-05">
                   Your Databox will collect mentions that contain at least one
                   of these keywords, plus all required keywords.
                 </p>
@@ -315,7 +259,7 @@
                 }"
               >
                 <b class="mt-1">Required Keywords</b>
-                <p class="mt-1">
+                <p class="mt-05">
                   Your Databox will collect mentions that contain all of these
                   keywords.
                 </p>
@@ -345,7 +289,7 @@
                 }"
               >
                 <b class="mt-1">Exclude Keywords</b>
-                <p class="mt-1">
+                <p class="mt-05">
                   Your Databox will not bring in mentions any of the following
                   keywords.
                 </p>
@@ -397,8 +341,6 @@
                     </p>
                   </mat-card-subtitle>
                 </mat-card-header>
-                
-                <br />
                 <mat-card-content 
                   *ngIf="showQuery === 'advance'"
                   [@animate]="{
@@ -412,28 +354,24 @@
                       fxFlex.gt-md="100"
                       fxLayoutAlign="center"
                     >
-                      <mat-card class="p-0">
-                        <mat-divider></mat-divider>
-                        <mat-card-content class="p-0">
-                          <mat-form-field class="full-width">
+                        <mat-form-field
+                          style="border: 1px solid gray;"
+                          class="full-width"
+                        >
+                          <div class="p-1">
                             <textarea
                               matInput
-                              placeholder="Query"
                               rows="10"
                               cols="80"
                               formControlName="advance-query"
                             ></textarea>
-                          </mat-form-field>
-                        </mat-card-content>
-                        <div class="text-muted query-help">
-                          <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                          </div>
+                        </mat-form-field>
+                        <div class="text-muted query-help mt-1">
                           <a>Show Simple Example</a>
-                          <mat-icon class="query-icon">remove_red_eye</mat-icon>
                           <a>Show Complex Example</a>
-                          <mat-icon class="query-icon">help_outline</mat-icon>
                           <a>Need More Help?</a>
                         </div>
-                      </mat-card>
                     </div>
                   </div>
                 </mat-card-content>
@@ -452,10 +390,9 @@
                     >
                       <mat-card class="query-right-side">
                         <mat-card-content>
-                          <h3 class="mat-h3">
-                            Boolean Operations: Booleans help you create your
-                            query.
-                          </h3>
+                          <h4 class="mat-h4">
+                            Boolean Operations:
+                          </h4>
                           <p
                             class="mat-color-primary query-info"
                             matTooltip="OR operators are used to expand your query. For example: car OR bus OR train"
@@ -486,42 +423,46 @@
       </div>
     </div>
 
-    <!-- Monitored Pages -->
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    <!-- Advanced Settings -->
+    <div fxLayout="row" fxLayoutWrap="wrap" >
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
         <mat-card>
           <mat-card-header>
             <mat-card-title>
-              <span>Monitored Pages</span>
+              <span>Advanced Settings</span>
             </mat-card-title>
             <span fxFlex></span>
-            <a>Expand</a>
+            <mat-icon class="mat-icon material-icons mat-color-gray">keyboard_arrow_down</mat-icon>
           </mat-card-header>
           <mat-divider></mat-divider>
           <br>
-          <mat-card-content>
-            <div fxLayout="row" fxLayoutWrap="wrap">
-              <div fxLayout="row" class="mb-1" fxFlex="100" fxFlex.gt-sm="100">
-                <mat-radio-button value="1">Monitor a News Media list created by our community</mat-radio-button>
-                <span fxFlex></span>
-                <a class="mat-color-gray">Suggest Media</a>
-              </div>
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-                <mat-radio-button value="1">Specific Pages</mat-radio-button>
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
+            </mat-slide-toggle>
+            <br>
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Specify the máximum number of results your query will retrieve">Specify Maximum Number of Results
+            </mat-slide-toggle>
+            <br>
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor only news media">Monitor only News Media
+            </mat-slide-toggle>
+            <br>
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor specific pages">Monitor Specific Pages
+            </mat-slide-toggle>
+          <div fxLayout="row" fxLayoutWrap="wrap" >
+            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
                 <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
                 <form>
                   <mat-form-field style="border: 1px solid gray;" class="full-width">
                     <div class="p-1">
-                      <textarea matInput rows="10" cols="80" value=""></textarea>
-                    </div>
+                                <textarea matInput rows="10" cols="80" value=""></textarea>
+                              </div>  
                   </mat-form-field>
                 </form>
               </div>
-            </div>
-          </mat-card-content>
+          </div>
         </mat-card>
       </div>
     </div>
+
 
     <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
       <span fxFlex></span>
@@ -531,12 +472,7 @@
     </div>
   </div>
   <!-- Column2 -->
-  <div
-    fxLayout="column"
-    fxFlex="100"
-    fxFlex.gt-md="50"
-    [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-  >
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
     <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
       <h1 class="mat-h1">Results Preview</h1>
     </div>

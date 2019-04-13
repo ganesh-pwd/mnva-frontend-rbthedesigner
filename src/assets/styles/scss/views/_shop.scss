@@ -35,7 +35,6 @@ h1.title {
 }
 
 .shop-wrap {
-  margin: 1rem .33rem .33rem;
   overflow: hidden;
   min-height: 750px;
 }
@@ -295,13 +294,16 @@ h1.title {
         flex-direction: row;
       }
       padding-right: 0;
-      .featured-img {
-        flex: 3 0;
+      .featured-img.algorithms, .featured-img.mentions, .featured-img.licenses{
+        flex: 1 0;
         img {
           width: 100%;
           max-width: 100%;
           min-height: 100%;
         }
+      }
+      .featured-img.mentions{
+        flex:2 0;
       }
       .info-wrap {
         flex-direction: column;
