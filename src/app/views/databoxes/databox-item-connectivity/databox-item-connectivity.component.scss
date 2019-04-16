@@ -54,6 +54,10 @@ h5{
 	font-size: 35px;
 }
 
+.card-content{
+	padding-left: 30px;
+}
+
 .airplane{
 	transform: rotate(45deg); 
 	transition: transform 2s;
@@ -93,4 +97,10 @@ mat-accordion{
 
 .mat-h1{
 	width: 100% !important;
+}
+
+.mat-icon-databox{
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+	position: absolute !important;
 }

@@ -100,8 +100,8 @@ export class ProductsCartComponent implements OnInit {
   }
 
   // check shopping cart if it contains account type purchase
-  public checkIfAccountType() {
-    if (this.cart) {
+  public checkIfAccountType(){
+    if(this.cart){
       let account_types = this.cart
       .filter(el => el.product.category === 'Account Type');
 

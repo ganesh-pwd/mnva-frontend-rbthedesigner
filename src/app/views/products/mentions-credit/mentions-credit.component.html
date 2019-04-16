@@ -4,7 +4,7 @@
       <img src="assets/images/icon-databox.png">
       <h1 class="mat-h1">
          Products
-         <small>   |    
+         <small>
            <span class="main-route">
              <a routerLink="/products">Products</a>
            </span> / Mentions Credit</small>
@@ -75,22 +75,22 @@
   </div>
 </div>
 
-<!-- <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+<!--
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
    <mat-sidenav-container fxLayout="row" fxLayoutWrap="wrap" fxAlignLayout="center">
       <div class="shop-wrap" fxLayout="row" fxLayoutWrap="wrap">
         <div class="full-width">
           <div class="product-container" [ngClass]="{'list-view': viewMode === 'list-view'}">
-
             <div class="product-wrap" *ngFor="let product of mentions | MenuFilter: searchInput | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
              [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-              <div class="product-inner mb-05 default-bg">
+              <div class="product-inner default-bg">
                 <div class="featured-img mentions" (click)="addToCart(product)">
                   <img [src]="product.photo" alt="">
                 </div>
                 <div class="info-wrap p-1">
                   <div class="main-info">
-                    <h3 class="mat-h3 title" (click)="addToCart(product)">{{product.name}}</h3>
+                    <h3 class="mat-h3" (click)="addToCart(product)">{{product.name}}</h3>
                     <p class="text-muted p-line">{{product?.description}}</p>
                   </div>
                   <div class="actions">
@@ -108,7 +108,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="more-info-wrap p-1" *ngIf="viewMode === 'list-view'">
                   <div class="more-info">
                     <div class="more-actions mb-1">
@@ -149,6 +148,7 @@
           </div>
         </div>
       </div>
-   </mat-sidenav-container>
+    </mat-sidenav-container>
   </div>
-</div> -->
+</div>
+-->

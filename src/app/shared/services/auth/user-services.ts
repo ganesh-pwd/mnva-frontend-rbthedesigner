@@ -10,8 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class UserService {
   private users: any[];
 
-  private apiData = new BehaviorSubject<any>(null);
-  public apiData$ = this.apiData.asObservable();
+  private userData = new BehaviorSubject<any>(null);
+  public userData$ = this.userData.asObservable();
   public loggedInUser: any;
 
   constructor(private router: Router,
@@ -19,7 +19,11 @@ export class UserService {
     const users = new UserDB();
     this.users = users.users;
 
-    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    let checkLogin = JSON.parse(sessionStorage.getItem('loggedInUser'))
+
+    if(checkLogin) this.setUser(checkLogin);
+
+    this.userData$.subscribe(user =>  this.loggedInUser = user);
   }
 
   // ******* Implement your APIs ********
@@ -27,9 +31,17 @@ export class UserService {
     return of(this.users.slice()).pipe(delay(500));
   }
 
+  setUser(user){
+    this.userData.next(user);
+  }
+
   // ** select single user
   selectUser(): Observable<any> {
     const filterUser = this.users.filter(el => el._id === '5a7b73f78b64a02a67204d6e');
+
+    this.setUser(filterUser[0]);
+    sessionStorage.setItem('loggedInUser', JSON.stringify(filterUser[0]));
+    
     return of(filterUser.slice());
   }
 
@@ -38,6 +50,7 @@ export class UserService {
     const filterUser = this.users.filter(el => el.username === user && el.password === pass);
 
     if (filterUser.length === 1) {
+      this.setUser(filterUser[0]);
       return of(filterUser.slice());
     }
     else alert('User does not exist')
@@ -45,13 +58,16 @@ export class UserService {
 
   // compute remaining mentions
   computeRemainingMention(mention): Observable<any> {
-    const filterUser = this.users.findIndex(el => el._id === this.loggedInUser._id);
+    const filterUser = this.users.filter(el => el._id === this.loggedInUser._id);
     const userList = this.users;
 
-    let computeMentions = this.loggedInUser.mentions - mention;
-    userList[filterUser].mentions = computeMentions;
+    console.log(filterUser)
 
-    sessionStorage.setItem('loggedInUser', JSON.stringify(userList[filterUser]));
+    let computeMentions = this.loggedInUser.mentions - mention;
+    filterUser[0].mentions = computeMentions;
+
+    this.setUser(filterUser[0]);
+    sessionStorage.setItem('loggedInUser', JSON.stringify(filterUser[0]));
 
     return of(userList.slice()).pipe(delay(500));
   }

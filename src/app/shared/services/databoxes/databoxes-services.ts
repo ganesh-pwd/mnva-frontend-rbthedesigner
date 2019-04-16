@@ -83,16 +83,18 @@ export class DataboxesService {
       'datasource': details.datasource || 'Facebook',
       'datasource_suggestion': [],
       'databox_type': 'Standard',
-      'location': details.country || 'Costa Rica',
+      'location': [...details.country]|| ['Costa Rica'],
       'last_updated': new Date(),
+      'date_created': new Date(),
       'mentions': 1200,
-      'mentions_per_day': 1200,
+      'algorithm_quota': 100,
+      'mentions_per_day': 7.5,
       'page_search_name': 'Website',
       'expiry_date': 'No Configuration',
       'status': status,
       'historical': '7 days',
-      'associated_account': 'Stephan Trussart',
-      'associated_email': 'stphn.trussart@minerva.com',
+      'associated_account': this.loggedInUser.name,
+      'associated_email': this.loggedInUser.email,
       'result': 1200,
       'keywords': '5/5',
       'category': '5/5',
@@ -105,6 +107,7 @@ export class DataboxesService {
 
     getDataboxItem.push(data);
 
+    sessionStorage.removeItem('databox_item');
     sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
     sessionStorage.setItem('databox_new', 'A New Databox has been created');
 
@@ -146,7 +149,7 @@ export class DataboxesService {
     if (status === 'Active') databox.status = 'Active';
     
     databox.datasource = details.datasource || 'Facebook';
-    databox.location = details.country || 'Costa Rica';
+    databox.location = [...details.country] || ['Costa Rica'];
     databox.query    =   details.advance_query || '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )';
     databox['optional-keywords']  =  details.optional_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
     databox['required-keywords']  =  details.required_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;

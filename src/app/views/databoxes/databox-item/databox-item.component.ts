@@ -36,8 +36,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public selectedOption = false;
   public id: string;
   public mentions: number;
-  public categoryRemaining: number;
-  public subcategoryRemaining: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
@@ -57,6 +55,9 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public tableSettings: {};
   public changeList: any[];
   public suggestResultForm: FormGroup;
+  public categoryRemaining: number;
+  public subcategoryRemaining: number;
+
 
   constructor(
     private router: Router,
@@ -169,9 +170,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       .subscribe(
         (data) => {
           this.mentions = data.mentions;
-          this.categoryRemaining = data.category_available - data.category_used;
-          this.subcategoryRemaining = data.sub_category_available - data.sub_category_available_used;
           if (data && data.status === 'Active' || data.status === 'Paused') {
+            this.categoryRemaining = data.category_available - data.category_used;
+            this.subcategoryRemaining = data.sub_category_available - data.sub_category_available_used;
+
             this.data = data;
             this.selectedOption = true;
             this.loader.close();

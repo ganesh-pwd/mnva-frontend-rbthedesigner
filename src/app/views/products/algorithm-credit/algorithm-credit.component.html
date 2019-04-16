@@ -4,10 +4,10 @@
       <img src="assets/images/icon-databox.png">
       <h1 class="mat-h1">
          Products
-         <small>   
-           <span class="main-route">
-             <a routerLink="/products">Products</a>
-           </span> / Algorithm Credit</small>
+         <small>   
+            <span class="main-route">
+              <a routerLink="/products">Products</a>
+            </span> / Algorithm Credit</small>
        </h1>
    </div>
 </div>
@@ -52,9 +52,11 @@
       </mat-card-header>
       <mat-divider></mat-divider>
       <br>
+
       <mat-card-content>
          <mat-card-subtitle>
             <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+
             <br>
             <mat-form-field>
                  <mat-select value="$250">
@@ -87,13 +89,13 @@
             <!-- Product Box -->
             <div class="product-wrap" *ngFor="let product of algorithms | MenuFilter: searchInput | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
              [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-              <div class="product-inner mb-05 default-bg">
+              <div class="product-inner mb-05">
                 <div class="featured-img algorithms" (click)="addToCart(product)">
                   <img [src]="product.photo" alt="">
                 </div>
                 <div class="info-wrap p-1">
                   <div class="main-info">
-                    <h3 class="mat-h3 title" (click)="addToCart(product)">{{product.name}}</h3>
+                    <h3 class="mat-h3" (click)="addToCart(product)">{{product.name}}</h3>
                     <p class="text-muted p-line">{{product?.description}}</p>
                   </div>
                   <div class="actions">
@@ -103,9 +105,19 @@
                         <span class="mention">${{product?.price?.sale.toFixed(5)}}/mention</span>
                         <!--<del class="text-muted">{{product?.price?.sale.toFixed(5)}}</del>-->
                       </div>
+
+                    </div>
+                    <div class="add-to-cart">
+                      <span fxFlex></span>
+                      <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart(product)">
+                        <mat-icon>shopping_cart</mat-icon>
+                      </button>
                     </div>
                   </div>
                 </div>
+                <!-- Visible when viewMode === list-view -->
+     
+
               </div>
             </div>
             <!-- End Product -->

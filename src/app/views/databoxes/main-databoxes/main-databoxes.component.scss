@@ -6,6 +6,10 @@ mat-card-header{
 	padding-bottom: 0px !important;
 	cursor: pointer;
 }
+mat-card-title{
+	font-weight: 600;
+	font-size: 18px;
+}
 
 mat-card-content{
 	cursor: pointer;
@@ -28,12 +32,6 @@ mat-card-subtitle{
 	cursor: pointer;
 }
 
-mat-card-title{
-	cursor: pointer;
-	&:hover{
-		text-decoration: underline;
-	}
-}
 
 .gallery-icons{
 	display: inline-flex !important;
@@ -55,5 +53,5 @@ mat-card-title{
 }
 
 .product-search-wrap .product-search {
-	font-family: "Roboto",Helvetica Neue,sans-serif;
+	font-family: "Roboto", Helvetica Neue,sans-serif;
 }

@@ -3,7 +3,7 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small class="fw-400">   Account / Notifications </small>
+      <small class="fw-400">      Account / Billing </small>
     </h1>
   </div>
 </div>
@@ -35,7 +35,7 @@
       <mat-card-content>
         <div class="pb-1">
           <h6>Mentions Remaining</h6>
-          <p class="text-muted">3000 mentions remaining</p>
+          <p class="text-muted">{{loggedInUser.mentions}} Mentions</p>
           <app-mentions-progress-bar></app-mentions-progress-bar>
         </div>
       </mat-card-content>
@@ -44,15 +44,15 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
     <mat-card class="p-0 fixed-height">
       <mat-card-title class="">
-        <div class="card-title-text">Algorithm Credit</div>
+        <div class="card-title-text mt-05">Algorithm Credit</div>
         <span fxFlex></span>
         <div class="card-title-text"><button mat-raised-button routerLink="/products/algorithm-credit">Add Credit</button></div>
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div>
+        <div class="pb-1">
           <h6>Algorithm Credit Remaining</h6>
-          <p class="text-muted">$100 in credit remaining</p>
+          <p class="text-muted">${{loggedInUser.algorithmCredits}} in credit remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">

@@ -6,6 +6,7 @@ import { MinervaAccountImageDialogService } from '../../../shared/services/miner
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { MinervaAccountService } from '../../../shared/services/minerva-account/minerva-account-dialog/minerva-account.service';
 import { Subscription } from 'rxjs';
+import { UserService } from '../../../shared/services/auth/user-services';
 
 @Component({
   	selector: 'app-minerva-users',
@@ -28,9 +29,10 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService,
-    private minervaAccountService: MinervaAccountService) {
+    private minervaAccountService: MinervaAccountService,
+    private userService: UserService) {
       this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
-      this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+      userService.userData$.subscribe((user) => this.loggedInUser = user);
     }
 
     ngOnInit() {

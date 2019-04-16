@@ -7,6 +7,7 @@ interface ConfirmData {
   title?: string;
   data?: any;
   update?: boolean;
+  mentions?: any;
 }
 
 @Injectable({
@@ -20,6 +21,7 @@ export class DataboxMentionsDialogService {
     data.title = data.title || 'Apply Mentions';
     data.update = data.update || false;
     data.data = data.data || {};
+    data.mentions = data.mentions;
 
     let dialogRef: MatDialogRef<DataboxDialogsMentionsComponent>;
     dialogRef = this.dialog.open(DataboxDialogsMentionsComponent, {
@@ -28,7 +30,8 @@ export class DataboxMentionsDialogService {
       data: {
         title : data.title,
         data  : data.data,
-        update: data.update
+        update: data.update,
+        mentions: data.mentions
       }
     });
 

@@ -30,11 +30,10 @@ h5 {
 
   form {
     margin-top: 2%;
-    margin-left: 5%;
   }
 
   button {
-    margin-left: 5%;
+    
   }
 
   .download-csv {
@@ -117,7 +116,7 @@ h5 {
 }
 
 .algorithm-header {
-  top: 7%;
+  margin-top: 5px;
   margin-left: 30px;
   font-size: 18px;
   position: absolute;
@@ -190,3 +189,11 @@ mat-icon.download{
   display: flex;
   flex-direction: row-reverse;
 }
+
+.head-mentions{
+  &:hover{
+    cursor: pointer !important;
+    text-decoration: underline !important;
+  }
+}
+

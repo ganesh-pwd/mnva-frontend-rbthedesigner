@@ -4,6 +4,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { map } from 'rxjs/operators';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
+import { UserService } from '../../../shared/services/auth/user-services';
 
 @Component({
   selector: "app-main-minerva-account",
@@ -18,8 +19,8 @@ export class MainMinervaAccountComponent implements OnInit, OnDestroy {
   signinForm: FormGroup;
   public loggedInUser: any;
 
-  constructor() {
-    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  constructor(private userService: UserService) {
+    userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
 
   ngOnInit() {}

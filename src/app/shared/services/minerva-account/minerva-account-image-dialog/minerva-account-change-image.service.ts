@@ -2,7 +2,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { delay } from 'rxjs/operators';
-
+import { UserService } from '../../auth/user-services';
 interface confirmData {
   title?: string
 }
@@ -15,12 +15,13 @@ export class MinervaAccountChangeService {
   public image$ = this.image.asObservable();
   public loggedInUser: any;
 
-  constructor(private dialog: MatDialog) {
-    this.loggedInUser = sessionStorage.getItem('loggedInUser')
-      ? JSON.parse(sessionStorage.getItem('loggedInUser')).profile_image
-      : '../assets/images/face-7.jpg';
-
-    this.setImage(this.loggedInUser);
+  constructor(private dialog: MatDialog, private userService: UserService) {
+    // logged in user
+    userService.userData$.subscribe((user) => {
+      this.loggedInUser = user;
+      if(user) this.setImage(user.profile_image);
+    });
+    
   }
 
   setImage(image) {

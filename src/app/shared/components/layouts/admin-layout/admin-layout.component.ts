@@ -66,7 +66,7 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // temporary select logged in user
-    this.selectUserAsLogged();
+    //this.selectUserAsLogged();
   }
 
   @HostListener('window:resize', ['$event'])

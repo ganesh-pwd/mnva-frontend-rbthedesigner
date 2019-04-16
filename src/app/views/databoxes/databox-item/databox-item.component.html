@@ -1,46 +1,49 @@
 <br />
-<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" id="head">
-    <img src="assets/images/icon-databox.png" />
-    <h1 class="mat-h1">
-      {{ data?.databox_name }}
-      <small>
-        <mat-icon (click)="modifyDataboxDialog('Edit Databox Name', 'Databox Name', true)"> edit</mat-icon>
-        <span class="main-route">
-          <a routerLink="/databoxes/">Databoxes </a> /
-          {{ data?.databox_name }}</span
-        >
-      </small>
-    </h1>
+<div *ngIf="data?.databox_name && paginatedData">
+  <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
+    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" id="head">
+      <img src="assets/images/icon-databox.png" />
+      <h1 class="mat-h1">
+        {{ data?.databox_name }}
+        <small> 
+          <mat-icon (click)="modifyDataboxDialog('Edit Databox Name', 'Databox Name', true)"> 
+          edit</mat-icon>      
+          <span class="main-route"> 
+            <a routerLink="/databoxes/">Databoxes </a> /
+            {{ data?.databox_name }}</span
+          >
+        </small>
+      </h1>
+    </div>
   </div>
-</div>
 
-<!-- Upper Menu -->
-<div
-  class="m-333"
-  fxLayout="row"
-  fxLayoutWrap="wrap"
-  style="border-bottom: 1px solid gray;"
->
-  <button
-    mat-raised-button
-    class="mb-05"
-    color="primary"
-    routerLink="/databoxes/edit-query/{{ data?._id }}"
+  <!-- Upper Menu -->
+  <div
+    class="m-333"
+    fxLayout="row"
+    fxLayoutWrap="wrap"
+    style="border-bottom: 1px solid gray;"
   >
-    Query
-  </button>
-  <button
-    mat-raised-button
-    class="mb-05 mat-bg-success"
-    routerLink="/databoxes/settings/connect/{{ data?._id }}"
-  >
-    Connect Your Data
-  </button>
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      routerLink="/databoxes/edit-query/{{ data?._id }}"
+    >
+      Query
+    </button>
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-success"
+      routerLink="/databoxes/settings/connect/{{ data?._id }}"
+    >
+      Connect Your Data
+    </button>
 
-  <span fxFlex></span>
-  <div class="mr-1 mt-05">
-    <app-slide-toggle [id]="id"></app-slide-toggle>
+    <span fxFlex></span>
+    <div class="mr-1 ">
+      <app-slide-toggle [id]="id"></app-slide-toggle>
+    </div>
   </div>
 </div>
 
@@ -67,9 +70,9 @@
           </mat-card>
         </div>
       </div>
-      
-      <!-- First Table -->
+  
       <div [hidden]="data?.first_create">
+        <!-- First Table -->
           <mat-card class="p-0" fxLayout="row" fxLayoutWrap="wrap" style="height: 100% !important; overflow: hidden !important;">
             
             <mat-card-content class="table-mat-card-content" fxLayout="row" fxLayoutWrap="wrap"  
@@ -82,8 +85,14 @@
                 </div>
                 <span fxFlex></span>
                 <div style="position: absolute; right: 24px;">
-                  <a class="mr-1"><mat-icon class="download">file_download</mat-icon><b>Download</b></a>
-                  <a><b>Not Finding a Result?</b></a>
+                  <!-- Download CSV -->
+                  <a class="mr-1 head-mentions" 
+                  (click)="downloadCSV()">
+                  <mat-icon class="download">file_download</mat-icon><b>Download</b></a>
+
+                  <!-- Add Suggestion -->
+                  <a class="head-mentions" 
+                  (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
                 </div>
               </div>
   
@@ -96,10 +105,10 @@
                     </div>
   
                     <div class="table-foot" >
-                      <!-- <div>
+                      <div>
                         <button mat-raised-button (click)="addNewRow()">Add Row</button>
                         <button mat-raised-button (click)="saveAllData()">Save All Changes</button>
-                      </div> -->
+                      </div>
                       <span fxFlex></span>
   
                       <button class="paginate" matTooltip="Prev Page" 
@@ -167,11 +176,12 @@
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
   
           <div class="bottom-data">
+            <!--
             <br>
-            <!-- <button mat-raised-button class="download-csv" (click)="downloadCSV()" #exportFile>Download to CSV</button>
+            <button mat-raised-button class="download-csv" (click)="downloadCSV()" #exportFile>Download to CSV</button>
             <br>
-            <h3 class="mat-h3 not-find-link" (click)="openAddSuggestionPreField()">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
-            <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
+            <h2 class="mat-h1 not-find-link" (click)="openAddSuggestionPreField()">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
+            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
   
             <form (submit)="openAddSuggestionPreField()" [formGroup]="suggestResultForm">
               <mat-form-field class="example-full-width">
@@ -187,15 +197,16 @@
               </mat-form-field>     
               <br>
               <button style="margin-left: 0 !important;" type="submit" mat-raised-button>Send</button>        
-            </form>
+            </form>-->
             
-            <br><br> -->
-            <h3 class="mat-h3">Delete Databox</h3>
-            <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
-            <button mat-raised-button (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation', true)">Delete Databox</button>
+            <br><br>
+            <h2 class="mat-h1">Delete Databox</h2>
+            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
+            <button mat-raised-button (click)="modifyDataboxDialog('Delete Databox', 'Are you sure you want to delete this databox. Input the databox name for confirmation. If you are fully aware of what you are doing then please proceed.', true)">Delete Databox</button>
           </div>
         </div>
       </div>
+
       <br><br>
     </mat-tab>
   
@@ -260,8 +271,8 @@
                   Add Category
                 </button>
                 <span fxFlex></span>
-                <p class="text-muted">Category Remaining: {{ categoryRemaining }}<br>
-                SubCategory Remaining: {{ subcategoryRemaining }}
+                <p class="text-muted">Category Remaining: {{ categoryRemaining || 0 }}<br>
+                SubCategory Remaining: {{ subcategoryRemaining || 0 }}
                 </p>
               </mat-card-actions>
           </mat-card>
@@ -336,194 +347,238 @@
   
           <div>
             <span fxFlex></span>
-            <h3 class="mat-h4">Credits Remaining:
+            <h3 class="mat-h3">Credits Remaining:
               <span class="credits">$100</span>   |   
               <button mat-raised-button class="mat-color-green" [routerLink]="['/products/mentions-credit']">Buy More</button>
             </h3>
             <br>
           </div>
   
+          <div class="mentions">
+            <span fxFlex></span>
+            <h3 class="mat-h3 text-muted">Current Mentions:  {{ mentions }}  mentions
+            </h3>
+            <br>
+          </div>
         </div>
       </div>
       <br>
-  
-      <!-- Algorithm Option -->
-      <div fxLayout="row" fxLayoutWrap="wrap">
-        <!-- Sentiment -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card class="p-1">
-            <mat-card-header>
-              <mat-card-title class="mat-color-primary">
-                <mat-icon class="icon-header">add</mat-icon>
-                <span class="algorithm-header">Sentiment</span>
-              </mat-card-title>
-            </mat-card-header>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <p class="card-content">
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-            <mat-card-content>
-              <br>
-              <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
-                  Apply Automatically
-                </mat-slide-toggle>
-                <span fxFlex></span>
-                <button mat-raised-button class="truncate"
-                  (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
-                </button>
+
+      <!-- Process Data List Options -->
+      <div>
+        <!-- Process Data List Options -->
+        <div class="product-container list-view">
+          <!-- Algorithm Box -->
+          <div class="product-wrap">
+            <div class="product-inner default-bg">
+              <div class="featured-img algorithms" >
+                <img src="../assets/images/image-placeholder.png" alt="">
               </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
+              <div class="info-wrap p-1">
+                <div class="main-info main-info-prcs-data">
+                 <mat-card-header>
+                     <mat-card-title class="mat-color-primary">
+                       <mat-icon class="icon-header">add</mat-icon> 
+                       <span class="algorithm-header">Sentiment</span>
+                     </mat-card-title>
+                   </mat-card-header>
+         
+                    <br>
+                    <p style="text-align: justify;">
+                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p><br>
+                    <mat-card-content>
+                      <div class="databox-details-below">
+                        <span fxFlex></span>
+                        (Unprocessed + New Data)
+                      </div>
+                    </mat-card-content>
+         
+                    <mat-divider></mat-divider><br>
+                    <mat-card-actions style="padding-bottom: 0 !important;">
+                      <div>
+                        <h2 class="mat-h4">Cost / Mention: Free</h2>
+                        <span fxFlex></span>
+                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                          Apply Automatically
+                        </mat-slide-toggle>
+                      </div>
+                      <mat-divider></mat-divider>
+
+                      <br>
+                      <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
+                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        Apply only to unprocessed data
+                      </button>
+                   </mat-card-actions>
+                </div>
               </div>
-            </mat-card-content>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <mat-card-actions>
-              <span fxFlex></span>
-              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-        
-        <!-- Topic Recognition -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card class="p-1">
-            <mat-card-header>
-              <mat-card-title class="mat-color-primary">
-                <mat-icon class="icon-header airplane">airplanemode_active</mat-icon>
-                <span class="algorithm-header">Topic Recognition</span>
-              </mat-card-title>
-            </mat-card-header>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <p class="card-content">
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-            <mat-card-content>
-              <br>
-              <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" >
-                  Apply Automatically
-                </mat-slide-toggle>
-                <span fxFlex></span>
-                <button mat-raised-button class="truncate"
-                  (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
-                </button>
+
+             
+            </div>
+          </div>
+
+          <!-- Topic Recognition Box -->
+          <div class="product-wrap">
+            <div class="product-inner default-bg">
+              <div class="featured-img algorithms" >
+                <img src="../assets/images/image-placeholder.png" alt="">
               </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
+              <div class="info-wrap p-1">
+                <div class="main-info main-info-prcs-data">
+                 <mat-card-header>
+                     <mat-card-title class="mat-color-primary">
+                       <mat-icon class="icon-header airplane">airplanemode_active</mat-icon>
+                       <span class="algorithm-header">Topic Recognition</span>
+                     </mat-card-title>
+                   </mat-card-header>
+          
+                    <br>
+                    <p style="text-align: justify;">
+                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p><br>
+                    <mat-card-content>
+                      <div class="databox-details-below">
+                        <span fxFlex></span>
+                        (Unprocessed + New Data)
+                      </div>
+                    </mat-card-content>
+          
+                    <mat-divider></mat-divider><br>
+                    <mat-card-actions style="padding-bottom: 0 !important;">
+                      <div>
+                        <h2 class="mat-h4">Cost / Mention: $0.03</h2>
+                        <span fxFlex></span>
+                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                          Apply Automatically
+                        </mat-slide-toggle>
+                      </div>
+                      <mat-divider></mat-divider>
+
+                      <br>
+                      <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
+                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        Apply only to unprocessed data
+                      </button>
+                   </mat-card-actions>
+                </div>
               </div>
-            </mat-card-content>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <mat-card-actions>
-              <span fxFlex></span>
-              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-  
-  
-        <!-- Gender Author -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card class="p-1">
-            <mat-card-header>
-              <mat-card-title class="mat-color-primary">
-                <mat-icon class="icon-header">people</mat-icon>
-                <span class="algorithm-header">Gender Author</span>
-              </mat-card-title>
-            </mat-card-header>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <p class="card-content">
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-            <mat-card-content>
-              <br>
-              <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
-                  Apply Automatically
-                </mat-slide-toggle>
-                <span fxFlex></span>
-                <button mat-raised-button class="truncate"
-                  (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
-                </button>
+
+             
+            </div>
+          </div>
+
+          <!-- Gender Author Box -->
+          <div class="product-wrap">
+            <div class="product-inner default-bg">
+              <div class="featured-img algorithms" >
+                <img src="../assets/images/image-placeholder.png" alt="">
               </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
-  
+              <div class="info-wrap p-1">
+                <div class="main-info main-info-prcs-data">
+                 <mat-card-header>
+                     <mat-card-title class="mat-color-primary">
+                       <mat-icon class="icon-header">people</mat-icon>
+                        <span class="algorithm-header">Gender Author</span>
+                     </mat-card-title>
+                   </mat-card-header>
+          
+                    <br>
+                    <p style="text-align: justify;">
+                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p><br>
+                    <mat-card-content>
+                      <div class="databox-details-below">
+                        <span fxFlex></span>
+                        (Unprocessed + New Data)
+                      </div>
+                    </mat-card-content>
+          
+                    <mat-divider></mat-divider><br>
+                    <mat-card-actions style="padding-bottom: 0 !important;">
+                      <div>
+                        <h2 class="mat-h4">Cost / Mention: Free</h2>
+                        <span fxFlex></span>
+                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                          Apply Automatically
+                        </mat-slide-toggle>
+                      </div>
+                      <mat-divider></mat-divider>
+
+                      <br>
+                      <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
+                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        Apply only to unprocessed data
+                      </button>
+                   </mat-card-actions>
+                </div>
               </div>
-            </mat-card-content>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <mat-card-actions>
-              <span fxFlex></span>
-              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
-            </mat-card-actions>
-          </mat-card>
-        </div>
-  
-        <!-- Entity Recognition -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <mat-card class="p-1">
-            <mat-card-header>
-              <mat-card-title class="mat-color-primary">
-                <mat-icon class="icon-header">location_city</mat-icon>
-                <span class="algorithm-header">Entity Recognition</span>
-              </mat-card-title>
-            </mat-card-header>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <p class="card-content">
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-            <mat-card-content>
-              <br>
-              <div class="databox-details">
-                <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
-                  Apply Automatically
-                </mat-slide-toggle>
-                <span fxFlex></span>
-                <button mat-raised-button class="truncate"
-                  (click)="openAlgorithmDialog('Apply Enrichment')">
-                  Apply only to unprocessed data
-                </button>
+
+             
+            </div>
+          </div>
+
+          <!-- Entity Recognition Box -->
+          <div class="product-wrap">
+            <div class="product-inner default-bg">
+              <div class="featured-img algorithms" >
+                <img src="../assets/images/image-placeholder.png" alt="">
               </div>
-              <div class="databox-details-below">
-                <p> (Unprocessed + New Data)</p>
+              <div class="info-wrap p-1">
+                <div class="main-info main-info-prcs-data">
+                 <mat-card-header>
+                     <mat-card-title class="mat-color-primary">
+                       <mat-icon class="icon-header">location_city</mat-icon>
+                       <span class="algorithm-header">Entity Recognition</span>
+                     </mat-card-title>
+                   </mat-card-header>
+          
+                    <br>
+                    <p style="text-align: justify;">
+                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p><br>
+                    <mat-card-content>
+                      <div class="databox-details-below">
+                        <span fxFlex></span>
+                        (Unprocessed + New Data)
+                      </div>
+                    </mat-card-content>
+          
+                    <mat-divider></mat-divider><br>
+                    <mat-card-actions style="padding-bottom: 0 !important;">
+                      <div>
+                        <h2 class="mat-h4">Cost / Mention: $0.03</h2>
+                        <span fxFlex></span>
+                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                          Apply Automatically
+                        </mat-slide-toggle>
+                      </div>
+                      <mat-divider></mat-divider>
+
+                      <br>
+                      <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
+                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        Apply only to unprocessed data
+                      </button>
+                   </mat-card-actions>
+                </div>
               </div>
-            </mat-card-content>
-  
-            <mat-divider></mat-divider>
-            <br>
-            <mat-card-actions>
-              <span fxFlex></span>
-              <h3 class="mat-h4">Cost / Mention: $0.03</h3>
-            </mat-card-actions>
-          </mat-card>
+
+             
+            </div>
+          </div>
         </div>
       </div>
   
       <!-- FAQ's -->
+      <!-- FAQ's -->
       <div fxLayout="row" fxLayoutWrap="wrap" class="faq"
         [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-  
+      
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
           <h1 class="mat-h2 faq-header">Frequently Asked Questions</h1>
         </div>
-  
+      
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
             <h2 class="mat-h3 mat-color-primary">Apply Automatically</h2>
@@ -532,7 +587,7 @@
             </p>
           </div>
         </div>
-  
+      
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
             <h2 class="mat-h3 mat-color-primary">Apply to Unprocessed Data</h2>
@@ -541,7 +596,7 @@
             </p>
           </div>
         </div>
-  
+      
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
             <h2 class="mat-h3 mat-color-primary">Cost / Mention</h2>
@@ -550,7 +605,7 @@
             </p>
           </div>
         </div>
-  
+      
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
           <div class="faq-inner">
             <h2 class="mat-h3 mat-color-primary">How to buy credit</h2>

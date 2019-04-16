@@ -17,49 +17,13 @@ export interface DataTableItem {
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: DataTableItem[] = [
   {
-    id: 0,
-    product_type: 'Databox',
-    product_name: 'Banco Popular <br>Facebook | Costa Rica',
-    status: 'No Configuration',
-    date_created: '12 July 2018',
-    period: 'Monthly',
-    price: 70,
-  },
-  {
-    id: 1,
-    product_type: 'Databox',
-    product_name: 'Banco Popular <br>Twitter | Costa Rica',
-    status: 'No Configuration',
-    date_created: '12 July 2018',
-    period: 'Credit',
-    price: 70,
-  },
-  {
-    id: 2,
-    product_type: 'Databox',
-    product_name: 'Banco Popular <br>Web | Costa Rica',
-    status: 'Data Refreshing',
-    date_created: '12 July 2018',
-    period: 'Credit',
-    price: 70,
-  },
-  {
-    id: 3,
-    product_type: 'Databox',
-    product_name: '',
-    status: 'Expired',
-    date_created: '12 July 2018',
-    period: 'Monthly',
-    price: 70,
-  },
-  {
     id: 4,
     product_type: 'Account Features',
     product_name: '15 Users',
     status: 'Ready',
     date_created: '12 July 2018',
     period: 'Credit',
-    price: 30,
+    price: 30
   },
   {
     id: 5,
@@ -68,8 +32,8 @@ const EXAMPLE_DATA: DataTableItem[] = [
     status: 'Ready',
     date_created: '12 July 2018',
     period: 'Credit',
-    price: 300,
-  },
+    price: 300
+  }
 ];
 
 /**
@@ -80,7 +44,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
 export class MinervaBillingDataSource extends DataSource<DataTableItem> {
   data: DataTableItem[] = EXAMPLE_DATA;
 
-  constructor(private paginator: MatPaginator, private sort: MatSort) {
+  constructor(private paginator: MatPaginator, private sort: MatSort, public databoxes: DataTableItem[] = []) {
     super();
   }
 
@@ -93,16 +57,16 @@ export class MinervaBillingDataSource extends DataSource<DataTableItem> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
     const dataMutations = [
-      observableOf(this.data),
+      observableOf([...this.databoxes, ...this.data]),
       this.paginator.page,
       this.sort.sortChange
     ];
 
     // Set the paginators length
-    this.paginator.length = this.data.length;
+    this.paginator.length = this.databoxes.length + this.data.length;
 
     return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
+      return this.getPagedData(this.getSortedData([...this.databoxes, ...this.data]));
     }));
   }
 
