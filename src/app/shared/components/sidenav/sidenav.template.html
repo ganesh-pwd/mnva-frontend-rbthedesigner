@@ -76,9 +76,9 @@
         <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'dropDown'">
           <li *ngFor="let itemLvL2 of item.sub" appDropdownLink>
 
-            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}"
-              routerLinkActive="mat-color-primary"
-              [routerLinkActiveOptions]="{exact:true}"
+            <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}" 
+              routerLinkActive="mat-color-primary" 
+              [routerLinkActiveOptions]="{exact:true}" 
               appDropdownToggle 
               *ngIf="itemLvL2.type !== 'dropDown'" 
               matRipple>

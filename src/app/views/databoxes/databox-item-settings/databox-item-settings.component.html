@@ -1,6 +1,6 @@
 <br />
 <!-- Header and Breadcrumb for Databox with Status Active -->
-<div *ngIf="checkIfCreateOrEdit === 'Create'">
+<div *ngIf="checkIfCreateOrEdit === 'Create' && (databoxItemData || data)">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div class="header-row" fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
       <img src="assets/images/icon-databox.png" />
@@ -10,12 +10,11 @@
           <mat-icon *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'"
             (click)="openDialog('Edit Databox Name', 'Databox Name', true)"
             >edit</mat-icon
-          >
+          >      
           <mat-icon *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'"
             (click)="openDialog('Set Databox Name', 'Databox Name', true)"
             >edit</mat-icon
-          >
-          |
+          >      
           <span class="main-route">
             <a routerLink="/databoxes/">Databoxes </a> /
             {{ databoxItemData || data?.databox_name }}
@@ -46,7 +45,7 @@
 </div>
 
 <!-- Header and Breadcrumb for Databox with Status Draft -->
-<div *ngIf="checkIfCreateOrEdit === 'Edit'">
+<div *ngIf="checkIfCreateOrEdit === 'Edit' && data">
   <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div class="header-row" fxLayout="row" fxFlex="100" fxFlex.gt-md="100">
       <img src="assets/images/icon-databox.png" />
@@ -56,8 +55,7 @@
           <mat-icon
             (click)="openDialog('Edit Databox Name', 'Databox Name', true)"
             >edit</mat-icon
-          >
-          |
+          >      
           <span class="main-route">
             <a routerLink="/databoxes/">Databoxes </a> /
             <a (click)="navigateToDatabox(data?._id, data?.first_create)">
@@ -108,7 +106,18 @@
                   [value]="singleDatasource">
                   {{ singleDatasource }}
                 
-                </mat-option>
+                  </mat-option>
+
+                  <mat-option *ngFor="let data_item of datasource" 
+                  [disabled]="true" 
+                  [value]="data_item" class="unavailable-datasource">
+                    <span 
+                    matTooltip="Upgrade your plan to unlock this datasource"
+                    matTooltipPosition="right"
+                    matTooltipClass='pos-right'>
+                      {{data_item}}
+                    </span>
+                  </mat-option>
               </mat-select>
             </mat-form-field>
           </mat-card-content>
@@ -128,12 +137,12 @@
           <mat-divider></mat-divider>
           <mat-card-content>
             <br>
-            <button mat-raised-button mat-color-primary class="query_type">Panamá</button>
-            <button mat-raised-button class="query_type">Costa Rica</button>
-            <button mat-raised-button class="query_type">Nicaragua</button>
-            <button mat-raised-button class="query_type">El Salvador</button>
-            <button mat-raised-button class="query_type">Honduras</button>
-            <button mat-raised-button class="query_type">Guatemala</button>
+
+            <div id="countries">
+              <button mat-raised-button class="query_type" 
+              *ngFor="let country of countries" (click)="selectCountry(country.name)" 
+              id="{{country.name}}">{{country.name}}</button>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>
@@ -157,15 +166,15 @@
     </div>
 
     <!-- Historical -->
-		<div fxLayout="row" fxLayoutWrap="wrap" >
-			<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-				<mat-card>
-					<mat-card-header>
-						<mat-card-title>
-							<span>Historical</span>
-						</mat-card-title>
-					</mat-card-header>
-					<mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutWrap="wrap" >
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              <span>Historical</span>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-divider></mat-divider>
           <mat-card-content>
             <br>
             <button mat-raised-button mat-color-primary class="query_type">Full Archive</button>
@@ -177,9 +186,9 @@
             <button mat-raised-button mat-color-primary class="query_type">6m</button>
             <button mat-raised-button mat-color-primary class="query_type">1y</button>
           </mat-card-content>
-				</mat-card>
-			</div>
-		</div>
+        </mat-card>
+      </div>
+    </div>
 
     <!-- Query Editor -->
     <div fxLayout="row" fxLayoutWrap="wrap">
@@ -482,7 +491,7 @@
       <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
         <div>
           <p>
-            <b>Mentions:</b> {{data?.mentions || 7.5}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day || 1200}}
+            <b>Mentions:</b> {{data?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day || 7.5}}
           </p>
         </div>
       </div>
@@ -494,15 +503,15 @@
         <mat-card class="p-0">
           <mat-card-content class="p-0" style="max-height: 159px;">
             <!-- Line Chart
-				    <canvas 
-				      baseChart 
-				      class="chart"
-				      [datasets]="lineChartData"
-				      [labels]="lineChartLabels"
-				      [options]="lineChartOptions"
-				      [colors]="chartColors"
-				      [legend]="lineChartLegend"
-				      [chartType]="lineChartType"></canvas> -->
+            <canvas 
+              baseChart 
+              class="chart"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="chartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"></canvas> -->
           </mat-card-content>
         </mat-card>
       </div>
@@ -602,7 +611,7 @@
     <button
       mat-raised-button
       class="mb-05 mat-bg-green"
-      (click)="openMentionsDialogUpdate('Create Databox')"
+      (click)="openMentionsDialogUpdate('Create Databox', data?.mentions)"
     >
       Create Databox
     </button>
@@ -621,12 +630,10 @@
     <button
       mat-raised-button
       class="mb-05 mat-bg-gray"
-      (click)="
-        openDialogUpdate(
-          'Run Query',
-          'Are you sure you want to save your details and run the query?'
-        )
-      "
+      (click)="openDialogUpdate(
+        'Run Query',
+        'Are you sure you want to save your details and run the query?'
+      )"
     >
       Run Query
     </button>

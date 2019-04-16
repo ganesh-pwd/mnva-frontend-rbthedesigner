@@ -9,6 +9,7 @@ import { DatasourceService } from '../../../shared/services/datasource/datasourc
 import { DataboxMentionsDialogService } from '../../../shared/services/databoxes/dialogs-mentions/dialogs-mentions.services';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
+import { UserService } from '../../../shared/services/auth/user-services';
 
 @Component({
   selector: 'app-databox-item-settings',
@@ -47,11 +48,12 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     private databoxesService: DataboxesService,
     private databoxMentionsDialogService: DataboxMentionsDialogService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
+    private userService: UserService,
     private datasourceService: DatasourceService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService
   ) {
-    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    userService.userData$.subscribe((user) => this.loggedInUser = user);
     
     // check if user is creating databox or editing query
     const urlSegment = this.router.url.split('/')[2];
@@ -66,7 +68,6 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     this.getDataboxes();
     this.getSingleItem();
     this.getCountries();
-    this.getDatasource();
     this.queryFormGroup();
 
     this.queryForm.valueChanges.subscribe(result => (this.changes = true));
@@ -81,7 +82,6 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   queryFormGroup() {
     this.queryForm = this.formBuilder.group({
       'datasource': [null, Validators.compose([Validators.required])],
-      'country': [null, Validators.compose([Validators.required])],
       'required-keywords': [null, Validators.compose([Validators.required])],
       'optional-keywords': [null],
       'excluded-keywords': [null],
@@ -109,7 +109,6 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     // set form value based on databox item details
     this.queryForm.setValue({
       'datasource': data.datasource,
-      'country': data.country,
       'required-keywords': data['required-keywords'],
       'optional-keywords': data['optional-keywords'],
       'excluded-keywords': data['excluded-keywords'],
@@ -128,18 +127,33 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (data) {
           this.data = data;
+
+          // set value of forms
           this.setValueOfForm();
+
+          // get data source 
+          this.getDatasource();
+
+          // select countries
+          this.data.location.forEach(el => this.selectCountry(el));
+
           this.loader.close();
         } else if (this.databoxes) {
           // set databox initial name
           this.databoxItemData =
             (sessionStorage.getItem('databox_edited_name')
-            ? sessionStorage.getItem('databox_edited_name')
-            : `Databox_${sessionStorage.getItem('databox_name_new')}`)
-            || data;
+              ? sessionStorage.getItem('databox_edited_name')
+              : `Databox_${sessionStorage.getItem('databox_name_new')}`)
+              || data;
 
-          this.setValueOfForm();
-          this.loader.close();
+            
+            // set value of forms
+            this.setValueOfForm();
+
+            // get data source 
+            this.getDatasource();
+
+            this.loader.close();
         }
       });
   }
@@ -168,11 +182,26 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       .subscribe(country => { this.countries = country; });
   }
 
+  // select country
+  selectCountry(country){
+    let selected = document.getElementById(country);
+    
+    if(selected.classList.contains('query-active')) 
+      selected.classList.remove('query-active');
+
+    else selected.classList.add('query-active');
+  }
+
   // get all datasource
   getDatasource() {
     this.getItemSub = this.datasourceService
       .getDatasource()
-      .subscribe(data => { this.datasource = data; });
+      .subscribe(data => { 
+  
+        this.datasource = data
+          .filter(el => this.loggedInUser.datasources.indexOf(el.name) < 0)
+          .map(el => el.name);
+      });
   }
 
   // set datasources
@@ -231,10 +260,18 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
   // get query form inputs data for saving
   getQueryFormBody() {
+    let country = document.getElementById('countries');
+    let active_country = country.getElementsByClassName('query-active');
+    let countries = [];
+
+    for(let i = 0; i < active_country.length; i++){
+      countries.push(active_country[i].textContent)
+    }
+
     // initialize inputs
     const body = {
       'datasource': this.queryForm.get('datasource').value,
-      'country': this.queryForm.get('country').value,
+      'country': countries,
       'required_keywords': this.queryForm.get('required-keywords').value,
       'optional_keywords': this.queryForm.get('optional-keywords').value,
       'excluded_keywords': this.queryForm.get('excluded-keywords').value,
@@ -245,16 +282,16 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   }
 
   // open databox query dialog
-  openMentionsDialog(title: string) {
+  openMentionsDialog(title: string, mentions: any = 1200) {
     this.databoxMentionsDialogService
-      .confirm({ title: title, data: this.getQueryFormBody() })
+      .confirm({ title: title, data: this.getQueryFormBody(), mentions: mentions })
       .subscribe(result => {});
   }
 
   // open databox query dialog
-  openMentionsDialogUpdate(title: string) {
+  openMentionsDialogUpdate(title: string, mentions: any = 1200) {
     this.databoxMentionsDialogService
-      .confirm({ title: title, data: this.getQueryFormBody(), update: true })
+      .confirm({ title: title, data: this.getQueryFormBody(), update: true, mentions: mentions })
       .subscribe(result => {});
   }
 }

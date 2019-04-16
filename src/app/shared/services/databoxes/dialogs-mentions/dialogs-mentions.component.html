@@ -36,13 +36,15 @@
 		<button *ngIf="!data.update && (loggedInUser.mentions - databoxMention) > 0" 
 			type="button" mat-raised-button color="primary"
 			(click)="createNewDatabox()">Apply</button>
+	
+		<button *ngIf="data.update && (loggedInUser.mentions - databoxMention) > 0" type="button" 
+			mat-raised-button color="primary"
+			(click)="updateCreateDatabox()">Apply</button>
 
-		<button *ngIf="!data.update && (loggedInUser.mentions - databoxMention) < 0" 
+		<!-- If mentions credit are negative -->
+		<button *ngIf="(loggedInUser.mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="primary"
 			(click)="goToMentions()">Add More Credit</button>
-	
-		<button *ngIf="data.update" type="button" mat-raised-button color="primary"
-			(click)="updateCreateDatabox()">Apply</button>
 	
 		<button type="button" mat-raised-button (click)="dialogRef.close(false)">Cancel</button>
 	</div>

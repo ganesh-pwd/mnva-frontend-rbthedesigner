@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TemplateGalleryDB } from '../../fake-db/template-gallery';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { UserService } from '../auth/user-services';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,12 @@ export class TemplateGalleryService {
   private template_gallery: any[];
   public loggedInUser: any;
 
-  constructor() {
+  constructor(private userService: UserService) {
     const templateGalleryDB = new TemplateGalleryDB();
     this.template_gallery = templateGalleryDB.template_gallery_type;
 
     // logged in user
-    const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-    this.loggedInUser = loggedInUser;
+    userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
 
   getAllItems() {

@@ -16,18 +16,18 @@ export class UserDB {
       'password': 'password',
       'username': 'username',
       'profile_image': '../assets/images/face-1.jpg',
-      'accountType': 'Basic',
-      'mentions': 3000,
-      'datasources': ['Facebook'],
+      'accountType': 'Professional',
+      'mentions': 5000,
+      'datasources': ['Facebook', 'Twitter', 'Web'],
       'algorithmCredits': 250,
       'created_users': [
         { '_id': '5a7b73f76bed15c94d1e46da' },      
         { '_id': '5a7b73f7f79f4250b96a355b' },     
       ],
-      'max_created_users': 2,
+      'max_created_users': 5,
       'connector': {
-        'alerts': ['Email Alerts'],
-        'connectors': ['Google Data Studio']
+        'alerts': ['Email Alerts', 'Slack Alerts'],
+        'connectors': ['Google Data Studio', 'Tableau Connectors', 'Power BI Connectors']
       },
       'bd': '2015-02-08T04:28:44 -06:00'
     },

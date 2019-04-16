@@ -4,6 +4,7 @@ import { MinervaAccountDialogService } from '../../../shared/services/minerva-ac
 import { MinervaAccountImageDialogService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-image-dialog.service';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { Subscription } from 'rxjs';
+import { UserService } from '../../../shared/services/auth/user-services';
 
 @Component({
   selector: "app-minerva-notifications",
@@ -22,12 +23,11 @@ export class MinervaNotificationsComponent implements OnInit, OnDestroy {
   constructor(
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
-    private minervaAccountChangeService: MinervaAccountChangeService
+    private minervaAccountChangeService: MinervaAccountChangeService,
+    private userService: UserService
   ) {
-    this.getReqImage = minervaAccountChangeService.image$.subscribe(
-      result => (this.userImage = result)
-	);
-	this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => (this.userImage = result));
+	  userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
 
   ngOnInit() {}

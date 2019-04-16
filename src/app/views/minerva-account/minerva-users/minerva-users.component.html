@@ -3,7 +3,7 @@
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
     <h1 class="mat-h1">
       Account
-      <small>  Account / Users </small>
+      <small class="fw-400">      Account / Billing </small>
     </h1>
   </div>
 </div>
@@ -33,9 +33,9 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div>
+        <div class="pb-1">
           <h6>Mentions Remaining</h6>
-          <p class="text-muted">3000 mentions remaining</p>
+          <p class="text-muted">{{loggedInUser.mentions}} Mentions</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -53,9 +53,9 @@
         <mat-divider></mat-divider>
       </mat-card-title>
       <mat-card-content>
-        <div>
+        <div class="pb-1">
           <h6>Algorithm Credit Remaining</h6>
-          <p class="text-muted">$100 in credit remaining</p>
+          <p class="text-muted">${{loggedInUser.algorithmCredits}} in credit remaining</p>
           <mat-progress-bar
           [mode]="'determinate'"
           [value]="60">
@@ -136,7 +136,7 @@
 						<p class="user-details">
 							<mat-icon>email</mat-icon> {{user.email}}
 						</p><br>
-						<p class="user-details">
+						<p class="mat-h3 user-details">
 							<mat-icon>calendar_today</mat-icon> Member since: 
 							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}
 						</p><br>

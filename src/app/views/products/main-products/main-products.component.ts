@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Product } from '../../../shared/models/product.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { UserService } from '../../../shared/services/auth/user-services';
 
 @Component({
   selector: 'app-main-products',
@@ -26,8 +27,9 @@ export class MainProductsComponent implements OnInit {
   constructor(
     private shopService: ProductShopService,
     private snackBar: MatSnackBar,
+    private userService: UserService,
     private fb: FormBuilder,
-  ) { this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser')); }
+  ) { userService.userData$.subscribe((user) => this.loggedInUser = user); }
 
   ngOnInit() {
     this.buildFilterForm(this.shopService.initialFilters);
@@ -83,6 +85,8 @@ export class MainProductsComponent implements OnInit {
         this.snackBar.open('Product added to cart', 'OK', { duration: 4000 });
       });
     }
+
+    
   }
 
   buildFilterForm(filterData:any = {}) {

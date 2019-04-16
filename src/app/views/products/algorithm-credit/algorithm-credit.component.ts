@@ -8,6 +8,7 @@ import { ProductShopService, CartItem } from '../products-shop.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Product } from '../../../shared/models/product.model';
+import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 
 @Component({
   selector: 'app-algorithm-credit',
@@ -44,6 +45,7 @@ export class AlgorithmCreditComponent implements OnInit {
     private algorithmCreditService: AlgorithmCreditService,
     private shopService: ProductShopService,
     private snackBar: MatSnackBar,
+    private loader: AppLoaderService,
     private fb: FormBuilder
   ) { }
 
@@ -71,10 +73,13 @@ export class AlgorithmCreditComponent implements OnInit {
   }
 
   getAlgorithms() {
+    this.loader.open();
+    
     this.algorithmCreditService
     .getItems()
     .subscribe(algorithm => {
       this.algorithms = algorithm;
+      this.loader.close();
     });
   }
 

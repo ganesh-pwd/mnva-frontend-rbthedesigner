@@ -159,3 +159,53 @@ button.query_type{
 		}
 	}
 }
+
+.unavailable-datasource{
+	span{
+		cursor: pointer !important;
+	}
+
+
+}
+
+
+.chk-multi {
+    border-radius: 5px !important;
+    background-color:white;
+    border:1px solid gray;
+    overflow:auto;
+    float:left;
+    box-shadow: none;
+    font-size: 11px !important;
+
+    &:hover{
+    	background:#22d9c9;
+    	color: white;
+    }
+
+    label{
+    	float:left;
+    	cursor: pointer !important;
+    }
+
+    label span{
+    	text-align:center;
+    	padding: 5px;
+    	margin: 5px;
+    	display:block;
+    	cursor: pointer !important;
+    }
+
+    label input{
+    	position:absolute;
+    	top:-20px;
+    }
+
+    input:checked + span {
+    	padding: 5px;
+    	margin: 5px;
+        background-color:#22d9c9;
+        color:#fff;
+    }
+}
+

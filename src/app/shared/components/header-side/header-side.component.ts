@@ -5,6 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from '../../../shared/services/auth/user-services';
+
 @Component({
   selector: 'app-header-side',
   templateUrl: './header-side.template.html',
@@ -33,11 +35,16 @@ export class HeaderSideComponent implements OnInit {
     public translate: TranslateService,
     private renderer: Renderer2,
     private router: Router,
+    private userService: UserService,
     public minervaAccountChangeService: MinervaAccountChangeService
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
-    this.userFullName = JSON.parse(sessionStorage.getItem('loggedInUser')).name || 'Stephan Trussart';
+    this.userService.userData$.subscribe(user => {
+      if(user){
+        this.userFullName = user.name
+      }
+    });
   }
 
   ngOnInit() {
@@ -90,7 +97,11 @@ export class HeaderSideComponent implements OnInit {
   }
 
   signOut() {
-    sessionStorage.clear();
-    this.router.navigate(['/sessions/signin']).then(() => window.location.reload());
+    
+    this.router.navigate(['/sessions/signin']).then(() => {
+      this.userService.setUser(null);
+      sessionStorage.clear();
+      window.location.reload();
+    });
   }
 }

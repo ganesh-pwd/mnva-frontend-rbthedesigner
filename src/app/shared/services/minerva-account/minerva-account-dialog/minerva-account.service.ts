@@ -2,7 +2,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { delay } from 'rxjs/operators';
 import { MinervaAccountDB } from '../../../fake-db/minerva-accounts';
-
+import { UserService } from '../../auth/user-services';
 interface confirmData {
   title?: string
 }
@@ -14,13 +14,12 @@ export class MinervaAccountService {
   public loggedInUser: any;
   public accounts: any[];
 
-  constructor() {
+  constructor(private userService: UserService) {
     const accounts = new MinervaAccountDB();
     this.accounts = accounts.minerva_accounts;
 
     // logged in user
-    const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-    this.loggedInUser = loggedInUser;
+    userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
 
   getAllItems(): Observable<any> {

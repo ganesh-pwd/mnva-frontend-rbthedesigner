@@ -79,6 +79,10 @@ small{
 	font-size: 35px;
 }
 
+.card-content{
+	padding-left: 30px;
+}
+
 .change{
 	cursor: pointer;
 	&:hover{
@@ -192,4 +196,10 @@ table{
 }
 .fixed-height{
 	min-height: 177px;
+}
+
+.databox-quota{
+	td{
+		padding: 0 !important;
+	}
 }

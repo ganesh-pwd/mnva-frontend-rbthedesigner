@@ -30,7 +30,7 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
   private updateMentionsReq: Subscription;
   private deleteSubs: Subscription;
 
-  public databoxMention: number = 1200;
+  public databoxMention: number;
   public loggedInUser;
 
   constructor(
@@ -42,7 +42,8 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    userService.userData$.subscribe((user) => this.loggedInUser = user);
+    this.databoxMention = this.data.mentions || 1200
   }
 
   ngOnInit() {}
@@ -54,14 +55,12 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
 
   // create new databox
   createNewDatabox() {
+    this.dialogRef.close(false);
     this.updateMentionCount(this.databoxMention).then(res => {
-      console.log(res);
-
       this.reqSubs = this.databoxesService
         .addItem(this.data.data)
         .subscribe(x => {
-          this.dialogRef.close(false);
-          this.router.navigate(['/databoxes']).then(() => window.location.reload());
+          this.router.navigate(['/databoxes'])
         });
     });
   }
@@ -76,16 +75,19 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
 
   // create and update databox if status is Draft
   updateCreateDatabox() {
-    this.updateMentionCount(this.databoxMention).then(res => {
-      console.log(res);
-
+    this.dialogRef.close(false);
+    this.updateMentionCount(this.data.mentions).then(res => {
       this.reqSubs = this.databoxesService
       .updateDatabox(this.data.data, 'Active')
       .subscribe((result) => {
-        
-        this.dialogRef.close(false);
       });
     });
+  }
+
+  updateDatabox() {
+    this.reqSubs = this.databoxesService
+    .updateDatabox(this.data.details, 'Draft')
+    .subscribe((result) => this.dialogRef.close(false));
   }
 
   // go to mentions page and add more credits
