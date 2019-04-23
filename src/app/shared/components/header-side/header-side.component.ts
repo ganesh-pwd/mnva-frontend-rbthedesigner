@@ -28,6 +28,7 @@ export class HeaderSideComponent implements OnInit {
   private getReqImage: Subscription;
   public userImage: string;
   public userFullName: string;
+  public loggedInUser;
 
   constructor(
     private themeService: ThemeService,
@@ -40,9 +41,11 @@ export class HeaderSideComponent implements OnInit {
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
-    this.userService.userData$.subscribe(user => {
+    
+    userService.userData$.subscribe(user => {
       if(user){
         this.userFullName = user.name
+        this.loggedInUser = user;
       }
     });
   }

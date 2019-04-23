@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
 import { CountryService } from '../../../shared/services/countries/country.service';
+import { HistoricalService } from '../../../shared/services/historical/historical.service';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { Subscription } from 'rxjs';
 import { DatasourceService } from '../../../shared/services/datasource/datasource.service';
@@ -18,24 +19,28 @@ import { UserService } from '../../../shared/services/auth/user-services';
   styleUrls: ['./databox-item-settings.component.scss']
 })
 export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
-  private getItemSub: Subscription;
-  private req: Subscription;
+  private databoxSingleReq: Subscription;
+  private databoxReq: Subscription;
+  private countryReq: Subscription;
+  private historicalReq: Subscription;
 
+  public queryForm: FormGroup;
   public data: any;
   public databoxes: any[];
   public databoxItemData: any;
   public checked: boolean = true;
   public countries: any;
+  public historicals: any;
   public selectedOption;
   public datasource: any;
+  public checkIfCreateOrEdit: string;
+  public changes: boolean;
   public selectedDatasource: string = 'Facebook';
   public selectedCountry: string = 'Costa Rica';
-  public checkIfCreateOrEdit: string;
-
-  public queryForm: FormGroup;
-  public changes: boolean;
-
   public showQuery: string = 'basic';
+  public showQueryAccord: boolean = true;
+  public showAdvanceAccord: boolean = true;
+  public showConnectAccord: boolean = true;
   public loggedInUser;
 
   // tslint:disable-next-line:max-line-length
@@ -50,6 +55,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private userService: UserService,
     private datasourceService: DatasourceService,
+    private historicalService: HistoricalService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService
   ) {
@@ -65,17 +71,20 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     setTimeout(() => this.loader.open(), 50);
 
+    this.getCountries();
+    this.getHistoricals();
     this.getDataboxes();
     this.getSingleItem();
-    this.getCountries();
     this.queryFormGroup();
 
     this.queryForm.valueChanges.subscribe(result => (this.changes = true));
   }
 
   ngOnDestroy() {
-    if (this.getItemSub) this.getItemSub.unsubscribe();
-    if (this.req) this.req.unsubscribe();
+    if (this.databoxSingleReq) this.databoxSingleReq.unsubscribe();
+    if (this.databoxReq) this.databoxReq.unsubscribe();
+    if (this.countryReq) this.countryReq.unsubscribe();
+    if (this.historicalReq) this.historicalReq.unsubscribe();
   }
 
   // build queryForm
@@ -122,7 +131,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   getSingleItem() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.getItemSub = this.databoxesService
+    this.databoxSingleReq = this.databoxesService
       .getSingleItem(id)
       .subscribe(data => {
         if (data) {
@@ -135,10 +144,13 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           this.getDatasource();
 
           // select countries
-          this.data.location.forEach(el => this.selectCountry(el));
+          data.location.forEach(el => this.selectCountry(el));
+          
+          // select historical value
+          this.selectCountry(data.historical);
 
           this.loader.close();
-        } else if (this.databoxes) {
+        } else if (!data) {
           // set databox initial name
           this.databoxItemData =
             (sessionStorage.getItem('databox_edited_name')
@@ -146,12 +158,17 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
               : `Databox_${sessionStorage.getItem('databox_name_new')}`)
               || data;
 
-            
             // set value of forms
             this.setValueOfForm();
 
             // get data source 
             this.getDatasource();
+
+            // set initial country as Costa Rica
+            this.selectCountry('Costa Rica');
+
+            // set historical value
+            this.selectHistorical('Full Archive');
 
             this.loader.close();
         }
@@ -168,23 +185,58 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     this.showQuery = 'advance';
   }
 
+  // minimize/maximize accordion
+  selectAccordion(accord){
+    switch(true){
+      case accord === 'showQuery':
+      {
+        if(this.showQueryAccord) this.showQueryAccord = false;
+        else this.showQueryAccord = true;
+        break;
+      }
+
+      case accord === 'showAdvance':
+      {
+        if(this.showAdvanceAccord) this.showAdvanceAccord = false;
+        else this.showAdvanceAccord = true;
+        break;
+      }
+
+      case accord === 'showConnect':
+      {
+        if(this.showConnectAccord) this.showQueryAccord = false;
+        else this.showConnectAccord = true;
+        break;
+      }
+    }
+  }
+
+
   // Get databox items
   getDataboxes() {
-    this.getItemSub = this.databoxesService.getItems().subscribe(data => {
+    this.databoxReq = this.databoxesService.getItems()
+    .subscribe(data => {
       if (data) this.databoxes = data;
     });
   }
 
   // get list of country
   getCountries() {
-    this.getItemSub = this.countryService
+    this.countryReq = this.countryService
       .getCountries()
-      .subscribe(country => { this.countries = country; });
+      .subscribe(country => this.countries = country);
   }
 
-  // select country
-  selectCountry(country){
-    let selected = document.getElementById(country);
+  // get historical list
+  getHistoricals(){
+    this.historicalReq = this.historicalService
+      .getHistorical()
+      .subscribe(historical => this.historicals = historical)
+  }
+
+  // select country like a checkbox
+  selectCountry(id_value){
+    let selected = document.getElementById(id_value);
     
     if(selected.classList.contains('query-active')) 
       selected.classList.remove('query-active');
@@ -192,9 +244,30 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     else selected.classList.add('query-active');
   }
 
+
+  // select historical value
+  selectHistorical(id_value){
+    // set selected historical
+    let historicals = document.getElementById('historicals');
+    let active_historical = historicals.getElementsByClassName('query-active');
+
+    if(active_historical.length > 0)
+      for(let i = 0; i < active_historical.length; i++)
+        active_historical[i].classList.remove('query-active')
+    
+    // select the button as active
+    let selected = document.getElementById(id_value);
+    
+    if(selected.classList.contains('query-active')) 
+      selected.classList.remove('query-active');
+
+    else selected.classList.add('query-active');
+  }
+
+
   // get all datasource
   getDatasource() {
-    this.getItemSub = this.datasourceService
+    this.databoxSingleReq = this.datasourceService
       .getDatasource()
       .subscribe(data => { 
   
@@ -215,63 +288,27 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     this.router.navigate([route]);
   }
 
-  // open regular databox dialog modal
-  openDialog(title: string, data: string, input: boolean) {
-    this.mainDataboxesDialogService
-      .confirm({
-        title: title,
-        data: data,
-        input: input,
-        update: false,
-        details: this.getQueryFormBody()
-      })
-      .subscribe(result => {
-        this.selectedOption = result;
-      });
-  }
-
-  // check if there's changes with inputs before cancelling
-  cancelChanges() {
-    if (this.changes) {
-      this.openDialog(
-        'Exit without saving changes?',
-        'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
-        false
-      );
-    } else this.router.navigate(['/databoxes']);
-
-    sessionStorage.removeItem('databox_edited_name');
-  }
-
-  // open modal for updating the databox
-  openDialogUpdate(title: string, data: string) {
-    this.mainDataboxesDialogService
-      .confirm({
-        title: title,
-        data: data,
-        input: false,
-        update: true,
-        details: this.getQueryFormBody()
-      })
-      .subscribe(result => {
-        this.selectedOption = result;
-      });
-  }
+  
 
   // get query form inputs data for saving
   getQueryFormBody() {
+    // get databox historical value
+    let historical = document.getElementById('historicals')
+    .getElementsByClassName('query-active');
+
+    // set selected multiple countries
     let country = document.getElementById('countries');
     let active_country = country.getElementsByClassName('query-active');
     let countries = [];
 
-    for(let i = 0; i < active_country.length; i++){
+    for(let i = 0; i < active_country.length; i++)
       countries.push(active_country[i].textContent)
-    }
 
     // initialize inputs
     const body = {
       'datasource': this.queryForm.get('datasource').value,
       'country': countries,
+      'historical': historical[0].textContent.trim(),
       'required_keywords': this.queryForm.get('required-keywords').value,
       'optional_keywords': this.queryForm.get('optional-keywords').value,
       'excluded_keywords': this.queryForm.get('excluded-keywords').value,
@@ -281,17 +318,62 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     return body;
   }
 
-  // open databox query dialog
-  openMentionsDialog(title: string, mentions: any = 1200) {
-    this.databoxMentionsDialogService
-      .confirm({ title: title, data: this.getQueryFormBody(), mentions: mentions })
-      .subscribe(result => {});
-  }
+  /* @DATABOXES DIALOG POP UPS */
 
-  // open databox query dialog
-  openMentionsDialogUpdate(title: string, mentions: any = 1200) {
-    this.databoxMentionsDialogService
-      .confirm({ title: title, data: this.getQueryFormBody(), update: true, mentions: mentions })
-      .subscribe(result => {});
-  }
+      // open regular databox dialog modal
+      openDialog(title: string, data: string, input: boolean) {
+        this.mainDataboxesDialogService
+          .confirm({
+            title: title,
+            data: data,
+            input: input,
+            update: false,
+            details: this.getQueryFormBody()
+          })
+          .subscribe(result => {
+            this.selectedOption = result;
+          });
+      }
+
+      // check if there's changes with inputs before cancelling
+      cancelChanges() {
+        if (this.changes) {
+          this.openDialog(
+            'Exit without saving changes?',
+            'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
+            false
+          );
+        } else this.router.navigate(['/databoxes']);
+
+        sessionStorage.removeItem('databox_edited_name');
+      }
+
+      // open modal for updating the databox
+      openDialogUpdate(title: string, data: string) {
+        this.mainDataboxesDialogService
+          .confirm({
+            title: title,
+            data: data,
+            input: false,
+            update: true,
+            details: this.getQueryFormBody()
+          })
+          .subscribe(result => {
+            this.selectedOption = result;
+          });
+      }
+
+      // open databox query dialog
+      openMentionsDialog(title: string, mentions: any = 1200) {
+        this.databoxMentionsDialogService
+          .confirm({ title: title, data: this.getQueryFormBody(), mentions: mentions })
+          .subscribe(result => {});
+      }
+
+      // open databox query dialog
+      openMentionsDialogUpdate(title: string, mentions: any = 1200) {
+        this.databoxMentionsDialogService
+          .confirm({ title: title, data: this.getQueryFormBody(), update: true, mentions: mentions })
+          .subscribe(result => {});
+      }
 }

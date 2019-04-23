@@ -25,6 +25,7 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatSelectModule,
+  MatExpansionModule
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -61,6 +62,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
+    MatExpansionModule,
     FlexLayoutModule,
     NgxDatatableModule,
     ChartsModule,

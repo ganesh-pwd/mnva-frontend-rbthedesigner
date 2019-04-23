@@ -7,6 +7,7 @@ import { databoxCategoryEditorDialogService } from '../../../shared/services/dat
 import { DataboxItemSearchService } from '../../../shared/services/databoxes/databox-item-search-services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxAddSuggestionService } from '../../../shared/services/databoxes/dialog-add-suggestions/dialog-add-suggestions.service';
+import { DataboxCategoryService } from '../../../shared/services/databoxes/databox-category-creator-services';
 
 import { HotTableRegisterer } from '@handsontable-pro/angular';
 import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
@@ -27,10 +28,11 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   private addRowReq: Subscription;
   private resetRowReq: Subscription;
   private req: Subscription;
+  private databoxCategoryReq: Subscription;
 
   public data: any;
   public databoxItemData: any;
-  public checked: boolean = true;
+  public checked: boolean = false;
   public arrayData: any;
   public paginatedData: any;
   public selectedOption = false;
@@ -39,7 +41,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
-  public dataSource = categoryData;
+  public dataSource: any;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumnsSecondTable: string[] = ['date', 'content', 'parent', 'author'];
@@ -50,6 +52,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public databoxItemTable: any;
+  public databoxCategories: any;
   public hotId: string = 'databoxItemTable';
   public selectedHero: any;
   public tableSettings: {};
@@ -58,6 +61,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public categoryRemaining: number;
   public subcategoryRemaining: number;
 
+  public sentiment: boolean = false;
+  public topicRecognition: boolean = false;
+  public genderAuthor: boolean = false;
+  public entityRecognition: boolean = false;
 
   constructor(
     private router: Router,
@@ -69,6 +76,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     private databoxItemSearchService: DataboxItemSearchService,
     private databoxAddSuggestionService: DataboxAddSuggestionService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
+    private databoxCategoryService: DataboxCategoryService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService
     ) {
@@ -133,6 +141,43 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     });
   }
 
+  slideToggle(data){
+    switch(true){
+      case data === 'sentiment':{
+        if(this.sentiment)
+          this.sentiment = false;
+        else this.sentiment = true;
+
+        break;
+      }
+
+      case data === 'topicRecognition':{
+        if(this.topicRecognition)
+          this.topicRecognition = false;
+        else this.topicRecognition = true;
+
+        break;
+      }
+
+      case data === 'genderAuthor':{
+        if(this.genderAuthor)
+          this.genderAuthor = false;
+        else this.genderAuthor = true;
+
+        break;
+      }
+
+      case data === 'entityRecognition':{
+        if(this.entityRecognition)
+          this.entityRecognition = false;
+        else this.entityRecognition = true;
+
+        break;
+      }
+    }
+
+  }
+
   // download the table
   downloadCSV() {
     const hotInstance = this.hotRegisterer.getInstance(this.hotId);
@@ -176,11 +221,22 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
             this.data = data;
             this.selectedOption = true;
+            this.getDataboxCategory(this.id);
             this.loader.close();
           }
           if (!data) this.router.navigate(['/sessions/404']);
         },
         (err) => this.router.navigate(['/sessions/404']));
+  }
+
+  // Get Databox Category
+  getDataboxCategory(id){
+    this.databoxCategoryReq = this.databoxCategoryService
+    .getItem(id)
+    .subscribe(result => {
+      this.databoxCategories = result[0].categories;
+      this.dataSource = result[0].categories || categoryData;
+    });
   }
 
   // paginate databox search table
@@ -282,9 +338,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   // open category editor dialog
-  openQueryDialog(title: string) {
-    this.databoxCategoryEditorDialogService.confirm({ title: title })
-      .subscribe((result) => { });
+  openQueryDialog(title: string, databox: any) {
+    this.databoxCategoryEditorDialogService.confirm({ 
+      title: title, databox: databox 
+    }).subscribe((result) => { });
   }
 
   // modify databox
@@ -299,8 +356,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   // open databox query dialog
-  openAlgorithmDialog(title: string) {
-    this.databoxAlgorithmDialogService.confirm({ title: title })
+  openAlgorithmDialog(title: string, checked: boolean) {
+    this.databoxAlgorithmDialogService.confirm({ title: title, checked: checked })
       .subscribe((result) => { });
   }
 

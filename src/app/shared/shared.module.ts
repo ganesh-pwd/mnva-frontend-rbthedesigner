@@ -29,7 +29,6 @@ import {
   MatProgressBarModule
 } from '@angular/material';
 
-
 // ONLY REQUIRED FOR **SIDE** NAVIGATION LAYOUT
 import { HeaderSideComponent } from './components/header-side/header-side.component';
 import { SidebarSideComponent } from './components/sidebar-side/sidebar-side.component';
@@ -76,6 +75,10 @@ import { DataboxDialogsQueryComponent } from './services/databoxes/dialogs-query
 import { MinervaAccountDialogComponent } from './services/minerva-account/minerva-account-dialog/minerva-account-dialog.component';
 import { MinervaAccountImageDialogComponent } from './services/minerva-account/minerva-account-image-dialog/minerva-account-image-dialog.component';
 
+// Accounts Settings Component
+import { AccountTypeComponent } from './components/account-type/account-type.component';
+import { AccountMentionRemainingComponent } from './components/account-mention-remaining/account-mention-remaining.component';
+import { AccountAlgorithmCreditRemainingComponent } from './components/account-algorithm-credit-remaining/account-algorithm-credit-remaining.component';
 /*
   Only Required if you want to use Angular Landing
   (https://themeforest.net/item/angular-landing-material-design-angular-app-landing-page/21198258)
@@ -103,6 +106,9 @@ const mainLayoutComponent = [
   AppComfirmComponent,
   AppLoaderComponent,
   SlideToggleComponent,
+  AccountTypeComponent,
+  AccountMentionRemainingComponent,
+  AccountAlgorithmCreditRemainingComponent,
   MentionsProgressBarComponent
 ];
 

@@ -44,3 +44,17 @@ button.query_type{
 		padding-left: 10px;
 	}
 }
+
+button.query_type{
+	line-height: 20px;
+	margin: 3px !important;
+	box-shadow: -2px 4px 8px -7px rgba(247,244,247,1) !important;
+	border: 1px solid gray !important;
+	font-size: 11px !important;
+	min-width: auto;
+	&:hover{
+		background-color: #22d9c9;
+		color: white;
+		border: 1px solid #22d9c9 !important;
+	}
+}

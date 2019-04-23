@@ -1,0 +1,24 @@
+<mat-card class="p-0 fixed-height">
+  <mat-card-title class="">
+    <div class="card-title-text mt-05">Algorithm Credit</div>
+    <span fxFlex></span>
+    <div class="card-title-text"><button mat-raised-button 
+      routerLink="/products/algorithm-credit">
+      Add Credit</button>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="pb-1">
+      <h6>Algorithm Credit Remaining</h6>
+      <p class="text-muted">${{loggedInUser.algorithmCredits}} in credit remaining</p>
+      <mat-progress-bar
+      [ngClass]="remaining >= 80 && remaining <= 99 
+        ? 'yellow-progress': remaining === 100 
+        ? 'red-progress': 'blue-progress'"
+      [mode]="'determinate'"
+      [value]="remaining">
+      </mat-progress-bar>
+    </div>
+  </mat-card-content>
+</mat-card>

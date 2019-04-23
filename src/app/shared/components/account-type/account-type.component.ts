@@ -7,23 +7,15 @@ import { UserService } from '../../../shared/services/auth/user-services';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-mentions-progress-bar',
+  selector: 'app-account-type',
   animations: [egretAnimations],
-  templateUrl: './mentions-progress-bar.component.html',
-  styleUrls: ['./mentions-progress-bar.scss']
+  templateUrl: './account-type.component.html',
+  styleUrls: ['./account-type.component.scss']
 })
-export class MentionsProgressBarComponent implements OnInit {
-
+export class AccountTypeComponent implements OnInit {
 	private getItemSub: Subscription;
 	private getReqImage: Subscription;
 	private req: Subscription;
-
-	public basic: number = 3000;
-	public professional: number = 5000;
-
-	public remaining: number = 0;
-	public color;
-	public value;
 
 	userImage: string;
 	public loggedInUser;
@@ -35,18 +27,7 @@ export class MentionsProgressBarComponent implements OnInit {
 	  private userService: UserService
 	  ) {
 	  this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
-	  userService.userData$.subscribe((user) => {
-	  	this.loggedInUser = user;
-
-	  	if(this.loggedInUser){
-	  		let userAccountType = this.loggedInUser.accountType === 'Basic' 
-	  		? this.basic 
-	  		: this.professional;
-
-	  		let remaining = userAccountType - this.loggedInUser.mentions;
-	  		this.remaining = (remaining/userAccountType) * 100;
-	  	}
-	  });
+	  userService.userData$.subscribe((user) => this.loggedInUser = user);
 	}
 
 	ngOnInit() {
@@ -55,5 +36,4 @@ export class MentionsProgressBarComponent implements OnInit {
 	ngOnDestroy() {
 
 	}
-
 }

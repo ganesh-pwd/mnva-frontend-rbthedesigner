@@ -12,58 +12,18 @@
 <!-- Plan and Credit -->
 <div fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
-    <mat-card class="p-0 fixed-height">
-      <mat-card-title class="">
-        <div class="card-title-text mt-05">Account Type</div>
-        <mat-divider></mat-divider>
-      </mat-card-title>
-      <mat-card-content>
-        <div class="pb-1">
-          <h1 class="mat-h1 fw-400">{{loggedInUser.accountType}}</h1>
-          <p><a class="text-muted mat-color-primary">Upgrade your plan</a></p>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <!-- USER ACCOUNT TYPE -->
+    <app-account-type></app-account-type>
   </div>
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
-    <mat-card class="p-0 fixed-height">
-      <mat-card-title class="">
-        <div class="card-title-text mt-05">Mentions Plan</div>
-        <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Add Mentions</button></div>
-        <mat-divider></mat-divider>
-      </mat-card-title>
-      <mat-card-content>
-        <div class="pb-1">
-          <h6>Mentions Remaining</h6>
-          <p class="text-muted">{{loggedInUser.mentions}} Mentions</p>
-          <mat-progress-bar
-	        [mode]="'determinate'"
-	        [value]="60">
-	      </mat-progress-bar>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <!-- USER MENTIONS REMAINING -->
+    <app-account-mention-remaining></app-account-mention-remaining>
+
   </div>
+
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="33.2">
-    <mat-card class="p-0 fixed-height">
-      <mat-card-title class="">
-        <div class="card-title-text mt-05">Algorithm Credit</div>
-        <span fxFlex></span>
-        <div class="card-title-text"><button mat-raised-button>Add Credit</button></div>
-        <mat-divider></mat-divider>
-      </mat-card-title>
-      <mat-card-content>
-        <div class="pb-1">
-          <h6>Algorithm Credit Remaining</h6>
-          <p class="text-muted">${{loggedInUser.algorithmCredits}} in credit remaining</p>
-          <mat-progress-bar
-          [mode]="'determinate'"
-          [value]="60">
-          </mat-progress-bar>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <!-- USER ALGORITHM CREDITS REMAINING -->
+    <app-account-algorithm-credit-remaining></app-account-algorithm-credit-remaining>
   </div>  
 </div>  
 <!-- Account Settings -->

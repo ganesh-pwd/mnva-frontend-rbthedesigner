@@ -107,6 +107,7 @@
               <button *ngIf="data.title !== 'Create Databox' 
               && data.title !== 'Delete Databox' 
               && data.title !== 'Save as Draft'
+              && data.title !== 'Save Changes'
               && data.title !== 'Exit without saving changes?'
               && data.title !== 'Set Databox Name'
               && data.title !== 'Edit Databox Name'
@@ -126,6 +127,13 @@
 
               <!-- Save as Draft with update -->
               <button *ngIf="data.title === 'Save as Draft' && data.update"
+              type="button" 
+              mat-raised-button
+              color="primary" 
+              (click)="updateDatabox()">{{data.title}}</button>
+
+              <!-- Save Databox Changes if Status is Draft -->
+              <button *ngIf="data.title === 'Save Changes' && data.update"
               type="button" 
               mat-raised-button
               color="primary" 

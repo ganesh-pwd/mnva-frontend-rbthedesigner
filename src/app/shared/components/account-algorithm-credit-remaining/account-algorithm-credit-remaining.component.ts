@@ -6,27 +6,28 @@ import { MinervaAccountChangeService } from '../../../shared/services/minerva-ac
 import { UserService } from '../../../shared/services/auth/user-services';
 import { Subscription } from 'rxjs';
 
+
 @Component({
-  selector: 'app-mentions-progress-bar',
+  selector: 'app-account-algorithm-credit-remaining',
   animations: [egretAnimations],
-  templateUrl: './mentions-progress-bar.component.html',
-  styleUrls: ['./mentions-progress-bar.scss']
+  templateUrl: './account-algorithm-credit-remaining.component.html',
+  styleUrls: ['./account-algorithm-credit-remaining.component.scss']
 })
-export class MentionsProgressBarComponent implements OnInit {
+export class AccountAlgorithmCreditRemainingComponent implements OnInit {
 
 	private getItemSub: Subscription;
 	private getReqImage: Subscription;
 	private req: Subscription;
 
-	public basic: number = 3000;
-	public professional: number = 5000;
+	userImage: string;
+	public loggedInUser;
+
+	public basic: number = 100;
+	public professional: number = 250;
 
 	public remaining: number = 0;
 	public color;
 	public value;
-
-	userImage: string;
-	public loggedInUser;
 
 	constructor(
 	  private minervaAccountDialogService: MinervaAccountDialogService,
@@ -43,7 +44,7 @@ export class MentionsProgressBarComponent implements OnInit {
 	  		? this.basic 
 	  		: this.professional;
 
-	  		let remaining = userAccountType - this.loggedInUser.mentions;
+	  		let remaining = userAccountType - this.loggedInUser.algorithmCredits;
 	  		this.remaining = (remaining/userAccountType) * 100;
 	  	}
 	  });
@@ -55,5 +56,4 @@ export class MentionsProgressBarComponent implements OnInit {
 	ngOnDestroy() {
 
 	}
-
 }

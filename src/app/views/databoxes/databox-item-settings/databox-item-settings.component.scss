@@ -76,14 +76,14 @@ h5{
 button.query_type{
 	line-height: 20px;
 	margin: 3px !important;
-	box-shadow: none;
-	border: 1px solid gray;
+	box-shadow: -2px 4px 8px -7px rgba(247,244,247,1) !important;
+	border: 1px solid gray !important;
 	font-size: 11px !important;
 	min-width: auto;
 	&:hover{
 		background-color: #22d9c9;
 		color: white;
-		border: 1px solid #22d9c9;
+		border: 1px solid #22d9c9 !important;
 	}
 }
 
@@ -169,43 +169,26 @@ button.query_type{
 }
 
 
-.chk-multi {
-    border-radius: 5px !important;
-    background-color:white;
-    border:1px solid gray;
-    overflow:auto;
-    float:left;
-    box-shadow: none;
-    font-size: 11px !important;
-
-    &:hover{
-    	background:#22d9c9;
-    	color: white;
-    }
-
-    label{
-    	float:left;
-    	cursor: pointer !important;
-    }
-
-    label span{
-    	text-align:center;
-    	padding: 5px;
-    	margin: 5px;
-    	display:block;
-    	cursor: pointer !important;
-    }
-
-    label input{
-    	position:absolute;
-    	top:-20px;
-    }
-
-    input:checked + span {
-    	padding: 5px;
-    	margin: 5px;
-        background-color:#22d9c9;
-        color:#fff;
-    }
+.mat-panel-title{
+  font-size: 15px !important;
+  font-weight: 500 !important;
 }
 
+.mat-panel-title {
+  
+}
+.mat-panel-title{
+  color: #fb8a01 !important;
+}
+
+.mat-expansion-panel-header{
+	border-bottom-style: solid 1px gray !important;
+}
+
+.mat-icon{
+	cursor: pointer !important;
+}
+
+.accordion-databox{
+	cursor: pointer !important;
+}
