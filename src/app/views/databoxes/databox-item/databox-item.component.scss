@@ -110,9 +110,14 @@ h5 {
 }
 
 .query-category {
-  left: 30px;
-  bottom: 50px;
-  position: absolute;
+  margin-top: -20px !important;
+  padding-top: -10px !important;
+  padding-bottom: -10px !important;
+  height: 40px !important;
+}
+
+.query-category-text {
+  margin-top: -20px !important;
 }
 
 .algorithm-header {
@@ -197,3 +202,9 @@ mat-icon.download{
   }
 }
 
+td{
+  .mat-icon{
+    cursor: pointer !important;
+    margin-right: 15px !important;
+  }
+}

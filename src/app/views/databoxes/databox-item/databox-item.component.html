@@ -176,29 +176,6 @@
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
   
           <div class="bottom-data">
-            <!--
-            <br>
-            <button mat-raised-button class="download-csv" (click)="downloadCSV()" #exportFile>Download to CSV</button>
-            <br>
-            <h2 class="mat-h1 not-find-link" (click)="openAddSuggestionPreField()">Not finding results from a specific {{data?.datasource}} Page? Suggest to add it here</h2>
-            <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
-  
-            <form (submit)="openAddSuggestionPreField()" [formGroup]="suggestResultForm">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{data?.page_search_name}} Name"formControlName="page-name">
-              </mat-form-field>
-               
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{data?.page_search_name}} ID" formControlName="page-id">
-              </mat-form-field>
-              &nbsp;
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{data?.page_search_name}} Country" formControlName="page-country">
-              </mat-form-field>     
-              <br>
-              <button style="margin-left: 0 !important;" type="submit" mat-raised-button>Send</button>        
-            </form>-->
-            
             <br><br>
             <h2 class="mat-h1">Delete Databox</h2>
             <h3 class="mat-h3">Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</h3>
@@ -263,18 +240,19 @@
               </table>
             </mat-card-content>
             <br>
-            <mat-card-actions class="p-0">
-                <button (click)="openQueryDialog('Create Category')"
-                  mat-raised-button
-                  color="primary"
-                  class="query-category">
-                  Add Category
-                </button>
-                <span fxFlex></span>
-                <p class="text-muted">Category Remaining: {{ categoryRemaining || 0 }}<br>
+            <mat-card-actions>
+              <button (click)="openQueryDialog('Create Category', data)"
+                mat-raised-button
+                color="primary"
+                class="query-category">
+                Add Category
+              </button>
+              <span fxFlex></span>
+              <p class="text-muted query-category-text">
+                Category Remaining: {{ categoryRemaining || 0 }}<br>
                 SubCategory Remaining: {{ subcategoryRemaining || 0 }}
-                </p>
-              </mat-card-actions>
+              </p>
+            </mat-card-actions>
           </mat-card>
           <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
             <span fxFlex></span>
@@ -399,7 +377,9 @@
                       <div>
                         <h2 class="mat-h4">Cost / Mention: Free</h2>
                         <span fxFlex></span>
-                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                        <mat-slide-toggle color="primary" class="mb-1" 
+                        [checked]="sentiment"
+                        (change)="slideToggle('sentiment')">
                           Apply Automatically
                         </mat-slide-toggle>
                       </div>
@@ -407,14 +387,12 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        (click)="openAlgorithmDialog('Apply Enrichment', sentiment)">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
                 </div>
               </div>
-
-             
             </div>
           </div>
 
@@ -449,7 +427,9 @@
                       <div>
                         <h2 class="mat-h4">Cost / Mention: $0.03</h2>
                         <span fxFlex></span>
-                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                        <mat-slide-toggle color="primary" class="mb-1" 
+                        [checked]="topicRecognition"
+                        (change)="slideToggle('topicRecognition')">
                           Apply Automatically
                         </mat-slide-toggle>
                       </div>
@@ -457,7 +437,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition)">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
@@ -499,7 +479,9 @@
                       <div>
                         <h2 class="mat-h4">Cost / Mention: Free</h2>
                         <span fxFlex></span>
-                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                        <mat-slide-toggle color="primary" class="mb-1" 
+                        [checked]="genderAuthor"
+                        (change)="slideToggle('genderAuthor')">
                           Apply Automatically
                         </mat-slide-toggle>
                       </div>
@@ -507,7 +489,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor)">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
@@ -549,7 +531,9 @@
                       <div>
                         <h2 class="mat-h4">Cost / Mention: $0.03</h2>
                         <span fxFlex></span>
-                        <mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+                        <mat-slide-toggle color="primary" class="mb-1" 
+                        [checked]="entityRecognition"
+                        (change)="slideToggle('entityRecognition')">
                           Apply Automatically
                         </mat-slide-toggle>
                       </div>
@@ -557,7 +541,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment')">
+                        (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition)">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>

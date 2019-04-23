@@ -92,13 +92,15 @@ export class DataboxesService {
       'page_search_name': 'Website',
       'expiry_date': 'No Configuration',
       'status': status,
-      'historical': '7 days',
+      'historical': details.historical,
       'associated_account': this.loggedInUser.name,
       'associated_email': this.loggedInUser.email,
       'result': 1200,
-      'keywords': '5/5',
-      'category': '5/5',
-      'sub_category': '5/5',
+      'keywords': '0/5',
+      'category_available': 20,
+      'category_used': 0,
+      'sub_category_available': 20,
+      'sub_category_available_used': 0,
       'query':  details.advance_query || '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': details.optional_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`,
       'required-keywords': details.required_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`,
@@ -149,8 +151,9 @@ export class DataboxesService {
     if (status === 'Active') databox.status = 'Active';
     
     databox.datasource = details.datasource || 'Facebook';
-    databox.location = [...details.country] || ['Costa Rica'];
-    databox.query    =   details.advance_query || '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )';
+    databox.location   = [...details.country] || ['Costa Rica'];
+    databox.historical = details.historical || 'Full Archive';
+    databox.query      = details.advance_query || '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )';
     databox['optional-keywords']  =  details.optional_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
     databox['required-keywords']  =  details.required_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
     databox['excluded-keywords']  =  details.excluded_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;

@@ -1,7 +1,7 @@
 <div>
     <h1 matDialogTitle>{{ data.title }}</h1>
     <div mat-dialog-content>
-    	<p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
+    	<p>After you click apply the databox will be created with a status set to Active. Mentions result will also be deducted automatically to your credits. Click Apply to proceed.</p>
     </div>
 
     <table>
@@ -22,7 +22,7 @@
 	            <td>{{loggedInUser.mentions}} Mentions</td>
 	        </tr>
 
-	        <tr class="mat-bg-green">
+	        <tr [ngClass]="(loggedInUser.mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'">
 	            <td>Total Remaining After Creation</td>
 	            <td>{{loggedInUser.mentions - databoxMention}} Mentions</td>
 	        </tr>

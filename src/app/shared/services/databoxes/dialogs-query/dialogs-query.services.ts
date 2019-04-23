@@ -5,7 +5,8 @@ import { delay } from 'rxjs/operators';
 import { DataboxDialogsQueryComponent } from './dialogs-query.component';
 
 interface confirmData {
-  title?: string
+  title?: string,
+  databox?: any,
 }
 
 @Injectable({
@@ -17,13 +18,15 @@ export class databoxCategoryEditorDialogService {
 
   public confirm(data:confirmData = {}): Observable<boolean> {
     data.title = data.title || 'Create Category';
+    data.databox = data.databox || {};
 
     let dialogRef: MatDialogRef<DataboxDialogsQueryComponent>;
     dialogRef = this.dialog.open(DataboxDialogsQueryComponent, {
       width: '800px',
       disableClose: true,
       data: {
-        title: data.title
+        title: data.title,
+        databox: data.databox
       }
     });
 

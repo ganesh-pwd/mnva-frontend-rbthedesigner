@@ -83,8 +83,6 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   navigateToDatabox(id: string, first: boolean, status: string) {
     const route = !first ? `databoxes/${id}` : `databoxes/${id}/initialize`;
 
-    console.log(id, first, status)
-
     if(status === 'Draft') this.router.navigate([`/databoxes/create-databox/${id}`]);
     else this.router.navigate([route]);
   }

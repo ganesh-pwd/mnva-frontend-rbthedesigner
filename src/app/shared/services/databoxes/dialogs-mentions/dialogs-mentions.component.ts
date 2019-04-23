@@ -18,6 +18,7 @@ import {
 import { DataboxesService } from '../databoxes-services';
 import { UserService } from '../../auth/user-services';
 import { Subscription } from 'rxjs';
+import { AppLoaderService } from '../../../services/app-loader/app-loader.service';
 
 @Component({
   selector: 'app-dialogs-mentions',
@@ -38,6 +39,7 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
     private databoxesService: DataboxesService,
     private userService: UserService,
     private router: Router,
+    private loader: AppLoaderService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -56,13 +58,17 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
   // create new databox
   createNewDatabox() {
     this.dialogRef.close(false);
-    this.updateMentionCount(this.databoxMention).then(res => {
-      this.reqSubs = this.databoxesService
-        .addItem(this.data.data)
-        .subscribe(x => {
-          this.router.navigate(['/databoxes'])
-        });
-    });
+    this.loader.open();
+    setTimeout(() => {
+      this.updateMentionCount(this.databoxMention).then(res => {
+        this.reqSubs = this.databoxesService
+          .addItem(this.data.data)
+          .subscribe(x => {
+            this.router.navigate(['/databoxes'])
+            this.loader.close();
+          });
+      });
+    }, 500);
   }
 
   // compute remaining mentions
@@ -76,12 +82,16 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
   // create and update databox if status is Draft
   updateCreateDatabox() {
     this.dialogRef.close(false);
-    this.updateMentionCount(this.data.mentions).then(res => {
-      this.reqSubs = this.databoxesService
-      .updateDatabox(this.data.data, 'Active')
-      .subscribe((result) => {
+    this.loader.open();
+    setTimeout(() => {
+      this.updateMentionCount(this.data.mentions).then(res => {
+        this.reqSubs = this.databoxesService
+        .updateDatabox(this.data.data, 'Active')
+        .subscribe((result) => {
+          this.loader.close();
+        });
       });
-    });
+    }, 500)
   }
 
   updateDatabox() {

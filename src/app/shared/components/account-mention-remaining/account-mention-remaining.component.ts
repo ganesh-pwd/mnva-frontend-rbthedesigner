@@ -6,13 +6,14 @@ import { MinervaAccountChangeService } from '../../../shared/services/minerva-ac
 import { UserService } from '../../../shared/services/auth/user-services';
 import { Subscription } from 'rxjs';
 
+
 @Component({
-  selector: 'app-mentions-progress-bar',
+  selector: 'app-account-mention-remaining',
   animations: [egretAnimations],
-  templateUrl: './mentions-progress-bar.component.html',
-  styleUrls: ['./mentions-progress-bar.scss']
+  templateUrl: './account-mention-remaining.component.html',
+  styleUrls: ['./account-mention-remaining.component.scss']
 })
-export class MentionsProgressBarComponent implements OnInit {
+export class AccountMentionRemainingComponent implements OnInit {
 
 	private getItemSub: Subscription;
 	private getReqImage: Subscription;

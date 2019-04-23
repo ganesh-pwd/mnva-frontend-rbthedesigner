@@ -1,16 +1,15 @@
 <div>
     <h1 matDialogTitle>{{ data.title }}</h1>
     <div mat-dialog-content>
-        <form>
+        <form [formGroup]="queryForm">
             <mat-form-field class="full-width">
-                <input matInput placeholder="Category Name"
-                [(ngModel)]="categoryName" [ngModelOptions]="{standalone: true}">
+                <input matInput placeholder="Category Name" formControlName="category-name">
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <mat-select placeholder="Choose a Type">
-                    <mat-option>Category</mat-option>
-                    <mat-option>Sub Category</mat-option>
+                <mat-select placeholder="Choose a Type" formControlName="category-type">
+                    <mat-option value="Category" >Category</mat-option>
+                    <mat-option value="Sub Category">Sub Category</mat-option>
                 </mat-select>
             </mat-form-field>
 
@@ -20,55 +19,71 @@
                     <br>
                     <!--Query Menu -->
                     <div fxLayout="row" fxLayoutWrap="wrap" >
-                        <button mat-raised-button mat-color-primary class="query_type">Basic Query</button>
-                        <button mat-raised-button class="query_type">Advanced Query</button>
+                        <button mat-raised-button 
+                        class="query_type"
+                        [ngClass]="showQuery === 'basic' ? 'query-active': ''"
+                        (click)="showBasicQuery()">Basic Query</button>
+
+                        <button mat-raised-button 
+                        class="query_type"
+                        [ngClass]="showQuery === 'advance' ? 'query-active': ''"
+                        (click)="showAdvanceQuery()">Advanced Query</button>
                     </div>
                     <!--Basic Query Editor -->
-                    <mat-card-content>
+                    <mat-card-content *ngIf="showQuery == 'basic'" 
+                        [@animate]="{
+                            value: '*',
+                            params: { x: '10px', delay: '400ms' }
+                        }"> 
                         <br>
+
+                        <span class="mat-color-primary mat-h3">Basic Query</span>
+
                         <div fxLayout="row" fxLayoutWrap="wrap" >
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
                                 <b class="mt-1">Optional Keywords</b>
                                 <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
-                                <form>
-                                    <mat-form-field style="border: 1px solid gray;" class="full-width">
-                                        <div class="p-1">
-                                            <textarea matInput rows="5" cols="80" value="{{editorData}}"></textarea>
-                                        </div>  
-                                    </mat-form-field>
-                                </form>
+                                <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                    <div class="p-1">
+                                        <textarea matInput rows="5" cols="80" 
+                                        formControlName="optional-keywords"></textarea>
+                                    </div>  
+                                </mat-form-field>
                             </div>
                             <span fxFlex></span>
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
                                 <b class="mt-1">Required Keywords</b>
                                 <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
-                                <form>
-                                    <mat-form-field style="border: 1px solid gray;" class="full-width">
-                                        <div class="p-1">
-                                            <textarea matInput rows="5" cols="80" value="{{editorData}}"></textarea>
-                                        </div>
-                                    </mat-form-field>
-                                </form>
+                                <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                    <div class="p-1">
+                                        <textarea matInput rows="5" cols="80" 
+                                        formControlName="required-keywords"></textarea>
+                                    </div>
+                                </mat-form-field>
                             </div>
                         </div>
                         <div fxLayout="row" fxLayoutWrap="wrap" >
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
                                 <b class="mt-1">Exclude Keywords</b>
                                 <p class="mt-1">Your Databox will not bring in mentions any of the following keywords.</p>
-                                <form>
-                                    <mat-form-field style="border: 1px solid gray;" class="full-width">
-                                        <div class="p-1">
-                                            <textarea matInput rows="5" cols="80" value="{{editorData}}"></textarea>
-                                        </div>
-                                    </mat-form-field>
-                                </form>                             
+                                <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                    <div class="p-1">
+                                        <textarea matInput rows="5" cols="80" 
+                                        formControlName="excluded-keywords"></textarea>
+                                    </div>
+                                </mat-form-field>                             
                             </div>
                         </div>                                                  
                     </mat-card-content>
                     <!--Avanced Query Editor -->
-                    <mat-card-content>
+                    <mat-card-content *ngIf="showQuery == 'advance'" 
+                      [@animate]="{
+                        value: '*',
+                        params: { x: '10px', delay: '400ms' }
+                      }">
                         <div fxLayout="row" fxLayoutWrap="wrap">
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                <br>
                                 <mat-card-header>
                                   <mat-card-title class="mat-color-primary">
                                     <span>Advanced Query</span>
@@ -84,11 +99,9 @@
                                         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
                                             <mat-card class="p-0">
                                                 <mat-card-content class="p-0">
-                                                    <form>
-                                                        <mat-form-field class="full-width">
-                                                          <textarea matInput placeholder="Query" rows="10" cols="80" value="{{editorData}}"></textarea>
-                                                        </mat-form-field>
-                                                    </form>
+                                                    <mat-form-field class="full-width">
+                                                      <textarea matInput placeholder="Query" rows="10" cols="80" formControlName="advance-query"></textarea>
+                                                    </mat-form-field>
                                                 </mat-card-content>
                                                 <div class="text-muted query-help">
                                                     <mat-icon class="query-icon">remove_red_eye</mat-icon>
@@ -128,12 +141,14 @@
     <div mat-dialog-actions>
         <span fxFlex></span>
         <button mat-raised-button
-          class="mb-05">
+          class="mb-05"
+          color="primary">
           Add Expression
         </button>
 
         <button mat-raised-button
-          class="mb-05 mat-bg-red"
+          class="mb-05"
+
           (click)="dialogRef.close(false)">
           Cancel
         </button>

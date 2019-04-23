@@ -42,11 +42,11 @@
   </button>
   <mat-menu #accountMenu="matMenu">
     <div class="account-type p16">
-      <span> <strong> Basic </strong></span>
-      <a href="#" class="menu-link">Upgrade </a>
+      <span> <strong> {{loggedInUser.accountType}} </strong></span>
+      <a routerLink="/products/account-type" class="menu-link">Upgrade </a>
     </div>
     <div class="mentions-remaining p16">
-      <p>0 Mentions Remaining</p>
+      <p>{{loggedInUser.mentions}} Mentions Remaining</p>
       <app-mentions-progress-bar></app-mentions-progress-bar>
       <p class="mt-1">Your quota resets in 10 days</p>
     </div>
@@ -55,9 +55,9 @@
       <span> 
         <strong> Algorithm Credit </strong>
       </span>
-      <a href="#" class="menu-link">Buy More </a>
+      <a routerLink="/products/algorithm-credit" class="menu-link">Buy More </a>
     </div>
-    <p class="credits p16 mt-1">$100</p>
+    <p class="credits p16 mt-1">${{loggedInUser.algorithmCredits}}</p>
     <hr>
     <button mat-menu-item [routerLink]="['/accounts/minerva-notifications']">
       <mat-icon>home</mat-icon>

@@ -6,6 +6,7 @@ import { DataboxDialogsAlgorithmComponent } from './dialogs-algorithm.component'
 
 interface confirmData {
   title?: string;
+  checked?: boolean;
 }
 
 @Injectable({
@@ -17,13 +18,15 @@ export class DataboxAlgorithmDialogService {
 
   public confirm(data: confirmData = {}): Observable<boolean> {
     data.title = data.title || 'Apply Enrichment';
+    data.checked = data.checked || false;
 
     let dialogRef: MatDialogRef<DataboxDialogsAlgorithmComponent>;
     dialogRef = this.dialog.open(DataboxDialogsAlgorithmComponent, {
-      width: '500px',
+      width: '600px',
       disableClose: true,
       data: {
-        title: data.title
+        title: data.title,
+        checked: data.checked
       }
     });
 

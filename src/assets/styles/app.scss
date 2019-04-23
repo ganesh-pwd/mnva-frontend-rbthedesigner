@@ -331,3 +331,34 @@ table {
   width: 100% !important;
   margin-top: -60px !important;
 }
+
+
+.blue-progress {
+  .mat-progress-bar-fill::after{
+      background-color: #19b4d7 !important;
+    }
+
+    .mat-progress-bar-buffer {
+      background-color: #b5e9ff;
+    }
+}
+
+.yellow-progress {
+  .mat-progress-bar-fill::after{
+    background-color: #f4e542 !important;
+  }
+
+  .mat-progress-bar-buffer {
+    background-color: #fff9bc;
+  }
+}
+
+.red-progress {
+  .mat-progress-bar-fill::after{
+    background-color: #f44336 !important;
+  }
+
+  .mat-progress-bar-buffer {
+    background-color: #ffd8c4;
+  }
+}

@@ -50,7 +50,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [
         { '_id': '5a7b73f78b64a02a67204d6c' },       
       ],
@@ -80,7 +80,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [
         { '_id': '5a7b73f7572e59b231149b9d' }, 
         { '_id': '5a7b73f70f9d074552e1309e' },   
@@ -111,7 +111,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [
         { '_id': '5a7b73f78988bd6e9265047f' }, 
       ],
@@ -141,7 +141,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -169,7 +169,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -197,7 +197,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -225,7 +225,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -253,7 +253,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -281,7 +281,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -309,7 +309,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -337,7 +337,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -365,7 +365,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -393,7 +393,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -421,7 +421,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -449,7 +449,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -477,7 +477,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -505,7 +505,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -533,7 +533,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -561,7 +561,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -589,7 +589,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -617,7 +617,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -645,7 +645,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -673,7 +673,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -701,7 +701,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -729,7 +729,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -757,7 +757,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -785,7 +785,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -813,7 +813,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -841,7 +841,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -869,7 +869,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -897,7 +897,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -925,7 +925,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -953,7 +953,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -981,7 +981,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1009,7 +1009,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1037,7 +1037,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1065,7 +1065,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1093,7 +1093,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1121,7 +1121,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1149,7 +1149,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1177,7 +1177,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1205,7 +1205,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1233,7 +1233,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1261,7 +1261,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1289,7 +1289,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1317,7 +1317,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1345,7 +1345,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1373,7 +1373,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1401,7 +1401,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1429,7 +1429,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1457,7 +1457,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1485,7 +1485,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1513,7 +1513,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1541,7 +1541,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1569,7 +1569,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1597,7 +1597,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1625,7 +1625,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1653,7 +1653,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1681,7 +1681,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1709,7 +1709,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1737,7 +1737,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1765,7 +1765,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1793,7 +1793,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1821,7 +1821,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1849,7 +1849,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1877,7 +1877,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {
@@ -1905,7 +1905,7 @@ export class UserDB {
       'accountType': 'Basic',
       'mentions': 3000,
       'datasources': ['Facebook'],
-      'algorithmCredits': 250,
+      'algorithmCredits': 100,
       'created_users': [],
       'max_created_users': 2,
       'connector': {

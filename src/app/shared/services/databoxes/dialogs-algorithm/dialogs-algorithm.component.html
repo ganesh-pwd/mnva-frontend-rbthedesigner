@@ -31,7 +31,23 @@
     </table>
 
     <br>
-    <div mat-dialog-actions>
+    <div mat-dialog-actions *ngIf="!data.checked">
+        <span fxFlex></span>
+        <button type="button" 
+        mat-raised-button
+        color="primary">Apply Automatically</button>
+
+        <button type="button" 
+        mat-raised-button
+        color="primary">Apply To Unprocessed Data</button>
+        
+        <button 
+        type="button"
+        mat-raised-button 
+        (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+
+    <div mat-dialog-actions *ngIf="data.checked">
         <span fxFlex></span>
         <button type="button" 
         mat-raised-button
