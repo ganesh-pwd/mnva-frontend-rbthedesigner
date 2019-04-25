@@ -1,7 +1,7 @@
 <div>
     <h1 matDialogTitle>{{ data.title }}</h1>
     <div mat-dialog-content>
-        <form [formGroup]="queryForm">
+        <form [formGroup]="queryForm"  *ngIf="data.title !== 'Delete Category'">
             <mat-form-field class="full-width">
                 <input matInput placeholder="Category Name" formControlName="category-name">
             </mat-form-field>
@@ -45,6 +45,10 @@
                                 <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
                                     <div class="p-1">
+                                        <mat-placeholder class="placeholder" 
+                                        *ngIf="queryForm.controls['optional-keywords'].value === null">
+                                          {{editorData}}
+                                        </mat-placeholder>
                                         <textarea matInput rows="5" cols="80" 
                                         formControlName="optional-keywords"></textarea>
                                     </div>  
@@ -56,6 +60,10 @@
                                 <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
                                     <div class="p-1">
+                                        <mat-placeholder class="placeholder" 
+                                        *ngIf="queryForm.controls['required-keywords'].value === null">
+                                          {{editorData}}
+                                        </mat-placeholder>
                                         <textarea matInput rows="5" cols="80" 
                                         formControlName="required-keywords"></textarea>
                                     </div>
@@ -68,8 +76,13 @@
                                 <p class="mt-1">Your Databox will not bring in mentions any of the following keywords.</p>
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
                                     <div class="p-1">
+                                        <mat-placeholder class="placeholder" 
+                                        *ngIf="queryForm.controls['excluded-keywords'].value === null">
+                                          {{editorData}}
+                                        </mat-placeholder>
                                         <textarea matInput rows="5" cols="80" 
-                                        formControlName="excluded-keywords"></textarea>
+                                        formControlName="excluded-keywords"> 
+                                        </textarea>
                                     </div>
                                 </mat-form-field>                             
                             </div>
@@ -94,56 +107,85 @@
                                 </mat-card-header>
                                 <mat-divider></mat-divider>
                                 <br>
-                                <mat-card-content>
-                                    <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
-                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
-                                            <mat-card class="p-0">
-                                                <mat-card-content class="p-0">
-                                                    <mat-form-field class="full-width">
-                                                      <textarea matInput placeholder="Query" rows="10" cols="80" formControlName="advance-query"></textarea>
-                                                    </mat-form-field>
-                                                </mat-card-content>
-                                                <div class="text-muted query-help">
-                                                    <mat-icon class="query-icon">remove_red_eye</mat-icon>
-                                                    <a>Show Simple Example</a>
-                                                    <mat-icon class="query-icon">remove_red_eye</mat-icon>
-                                                    <a>Show Complex Example</a>
-                                                    <mat-icon class="query-icon">help_outline</mat-icon>
-                                                    <a>Need More Help?</a>
-                                                </div>
-                                            </mat-card>
-                                        </div>
-                                    </div>
-                                    <div fxLayout="row" fxLayoutWrap="wrap">
-                                        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
-                                            <mat-card class="query-right-side">
-                                                <mat-card-content>
-                                                    <h3 class="mat-h3">Boolean Operations: Booleans help you create your query.</h3>
-                                                    <p class="mat-color-primary query-info"matTooltip="OR operators are used to expand your query. For example: car OR bus OR train">OR = OR's help you expand your query
-                                                    </p>
-                                                    <p class="mat-color-primary query-info"matTooltip="AND operators are used to expand your query. For example: car AND bus AND train">AND = AND's help you be more exact
-                                                    </p>
-                                                    <p class="mat-color-primary query-info"matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train">NOT = NOT's help you exclude information
-                                                    </p>
-                                                </mat-card-content>
-                                            </mat-card>
-                                        </div>
-                                    </div>
+
+                                <mat-card-content class="p-0">
+                                    <mat-form-field class="full-width">
+                                        <mat-placeholder class="placeholder" 
+                                        *ngIf="queryForm.controls['advance-query'].value === null">
+                                          {{editorData}}
+                                        </mat-placeholder>
+                                        <textarea matInput rows="10" cols="80" 
+                                        formControlName="advance-query"></textarea>
+                                    </mat-form-field>
                                 </mat-card-content>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                    <!-- Expression Help -->
+                    <mat-card-content>
+                        <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                <mat-card class="p-0">
+                                    <div class="text-muted query-help">
+                                        <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                                        <a>Show Simple Example</a>
+                                        <mat-icon class="query-icon">remove_red_eye</mat-icon>
+                                        <a>Show Complex Example</a>
+                                        <mat-icon class="query-icon">help_outline</mat-icon>
+                                        <a>Need More Help?</a>
+                                    </div>
+                                </mat-card>
+                            </div>
+                        </div>
+                        <div fxLayout="row" fxLayoutWrap="wrap">
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+                                <mat-card class="query-right-side">
+                                    <mat-card-content>
+                                        <h3 class="mat-h3">Boolean Operations: Booleans help you create your query.</h3>
+                                        <p class="mat-color-primary query-info"matTooltip="OR operators are used to expand your query. For example: car OR bus OR train">OR = OR's help you expand your query
+                                        </p>
+                                        <p class="mat-color-primary query-info"matTooltip="AND operators are used to expand your query. For example: car AND bus AND train">AND = AND's help you be more exact
+                                        </p>
+                                        <p class="mat-color-primary query-info"matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train">NOT = NOT's help you exclude information
+                                        </p>
+                                    </mat-card-content>
+                                </mat-card>
                             </div>
                         </div>
                     </mat-card-content>
                 </div>
             </div>
         </form>
+
+        <p class="mat-h3" *ngIf="data.title === 'Delete Category'">You are about to delete a Category or Expresson. Are you sure you want to delete the {{data.category}} Category from the list of categories?</p>
     </div>
+
     <br>
     <div mat-dialog-actions>
         <span fxFlex></span>
         <button mat-raised-button
           class="mb-05"
-          color="primary">
+          color="primary"
+          (click)="addCategoryExpression()"
+          *ngIf="!data?.editCategory">
           Add Expression
+        </button>
+
+        <button mat-raised-button
+          class="mb-05"
+          color="primary"
+          (click)="editCategoryExpression()"
+          *ngIf="data?.editCategory && data.title !== 'Delete Category'">
+          Edit Expression
+        </button>
+
+        <button mat-raised-button
+          class="mb-05"
+          color="warn"
+          (click)="deleteCategoryExpression()"
+          *ngIf="data?.editCategory && data.title === 'Delete Category'">
+          Delete Expression
         </button>
 
         <button mat-raised-button

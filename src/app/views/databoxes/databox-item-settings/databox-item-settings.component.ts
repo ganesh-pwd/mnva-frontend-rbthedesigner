@@ -11,6 +11,7 @@ import { DataboxMentionsDialogService } from '../../../shared/services/databoxes
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-databox-item-settings',
@@ -57,7 +58,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     private datasourceService: DatasourceService,
     private historicalService: HistoricalService,
     private formBuilder: FormBuilder,
-    private loader: AppLoaderService
+    private loader: AppLoaderService,
+    public snackBar: MatSnackBar
   ) {
     userService.userData$.subscribe((user) => this.loggedInUser = user);
     
@@ -349,31 +351,106 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       }
 
       // open modal for updating the databox
+      openDialogTestQuery(title: string, data: string) {
+        let valid = true;
+
+        if((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')){
+          this.snackBar.open("You need to add a required keywords", 'close');
+          valid = false;
+        }
+
+        if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance')){
+          this.snackBar.open("You need to add an advance query", 'close');
+          valid = false;
+        }
+
+
+        if(valid){
+          this.snackBar.dismiss();
+          
+          this.mainDataboxesDialogService
+            .confirm({
+              title: title,
+              data: data,
+              input: false,
+              update: true,
+              details: this.getQueryFormBody()
+            })
+            .subscribe(result => {
+              this.selectedOption = result;
+            });
+        }
+      }
+
+      // open modal for updating the databox
       openDialogUpdate(title: string, data: string) {
-        this.mainDataboxesDialogService
-          .confirm({
-            title: title,
-            data: data,
-            input: false,
-            update: true,
-            details: this.getQueryFormBody()
-          })
-          .subscribe(result => {
-            this.selectedOption = result;
-          });
+        let valid = true;
+
+        if((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')){
+          this.snackBar.open("You need to add a required keywords", 'close');
+          valid = false;
+        }
+
+        if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance')){
+          this.snackBar.open("You need to add an advance query", 'close');
+          valid = false;
+        }
+
+
+        if(valid){
+          this.mainDataboxesDialogService
+            .confirm({
+              title: title,
+              data: data,
+              input: false,
+              update: true,
+              details: this.getQueryFormBody()
+            })
+            .subscribe(result => {
+              this.selectedOption = result;
+            });
+        }
       }
 
       // open databox query dialog
       openMentionsDialog(title: string, mentions: any = 1200) {
-        this.databoxMentionsDialogService
-          .confirm({ title: title, data: this.getQueryFormBody(), mentions: mentions })
-          .subscribe(result => {});
+        let valid = true;
+
+        if((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')){
+          this.snackBar.open("You need to add a required keywords", 'close');
+          valid = false;
+        }
+
+        if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance')){
+          this.snackBar.open("You need to add an advance query", 'close');
+          valid = false;
+        }
+
+        if(valid){
+          this.databoxMentionsDialogService
+            .confirm({ title: title, data: this.getQueryFormBody(), mentions: mentions })
+            .subscribe(result => {});
+        }
       }
 
       // open databox query dialog
       openMentionsDialogUpdate(title: string, mentions: any = 1200) {
-        this.databoxMentionsDialogService
-          .confirm({ title: title, data: this.getQueryFormBody(), update: true, mentions: mentions })
-          .subscribe(result => {});
+        let valid = true;
+
+        if((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')){
+          this.snackBar.open("You need to add a required keywords", 'close');
+          valid = false;
+        }
+
+        if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance')){
+          this.snackBar.open("You need to add an advance query", 'close');
+          valid = false;
+        }
+
+        if(valid){
+          this.databoxMentionsDialogService
+            .confirm({ title: title, data: this.getQueryFormBody(), update: true, mentions: mentions })
+            .subscribe(result => {});
+        }
       }
 }

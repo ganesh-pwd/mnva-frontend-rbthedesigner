@@ -47,6 +47,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public displayedColumnsSecondTable: string[] = ['date', 'content', 'parent', 'author'];
   public databoxSecondTable = new MatTableDataSource(<any> DataboxResultItem);
 
+  public selectedTab: number;
+
   @ViewChild('hot') hot;
   @ViewChild('exportFile') exportFile;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -59,12 +61,36 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public changeList: any[];
   public suggestResultForm: FormGroup;
   public categoryRemaining: number;
+  public categoryUsed: number;
   public subcategoryRemaining: number;
+  public subCategoryUsed: number;
 
   public sentiment: boolean = false;
   public topicRecognition: boolean = false;
   public genderAuthor: boolean = false;
   public entityRecognition: boolean = false;
+
+  // Doughnuts
+  public sharedChartOptions: any = {
+    responsive: true,
+    legend: {
+      display: false,
+      position: 'bottom'
+    }
+  };
+  public doughnutOptions: any = Object.assign({
+    elements: {
+      arc: {
+        borderWidth: 0
+      }
+    }
+  }, this.sharedChartOptions);
+  public doughnutChartColors: any[] = [{
+    backgroundColor: ['#fb8a01', '#19b4d7', '#3c4650', '#4caf50']
+  }];
+  public doughnutChartCategoryLabels = ['Category Mentions', 'Category Remaining'];
+  public doughnutChartSubCategoryLabels = ['SubCategory Mentions', 'SubCategory Remaining'];
+  public doughnutChartType = 'doughnut';
 
   constructor(
     private router: Router,
@@ -82,12 +108,13 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     ) {
       this.data = [];
       this.databoxesService.apiData$.subscribe(result => this.databoxItemData = result);
+      this.selectedTab = parseInt(sessionStorage.getItem('selectedTabDatabox')) || 0;
     }
 
 
 
   ngOnInit() {
-    setTimeout(() => this.loader.open(), 50)
+    setTimeout(() => this.loader.open(), 50);
     // get databox details
     this.getSingleItem();
 
@@ -121,7 +148,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.databoxSecondTable.paginator = this.paginator;
     this.suggestResultFormGroup();
 
-    setTimeout(() => document.getElementById('head').click(), 500)
+    setTimeout(() => document.getElementById('head').click(), 500);
   }
 
   ngOnDestroy() {
@@ -141,9 +168,9 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  slideToggle(data){
-    switch(true){
-      case data === 'sentiment':{
+  slideToggle(data) {
+    switch (true) {
+      case data === 'sentiment': {
         if(this.sentiment)
           this.sentiment = false;
         else this.sentiment = true;
@@ -151,7 +178,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
 
-      case data === 'topicRecognition':{
+      case data === 'topicRecognition': {
         if(this.topicRecognition)
           this.topicRecognition = false;
         else this.topicRecognition = true;
@@ -159,7 +186,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
 
-      case data === 'genderAuthor':{
+      case data === 'genderAuthor': {
         if(this.genderAuthor)
           this.genderAuthor = false;
         else this.genderAuthor = true;
@@ -167,7 +194,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
 
-      case data === 'entityRecognition':{
+      case data === 'entityRecognition': {
         if(this.entityRecognition)
           this.entityRecognition = false;
         else this.entityRecognition = true;
@@ -219,6 +246,9 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
             this.categoryRemaining = data.category_available - data.category_used;
             this.subcategoryRemaining = data.sub_category_available - data.sub_category_available_used;
 
+            this.categoryUsed = data.category_used;
+            this.subCategoryUsed = data.sub_category_available_used;
+
             this.data = data;
             this.selectedOption = true;
             this.getDataboxCategory(this.id);
@@ -234,8 +264,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.databoxCategoryReq = this.databoxCategoryService
     .getItem(id)
     .subscribe(result => {
-      this.databoxCategories = result[0].categories;
-      this.dataSource = result[0].categories || categoryData;
+      if(result[0]){
+        this.databoxCategories = result[0].categories;
+        this.dataSource = result[0].categories || categoryData;
+      }
     });
   }
 
@@ -338,9 +370,12 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   // open category editor dialog
-  openQueryDialog(title: string, databox: any) {
+  openQueryDialog(title: string, databox: any, editCategory?: boolean, category?: any) {
     this.databoxCategoryEditorDialogService.confirm({ 
-      title: title, databox: databox 
+      title: title, 
+      databox: databox,
+      editCategory: editCategory,
+      category: category
     }).subscribe((result) => { });
   }
 

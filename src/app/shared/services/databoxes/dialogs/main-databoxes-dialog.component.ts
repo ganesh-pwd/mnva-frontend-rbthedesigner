@@ -104,6 +104,25 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     else { this.deleteDataInfo = true; }
   }
 
+  testQuery(){
+    this.reqSubs = this.databoxesService
+    .testQueryDatabox(this.data.details)
+    .subscribe((result) => {
+      this.dialogRef.close(false);
+
+      let url = this.router.url;
+
+      this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+      .then(() => this.router.navigate(['/databoxes']))
+      .then(() => this.router.navigate([url]))
+      .then(() => sessionStorage.removeItem('selectedTabDatabox'))
+      .then(() => {
+        this.snackBar.open('The Databox Query has been successfully built', 'close');
+        setTimeout(() => this.snackBar.dismiss(), 3000);
+      });
+    });
+  }
+
   // cancel databox changes
   cancelChanges() {
     sessionStorage.removeItem('databox_edited_name');

@@ -112,7 +112,8 @@
               && data.title !== 'Set Databox Name'
               && data.title !== 'Edit Databox Name'
               && data.title !== 'Run Query'
-              && data.title !== 'Create a New Databox'"
+              && data.title !== 'Create a New Databox'
+              && data.title !== 'Test Query'"
               type="button" 
               mat-raised-button
               color="primary" 
@@ -145,6 +146,13 @@
               mat-raised-button
               color="primary" 
               (click)="updateDatabox()">{{data.title}}</button>
+
+              <!-- TEST Query and Save the Details -->
+              <button *ngIf="data.title === 'Test Query' && data.update"
+              type="button" 
+              mat-raised-button
+              class="mat-bg-success" 
+              (click)="testQuery()">{{data.title}}</button>
 
               <!-- Create databox -->
               <button *ngIf="data.title === 'Create a New Databox'"
