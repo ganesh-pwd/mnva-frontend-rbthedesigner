@@ -73,16 +73,18 @@ export class ProductsCartComponent implements OnInit {
   }
 
   // if user select pay yearly or monthly
-  public onBillMonthlyYearly(event, price){
-    if(event.checked){
-      let yearlyBal = parseFloat((price * 12).toFixed(5));
+  public onBillMonthlyYearly(event, price) {
+    if (event.checked) {
+      // If pays monthly it should have a 10% discount
+      const discountPrice = (price * 12) - (price * 12 * 0.10);
+      const yearlyBal = parseFloat((discountPrice).toFixed(5)) ;
       this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(5));
-      this.total    = parseFloat((this.subTotal + (this.subTotal * (15 / 100))).toFixed(5));
+      this.total    = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(5));
       this.billYearly = true;
     } else {
-      let yearlyBal = parseFloat((price * 1).toFixed(5));
+      const yearlyBal = parseFloat((price * 1).toFixed(5));
       this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(5));
-      this.total    = parseFloat((this.subTotal + (this.subTotal * (15 / 100))).toFixed(5));
+      this.total    = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(5));
       this.billYearly = false;
     }
   }
@@ -110,9 +112,11 @@ export class ProductsCartComponent implements OnInit {
   }
 
   getItemTotal(price, quantity, type) {
-    if(this.billYearly && type === 'Account Type')
-      return parseFloat((price * 12).toFixed(5));
-
-    else return parseFloat((price * quantity).toFixed(5));
+    const discountPrice = (price * 12) - (price * 12 * 0.10);
+    if (this.billYearly && type === 'Account Type') {
+      return parseFloat((discountPrice).toFixed(5));
+    } else {
+      return parseFloat((price * quantity).toFixed(5));
+    }
   }
 }

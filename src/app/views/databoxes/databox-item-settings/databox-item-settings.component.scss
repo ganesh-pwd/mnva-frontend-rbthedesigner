@@ -192,3 +192,14 @@ button.query_type{
 .accordion-databox{
 	cursor: pointer !important;
 }
+
+.placeholder{
+	color: gray;
+	font-size: 10px !important
+}
+
+.mat-focused .placeholder {
+
+    color: #19b4d7;
+    font-size: 10px !important
+}

@@ -31,3 +31,8 @@ mat-select {
   width: 85px;
   height: 85px;
 }
+
+.sidebar-panel{
+  z-index: 9999999 !important;
+  background: white !important;
+}

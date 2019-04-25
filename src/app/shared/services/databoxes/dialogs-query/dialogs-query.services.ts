@@ -7,6 +7,8 @@ import { DataboxDialogsQueryComponent } from './dialogs-query.component';
 interface confirmData {
   title?: string,
   databox?: any,
+  editCategory?: boolean,
+  category?: any
 }
 
 @Injectable({
@@ -17,8 +19,10 @@ export class databoxCategoryEditorDialogService {
   }
 
   public confirm(data:confirmData = {}): Observable<boolean> {
-    data.title = data.title || 'Create Category';
-    data.databox = data.databox || {};
+    data.title    = data.title || 'Create Category';
+    data.databox  = data.databox || {};
+    data.editCategory = data.editCategory || false;
+    data.category = data.category || '';
 
     let dialogRef: MatDialogRef<DataboxDialogsQueryComponent>;
     dialogRef = this.dialog.open(DataboxDialogsQueryComponent, {
@@ -26,7 +30,9 @@ export class databoxCategoryEditorDialogService {
       disableClose: true,
       data: {
         title: data.title,
-        databox: data.databox
+        databox: data.databox,
+        editCategory: data.editCategory,
+        category: data.category
       }
     });
 

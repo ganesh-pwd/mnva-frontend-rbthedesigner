@@ -25,12 +25,6 @@ export class DataboxesService {
   }
 
   // ******* Implement your APIs ********
-  /* get databoxes item no filter
-  getItems(): Observable<any> {
-    const rows = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
-    return of(rows.slice()).pipe(delay(500));
-  }*/
-
   getItems(): Observable<any> {
     const rows = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
     const filter_by_logged_in_user = rows.filter(i => i.master_user_info === this.loggedInUser._id)
@@ -101,10 +95,10 @@ export class DataboxesService {
       'category_used': 0,
       'sub_category_available': 20,
       'sub_category_available_used': 0,
-      'query':  details.advance_query || '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
-      'optional-keywords': details.optional_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`,
-      'required-keywords': details.required_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`,
-      'excluded-keywords': details.excluded_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`,
+      'query':  details.advance_query ,
+      'optional-keywords': details.optional_keywords,
+      'required-keywords': details.required_keywords,
+      'excluded-keywords': details.excluded_keywords,
     };
 
     getDataboxItem.push(data);
@@ -141,6 +135,7 @@ export class DataboxesService {
     return of(getDataboxItem.slice()).pipe(delay(500));
   }
 
+
   // update databox item
   updateDatabox(details: any = {}, status = 'Active'): Observable<any> {
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
@@ -153,10 +148,10 @@ export class DataboxesService {
     databox.datasource = details.datasource || 'Facebook';
     databox.location   = [...details.country] || ['Costa Rica'];
     databox.historical = details.historical || 'Full Archive';
-    databox.query      = details.advance_query || '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )';
-    databox['optional-keywords']  =  details.optional_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
-    databox['required-keywords']  =  details.required_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
-    databox['excluded-keywords']  =  details.excluded_keywords || `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
+    databox.query      = details.advance_query;
+    databox['optional-keywords']  =  details.optional_keywords;
+    databox['required-keywords']  =  details.required_keywords;
+    databox['excluded-keywords']  =  details.excluded_keywords;
     databox.last_updated = new Date();
 
     sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
@@ -167,6 +162,7 @@ export class DataboxesService {
 
     return of(getDataboxItem.slice()).pipe(delay(500));
   }
+
 
   // add new result suggestion
   addNewResultSuggestion(data){
@@ -222,5 +218,26 @@ export class DataboxesService {
       // show databox does not exist
       return 'Not Exist';
     }
+  }
+
+  testQueryDatabox(details: any = {}): Observable<any> {
+    const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
+    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/')[3]);
+    const databox          = getDataboxItem[confirm_id_name];
+
+    console.log(databox)
+
+    // set the data
+    databox.query = details.advance_query;
+    databox['optional-keywords']  =  details.optional_keywords;
+    databox['required-keywords']  =  details.required_keywords;
+    databox['excluded-keywords']  =  details.excluded_keywords;
+    databox.last_updated = new Date();
+
+    sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
+    sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+    sessionStorage.removeItem('databox_edited_name');
+
+    return of(getDataboxItem.slice()).pipe(delay(500));
   }
 }

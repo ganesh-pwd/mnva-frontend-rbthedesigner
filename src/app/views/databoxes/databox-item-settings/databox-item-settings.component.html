@@ -150,7 +150,7 @@
     </div>
 
     <!-- Connect Your Page -->
-    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data?.datasource === 'Owned Twitter Profile'">
+    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data?.datasource === ('Owned Twitter Profile' || 'Owned Facebook Page')">
       <div fxLayout="column" fxFlex.gt-sm="100">
         <mat-card>
           <mat-card-header>
@@ -271,6 +271,10 @@
                     class="full-width"
                   >
                     <div class="p-1">
+                      <mat-placeholder class="placeholder" 
+                      *ngIf="queryForm.controls['optional-keywords'].value === ''">
+                        {{editorData}}
+                      </mat-placeholder>
                       <textarea
                         matInput
                         rows="10"
@@ -301,6 +305,10 @@
                     class="full-width"
                   >
                     <div class="p-1">
+                      <mat-placeholder class="placeholder" 
+                      *ngIf="queryForm.controls['required-keywords'].value === ''">
+                        {{editorData}}
+                      </mat-placeholder>
                       <textarea
                         matInput
                         rows="10"
@@ -331,11 +339,13 @@
                     class="full-width"
                   >
                     <div class="p-1">
+                      <mat-placeholder class="placeholder" 
+                      *ngIf="queryForm.controls['excluded-keywords'].value === ''">
+                      {{editorData}}</mat-placeholder>
                       <textarea
                         matInput
                         rows="10"
                         cols="80"
-                        value="{{ editorData }}"
                         formControlName="excluded-keywords"
                       ></textarea>
                     </div>
@@ -392,6 +402,9 @@
                             class="full-width"
                           >
                             <div class="p-1">
+                              <mat-placeholder class="placeholder" 
+                              *ngIf="queryForm.controls['advance-query'].value === ''">
+                              {{editorData}}</mat-placeholder>
                               <textarea
                                 matInput
                                 rows="10"
@@ -522,7 +535,11 @@
 
     <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
       <span fxFlex></span>
-      <button mat-raised-button class="mb-05 mat-bg-success">
+      <button mat-raised-button class="mb-05 mat-bg-success" 
+      (click)="openDialogTestQuery(
+          'Test Query',
+          'You are about to build and update this query. Are you sure you want to proceed?')
+      ">
         Test Query
       </button>
     </div>
