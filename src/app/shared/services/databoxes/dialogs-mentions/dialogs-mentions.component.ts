@@ -65,6 +65,7 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
           .addItem(this.data.data)
           .subscribe(x => {
             this.router.navigate(['/databoxes'])
+            .then(() => sessionStorage.removeItem('databox_new'))
             this.loader.close();
           });
       });

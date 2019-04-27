@@ -21,6 +21,10 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   public databoxItemData: any;
   public selectedOption;
 
+  public powerBi: boolean = false;
+  public tableau: boolean = false;
+  public dataStudio: boolean = false;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -48,7 +52,12 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
-        if (data) this.data = data;
+        if (data){
+          this.data = data;
+
+          // slide toggle if element is found on databox 
+          data.dataConnectors.forEach(el => this.slideToggle(el));
+        }
         else this.router.navigate(["/sessions/404"]);
       },
       // if there's error
@@ -63,12 +72,14 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   }
 
   // open main databox dialog
-  openDialog(title: string, data: string, input: boolean) {
+  openDialog(title: string, data: string, input: boolean, checked: boolean, connector: string) {
     this.getItemSub = this.mainDataboxesDialogService
       .confirm({
         title: title,
         data: data,
-        input: input
+        input: input,
+        checked: checked,
+        connector: connector
       })
       .subscribe(result => {
         this.selectedOption = result;
@@ -82,5 +93,33 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         title: title
       })
       .subscribe(result => {});
+  }
+
+  slideToggle(data) {
+    switch (true) {
+      case data === 'powerBi': {
+        if(this.powerBi)
+          this.powerBi = false;
+        else this.powerBi = true;
+
+        break;
+      }
+
+      case data === 'tableau': {
+        if(this.tableau)
+          this.tableau = false;
+        else this.tableau = true;
+
+        break;
+      }
+
+      case data === 'dataStudio': {
+        if(this.dataStudio)
+          this.dataStudio = false;
+        else this.dataStudio = true;
+
+        break;
+      }
+    }
   }
 }

@@ -40,6 +40,7 @@ export class AlgorithmCreditComponent implements OnInit {
   public filterForm: FormGroup;
   public cart: CartItem[];
   public cartData: any;
+  public selectedCredit;
 
   constructor(
     private algorithmCreditService: AlgorithmCreditService,
@@ -47,23 +48,24 @@ export class AlgorithmCreditComponent implements OnInit {
     private snackBar: MatSnackBar,
     private loader: AppLoaderService,
     private fb: FormBuilder
-  ) { }
+  ) { this.getAlgorithms(); this.selectedCredit = "250" }
 
   ngOnInit() {
     this.dataSource = new DataTableDataSource(this.paginator, this.sort);
 
+    
+    this.getCart();
     this.buildFilterForm(this.shopService.initialFilters);
-
-    this.getAlgorithms();
 
     this.products$ = this.shopService
       .getFilteredProduct(this.filterForm)
       .pipe(
         map(products => {
           return products;
+
         })
       );
-    this.getCart();
+
     this.cartData = this.shopService.cartData;
   }
 
@@ -115,10 +117,35 @@ export class AlgorithmCreditComponent implements OnInit {
     });
   }
 
+  addCreditToCart(){
+    const productBuild = {
+      name: "Algorithm Credit",
+      _id: Date.now().toString(),
+      price: {
+        sale: this.filterForm.get('algoCredit').value
+      },
+      category: 'Algorithm Credit',
+      photo: 'https://via.placeholder.com/140x140'
+    };
+    const cartItem: CartItem = {
+      product: productBuild,
+      data: {
+        quantity: 1
+      }
+    };
+    this.shopService
+    .addToCart(cartItem)
+    .subscribe(cart => {
+      this.cart = cart;
+      this.snackBar.open('Product added to cart', 'OK', { duration: 4000 });
+    });
+  }
+
   buildFilterForm(filterData:any = {}) {
     this.filterForm = this.fb.group({
       search: [''],
       category: ['all'],
+      algoCredit: ["250"],
       minPrice: [filterData.minPrice],
       maxPrice: [filterData.maxPrice],
       minRating: [filterData.minRating],

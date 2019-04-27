@@ -226,7 +226,7 @@
   
                 <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef> Action </th>
-                  <td mat-cell *matCellDef="let category;">
+                  <td mat-cell *matCellDef="let category;" width="100px">
                       <mat-icon class="text-muted" 
                       (click)="openQueryDialog('Edit Category', data, true, category.name)">
                       edit</mat-icon> 
@@ -268,7 +268,7 @@
           <div fxLayout="row" fxLayoutWrap="wrap" >
             <!-- Doughnut Chart para Categorias -->
             <div fxFlex="100" fxFlex.gt-sm="50">
-              <mat-card class="p-0 fixed-height doughnut-card">
+              <mat-card class="p-0  doughnut-card">
                 <mat-card-header>
                   <mat-card-title class="mat-color-primary">
                     <span>Category Mentions</span>
@@ -279,6 +279,7 @@
                   <canvas 
                     baseChart 
                     class="chart"
+                    id="categoryRemain"
                     [data]="[categoryUsed, categoryRemaining]"
                     [labels]="doughnutChartCategoryLabels"
                     [options]="doughnutOptions"
@@ -289,7 +290,7 @@
             </div>
             <!-- Doughnut Chart para SubCategorias -->
             <div fxFlex="100" fxFlex.gt-sm="50">
-              <mat-card class="p-0 fixed-height doughnut-card">
+              <mat-card class="p-0 doughnut-card">
                   <mat-card-header>
                     <mat-card-title class="mat-color-primary">
                       <span>SubCategory Mentions</span>
@@ -330,7 +331,7 @@
     <mat-tab label="Process Your Data">
       <!-- Credits -->
       <br>
-      <div fxLayout="row" fxLayoutWrap="wrap">
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="loggedInUser && data">
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100"
           [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
   
@@ -354,9 +355,10 @@
       <br>
 
       <!-- Process Data List Options -->
-      <div>
+      <div *ngIf="loggedInUser && data">
         <!-- Process Data List Options -->
-        <div class="product-container list-view">
+        <div class="product-container list-view"  
+        [@animate]="{value:'*', params:{ y:'200px', delay:'700ms' }}">
           <!-- Algorithm Box -->
           <div class="product-wrap">
             <div class="product-inner default-bg">
@@ -398,7 +400,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment', sentiment)">
+                        (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'sentiment')">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
@@ -448,7 +450,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition)">
+                        (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition, 'topicRecognition')">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
@@ -500,7 +502,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor)">
+                        (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor, 'genderAuthor')">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
@@ -552,7 +554,7 @@
 
                       <br>
                       <button class="apply" mat-raised-button style="width: 100% !important; padding: 10px !important;"
-                        (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition)">
+                        (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition, 'entityRecognition')">
                         Apply only to unprocessed data
                       </button>
                    </mat-card-actions>
@@ -566,8 +568,8 @@
       </div>
   
       <!-- FAQ's -->
-      <!-- FAQ's -->
-      <div fxLayout="row" fxLayoutWrap="wrap" class="faq"
+      <div fxLayout="row" fxLayoutWrap="wrap" class="faq" 
+        *ngIf="data?.databox_name && paginatedData"
         [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
       
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">

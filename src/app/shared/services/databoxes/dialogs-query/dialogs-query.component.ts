@@ -148,6 +148,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
         this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
         .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
+        .then(() => sessionStorage.removeItem('databox_updated'))
         .then(() => this.router.navigate(['/databoxes']))
         .then(() => this.router.navigate([url]))
         .then(() => sessionStorage.removeItem('selectedTabDatabox'));
@@ -196,6 +197,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
         this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
         .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
+        .then(() => sessionStorage.removeItem('databox_updated'))
         .then(() => this.router.navigate(['/databoxes']))
         .then(() => this.router.navigate([url]))
         .then(() => sessionStorage.removeItem('selectedTabDatabox'));
@@ -216,6 +218,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
       this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
       .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
+      .then(() => sessionStorage.removeItem('databox_updated'))
       .then(() => this.router.navigate(['/databoxes']))
       .then(() => this.router.navigate([url]))
       .then(() => sessionStorage.removeItem('selectedTabDatabox'))

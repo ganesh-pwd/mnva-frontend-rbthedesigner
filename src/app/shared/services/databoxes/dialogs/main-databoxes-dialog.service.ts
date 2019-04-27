@@ -9,6 +9,8 @@ interface ConfirmData {
   input?: boolean;
   update?: boolean;
   details?: any;
+  checked?: boolean;
+  connector?: string;
 }
 
 @Injectable({
@@ -24,17 +26,23 @@ export class MainDataboxesDialogService {
     data.input = data.input;
     data.update = data.update || false;
     data.details = data.details || {};
+    data.checked = data.checked;
+    data.connector = data.connector;
 
     let dialogRef: MatDialogRef<MainDataboxDialogComponent>;
     dialogRef = this.dialog.open(MainDataboxDialogComponent, {
-      width: '500px',
+      width: data.title === 'How to connect to Power BI'
+        || data.title === 'How to connect to Tableau'
+        || data.title === 'How to connect to Data Studio' ? '600px' : '500px',
       disableClose: true,
       data: {
         title: data.title,
         data: data.data,
         input: data.input,
         update: data.update,
-        details: data.details
+        details: data.details,
+        checked: data.checked,
+        connector: data.connector
       }
     });
 

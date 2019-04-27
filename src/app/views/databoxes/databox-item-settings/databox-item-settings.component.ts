@@ -44,6 +44,65 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public showConnectAccord: boolean = true;
   public loggedInUser;
 
+  public sharedChartOptions: any = {
+    responsive: true,
+    legend: {
+      display: false,
+      position: 'bottom'
+    }
+  };
+
+  public chartColors: Array <any> = [{
+    backgroundColor: '#19b4d7',
+    borderColor: '#19b4d7',
+    pointBackgroundColor: '#19b4d7',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+  }, {
+    backgroundColor: '#fb8a01',
+    borderColor: '#fb8a01',
+    pointBackgroundColor: '#fb8a01',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(77,83,96,1)'
+  }];
+
+  /*
+  * Line Chart Options
+  */
+  public lineChartData: Array <any> = [{
+    data: [5, 5, 7, 8, 4, 5, 5],
+    label: 'Series A'
+  }, {
+    data: [5, 4, 4, 3, 6, 2, 5],
+    label: 'Series B'
+  }];
+  public lineChartLabels: Array <any> = ['1', '2', '3', '4', '5', '6', '7'];
+  public lineChartOptions: any = Object.assign({
+    animation: false,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: 'rgba(0,0,0,0.02)',
+          zeroLineColor: 'rgba(0,0,0,0.02)'
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: 'rgba(0,0,0,0.02)',
+          zeroLineColor: 'rgba(0,0,0,0.02)'
+        },
+        ticks: {
+          beginAtZero: true,
+          suggestedMax: 9,
+        }
+      }]
+    }
+  }, this.sharedChartOptions);
+  public lineChartLegend: boolean = false;
+  public lineChartType: string = 'line';
+
   // tslint:disable-next-line:max-line-length
   editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
 

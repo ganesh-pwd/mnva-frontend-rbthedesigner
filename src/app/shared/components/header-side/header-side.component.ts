@@ -30,6 +30,8 @@ export class HeaderSideComponent implements OnInit {
   public userFullName: string;
   public loggedInUser;
 
+  public remaining: number = 0;
+
   constructor(
     private themeService: ThemeService,
     private layout: LayoutService,

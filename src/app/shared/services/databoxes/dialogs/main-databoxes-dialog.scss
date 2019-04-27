@@ -15,3 +15,17 @@ h3{
 .height-full{
   height: 100% !important; 
 }
+
+.close{
+	cursor: pointer;
+}
+
+.text-left{
+	text-align: left !important;
+}
+
+mat-step{
+	&:hover{
+		background: white !important;
+	}
+}

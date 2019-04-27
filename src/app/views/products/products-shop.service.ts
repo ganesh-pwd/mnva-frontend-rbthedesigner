@@ -2,12 +2,12 @@
 import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { LicenseDB } from '../../shared/fake-db/licenses';
-import { CountryDB } from '../../shared/fake-db/countries';
 import { Product } from '../../shared/models/product.model';
 import { FormGroup } from '@angular/forms';
 
 import { of, combineLatest } from 'rxjs';
 import { startWith, debounceTime, delay, map, switchMap } from 'rxjs/operators';
+import { DiscountCouponsDB } from 'app/shared/fake-db/discount-coupons';
 
 
 
@@ -32,37 +32,44 @@ export class ProductShopService {
   public cart: CartItem[] = [];
   public cartData = {
     itemCount: 0
-  }
+  };
+
+  public coupons: any;
+
   constructor() { }
+
   public getCart(): Observable<CartItem[]> {
-    return of(this.cart)
+    return of(this.cart);
   }
+
   public addToCart(cartItem: CartItem): Observable<CartItem[]> {
     let index = -1;
     this.cart.forEach((item, i) => {
-      if(item.product._id === cartItem.product._id) {
+      if (item.product._id === cartItem.product._id) {
         index = i;
       }
     })
-    if(index !== -1) {
+    if (index !== -1) {
       this.cart[index].data.quantity += cartItem.data.quantity;
       this.updateCount();
-      return of(this.cart)
+      return of(this.cart);
     } else {
       this.cart.push(cartItem);
       this.updateCount();
-      return of(this.cart)
+      return of(this.cart);
     }
   }
+
   private updateCount() {
     this.cartData.itemCount = 0;
     this.cart.forEach(item => {
       this.cartData.itemCount += item.data.quantity;
-    })
+    });
   }
+
   public removeFromCart(cartItem: CartItem): Observable<CartItem[]> {
     this.cart = this.cart.filter(item => {
-      if(item.product._id == cartItem.product._id) {
+      if(item.product._id === cartItem.product._id) {
         return false;
       }
       return true;
@@ -70,8 +77,9 @@ export class ProductShopService {
     this.updateCount();
     return of(this.cart)
   }
+
   public getProducts(): Observable<Product[]> {
-    let licenseDB = new LicenseDB();
+    const licenseDB = new LicenseDB();
     return of(licenseDB.licenses)
       .pipe(
         delay(500),
@@ -79,18 +87,20 @@ export class ProductShopService {
           this.products = data;
           return data;
         })
-      )
+      );
   }
+
   public getProductDetails(productID): Observable<Product> {
-    let licenseDB = new LicenseDB();
-    let product = licenseDB.licenses.filter(p => p._id === productID)[0];
-    if(!product) {
+    const licenseDB = new LicenseDB();
+    const product = licenseDB.licenses.filter(p => p._id === productID)[0];
+    if (!product) {
       return observableThrowError(new Error('Product not found!'));
     }
     return of(product)
   }
+
   public getCategories(): Observable<any> {
-    let categories = ['speaker', 'headphone', 'watch', 'phone'];
+    const categories = ['speaker', 'headphone', 'watch', 'phone'];
     return of(categories);
   }
 
@@ -107,17 +117,17 @@ export class ProductShopService {
       switchMap(([products, filterData]) => {
         return this.filterProducts(products, filterData);
       })
-    )
+    );
 
   }
+
   /*
   * If your data set is too big this may raise performance issue.
   * You should implement server side filtering instead.
   */
   private filterProducts(products: Product[], filterData): Observable<Product[]> {
-    let filteredProducts = products.filter(p => {
-      let isMatch: Boolean;
-      let match = {
+    const filteredProducts = products.filter(p => {
+      const match = {
         search: false,
         caterory: false,
         price: false,
@@ -154,7 +164,7 @@ export class ProductShopService {
         match.price = false;
       }
       // Rating filter
-      if(
+      if (
         p.ratings.rating >= filterData.minRating
         && p.ratings.rating <= filterData.maxRating
       ) {
@@ -163,12 +173,24 @@ export class ProductShopService {
         match.rating = false;
       }
 
-      for(let m in match) {
+      for (let m in match) {
         if(!match[m]) return false;
       }
 
       return true;
-    })
-    return of(filteredProducts)
+    });
+    return of(filteredProducts);
+  }
+
+  public getCoupons(): Observable<any[]> {
+    const discounts = new DiscountCouponsDB();
+    return of(discounts.coupons)
+      .pipe(
+        delay(500),
+        map((data: any) => {
+          this.coupons = data;
+          return data;
+        })
+      )
   }
 }

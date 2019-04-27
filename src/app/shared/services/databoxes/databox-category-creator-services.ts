@@ -79,13 +79,13 @@ export class DataboxCategoryService {
         if(details.type === 'Category'){
           databox.category_used = category_available + 1;
           sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-          sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+          sessionStorage.setItem('databox_updated', `The Category for ${databox.databox_name} Databox has been updated`);
         } 
 
         if(details.type === 'Sub Category') {
           databox.sub_category_available_used = sub_category_available + 1;
           sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-          sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+          sessionStorage.setItem('databox_updated', `The Sub-Category ${databox.databox_name} Databox has been updated`);
         }
 
       return of(this.databox_category.slice()).pipe(delay(500));
@@ -117,13 +117,13 @@ export class DataboxCategoryService {
         if(details.type === 'Category'){
           databox.category_used = category_available + 1;
           sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-          sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+          sessionStorage.setItem('databox_updated', `The Category ${databox.databox_name} Databox has been updated`);
         } 
 
         if(details.type === 'Sub Category') {
           databox.sub_category_available_used = sub_category_available + 1;
           sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-          sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+          sessionStorage.setItem('databox_updated', `The Sub-Category ${databox.databox_name} Databox has been updated`);
         }
 
       this.databox_category.push(data);
@@ -139,6 +139,7 @@ export class DataboxCategoryService {
     const category_index = rows[index].categories.findIndex(el => el.name === category_name);
     const expression = details['optional-keywords'] ? `${details['required-keywords']} OR "${details['optional-keywords']}"` : `${details['required-keywords']}`;
 
+    // get databox data and update category remaining
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
     const confirm_id_name = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
     const databox         = getDataboxItem[confirm_id_name];
@@ -152,14 +153,14 @@ export class DataboxCategoryService {
         databox.category_used = category_available + 1;
         databox.sub_category_available_used = sub_category_available - 1;
         sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-        sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+        sessionStorage.setItem('databox_updated', `The Category ${databox.databox_name} Databox has been updated`);
       } 
 
       if(rows[index].categories[category_index].type !== details.type && details.type === 'Sub Category') {
         databox.category_used = category_available - 1;
         databox.sub_category_available_used = sub_category_available + 1;
         sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-        sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
+        sessionStorage.setItem('databox_updated', `The Sub-Category ${databox.databox_name} Databox has been updated`);
       }
 
       rows[index].categories[category_index].name = details.name;
@@ -182,9 +183,28 @@ export class DataboxCategoryService {
     const index = rows.findIndex(i => i.master_user_info === this.loggedInUser._id && i.databox_id === id)
     const category_index = rows[index].categories.findIndex(el => el.name === category_name);
 
-    console.log(rows[index].categories, rows[index].categories[category_index], category_index)
+    // get databox data and update category remaining
+    const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
+    const confirm_id_name = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
+    const databox         = getDataboxItem[confirm_id_name];
+
+    const sub_category_available = databox.sub_category_available_used;
+    const category_available = databox.category_used;
 
     if(category_index > -1){
+      // update the databox data
+      if(rows[index].categories[category_index].type === 'Category'){
+        databox.category_used = category_available - 1;
+        sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
+        sessionStorage.setItem('databox_updated', `The Category ${databox.databox_name} Databox has been updated`);
+      } 
+
+      if(rows[index].categories[category_index].type === 'Sub Category') {
+        databox.sub_category_available_used = sub_category_available - 1;
+        sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
+        sessionStorage.setItem('databox_updated', `The Sub-Category ${databox.databox_name} Databox has been updated`);
+      }
+
       rows[index].categories.splice(category_index, 1);
 
       this.databox_category = rows;

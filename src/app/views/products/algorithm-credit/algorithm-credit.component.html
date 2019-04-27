@@ -59,14 +59,14 @@
 
             <br>
             <mat-form-field>
-                 <mat-select value="$250">
-                    <mat-option value="$50" style="font-size: 14px !important;">$50</mat-option>
-                    <mat-option value="$100" style="font-size: 14px !important;">$100</mat-option>
-                    <mat-option value="$150" style="font-size: 14px !important;">$150</mat-option>
-                    <mat-option value="$250" style="font-size: 14px !important;">$250</mat-option>
+                 <mat-select [formControl]="filterForm.controls['algoCredit']">
+                    <mat-option value="50" style="font-size: 14px !important;">$50</mat-option>
+                    <mat-option value="100" style="font-size: 14px !important;">$100</mat-option>
+                    <mat-option value="150" style="font-size: 14px !important;">$150</mat-option>
+                    <mat-option value="250" style="font-size: 14px !important;">$250</mat-option>
                  </mat-select>
             </mat-form-field>
-            <button mat-raised-button class="mat-primary btn-add-to-cart ml-1">
+            <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()">
               <mat-icon>shopping_cart</mat-icon>
                  Add to cart
             </button>

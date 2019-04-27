@@ -10,7 +10,7 @@
     </div>
     <mat-divider></mat-divider>
   </mat-card-title>
-  <mat-card-content>
+  <mat-card-content *ngIf="loggedInUser">
     <div class="pb-1">
       <h6>Mentions Remaining</h6>
       <p class="text-muted">{{loggedInUser.mentions}} Mentions</p>

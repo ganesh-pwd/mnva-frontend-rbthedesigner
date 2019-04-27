@@ -99,6 +99,8 @@ export class DataboxesService {
       'optional-keywords': details.optional_keywords,
       'required-keywords': details.required_keywords,
       'excluded-keywords': details.excluded_keywords,
+      'algorithmConnectors': [],
+      'dataConnectors': [],
     };
 
     getDataboxItem.push(data);
@@ -129,8 +131,9 @@ export class DataboxesService {
 
     let url = this.router.url;
 
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(()=>
-    this.router.navigate([url]));
+    this.router.navigateByUrl('/', { skipLocationChange: true })
+    .then(() => sessionStorage.removeItem('databox_updated'))
+    .then(()=>this.router.navigate([url]));
 
     return of(getDataboxItem.slice()).pipe(delay(500));
   }
@@ -139,7 +142,7 @@ export class DataboxesService {
   // update databox item
   updateDatabox(details: any = {}, status = 'Active'): Observable<any> {
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
-    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/')[3]);
+    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
     const databox          = getDataboxItem[confirm_id_name];
 
     // set the data
@@ -167,7 +170,7 @@ export class DataboxesService {
   // add new result suggestion
   addNewResultSuggestion(data){
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
-    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/')[2]);
+    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
     const databox          = getDataboxItem[confirm_id_name];
 
     // set the data
@@ -183,8 +186,9 @@ export class DataboxesService {
 
     let url = this.router.url;
 
-    this.router.navigateByUrl('', { skipLocationChange: true }).then(()=>
-    this.router.navigate([url]));
+    this.router.navigateByUrl('', { skipLocationChange: true })
+    .then(() => sessionStorage.removeItem('databox_updated'))
+    .then(() => this.router.navigate([url]));
 
     return of(getDataboxItem.slice()).pipe(delay(500));
   }
@@ -206,7 +210,7 @@ export class DataboxesService {
   deleteDatabox(name){
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
     const index           = getDataboxItem.findIndex(el => el.databox_name === name);
-    const confirm_id_name = getDataboxItem.findIndex(el => el._id === this.router.url.split('/')[2]);
+    const confirm_id_name = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
 
     // remove the record
     if (index > -1 && index === confirm_id_name) {
@@ -220,12 +224,11 @@ export class DataboxesService {
     }
   }
 
+  // build the test query
   testQueryDatabox(details: any = {}): Observable<any> {
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
-    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/')[3]);
+    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
     const databox          = getDataboxItem[confirm_id_name];
-
-    console.log(databox)
 
     // set the data
     databox.query = details.advance_query;
@@ -235,9 +238,52 @@ export class DataboxesService {
     databox.last_updated = new Date();
 
     sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-    sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
-    sessionStorage.removeItem('databox_edited_name');
+    sessionStorage.setItem('databox_updated', `Query for ${databox.databox_name} Databox has been updated`);
 
+    return of(getDataboxItem.slice()).pipe(delay(500));
+  }
+
+
+  // update algorithmConnector
+  addAlgorithmConnector(connector, checked): Observable<any>  {
+    const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
+    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
+    const databox          = getDataboxItem[confirm_id_name];
+    const findConnectorIndex = databox.algorithmConnectors.findIndex(el => el === connector);
+
+    // set the data
+    if(findConnectorIndex === -1 && checked === true)
+      databox.algorithmConnectors.push(connector);
+
+    if(findConnectorIndex > -1 && checked === false)
+      databox.algorithmConnectors.splice(findConnectorIndex, 1);;
+
+    databox.last_updated = new Date();
+
+    sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
+    sessionStorage.setItem('databox_updated', `Algorithm Connector for ${databox.databox_name} Databox has been updated`);
+    
+    return of(getDataboxItem.slice()).pipe(delay(500));
+  }
+
+  addDataConnector(connector, checked): Observable<any>  {
+    const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
+    const confirm_id_name  = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
+    const databox          = getDataboxItem[confirm_id_name];
+    const findConnectorIndex = databox.dataConnectors.findIndex(el => el === connector);
+
+    // set the data
+    if(findConnectorIndex === -1 && checked === true)
+      databox.dataConnectors.push(connector);
+
+    if(findConnectorIndex > -1 && checked === false)
+      databox.dataConnectors.splice(findConnectorIndex, 1);;
+
+    databox.last_updated = new Date();
+
+    sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
+    sessionStorage.setItem('databox_updated', `Data Connector for ${databox.databox_name} Databox has been updated`);
+    
     return of(getDataboxItem.slice()).pipe(delay(500));
   }
 }

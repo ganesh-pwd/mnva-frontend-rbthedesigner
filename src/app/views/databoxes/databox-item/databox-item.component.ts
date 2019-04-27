@@ -8,7 +8,7 @@ import { DataboxItemSearchService } from '../../../shared/services/databoxes/dat
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxAddSuggestionService } from '../../../shared/services/databoxes/dialog-add-suggestions/dialog-add-suggestions.service';
 import { DataboxCategoryService } from '../../../shared/services/databoxes/databox-category-creator-services';
-
+import { UserService } from '../../../shared/services/auth/user-services';
 import { HotTableRegisterer } from '@handsontable-pro/angular';
 import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
 import { MatPaginator, MatTableDataSource} from '@angular/material';
@@ -69,6 +69,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public topicRecognition: boolean = false;
   public genderAuthor: boolean = false;
   public entityRecognition: boolean = false;
+  public loggedInUser;
 
   // Doughnuts
   public sharedChartOptions: any = {
@@ -103,14 +104,15 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     private databoxAddSuggestionService: DataboxAddSuggestionService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private databoxCategoryService: DataboxCategoryService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService
     ) {
       this.data = [];
       this.databoxesService.apiData$.subscribe(result => this.databoxItemData = result);
       this.selectedTab = parseInt(sessionStorage.getItem('selectedTabDatabox')) || 0;
+      userService.userData$.subscribe((user) => this.loggedInUser = user);
     }
-
 
 
   ngOnInit() {
@@ -202,7 +204,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
     }
-
   }
 
   // download the table
@@ -241,8 +242,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       .getSingleItem(this.id)
       .subscribe(
         (data) => {
-          this.mentions = data.mentions;
           if (data && data.status === 'Active' || data.status === 'Paused') {
+            this.mentions = data.mentions;
             this.categoryRemaining = data.category_available - data.category_used;
             this.subcategoryRemaining = data.sub_category_available - data.sub_category_available_used;
 
@@ -251,7 +252,13 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
             this.data = data;
             this.selectedOption = true;
+
+            // get databox categories
             this.getDataboxCategory(this.id);
+
+            // slide apply automatically toggle
+            data.algorithmConnectors.forEach(el => this.slideToggle(el));
+
             this.loader.close();
           }
           if (!data) this.router.navigate(['/sessions/404']);
@@ -391,9 +398,12 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   // open databox query dialog
-  openAlgorithmDialog(title: string, checked: boolean) {
-    this.databoxAlgorithmDialogService.confirm({ title: title, checked: checked })
-      .subscribe((result) => { });
+  openAlgorithmDialog(title: string, checked: boolean, connector) {
+    this.databoxAlgorithmDialogService.confirm({ 
+      title: title, 
+      checked: checked, 
+      connector: connector 
+    }).subscribe((result) => { });
   }
 
   openAddSuggestion(){

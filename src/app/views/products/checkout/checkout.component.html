@@ -189,6 +189,27 @@
               <mat-divider></mat-divider>
             </mat-list-item>
 
+            <mat-list-item class="mt-1">
+              <div fxFlex="56px"></div>
+              <div fxLayout="row" fxFlex="100">
+                <mat-form-field class="apply-coupon">
+                  <input matInput placeholder="Discount code" (input)="coupon = $event.target.value">
+                </mat-form-field>
+                <span fxFlex></span>
+                <div class="text-muted">
+                  <button mat-raised-button color="primary" (click)="applyCoupon($event)">Apply</button>
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+
+            <mat-list-item class="mt-1">
+              <div fxFlex="56px"></div>
+              <p *ngIf="validCoupon && !emptyCoupon" class="sucess-coupon">Coupon is valid.</p>
+              <p *ngIf="!validCoupon && !emptyCoupon" class="mat-color-red">Coupon is not valid. If you don't have a valid coupon, leave the input empty.</p>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+
             <mat-list-item>
               <div fxFlex="56px"></div>
               <div fxLayout="row" fxFlex="100">
@@ -257,8 +278,8 @@
 
           <mat-card-actions>
             <span fxFlex></span>
-            <button mat-raised-button color="primary" (click)="getBack()">Back to Cart</button>
-            <button mat-raised-button color="success" (click)="placeOrder()">Place Order</button>
+            <button mat-raised-button color="success" (click)="getBack()">Back to Cart</button>
+            <button mat-raised-button color="primary" (click)="placeOrder()">Place Order</button>
           </mat-card-actions>
         </mat-card-content>
       </mat-card>
