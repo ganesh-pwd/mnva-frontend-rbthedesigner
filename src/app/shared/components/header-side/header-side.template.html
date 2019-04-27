@@ -56,8 +56,15 @@
         <strong> Algorithm Credit </strong>
       </span>
       <a routerLink="/products/algorithm-credit" class="menu-link">Buy More </a>
+      <p>${{loggedInUser.algorithmCredits}} in credit remaining</p>
+      <mat-progress-bar
+        [ngClass]="remaining >= 80 && remaining <= 99 
+          ? 'yellow-progress': remaining === 100 
+          ? 'red-progress': 'blue-progress'"
+        [mode]="'determinate'"
+        [value]="remaining">
+      </mat-progress-bar>
     </div>
-    <p class="credits p16 mt-1">${{loggedInUser.algorithmCredits}}</p>
     <hr>
     <button mat-menu-item [routerLink]="['/accounts/minerva-notifications']">
       <mat-icon>home</mat-icon>

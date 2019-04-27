@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ProductShopService, CartItem } from '../products-shop.service';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products-cart',
@@ -15,6 +16,7 @@ export class ProductsCartComponent implements OnInit {
   public subTotal: number;
   public vat: number = 13;
   public billYearly: boolean = false;
+
   constructor(
     private shopService: ProductShopService,
     private location: Location
@@ -35,8 +37,8 @@ export class ProductsCartComponent implements OnInit {
   }
 
   public onQuantityChange() {
-    let subtotal = this.computePriceNotAccount();
-    let accountType = this.getAccountTypePrice();
+    const subtotal = this.computePriceNotAccount();
+    const accountType = this.getAccountTypePrice();
 
     this.subTotal = parseFloat((subtotal + accountType).toFixed(5));
     this.total = parseFloat((this.subTotal + (this.subTotal * (15 / 100))).toFixed(5));
@@ -47,7 +49,7 @@ export class ProductsCartComponent implements OnInit {
     let subtotal = 0;
 
     this.cart.forEach(item => {
-      if(item.product.category !== 'Account Type')
+      if (item.product.category !== 'Account Type')
         subtotal += (item.product.price.sale * item.data.quantity);
     });
 
@@ -55,19 +57,21 @@ export class ProductsCartComponent implements OnInit {
   }
 
   // get pricing of account type
-  public getAccountTypePrice(){
-    let subtotal = 0
-    if(this.billYearly){
+  public getAccountTypePrice() {
+    let subtotal = 0;
+    if (this.billYearly) {
       this.cart.forEach(item => {
-        if(item.product.category === 'Account Type')
+        if (item.product.category === 'Account Type') {
           subtotal += (item.product.price.sale * 12);
+        }
       });
-    } else{
+    } else {
       this.cart.forEach(item => {
-        if(item.product.category === 'Account Type')
+        if (item.product.category === 'Account Type') {
           subtotal += (item.product.price.sale * 1);
+        }
       });
-    } 
+    }
 
     return subtotal;
   }
@@ -95,20 +99,20 @@ export class ProductsCartComponent implements OnInit {
 
   public getCart() {
     this.shopService
-    .getCart()
-    .subscribe(cart => {
-      this.cart = cart;
-    });
+      .getCart()
+      .subscribe(cart => {
+        this.cart = cart;
+      });
   }
 
   // check shopping cart if it contains account type purchase
-  public checkIfAccountType(){
-    if(this.cart){
-      let account_types = this.cart
+  public checkIfAccountType() {
+    if (this.cart) {
+      const account_types = this.cart
       .filter(el => el.product.category === 'Account Type');
 
       if(account_types.length > 0) return true;
-    } 
+    };
   }
 
   getItemTotal(price, quantity, type) {

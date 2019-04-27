@@ -20,42 +20,57 @@ export class ProductCheckoutComponent implements OnInit {
 
   public total: number;
   public subTotal: number;
-  public vat: number = 15;
+  public vat: number = 13;
   public shipping: any = 'Free';
   public paymentMethod: string;
+
+  public coupon: string;
+  public validCoupon: boolean;
+  public couponsList: any;
+  public emptyCoupon: boolean = true;
+  public applydiscount: number;
 
   constructor(
     private fb: FormBuilder,
     private shopService: ProductShopService,
     private location: Location
   ) {
-    let countryDB = new CountryDB();
+    const countryDB = new CountryDB();
     this.countries = countryDB.countries;
   }
 
   ngOnInit() {
     this.getCart();
     this.buildCheckoutForm();
+    this.getCoupons();
   }
-  calculateCost() {
+
+  public calculateCost() {
     this.subTotal = 0;
     this.cart.forEach(item => {
-      this.subTotal += (item.product.price.sale * item.data.quantity)
-    })
+      if (this.applydiscount) {
+        const discountPrice = item.product.price.sale - (item.product.price.sale * (this.applydiscount / 100));
+        this.subTotal += discountPrice * item.data.quantity;
+      } else {
+        this.subTotal += (item.product.price.sale * item.data.quantity);
+      }
+    });
     this.total = this.subTotal + (this.subTotal * (15 / 100));
     if (this.shipping !== 'Free') {
       this.total += this.shipping;
     }
   }
-  getCart() {
+
+  public getCart() {
     this.shopService
       .getCart()
       .subscribe(cart => {
         this.cart = cart;
         this.calculateCost();
-      })
+      });
   }
-  buildCheckoutForm() {
+
+  public buildCheckoutForm() {
     this.checkoutForm = this.fb.group({
       country: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -81,6 +96,32 @@ export class ProductCheckoutComponent implements OnInit {
       phone: ['', Validators.required],
       email: ['', Validators.required]
     });
+  }
+
+  public getCoupons() {
+    this.shopService
+      .getCoupons()
+      .subscribe(coupons => {
+        this.couponsList = coupons;
+      });
+  }
+
+  public applyCoupon(event) {
+    event.preventDefault();
+
+    if (!this.coupon) {
+      return;
+    }
+
+    this.emptyCoupon = false;
+    const couponArr = this.couponsList.filter(coupon => {
+        return coupon.name === this.coupon.toUpperCase();
+    });
+
+    couponArr.length ? this.validCoupon = true : this.validCoupon = false;
+
+    this.applydiscount = couponArr[0].discount;
+    this.calculateCost();
   }
 
   public getBack() {

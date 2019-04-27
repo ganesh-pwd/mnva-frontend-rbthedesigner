@@ -45,22 +45,23 @@ export class MentionsCreditComponent implements OnInit {
     private snackBar: MatSnackBar,
     private fb: FormBuilder,
     private loader: AppLoaderService
-  ) { }
+  ) { this.getMentions(); }
 
   ngOnInit() {
     setTimeout(() => {
       this.loader.open();
     });
-
+    
+    this.getCart();
     this.buildFilterForm(this.shopService.initialFilters);
-    this.getMentions();
 
     this.products$ = this.shopService
       .getFilteredProduct(this.filterForm)
       .pipe(map(products => products));
 
-    this.getCart();
+    
     this.cartData = this.shopService.cartData;
+    
   }
 
   // search input
@@ -110,10 +111,35 @@ export class MentionsCreditComponent implements OnInit {
     });
   }
 
+  addCreditToCart(){
+    const productBuild = {
+      name: "Mentions Credit",
+      _id: Date.now().toString(),
+      price: {
+        sale: this.filterForm.get('mentionCredit').value
+      },
+      category: 'Mentions Credit',
+      photo: 'https://via.placeholder.com/140x140'
+    };
+    const cartItem: CartItem = {
+      product: productBuild,
+      data: {
+        quantity: 1
+      }
+    };
+    this.shopService
+    .addToCart(cartItem)
+    .subscribe(cart => {
+      this.cart = cart;
+      this.snackBar.open('Product added to cart', 'OK', { duration: 4000 });
+    });
+  }
+
   buildFilterForm(filterData: any = {}) {
     this.filterForm = this.fb.group({
       search: [''],
       category: ['all'],
+      mentionCredit: ["250"],
       minPrice: [filterData.minPrice],
       maxPrice: [filterData.maxPrice],
       minRating: [filterData.minRating],

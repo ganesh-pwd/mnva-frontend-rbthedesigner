@@ -23,7 +23,12 @@
 
 <div class="height-full" *ngIf="!deleteDataInfo" 
   [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-  <h1 matDialogTitle>{{ data.title }}</h1>
+  <h1 matDialogTitle>{{ data.title }}
+  <span fxFlex></span>
+  <mat-icon class="close" (click)="dialogRef.close(true)" 
+  *ngIf="data.title === 'How to connect to Power BI' 
+    || data.title === 'How to connect to Tableau' 
+    || data.title === 'How to connect to Data Studio'">close</mat-icon></h1>
   <div mat-dialog-content>
       <!-- Input Data -->
       <form *ngIf="data.input; else showText">
@@ -39,42 +44,90 @@
           {{data.data}}
       </ng-template>
 
-      <div *ngIf="data.folder === 'Power BI' 
-          || data.folder === 'Tableau' 
-          || data.folder === 'Data Studio'">
+      <div *ngIf="data.title === 'Power BI' 
+          || data.title === 'Tableau' 
+          || data.title === 'Data Studio'">
               <hr> 
-              <h3 class="mat-h3 mat-color-primary">See Templates for {{data.folder}}</h3>
+              <h3 class="mat-h3 mat-color-primary">See Templates for {{data.title}}</h3>
       </div>
 
       <!-- For Databox Connectivity Only -->
-      <div *ngIf="data.folder === 'Power BI' 
-        || data.folder === 'Tableau' 
-        || data.folder === 'Data Studio'"
+      <div *ngIf="data.title === 'How to connect to Power BI' 
+        || data.title === 'How to connect to Tableau' 
+        || data.title === 'How to connect to Data Studio'"
         fxLayout="row" fxLayoutWrap="wrap">
           <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" fxLayoutAlign="center">
-              <div class="text-center" >
+              <div class="text-center">
                   <mat-horizontal-stepper [linear]="true">
                     <mat-step [stepControl]="firstFormGroup">
-                      <ng-template [ngIf]="data.folder === 'Power BI'">
-                        <div>Power BI Step 1</div>
+                      <ng-template [ngIf]="data.title === 'How to connect to Power BI'">
+                        <div>Power BI Step 1</div> <br>
+                        <p class="text-left">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                       </ng-template>
-                      <ng-template [ngIf]="data.folder === 'Tableau'">
-                        <div>Tableau Step 1</div>
+                      <ng-template [ngIf]="data.title === 'How to connect to Tableau'">
+                        <div>Tableau Step 1</div> <br>
+                        <p class="text-left">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                       </ng-template>
-                      <ng-template [ngIf]="data.folder === 'Data Studio'">
-                        <div>Data Studio Step 1</div>
+                      <ng-template [ngIf]="data.title === 'How to connect to Data Studio'">
+                        <div>Data Studio Step 1</div> <br>
+                        <p class="text-left">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                       </ng-template>
                     </mat-step>
 
                     <mat-step [stepControl]="secondFormGroup">
-                      <ng-template [ngIf]="data.folder === 'Power BI'">
-                        <div>Power BI Step 2</div>
+                      <ng-template [ngIf]="data.title === 'How to connect to Power BI'">
+                        <div>Power BI Step 2</div> <br>
+                        <p class="text-left">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                       </ng-template>
-                      <ng-template [ngIf]="data.folder === 'Tableau'">
-                        <div>Tableau Step 2</div>
+                      <ng-template [ngIf]="data.title === 'How to connect to Tableau'">
+                        <div>Tableau Step 2</div> <br>
+                        <p class="text-left">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                       </ng-template>
-                      <ng-template [ngIf]="data.folder === 'Data Studio'">
-                        <div>Data Studio Step 2</div>
+                      <ng-template [ngIf]="data.title === 'How to connect to Data Studio'">
+                        <div>Data Studio Step 2</div> <br>
+                        <p class="text-left">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
                       </ng-template>
                     </mat-step>
 
@@ -84,26 +137,55 @@
                         <mat-icon class="pt-1" [style.fontSize]="'36px'">check</mat-icon>
                       </div>
                       <div class="pb-1 mb-1"> You Are Done.</div>
-                      <div fxLayout="row">
-                        <button mat-raised-button color="accent" matStepperPrevious>Back</button>
-                        <span fxFlex="8px"></span>
-                        <button mat-raised-button color="primary" (click)="submit()">Submit</button>
-                      </div>
                     </mat-step>
                   </mat-horizontal-stepper>
+
+
               </div>
           </div>
       </div>
   </div>
   <br>
 
+  <!-- Action Buttons FOR DATABOX CONNECT ONLY -->
+  <div mat-dialog-actions 
+      *ngIf="data.title === 'How to connect to Power BI'
+        || data.title === 'How to connect to Tableau'
+        || data.title === 'How to connect to Data Studio'">
+    <mat-divider></mat-divider>
+    <br>
+
+    <span fxFlex></span>
+    <div *ngIf="!data.checked">
+      <button (click)="dialogRef.close(false)" 
+      mat-raised-button class="m-333">Cancel</button>
+
+      <button mat-raised-button class="m-333" color="primary" 
+      (click)="updateConnector(true)">Connect Automatically</button>
+
+      <button mat-raised-button class="m-333" color="primary" 
+      (click)="updateConnector()">Connect to Unprocess Data</button>
+    </div>
+
+    <div *ngIf="data.checked">
+      <button (click)="dialogRef.close(false)" 
+      mat-raised-button class="m-333">Cancel</button>
+
+      <button mat-raised-button class="m-333" color="primary" 
+      (click)="updateConnector()">Connect Data</button>
+    </div>
+  </div>
+
   <!-- Action Buttons -->
-  <div mat-dialog-actions>
+  <div mat-dialog-actions 
+      *ngIf="data.title !== 'How to connect to Power BI'
+        && data.title !== 'How to connect to Tableau'
+        && data.title !== 'How to connect to Data Studio'">
       <span fxFlex></span>
 
-      <div *ngIf="data.folder !== 'Power BI' 
-          && data.folder !== 'Tableau' 
-          && data.folder !== 'Data Studio'">
+      <div *ngIf="data.title !== 'Power BI' 
+          && data.title !== 'Tableau' 
+          && data.title !== 'Data Studio'">
               <button *ngIf="data.title !== 'Create Databox' 
               && data.title !== 'Delete Databox' 
               && data.title !== 'Save as Draft'
@@ -113,7 +195,10 @@
               && data.title !== 'Edit Databox Name'
               && data.title !== 'Run Query'
               && data.title !== 'Create a New Databox'
-              && data.title !== 'Test Query'"
+              && data.title !== 'Test Query'
+              && data.title !== 'How to connect to Power BI'
+              && data.title !== 'How to connect to Tableau'
+              && data.title !== 'How to connect to Data Studio'"
               type="button" 
               mat-raised-button
               color="primary" 
@@ -193,6 +278,7 @@
               </button>
       </div>&nbsp;&nbsp;
       
-      <button (click)="dialogRef.close(false)" type="button" mat-raised-button>Cancel</button>
+      <button (click)="dialogRef.close(false)" 
+      type="button" mat-raised-button>Cancel</button>
   </div>
 </div>

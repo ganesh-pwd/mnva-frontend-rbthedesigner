@@ -35,11 +35,11 @@
         <span fxFlex></span>
         <button type="button" 
         mat-raised-button
-        color="primary">Apply Automatically</button>
+        color="primary" (click)="updateConnector(true)">Apply Automatically</button>
 
         <button type="button" 
         mat-raised-button
-        color="primary">Apply To Unprocessed Data</button>
+        color="primary" (click)="updateConnector()">Apply To Unprocessed Data</button>
         
         <button 
         type="button"
@@ -51,7 +51,7 @@
         <span fxFlex></span>
         <button type="button" 
         mat-raised-button
-        color="primary">Apply</button>
+        color="primary" (click)="updateConnector()">Apply</button>
         
         <button 
         type="button"

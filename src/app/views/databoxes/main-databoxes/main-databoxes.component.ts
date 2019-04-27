@@ -97,6 +97,20 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
       });
   }
 
+
+  // check databox connectors
+  checkAlgorithmConnectors(databox, connector){
+    let filter = databox.algorithmConnectors.findIndex(el => el === connector);
+
+    return filter > -1 ? true : false;
+  }
+
+  checkDataConnectors(databox, connector){
+    let filter = databox.dataConnectors.findIndex(el => el === connector);
+
+    return filter > -1 ? true : false;
+  }
+
   // generate id with length 24
   generateID() {
     let id = '';

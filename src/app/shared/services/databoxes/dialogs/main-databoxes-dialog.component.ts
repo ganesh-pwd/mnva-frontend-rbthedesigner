@@ -66,7 +66,8 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     this.reqSubs = this.databoxesService.addItem(this.data.details, 'Draft')
     .subscribe((result) => {
       this.dialogRef.close(false);
-      this.router.navigate(['/databoxes']);
+      this.router.navigate(['/databoxes'])
+      .then(() => sessionStorage.removeItem('databox_new'));
     });
   }
 
@@ -104,6 +105,7 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     else { this.deleteDataInfo = true; }
   }
 
+  // build databox query
   testQuery(){
     this.reqSubs = this.databoxesService
     .testQueryDatabox(this.data.details)
@@ -113,6 +115,7 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
       let url = this.router.url;
 
       this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+      .then(() => sessionStorage.removeItem('databox_updated'))
       .then(() => this.router.navigate(['/databoxes']))
       .then(() => this.router.navigate([url]))
       .then(() => sessionStorage.removeItem('selectedTabDatabox'))
@@ -121,6 +124,23 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
         setTimeout(() => this.snackBar.dismiss(), 3000);
       });
     });
+  }
+
+  // update connectors
+  updateConnector(automatic?: boolean){
+    
+    this.reqSubs = this.databoxesService
+    .addDataConnector(this.data.connector, automatic ? true : this.data.checked)
+    .subscribe(result => {
+      this.dialogRef.close(false);
+      
+      let url = this.router.url;
+
+      this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+      .then(() => sessionStorage.removeItem('databox_updated'))
+      .then(() => this.router.navigate(['/databoxes']))
+      .then(() => this.router.navigate([url]))
+    })
   }
 
   // cancel databox changes

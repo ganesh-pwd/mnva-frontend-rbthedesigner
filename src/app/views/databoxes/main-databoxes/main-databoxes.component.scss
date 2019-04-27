@@ -34,15 +34,21 @@ mat-card-subtitle{
 
 
 .gallery-icons{
-	display: inline-flex !important;
-	vertical-align: middle !important;
+	padding: 10px 4px !important;
+
 	i{
+		position: absolute;
+		margin: 5px 0px !important;
+		padding: 0 !important;
+		
 		img{
-			padding-top: 10px !important;
-			width: 50%;
+			width: 100%;
 		}
 	}
 
+	.mat-icon{
+		font-size: 150% !important;
+	}
 }
 
 .no-databoxes {
@@ -54,4 +60,14 @@ mat-card-subtitle{
 
 .product-search-wrap .product-search {
 	font-family: "Roboto", Helvetica Neue,sans-serif;
+}
+
+
+.equal {
+  display: flex !important;
+
+}
+
+.min-ht{
+	min-height: 80px !important;
 }
