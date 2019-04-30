@@ -5,7 +5,8 @@ import { delay } from 'rxjs/operators';
 import { DataboxDialogsConnectivityComponent } from './dialogs-connectivity.component';
 
 interface confirmData {
-  title?: string
+  title?: string;
+  datasource?: string;
 }
 
 @Injectable({
@@ -17,13 +18,15 @@ export class DataboxConnectivityDialogService {
 
   public confirm(data:confirmData = {}): Observable<boolean> {
     data.title = data.title || 'Email Notification';
+    data.datasource = data.datasource;
 
     let dialogRef: MatDialogRef<DataboxDialogsConnectivityComponent>;
     dialogRef = this.dialog.open(DataboxDialogsConnectivityComponent, {
       width: '800px',
       disableClose: true,
       data: {
-        title: data.title
+        title: data.title,
+        datasource: data.datasource
       }
     });
 

@@ -9,9 +9,8 @@
           <mat-icon (click)="modifyDataboxDialog('Edit Databox Name', 'Databox Name', true)"> 
           edit</mat-icon>      
           <span class="main-route"> 
-            <a routerLink="/databoxes/">Databoxes </a> /
-            {{ data?.databox_name }}</span
-          >
+            <a routerLink="/databoxes/">Databoxes </a> 
+          </span><span>/ {{ data?.databox_name }}</span>
         </small>
       </h1>
     </div>
@@ -77,14 +76,16 @@
             
             <mat-card-content class="table-mat-card-content" fxLayout="row" fxLayoutWrap="wrap"  
               style="overflow: hidden !important; width: 100% !important; height: 100% !important;">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
+              
+              <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100" fxFlex.gt-md="100" 
+              class="page-search mat-bg-gray">
                 <div>
                   <p>
                       <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day}}
                   </p>
                 </div>
                 <span fxFlex></span>
-                <div style="position: absolute; right: 24px;">
+                <div>
                   <!-- Download CSV -->
                   <a class="mr-1 head-mentions" 
                   (click)="downloadCSV()">

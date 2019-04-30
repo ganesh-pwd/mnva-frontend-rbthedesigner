@@ -408,7 +408,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   openAddSuggestion(){
-    this.databoxAddSuggestionService.confirm({ title: `Suggest Result From a Specific ${this.data.page_search_name}`, data: {}, field: this.data.page_search_name}).subscribe((result) => { });
+    this.databoxAddSuggestionService.confirm({ 
+      title: `Suggest Result From a Specific ${this.data.page_search_name}`, 
+      field: this.data.page_search_name})
+    .subscribe((result) => { });
   }
 
   // add suggestion

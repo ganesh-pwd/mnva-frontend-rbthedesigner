@@ -31,7 +31,7 @@ export class DataboxDB {
       'category_used': 4,
       'sub_category_available': 20,
       'sub_category_available_used': 3,
-      'algorithmConnectors': ['sentiment', 'topicRecognition', 'genderAuthor', 'entityRecognition'],
+      'algorithmConnectors': ['sentiment', 'topicRecognition', 'entityRecognition'],
       'dataConnectors': ['powerBi', 'tableau', 'dataStudio'],
       'query': '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`,

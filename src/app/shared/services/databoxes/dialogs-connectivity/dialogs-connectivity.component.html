@@ -10,9 +10,10 @@
 	<br>
 	<mat-accordion>
 		<mat-expansion-panel>
-			<mat-expansion-panel-header>
+			<mat-expansion-panel-header  *ngIf="data.datasource !== 'Twitter'">
 				<mat-panel-title>
-					<mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
+					<mat-slide-toggle color="primary" class="mb-1" [checked]="checked"
+					[disabled]="data.datasource === 'Twitter'">
 						Receive one email per mention
 					</mat-slide-toggle> 
 				</mat-panel-title>
@@ -22,7 +23,7 @@
 			</mat-expansion-panel-header>
 
 	        <!-- Time line -->
-	        <mat-card class="default">
+	        <mat-card class="default" *ngIf="data.datasource !== 'Twitter'">
 		        <mat-card-content>
 		            <div class="timeline">
 		              	<div class="timeline-item">
