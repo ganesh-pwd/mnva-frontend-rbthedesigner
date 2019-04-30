@@ -11,7 +11,7 @@ import { DataboxCategoryService } from '../../../shared/services/databoxes/datab
 import { UserService } from '../../../shared/services/auth/user-services';
 import { HotTableRegisterer } from '@handsontable-pro/angular';
 import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
-import { MatPaginator, MatTableDataSource} from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSidenav} from '@angular/material';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -52,6 +52,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   @ViewChild('hot') hot;
   @ViewChild('exportFile') exportFile;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSidenav) private sideNav: MatSidenav;
 
   public databoxItemTable: any;
   public databoxCategories: any;

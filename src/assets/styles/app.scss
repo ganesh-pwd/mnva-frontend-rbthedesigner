@@ -107,7 +107,7 @@ tbody {
 
 // font gray
 .mat-color-gray {
-  color: gray;
+  color: rgba(0, 0, 0, .54);
 }
 
 .mat-color-red {
@@ -160,7 +160,7 @@ body .mat-select-trigger,
 }
 
 .databox-paused {
-  color: gray !important;
+  color: rgba(0, 0, 0, .54) !important;
 }
 
 .control-btns {
@@ -203,7 +203,7 @@ hot-table {
   th {
     font-family: arial, sans-serif;
     background: whitesmoke !important;
-    color: gray !important;
+    color: rgba(0, 0, 0, .54) !important;
     padding-top: 15px !important;
     font-weight: 600 !important;
   }
@@ -228,7 +228,7 @@ hot-table {
   button {
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    color: gray;
+    color: rgba(0, 0, 0, .54);
     padding: 5px 10px;
     cursor: pointer;
     cursor: hand;
@@ -273,7 +273,7 @@ hot-table {
     mat-icon {
       cursor: pointer;
       font-size: 18px;
-      color: gray;
+      color: rgba(0, 0, 0, .54);
       position: absolute;
       left: -23px;
       bottom: 3px;
@@ -309,18 +309,12 @@ table {
   .mat-header-cell-databox {
     font-family: arial, sans-serif !important;
     background: whitesmoke !important;
-    color: gray !important;
+    color: rgba(0, 0, 0, .54) !important;
     padding-top: 15px !important;
     font-weight: 600 !important;
     font-size: 14px !important;
     padding-left: 10px !important;
   }
-}
-
-.query-active {
-  background: #22d9c9 !important; 
-  border: 1px solid #22d9c9 !important; 
-  color: white !important;
 }
 
 .cdk-overlay-pane {

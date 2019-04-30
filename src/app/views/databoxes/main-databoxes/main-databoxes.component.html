@@ -28,9 +28,9 @@
     <mat-card class="p-0">
       <mat-card-header class="m-0 p-1" >
       	<mat-card-title class="" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.databox_name}}</mat-card-title>
-      	<mat-card-subtitle (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.datasource}} | 
-        <small *ngFor="let location of data.location; let i = index">
-        {{i !== data.location.length - 1 ? location + ',' : location}}</small>
+      	<mat-card-subtitle class="mat-color-primary" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.datasource}} 
+        <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
+         / {{i !== data.location.length - 1 ? location + ',' : location}}</small>
         </mat-card-subtitle>
 
       	<span fxFlex></span>

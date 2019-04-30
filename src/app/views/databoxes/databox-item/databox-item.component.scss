@@ -83,7 +83,7 @@ h5 {
 
   .paginate {
     border: none !important;
-    color: gray;
+    color: rgba(0, 0, 0, .54);
     cursor: pointer;
     cursor: hand;
     margin-right: 0px;
@@ -94,7 +94,7 @@ h5 {
     &:hover {
       border-radius: 70%;
       background: rgba(242, 242, 242, 0.5);
-      color: gray;
+      color: rgba(0, 0, 0, .54);
     }
 
     .disabled {
@@ -122,9 +122,8 @@ h5 {
 
 .algorithm-header {
   margin-top: 5px;
-  margin-left: 30px;
+  margin-bottom: 15px;
   font-size: 18px;
-  position: absolute;
 }
 
 .category-header {
@@ -140,8 +139,9 @@ h5 {
   transition: transform 2s;
 }
 
-.mentions {
+.credit-remain {
   margin-right: 2%;
+  margin-top: 10px;
 }
 
 .credits {
@@ -207,4 +207,21 @@ td{
     cursor: pointer !important;
     margin-right: 15px !important;
   }
+}
+
+// .relative{
+//   position: relative;
+//   .allign-middle{
+//     margin: 0;
+//     position: inherit;
+//     top: 50%;
+//     -ms-transform: translateY(-50%);
+//     transform: translateY(-50%);
+//   }
+// }
+.relative{
+  min-width: 200px;
+}
+.info-wrap{
+  background-color: rgba(0, 0, 0, 0.03);
 }

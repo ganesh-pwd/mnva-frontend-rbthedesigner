@@ -320,7 +320,7 @@ code {
   color: rgba(255, 255, 255, .54) !important;
 }
 .text-gray {
-  color: rgba(0, 0, 0, .7) !important;
+  color: rgba(0, 0, 0, .54) !important;
 }
 .text-sm {
   font-size: .813rem;
@@ -360,9 +360,6 @@ mat-card-title{
 .mat-card-title{
   color: #fb8a01;
 }
-.mat-card-subtitle{
-  color: initial !important;
-}
 .mat-card.default>:first-child {
   border-radius: 2px 2px 0 0;
 }
@@ -386,6 +383,11 @@ mat-card-title{
 }
 .mat-card.default>:last-child {
   border-radius: 0 0 2px 2px;
+}
+
+.mat-cell{
+  padding: 1% 1%;
+  font-size: 12px !important;
 }
 
 .mat-card {
@@ -873,8 +875,6 @@ div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
     margin-left: .5rem;
   }
 }
-
-
 
 
 @media (max-width: 767px) {

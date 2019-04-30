@@ -41,7 +41,7 @@ small{
 	mat-icon{
 		cursor: pointer;
 		font-size: 18px;
-		color: gray;
+		color: rgba(0, 0, 0, .54);
 		margin-left: 1%;
 	}
 
@@ -167,12 +167,6 @@ small{
 		padding: 0 !important;
 		margin: 0 !important;
 	}
-}
-
-
-.mat-cell{
-	padding: 1% 1%;
-	font-size: 12px;
 }
 
 table{

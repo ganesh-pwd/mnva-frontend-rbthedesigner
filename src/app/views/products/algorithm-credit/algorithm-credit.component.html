@@ -78,57 +78,69 @@
 
 <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-   <mat-sidenav-container fxLayout="row" fxLayoutWrap="wrap" fxAlignLayout="center">
-      <div class="shop-wrap" fxLayout="row" fxLayoutWrap="wrap">
-        <!-- Filters -->
-        <!-- Right side -->
-        <div class="full-width">
-          
-          <!-- Products container -->
-          <div class="product-container" [ngClass]="{'list-view': viewMode === 'list-view'}">
-            <!-- Product Box -->
-            <div class="product-wrap" *ngFor="let product of algorithms | MenuFilter: searchInput | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
-             [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-              <div class="product-inner mb-05">
-                <div class="featured-img algorithms" (click)="addToCart(product)">
-                  <img [src]="product.photo" alt="">
-                </div>
-                <div class="info-wrap p-1">
-                  <div class="main-info">
-                    <h3 class="mat-h3" (click)="addToCart(product)">{{product.name}}</h3>
-                    <p class="text-muted p-line">{{product?.description}}</p>
-                  </div>
-                  <div class="actions">
-                    <div class="price-rating">
-                      <div class="price">
-                        <span fxFlex></span>
-                        <span class="mention">${{product?.price?.sale.toFixed(5)}}/mention</span>
-                        <!--<del class="text-muted">{{product?.price?.sale.toFixed(5)}}</del>-->
+    <mat-card>
+      <mat-card-header>
+         <mat-card-title class="mat-color-primary">
+            <div class="mt-05">Available Algorithms</div>
+         </mat-card-title>
+      </mat-card-header>
+      <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+         <mat-sidenav-container fxLayout="row" fxLayoutWrap="wrap" fxAlignLayout="center">
+            <div class="shop-wrap" fxLayout="row" fxLayoutWrap="wrap">
+              <!-- Filters -->
+              <!-- Right side -->
+              <div class="full-width">
+                
+                <!-- Products container -->
+                <div class="product-container" [ngClass]="{'list-view': viewMode === 'list-view'}">
+                  <!-- Product Box -->
+                  <div class="product-wrap" *ngFor="let product of algorithms | MenuFilter: searchInput | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
+                   [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                    <div class="product-inner mb-05">
+                      <div class="featured-img algorithms" (click)="addToCart(product)">
+                        <img [src]="product.photo" alt="">
                       </div>
-
-                    </div>
-                    <div class="add-to-cart">
-                      <span fxFlex></span>
-                      <button mat-raised-button class="mat-primary btn-add-to-cart mt-1" (click)="addToCart(product)">
-                        <mat-icon>shopping_cart</mat-icon>
-                      </button>
+                      <div class="info-wrap p-1">
+                        <div class="main-info">
+                          <h3 class="mat-h3" (click)="addToCart(product)">{{product.name}}</h3>
+                        </div>
+                        <div class="actions">
+                          <div class="price-rating">
+                            <div class="price">
+                              <span class="mention">${{product?.price?.sale.toFixed(5)}}/mention</span>
+                              <!--<del class="text-muted">{{product?.price?.sale.toFixed(5)}}</del>-->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Visible when viewMode === list-view -->
+                      <div class="more-info-wrap p-1" *ngIf="viewMode === 'list-view'">
+                        <div class="more-info">
+                          <div>
+                            <ul>
+                              <li>
+                                {{product?.description}}
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <!-- End Product -->
+                  <div class="products-pagination">
+                    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+                  </div>
                 </div>
-                <!-- Visible when viewMode === list-view -->
-     
-
+                <!-- End Products container -->
               </div>
             </div>
-            <!-- End Product -->
-
-            <div class="products-pagination">
-              <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
-            </div>
-          </div>
-          <!-- End Products container -->
+          </mat-sidenav-container>
         </div>
       </div>
-    </mat-sidenav-container>
+      <mat-divider></mat-divider>
+      <br>
+    </mat-card>
   </div>
 </div>
