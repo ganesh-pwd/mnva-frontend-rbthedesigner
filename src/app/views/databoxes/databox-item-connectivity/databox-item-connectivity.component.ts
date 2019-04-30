@@ -87,10 +87,11 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   }
 
   // open notification dialog
-  openNotificationDialog(title: string) {
+  openNotificationDialog(title: string, datasource: string) {
     this.getItemSub = this.databoxConnectivityDialogService
       .confirm({
-        title: title
+        title: title,
+        datasource: datasource
       })
       .subscribe(result => {});
   }

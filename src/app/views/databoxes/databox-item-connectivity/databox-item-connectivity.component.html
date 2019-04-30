@@ -11,7 +11,7 @@
 					<a routerLink="/databoxes/">Databoxes </a> / 
 					<a (click)="navigateToDatabox(databoxItemData?._id, data?.first_create)">
 					{{databoxItemData?.databox_name}}</a> 
-				</span> / Connect Your Data
+				</span> <span>/ Connect Your Data</span>
 			</small>
 		</h1>
 	</div>
@@ -132,14 +132,15 @@
 <br><br>
 
 <!-- Notification -->
-<div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data"
+<div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data && data?.datasource !== 'Twitter'" 
 	[@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 		<h1 class="mat-h2 mat-color-primary connector">Notification</h1>
 	</div>
 
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >
-		<mat-card (click)="openNotificationDialog('Email Notifications')">
+		<mat-card 
+			(click)="openNotificationDialog('Email Notifications', data.datasource)">
 			<mat-card-header>
 				<mat-card-title class="mat-color-primary">
 					<img src="/assets/images/email.png" class="minerva-logo" >
@@ -184,6 +185,78 @@
 		<mat-card>
 			<mat-card-header>
 				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/apple_tv.png" class="minerva-logo" >
+					<span class="title-header">Apple TV <br>
+						<small class="text-muted">Apple</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
+
+<div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data && data?.datasource === 'Twitter'" 
+	[@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" 
+	class="disable-notification">
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+		<h1 class="mat-h2 connector mat-color-primary">Notification</h1>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" disabled="true">
+		<mat-card class="dont-disable" 
+		(click)="openNotificationDialog('Email Notifications', data.datasource)">
+			<mat-card-header>
+				<mat-card-title class="mat-color-primary">
+					<img src="/assets/images/email.png" class="minerva-logo">
+					<span class="title-header">Email <br>
+						<small class="text-muted">Email</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card class="disable">
+			<mat-card-header>
+				<mat-card-title>
+					<img src="/assets/images/slack.png" class="minerva-logo" >
+					<span class="title-header">Slack <br>
+						<small class="text-muted">Slack</small></span>
+				</mat-card-title>
+			</mat-card-header>
+
+			<mat-divider></mat-divider>
+			<br>
+			
+			<mat-card-content>
+				<p class="">
+				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+				</p>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+		<mat-card class="disable">
+			<mat-card-header>
+				<mat-card-title>
 					<img src="/assets/images/apple_tv.png" class="minerva-logo" >
 					<span class="title-header">Apple TV <br>
 						<small class="text-muted">Apple</small></span>

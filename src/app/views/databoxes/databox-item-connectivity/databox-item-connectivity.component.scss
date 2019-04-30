@@ -107,3 +107,29 @@ mat-accordion{
 	position: absolute !important;
 }
 
+.disable-notification{
+	.disable{
+		color: #abacad !important;
+
+		.mat-card-title{
+			color: #abacad !important;
+
+			.title-header{
+				color: #abacad !important;
+			}
+
+			img{
+				opacity: 0.4 !important;
+	    		filter: alpha(opacity=40) !important;
+			}
+		}
+
+		p{
+			color: #abacad !important;
+		}
+	}
+
+	.dont-disable{
+
+	}
+}

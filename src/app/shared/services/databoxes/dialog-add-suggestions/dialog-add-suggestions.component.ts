@@ -45,6 +45,7 @@ export class DataboxDialogAddSuggestionComponent implements OnInit, OnDestroy {
       'page-country': [null, Validators.compose([Validators.required])]
     });
 
+    /*
     console.log(this.data.data.page_name);
 
     if (this.data.data) {
@@ -53,7 +54,7 @@ export class DataboxDialogAddSuggestionComponent implements OnInit, OnDestroy {
         'page-id': this.data.data.page_id,
         'page-country': this.data.data.page_country
       });
-    }
+    }*/
   }
 
   // add suggestion

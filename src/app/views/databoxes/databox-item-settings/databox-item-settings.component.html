@@ -19,7 +19,7 @@
             <a routerLink="/databoxes/">Databoxes </a> /
             {{ databoxItemData || data?.databox_name }}
           </span>
-          / Create Databox
+          <span>/ Create Databox</span>
         </small>
       </h1>
     </div>
@@ -62,7 +62,7 @@
               {{ data?.databox_name }}</a
             >
           </span>
-          / Edit Query
+          <span>/ Edit Query</span>
         </small>
       </h1>
     </div>
@@ -565,7 +565,7 @@
     <div fxLayout="row" fxLayoutWrap="wrap">
       <div fxFlex="100" fxFlex.gt-sm="100">
         <mat-card class="p-0">
-          <mat-card-content class="p-0" style="max-height: 159px;">
+          <mat-card-content class="p-1" style="max-height: 200px;">
             <!-- Line Chart -->
             <canvas 
               baseChart 
