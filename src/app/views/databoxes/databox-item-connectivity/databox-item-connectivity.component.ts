@@ -21,9 +21,9 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   public databoxItemData: any;
   public selectedOption;
 
-  public powerBi: boolean = false;
-  public tableau: boolean = false;
-  public dataStudio: boolean = false;
+  public email: boolean = false;
+  public slack: boolean = false;
+  public appleTv: boolean = false;
 
   constructor(
     private router: Router,
@@ -97,26 +97,26 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   slideToggle(data) {
     switch (true) {
-      case data === 'powerBi': {
-        if(this.powerBi)
-          this.powerBi = false;
-        else this.powerBi = true;
+      case data === 'email': {
+        if(this.email)
+          this.email = false;
+        else this.email = true;
 
         break;
       }
 
-      case data === 'tableau': {
-        if(this.tableau)
-          this.tableau = false;
-        else this.tableau = true;
+      case data === 'slack': {
+        if(this.slack)
+          this.slack = false;
+        else this.slack = true;
 
         break;
       }
 
-      case data === 'dataStudio': {
-        if(this.dataStudio)
-          this.dataStudio = false;
-        else this.dataStudio = true;
+      case data === 'appleTv': {
+        if(this.appleTv)
+          this.appleTv = false;
+        else this.appleTv = true;
 
         break;
       }

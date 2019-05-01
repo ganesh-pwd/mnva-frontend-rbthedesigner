@@ -227,10 +227,10 @@
                 <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef> Action </th>
                   <td mat-cell *matCellDef="let category;" width="100px">
-                      <mat-icon class="text-muted" 
+                      <mat-icon class="text-muted icon-sm" 
                       (click)="openQueryDialog('Edit Category', data, true, category.name)">
                       edit</mat-icon> 
-                      <mat-icon class="text-muted"
+                      <mat-icon class="text-muted icon-sm"
                       (click)="openQueryDialog('Delete Category', data, true, category.name)">
                       delete</mat-icon>
                   </td>

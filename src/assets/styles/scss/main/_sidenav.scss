@@ -85,6 +85,11 @@
         padding: 5px !important;
         border-left: 3px solid;
         border-color: transparent;
+        border-radius: 0;
+        &.databox{
+          height: 35px;
+          width: 35px;
+        }
       }
       .mat-icon:not(.menu-caret) {
         text-align: center;

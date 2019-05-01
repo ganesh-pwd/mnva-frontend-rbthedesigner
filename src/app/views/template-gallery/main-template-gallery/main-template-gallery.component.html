@@ -1,7 +1,7 @@
 <br />
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-    <img src="assets/images/icon-databox.png" />
+    <img src="assets/images/icon-gallery.png" />
     <h1 class="mat-h1">
       Template Gallery
     </h1>
@@ -45,9 +45,8 @@
     fxFlex.gt-xs="33"
     *ngFor="let template_gallery of (data | MenuFilter: searchGallery)"
   >
-    <mat-card class="p-0" *ngIf="data">
+    <mat-card class="p-0" *ngIf="data" routerLink="/template-gallery/{{ template_gallery.link }}">
       <img
-        routerLink="/template-gallery/{{ template_gallery.link }}"
         mat-card-image
         src="{{ template_gallery.image_head }}"
       />

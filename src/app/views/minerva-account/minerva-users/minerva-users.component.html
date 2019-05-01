@@ -42,7 +42,7 @@
         <mat-nav-list>
           <mat-list-item routerLink="/accounts/minerva-notifications" routerLinkActive="list-item-active">
             <mat-icon>home</mat-icon>
-            Notifications
+            Minerva News
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
@@ -96,7 +96,7 @@
 						<p class="user-details">
 							<mat-icon>email</mat-icon> {{user.email}}
 						</p><br>
-						<p class="mat-h3 user-details">
+						<p class="user-details">
 							<mat-icon>calendar_today</mat-icon> Member since: 
 							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}
 						</p><br>
@@ -113,7 +113,7 @@
 			(click)="openDialog('Add New User')"> Add User
 			</button>
 
-			<p>{{data.length}} / {{loggedInUser.max_created_users}} users remaining</p>
+			<p class="users-remaining">{{data.length}} / {{loggedInUser.max_created_users}} users remaining</p>
 		</div>
 	</div>
 </div>
