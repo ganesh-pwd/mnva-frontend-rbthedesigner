@@ -4,9 +4,10 @@ import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { MinervaAccountDialogService } from '../../../shared/services/minerva-account/minerva-account-dialog/minerva-account-dialog.service';
 import { MinervaAccountImageDialogService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-image-dialog.service';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
-import { MinervaAccountService } from '../../../shared/services/minerva-account/minerva-account-dialog/minerva-account.service';
+import { MinervaAccountService } from '../../../shared/services/minerva-account/minerva-account-service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   	selector: 'app-minerva-users',
@@ -23,6 +24,7 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     userImage: string;
     public data: any;
     public loggedInUser;
+    public isUserAdded;
 
     constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -30,9 +32,13 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService,
     private minervaAccountService: MinervaAccountService,
+    private snackbar: MatSnackBar,
     private userService: UserService) {
       this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
       userService.userData$.subscribe((user) => this.loggedInUser = user);
+
+      this.isUserAdded = sessionStorage.getItem('user_new');
+      if (this.isUserAdded) this.openSnackBar(this.isUserAdded);  
     }
 
     ngOnInit() {
@@ -58,9 +64,10 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
       return converted_date;
     }
 
-    openDialog(title: string) {
+    openDialog(title: string, details?: any) {
         this.minervaAccountDialogService.confirm({
-          title: title
+          title: title,
+          details: details
         }).subscribe((result) => {});
     }
 
@@ -68,4 +75,16 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
         this.minervaAccountImageDialogService.confirm({ title: title })
         .subscribe(result => {});
     }
+
+    // open snackbar
+  openSnackBar(message: string) {
+    this.snackbar.open(message, 'close');
+
+    setTimeout(() => {
+      /**/
+      if(this.isUserAdded) sessionStorage.removeItem('user_new');
+
+      this.snackbar.dismiss();
+    }, 3000);
+  }
 }

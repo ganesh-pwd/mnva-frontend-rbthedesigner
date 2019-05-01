@@ -11,6 +11,7 @@ export class NotificationsComponent implements OnInit {
   public isDataboxAdded;
   public isDataboxDeleted;
   public isDataboxUpdated;
+  public isUserAdded;
 
   // Dummy notifications
   notifications: any[] = JSON.parse(sessionStorage.getItem('notifications')) || [{
@@ -42,6 +43,7 @@ export class NotificationsComponent implements OnInit {
           this.isDataboxAdded  = sessionStorage.getItem('databox_new');
           this.isDataboxDeleted = sessionStorage.getItem('deleted_databox_true');
           this.isDataboxUpdated = sessionStorage.getItem('databox_updated');
+          this.isUserAdded = sessionStorage.getItem('user_new');
 
           if (this.isDataboxAdded) {
             this.notifications.push({
@@ -75,6 +77,19 @@ export class NotificationsComponent implements OnInit {
               icon: 'widgets',
               time: '1 min ago',
               route: '/databoxes',
+              color: 'primary'
+            });
+
+            sessionStorage.setItem('notifications', JSON.stringify(this.notifications));
+            sessionStorage.setItem('notificationCount', `${this.notifications.length}`);
+          }
+
+          if (this.isUserAdded) {
+            this.notifications.push({
+              message: this.isUserAdded,
+              icon: 'assignment_ind',
+              time: '1 min ago',
+              route: '/accounts/users',
               color: 'primary'
             });
 

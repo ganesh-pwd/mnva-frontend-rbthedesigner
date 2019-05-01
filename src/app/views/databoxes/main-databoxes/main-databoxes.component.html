@@ -29,18 +29,30 @@
       <mat-card-header class="m-0 p-1" >
       	<mat-card-title class="" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.databox_name}}</mat-card-title>
       	<mat-card-subtitle class="mat-color-primary" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.datasource}} 
+        <small class="mat-color-gray">/</small>
         <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
-         / {{i !== data.location.length - 1 ? location + ',' : location}}</small>
+          {{i !== data.location.length - 1 ? location + ' /' : location}}</small>
         </mat-card-subtitle>
 
       	<span fxFlex></span>
-      	<button mat-icon-button [matMenuTriggerFor]="userMenu" class="">
+      	<button mat-icon-button [matMenuTriggerFor]="userMenu" class="" *ngIf="data.status !== 'Draft'">
       	    <mat-icon class="">more_vert</mat-icon>
       	</button>
+
+        <button mat-icon-button [matMenuTriggerFor]="userMenu2" class="" *ngIf="data.status === 'Draft'">
+            <mat-icon class="">more_vert</mat-icon>
+        </button>
+
       	<mat-menu #userMenu="matMenu">
       	    <button mat-menu-item routerLink="/databoxes/edit-query/{{data._id}}">Edit Query</button>
             <button mat-menu-item routerLink="/databoxes/settings/connect/{{data?._id}}">Connect Your Data</button>
       	</mat-menu>
+
+        <mat-menu #userMenu2="matMenu">
+            <button mat-menu-item routerLink="/databoxes/create-databox/{{data._id}}">
+            Create Databox</button>
+            <button mat-menu-item (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true, data)">Delete Databox</button>
+        </mat-menu>
       </mat-card-header>
 
       <mat-divider></mat-divider>

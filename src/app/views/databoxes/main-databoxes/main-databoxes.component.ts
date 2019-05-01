@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
-
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -57,6 +56,18 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   openDialog(title: string, data: string, input: boolean) {
     this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
       .subscribe((result) => this.selectedOption = result);
+  }
+
+  // modify databox
+  modifyDataboxDialog(title: string, data: string, input: boolean, details: any) {
+    this.mainDataboxesDialogService.confirm({
+      title: title,
+      data: data,
+      input: input,
+      details: details
+    }).subscribe((result) => {
+      this.selectedOption = result;
+    });
   }
 
   // open create databox dialog

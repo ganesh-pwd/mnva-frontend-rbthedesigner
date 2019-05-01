@@ -107,7 +107,11 @@ export class DataboxesService {
 
     sessionStorage.removeItem('databox_item');
     sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-    sessionStorage.setItem('databox_new', 'A New Databox has been created');
+
+    if(status === 'Draft')
+      sessionStorage.setItem('databox_new', 'A New Databox with status Draft has been created');
+
+    else sessionStorage.setItem('databox_new', 'A New Databox has been created');
 
     sessionStorage.removeItem('databox_name_new');
     sessionStorage.removeItem('databox_id_new');
@@ -207,17 +211,24 @@ export class DataboxesService {
 
 
   // remove databox item based on databox name
-  deleteDatabox(name){
+  deleteDatabox(name, id?: string){
     const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
     const index           = getDataboxItem.findIndex(el => el.databox_name === name);
-    const confirm_id_name = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
+    const confirm_id_name = getDataboxItem.findIndex(el => el._id === (this.router.url.split('/').filter(el => el.length === 24)[0] || id));
+
+    console.log(confirm_id_name, index)
 
     // remove the record
     if (index > -1 && index === confirm_id_name) {
       getDataboxItem.splice(index, 1);
-      sessionStorage.setItem('deleted_databox_true', `The ${name} Databox has been successfully deleted.`);
+      
       sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
-      this.router.navigate(['/databoxes']);
+
+      this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+      .then(() => sessionStorage.setItem('deleted_databox_true', `The ${name} Databox has been successfully deleted.`))
+      .then(() => this.router.navigate(['/databoxes']))
+      .then(() => setTimeout(() => sessionStorage.removeItem('deleted_databox_true'), 1000));
+      
     } else {
       // show databox does not exist
       return 'Not Exist';

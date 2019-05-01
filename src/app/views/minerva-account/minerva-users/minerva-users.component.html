@@ -71,7 +71,11 @@
 					<mat-card-header>
 
 					  	<mat-card-title class="mat-color-primary">
-					  		<img class="user-image" src="{{user.profile_image}}" alt="">
+					  		<img class="user-image" src="{{user.profile_image}}" alt=""
+					  		 *ngIf="user.status !== 'Pending'">
+
+					  		<img class="user-image" src="/assets/images/user-placeholder.png" 
+					  		*ngIf="user.status === 'Pending'">
 					  		<h4 class="mat-h4 mt-1 ml-1">{{user.name}}</h4>
 
 					  	</mat-card-title>
@@ -81,7 +85,7 @@
 					      	<mat-icon class="">more_vert</mat-icon>
 					  	</button>
 					  	<mat-menu #userMenu="matMenu">
-					      	<button mat-menu-item (click)="openDialog('Edit User')">
+					      	<button mat-menu-item (click)="openDialog('Edit User', user)">
 					      	Edit User</button>
 					      	<button mat-menu-item>Delete User</button>
 					  	</mat-menu>
@@ -97,8 +101,11 @@
 							<mat-icon>email</mat-icon> {{user.email}}
 						</p><br>
 						<p class="mat-h3 user-details">
-							<mat-icon>calendar_today</mat-icon> Member since: 
-							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}
+							<mat-icon>calendar_today</mat-icon> Member since: 
+							<span *ngIf="user.status !== 'Pending'"> 
+							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}</span>
+
+							<span *ngIf="user.status === 'Pending'"> Pending</span>
 						</p><br>
 					</mat-card-content>
 				</mat-card>

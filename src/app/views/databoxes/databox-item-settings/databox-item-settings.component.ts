@@ -165,15 +165,12 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       'datasource': this.data ? this.data.datasource : this.selectedDatasource,
       'country': this.data ? this.data.location : this.selectedCountry,
       'required-keywords': this.data
-        ? this.data['required-keywords']
-        : this.editorData,
+        ? this.data['required-keywords'] : '',
       'optional-keywords': this.data
-        ? this.data['optional-keywords']
-        : this.editorData,
+        ? this.data['optional-keywords'] : '',
       'excluded-keywords': this.data
-        ? this.data['excluded-keywords']
-        : this.editorData,
-      'advance-query': this.data ? this.data.query : this.editorData
+        ? this.data['excluded-keywords'] : '',
+      'advance-query': this.data ? this.data.query : ''
     };
 
     // set form value based on databox item details
@@ -196,6 +193,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       .getSingleItem(id)
       .subscribe(data => {
         if (data) {
+          if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
+
           this.data = data;
 
           // set value of forms
@@ -414,7 +413,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         let valid = true;
 
         if((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')){
-          this.snackBar.open("You need to add a required keywords", 'close');
+          this.snackBar.open("You need to add the required keywords", 'close');
           valid = false;
         }
 
