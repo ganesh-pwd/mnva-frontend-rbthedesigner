@@ -117,22 +117,24 @@ small{
 .app-user-photo{
 	z-index: 9;
 		&:hover{
-			background: rgba(0,0,0,0.7);
+			cursor: pointer !important;
+			background: rgba(0,0,0,.8);
 			&:before {
-		        content: "  Change  ";
-		        font-size: 12px;
-				margin-left: 6px;
-				width: 90px;
-		 		padding-left: 4px;
+		        content: "   Change   ";
+		        font-size: 10px;
+				margin-left: 5px;
+				width: 94px;
+				height: 20px !important;
+		 		padding-left: 1px;
 		 		padding-right: 4px;
-		 		padding-top: 6px;
+		 		padding-top: 9px;
 		 		padding-bottom: 6px;
-		  		border-bottom-right-radius: 500px;
-		  		border-bottom-left-radius: 500px;
+		  		border-bottom-right-radius: 1000px;
+		  		border-bottom-left-radius: 1000px;
 		        color: white;
 		 		position: absolute;
-		        top: 124px;
-		        background: rgba(0,0,0, 0.5);
+		        top: 112px;
+		        background: rgba(0,0,0,.3);
 		    }
 		}
 	width: 120px;

@@ -99,7 +99,8 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
 
   // delete a databox item
   deleteDatabox() {
-    const deleteData = () => this.databoxesService.deleteDatabox(this.inputData);
+    console.log(this.inputData, this.data.details._id);
+    const deleteData = () => this.databoxesService.deleteDatabox(this.inputData, this.data.details._id);
 
     if (!deleteData()) { this.dialogRef.close(false); }
     else { this.deleteDataInfo = true; }

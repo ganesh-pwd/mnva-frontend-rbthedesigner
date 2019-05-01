@@ -92,7 +92,7 @@
                   <mat-icon class="download">file_download</mat-icon><b>Download</b></a>
 
                   <!-- Add Suggestion -->
-                  <a class="head-mentions" 
+                  <a class="head-mentions" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
                   (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
                 </div>
               </div>

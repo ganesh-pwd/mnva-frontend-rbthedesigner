@@ -66,7 +66,7 @@ export class DataboxCategoryService {
         'index': maxIndex,
         'name': details.name,
         'type': details.type,
-        'expression':  expression || details.query,
+        'expression': expression !== 'null' ? expression : details.query,
         'required-keywords': details['required-keywords'],
         'optional-keywords': details['optional-keywords'],
         'excluded-keywords': details['excluded-keywords'],
@@ -105,7 +105,7 @@ export class DataboxCategoryService {
           'index': 0,
           'name': details.name,
           'type': details.type,
-          'expression': expression || details.query,
+          'expression': expression !== 'null' ? expression : details.query,
           'required-keywords': details['required-keywords'],
           'optional-keywords': details['optional-keywords'],
           'excluded-keywords': details['excluded-keywords'],
@@ -165,7 +165,7 @@ export class DataboxCategoryService {
 
       rows[index].categories[category_index].name = details.name;
       rows[index].categories[category_index].type = details.type;
-      rows[index].categories[category_index].expression = expression || details['query'];
+      rows[index].categories[category_index].expression = expression !== 'null' ? expression : details.query,
       rows[index].categories[category_index]['required-keywords'] = details['required-keywords'];
       rows[index].categories[category_index]['optional-keywords'] = details['optional-keywords'];
       rows[index].categories[category_index]['excluded-keywords'] = details['excluded-keywords'];

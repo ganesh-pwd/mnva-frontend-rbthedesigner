@@ -53,6 +53,8 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
         if (data){
+          if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
+          
           this.data = data;
 
           // slide toggle if element is found on databox 

@@ -24,46 +24,53 @@
     </div>
 
     <div *ngIf="data.title === 'Add New User' || data.title === 'Edit User'">
-    	<mat-form-field class="full-width">
-    	    <input matInput placeholder="Email Address" value="s@mnrva.io">
-    	</mat-form-field>
+        <form [formGroup]="userForm">
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Full Name" formControlName="name">
+            </mat-form-field>
 
-    	<br>
-    	<h3 class="mat-h3">Role</h3>
-    	<p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. </p>
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Email Address" formControlName="email">
+            </mat-form-field>
 
-    	<mat-form-field>
-    	  <mat-select value="Administrator">
-    	    <mat-option value="Administrator">
-    	      Administrator
-    	    </mat-option>
-    	    <mat-option value="Normal User">
-    	      Normal User
-    	    </mat-option>
-    	  </mat-select>
-    	</mat-form-field>
+            <br>
+            <h3 class="mat-h3">Role</h3>
+            <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. </p>
 
-    	<br>
-    	<div mat-dialog-actions>
-    	    <span fxFlex></span>
-    	    <button
-    	    *ngIf="data.title === 'Add New User'"
-    	    type="button"
-    	    mat-raised-button
-          class="mat-color-green"
-          (click)="dialogRef.close(false)">Invite</button>
+            <mat-form-field>
+              <mat-select value="Administrator" formControlName="role">
+                <mat-option value="Administrator">
+                  Administrator
+                </mat-option>
+                <mat-option value="Normal User">
+                  Normal User
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-    	    <button
-    	    *ngIf="data.title === 'Edit User'"
-    	    type="button"
-    	    mat-raised-button
-          color="primary"
-          (click)="dialogRef.close(false)">Save</button>
+            <br>
+            <div mat-dialog-actions>
+                <span fxFlex></span>
+                <button
+                *ngIf="data.title === 'Add New User'"
+                type="button"
+                mat-raised-button
+              class="mat-color-green"
+              (click)="addNewUser()">Invite</button>
 
-    	    <button
-    	    type="button"
-    	    mat-raised-button
-    	    (click)="dialogRef.close(false)">Cancel</button>
-    	</div>
+                <button
+                *ngIf="data.title === 'Edit User'"
+                type="button"
+                mat-raised-button
+              color="primary"
+              (click)="dialogRef.close(false)">Save</button>
+
+                <button
+                type="button"
+                mat-raised-button
+                (click)="dialogRef.close(false)">Cancel</button>
+            </div>
+        </form>
+    	
     </div>
 </div>
