@@ -43,6 +43,10 @@
 
 		<!-- If mentions credit are negative -->
 		<button *ngIf="(loggedInUser.mentions - databoxMention) < 0" 
+			type="button" mat-raised-button color="warn"
+			(click)="createNewDatabox()">Continue with {{loggedInUser.mentions - databoxMention}} Mentions</button>
+
+		<button *ngIf="(loggedInUser.mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="primary"
 			(click)="goToMentions()">Add More Credit</button>
 	

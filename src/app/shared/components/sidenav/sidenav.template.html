@@ -22,7 +22,7 @@
       </div>
 
       <div *ngIf="!item.disabled && item.type !== 'separator' && item.type !== 'icon'" class="lvl1">
-        <a routerLink="/{{item.state}}" 
+        <a (click)="navigateToState(item.state)"
           appDropdownToggle 
           matRipple 
           *ngIf="item.type === 'link'">

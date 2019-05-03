@@ -1,3 +1,5 @@
+
+
 <div *ngIf="deleteDataInfo">
   <div class="default-bg" [@animate]="{value:'*', params:{ scale:'0.8', delay:'200ms' }}">
       <div>
@@ -246,7 +248,7 @@
               color="primary" 
               (click)="createDataboxInit()">{{data.title}}</button>
 
-              <!-- Edit Databox -->
+              <!-- Edit Databox Name -->
               <button *ngIf="data.title === 'Set Databox Name'"
               type="button"
               mat-raised-button
@@ -254,7 +256,7 @@
               (click)="editDataboxNotCreated()">{{data.title}}
               </button>
 
-              <!-- Edit Databox -->
+              <!-- Edit Databox Name -->
               <button *ngIf="data.title === 'Edit Databox Name'"
               type="button"
               mat-raised-button

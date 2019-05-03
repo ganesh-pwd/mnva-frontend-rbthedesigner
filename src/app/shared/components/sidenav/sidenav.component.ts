@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,7 +10,7 @@ export class SidenavComponent {
   @Input('hasIconMenu') public hasIconTypeMenuItem: boolean;
   @Input('iconMenuTitle') public iconTypeMenuTitle: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   // Only for demo purpose
   addMenuItem() {
@@ -21,5 +22,15 @@ export class SidenavComponent {
       state: 'material',
       sub: []
     });
+  }
+
+
+  // navigate to state after clicking sidebar
+  navigateToState(state){
+    if(sessionStorage.getItem('databox_test_query_bool')){
+      sessionStorage.removeItem('databox_test_query_bool');
+      sessionStorage.removeItem('databox_test_query');
+      this.router.navigate([`/${state}`]);
+    } else this.router.navigate([`/${state}`])
   }
 }
