@@ -18,7 +18,7 @@ export class UserDB {
       'profile_image': '../assets/images/face-1.jpg',
       'accountType': 'Professional',
       'mentions': 5000,
-      'datasources': ['Facebook', 'Twitter', 'Web'],
+      'datasources': ['Facebook', 'Twitter', 'Web','Owned Facebook Page', 'Owned Twitter Profile'],
       'algorithmCredits': 250,
       'created_users': [
         { '_id': '5a7b73f76bed15c94d1e46da' },      

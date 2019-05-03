@@ -59,7 +59,7 @@
       <p>${{loggedInUser.algorithmCredits}} in credit remaining</p>
       <mat-progress-bar
         [ngClass]="remaining >= 80 && remaining <= 99 
-          ? 'yellow-progress': remaining === 100 
+          ? 'yellow-progress': remaining >= 100 
           ? 'red-progress': 'blue-progress'"
         [mode]="'determinate'"
         [value]="remaining">

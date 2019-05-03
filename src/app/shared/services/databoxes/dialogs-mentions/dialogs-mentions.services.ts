@@ -25,7 +25,7 @@ export class DataboxMentionsDialogService {
 
     let dialogRef: MatDialogRef<DataboxDialogsMentionsComponent>;
     dialogRef = this.dialog.open(DataboxDialogsMentionsComponent, {
-      width: '500px',
+      width: '600px',
       disableClose: true,
       data: {
         title : data.title,

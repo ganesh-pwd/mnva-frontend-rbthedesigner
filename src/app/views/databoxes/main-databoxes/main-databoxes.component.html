@@ -86,8 +86,6 @@
             <mat-icon class="icon-header">location_city</mat-icon></button>
 
             <!-- Data Connectors -->
-            
-
             <button mat-icon-button *ngIf="checkDataConnectors(data, 'powerBi')">
             <i><img src="/assets/images/tableau.png"></i></button>
 
@@ -102,7 +100,7 @@
 
       <mat-divider></mat-divider>
       <br>
-      <mat-card-actions class="m-0 p-05">
+      <mat-card-actions class="m-0 p-05" *ngIf="data">
       	<app-slide-toggle [id]="data._id"></app-slide-toggle>
       </mat-card-actions>
     </mat-card>

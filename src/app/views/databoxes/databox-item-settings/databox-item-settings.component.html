@@ -1,4 +1,4 @@
-<br />
+<br id="databox-breadcrumb">
 <!-- Header and Breadcrumb for Databox with Status Active -->
 <div *ngIf="checkIfCreateOrEdit === 'Create' && (databoxItemData || data)">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
@@ -16,10 +16,9 @@
             >edit</mat-icon
           >      
           <span class="main-route">
-            <a routerLink="/databoxes/">Databoxes </a> /
-            {{ databoxItemData || data?.databox_name }}
+            <a routerLink="/databoxes/">Databoxes </a> 
           </span>
-          <span>/ Create Databox</span>
+          <span>/ {{ databoxItemData || data?.databox_name }}/ Create Databox</span>
         </small>
       </h1>
     </div>
@@ -30,13 +29,13 @@
       mat-raised-button
       class="mb-05"
       color="primary"
-      routerLink="/databoxes"
+      (click)="cancelChanges()"
     >
       Back to Databox
     </button>
     <span fxFlex></span>
     <div class="mr-1">
-      <h3 class="mat-h3 mr-1">Mentions Remaining:
+      <h3 class="mat-h3 mr-1" [ngClass]="loggedInUser.mentions < 0 ? 'mat-color-red': ''">Mentions Remaining:
         <span class="credits"> {{loggedInUser.mentions}}
         </span>
       </h3>
@@ -69,7 +68,8 @@
   </div>
 
   <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
-    <button mat-raised-button class="mb-05" color="primary" (click)="navigateToDatabox(data?._id, data?.first_create)">
+    <button mat-raised-button class="mb-05" color="primary"
+    (click)="cancelChanges()">
       Back to Databox
     </button>
   </div>
@@ -504,29 +504,42 @@
               params: { y: '-20px', delay: '400ms' }
             }">
             <br>
-              <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="include_comments" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
               </mat-slide-toggle>
               <br>
-              <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Specify the máximum number of results your query will retrieve">Specify Maximum Number of Results
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result" matTooltip="Specify the máximum number of results your query will retrieve">Specify Maximum Number of Results
               </mat-slide-toggle>
               <br>
-              <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor only news media">Monitor only News Media
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_only_news_media" matTooltip="Monitor only news media">Monitor only News Media
               </mat-slide-toggle>
               <br>
-              <mat-slide-toggle color="primary" class="mb-1" [checked]="checked" matTooltip="Monitor specific pages">Monitor Specific Pages
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page" matTooltip="Monitor specific pages">Monitor Specific Pages
               </mat-slide-toggle>
-            <div fxLayout="row" fxLayoutWrap="wrap" >
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
               <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-                  <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
-                  <form>
+                  <p class="mt-1">Please type the maximum number of result.</p>
                     <mat-form-field style="border: 1px solid gray;" class="full-width">
                       <div class="p-1">
-                                  <textarea matInput rows="10" cols="80" value=""></textarea>
-                                </div>  
+                        <input type="number" min="0" max="99" matInput formControlName="max_number_result">
+                      </div>  
                     </mat-form-field>
-                  </form>
                 </div>
             </div>
+
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
+              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+                  <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
+                    <mat-form-field style="border: 1px solid gray;" class="full-width">
+                      <div class="p-1">
+                        <textarea matInput rows="10" cols="80"
+                        formControlName="facebook_page_id"></textarea>
+                      </div>  
+                    </mat-form-field>
+                </div>
+            </div>
+             
+            
           </div>
         </mat-card>
       </div>
@@ -598,7 +611,7 @@
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p>No results yet, please Create a Query and then clic “Test Query” to see results.</p>
+            <p class="text-justify" [innerHtml]="setResult()">.</p>
           </mat-card-content>
           <mat-divider></mat-divider>
           <mat-card-content> </mat-card-content>

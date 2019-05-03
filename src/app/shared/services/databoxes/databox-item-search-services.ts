@@ -18,6 +18,7 @@ export class DataboxItemSearchService {
     this.databoxItemQuery = databoxItemQuery.databox_item_search;
   }
 
+
   // ******* Implement your APIs ********
   getItems(): Observable<any> {
     const rows = this.databoxItemQuery;
@@ -28,6 +29,7 @@ export class DataboxItemSearchService {
 
     return of(rows.sort((a, b) => a.id - b.id).slice());
   }
+
 
 	// Add Databox folder
   addRow(): Observable<any> {
@@ -46,6 +48,8 @@ export class DataboxItemSearchService {
     return of(rows.sort((a, b) => a.id - b.id).slice()).pipe(delay(500));
   }
 
+
+  // delete databox item handsontable
   deleteRow(id): Observable<any> {
     const rows = this.databoxItemQuery;
     const toBeDeleted = this.databoxItemQuery.find(x => x.id === id);
@@ -54,6 +58,7 @@ export class DataboxItemSearchService {
     return of(rows.sort((a, b) => a.id - b.id).slice()).pipe(delay(500));
   }
 
+  // reset row
   resetRows(): Observable<any> {
     this.databoxItemQuery = JSON.parse(sessionStorage.getItem('databox_item_old'));
     return of(this.databoxItemQuery.slice(0, 13).sort((a, b) => a.id - b.id).slice()).pipe(delay(500));
