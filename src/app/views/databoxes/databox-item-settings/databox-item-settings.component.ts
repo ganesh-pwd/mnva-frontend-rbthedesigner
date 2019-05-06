@@ -331,6 +331,13 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         }
       }
 
+      // set mention value
+      setMentionValue(mention){
+        let checkChanges = sessionStorage.getItem('databox_test_query_bool')
+
+        return this.changes || checkChanges ? mention : 0
+      }
+
   /* @DATABOX COMPONENT ADVANCE CONDITION */
   
       // check monitor specific page slider

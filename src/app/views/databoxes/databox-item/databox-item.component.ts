@@ -41,11 +41,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
   public dataSource: any;
-
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  public displayedColumnsSecondTable: string[] = ['date', 'content', 'parent', 'author'];
-  public databoxSecondTable = new MatTableDataSource(<any> DataboxResultItem);
-
   public selectedTab: number;
 
   @ViewChild('hot') hot;
@@ -112,8 +107,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       return arr;
     });
 
+    // create databox item result table (handsontable)
     this.createTable();
-    this.databoxSecondTable.paginator = this.paginator;
     this.suggestResultFormGroup();
 
     setTimeout(() => document.getElementById('head').click(), 500);
@@ -195,31 +190,61 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  // download the table
-  downloadCSV() {
-    const hotInstance = this.hotRegisterer.getInstance(this.hotId);
 
-    hotInstance.getPlugin('exportFile').downloadFile('csv', {
-      bom: false,
-      columnDelimiter: ',',
-      columnHeaders: true,
-      exportHiddenColumns: true,
-      exportHiddenRows: true,
-      fileExtension: 'csv',
-      filename: `Databox-item-Page-${this.paginatedData.page}-${this.data._id}-CSV-file_[YYYY]-[MM]-[DD]`,
-      mimeType: 'text/csv',
-      rowDelimiter: '\r\n',
-      rowHeaders: true
-    });
+  clickSlideToggle(data){
+    switch (true) {
+      case data === 'sentiment': {
+        if(this.sentiment)
+          this.sentiment = false;
+        else this.sentiment = true;
+
+        setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.sentiment, data, true), 300);
+
+        break;
+      }
+
+      case data === 'topicRecognition': {
+        if(this.topicRecognition)
+          this.topicRecognition = false;
+        else this.topicRecognition = true;
+
+        setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.topicRecognition, data, true), 300);
+
+        break;
+      }
+
+      case data === 'genderAuthor': {
+        if(this.genderAuthor)
+          this.genderAuthor = false;
+        else this.genderAuthor = true;
+
+        setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.genderAuthor, data, true), 300);
+
+        break;
+      }
+
+      case data === 'entityRecognition': {
+        if(this.entityRecognition)
+          this.entityRecognition = false;
+        else this.entityRecognition = true;
+
+        setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.entityRecognition, data, true), 300);
+
+        break;
+      }
+    }
   }
+
 
   // get databox table search item
   getDataboxItemSearch() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
     const page = this.activatedRoute.snapshot.paramMap.get('page');
 
-    this.getTableReq = this.databoxItemSearchService.getItems().subscribe(data => {
+    this.getTableReq = this.databoxItemSearchService.getItems(id)
+    .subscribe(data => {
       this.databoxItemTable = data;
-      this.paginatedData = this.paginateDatabox(this.databoxItemTable, page ? parseInt(page) : 1);
+      this.paginatedData    = this.paginateDatabox(this.databoxItemTable, page ? parseInt(page) : 1);
     });
   }
 
@@ -262,7 +287,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     .subscribe(result => {
       if(result[0]){
         this.databoxCategories = result[0].categories;
-        this.dataSource = result[0].categories || categoryData;
+        this.dataSource = result[0].categories;
       }
     });
   }
@@ -294,11 +319,12 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       }
 
       // open databox query dialog
-      openAlgorithmDialog(title: string, checked: boolean, connector) {
+      openAlgorithmDialog(title: string, checked: boolean, connector: any, algo_switch?: boolean) {
         this.databoxAlgorithmDialogService.confirm({ 
           title: title, 
           checked: checked, 
-          connector: connector 
+          connector: connector,
+          algo_switch: algo_switch 
         }).subscribe((result) => { });
       }
 
@@ -350,7 +376,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         const route = `/databoxes/${id}/${this.paginatedData.total_pages}`;
 
-        this.databoxItemSearchService.addRow().subscribe(data => {
+        this.addRowReq = this.databoxItemSearchService.addRow(id).subscribe(data => {
           if (data) {
             this.router.navigateByUrl('/databoxes', { skipLocationChange: true })
             .then(() => this.router.navigate([route]));
@@ -363,7 +389,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         const route = `/databoxes/${id}`;
 
-        this.databoxItemSearchService.deleteRow(row).subscribe(data => {
+        this.resetRowReq = this.databoxItemSearchService.deleteRow(id, row).subscribe(data => {
           if (data) {
             this.router.navigateByUrl('/databoxes', { skipLocationChange: true })
             .then(() => this.router.navigate([route]));
@@ -376,8 +402,11 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         const route = `/databoxes/${id}`;
 
-        this.router.navigateByUrl('', { skipLocationChange: true })
-        .then(() => this.router.navigate([route]));
+        this.addRowReq = this.databoxItemSearchService.saveAllChanges(id, this.paginatedData['items'])
+        .subscribe(data => {
+          this.router.navigateByUrl('', { skipLocationChange: true })
+          .then(() => this.router.navigate([route]));
+        });
       }
 
       // reset databox search table default rows
@@ -390,6 +419,25 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
             this.router.navigateByUrl('/databoxes', { skipLocationChange: true })
               .then(() => this.router.navigate([route]));
           });
+      }
+
+      
+      // download the table
+      downloadCSV() {
+        const hotInstance = this.hotRegisterer.getInstance(this.hotId);
+
+        hotInstance.getPlugin('exportFile').downloadFile('csv', {
+          bom: false,
+          columnDelimiter: ',',
+          columnHeaders: true,
+          exportHiddenColumns: true,
+          exportHiddenRows: true,
+          fileExtension: 'csv',
+          filename: `Databox-item-Page-${this.paginatedData.page}-${this.data._id}-CSV-file_[YYYY]-[MM]-[DD]`,
+          mimeType: 'text/csv',
+          rowDelimiter: '\r\n',
+          rowHeaders: true
+        });
       }
 
       // navigate to databox page search
@@ -446,10 +494,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
           columns: [
             { data: 'date', title: 'Date', type: 'date' },
             { data: 'content', title: 'Content', width: '600px' },
-            { data: 'parent', title: 'Parent' },
-            { data: 'author', title: 'Author' },
-            { data: 'category', title: 'Category' },
-            { data: 'subcategory', title: 'SubCategory' },
+            { data: 'parent', title: 'Parent', className: 'htCenter' },
+            { data: 'author', title: 'Author', className: 'htCenter' },
+            { data: 'category', title: 'Category', className: 'htCenter' },
+            { data: 'subcategory', title: 'SubCategory', className: 'htCenter' },
             { data: 'like', title: 'Like', className: 'htCenter' },
             { data: 'share', title: 'Share', className: 'htCenter' },
             { data: 'comment', title: 'Comment', className: 'htCenter' },
@@ -506,13 +554,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       }
 }
 
-// category table interface
-export interface Categories {
-  name: string;
-  type: string;
-  expression: string;
-}
-
 // Databox item second table interface
 export interface DataTableItem {
   id: number;
@@ -522,66 +563,10 @@ export interface DataTableItem {
   author: string;
 }
 
-// category table data
-const categoryData: Categories[] = [
-  { name: 'Movistar', type: 'Category', expression: `movistar OR "movi"` },
-  { name: 'Kolbi', type: 'Category', expression: `kolbi OR "kolbi"` },
-  { name: 'Claro', type: 'Category', expression: `claro` },
-  { name: 'Internet', type: 'Sub Category', expression: `internet` },
-];
-
 // Databox item second table data
 const DataboxResultItem: DataTableItem[] = [
   {
     id: 1, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
     parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 2, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 3, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 4, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 5, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 6, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 7, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 8, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 9, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 10, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 11, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 12, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
-  {
-    id: 13, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  },
+  }
 ];

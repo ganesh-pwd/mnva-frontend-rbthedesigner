@@ -8,6 +8,7 @@ interface confirmData {
   title?: string;
   checked?: boolean;
   connector?: string;
+  algo_switch?: boolean;
 }
 
 @Injectable({
@@ -21,6 +22,7 @@ export class DataboxAlgorithmDialogService {
     data.title = data.title || 'Apply Enrichment';
     data.checked = data.checked || false;
     data.connector = data.connector;
+    data.algo_switch = data.algo_switch || false;
 
     let dialogRef: MatDialogRef<DataboxDialogsAlgorithmComponent>;
     dialogRef = this.dialog.open(DataboxDialogsAlgorithmComponent, {
@@ -29,7 +31,8 @@ export class DataboxAlgorithmDialogService {
       data: {
         title: data.title,
         checked: data.checked,
-        connector: data.connector
+        connector: data.connector,
+        algo_switch: data.algo_switch
       }
     });
 

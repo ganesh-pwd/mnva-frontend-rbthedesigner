@@ -23,18 +23,26 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 	private reqSubs: Subscription;
 	private deleteSubs: Subscription;
 
-	ngOnInit(){}
+	ngOnInit(){ console.log(this.data.checked) }
 
 	ngOnDestroy(){
 		if(this.reqSubs) this.reqSubs.unsubscribe();
 		if(this.deleteSubs) this.deleteSubs.unsubscribe();
 	}
 
-	// update connectors
-	updateConnector(automatic?: boolean){
-		
+	// update connectors, if update automatically button was clicked
+	updateConnector(automatic?: boolean){ this.switchAlgorithm(automatic ? true : this.data.checked); }
+
+	// switch algorithm off
+	switchAlgorithmOff(){ this.switchAlgorithm(false); }
+
+	// switch algorithm on
+	switchAlgorithmOn(){ this.switchAlgorithm(true); }
+
+	// switch algorithm service
+	switchAlgorithm(switch_data: boolean){
 		this.reqSubs = this.databoxesService
-		.addAlgorithmConnector(this.data.connector, automatic ? true : this.data.checked)
+		.addAlgorithmConnector(this.data.connector, switch_data)
 		.subscribe(result => {
 			this.dialogRef.close(false);
 			
@@ -46,6 +54,6 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 			.then(() => this.router.navigate(['/databoxes']))
 			.then(() => this.router.navigate([url]))
 			.then(() => sessionStorage.removeItem('selectedTabDatabox'));
-		})
+		});
 	}
 }

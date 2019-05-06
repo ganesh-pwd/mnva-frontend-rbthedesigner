@@ -8,8 +8,6 @@ export interface DataTableItem {
   id: number;
   product_type: string;
   product_name: string;
-  status: string;
-  date_created: string;
   period: string;
   price: number;
 }
@@ -18,21 +16,17 @@ export interface DataTableItem {
 const EXAMPLE_DATA: DataTableItem[] = [
   {
     id: 4,
-    product_type: 'Account Features',
-    product_name: '15 Users',
-    status: 'Ready',
-    date_created: '12 July 2018',
-    period: 'Credit',
-    price: 30
+    product_type: 'Mentions Credit',
+    product_name: '$250',
+    period: 'Annual',
+    price: 250
   },
   {
     id: 5,
-    product_type: 'Algorithms',
-    product_name: 'Algorithm Credits',
-    status: 'Ready',
-    date_created: '12 July 2018',
-    period: 'Credit',
-    price: 300
+    product_type: 'Algorithm Credit',
+    product_name: 'Sentiment Algorithm',
+    period: 'Annual',
+    price: 250
   }
 ];
 

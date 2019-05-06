@@ -64,10 +64,11 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
       return converted_date;
     }
 
-    openDialog(title: string, details?: any) {
+    openDialog(title: string, details?: any, delete_user?: boolean) {
         this.minervaAccountDialogService.confirm({
           title: title,
-          details: details
+          details: details,
+          delete: delete_user
         }).subscribe((result) => {});
     }
 
@@ -77,7 +78,7 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     }
 
     // open snackbar
-  openSnackBar(message: string) {
+    openSnackBar(message: string) {
     this.snackbar.open(message, 'close');
 
     setTimeout(() => {

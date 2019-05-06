@@ -4,6 +4,7 @@
     <span fxFlex></span>
     <div class="card-title-text">
       <button mat-raised-button 
+      *ngIf="loggedInUser.accountType !== 'Enterprise'"
       routerLink="/products/mentions-credit">
       Add Mentions
       </button>
@@ -13,8 +14,12 @@
   <mat-card-content *ngIf="loggedInUser">
     <div class="pb-1">
       <h6>Mentions Remaining</h6>
-      <p class="text-muted">{{loggedInUser.mentions}} Mentions</p>
-      <mat-progress-bar
+      <p class="text-muted" *ngIf="loggedInUser.accountType !== 'Enterprise'">
+      {{loggedInUser.mentions}} Mentions</p>
+      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+      Unlimited Mentions</p>
+      <mat-progress-bar 
+        *ngIf="loggedInUser.accountType !== 'Enterprise'"
         [ngClass]="remaining >= 80 && remaining <= 99 
           ? 'yellow-progress': remaining >= 100 
           ? 'red-progress': 'blue-progress'"

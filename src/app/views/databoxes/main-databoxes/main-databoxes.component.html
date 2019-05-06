@@ -27,8 +27,12 @@
   <div fxFlex="100" fxFlex.gt-xs="33.3333" *ngFor="let data of databoxes | MenuFilter: databoxSearch" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
     <mat-card class="p-0">
       <mat-card-header class="m-0 p-1" >
-      	<mat-card-title class="" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.databox_name}}</mat-card-title>
-      	<mat-card-subtitle class="mat-color-primary" (click)="navigateToDatabox(data._id, data.first_create, data.status)">{{data.datasource}} 
+      	<mat-card-title class="" 
+        (click)="navigateToDatabox(data._id, data.first_create, data.status)">
+        {{data.databox_name}}</mat-card-title>
+      	<mat-card-subtitle class="mat-color-primary" 
+        (click)="navigateToDatabox(data._id, data.first_create, data.status)">
+        {{data.datasource}} 
         <small class="mat-color-gray">/</small>
         <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
           {{i !== data.location.length - 1 ? location + ' /' : location}}</small>
@@ -73,27 +77,30 @@
         <div fxLayout="row" fxLayoutWrap="wrap">
           <div class="gallery-icons text-center  min-ht" fxFlex="100">
             <!-- Algorithm Connectors -->
-            <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'sentiment')">
-            <mat-icon class="icon-header">add</mat-icon></button>
+            <div *ngIf="data?.status !== 'Draft'">
+              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'sentiment')">
+              <mat-icon class="icon-header">add</mat-icon></button>
 
-            <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'topicRecognition')">
-            <mat-icon class="icon-header">airplanemode_active</mat-icon></button>
+              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'topicRecognition')">
+              <mat-icon class="icon-header">airplanemode_active</mat-icon></button>
 
-            <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'genderAuthor')">
-            <mat-icon class="icon-header">people</mat-icon></button>
+              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'genderAuthor')">
+              <mat-icon class="icon-header">people</mat-icon></button>
 
-            <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'entityRecognition')">
-            <mat-icon class="icon-header">location_city</mat-icon></button>
+              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'entityRecognition')">
+              <mat-icon class="icon-header">location_city</mat-icon></button>
 
-            <!-- Data Connectors -->
-            <button mat-icon-button *ngIf="checkDataConnectors(data, 'powerBi')">
-            <i><img src="/assets/images/tableau.png"></i></button>
+              <!-- Data Connectors -->
+              <button mat-icon-button *ngIf="checkDataConnectors(data, 'email')">
+              <i><img src="/assets/images/email.png"></i></button>
 
-            <button mat-icon-button *ngIf="checkDataConnectors(data, 'tableau')">
-            <i><img src="/assets/images/power_bi.png"></i></button>
+              <button mat-icon-button *ngIf="checkDataConnectors(data, 'slack')">
+              <i><img src="/assets/images/slack.png"></i></button>
 
-            <button mat-icon-button *ngIf="checkDataConnectors(data, 'dataStudio')">
-            <i><img src="/assets/images/data_studio.png"></i></button>
+              <button mat-icon-button *ngIf="checkDataConnectors(data, 'appleTV')">
+              <i><img src="/assets/images/apple_tv.png"></i></button>
+            </div>
+            
           </div>
         </div>
       </mat-card-content>

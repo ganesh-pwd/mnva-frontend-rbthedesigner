@@ -10,8 +10,8 @@
 				<span class="main-route">
 					<a routerLink="/databoxes/">Databoxes </a> / 
 					<a (click)="navigateToDatabox(databoxItemData?._id, data?.first_create)">
-					{{databoxItemData?.databox_name}}</a> 
-				</span> <span>/ Connect Your Data</span>
+					{{databoxItemData?.databox_name}} </a> /
+				</span> <span> Connect Your Data</span>
 			</small>
 		</h1>
 	</div>
@@ -55,15 +55,7 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
-			<mat-divider></mat-divider>
-			<br>
-			<div class="text-center">
-				<mat-slide-toggle color="primary" class="mb-1" 
-				[checked]="powerBi"
-                (change)="slideToggle('powerBi')">
-				  Apply Automatically
-				</mat-slide-toggle>
-			</div>
+			
 		</mat-card>
 	</div>
 
@@ -84,16 +76,6 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
-
-			<mat-divider></mat-divider>
-			<br>
-			<div class="text-center">
-				<mat-slide-toggle color="primary" class="mb-1" 
-				[checked]="tableau"
-                (change)="slideToggle('tableau')">
-				  Apply Automatically
-				</mat-slide-toggle>
-			</div>
 		</mat-card>
 	</div>
 
@@ -115,16 +97,6 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
-
-			<mat-divider></mat-divider>
-			<br>
-			<div class="text-center">
-				<mat-slide-toggle color="primary" class="mb-1" 
-				[checked]="dataStudio"
-                (change)="slideToggle('dataStudio')">
-				  Apply Automatically
-				</mat-slide-toggle>
-			</div>
 		</mat-card>
 	</div>
 </div>
@@ -139,9 +111,8 @@
 	</div>
 
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >
-		<mat-card 
-			(click)="openNotificationDialog('Email Notifications', data.datasource)">
-			<mat-card-header>
+		<mat-card>
+			<mat-card-header (click)="openNotificationDialog('Email Notifications', data.datasource)">
 				<mat-card-title class="mat-color-primary">
 					<img src="/assets/images/email.png" class="minerva-logo" >
 					<span class="title-header">Email <br>
@@ -152,11 +123,21 @@
 			<mat-divider></mat-divider>
 			<br>
 			
-			<mat-card-content>
+			<mat-card-content (click)="openNotificationDialog('Email Notifications', data.datasource)">
 				<p class="">
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+
+			<mat-divider></mat-divider>
+			<br>
+			<div class="text-center">
+				<mat-slide-toggle color="primary" class="mb-1" 
+				[checked]="email"
+                (change)="clickSlideToggle('email')">
+				  On / Off
+				</mat-slide-toggle>
+			</div>
 		</mat-card>
 	</div>
 
@@ -178,6 +159,15 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+			<mat-divider></mat-divider>
+			<br>
+			<div class="text-center">
+				<mat-slide-toggle color="primary" class="mb-1" 
+				[checked]="slack"
+                (change)="clickSlideToggle('slack')">
+				  On / Off
+				</mat-slide-toggle>
+			</div>
 		</mat-card>
 	</div>
 
@@ -199,6 +189,15 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+			<mat-divider></mat-divider>
+			<br>
+			<div class="text-center">
+				<mat-slide-toggle color="primary" class="mb-1" 
+				[checked]="appleTV"
+                (change)="clickSlideToggle('appleTV')">
+				  On / Off
+				</mat-slide-toggle>
+			</div>
 		</mat-card>
 	</div>
 </div>
@@ -229,6 +228,16 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+
+			<mat-divider></mat-divider>
+			<br>
+			<div class="text-center">
+				<mat-slide-toggle color="primary" class="mb-1" 
+				[checked]="email"
+				(change)="clickSlideToggle('email')">
+				  On / Off
+				</mat-slide-toggle>
+			</div>
 		</mat-card>
 	</div>
 
@@ -250,6 +259,15 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+
+			<mat-divider></mat-divider>
+			<br>
+			<div class="text-center">
+				<mat-slide-toggle color="primary" class="mb-1" 
+				[disabled]="true">
+				  On / Off
+				</mat-slide-toggle>
+			</div>
 		</mat-card>
 	</div>
 
@@ -271,6 +289,15 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+
+			<mat-divider></mat-divider>
+			<br>
+			<div class="text-center">
+				<mat-slide-toggle color="primary" class="mb-1" 
+				[disabled]="true">
+				  On / Off
+				</mat-slide-toggle>
+			</div>
 		</mat-card>
 	</div>
 </div>

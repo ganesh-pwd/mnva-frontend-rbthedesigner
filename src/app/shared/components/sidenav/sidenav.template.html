@@ -7,8 +7,12 @@
     </div>
     <!-- Icon menu items -->
     <div class="icon-menu-item" *ngFor="let item of menuItems">
-      <button *ngIf="!item.disabled && item.type === 'icon'" mat-raised-button [matTooltip]="item.tooltip" routerLink="/{{item.state}}"
-        routerLinkActive="mat-bg-primary">
+      <button *ngIf="!item.disabled && item.type === 'icon'" 
+        mat-raised-button 
+        [matTooltip]="item.tooltip" 
+        routerLink="/{{item.state}}"
+        routerLinkActive="mat-bg-primary"
+        [routerLinkActiveOptions]="{exact:true}">
         <mat-icon>{{item.icon}}</mat-icon>
       </button>
     </div>
