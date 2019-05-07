@@ -42,7 +42,7 @@
         <mat-nav-list>
           <mat-list-item routerLink="/accounts/minerva-notifications" routerLinkActive="list-item-active">
             <mat-icon>home</mat-icon>
-            Notifications
+            Minerva News
           </mat-list-item>
           <mat-divider></mat-divider>
           <mat-list-item routerLink="/accounts/settings" routerLinkActive="list-item-active">
@@ -100,12 +100,18 @@
 						<p class="user-details">
 							<mat-icon>email</mat-icon> {{user.email}}
 						</p><br>
+<<<<<<< HEAD
+						<p class="user-details">
+							<mat-icon>calendar_today</mat-icon> Member since: 
+							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}
+=======
 						<p class="mat-h3 user-details">
 							<mat-icon>calendar_today</mat-icon> Member since: 
 							<span *ngIf="user.status !== 'Pending'"> 
 							{{ setDate(user.date_created) | date: 'MMM dd, yyyy'}}</span>
 
 							<span *ngIf="user.status === 'Pending'"> Pending</span>
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 						</p><br>
 					</mat-card-content>
 				</mat-card>
@@ -121,6 +127,9 @@
 			(click)="openDialog('Add New User')"> Add User
 			</button>
 
+<<<<<<< HEAD
+			<p class="users-remaining">{{data.length}} / {{loggedInUser.max_created_users}} users remaining</p>
+=======
 			<button
 			class="mb-05"
 			color="primary"
@@ -134,6 +143,7 @@
 			<p *ngIf="loggedInUser.accountType === 'Enterprise'">{{data.length}} / 
 				<span class="mat-color-primary">Unlimited Users </span>
 			</p>
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 		</div>
 	</div>
 </div>

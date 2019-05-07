@@ -33,8 +33,10 @@
 [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 		<h1 class="mat-h2 mat-color-primary connector">Connectors</h1>
+		<p class="connector">
+			Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+		</p>
 	</div>
-
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
 		<mat-card >
 			<mat-card-header (click)="openDialog('How to connect to Power BI', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, powerBi, 'powerBi')">
@@ -49,13 +51,15 @@
 
 			<mat-divider></mat-divider>
 			<br>
-			
 			<mat-card-content (click)="openDialog('How to connect to Power BI', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, powerBi, 'powerBi')">
 				<p class=" p-333">
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+<<<<<<< HEAD
+=======
 			
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 		</mat-card>
 	</div>
 
@@ -108,8 +112,10 @@
 	[@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
 		<h1 class="mat-h2 mat-color-primary connector">Notification</h1>
+		<p class="connector">
+			Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+		</p>
 	</div>
-
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >
 		<mat-card>
 			<mat-card-header (click)="openNotificationDialog('Email Notifications', data.datasource)">
@@ -128,16 +134,26 @@
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
 			</mat-card-content>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 			<mat-divider></mat-divider>
 			<br>
 			<div class="text-center">
 				<mat-slide-toggle color="primary" class="mb-1" 
 				[checked]="email"
+<<<<<<< HEAD
+                (change)="slideToggle('email')">
+				  On/Off
+				</mat-slide-toggle>
+			</div> 
+=======
                 (change)="clickSlideToggle('email')">
 				  On / Off
 				</mat-slide-toggle>
 			</div>
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 		</mat-card>
 	</div>
 
@@ -164,8 +180,13 @@
 			<div class="text-center">
 				<mat-slide-toggle color="primary" class="mb-1" 
 				[checked]="slack"
+<<<<<<< HEAD
+                (change)="slideToggle('slack')">
+				  On/Off
+=======
                 (change)="clickSlideToggle('slack')">
 				  On / Off
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 				</mat-slide-toggle>
 			</div>
 		</mat-card>
@@ -193,6 +214,11 @@
 			<br>
 			<div class="text-center">
 				<mat-slide-toggle color="primary" class="mb-1" 
+<<<<<<< HEAD
+				[checked]="appleTv"
+                (change)="slideToggle('appleTv')">
+				  On/Off
+=======
 				[checked]="appleTV"
                 (change)="clickSlideToggle('appleTV')">
 				  On / Off
@@ -296,6 +322,7 @@
 				<mat-slide-toggle color="primary" class="mb-1" 
 				[disabled]="true">
 				  On / Off
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 				</mat-slide-toggle>
 			</div>
 		</mat-card>

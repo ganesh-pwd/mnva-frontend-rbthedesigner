@@ -32,7 +32,7 @@
           matRipple 
           *ngIf="item.type === 'link'">
               <!-- <mat-icon>{{item.icon}}</mat-icon> -->
-              <img src="{{item.image_icon}}" class="side-image-icon">
+              <img src="{{item.image_icon}}" class="side-image-icon {{item.class}}">
               <span class="item-name lvl1">
                 {{item.name | translate}}
               </span>
@@ -61,7 +61,7 @@
           routerLinkActive="mat-color-primary"
           [routerLinkActiveOptions]="{exact:true}">
               <!-- <mat-icon>{{item.icon}}</mat-icon> -->
-              <img src="{{item.image_icon}}" class="side-image-icon">
+              <img src="{{item.image_icon}}" class="side-image-icon {{item.class}}">
               <span class="item-name lvl1">
                 {{item.name | translate}}
               </span>

@@ -127,7 +127,7 @@
                     </mat-card-content>
 
                     <!-- Expression Help -->
-                    <mat-card-content>
+                    <mat-card-content *ngIf="showQuery == 'advance'">
                         <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
                                 <mat-card class="p-0">
