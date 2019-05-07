@@ -1,9 +1,64 @@
 export class UserDB {
   public users = [
     {
+      '_id': '3a7b73f76bed15c94d1e46d4',
+      'index': 0,
+      'guid': 'b01da2d1-07f8-4acc-a1e3-72dda7310af8',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
+      'isActive': true,
+      'balance': 9999,
+      'age': 30,
+      'name': 'James Trussart',
+      'gender': 'male',
+      'company': 'ACIUM',
+      'email': 'james_trussart@minerva.com',
+      'phone': '+1 (852) 535-2066',
+      'address': '163 Poplar Avenue, Cliffside, Virginia, 4592',
+      'password': 'password',
+      'username': 'username_enterprise',
+      'profile_image': '../assets/images/face-1.jpg',
+      'accountType': 'Enterprise',
+      'mentions': 9999999999,
+      'datasources': ['Facebook', 'Twitter', 'Web','Owned Facebook Page', 'Owned Twitter Profile', 'AirBnB', 'Waze'],
+      'algorithmCredits': 500,
+      'created_users': [
+        { '_id': '5a7b73f76bed15c94d1e46da' },      
+        { '_id': '5a7b73f7f79f4250b96a355b' },     
+      ],
+      'max_created_users': 9999999999,
+      'connector': {
+        'alerts': ['Email Alerts', 'Slack Alerts'],
+        'connectors': ['Google Data Studio', 'Tableau Connectors', 'Power BI Connectors']
+      },
+      'bd': '2015-02-08T04:28:44 -06:00'
+    },
+    {
       '_id': '5a7b73f76bed15c94d1e46d4',
       'index': 0,
       'guid': 'c01da2d1-07f8-4acc-a1e3-72dda7310af8',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': true, 
+          'when_invoice_generated': false
+        },
+        {
+          'accountName': 'Paprika Digital',
+          'id': '5a7b73f7cab10f461153989b',  
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }],
       'isActive': true,
       'balance': 2838.08,
       'age': 30,
@@ -18,7 +73,7 @@ export class UserDB {
       'profile_image': '../assets/images/face-1.jpg',
       'accountType': 'Professional',
       'mentions': 5000,
-      'datasources': ['Facebook', 'Twitter', 'Web'],
+      'datasources': ['Facebook', 'Twitter', 'Web','Owned Facebook Page', 'Owned Twitter Profile'],
       'algorithmCredits': 250,
       'created_users': [
         { '_id': '5a7b73f76bed15c94d1e46da' },      
@@ -35,6 +90,15 @@ export class UserDB {
       '_id': '5a7b73f7f79f4250b96a355a',
       'index': 1,
       'guid': '3f04aa40-62da-466d-ac14-2b8a5da3d1ce',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3043.81,
       'age': 39,
@@ -65,6 +129,15 @@ export class UserDB {
       '_id': '5a7b73f78b64a02a67204d6e',
       'index': 2,
       'guid': 'e7d9d61e-b657-4fcf-b069-2eb9bfdc44fa',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1796.92,
       'age': 23,
@@ -96,6 +169,15 @@ export class UserDB {
       '_id': '5a7b73f7572e59b231149b94',
       'index': 3,
       'guid': '47673d82-ab31-48a1-8a16-2c6701573c67',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2850.27,
       'age': 37,
@@ -126,6 +208,15 @@ export class UserDB {
       '_id': '5a7b73f70f9d074552e13090',
       'index': 4,
       'guid': 'bc9c7cd3-04e0-4095-a933-af28efaf3b3e',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3743.48,
       'age': 26,
@@ -154,6 +245,15 @@ export class UserDB {
       '_id': '5a7b73f78988bd6e92650473',
       'index': 5,
       'guid': '08cb947c-e49c-4736-9687-0fca0992ec38',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3453.79,
       'age': 34,
@@ -182,6 +282,15 @@ export class UserDB {
       '_id': '5a7b73f72488770f90649570',
       'index': 6,
       'guid': '771c85d5-7762-4bae-96fd-09892a9c4374',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3334.73,
       'age': 20,
@@ -210,6 +319,15 @@ export class UserDB {
       '_id': '5a7b73f7c576e368b321a705',
       'index': 7,
       'guid': '2455a7ef-a537-46e1-a210-75e5e2187460',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3488.64,
       'age': 37,
@@ -238,6 +356,15 @@ export class UserDB {
       '_id': '5a7b73f705f8a9c6e35c8ca2',
       'index': 8,
       'guid': 'a90d65a8-681d-462f-bf08-eceeef366375',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3786.67,
       'age': 36,
@@ -266,6 +393,15 @@ export class UserDB {
       '_id': '5a7b73f7a3e2be2dbb7b093e',
       'index': 9,
       'guid': 'fb3d0f97-91ae-4336-b0b4-19f4a00fe567',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3335.5,
       'age': 33,
@@ -294,6 +430,15 @@ export class UserDB {
       '_id': '5a7b73f716de69a9217c1273',
       'index': 10,
       'guid': '129a92fd-848f-48eb-98a1-aebf6e92b079',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3811.15,
       'age': 30,
@@ -322,6 +467,15 @@ export class UserDB {
       '_id': '5a7b73f7ed19007bed2d29fb',
       'index': 11,
       'guid': 'd799b69a-192d-4ee3-9a69-9e8e5afc45b0',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3935.82,
       'age': 28,
@@ -350,6 +504,15 @@ export class UserDB {
       '_id': '5a7b73f78d0dc0858a70c44a',
       'index': 12,
       'guid': '8cbb37bb-7644-4993-b48b-df3a69deb339',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3868.95,
       'age': 28,
@@ -378,6 +541,15 @@ export class UserDB {
       '_id': '5a7b73f7e929494a8568a885',
       'index': 13,
       'guid': '22ec32d7-0ba9-4366-b6d8-ca16389a2cd9',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3954.41,
       'age': 34,
@@ -406,6 +578,15 @@ export class UserDB {
       '_id': '5a7b73f767e97ce3136444fd',
       'index': 14,
       'guid': '031d282f-0be9-49e1-a211-9aa59d449d91',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3287.33,
       'age': 24,
@@ -434,6 +615,15 @@ export class UserDB {
       '_id': '5a7b73f7fba076653cc18925',
       'index': 15,
       'guid': 'd76ab6d6-d1db-4286-8516-ce6c9db3972a',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3279.98,
       'age': 21,
@@ -462,6 +652,15 @@ export class UserDB {
       '_id': '5a7b73f7c6d408bc853be87c',
       'index': 16,
       'guid': '30c2d1c7-770b-4adb-b6df-cc205d748323',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3955.55,
       'age': 37,
@@ -490,6 +689,15 @@ export class UserDB {
       '_id': '5a7b73f7abe6c78719d2f494',
       'index': 17,
       'guid': '2d8e77a1-4a88-4642-b6a8-693de296661c',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1832.83,
       'age': 23,
@@ -518,6 +726,15 @@ export class UserDB {
       '_id': '5a7b73f72d64af126b8080be',
       'index': 18,
       'guid': 'e1e8ee63-6d08-48fc-a077-2265cee34f23',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2419.18,
       'age': 23,
@@ -546,6 +763,15 @@ export class UserDB {
       '_id': '5a7b73f789b4e9086d34b255',
       'index': 19,
       'guid': '13552b7d-928c-4b92-a2ae-5ccbee807594',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1220.91,
       'age': 22,
@@ -574,6 +800,15 @@ export class UserDB {
       '_id': '5a7b73f737eea8e94089b7b4',
       'index': 20,
       'guid': 'cf577c87-b40c-4c09-9fac-d04c9a824b86',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2446.07,
       'age': 25,
@@ -602,6 +837,15 @@ export class UserDB {
       '_id': '5a7b73f76bc821dc6ee56ee2',
       'index': 21,
       'guid': 'b6c685c2-a497-4261-9217-622723d5235f',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3694.63,
       'age': 33,
@@ -630,6 +874,15 @@ export class UserDB {
       '_id': '5a7b73f794c27c4048290cbf',
       'index': 22,
       'guid': '7e887403-8ff5-41b4-9902-bb63ff714fee',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2804.02,
       'age': 29,
@@ -658,6 +911,15 @@ export class UserDB {
       '_id': '5a7b73f720a5781f7d19597a',
       'index': 23,
       'guid': '9e108687-e1ca-4385-bdd5-62ab006f8aa3',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1984.1,
       'age': 36,
@@ -686,6 +948,15 @@ export class UserDB {
       '_id': '5a7b73f7f0a4c5e6c9807fb2',
       'index': 24,
       'guid': '93b0b383-dd69-4453-be26-f13ae361ce67',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1845.13,
       'age': 22,
@@ -714,6 +985,15 @@ export class UserDB {
       '_id': '5a7b73f7e6c45298c709371c',
       'index': 25,
       'guid': '5a059bbb-3f6d-47bc-ba2b-c13eeaaa93b4',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3684.79,
       'age': 31,
@@ -742,6 +1022,15 @@ export class UserDB {
       '_id': '5a7b73f79468759d25ecdcf4',
       'index': 26,
       'guid': '68d7f78e-5001-480b-a67d-72b370a5c2de',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1831.14,
       'age': 29,
@@ -770,6 +1059,15 @@ export class UserDB {
       '_id': '5a7b73f7346b1bbab11524fa',
       'index': 27,
       'guid': '0729eef8-36c5-4aa2-8e31-f5e2ca19b94b',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1719.77,
       'age': 22,
@@ -798,6 +1096,15 @@ export class UserDB {
       '_id': '5a7b73f75116874002de08de',
       'index': 28,
       'guid': '63014b40-3f1e-40ff-b2f7-f55ef6a5a599',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1973.27,
       'age': 20,
@@ -826,6 +1133,15 @@ export class UserDB {
       '_id': '5a7b73f739be4dc1f743993c',
       'index': 29,
       'guid': 'ae498760-b43b-4c9c-8575-820f419984f6',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2118.14,
       'age': 36,
@@ -854,6 +1170,15 @@ export class UserDB {
       '_id': '5a7b73f70b86f2969d762be2',
       'index': 30,
       'guid': 'f19cb86e-ab4f-4d07-833a-4adb8a19d0af',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3794.89,
       'age': 37,
@@ -882,6 +1207,15 @@ export class UserDB {
       '_id': '5a7b73f7394648a68c2a6ae3',
       'index': 31,
       'guid': 'a88e5389-0b07-4d19-ac6c-718ce9e0de55',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3343.45,
       'age': 38,
@@ -910,6 +1244,15 @@ export class UserDB {
       '_id': '5a7b73f77ad97f4e1c2fa65a',
       'index': 32,
       'guid': 'fb915568-2875-49b3-96d7-6b54b2b186a1',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2680.62,
       'age': 30,
@@ -938,6 +1281,15 @@ export class UserDB {
       '_id': '5a7b73f72598106a97fbf7d5',
       'index': 33,
       'guid': 'fac3cd4b-2d42-4b4f-9d6f-0bac689bd47b',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3286.46,
       'age': 37,
@@ -966,6 +1318,15 @@ export class UserDB {
       '_id': '5a7b73f7b88290b05f53faa1',
       'index': 34,
       'guid': 'b1c6a3a3-00bd-4bc6-87df-69eecd909ab5',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1484.16,
       'age': 24,
@@ -994,6 +1355,15 @@ export class UserDB {
       '_id': '5a7b73f7d2f7429d0caec5fe',
       'index': 35,
       'guid': '62c961ac-49b1-4a69-b4bf-13a396ec4fd9',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3450.17,
       'age': 23,
@@ -1022,6 +1392,15 @@ export class UserDB {
       '_id': '5a7b73f78a4c54ff8334e053',
       'index': 36,
       'guid': '4f2f7ae5-0bd1-4665-b97f-c556e5162349',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1797.89,
       'age': 23,
@@ -1050,6 +1429,15 @@ export class UserDB {
       '_id': '5a7b73f7c87f7e86fcb00055',
       'index': 37,
       'guid': 'b7236378-8129-44b5-bcc6-0369290ffad6',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3776.51,
       'age': 38,
@@ -1078,6 +1466,15 @@ export class UserDB {
       '_id': '5a7b73f712f9208f145fa6ea',
       'index': 38,
       'guid': '5c955e3a-5f3a-4ead-96ee-80a5de6dc479',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3794.93,
       'age': 27,
@@ -1106,6 +1503,15 @@ export class UserDB {
       '_id': '5a7b73f7aa1f371de59df90b',
       'index': 39,
       'guid': '94698a81-61a6-4e23-a952-76a50fba71ef',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2205.55,
       'age': 35,
@@ -1134,6 +1540,15 @@ export class UserDB {
       '_id': '5a7b73f7c45c697931199945',
       'index': 40,
       'guid': 'a05a215f-be1c-49d1-89ca-c821b118f923',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2397.12,
       'age': 29,
@@ -1162,6 +1577,15 @@ export class UserDB {
       '_id': '5a7b73f7ef55416e92ebc818',
       'index': 41,
       'guid': '1ae8ceac-e8d0-4417-9f6f-04cd4e4738ad',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3335.51,
       'age': 35,
@@ -1190,6 +1614,15 @@ export class UserDB {
       '_id': '5a7b73f7cbeecfe6febd672d',
       'index': 42,
       'guid': 'afdf3298-77bd-46b3-ae8d-232f815c5f01',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2205.01,
       'age': 37,
@@ -1218,6 +1651,15 @@ export class UserDB {
       '_id': '5a7b73f71803de25c5f754ad',
       'index': 43,
       'guid': '5b872cad-4388-496b-8ede-5f86990dec00',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1001.05,
       'age': 21,
@@ -1246,6 +1688,15 @@ export class UserDB {
       '_id': '5a7b73f77f2a05eacb331c74',
       'index': 44,
       'guid': '7d6b7650-10d7-435d-87ca-33a1fe12cd57',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1926.79,
       'age': 27,
@@ -1274,6 +1725,15 @@ export class UserDB {
       '_id': '5a7b73f7727afbb0fc15653b',
       'index': 45,
       'guid': 'ebbc985b-227e-4954-a8a6-588b2a2bff22',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2464.9,
       'age': 29,
@@ -1302,6 +1762,15 @@ export class UserDB {
       '_id': '5a7b73f71dd7612e967e01ae',
       'index': 46,
       'guid': '63a2ee7f-2141-4ec5-b1e2-fcdcd62f28ed',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3917.74,
       'age': 25,
@@ -1330,6 +1799,15 @@ export class UserDB {
       '_id': '5a7b73f7b33c73c425db7ee0',
       'index': 47,
       'guid': '61d40a89-af0c-40ca-8970-c54978134e6b',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2213.18,
       'age': 32,
@@ -1358,6 +1836,15 @@ export class UserDB {
       '_id': '5a7b73f7c30aa4064670cf21',
       'index': 48,
       'guid': '969d77af-b251-4924-82cf-7c787752161d',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3673.94,
       'age': 23,
@@ -1386,6 +1873,15 @@ export class UserDB {
       '_id': '5a7b73f7ecd5a4859f2d94dc',
       'index': 49,
       'guid': 'cdf9b8de-a309-4cb7-80bb-f1b830b8b640',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2166.21,
       'age': 27,
@@ -1414,6 +1910,15 @@ export class UserDB {
       '_id': '5a7b73f7216c8cabc849eea7',
       'index': 50,
       'guid': 'c4175d6a-1560-468e-b682-701c1549b6b1',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3479.39,
       'age': 39,
@@ -1442,6 +1947,15 @@ export class UserDB {
       '_id': '5a7b73f78841719bf955b2d9',
       'index': 51,
       'guid': '966c9ce6-9151-47cb-8c71-98c4cd0d2f40',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1625.49,
       'age': 36,
@@ -1470,6 +1984,15 @@ export class UserDB {
       '_id': '5a7b73f7b7b8e578dff0f85c',
       'index': 52,
       'guid': '8269a34f-3a02-47d6-bcb1-8f076bb478f0',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1143.73,
       'age': 27,
@@ -1498,6 +2021,15 @@ export class UserDB {
       '_id': '5a7b73f737459ec79c91ca75',
       'index': 53,
       'guid': 'badb9342-10fd-4520-ae66-c246e47add8f',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1458.01,
       'age': 23,
@@ -1526,6 +2058,15 @@ export class UserDB {
       '_id': '5a7b73f70ddc6fc11ebf043a',
       'index': 54,
       'guid': '52b1be89-8186-4685-81b7-203c17ed9f89',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2815.76,
       'age': 25,
@@ -1554,6 +2095,15 @@ export class UserDB {
       '_id': '5a7b73f78b816185ccd2b4b3',
       'index': 55,
       'guid': 'e66850ea-546b-4eb5-ae76-d66b0e727f44',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3645.09,
       'age': 21,
@@ -1582,6 +2132,15 @@ export class UserDB {
       '_id': '5a7b73f780f8bf8fbe24d75c',
       'index': 56,
       'guid': '40b999cd-00bf-46e0-9107-b44906d832e0',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2477.66,
       'age': 36,
@@ -1610,6 +2169,15 @@ export class UserDB {
       '_id': '5a7b73f741e22fc19ffa6952',
       'index': 57,
       'guid': 'cc2ac19d-7d67-4f60-973a-369160a9c377',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2651.39,
       'age': 20,
@@ -1638,6 +2206,15 @@ export class UserDB {
       '_id': '5a7b73f7de56ead40c26e69a',
       'index': 58,
       'guid': '6e0b06b8-1199-498c-8002-41f4972aa2d2',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 3463.92,
       'age': 28,
@@ -1666,6 +2243,15 @@ export class UserDB {
       '_id': '5a7b73f70a04fe142269ea8d',
       'index': 59,
       'guid': 'c6733cd5-1e73-4317-b4bc-1a9e597581a4',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3846.35,
       'age': 26,
@@ -1694,6 +2280,15 @@ export class UserDB {
       '_id': '5a7b73f7339943d94af3b39d',
       'index': 60,
       'guid': '4ff2c2aa-0573-4be1-a1c8-f684af8a5fbf',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2717.94,
       'age': 26,
@@ -1722,6 +2317,15 @@ export class UserDB {
       '_id': '5a7b73f7d8e266ad1bc5daa8',
       'index': 61,
       'guid': '94667aad-86fc-4a2c-94fb-11b572307c75',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 2725.58,
       'age': 39,
@@ -1750,6 +2354,15 @@ export class UserDB {
       '_id': '5a7b73f7e74a5af674e4cbdd',
       'index': 62,
       'guid': 'ec68c47e-7cbd-485e-8d54-fab1bb6ea008',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 1343.87,
       'age': 29,
@@ -1778,6 +2391,15 @@ export class UserDB {
       '_id': '5a7b73f7efb231e53a0c94cd',
       'index': 63,
       'guid': '6a8b3f55-406c-4ae8-be59-94a0f8fbd180',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1092.69,
       'age': 37,
@@ -1806,6 +2428,15 @@ export class UserDB {
       '_id': '5a7b73f7e345c5dfc5d636e4',
       'index': 64,
       'guid': '46879caf-76e6-46e0-9b8b-bc17667a81ea',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 2077.12,
       'age': 36,
@@ -1834,6 +2465,15 @@ export class UserDB {
       '_id': '5a7b73f77f5f9d730fab11e0',
       'index': 65,
       'guid': '9cfb8f58-7acf-4a39-bf2b-c90269c33db0',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3503.58,
       'age': 31,
@@ -1862,6 +2502,15 @@ export class UserDB {
       '_id': '5a7b73f7cab10f461153989c',
       'index': 66,
       'guid': '2562a818-4451-4193-94cd-650d131ff097',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': false,
       'balance': 1652.9,
       'age': 21,
@@ -1890,6 +2539,15 @@ export class UserDB {
       '_id': '5a7b73f7ecccc997e4160a59',
       'index': 67,
       'guid': '0050170f-0283-481d-9633-dc9d134be121',
+      'accountNames': [
+        {
+          'accountName': 'CCK',
+          'id': '5a7b73f7cab10f461153989c', 
+          'when_user_join': false, 
+          'when_data_released': false, 
+          'when_invoice_generated': false
+        }
+      ],
       'isActive': true,
       'balance': 3692.88,
       'age': 21,

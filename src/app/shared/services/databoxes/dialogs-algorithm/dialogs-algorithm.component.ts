@@ -1,9 +1,7 @@
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { Component, Inject, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
-import { egretAnimations } from '../../../animations/egret-animations';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataboxesService } from '../databoxes-services';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,27 +16,35 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 		public snackBar: MatSnackBar,
 		private router: Router,
 		private databoxesService: DataboxesService,
-		@Inject(MAT_DIALOG_DATA) public data:any) {}
+		@Inject(MAT_DIALOG_DATA) public data: any) {}
 
 	private reqSubs: Subscription;
 	private deleteSubs: Subscription;
 
-	ngOnInit(){}
+	ngOnInit() { }
 
-	ngOnDestroy(){
+	ngOnDestroy() {
 		if(this.reqSubs) this.reqSubs.unsubscribe();
 		if(this.deleteSubs) this.deleteSubs.unsubscribe();
 	}
 
-	// update connectors
-	updateConnector(automatic?: boolean){
-		
+	// update connectors, if update automatically button was clicked
+	updateConnector(automatic?: boolean){ this.switchAlgorithm(automatic ? true : this.data.checked); }
+
+	// switch algorithm off
+	switchAlgorithmOff(){ this.switchAlgorithm(false); }
+
+	// switch algorithm on
+	switchAlgorithmOn(){ this.switchAlgorithm(true); }
+
+	// switch algorithm service
+	switchAlgorithm(switch_data: boolean){
 		this.reqSubs = this.databoxesService
-		.addAlgorithmConnector(this.data.connector, automatic ? true : this.data.checked)
+		.addAlgorithmConnector(this.data.connector, switch_data)
 		.subscribe(result => {
 			this.dialogRef.close(false);
 			
-			let url = this.router.url;
+			const url = this.router.url;
 
 			this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
 			.then(() => sessionStorage.setItem('selectedTabDatabox', '2'))
@@ -46,6 +52,6 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 			.then(() => this.router.navigate(['/databoxes']))
 			.then(() => this.router.navigate([url]))
 			.then(() => sessionStorage.removeItem('selectedTabDatabox'));
-		})
+		});
 	}
 }

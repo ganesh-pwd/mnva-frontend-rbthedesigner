@@ -14,16 +14,22 @@
         <p class="m-0"><a class="text-muted mat-color-primary"
         routerLink="/products/mentions-credit">
         Add Mentions
-        </a> or <br> <a class="text-muted mat-color-primary"
+        </a> or <br> <a *ngIf="loggedInUser.accountType !== 'Enterprise'" class="text-muted mat-color-primary"
         routerLink="/products/mentions-credit">
         Upgrade your plan
         </a></p>
       </div>
     </div>  
     <div class="pb-1">
+      <h6>Mentions Remaining</h6>
+      <p class="text-muted" *ngIf="loggedInUser.accountType !== 'Enterprise'">
+      {{loggedInUser.mentions}} Mentions</p>
+      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+      Unlimited Mentions</p>
       <mat-progress-bar
+        *ngIf="loggedInUser.accountType !== 'Enterprise'"
         [ngClass]="remaining >= 80 && remaining <= 99 
-          ? 'yellow-progress': remaining === 100 
+          ? 'yellow-progress': remaining >= 100 
           ? 'red-progress': 'blue-progress'"
         [mode]="'determinate'"
         [value]="remaining">

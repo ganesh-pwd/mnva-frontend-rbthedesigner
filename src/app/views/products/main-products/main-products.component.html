@@ -7,19 +7,33 @@
         <small>
           <span class="main-route">
             <a routerLink="/products">Products</a>
-          </span> / Account Type</small>
+          </span> 
+          <span>/ Account Type</span> 
+        </small>
       </h1>
   </div>
 </div>
 
-<mat-card class="account-type p-0 pb-1" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-  <div style="position: absolute;left: 24px; top: 24px;">
-     Billed Montly <mat-slide-toggle color="primary" class="mb-1"> Billed Anually</mat-slide-toggle>
-  </div>
-  <div class="full-width mb-1 mt-1 add-cart">
-    <button mat-raised-button color="primary" routerLink="/products/cart">
-      <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
-    </button>
+<mat-card class="account-type p-0 pb-1" 
+[@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+  <div class="p-1">
+    <!-- Search Form -->
+    <div fxLayout="row" fxLayout.lt-sm="column" class="shop-top-toolbar">
+       <div class="product-search-wrap">
+          <div>
+            Billed Montly 
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="billedAnnually" (change)="clickSlideToggle($event)"> 
+            Billed Anually</mat-slide-toggle>
+          </div>
+       </div>
+       
+      <span fxFlex></span>
+        <button mat-raised-button color="primary" routerLink="/products/cart">
+          <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
+        </button>
+    </div>
+   
   </div>
 
   <mat-card-content>
@@ -47,6 +61,8 @@
                 <mat-list-item class="disabled">Web</mat-list-item>
                 <mat-list-item class="disabled">Airbnb</mat-list-item>
                 <mat-list-item class="disabled">Waze</mat-list-item>
+                <mat-list-item class="disabled">Owned Facebook Page</mat-list-item>
+                <mat-list-item class="disabled">Owned Twitter Profile</mat-list-item>
               </mat-list>
             </div>
             <br>
@@ -91,6 +107,8 @@
                 <mat-list-item>Facebook</mat-list-item>
                 <mat-list-item>Twitter</mat-list-item>
                 <mat-list-item>Web</mat-list-item>
+                <mat-list-item>Owned Facebook Page</mat-list-item>
+                <mat-list-item>Owned Twitter Profile</mat-list-item>
                 <mat-list-item class="disabled">Airbnb</mat-list-item>
                 <mat-list-item class="disabled">Waze</mat-list-item>
               </mat-list>
@@ -137,6 +155,8 @@
                 <mat-list-item>Facebook</mat-list-item>
                 <mat-list-item>Twitter</mat-list-item>
                 <mat-list-item>Web</mat-list-item>
+                <mat-list-item>Owned Facebook Page</mat-list-item>
+                <mat-list-item>Owned Twitter Profile</mat-list-item>
                 <mat-list-item>Airbnb</mat-list-item>
                 <mat-list-item>Waze</mat-list-item>
               </mat-list>

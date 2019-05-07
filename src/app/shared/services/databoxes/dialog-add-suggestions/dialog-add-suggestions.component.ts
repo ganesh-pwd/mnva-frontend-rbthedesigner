@@ -44,21 +44,11 @@ export class DataboxDialogAddSuggestionComponent implements OnInit, OnDestroy {
       'page-id': [null, Validators.compose([Validators.required])],
       'page-country': [null, Validators.compose([Validators.required])]
     });
-
-    console.log(this.data.data.page_name);
-
-    if (this.data.data) {
-      this.suggestResultForm.setValue({
-        'page-name': this.data.data.page_name,
-        'page-id': this.data.data.page_id,
-        'page-country': this.data.data.page_country
-      });
-    }
   }
 
   // add suggestion
   addSuggestion() {
-    let body = {
+    const body = {
       source: this.data.field,
       page_name: this.suggestResultForm.get('page-name').value,
       page_id: this.suggestResultForm.get('page-id').value,

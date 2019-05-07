@@ -75,13 +75,25 @@
 				<br>
 
 				<mat-form-field>
-				    <input matInput placeholder="Account Name" value="CCK">
+				    <input matInput placeholder="Account Name" [value]="selected" [(ngModel)]="new_value">
 				</mat-form-field>
 
 				<h4 class="mat-h4">Email From Minerva</h4>
-				<mat-checkbox>When New User Joins</mat-checkbox><br>
-				<mat-checkbox checked=true>When New Data Sources are Released</mat-checkbox><br>
-				<mat-checkbox>When An Invoice is Generated</mat-checkbox><br><br><br>
+				<mat-checkbox [(ngModel)]="when_user_join" 
+        [checked]="when_user_join">When New User Joins</mat-checkbox><br>
+				<mat-checkbox [(ngModel)]="when_data_released" 
+        [checked]="when_data_released">When New Data Sources are Released</mat-checkbox><br>
+				<mat-checkbox [(ngModel)]="when_invoice_generated" 
+        [checked]="when_invoice_generated">When An Invoice is Generated</mat-checkbox><br><br>
+
+        <button mat-raised-button color="primary" 
+        (click)="saveChanges()">Save Changes</button>
+
+        <br><br>
+
+        <mat-divider></mat-divider>
+
+        <br>
 
 				<h4 class="mat-h4">Delete Account</h4>
 				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique.</p>

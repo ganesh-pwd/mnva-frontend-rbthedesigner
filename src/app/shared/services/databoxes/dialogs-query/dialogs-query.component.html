@@ -46,7 +46,8 @@
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
                                     <div class="p-1">
                                         <mat-placeholder class="placeholder" 
-                                        *ngIf="queryForm.controls['optional-keywords'].value === null">
+                                        *ngIf="queryForm.controls['optional-keywords'].value === null 
+                                        || queryForm.controls['optional-keywords'].value === ''">
                                           {{editorData}}
                                         </mat-placeholder>
                                         <textarea matInput rows="5" cols="80" 
@@ -61,7 +62,8 @@
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
                                     <div class="p-1">
                                         <mat-placeholder class="placeholder" 
-                                        *ngIf="queryForm.controls['required-keywords'].value === null">
+                                        *ngIf="queryForm.controls['required-keywords'].value === null
+                                        || queryForm.controls['required-keywords'].value === ''">
                                           {{editorData}}
                                         </mat-placeholder>
                                         <textarea matInput rows="5" cols="80" 
@@ -77,7 +79,8 @@
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
                                     <div class="p-1">
                                         <mat-placeholder class="placeholder" 
-                                        *ngIf="queryForm.controls['excluded-keywords'].value === null">
+                                        *ngIf="queryForm.controls['excluded-keywords'].value === null
+                                        || queryForm.controls['excluded-keywords'].value === ''">
                                           {{editorData}}
                                         </mat-placeholder>
                                         <textarea matInput rows="5" cols="80" 
@@ -111,7 +114,8 @@
                                 <mat-card-content class="p-0">
                                     <mat-form-field class="full-width">
                                         <mat-placeholder class="placeholder" 
-                                        *ngIf="queryForm.controls['advance-query'].value === null">
+                                        *ngIf="queryForm.controls['advance-query'].value === null
+                                        || queryForm.controls['advance-query'].value === ''">
                                           {{editorData}}
                                         </mat-placeholder>
                                         <textarea matInput rows="10" cols="80" 

@@ -2,6 +2,7 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataboxesService } from '../databoxes-services';
+import { DataboxesTestQueryService } from '../databox-test-query.service';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from 'app/shared/animations/egret-animations';
 
@@ -20,6 +21,7 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
     private databoxesService: DataboxesService,
+    private databoxesTestQueryService: DataboxesTestQueryService,
     public dialogRef: MatDialogRef<MainDataboxDialogComponent>,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -57,6 +59,8 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     sessionStorage.setItem('databox_name_new', `${this.generateGUID()}`);
     sessionStorage.setItem('databox_id_new', this.databox_id_new );
     sessionStorage.removeItem('databox_edited_name');
+    sessionStorage.removeItem('databox_test_query_bool');
+    sessionStorage.removeItem('databox_test_query');
     this.dialogRef.close(false);
     this.router.navigate([`/databoxes/create-databox/${this.databox_id_new}`]);
   }
@@ -67,7 +71,11 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     .subscribe((result) => {
       this.dialogRef.close(false);
       this.router.navigate(['/databoxes'])
-      .then(() => sessionStorage.removeItem('databox_new'));
+      .then(() => {
+        sessionStorage.removeItem('databox_new');
+        sessionStorage.removeItem('databox_test_query_bool');
+        sessionStorage.removeItem('databox_test_query');
+      });
     });
   }
 
@@ -94,12 +102,16 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
   updateDatabox() {
     this.reqSubs = this.databoxesService
     .updateDatabox(this.data.details, 'Draft')
-    .subscribe((result) => this.dialogRef.close(false));
+    .subscribe((result) => {
+      this.dialogRef.close(false);
+      sessionStorage.removeItem('databox_test_query_bool');
+      sessionStorage.removeItem('databox_test_query');
+    });
   }
 
   // delete a databox item
   deleteDatabox() {
-    const deleteData = () => this.databoxesService.deleteDatabox(this.inputData);
+    const deleteData = () => this.databoxesService.deleteDatabox(this.inputData, this.data.details._id);
 
     if (!deleteData()) { this.dialogRef.close(false); }
     else { this.deleteDataInfo = true; }
@@ -107,28 +119,29 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
 
   // build databox query
   testQuery(){
-    this.reqSubs = this.databoxesService
+    this.reqSubs = this.databoxesTestQueryService
     .testQueryDatabox(this.data.details)
     .subscribe((result) => {
       this.dialogRef.close(false);
 
       let url = this.router.url;
-
+     
       this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
       .then(() => sessionStorage.removeItem('databox_updated'))
       .then(() => this.router.navigate(['/databoxes']))
       .then(() => this.router.navigate([url]))
       .then(() => sessionStorage.removeItem('selectedTabDatabox'))
+      .then(() => sessionStorage.setItem('databox_test_query_bool', 'true'))
       .then(() => {
         this.snackBar.open('The Databox Query has been successfully built', 'close');
         setTimeout(() => this.snackBar.dismiss(), 3000);
-      });
+      }); 
     });
   }
 
+
   // update connectors
   updateConnector(automatic?: boolean){
-    
     this.reqSubs = this.databoxesService
     .addDataConnector(this.data.connector, automatic ? true : this.data.checked)
     .subscribe(result => {
@@ -143,10 +156,30 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     })
   }
 
+  cancelConnector(){
+    this.dialogRef.close(false);
+    
+    let url = this.router.url;
+
+    this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+    .then(() => sessionStorage.removeItem('databox_updated'))
+    .then(() => this.router.navigate(['/databoxes']))
+    .then(() => this.router.navigate([url]))
+  }
+
   // cancel databox changes
   cancelChanges() {
     sessionStorage.removeItem('databox_edited_name');
-    this.router.navigate(['/databoxes']);
+    if(sessionStorage.getItem('databox_test_query_bool')){
+      let url = this.router.url.split('/').filter(el => el !== 'edit-query').join('/');
+      
+      this.router.navigate([url])
+      .then(() => {
+        sessionStorage.removeItem('databox_test_query_bool');
+        sessionStorage.removeItem('databox_test_query');
+      });
+    } else this.router.navigate(['/databoxes']);
+
     this.dialogRef.close(false);
   }
 

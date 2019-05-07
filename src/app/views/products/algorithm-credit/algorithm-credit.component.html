@@ -7,18 +7,20 @@
          <small>   
             <span class="main-route">
               <a routerLink="/products">Products</a>
-            </span> / Algorithm Credit</small>
+            </span> 
+            <span>/ Algorithm Credit</span>
+          </small>
        </h1>
    </div>
 </div>
 
 <mat-sidenav-container>
-  <div fxLayout="row" fxLayoutWrap="wrap">
+  <div>
     <!-- Filters -->
     <!-- Right side -->
-    <div  fxLayout="row" fxLayoutWrap="wrap">
+    <div>
       <!-- Search Form -->
-      <div class="shop-top-toolbar">
+      <div fxLayout.lt-sm="column" fxLayout="row"  class="shop-top-toolbar">
          <button mat-icon-button class="mr-1" (click)="toggleSideNav()"><mat-icon>short_text</mat-icon> </button>
          <div class="product-search-wrap">
             <form [formGroup]="filterForm">
@@ -30,9 +32,8 @@
             </form>
          </div>
 
-        <span fxFlex></span>
-        <button style="position: absolute; right:24px;" 
-        mat-raised-button color="primary" routerLink="/products/cart">
+        <span fxFlex></span><span fxFlex="20px"></span>
+        <button mat-raised-button color="primary" routerLink="/products/cart">
          <mat-icon>shopping_cart</mat-icon>
          Cart  ({{cartData.itemCount}})
         </button>

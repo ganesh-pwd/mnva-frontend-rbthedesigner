@@ -56,12 +56,23 @@ export class UserService {
     else alert('User does not exist')
   }
 
+  // change user account name
+  setAccountName(details): Observable<any> {
+    const filterAccountNames = this.loggedInUser.accountNames.filter(el => el.id === details.id)[0];
+
+    filterAccountNames.accountName = details.accountName;
+    filterAccountNames.when_user_join = details.when_user_join;
+    filterAccountNames.when_data_released = details.when_data_released;
+    filterAccountNames.when_invoice_generated = details.when_invoice_generated;
+
+    return of(filterAccountNames);
+  }
+
+
   // compute remaining mentions
   computeRemainingMention(mention): Observable<any> {
     const filterUser = this.users.filter(el => el._id === this.loggedInUser._id);
     const userList = this.users;
-
-    console.log(filterUser)
 
     let computeMentions = this.loggedInUser.mentions - mention;
     filterUser[0].mentions = computeMentions;

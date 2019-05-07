@@ -9,9 +9,8 @@
           <mat-icon (click)="modifyDataboxDialog('Edit Databox Name', 'Databox Name', true)"> 
           edit</mat-icon>      
           <span class="main-route"> 
-            <a routerLink="/databoxes/">Databoxes </a> /
-            {{ data?.databox_name }}</span
-          >
+            <a routerLink="/databoxes/">Databoxes </a> 
+          </span><span>/ {{ data?.databox_name }}</span>
         </small>
       </h1>
     </div>
@@ -42,7 +41,7 @@
 
     <span fxFlex></span>
     <div class="mr-1 ">
-      <app-slide-toggle [id]="id"></app-slide-toggle>
+      <app-slide-toggle [id]="id" *ngIf="data._id"></app-slide-toggle>
     </div>
   </div>
 </div>
@@ -70,32 +69,35 @@
           </mat-card>
         </div>
       </div>
-  
+      
+      <!-- First Table -->
       <div [hidden]="data?.first_create">
-        <!-- First Table -->
+        
           <mat-card class="p-0" fxLayout="row" fxLayoutWrap="wrap" style="height: 100% !important; overflow: hidden !important;">
             
             <mat-card-content class="table-mat-card-content" fxLayout="row" fxLayoutWrap="wrap"  
               style="overflow: hidden !important; width: 100% !important; height: 100% !important;">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
+              
+              <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100" fxFlex.gt-md="100" 
+              class="page-search mat-bg-gray">
                 <div>
                   <p>
                       <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day}}
                   </p>
                 </div>
                 <span fxFlex></span>
-                <div style="position: absolute; right: 24px;">
+                <div>
                   <!-- Download CSV -->
                   <a class="mr-1 head-mentions" 
                   (click)="downloadCSV()">
                   <mat-icon class="download">file_download</mat-icon><b>Download</b></a>
 
                   <!-- Add Suggestion -->
-                  <a class="head-mentions" 
+                  <a class="head-mentions" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
                   (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
                 </div>
               </div>
-  
+          
               <div [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayout="row" fxLayoutWrap="wrap"  style="overflow-x: scroll !important; width: 102% !important; height: 100% !important;" (scroll)="createTable()">
                 
                 <div fxLayout="row" fxLayoutWrap="wrap">
@@ -105,9 +107,9 @@
                     </div>
   
                     <div class="table-foot" >
-                      <div>
-                        <button mat-raised-button (click)="addNewRow()">Add Row</button>
-                        <button mat-raised-button (click)="saveAllData()">Save All Changes</button>
+                      <div class="mb-1">
+                        <button mat-raised-button color="primary" (click)="addNewRow()">Add Row</button>
+                        <button mat-raised-button class="mat-bg-success" (click)="saveAllData()">Save All Changes</button>
                       </div>
                       <span fxFlex></span>
   
@@ -128,49 +130,6 @@
           </mat-card>
       </div>
   
-      <!-- Second Table -->
-      <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
-        <div [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <div style="width: 101% !important;">
-            <mat-card class="p-0 table-mat-card" style="width: 101% !important;">
-              <mat-card-content class="table-mat-card-content">
-                <table mat-table [dataSource]="databoxSecondTable">
-  
-                  <!-- Position Column -->
-                  <ng-container matColumnDef="name">
-                    <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef style="padding-left: 15px !important;"> Date </th>
-                    <td mat-cell *matCellDef="let databoxes"> {{databoxes.date}} </td>
-                  </ng-container>
-  
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="type">
-                    <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef style="width: 600px !important; "> Content </th>
-                    <td mat-cell *matCellDef="let databoxes"> {{databoxes.content}} </td>
-                  </ng-container>
-  
-                  <!-- Weight Column -->
-                  <ng-container matColumnDef="expression">
-                    <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef> Parent </th>
-                    <td mat-cell *matCellDef="let databoxes"> {{databoxes.parent}} </td>
-                  </ng-container>
-  
-                  <!-- Symbol Column -->
-                  <ng-container matColumnDef="action">
-                    <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef> Author </th>
-                    <td mat-cell *matCellDef="let databoxes"> {{databoxes.author}} </td>
-                  </ng-container>
-  
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-  
-                <mat-paginator [pageSizeOptions]="[20, 30, 50, 100]"></mat-paginator>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </div>
-      </div>
-  
   
       <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
@@ -179,7 +138,7 @@
             <br><br>
             <h2 class="mat-h1">Delete Databox</h2>
             <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
-            <button mat-raised-button (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true)">Delete Databox</button>
+            <button mat-raised-button color="warn" (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true)">Delete Databox</button>
           </div>
         </div>
       </div>
@@ -319,6 +278,25 @@
                 </mat-card-title>
                 <mat-divider></mat-divider>
                 <mat-card-content>
+                  <table mat-table [dataSource]="dataSource">
+                    <!--- Note this table dataSource should be fetched with real data from the backend service -->
+                    <ng-container matColumnDef="content">
+                      <th mat-header-cell *matHeaderCellDef> Content </th>
+                      <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+                    </ng-container>
+      
+                    <ng-container matColumnDef="category">
+                      <th mat-header-cell *matHeaderCellDef> Category </th>
+                      <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+                    </ng-container>
+      
+                    <ng-container matColumnDef="subCategory">
+                      <th mat-header-cell *matHeaderCellDef> SubCategory </th>
+                      <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
+                  </table>
                 </mat-card-content>
               </mat-card>
             </div>      
@@ -357,7 +335,7 @@
                 <div class="allign-middle" >
                   <mat-slide-toggle color="primary" class="" 
                     [checked]="sentiment"
-                    (change)="slideToggle('sentiment')">
+                    (change)="clickSlideToggle('sentiment')">
                   </mat-slide-toggle><br>
                 </div>
               </div>  
@@ -392,7 +370,7 @@
                 <div class="allign-middle" >
                   <mat-slide-toggle color="primary" class="" 
                     [checked]="topicRecognition"
-                    (change)="slideToggle('topicRecognition')">
+                    (change)="clickSlideToggle('topicRecognition')">
                   </mat-slide-toggle><br>
                 </div>
               </div>  
@@ -427,7 +405,7 @@
                 <div class="allign-middle" >
                   <mat-slide-toggle color="primary" class="" 
                     [checked]="genderAuthor"
-                    (change)="slideToggle('genderAuthor')">
+                    (change)="clickSlideToggle('genderAuthor')">
                   </mat-slide-toggle><br>
                 </div>
               </div>  
@@ -462,7 +440,7 @@
                 <div class="allign-middle" >
                   <mat-slide-toggle color="primary" class="" 
                     [checked]="entityRecognition"
-                    (change)="slideToggle('entityRecognition')">
+                    (change)="clickSlideToggle('entityRecognition')">
                   </mat-slide-toggle><br>
                 </div>
               </div>  
@@ -539,3 +517,44 @@
       </div>
     </mat-tab>
   </mat-tab-group>
+
+
+
+  <!-- Second Table 
+  <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
+    <div [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+      <div style="width: 101% !important;">
+        <mat-card class="p-0 table-mat-card" style="width: 101% !important;">
+          <mat-card-content class="table-mat-card-content">
+            <table mat-table [dataSource]="databoxSecondTable">
+  
+              <ng-container matColumnDef="name">
+                <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef style="padding-left: 15px !important;"> Date </th>
+                <td mat-cell *matCellDef="let databoxes"> {{databoxes.date}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="type">
+                <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef style="width: 600px !important; "> Content </th>
+                <td mat-cell *matCellDef="let databoxes"> {{databoxes.content}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="expression">
+                <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef> Parent </th>
+                <td mat-cell *matCellDef="let databoxes"> {{databoxes.parent}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="action">
+                <th class="mat-header-cell-databox" mat-header-cell *matHeaderCellDef> Author </th>
+                <td mat-cell *matCellDef="let databoxes"> {{databoxes.author}} </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+  
+            <mat-paginator [pageSizeOptions]="[20, 30, 50, 100]"></mat-paginator>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>-->

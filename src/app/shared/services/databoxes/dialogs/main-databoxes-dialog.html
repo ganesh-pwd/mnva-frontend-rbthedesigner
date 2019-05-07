@@ -1,3 +1,5 @@
+
+
 <div *ngIf="deleteDataInfo">
   <div class="default-bg" [@animate]="{value:'*', params:{ scale:'0.8', delay:'200ms' }}">
       <div>
@@ -156,19 +158,34 @@
     <br>
 
     <span fxFlex></span>
-    <div *ngIf="!data.checked">
+    <div>
       <button (click)="dialogRef.close(false)" 
       mat-raised-button class="m-333">Cancel</button>
 
       <button mat-raised-button class="m-333" color="primary" 
-      (click)="updateConnector(true)">Connect Automatically</button>
+      (click)="dialogRef.close(false)">Connect Data</button>
+    </div>
+  </div>
+
+  <!-- Data Connector -->
+  <div mat-dialog-actions 
+      *ngIf="data.title === 'Connect to Email Notification'
+        || data.title === 'Connect to Slack'
+        || data.title === 'Connect to Apple TV'">
+    <mat-divider></mat-divider>
+    <br>
+
+    <span fxFlex></span>
+    <div *ngIf="!data.checked">
+      <button (click)="cancelConnector()" 
+      mat-raised-button class="m-333">Cancel</button>
 
       <button mat-raised-button class="m-333" color="primary" 
-      (click)="updateConnector()">Connect to Unprocess Data</button>
+      (click)="updateConnector()">Apply</button>
     </div>
 
     <div *ngIf="data.checked">
-      <button (click)="dialogRef.close(false)" 
+      <button (click)="cancelConnector()" 
       mat-raised-button class="m-333">Cancel</button>
 
       <button mat-raised-button class="m-333" color="primary" 
@@ -180,7 +197,10 @@
   <div mat-dialog-actions 
       *ngIf="data.title !== 'How to connect to Power BI'
         && data.title !== 'How to connect to Tableau'
-        && data.title !== 'How to connect to Data Studio'">
+        && data.title !== 'How to connect to Data Studio'
+        && data.title !== 'Connect to Email Notification'
+        && data.title !== 'Connect to Slack'
+        && data.title !== 'Connect to Apple TV'">
       <span fxFlex></span>
 
       <div *ngIf="data.title !== 'Power BI' 
@@ -246,7 +266,7 @@
               color="primary" 
               (click)="createDataboxInit()">{{data.title}}</button>
 
-              <!-- Edit Databox -->
+              <!-- Edit Databox Name -->
               <button *ngIf="data.title === 'Set Databox Name'"
               type="button"
               mat-raised-button
@@ -254,7 +274,7 @@
               (click)="editDataboxNotCreated()">{{data.title}}
               </button>
 
-              <!-- Edit Databox -->
+              <!-- Edit Databox Name -->
               <button *ngIf="data.title === 'Edit Databox Name'"
               type="button"
               mat-raised-button
@@ -274,7 +294,7 @@
               type="button"
               mat-raised-button
               color="warn"
-              (click)="cancelChanges()">{{data.title}}
+              (click)="cancelChanges()">Yes
               </button>
       </div>&nbsp;&nbsp;
       

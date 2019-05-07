@@ -43,12 +43,19 @@
   <mat-menu #accountMenu="matMenu">
     <div class="account-type p16">
       <span> <strong> {{loggedInUser.accountType}} </strong></span>
-      <a routerLink="/products/account-type" class="menu-link">Upgrade </a>
+      <a routerLink="/products/account-type" class="menu-link" 
+      *ngIf="loggedInUser.accountType !== 'Enterprise'">Upgrade </a>
     </div>
     <div class="mentions-remaining p16">
-      <p>{{loggedInUser.mentions}} Mentions Remaining</p>
+      <p *ngIf="loggedInUser.accountType !== 'Enterprise'">
+      {{loggedInUser.mentions}} Mentions Remaining</p>
+
+      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+      Unlimited Mentions</p>
+
       <app-mentions-progress-bar></app-mentions-progress-bar>
-      <p class="mt-1">Your quota resets in 10 days</p>
+
+      <p class="mt-1" *ngIf="loggedInUser.accountType !== 'Enterprise'">Your quota resets in 10 days</p>
     </div>
     <hr>
     <div class="algorithm-credit p16 mt-1">
@@ -59,7 +66,7 @@
       <p>${{loggedInUser.algorithmCredits}} in credit remaining</p>
       <mat-progress-bar
         [ngClass]="remaining >= 80 && remaining <= 99 
-          ? 'yellow-progress': remaining === 100 
+          ? 'yellow-progress': remaining >= 100 
           ? 'red-progress': 'blue-progress'"
         [mode]="'determinate'"
         [value]="remaining">

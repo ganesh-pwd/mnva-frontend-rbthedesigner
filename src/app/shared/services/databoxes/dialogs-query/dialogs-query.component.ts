@@ -129,10 +129,10 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       this.snackBar.dismiss();
 
       let body = {
-        'required-keywords': this.queryForm.get('required-keywords').value,
-        'optional-keywords': this.queryForm.get('optional-keywords').value,
-        'excluded-keywords': this.queryForm.get('excluded-keywords').value,
-        'query': this.queryForm.get('advance-query').value,
+        'required-keywords': this.showQuery === 'basic' ? this.queryForm.get('required-keywords').value : null,
+        'optional-keywords': this.showQuery === 'basic' ? this.queryForm.get('optional-keywords').value : null,
+        'excluded-keywords': this.showQuery === 'basic' ? this.queryForm.get('excluded-keywords').value : null,
+        'query': this.showQuery === 'advance' ? this.queryForm.get('advance-query').value : null,
         'name': this.queryForm.get('category-name').value,
         'type': this.queryForm.get('category-type').value
       }
@@ -176,10 +176,10 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       this.snackBar.dismiss();
 
       let body = {
-        'required-keywords': this.queryForm.get('required-keywords').value,
-        'optional-keywords': this.queryForm.get('optional-keywords').value,
-        'excluded-keywords': this.queryForm.get('excluded-keywords').value,
-        'query': this.queryForm.get('advance-query').value,
+        'required-keywords': this.showQuery === 'basic' ? this.queryForm.get('required-keywords').value : null,
+        'optional-keywords': this.showQuery === 'basic' ? this.queryForm.get('optional-keywords').value : null,
+        'excluded-keywords': this.showQuery === 'basic' ? this.queryForm.get('excluded-keywords').value : null,
+        'query': this.showQuery === 'advance' ? this.queryForm.get('advance-query').value : null,
         'name': this.queryForm.get('category-name').value,
         'type': this.queryForm.get('category-type').value
       }
@@ -191,8 +191,6 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       this.addCategoryReq = this.databoxCategoryService
       .editCategory(this.data.databox._id, body, this.data.category)
       .subscribe(result => {
-        console.log(result)
-
         let url = this.router.url;
 
         this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })

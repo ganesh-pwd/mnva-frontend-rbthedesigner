@@ -22,7 +22,5 @@ export class WizardComponent implements OnInit {
   }
   
   submit() {
-    console.log(this.firstFormGroup.value);
-    console.log(this.secondFormGroup.value);
   }
 }

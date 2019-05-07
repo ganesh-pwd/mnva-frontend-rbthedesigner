@@ -253,6 +253,17 @@ hot-table {
   }
 }
 
+@media screen and (max-width:660px) {
+  .header-row{
+    small span{
+      display: none !important;
+    }
+  }
+
+}
+
+
+
 .header-row {
   h1 {
     margin-left: 63px;
@@ -280,6 +291,8 @@ hot-table {
     }
   }
 }
+
+
 
 .mat-tab-group, .mat-tab {
   width: 100% !important;

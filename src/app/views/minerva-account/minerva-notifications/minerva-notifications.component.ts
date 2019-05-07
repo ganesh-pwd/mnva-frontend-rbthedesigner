@@ -5,7 +5,8 @@ import { MinervaAccountImageDialogService } from '../../../shared/services/miner
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/auth/user-services';
-
+import { MinervaNewsService } from '../../../shared/services/minerva-news/minerva-news.service';
+ 
 @Component({
   selector: "app-minerva-notifications",
   animations: [egretAnimations],
@@ -19,21 +20,32 @@ export class MinervaNotificationsComponent implements OnInit, OnDestroy {
   userImage: string;
 
   public loggedInUser: any;
+  public minervaNews: any[];
 
   constructor(
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService,
+    private minervaNewsService: MinervaNewsService,
     private userService: UserService
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => (this.userImage = result));
 	  userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getMinervaNews();
+  }
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
     if (this.req) this.req.unsubscribe();
+  }
+
+  // get all minerva news data
+  getMinervaNews(){
+    this.req = this.minervaNewsService
+    .getAllItems()
+    .subscribe(result => this.minervaNews = result);
   }
 
   changeImageDialog(title: string) {

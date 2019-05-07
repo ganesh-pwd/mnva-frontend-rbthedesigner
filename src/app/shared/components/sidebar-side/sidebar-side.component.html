@@ -15,12 +15,12 @@
 
       <span class="mb-05">
         <mat-form-field>
-          <mat-select [(value)]="selected">
-            <mat-option value="CCK" selected>
-              CCK
-            </mat-option>
-            <mat-option value="Paprika Digital">
-              Paprika Digital
+          <mat-select 
+            (selectionChange)="changeSelectedAccount($event)"
+            [value]="selected">
+            <mat-option value="{{accounts.accountName}}" 
+            *ngFor="let accounts of loggedInUser?.accountNames">
+              {{accounts.accountName}}
             </mat-option>
           </mat-select>
         </mat-form-field>

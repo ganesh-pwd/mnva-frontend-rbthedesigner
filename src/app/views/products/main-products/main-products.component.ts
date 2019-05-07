@@ -23,7 +23,9 @@ export class MainProductsComponent implements OnInit {
   public cartData: any;
   public filterForm: FormGroup;
   public loggedInUser;
-	// 5 keyword - 17.5
+  public billedAnnually = false;
+  // 5 keyword - 17.5
+
   constructor(
     private shopService: ProductShopService,
     private snackBar: MatSnackBar,
@@ -45,7 +47,7 @@ export class MainProductsComponent implements OnInit {
     this.cartData = this.shopService.cartData;
   }
 
-  getCart() {
+  private getCart() {
     this.shopService
     .getCart()
     .subscribe(cart => {
@@ -53,7 +55,19 @@ export class MainProductsComponent implements OnInit {
     });
   }
 
-  addToCart(name, price) {
+  public clickSlideToggle(event) {
+    if (event.checked) {
+      this.standardAccount = parseFloat((this.standardAccount - this.standardAccount * 0.10).toFixed(2));
+      this.plusAccount = parseFloat((this.plusAccount - this.plusAccount * 0.10).toFixed(2));
+      this.enterpriseAccount = parseFloat((this.enterpriseAccount - this.enterpriseAccount * 0.10).toFixed(2));
+    } else {
+      this.standardAccount = 40;
+      this.plusAccount = 70;
+      this.enterpriseAccount = 100;
+    }
+  }
+
+  public addToCart(name, price) {
     const productBuild = {
       name: name,
       _id: Date.now().toString(),
@@ -71,12 +85,12 @@ export class MainProductsComponent implements OnInit {
     };
 
     // check if item is already added to cart
-    let filter = this.cart.filter(el => 
-      el.product.name === name || 
-      el.product.category === 'Account Type');
+    const filter = this.cart.filter(el => {
+      return el.product.name === name || el.product.category === 'Account Type';
+    });
 
-    if(filter.length > 0){
-      alert("You already added an Account Type Purchase to shopping cart")
+    if (filter.length > 0) {
+      alert('You already added an Account Type Purchase to shopping cart');
     } else {
       this.shopService
       .addToCart(cartItem)
@@ -85,11 +99,9 @@ export class MainProductsComponent implements OnInit {
         this.snackBar.open('Product added to cart', 'OK', { duration: 4000 });
       });
     }
-
-    
   }
 
-  buildFilterForm(filterData:any = {}) {
+  private buildFilterForm(filterData: any = {}) {
     this.filterForm = this.fb.group({
       search: [''],
       category: ['all'],

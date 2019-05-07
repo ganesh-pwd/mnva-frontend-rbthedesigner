@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="!data?.algo_switch">
     <h1 matDialogTitle>{{ data.title }}</h1>
     <div mat-dialog-content>
     	<p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
@@ -57,5 +57,41 @@
         type="button"
         mat-raised-button 
         (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+</div>
+
+<div *ngIf="data?.algo_switch">
+    <h1 matDialogTitle>Algorithm Connector</h1>
+    <div mat-dialog-content>
+        <p *ngIf="data?.checked">Are you sure you want to turn the algoritm ON?</p>
+        <p *ngIf="!data?.checked">Are you sure you want to turn the algoritm OFF?</p>
+    </div>
+
+    <br>
+
+    <div mat-dialog-actions *ngIf="data?.checked">
+        <span fxFlex></span>
+        <button type="button" 
+        mat-raised-button
+        color="primary" 
+        (click)="switchAlgorithmOn()">Yes</button>
+        
+        <button 
+        type="button"
+        mat-raised-button 
+        (click)="switchAlgorithmOff()">No</button>
+    </div>
+
+    <div mat-dialog-actions *ngIf="!data?.checked">
+        <span fxFlex></span>
+        <button type="button" 
+        mat-raised-button
+        color="primary" 
+        (click)="switchAlgorithmOff()">Yes</button>
+        
+        <button 
+        type="button"
+        mat-raised-button 
+        (click)="switchAlgorithmOn()">No</button>
     </div>
 </div>

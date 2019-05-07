@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
@@ -23,7 +23,11 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   public email: boolean = false;
   public slack: boolean = false;
+<<<<<<< HEAD
   public appleTv: boolean = false;
+=======
+  public appleTV: boolean = false;
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 
   constructor(
     private router: Router,
@@ -48,11 +52,13 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   // Get databox items created by users with parameter id
   getSingleItem() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
         if (data){
+          if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
+          
           this.data = data;
 
           // slide toggle if element is found on databox 
@@ -87,20 +93,32 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   }
 
   // open notification dialog
-  openNotificationDialog(title: string) {
-    this.getItemSub = this.databoxConnectivityDialogService
-      .confirm({
-        title: title
-      })
-      .subscribe(result => {});
+  openNotificationDialog(title: string, datasource: string) {
+    if (this.email) {
+      this.getItemSub = this.databoxConnectivityDialogService
+        .confirm({
+          title: title,
+          datasource: datasource
+        })
+        .subscribe(result => {});
+    }
   }
 
-  slideToggle(data) {
+  clickSlideToggle(data) {
     switch (true) {
       case data === 'email': {
         if(this.email)
           this.email = false;
         else this.email = true;
+<<<<<<< HEAD
+=======
+
+        setTimeout(() => {
+          this.openDialog('Connect to Email Notification', 
+            'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
+            false, this.email, 'email');
+        }, 300);
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 
         break;
       }
@@ -109,17 +127,60 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         if(this.slack)
           this.slack = false;
         else this.slack = true;
+<<<<<<< HEAD
+=======
+
+        setTimeout(() => {
+          this.openDialog('Connect to Slack',
+            'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
+            false, this.slack, 'slack');
+        }, 300);
 
         break;
       }
 
-      case data === 'appleTv': {
-        if(this.appleTv)
-          this.appleTv = false;
-        else this.appleTv = true;
+      case data === 'appleTV': {
+        if(this.appleTV)
+          this.appleTV = false;
+        else this.appleTV = true;
+
+        setTimeout(() => {
+          this.openDialog('Connect to Apple TV', 
+            'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
+            false, this.appleTV, 'appleTV');
+        }, 300);
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 
         break;
       }
     }
   }
+
+<<<<<<< HEAD
+      case data === 'appleTv': {
+        if(this.appleTv)
+          this.appleTv = false;
+        else this.appleTv = true;
+=======
+  slideToggle(data) {
+    switch (true) {
+      case data === 'email': {
+        this.email ? this.email = false : this.email = true;
+        break;
+      }
+>>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
+
+      case data === 'slack': {
+        this.slack ? this.slack = false : this.slack = true;
+        break;
+      }
+
+      case data === 'appleTV': {
+        this.appleTV ? this.appleTV = false : this.appleTV = true;
+        break;
+      }
+    }
+  }
+
+
 }

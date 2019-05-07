@@ -7,7 +7,7 @@
         <small>  
           <span class="main-route">
             <a routerLink="/products">Products</a>
-          </span> / Cart</small>
+          </span> <span>/ Cart</span></small>
       </h1>
   </div>
 </div>
@@ -68,6 +68,11 @@
             <span class="fw-500">Subtotal:</span>
             <span fxFlex></span>
             <span class="text-muted">${{subTotal}}</span>
+          </div>
+          <div class="line mb-1">
+            <span class="fw-500">Annual Discount (10%):</span>
+            <span fxFlex></span>
+            <span class="text-muted">${{annualDiscount}}</span>
           </div>
           <div class="line mb-1">
             <span class="fw-500">IVA:</span>

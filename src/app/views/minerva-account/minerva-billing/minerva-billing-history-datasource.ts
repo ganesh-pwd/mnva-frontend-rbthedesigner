@@ -18,7 +18,7 @@ const EXAMPLE_DATA: DataTableItems[] = [
   {
     id: 3, 
     payment_date: '12 July 2018',
-    invoice_number: '40-2018',
+    invoice_number: 'c01fa2d1-07f8-65e2-a1e3-72dda7asB0af8',
     product: 'Credit Algorithm',
     amount: 120,
     download: 'invoice',

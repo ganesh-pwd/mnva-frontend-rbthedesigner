@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatSnackBar, MatSidenav } from '@angular/material';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Product } from '../../../shared/models/product.model';
 import { CartItem, ProductShopService } from '../products-shop.service';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
@@ -32,7 +32,7 @@ export class AdvancedTemplatesComponent implements OnInit {
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private loader: AppLoaderService
-  ){}
+  ) {}
 
   ngOnInit() {
     this.categories$ = this.shopService.getCategories();
@@ -80,7 +80,7 @@ export class AdvancedTemplatesComponent implements OnInit {
     });
   }
 
-  private buildFilterForm(filterData:any = {}) {
+  private buildFilterForm(filterData: any = {}) {
     this.filterForm = this.fb.group({
       search: [''],
       category: ['all'],

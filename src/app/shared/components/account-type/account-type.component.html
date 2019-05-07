@@ -6,7 +6,9 @@
   <mat-card-content>
     <div class="">
       <h1 class="mat-h1 fw-400">{{loggedInUser.accountType}}</h1>
-      <p><a class="text-muted mat-color-primary" routerLink="/products/account-type">Upgrade your plan</a></p>
+      <p *ngIf="loggedInUser.accountType !== 'Enterprise'">
+      <a class="text-muted mat-color-primary" 
+      routerLink="/products/account-type">Upgrade your plan</a></p>
     </div>
   </mat-card-content>
 </mat-card>

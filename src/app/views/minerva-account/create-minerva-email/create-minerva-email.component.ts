@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import {FormControl, Validators} from '@angular/forms';
 
@@ -8,14 +8,10 @@ import {FormControl, Validators} from '@angular/forms';
   templateUrl: './create-minerva-email.component.html',
   styleUrls: ['./create-minerva-email.component.scss']
 })
-export class CreateMinervaEmailComponent implements OnInit {
+export class CreateMinervaEmailComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor() { }
-
-  ngOnInit() {
-
-  }
 
   getErrorMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :

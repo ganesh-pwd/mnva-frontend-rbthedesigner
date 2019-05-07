@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ProductShopService, CartItem } from '../products-shop.service';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products-cart',
@@ -16,6 +15,7 @@ export class ProductsCartComponent implements OnInit {
   public subTotal: number;
   public vat: number = 13;
   public billYearly: boolean = false;
+  public annualDiscount: number;
 
   constructor(
     private shopService: ProductShopService,
@@ -41,11 +41,12 @@ export class ProductsCartComponent implements OnInit {
     const accountType = this.getAccountTypePrice();
 
     this.subTotal = parseFloat((subtotal + accountType).toFixed(5));
-    this.total = parseFloat((this.subTotal + (this.subTotal * (15 / 100))).toFixed(5));
+    this.annualDiscount = 0;
+    this.total = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(5));
   }
 
   // compute subtotal for item not related to account
-  public computePriceNotAccount(){
+  public computePriceNotAccount() {
     let subtotal = 0;
 
     this.cart.forEach(item => {
@@ -78,17 +79,23 @@ export class ProductsCartComponent implements OnInit {
 
   // if user select pay yearly or monthly
   public onBillMonthlyYearly(event, price) {
+    this.annualDiscount = price * 12 * 0.10;
+
     if (event.checked) {
       // If pays monthly it should have a 10% discount
-      const discountPrice = (price * 12) - (price * 12 * 0.10);
-      const yearlyBal = parseFloat((discountPrice).toFixed(5)) ;
-      this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(5));
-      this.total    = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(5));
+      let withAnnualDiscount = 0;
+      const yearlyBal = parseFloat((price * 12).toFixed(5));
+
+      this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(2));
+
+      withAnnualDiscount = this.subTotal - this.annualDiscount;
+      this.total    = parseFloat(((withAnnualDiscount) + (withAnnualDiscount * (this.vat / 100))).toFixed(2));
       this.billYearly = true;
     } else {
       const yearlyBal = parseFloat((price * 1).toFixed(5));
-      this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(5));
-      this.total    = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(5));
+      this.annualDiscount = 0;
+      this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(2));
+      this.total    = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(2));
       this.billYearly = false;
     }
   }
@@ -116,11 +123,10 @@ export class ProductsCartComponent implements OnInit {
   }
 
   getItemTotal(price, quantity, type) {
-    const discountPrice = (price * 12) - (price * 12 * 0.10);
     if (this.billYearly && type === 'Account Type') {
-      return parseFloat((discountPrice).toFixed(5));
+      return parseFloat((price * 12).toFixed(2));
     } else {
-      return parseFloat((price * quantity).toFixed(5));
+      return parseFloat((price * quantity).toFixed(2));
     }
   }
 }

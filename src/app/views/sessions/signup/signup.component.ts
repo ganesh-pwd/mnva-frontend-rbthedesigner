@@ -2,9 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatProgressBar, MatButton } from '@angular/material';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { map } from 'rxjs/operators';
-import { egretAnimations } from "../../../shared/animations/egret-animations";
+import { egretAnimations } from '../../../shared/animations/egret-animations';
 
 
 @Component({
@@ -30,17 +28,16 @@ export class SignupComponent implements OnInit {
       confirmPassword: confirmPassword,
       agreed: new FormControl('', (control: FormControl) => {
         const agreed = control.value;
-        if(!agreed) {
-          return { agreed: true }
+        if (!agreed) {
+          return { agreed: true };
         }
         return null;
       })
-    })
+    });
   }
 
   signup() {
     const signupData = this.signupForm.value;
-    console.log(signupData);
 
     this.submitButton.disabled = true;
     this.progressBar.mode = 'indeterminate';

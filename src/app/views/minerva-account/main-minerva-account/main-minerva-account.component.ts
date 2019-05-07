@@ -18,9 +18,15 @@ export class MainMinervaAccountComponent implements OnInit, OnDestroy {
 
   signinForm: FormGroup;
   public loggedInUser: any;
-
+  public userFullName: string;
+  
   constructor(private userService: UserService) {
-    userService.userData$.subscribe((user) => this.loggedInUser = user);
+    userService.userData$.subscribe((user) => {
+      if (user) {
+        this.userFullName = user.name;
+        this.loggedInUser = user;
+      }
+    });
   }
 
   ngOnInit() {}
