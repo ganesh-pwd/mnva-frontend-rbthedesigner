@@ -1,9 +1,7 @@
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { Component, Inject, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
-import { egretAnimations } from '../../../animations/egret-animations';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataboxesService } from '../databoxes-services';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,14 +16,14 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 		public snackBar: MatSnackBar,
 		private router: Router,
 		private databoxesService: DataboxesService,
-		@Inject(MAT_DIALOG_DATA) public data:any) {}
+		@Inject(MAT_DIALOG_DATA) public data: any) {}
 
 	private reqSubs: Subscription;
 	private deleteSubs: Subscription;
 
-	ngOnInit(){ console.log(this.data.checked) }
+	ngOnInit() { }
 
-	ngOnDestroy(){
+	ngOnDestroy() {
 		if(this.reqSubs) this.reqSubs.unsubscribe();
 		if(this.deleteSubs) this.deleteSubs.unsubscribe();
 	}
@@ -46,7 +44,7 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 		.subscribe(result => {
 			this.dialogRef.close(false);
 			
-			let url = this.router.url;
+			const url = this.router.url;
 
 			this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
 			.then(() => sessionStorage.setItem('selectedTabDatabox', '2'))

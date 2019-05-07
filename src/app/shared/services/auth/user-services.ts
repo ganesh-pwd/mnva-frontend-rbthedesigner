@@ -74,8 +74,6 @@ export class UserService {
     const filterUser = this.users.filter(el => el._id === this.loggedInUser._id);
     const userList = this.users;
 
-    console.log(filterUser)
-
     let computeMentions = this.loggedInUser.mentions - mention;
     filterUser[0].mentions = computeMentions;
 

@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit  } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { TemplateGalleryService } from '../../../shared/services/template-gallery/template-gallery.service';
-import { CartItem, ProductShopService } from '../products-shop.service';
+import { ProductShopService } from '../products-shop.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,10 +24,11 @@ public versions: any[] = [
   public data: any;
   public template: string;
 
-  constructor(private router: Router,
-      private activatedRoute: ActivatedRoute,
-      private productService: ProductShopService,
-      private templateGalleryService: TemplateGalleryService) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductShopService
+  ) { }
 
   ngOnInit() {
     this.getSingleItem();
@@ -43,7 +43,6 @@ public versions: any[] = [
 
     this.getItemSub = this.productService.getProductDetails(id)
    .subscribe(data => {
-   	console.log(data)
      if (data) { this.data = data; }
      // if not found
      else this.router.navigate(['/sessions/404']);

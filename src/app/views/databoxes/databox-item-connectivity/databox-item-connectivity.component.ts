@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
@@ -48,7 +48,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   // Get databox items created by users with parameter id
   getSingleItem() {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
@@ -90,7 +90,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   // open notification dialog
   openNotificationDialog(title: string, datasource: string) {
-    if(this.email){
+    if (this.email) {
       this.getItemSub = this.databoxConnectivityDialogService
         .confirm({
           title: title,
@@ -100,14 +100,14 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
     }
   }
 
-  clickSlideToggle(data){
+  clickSlideToggle(data) {
     switch (true) {
       case data === 'email': {
         if(this.email)
           this.email = false;
         else this.email = true;
 
-        setTimeout(() =>{
+        setTimeout(() => {
           this.openDialog('Connect to Email Notification', 
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.email, 'email');
@@ -121,8 +121,8 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
           this.slack = false;
         else this.slack = true;
 
-        setTimeout(() =>{
-          this.openDialog('Connect to Slack', 
+        setTimeout(() => {
+          this.openDialog('Connect to Slack',
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.slack, 'slack');
         }, 300);
@@ -135,7 +135,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
           this.appleTV = false;
         else this.appleTV = true;
 
-        setTimeout(() =>{
+        setTimeout(() => {
           this.openDialog('Connect to Apple TV', 
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.appleTV, 'appleTV');
@@ -149,26 +149,17 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   slideToggle(data) {
     switch (true) {
       case data === 'email': {
-        if(this.email)
-          this.email = false;
-        else this.email = true;
-
+        this.email ? this.email = false : this.email = true;
         break;
       }
 
       case data === 'slack': {
-        if(this.slack)
-          this.slack = false;
-        else this.slack = true;
-
+        this.slack ? this.slack = false : this.slack = true;
         break;
       }
 
       case data === 'appleTV': {
-        if(this.appleTV)
-          this.appleTV = false;
-        else this.appleTV = true;
-
+        this.appleTV ? this.appleTV = false : this.appleTV = true;
         break;
       }
     }

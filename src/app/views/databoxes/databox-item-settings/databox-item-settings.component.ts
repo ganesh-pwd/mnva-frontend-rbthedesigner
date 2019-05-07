@@ -168,13 +168,13 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       // get query form inputs data for saving
       getQueryFormBody() {
         // get databox historical value
-        let historical = document.getElementById('historicals')
+        const historical = document.getElementById('historicals')
         .getElementsByClassName('query-active');
 
         // set selected multiple countries
-        let country = document.getElementById('countries');
-        let active_country = country.getElementsByClassName('query-active');
-        let countries = [];
+        const country = document.getElementById('countries');
+        const active_country = country.getElementsByClassName('query-active');
+        const countries = [];
 
         for(let i = 0; i < active_country.length; i++)
           countries.push(active_country[i].textContent)
@@ -204,10 +204,10 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // set initial value of query form
       setValueOfForm() {
-        let databox_id = this.data ? this.data._id : sessionStorage.getItem('databox_id_new');
-        let test_query_exist = sessionStorage.getItem('databox_test_query_bool');
-        let test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
-        let check_databox    = this.data && test_query_data && test_query_data.databox_id === databox_id ? true : false;
+        const databox_id = this.data ? this.data._id : sessionStorage.getItem('databox_id_new');
+        const test_query_exist = sessionStorage.getItem('databox_test_query_bool');
+        const test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
+        const check_databox    = this.data && test_query_data && test_query_data.databox_id === databox_id ? true : false;
         
         const data = {
           // basic query: required keywords
@@ -259,10 +259,10 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       }
 
       // databox result
-      setResult(){
-        let test_query_exist = sessionStorage.getItem('databox_test_query_bool');
-        let test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
-        let check_databox    = this.data && test_query_data && test_query_data.databox_id === this.data._id ? true : false;
+      setResult() {
+        const test_query_exist = sessionStorage.getItem('databox_test_query_bool');
+        const test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
+        const check_databox    = this.data && test_query_data && test_query_data.databox_id === this.data._id ? true : false;
 
         return this.data  && !(test_query_data && check_databox) ? 'No results yet, please Create a Query and then click “Test Query” to see results.':
         'Generated Result From Test Query, <br><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur. '
@@ -274,8 +274,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // select country like a checkbox
       selectCountry(id_value){
-        let selected = document.getElementById(id_value);
-        
+        const selected = document.getElementById(id_value);
+
         if(selected.classList.contains('query-active')) selected.classList.remove('query-active');
         else selected.classList.add('query-active');
       }
@@ -284,26 +284,29 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       // select historical value
       selectHistorical(id_value){
         // set selected historical
-        let historicals = document.getElementById('historicals');
-        let active_historical = historicals.getElementsByClassName('query-active');
+        const historicals = document.getElementById('historicals');
+        const active_historical = historicals.getElementsByClassName('query-active');
 
-        if(active_historical.length > 0)
-          for(let i = 0; i < active_historical.length; i++)
+        if (active_historical.length > 0) {
+          for (let i = 0; i < active_historical.length; i++) {
             active_historical[i].classList.remove('query-active');
-        
+          }
+        }
+
         // select the button as active
-        let selected = document.getElementById(id_value);
-        
-        if(selected.classList.contains('query-active')) 
+        const selected = document.getElementById(id_value);
+
+        if (selected.classList.contains('query-active')) {
           selected.classList.remove('query-active');
+        }
 
         else selected.classList.add('query-active');
       }
 
 
       // minimize/maximize accordion
-      selectAccordion(accord){
-        switch(true){
+      selectAccordion(accord) {
+        switch (true) {
           case accord === 'showQuery':
           {
             if(this.showQueryAccord) this.showQueryAccord = false;
@@ -329,9 +332,9 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // set mention value
       setMentionValue(mention){
-        let checkChanges = sessionStorage.getItem('databox_test_query_bool')
+        const checkChanges = sessionStorage.getItem('databox_test_query_bool');
 
-        return this.changes || checkChanges ? mention : 0
+        return this.changes || checkChanges ? mention : 0;
       }
 
   /* @DATABOX COMPONENT ADVANCE CONDITION */
@@ -438,7 +441,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       getHistoricals(){
         this.historicalReq = this.historicalService
           .getHistorical()
-          .subscribe(historical => this.historicals = historical)
+          .subscribe(historical => this.historicals = historical);
       }
       
 
@@ -446,7 +449,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       getDatasource() {
         this.databoxSingleReq = this.datasourceService
           .getDatasource()
-          .subscribe(data => { 
+          .subscribe(data => {
       
             this.datasource = data
               .filter(el => this.loggedInUser.datasources.indexOf(el.name) < 0)
@@ -477,7 +480,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       checkIfInputIsValid(){
         let valid = true;
 
-        if((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')){
+        if ((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')) {
           this.snackBar.open("You need to add the required keywords", 'close');
           setTimeout(() => this.snackBar.dismiss(), 3000);
           valid = false;
@@ -494,7 +497,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // open modal for updating the databox
       openDialogTestQuery(title: string, data: string) {
-        if(this.checkIfInputIsValid()){
+        if (this.checkIfInputIsValid()) {
           this.snackBar.dismiss();
           
           this.mainDataboxesDialogService
@@ -513,7 +516,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // open modal for updating the databox
       openDialogUpdate(title: string, data: string) {
-        if(this.checkIfInputIsValid()){
+        if (this.checkIfInputIsValid()) {
           this.mainDataboxesDialogService
             .confirm({
               title: title,
@@ -530,7 +533,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // open databox query dialog
       openMentionsDialog(title: string, mentions: any = 1200) {
-        if(this.checkIfInputIsValid()){
+        if (this.checkIfInputIsValid()) {
           this.databoxMentionsDialogService
             .confirm({ title: title, data: this.getQueryFormBody(), mentions: mentions })
             .subscribe(result => {});
@@ -539,7 +542,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // open databox query dialog
       openMentionsDialogUpdate(title: string, mentions: any = 1200) {
-        if(this.checkIfInputIsValid()){
+        if (this.checkIfInputIsValid()) {
           this.databoxMentionsDialogService
             .confirm({ title: title, data: this.getQueryFormBody(), update: true, mentions: mentions })
             .subscribe(result => {});
