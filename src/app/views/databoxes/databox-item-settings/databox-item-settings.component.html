@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-<br />
-<!-- Header and Breadcrumb for Databox with Status Draft -->
-=======
 <br id="databox-breadcrumb">
 <!-- Header and Breadcrumb for Databox with Status Active -->
->>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 <div *ngIf="checkIfCreateOrEdit === 'Create' && (databoxItemData || data)">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div class="header-row" fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
@@ -38,23 +33,6 @@
     >
       Back to Databox
     </button>
-    <span fxFlex></span>
-<<<<<<< HEAD
-=======
-    <div class="mr-1">
-      <h3 class="mat-h3 mr-1" [ngClass]="loggedInUser.mentions < 0 ? 'mat-color-red': ''">Mentions Remaining:
-        <span class="credits" 
-        *ngIf="loggedInUser.accountType !== 'Enterprise'"> 
-        {{loggedInUser.mentions}} Mentions
-        </span>
-
-        <span class="credits" 
-        *ngIf="loggedInUser.accountType === 'Enterprise'"> 
-        Unlimited Mentions
-        </span>
-      </h3>
-    </div>
->>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
   </div>
 </div>
 

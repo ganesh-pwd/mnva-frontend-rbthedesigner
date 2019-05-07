@@ -4,10 +4,13 @@
     <mat-divider></mat-divider>
   </mat-card-title>
   <mat-card-content *ngIf="loggedInUser">
-    <div class="pb-1">
+    <div>
       <div>
         <p class="m-0">Mentions Remaining</p>
-        <p class="text-muted m-0">{{loggedInUser.mentions}} Mentions</p>
+        <p class="text-muted" *ngIf="loggedInUser.accountType !== 'Enterprise'">
+      {{loggedInUser.mentions}} Mentions</p>
+      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+      Unlimited Mentions</p>
       </div>
       <span fxFlex></span> 
       <div>
@@ -21,11 +24,6 @@
       </div>
     </div>  
     <div class="pb-1">
-      <h6>Mentions Remaining</h6>
-      <p class="text-muted" *ngIf="loggedInUser.accountType !== 'Enterprise'">
-      {{loggedInUser.mentions}} Mentions</p>
-      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
-      Unlimited Mentions</p>
       <mat-progress-bar
         *ngIf="loggedInUser.accountType !== 'Enterprise'"
         [ngClass]="remaining >= 80 && remaining <= 99 

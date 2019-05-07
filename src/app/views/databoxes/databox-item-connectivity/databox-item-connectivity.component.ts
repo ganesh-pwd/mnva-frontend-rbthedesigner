@@ -23,11 +23,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   public email: boolean = false;
   public slack: boolean = false;
-<<<<<<< HEAD
-  public appleTv: boolean = false;
-=======
   public appleTV: boolean = false;
->>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
 
   constructor(
     private router: Router,
@@ -110,16 +106,11 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         if(this.email)
           this.email = false;
         else this.email = true;
-<<<<<<< HEAD
-=======
-
         setTimeout(() => {
           this.openDialog('Connect to Email Notification', 
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.email, 'email');
         }, 300);
->>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
-
         break;
       }
 
@@ -127,9 +118,6 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         if(this.slack)
           this.slack = false;
         else this.slack = true;
-<<<<<<< HEAD
-=======
-
         setTimeout(() => {
           this.openDialog('Connect to Slack',
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
@@ -149,27 +137,16 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.appleTV, 'appleTV');
         }, 300);
->>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
-
         break;
       }
     }
   }
-
-<<<<<<< HEAD
-      case data === 'appleTv': {
-        if(this.appleTv)
-          this.appleTv = false;
-        else this.appleTv = true;
-=======
   slideToggle(data) {
     switch (true) {
       case data === 'email': {
         this.email ? this.email = false : this.email = true;
         break;
       }
->>>>>>> 2f52064ef5419f39a552c1369dfc2e466a18aa8f
-
       case data === 'slack': {
         this.slack ? this.slack = false : this.slack = true;
         break;
@@ -181,6 +158,4 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-
 }
