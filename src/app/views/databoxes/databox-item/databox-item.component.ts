@@ -43,6 +43,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public dataSource: any;
   public selectedTab: number;
 
+  /** Results table */
+  public resultsTableColumns: string[] = ['content', 'category', 'subCategory'];
+  public resultsDataSource: any;
+
   @ViewChild('hot') hot;
   @ViewChild('exportFile') exportFile;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -66,7 +70,28 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public entityRecognition: boolean = false;
   public loggedInUser;
 
-  
+  /* @SET CHART DATA */
+  // Doughnuts
+  public sharedChartOptions: any = {
+    responsive: true,
+    legend: {
+      display: false,
+      position: 'bottom'
+    }
+  };
+  public doughnutOptions: any = Object.assign({
+    elements: {
+      arc: {
+        borderWidth: 0
+      }
+    }
+  }, this.sharedChartOptions);
+  public doughnutChartColors: any[] = [{
+    backgroundColor: ['#fb8a01', '#19b4d7', '#3c4650', '#4caf50']
+  }];
+  public doughnutChartCategoryLabels = ['Category Mentions', 'Category Remaining'];
+  public doughnutChartSubCategoryLabels = ['SubCategory Mentions', 'SubCategory Remaining'];
+  public doughnutChartType = 'doughnut';
 
   constructor(
     private router: Router,
@@ -113,6 +138,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
     setTimeout(() => document.getElementById('head').click(), 500);
   }
+
   ngOnDestroy() {
     if (this.getItemSub) { this.getItemSub.unsubscribe(); }
     if (this.getTableReq) { this.getTableReq.unsubscribe(); }
@@ -120,30 +146,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     if (this.resetRowReq) { this.resetRowReq.unsubscribe(); }
     if (this.req) {this.req.unsubscribe(); }
   }
-
-  /* @SET CHART DATA */
-
-    // Doughnuts
-    public sharedChartOptions: any = {
-      responsive: true,
-      legend: {
-        display: false,
-        position: 'bottom'
-      }
-    };
-    public doughnutOptions: any = Object.assign({
-      elements: {
-        arc: {
-          borderWidth: 0
-        }
-      }
-    }, this.sharedChartOptions);
-    public doughnutChartColors: any[] = [{
-      backgroundColor: ['#fb8a01', '#19b4d7', '#3c4650', '#4caf50']
-    }];
-    public doughnutChartCategoryLabels = ['Category Mentions', 'Category Remaining'];
-    public doughnutChartSubCategoryLabels = ['SubCategory Mentions', 'SubCategory Remaining'];
-    public doughnutChartType = 'doughnut';
 
   // build queryForm
   suggestResultFormGroup() {
@@ -281,11 +283,11 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
   // Get Databox Category
-  getDataboxCategory(id){
+  getDataboxCategory(id) {
     this.databoxCategoryReq = this.databoxCategoryService
     .getItem(id)
     .subscribe(result => {
-      if(result[0]){
+      if (result[0]) {
         this.databoxCategories = result[0].categories;
         this.dataSource = result[0].categories;
       }

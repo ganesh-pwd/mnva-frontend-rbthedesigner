@@ -45,6 +45,65 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public loggedInUser;
   public editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
 
+  /* @SET CHART DATA */
+  // set chart data
+
+  public sharedChartOptions: any = {
+    responsive: true,
+    legend: {
+      display: false,
+      position: 'bottom'
+    }
+  };
+
+  public chartColors: Array <any> = [{
+    backgroundColor: '#19b4d7',
+    borderColor: '#19b4d7',
+    pointBackgroundColor: '#19b4d7',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+  }, {
+    backgroundColor: '#fb8a01',
+    borderColor: '#fb8a01',
+    pointBackgroundColor: '#fb8a01',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(77,83,96,1)'
+  }];
+
+  /* set line chart option
+  * Line Chart Options
+  */
+  public lineChartData: Array <any> = [{
+    data: [1200, 3200, 1600, 5300, 4100, 9800, 7900],
+    label: 'Mentions'
+  }];
+  public lineChartLabels: Array <any> = [`Sat 17`, 'Sun 18', 'Mon 19', 'Tue 20', 'Wed 21', 'Thu 22'];
+  public lineChartOptions: any = Object.assign({
+    animation: false,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          color: 'rgba(0,0,0,0.02)',
+          zeroLineColor: 'rgba(0,0,0,0.02)'
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          color: 'rgba(0,0,0,0.02)',
+          zeroLineColor: 'rgba(0,0,0,0.02)'
+        },
+        ticks: {
+          beginAtZero: true,
+          suggestedMax: 9,
+        }
+      }]
+    }
+  }, this.sharedChartOptions);
+  public lineChartLegend: boolean = false;
+  public lineChartType: string = 'line';
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -60,7 +119,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     public snackBar: MatSnackBar
   ) {
     userService.userData$.subscribe((user) => this.loggedInUser = user);
-    
+
     // check if user is creating databox or editing query
     const urlSegment = this.router.url.split('/')[2];
     if (urlSegment === 'create-databox') this.checkIfCreateOrEdit = 'Create';
@@ -78,76 +137,13 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
     this.queryForm.valueChanges.subscribe(result => (this.changes = true));
   }
+
   ngOnDestroy() {
     if (this.databoxSingleReq) this.databoxSingleReq.unsubscribe();
     if (this.databoxReq) this.databoxReq.unsubscribe();
     if (this.countryReq) this.countryReq.unsubscribe();
     if (this.historicalReq) this.historicalReq.unsubscribe();
   }
-
-  /* @SET CHART DATA */
-
-      // set chart data
-
-      public sharedChartOptions: any = {
-        responsive: true,
-        legend: {
-          display: false,
-          position: 'bottom'
-        }
-      };
-
-      public chartColors: Array <any> = [{
-        backgroundColor: '#19b4d7',
-        borderColor: '#19b4d7',
-        pointBackgroundColor: '#19b4d7',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      }, {
-        backgroundColor: '#fb8a01',
-        borderColor: '#fb8a01',
-        pointBackgroundColor: '#fb8a01',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(77,83,96,1)'
-      }];
-
-      /* set line chart option
-      * Line Chart Options
-      */
-      public lineChartData: Array <any> = [{
-        data: [5, 5, 7, 8, 4, 5, 5],
-        label: 'Series A'
-      }, {
-        data: [5, 4, 4, 3, 6, 2, 5],
-        label: 'Series B'
-      }];
-      public lineChartLabels: Array <any> = ['1', '2', '3', '4', '5', '6', '7'];
-      public lineChartOptions: any = Object.assign({
-        animation: false,
-        scales: {
-          xAxes: [{
-            gridLines: {
-              color: 'rgba(0,0,0,0.02)',
-              zeroLineColor: 'rgba(0,0,0,0.02)'
-            }
-          }],
-          yAxes: [{
-            gridLines: {
-              color: 'rgba(0,0,0,0.02)',
-              zeroLineColor: 'rgba(0,0,0,0.02)'
-            },
-            ticks: {
-              beginAtZero: true,
-              suggestedMax: 9,
-            }
-          }]
-        }
-      }, this.sharedChartOptions);
-      public lineChartLegend: boolean = false;
-      public lineChartType: string = 'line';
-
 
   /* @DATABOX FORM GROUP FUNCTIONS INITIALIZE */
 

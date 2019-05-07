@@ -19,7 +19,8 @@
   </div>
 
   <ul appDropdown class="sidenav">
-    <li *ngFor="let item of menuItems" appDropdownLink routerLinkActive="open">
+    <li *ngFor="let item of menuItems" appDropdownLink 
+    routerLinkActive="open" >
       <div class="nav-item-sep" *ngIf="item.type === 'separator'">
         <mat-divider></mat-divider>
         <span class="text-muted">{{item.name | translate}}</span>
@@ -36,11 +37,6 @@
                 {{item.name | translate}}
               </span>
               <span fxFlex></span>
-              <span 
-                class="menuitem-badge mat-bg-{{ badge.color }}" 
-                [ngStyle]="{background: badge.color}" 
-                *ngFor="let badge of item.badges">{{ badge.value }}
-              </span>
         </a>
 
         <a [href]="item.state" 
@@ -61,7 +57,9 @@
         <a *ngIf="item.type === 'dropDown'" 
           appDropdownToggle 
           matRipple 
-          routerLink="/{{item.state}}">
+          routerLink="/{{item.state}}"
+          routerLinkActive="mat-color-primary"
+          [routerLinkActiveOptions]="{exact:true}">
               <!-- <mat-icon>{{item.icon}}</mat-icon> -->
               <img src="{{item.image_icon}}" class="side-image-icon">
               <span class="item-name lvl1">
@@ -73,7 +71,7 @@
                 [ngStyle]="{background: badge.color}" 
                 *ngFor="let badge of item.badges">{{ badge.value }}
               </span>
-              <mat-icon class="menu-caret">keyboard_arrow_right</mat-icon>
+              <mat-icon class="menu-caret" *ngIf="item.name !== 'Databoxes'">keyboard_arrow_right</mat-icon>
         </a>
 
         <!-- LEVEL 2 -->
@@ -95,10 +93,13 @@
             <a *ngIf="itemLvL2.type === 'dropDown'" 
               appDropdownToggle 
               matRipple 
+              routerLinkActive="mat-color-primary" 
+              [routerLinkActiveOptions]="{exact:true}" 
               routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}">
                 <span class="item-name lvl2">{{itemLvL2.name | translate}}</span>
                 <span fxFlex></span>
-                <mat-icon class="menu-caret">keyboard_arrow_right</mat-icon>
+                <mat-icon class="menu-caret" 
+                *ngIf="item.name !== 'Databoxes'">keyboard_arrow_right</mat-icon>
             </a>
 
             <!-- LEVEL 3 -->

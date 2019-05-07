@@ -81,7 +81,7 @@ export class NavigationService {
 
     const arr = [{
         name: 'Databoxes',
-        type: 'link',
+        type: 'dropDown',
         tooltip: 'Databoxes',
         icon: 'widgets',
         state: 'databoxes',
