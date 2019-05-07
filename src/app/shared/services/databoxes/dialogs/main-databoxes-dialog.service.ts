@@ -33,7 +33,10 @@ export class MainDataboxesDialogService {
     dialogRef = this.dialog.open(MainDataboxDialogComponent, {
       width: data.title === 'How to connect to Power BI'
         || data.title === 'How to connect to Tableau'
-        || data.title === 'How to connect to Data Studio' ? '600px' : '500px',
+        || data.title === 'How to connect to Data Studio' 
+        || data.title === 'Connect to Email Notification'
+        || data.title === 'Connect to Slack'
+        || data.title === 'Connect to Apple TV'? '600px' : '500px',
       disableClose: true,
       data: {
         title: data.title,

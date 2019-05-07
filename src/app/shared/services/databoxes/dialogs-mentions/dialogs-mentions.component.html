@@ -17,14 +17,28 @@
 	            <td>{{databoxMention}} Mentions</td>
 	        </tr>
 
-	        <tr>
+	        <tr *ngIf="loggedInUser.accountType !== 'Enterprise'">
 	            <td>Current Mentions Remaining in Plan</td>
 	            <td>{{loggedInUser.mentions}} Mentions</td>
 	        </tr>
 
-	        <tr [ngClass]="(loggedInUser.mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'">
-	            <td>Total Remaining After Creation</td>
+	        <tr [ngClass]="(loggedInUser.mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'" 
+	        *ngIf="loggedInUser.accountType !== 'Enterprise'">
+	            <td *ngIf="!data.update">Total Remaining After Creation</td>
+	            <td *ngIf="data.update">Total Remaining After Running The Query</td>
 	            <td>{{loggedInUser.mentions - databoxMention}} Mentions</td>
+	        </tr>
+
+	        <tr *ngIf="loggedInUser.accountType === 'Enterprise'">
+	            <td>Current Mentions Remaining in Plan</td>
+	            <td>Unlimited Mentions</td>
+	        </tr>
+
+	        <tr [ngClass]="(loggedInUser.mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'" 
+	        *ngIf="loggedInUser.accountType === 'Enterprise'">
+	            <td *ngIf="!data.update">Total Remaining After Creation</td>
+	            <td *ngIf="data.update">Total Remaining After Running The Query</td>
+	            <td>Unlimited Mentions</td>
 	        </tr>
 
       	</tbody>
@@ -42,9 +56,14 @@
 			(click)="updateCreateDatabox()">Apply</button>
 
 		<!-- If mentions credit are negative -->
-		<button *ngIf="(loggedInUser.mentions - databoxMention) < 0" 
+		<button *ngIf="!data.update && (loggedInUser.mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="warn"
 			(click)="createNewDatabox()">Continue with {{loggedInUser.mentions - databoxMention}} Mentions</button>
+
+		<!-- If mentions credit are negative -->
+		<button *ngIf="data.update && (loggedInUser.mentions - databoxMention) < 0" 
+			type="button" mat-raised-button color="warn"
+			(click)="updateCreateDatabox()">Continue with {{loggedInUser.mentions - databoxMention}} Mentions</button>
 
 		<button *ngIf="(loggedInUser.mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="primary"

@@ -21,9 +21,9 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   public databoxItemData: any;
   public selectedOption;
 
-  public powerBi: boolean = false;
-  public tableau: boolean = false;
-  public dataStudio: boolean = false;
+  public email: boolean = false;
+  public slack: boolean = false;
+  public appleTV: boolean = false;
 
   constructor(
     private router: Router,
@@ -90,39 +90,89 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
   // open notification dialog
   openNotificationDialog(title: string, datasource: string) {
-    this.getItemSub = this.databoxConnectivityDialogService
-      .confirm({
-        title: title,
-        datasource: datasource
-      })
-      .subscribe(result => {});
+    if(this.email){
+      this.getItemSub = this.databoxConnectivityDialogService
+        .confirm({
+          title: title,
+          datasource: datasource
+        })
+        .subscribe(result => {});
+    }
   }
 
-  slideToggle(data) {
+  clickSlideToggle(data){
     switch (true) {
-      case data === 'powerBi': {
-        if(this.powerBi)
-          this.powerBi = false;
-        else this.powerBi = true;
+      case data === 'email': {
+        if(this.email)
+          this.email = false;
+        else this.email = true;
+
+        setTimeout(() =>{
+          this.openDialog('Connect to Email Notification', 
+            'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
+            false, this.email, 'email');
+        }, 300);
 
         break;
       }
 
-      case data === 'tableau': {
-        if(this.tableau)
-          this.tableau = false;
-        else this.tableau = true;
+      case data === 'slack': {
+        if(this.slack)
+          this.slack = false;
+        else this.slack = true;
+
+        setTimeout(() =>{
+          this.openDialog('Connect to Slack', 
+            'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
+            false, this.slack, 'slack');
+        }, 300);
 
         break;
       }
 
-      case data === 'dataStudio': {
-        if(this.dataStudio)
-          this.dataStudio = false;
-        else this.dataStudio = true;
+      case data === 'appleTV': {
+        if(this.appleTV)
+          this.appleTV = false;
+        else this.appleTV = true;
+
+        setTimeout(() =>{
+          this.openDialog('Connect to Apple TV', 
+            'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
+            false, this.appleTV, 'appleTV');
+        }, 300);
 
         break;
       }
     }
   }
+
+  slideToggle(data) {
+    switch (true) {
+      case data === 'email': {
+        if(this.email)
+          this.email = false;
+        else this.email = true;
+
+        break;
+      }
+
+      case data === 'slack': {
+        if(this.slack)
+          this.slack = false;
+        else this.slack = true;
+
+        break;
+      }
+
+      case data === 'appleTV': {
+        if(this.appleTV)
+          this.appleTV = false;
+        else this.appleTV = true;
+
+        break;
+      }
+    }
+  }
+
+
 }

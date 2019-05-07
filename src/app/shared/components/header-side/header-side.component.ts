@@ -45,7 +45,7 @@ export class HeaderSideComponent implements OnInit {
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
     
     userService.userData$.subscribe(user => {
-      if(user){
+      if (user) {
         this.userFullName = user.name
         this.loggedInUser = user;
       }
@@ -102,7 +102,6 @@ export class HeaderSideComponent implements OnInit {
   }
 
   signOut() {
-    
     this.router.navigate(['/sessions/signin']).then(() => {
       this.userService.setUser(null);
       sessionStorage.clear();

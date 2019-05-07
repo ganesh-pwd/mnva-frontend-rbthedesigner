@@ -7,6 +7,7 @@ import { AlgorithmCreditComponent } from './algorithm-credit/algorithm-credit.co
 import { ProductsCartComponent } from './cart/cart.component';
 import { ProductCheckoutComponent } from './checkout/checkout.component';
 import { MentionsCreditComponent } from './mentions-credit/mentions-credit.component';
+import { AdvancedTemplatesLinkComponent } from './advanced-templates-link/advanced-templates-link.component';
 
 export const ProductRoutes: Routes = [
   {
@@ -70,7 +71,13 @@ export const ProductRoutes: Routes = [
           data: {
             title: 'Advanced Templates', breadcrumb: 'Advanced Templates'
           }
-      }
+      },
+      {
+        path: ':id', component: AdvancedTemplatesLinkComponent,
+          data: {
+            title: 'Advanced Templates', breadcrumb: 'Advanced Templates'
+          }
+      },
     ]
   },
   {

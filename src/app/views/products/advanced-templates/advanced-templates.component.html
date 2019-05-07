@@ -24,15 +24,6 @@
       </div>
       <!-- View change buttons and cart -->
       <span fxFlex></span>
-      <!-- 
-      <div [fxHide.lt-md]="true">
-        <button mat-icon-button [color]="viewMode === 'list-view' ? 'primary' : ''" (click)="viewMode = 'list-view'">
-          <mat-icon>format_list_bulleted</mat-icon>
-        </button>
-        <button mat-icon-button [color]="viewMode === 'grid-view' ? 'primary' : ''" (click)="viewMode = 'grid-view'">
-          <mat-icon>apps</mat-icon>
-        </button>
-      </div>-->
 
       <span fxFlex="20px"></span>
       <button mat-raised-button color="primary" routerLink="/products/cart">
@@ -55,10 +46,7 @@
         <div class="product-wrap" *ngFor="let product of products$ | async | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
           [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}">
           <div class="product-inner default-bg">
-            <!--div *ngIf="product?.badge?.text" class="product-badge mat-elevation-z7" [ngStyle]="{background: product?.badge?.color || '#f44336'}">
-                <span>{{product?.badge?.text}}</span>
-              </div-->
-            <div class="featured-img" (click)="addToCart(product)">
+            <div class="featured-img" routerLink="/products/advanced-templates/{{product._id}}">
               <img [src]="product.photo" alt="">
             </div>
             <div class="info-wrap p-1">
@@ -74,7 +62,6 @@
                 <div class="price-rating">
                   <div class="price">
                     <span>{{product?.price?.sale | currency:'USD'}}</span>
-                    <!--del class="text-muted">{{product?.price?.previous | currency:'USD'}}</del-->
                   </div>
 
                 </div>

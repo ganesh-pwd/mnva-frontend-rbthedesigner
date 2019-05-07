@@ -87,7 +87,7 @@
 					  	<mat-menu #userMenu="matMenu">
 					      	<button mat-menu-item (click)="openDialog('Edit User', user)">
 					      	Edit User</button>
-					      	<button mat-menu-item>Delete User</button>
+					      	<button mat-menu-item (click)="openDialog('Delete User', user, true)">Delete User</button>
 					  	</mat-menu>
 					</mat-card-header>
 
@@ -116,11 +116,24 @@
 			class="mb-05"
 			color="primary"
 			mat-raised-button
+			*ngIf="loggedInUser.accountType !== 'Enterprise'"
 			[disabled]="data.length === loggedInUser.max_created_users"
 			(click)="openDialog('Add New User')"> Add User
 			</button>
 
-			<p>{{data.length}} / {{loggedInUser.max_created_users}} users remaining</p>
+			<button
+			class="mb-05"
+			color="primary"
+			mat-raised-button
+			*ngIf="loggedInUser.accountType === 'Enterprise'"
+			(click)="openDialog('Add New User')"> Add User
+			</button>
+
+			<p *ngIf="loggedInUser.accountType !== 'Enterprise'">{{data.length}} / {{loggedInUser.max_created_users}} users remaining</p>
+
+			<p *ngIf="loggedInUser.accountType === 'Enterprise'">{{data.length}} / 
+				<span class="mat-color-primary">Unlimited Users </span>
+			</p>
 		</div>
 	</div>
 </div>

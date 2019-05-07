@@ -7,6 +7,7 @@ import { MinervaAccountDialogComponent } from './minerva-account-dialog.componen
 interface confirmData {
   title?: string,
   details?: any,
+  delete?: boolean
 }
 
 @Injectable({
@@ -19,6 +20,7 @@ export class MinervaAccountDialogService {
   public confirm(data:confirmData = {}): Observable<boolean> {
     data.title = data.title || 'Delete Account';
     data.details = data.details || {};
+    data.delete = data.delete || false;
 
     let dialogRef: MatDialogRef<MinervaAccountDialogComponent>;
     dialogRef = this.dialog.open(MinervaAccountDialogComponent, {
@@ -27,6 +29,7 @@ export class MinervaAccountDialogService {
       data: {
         title: data.title,
         details: data.details,
+        delete: data.delete
       }
     });
 

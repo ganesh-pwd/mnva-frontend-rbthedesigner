@@ -14,13 +14,14 @@ export class MinervaAccountDialogComponent implements OnInit, OnDestroy {
   private deleteSubs: Subscription;
 
   public userForm: FormGroup;
+  public deleteInput: string = '';
 
   constructor(public dialogRef: MatDialogRef<MinervaAccountDialogComponent>,
     public dialog: MatDialog, public snackBar: MatSnackBar,
     private minervaAccountService: MinervaAccountService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) { console.log(data) }
 
   ngOnInit() {
     this.userFormGroupBuilder();
@@ -67,6 +68,32 @@ export class MinervaAccountDialogComponent implements OnInit, OnDestroy {
       this.dialogRef.close(false);
       console.log(result);
     });
+  }
+
+  // edit user account
+  editUser(){
+    let body = {
+      'name': this.userForm.get('name').value,
+      'email': this.userForm.get('email').value,
+      'role' : this.userForm.get('role').value
+    }
+
+    this.reqSubs = this.minervaAccountService
+    .editUser(body, this.data.details._id)
+    .subscribe(result => {
+      this.dialogRef.close(false);
+      console.log(result);
+    });
+  }
+
+
+  // delete user
+  deleteUser(){
+    this.deleteSubs = this.minervaAccountService
+    .deleteUser(this.data.details._id, this.deleteInput)
+    .subscribe(result => {
+      this.dialogRef.close(false);
+    })
   }
 
   closeDialog() {

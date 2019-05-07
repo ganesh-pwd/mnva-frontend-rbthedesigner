@@ -41,6 +41,7 @@ import { AlgorithmCreditComponent } from './algorithm-credit/algorithm-credit.co
 import { ProductsCartComponent } from './cart/cart.component';
 import { ProductCheckoutComponent } from './checkout/checkout.component';
 import { MentionsCreditComponent } from './mentions-credit/mentions-credit.component';
+import { AdvancedTemplatesLinkComponent } from './advanced-templates-link/advanced-templates-link.component';
 
 @NgModule({
   imports: [
@@ -84,7 +85,8 @@ import { MentionsCreditComponent } from './mentions-credit/mentions-credit.compo
     AlgorithmCreditComponent,
     ProductsCartComponent,
     ProductCheckoutComponent,
-    MentionsCreditComponent
+    MentionsCreditComponent,
+    AdvancedTemplatesLinkComponent,
   ],
   providers: [
     MatDatepickerModule,

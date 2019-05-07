@@ -24,99 +24,130 @@
 
 	        <!-- Time line -->
 	        <mat-card class="default" *ngIf="data.datasource !== 'Twitter'">
-		        <mat-card-content>
-		            <div class="timeline">
-		              	<div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group value="1">
-		                  	        <mat-radio-button value="1">
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top">
-			                    	<b class="timeline-body-title">Who is going to recieve this Summary Report?</b><br>
+		        <form [formGroup]="receive_email_group">
+        	        <mat-card-content>
+        	            <div class="timeline">
+        	              	<div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button value="1"
+        	                  	        [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top">
+        		                    	<b class="timeline-body-title">
+        		                    	Who is going to recieve this Summary Report?</b><br>
 
-			                    	<form>
-			                    	  <mat-form-field class="full-width">
-			                    	    <input type="email" matInput placeholder="Email">
-			                    	  </mat-form-field>
-			                    	</form>
-			                  	</div>
-			                </div>
-		              	</div>
+        		                    	<mat-form-field class="full-width">
+        		                    	    <input type="email" 
+        		                    	    matInput 
+        		                    	    placeholder="Email" 
+        		                    	    formControlName="receiver-email">
+        		                    	</mat-form-field>
+        		                  	</div>
+        		                </div>
+        	              	</div>
 
-			            <div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group value="1">
-		                  	        <mat-radio-button value="1">
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top" fxLayout="row">
-				                    <b class="timeline-body-title">Choose at what time do you need your Email Summary Report sent</b>
-				                  	</div>
-				                  	<div class="timeline-body-content">
-				                    <p><mat-checkbox>9:00 AM</mat-checkbox></p>
-				                    <p><mat-checkbox>11:00 AM</mat-checkbox></p>
-				                    <p><mat-checkbox>12:00 PM</mat-checkbox></p>
-				                    <p><mat-checkbox>4:00 PM</mat-checkbox></p>
-				                    <p>
-				                    	<button 
-				                    	mat-raised-button 
-				                    	color="primary">
-				                    	Next</button>
-				                    </p>
-			                  	</div>
-			                </div>
-			            </div>
+        		            <div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button [value]="receive_email_group.controls['receiver-email'].valid && receive_email_group.controls['receiver-email'].touched ? '1' : '0'" 
+        	                  	        [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top" fxLayout="row">
+        			                    <b class="timeline-body-title">Choose at what time do you need your Email Summary Report sent</b>
+        			                  	</div>
+        			                  	<div class="timeline-body-content">
+        			                    <p><mat-checkbox formControlName="summary-report-check" 
+        			                    [disabled]="receive_email_group.controls['receiver-email'].valid && receive_email_group.controls['receiver-email'].touched ? null : ''">
+        			                	9:00 AM</mat-checkbox></p>
 
-			            <div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group  value="1">
-		                  	        <mat-radio-button>
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top" fxLayout="row">
-			                    	<div class="timeline-body-content">
-			                    		<b class="timeline-body-title">Choose what days will the report be received</b><br><br>
-			                    	
-			                    		<p><mat-checkbox>Monday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Tuesday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Wednesday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Thursday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Friday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Saturday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Sunday</mat-checkbox></p>
-			                    		<p>
-			                    			<button 
-			                    			mat-raised-button 
-			                    			color="primary">
-			                    			Next</button>
-			                    		</p>
-			                    	</div>
-			                  	</div>
-			                </div>
-		              	</div>
+        			                    <p><mat-checkbox formControlName="summary-report-check"
+        			                    [disabled]="receive_email_group.controls['receiver-email'].valid && receive_email_group.controls['receiver-email'].touched ? null : ''">
+        			                	11:00 AM</mat-checkbox></p>
 
-		              	<div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group  value="1">
-		                  	        <mat-radio-button>
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top" fxLayout="row">
-			                    	<b class="timeline-body-title">Done</b>
-			                  	</div>
-			                </div>
-		              	</div>
-		            </div>
-		        </mat-card-content>
+        			                    <p><mat-checkbox formControlName="summary-report-check"
+        			                    [disabled]="receive_email_group.controls['receiver-email'].valid && receive_email_group.controls['receiver-email'].touched ? null : ''">
+        			                	12:00 PM</mat-checkbox></p>
+
+        			                    <p><mat-checkbox formControlName="summary-report-check"
+        			                    [disabled]="receive_email_group.controls['receiver-email'].valid && receive_email_group.controls['receiver-email'].touched ? null : ''">
+        			                	4:00 PM</mat-checkbox></p>
+        			                    <p>
+        			                    	<button 
+        			                    	mat-raised-button 
+        			                    	color="primary">
+        			                    	Next</button>
+        			                    </p>
+        		                  	</div>
+        		                </div>
+        		            </div>
+
+        		            <div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button [value]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? '1' : '0'" [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top" fxLayout="row">
+        		                    	<div class="timeline-body-content">
+        		                    		<b class="timeline-body-title">Choose what days will the report be received</b><br><br>
+        		                    	
+        		                    		<p><mat-checkbox formControlName="days-received" 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Monday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Tuesday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Wednesday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Thursday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Friday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Saturday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''">Sunday</mat-checkbox></p>
+
+        		                    		<p>
+        		                    			<button [disabled]="receive_email_group.controls['summary-report-check'].valid && receive_email_group.controls['summary-report-check'].touched ? null : ''"
+        		                    			mat-raised-button 
+        		                    			color="primary">
+        		                    			Next</button>
+        		                    		</p>
+        		                    	</div>
+        		                  	</div>
+        		                </div>
+        	              	</div>
+
+        	              	<div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button [value]="receive_email_group.controls['days-received'].valid && receive_email_group.controls['days-received'].touched ? '1' : '0'" [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top" fxLayout="row">
+        		                    	<b class="timeline-body-title" [ngClass]="receive_email_group.controls['days-received'].valid && receive_email_group.controls['days-received'].touched ? '' : 'mat-color-gray'">Done</b>
+        		                  	</div>
+        		                </div>
+        	              	</div>
+        	            </div>
+        	        </mat-card-content>
+		        </form>
 	        </mat-card>
 	        <!-- End Time line -->
 		</mat-expansion-panel>
@@ -135,99 +166,130 @@
 
 	        <!-- Time line -->
 	        <mat-card class="default">
-		        <mat-card-content>
-		            <div class="timeline">
-		              	<div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group value="1">
-		                  	        <mat-radio-button value="1"> 
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top">
-			                    	<b class="timeline-body-title">Who is going to recieve this Summary Report?</b><br>
+		        <form [formGroup]="receive_aggregated_report_group">
+        	        <mat-card-content>
+        	            <div class="timeline">
+        	              	<div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button value="1"
+        	                  	        [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top">
+        		                    	<b class="timeline-body-title">
+        		                    	Who is going to recieve this Summary Report?</b><br>
 
-			                    	<form>
-			                    	  <mat-form-field class="full-width">
-			                    	    <input type="email" matInput placeholder="Email">
-			                    	  </mat-form-field>
-			                    	</form>
-			                  	</div>
-			                </div>
-		              	</div>
+        		                    	<mat-form-field class="full-width">
+        		                    	    <input type="email" 
+        		                    	    matInput 
+        		                    	    placeholder="Email" 
+        		                    	    formControlName="receiver-email">
+        		                    	</mat-form-field>
+        		                  	</div>
+        		                </div>
+        	              	</div>
 
-			            <div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group>
-		                  	        <mat-radio-button>
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top" fxLayout="row">
-				                    <b class="timeline-body-title">Choose at what time do you need your Email Summary Report sent</b>
-				                  	</div>
-				                  	<div class="timeline-body-content">
-				                    <p><mat-checkbox>9:00 AM</mat-checkbox></p>
-				                    <p><mat-checkbox>11:00 AM</mat-checkbox></p>
-				                    <p><mat-checkbox>12:00 PM</mat-checkbox></p>
-				                    <p><mat-checkbox>4:00 PM</mat-checkbox></p>
-				                    <p>
-				                    	<button 
-				                    	mat-raised-button 
-				                    	color="primary">
-				                    	Next</button>
-				                    </p>
-			                  	</div>
-			                </div>
-			            </div>
+        		            <div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button [value]="receive_aggregated_report_group.controls['receiver-email'].valid && receive_aggregated_report_group.controls['receiver-email'].touched ? '1' : '0'" 
+        	                  	        [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top" fxLayout="row">
+        			                    <b class="timeline-body-title">Choose at what time do you need your Email Summary Report sent</b>
+        			                  	</div>
+        			                  	<div class="timeline-body-content">
+        			                    <p><mat-checkbox formControlName="summary-report-check" 
+        			                    [disabled]="receive_aggregated_report_group.controls['receiver-email'].valid && receive_aggregated_report_group.controls['receiver-email'].touched ? null : ''">
+        			                	9:00 AM</mat-checkbox></p>
 
-			            <div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group  value="1">
-		                  	        <mat-radio-button>
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top" fxLayout="row">
-			                  		<div class="timeline-body-content">
-			                    		<b class="timeline-body-title">Choose what days will the report be received</b><br><br>
-			                    	
-			                    		<p><mat-checkbox>Monday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Tuesday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Wednesday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Thursday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Friday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Saturday</mat-checkbox></p>
-			                    		<p><mat-checkbox>Sunday</mat-checkbox></p>
-			                    		<p>
-			                    			<button 
-			                    			mat-raised-button 
-			                    			color="primary">
-			                    			Next</button>
-			                    		</p>
-			                    	</div>
-			                  	</div>
-			                </div>
-		              	</div>
+        			                    <p><mat-checkbox formControlName="summary-report-check"
+        			                    [disabled]="receive_aggregated_report_group.controls['receiver-email'].valid && receive_aggregated_report_group.controls['receiver-email'].touched ? null : ''">
+        			                	11:00 AM</mat-checkbox></p>
 
-		              	<div class="timeline-item">
-			                <div class="timeline-badge">
-			                  	<mat-radio-group  value="1">
-		                  	        <mat-radio-button>
-		                  	        </mat-radio-button>
-		                  	    </mat-radio-group>
-			                </div>
-			                <div class="timeline-body">
-			                  	<div class="timeline-body-top" fxLayout="row">
-			                    	<b class="timeline-body-title">Done</b>
-			                  	</div>
-			                </div>
-		              	</div>
-		            </div>
-		        </mat-card-content>
+        			                    <p><mat-checkbox formControlName="summary-report-check"
+        			                    [disabled]="receive_aggregated_report_group.controls['receiver-email'].valid && receive_aggregated_report_group.controls['receiver-email'].touched ? null : ''">
+        			                	12:00 PM</mat-checkbox></p>
+
+        			                    <p><mat-checkbox formControlName="summary-report-check"
+        			                    [disabled]="receive_aggregated_report_group.controls['receiver-email'].valid && receive_aggregated_report_group.controls['receiver-email'].touched ? null : ''">
+        			                	4:00 PM</mat-checkbox></p>
+        			                    <p>
+        			                    	<button 
+        			                    	mat-raised-button 
+        			                    	color="primary">
+        			                    	Next</button>
+        			                    </p>
+        		                  	</div>
+        		                </div>
+        		            </div>
+
+        		            <div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button [value]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? '1' : '0'" [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top" fxLayout="row">
+        		                    	<div class="timeline-body-content">
+        		                    		<b class="timeline-body-title">Choose what days will the report be received</b><br><br>
+        		                    	
+        		                    		<p><mat-checkbox formControlName="days-received" 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Monday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Tuesday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Wednesday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Thursday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Friday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Saturday</mat-checkbox></p>
+
+        		                    		<p><mat-checkbox 
+        		                    			formControlName="days-received" [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''">Sunday</mat-checkbox></p>
+
+        		                    		<p>
+        		                    			<button [disabled]="receive_aggregated_report_group.controls['summary-report-check'].valid && receive_aggregated_report_group.controls['summary-report-check'].touched ? null : ''"
+        		                    			mat-raised-button 
+        		                    			color="primary">
+        		                    			Next</button>
+        		                    		</p>
+        		                    	</div>
+        		                  	</div>
+        		                </div>
+        	              	</div>
+
+        	              	<div class="timeline-item">
+        		                <div class="timeline-badge">
+        		                  	<mat-radio-group value="1">
+        	                  	        <mat-radio-button [value]="receive_aggregated_report_group.controls['days-received'].valid && receive_aggregated_report_group.controls['days-received'].touched ? '1' : '0'" [disabled]="true">
+        	                  	        </mat-radio-button>
+        	                  	    </mat-radio-group>
+        		                </div>
+        		                <div class="timeline-body">
+        		                  	<div class="timeline-body-top" fxLayout="row">
+        		                    	<b class="timeline-body-title" [ngClass]="receive_aggregated_report_group.controls['days-received'].valid && receive_aggregated_report_group.controls['days-received'].touched ? '' : 'mat-color-gray'">Done</b>
+        		                  	</div>
+        		                </div>
+        	              	</div>
+        	            </div>
+        	        </mat-card-content>
+		        </form>
 	        </mat-card>
 	        <!-- End Time line -->
 		</mat-expansion-panel>

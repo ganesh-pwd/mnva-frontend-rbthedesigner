@@ -45,7 +45,7 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     userService.userData$.subscribe((user) => this.loggedInUser = user);
-    this.databoxMention = this.data.mentions || 1200
+    this.databoxMention = this.data.mentions;
   }
 
   ngOnInit() {}

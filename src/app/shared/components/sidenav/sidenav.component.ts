@@ -30,7 +30,8 @@ export class SidenavComponent {
     if(sessionStorage.getItem('databox_test_query_bool')){
       sessionStorage.removeItem('databox_test_query_bool');
       sessionStorage.removeItem('databox_test_query');
+
       this.router.navigate([`/${state}`]);
-    } else this.router.navigate([`/${state}`])
+    } else this.router.navigate([`/${state}`]);
   }
 }

@@ -36,7 +36,14 @@
     <span fxFlex></span>
     <div class="mr-1">
       <h3 class="mat-h3 mr-1" [ngClass]="loggedInUser.mentions < 0 ? 'mat-color-red': ''">Mentions Remaining:
-        <span class="credits"> {{loggedInUser.mentions}}
+        <span class="credits" 
+        *ngIf="loggedInUser.accountType !== 'Enterprise'"> 
+        {{loggedInUser.mentions}} Mentions
+        </span>
+
+        <span class="credits" 
+        *ngIf="loggedInUser.accountType === 'Enterprise'"> 
+        Unlimited Mentions
         </span>
       </h3>
     </div>
@@ -578,8 +585,22 @@
     <div fxLayout="row" fxLayoutWrap="wrap">
       <div fxFlex="100" fxFlex.gt-sm="100">
         <mat-card class="p-0">
-          <mat-card-content class="p-1" style="max-height: 200px;">
+          <mat-card-content class="px-1" 
+          style="padding-top: 40px !important; padding-left: 20px !important;">
             <!-- Line Chart -->
+            <!-- <ngx-charts-line-chart
+            [view]="view"
+            class="chart-container"
+            [scheme]="colorScheme"
+            [results]="dateDataWithOrWithoutRange"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [timeline]="timeline"
+            >
+            </ngx-charts-line-chart> -->
             <canvas 
               baseChart 
               class="chart"
@@ -707,10 +728,7 @@
     <button
       mat-raised-button
       class="mb-05 mat-bg-gray"
-      (click)="openDialogUpdate(
-        'Run Query',
-        'Are you sure you want to save your details and run the query?'
-      )"
+      (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
     >
       Run Query
     </button>

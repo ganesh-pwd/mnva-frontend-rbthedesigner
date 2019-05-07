@@ -71,7 +71,44 @@ export class MinervaAccountService {
         }
       }
 
+      // edit existing user
+      editUser(details: any = {}, id): Observable<any> {
+        const minerva_accounts = this.accounts.filter(el => el.master_user_info === this.loggedInUser._id);
+        const user_details = minerva_accounts[minerva_accounts.findIndex(el => el._id === id)];
 
+        user_details.name = details.name;
+        user_details.user_type = details.role;
+        user_details.email = details.email;
+
+        this.accounts = minerva_accounts;
+
+        this.router.navigateByUrl('/accounts/minerva-notifications', { skipLocationChange: true })
+        .then(() => sessionStorage.setItem('user_new', 'A User has been successfully updated'))
+        .then(() => this.router.navigate(['/accounts/users']))
+        .then(() => sessionStorage.removeItem('user_new'));
+       
+        return of(this.accounts.slice());
+      }
+
+      // remove user 
+      deleteUser(id: string, input): Observable<any>{
+        if(input === 'delete'){
+          const minerva_accounts = this.accounts.filter(el => el.master_user_info === this.loggedInUser._id);
+          const user_details = minerva_accounts[minerva_accounts.findIndex(el => el._id === id)];
+
+          minerva_accounts.splice(minerva_accounts.findIndex(el => el._id === id), 1);
+
+          this.accounts = minerva_accounts;
+
+          this.router.navigateByUrl('/accounts/minerva-notifications', { skipLocationChange: true })
+          .then(() => sessionStorage.setItem('user_new', 'A User has been successfully deleted'))
+          .then(() => this.router.navigate(['/accounts/users']))
+          .then(() => sessionStorage.removeItem('user_new'));
+
+        } else alert(`You didn't write the word 'delete' to confirm the deletion of the user account`);
+
+        return of(this.accounts.slice());
+      }
 
   /* @FUNCTIONS FOR GENERATING RANDOM ID AND MAX INDEX */
 

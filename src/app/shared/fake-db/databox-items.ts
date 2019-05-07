@@ -19,6 +19,7 @@ export class DataboxDB {
       'last_updated': 'Thurs, July 12, 2018',
       'date_created': 'Thurs, July 12, 2017',
       'expiry_date': 'Thurs, July 12, 2018',
+      'algorithm_quota': 100,
       'mentions': 3600,
       'mentions_per_day': 8.4,
       'page_search_name': 'Facebook Page',
@@ -32,7 +33,7 @@ export class DataboxDB {
       'sub_category_available': 20,
       'sub_category_available_used': 3,
       'algorithmConnectors': ['sentiment', 'topicRecognition', 'entityRecognition'],
-      'dataConnectors': ['powerBi', 'tableau', 'dataStudio'],
+      'dataConnectors': ['email', 'slack', 'appleTV'],
       'query': '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
       'required-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
@@ -42,7 +43,138 @@ export class DataboxDB {
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
       'max_number_result': 1,
-      'facebook_page_id': ''
+      'facebook_page_id': '',
+      'databox_item_result_table': [
+            {
+                  'id': 0, 'date': '15/01/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_1',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 1, 
+                  'date': '15/02/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_2',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 2, 
+                  'date': '15/03/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_3',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 3, 
+                  'date': '15/04/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_4',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 4, 
+                  'date': '15/05/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_5',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 5, 
+                  'date': '15/06/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_6',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 6, 
+                  'date': '15/07/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_7',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 7, 
+                  'date': '15/08/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_8',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 8, 
+                  'date': '15/09/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_9',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 9, 
+                  'date': '15/10/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_10',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 10, 
+                  'date': '15/11/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_11',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 11, 
+                  'date': '15/12/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_12',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 12, 
+                  'date': '15/13/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_13',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+      ]
     },
     {
       '_id': '5a7b73f7f79f4250b93a355a',
@@ -63,6 +195,7 @@ export class DataboxDB {
       'last_updated': 'Thurs, July 12, 2018',
       'date_created': 'Thurs, July 12, 2017',
       'expiry_date': 'Thurs, July 12, 2018',
+      'algorithm_quota': 100,
       'mentions': 1200,
       'mentions_per_day': 8.4,
       'page_search_name': 'Facebook Page',
@@ -76,7 +209,7 @@ export class DataboxDB {
       'sub_category_available': 20,
       'sub_category_available_used': 0,
       'algorithmConnectors': ['sentiment', 'topicRecognition', 'genderAuthor'],
-      'dataConnectors': ['powerBi', 'tableau'],
+      'dataConnectors': ['email', 'slack'],
       'query': '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
       'required-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
@@ -86,7 +219,138 @@ export class DataboxDB {
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
       'max_number_result': 1,
-      'facebook_page_id': ''
+      'facebook_page_id': '',
+      'databox_item_result_table': [
+            {
+                  'id': 0, 'date': '15/01/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_1',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 1, 
+                  'date': '15/02/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_2',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 2, 
+                  'date': '15/03/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_3',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 3, 
+                  'date': '15/04/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_4',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 4, 
+                  'date': '15/05/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_5',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 5, 
+                  'date': '15/06/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_6',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 6, 
+                  'date': '15/07/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_7',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 7, 
+                  'date': '15/08/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_8',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 8, 
+                  'date': '15/09/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_9',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 9, 
+                  'date': '15/10/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_10',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 10, 
+                  'date': '15/11/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_11',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 11, 
+                  'date': '15/12/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_12',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 12, 
+                  'date': '15/13/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_13',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+      ]
     },
     {
       '_id': '5a7be3f76bed15c55d1e46d4',
@@ -108,6 +372,7 @@ export class DataboxDB {
       'last_updated': 'Thurs, July 12, 2018',
       'date_created': 'Thurs, July 12, 2017',
       'expiry_date': 'Thurs, July 12, 2018',
+      'algorithm_quota': 100,
       'mentions': 4600,
       'mentions_per_day': 8.4,
       'status': 'Paused',
@@ -120,7 +385,7 @@ export class DataboxDB {
       'sub_category_available': 20,
       'sub_category_available_used': 0,
       'algorithmConnectors': ['sentiment', 'topicRecognition', 'entityRecognition'],
-      'dataConnectors': ['powerBi', 'tableau', 'dataStudio'],
+      'dataConnectors': ['email', 'slack', 'appleTV'],
       'query': '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
       'required-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
@@ -130,7 +395,138 @@ export class DataboxDB {
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
       'max_number_result': 1,
-      'facebook_page_id': ''
+      'facebook_page_id': '',
+      'databox_item_result_table': [
+            {
+                  'id': 0, 'date': '15/01/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_1',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 1, 
+                  'date': '15/02/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_2',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 2, 
+                  'date': '15/03/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_3',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 3, 
+                  'date': '15/04/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_4',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 4, 
+                  'date': '15/05/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_5',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 5, 
+                  'date': '15/06/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_6',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 6, 
+                  'date': '15/07/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_7',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 7, 
+                  'date': '15/08/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_8',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 8, 
+                  'date': '15/09/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_9',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 9, 
+                  'date': '15/10/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_10',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 10, 
+                  'date': '15/11/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_11',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 11, 
+                  'date': '15/12/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_12',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 12, 
+                  'date': '15/13/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_13',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+      ]
     },
     {
       '_id': '5a7b73f76bed15c938be46d4',
@@ -151,6 +547,7 @@ export class DataboxDB {
       'last_updated': 'Thurs, July 12, 2018',
       'date_created': 'Thurs, July 12, 2017',
       'expiry_date': 'Thurs, July 12, 2018',
+      'algorithm_quota': 100,
       'mentions': 4200,
       'mentions_per_day': 8.4,
       'page_search_name': 'Website',
@@ -164,7 +561,7 @@ export class DataboxDB {
       'sub_category_available': 20,
       'sub_category_available_used': 0,
       'algorithmConnectors': ['sentiment', 'topicRecognition', 'entityRecognition'],
-      'dataConnectors': ['powerBi', 'tableau'],
+      'dataConnectors': ['email', 'slack'],
       'query': '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
       'required-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
@@ -174,7 +571,138 @@ export class DataboxDB {
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
       'max_number_result': 1,
-      'facebook_page_id': ''
+      'facebook_page_id': '',
+      'databox_item_result_table': [
+            {
+                  'id': 0, 'date': '15/01/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_1',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 1, 
+                  'date': '15/02/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_2',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 2, 
+                  'date': '15/03/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_3',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 3, 
+                  'date': '15/04/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_4',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 4, 
+                  'date': '15/05/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_5',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 5, 
+                  'date': '15/06/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_6',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 6, 
+                  'date': '15/07/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_7',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 7, 
+                  'date': '15/08/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_8',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 8, 
+                  'date': '15/09/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_9',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 9, 
+                  'date': '15/10/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_10',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 10, 
+                  'date': '15/11/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_11',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 11, 
+                  'date': '15/12/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_12',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 12, 
+                  'date': '15/13/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_13',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+      ]
     },
     {
       '_id': '5a7b73f76bed15c9e8ae46d4',
@@ -194,6 +722,7 @@ export class DataboxDB {
       'location': ['Costa Rica'],
       'last_updated': 'Thurs, July 12, 2018',
       'date_created': 'Thurs, July 12, 2017',
+      'algorithm_quota': 100,
       'mentions': 4200,
       'mentions_per_day': 8.4,
       'page_search_name': 'Website',
@@ -207,7 +736,7 @@ export class DataboxDB {
       'sub_category_available': 20,
       'sub_category_available_used': 3,
       'algorithmConnectors': ['sentiment', 'topicRecognition', 'entityRecognition'],
-      'dataConnectors': ['powerBi', 'tableau'],
+      'dataConnectors': ['email', 'slack'],
       'query': '( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )',
       'optional-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
       'required-keywords': `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi )`,
@@ -217,7 +746,138 @@ export class DataboxDB {
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
       'max_number_result': 1,
-      'facebook_page_id': ''
+      'facebook_page_id': '',
+      'databox_item_result_table': [
+            {
+                  'id': 0, 'date': '15/01/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_1',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 1, 
+                  'date': '15/02/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_2',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 2, 
+                  'date': '15/03/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_3',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 3, 
+                  'date': '15/04/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_4',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 4, 
+                  'date': '15/05/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_5',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 5, 
+                  'date': '15/06/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_6',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 6, 
+                  'date': '15/07/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_7',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 7, 
+                  'date': '15/08/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_8',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 8, 
+                  'date': '15/09/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_9',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 9, 
+                  'date': '15/10/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_10',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 10, 
+                  'date': '15/11/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_11',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 11, 
+                  'date': '15/12/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_12',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+            {
+                  'id': 12, 
+                  'date': '15/13/2018', 
+                  'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+                  'parent': 'NULL',
+                  'author': 'Sabores a lo Tico_13',
+                  'category': 'Category 1',
+                  'subcategory': 'SubCategory1',
+                  'like': 100, 'share': 100, 'comment': 100, 'love': 100, 'sad': 100, 'angry': 100, 'pride': 100, 'laugh': 100
+            },
+      ]
     }
   ];
 }

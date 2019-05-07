@@ -157,6 +157,17 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     })
   }
 
+  cancelConnector(){
+    this.dialogRef.close(false);
+    
+    let url = this.router.url;
+
+    this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+    .then(() => sessionStorage.removeItem('databox_updated'))
+    .then(() => this.router.navigate(['/databoxes']))
+    .then(() => this.router.navigate([url]))
+  }
+
   // cancel databox changes
   cancelChanges() {
     sessionStorage.removeItem('databox_edited_name');

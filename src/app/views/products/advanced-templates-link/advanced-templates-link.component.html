@@ -1,0 +1,59 @@
+<br>
+<div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+    <img src="assets/images/icon-databox.png">
+    <h1 class="mat-h1">
+        Products
+        <small>
+           <span class="main-route">
+             <a routerLink="/products">Products</a>
+           </span> 
+           <span>/ Advanced Templates</span>
+         </small>
+      </h1>
+  </div>
+</div>
+
+<div class="m-333" fxLayout="row" fxLayoutWrap="wrap" #databoxesButtonID>
+  <button mat-raised-button
+  class="mb-05"
+  color="primary"
+  routerLink="/products/advanced-templates">
+  Back to Gallery
+  </button>&nbsp;
+</div>
+<hr>
+
+<div fxLayout="row" fxLayoutWrap="wrap">
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="40" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    <mat-card class="default p-1">
+      <mat-card-title class="pl-0"><h2 class="mat-h2">{{data?.name}}</h2></mat-card-title>
+      <mat-card-content class="p-0">
+        <p [innerHtml]="data?.description"></p>
+          <br>
+          <mat-divider></mat-divider>
+          <br><br>
+          <div class="text-center" *ngIf="data">
+            <mat-select placeholder="Choose a version" class="choose-version mb-1">
+              <mat-option *ngFor="let version of data.version" [value]="version.value" ngDefaultControl>
+                {{version.viewValue}}
+              </mat-option>
+            </mat-select><br>
+            <button mat-raised-button color="primary" class="mr-1" 
+            [disabled]="true">Download Template</button>
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="60" [@animate]="{value:'*', params:{ x:'300px', delay:'400ms' }}">
+    <mat-card class="default" *ngFor="let images of data?.gallery">
+      <mat-card-content class="p-0">
+        <img src="{{images}}" class="img-fluid" alt="Responsive image">
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+

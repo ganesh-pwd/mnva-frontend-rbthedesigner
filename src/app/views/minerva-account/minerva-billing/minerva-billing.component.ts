@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterContentChecked, ChangeDetectorRef  } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
-import { MatPaginator, MatSort, MatTableDataSource, Sort } from '@angular/material';
+import { Component, OnInit, OnDestroy, ViewChild  } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { MinervaAccountDialogService } from '../../../shared/services/minerva-account/minerva-account-dialog/minerva-account-dialog.service';
@@ -22,14 +22,14 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   private getReqImage: Subscription;
   private req: Subscription;
 
-  @ViewChild("paginator") paginator: MatPaginator;
+  @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 
-  @ViewChild("historyPaginator") historyPaginator: MatPaginator;
+  @ViewChild('historyPaginator') historyPaginator: MatPaginator;
   @ViewChild(MatSort) public historySort: MatSort;
 
-  @ViewChild("databoxQuotaSort") databoxQuotaSort: MatSort;
-  @ViewChild("databoxQuotaPaginator") databoxQuotaPaginator: MatPaginator;
+  @ViewChild('databoxQuotaSort') databoxQuotaSort: MatSort;
+  @ViewChild('databoxQuotaPaginator') databoxQuotaPaginator: MatPaginator;
 
   userImage: string;
   dataSource: MinervaBillingDataSource;
@@ -37,7 +37,7 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   dataSourceBillingHistory: MinervaBillingHistoryDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['product_type', 'product_name', 'status', 'date_created', 'period', 'price'];
+  displayedColumns = ['product_type', 'product_name', 'period', 'price'];
   displayedColumnsBillingHistory = ['payment_date', 'invoice_number', 'product', 'amount', 'download'];
   displayedColumnsDataboxQuota = ['databox_name', 'status', 'date_created', 'mentions_quota', 'algorithm_quota'];
 
@@ -45,14 +45,14 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   public databoxes;
   public databoxes_sorted;
 
-  constructor(private router: Router,
-    private activatedRoute: ActivatedRoute,
+  constructor(
+    private router: Router,
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService,
-    private userService: UserService, 
+    private userService: UserService,
     private databoxesService: DataboxesService,
-    private cdRef: ChangeDetectorRef) {
+  ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
     userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
@@ -69,41 +69,28 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   }
 
   //
-  getDataboxes(){
+  getDataboxes() {
     this.req = this.databoxesService.getItems().subscribe((result) => {
-      if(result){
+      if (result) {
         this.databoxes = result;
 
-        let product_active_databox = result.map(el => {
+        const product_history = result.map(el => {
           return {
-              id: el._id,
-              product_type: 'Databox',
-              product_name: `<strong>${el.databox_name}</strong> 
-              <br>${el.datasource} | ${el.location}`,
-              status: el.status,
-              date_created: new Date(el.date_created),
-              period: 'Credit',
-              price: 40
-          }
-        });
-
-        let product_history = result.map(el => {
-          return{
-            id: el._id, 
+            id: el._id,
             payment_date: new Date(el.date_created),
             invoice_number: el.guid,
             product: `<strong>${el.databox_name}</strong> 
               <br>${el.datasource} | ${el.location}`,
             amount: 40,
             download: 'invoice'
-          }
-        })
+          };
+        });
 
         // Set table dynamically
         this.datasourceDataboxQuota = new MatTableDataSource(<any> result);
-        this.dataSource = new MinervaBillingDataSource(this.paginator, this.sort, product_active_databox);
+        this.dataSource = new MinervaBillingDataSource(this.paginator, this.sort);
         this.dataSourceBillingHistory = new MinervaBillingHistoryDataSource(this.historyPaginator, this.historySort, product_history);
-        
+
         this.datasourceDataboxQuota.paginator = this.databoxQuotaPaginator;
         this.datasourceDataboxQuota.sort = this.databoxQuotaSort;
       }

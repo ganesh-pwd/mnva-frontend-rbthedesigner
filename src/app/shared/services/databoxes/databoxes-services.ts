@@ -32,7 +32,7 @@ export class DataboxesService {
       // get databox items for the currently logged in user
       getItems(): Observable<any> {
         const rows = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
-        const filter_by_logged_in_user = rows.filter(i => i.master_user_info === this.loggedInUser._id)
+        const filter_by_logged_in_user = rows.filter(i => i.master_user_info === this.loggedInUser._id);
         return of(filter_by_logged_in_user.slice()).pipe(delay(500));
       }
 
@@ -109,6 +109,17 @@ export class DataboxesService {
           'monitor_specific_page': details.monitor_specific_page,
           'facebook_page_id': details.facebook_page_id,
           'max_number_result': details.max_number_result || 1,
+          'databox_item_result_table': [
+            {
+              'id': 0, 'date': (new Date()).toLocaleDateString(), 
+              'content': 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
+              'parent': 'NULL',
+              'author': this.loggedInUser.name,
+              'category': 'Category 1',
+              'subcategory': 'SubCategory1',
+              'like': 0, 'share': 0, 'comment': 0, 'love': 0, 'sad': 0, 'angry': 0, 'pride': 0, 'laugh': 0
+            },
+          ]
         };
 
         getDataboxItem.push(data);

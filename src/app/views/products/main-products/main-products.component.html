@@ -23,7 +23,7 @@
        <div class="product-search-wrap">
           <div>
             Billed Montly 
-            <mat-slide-toggle color="primary" class="mb-1"> 
+            <mat-slide-toggle color="primary" class="mb-1" [checked]="billedAnnually" (change)="clickSlideToggle($event)"> 
             Billed Anually</mat-slide-toggle>
           </div>
        </div>
