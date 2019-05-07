@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { ProductShopService, CartItem } from '../products-shop.service';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products-cart',
@@ -90,7 +89,6 @@ export class ProductsCartComponent implements OnInit {
       this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(2));
 
       withAnnualDiscount = this.subTotal - this.annualDiscount;
-      console.log('withAnnualDiscount: ', withAnnualDiscount);
       this.total    = parseFloat(((withAnnualDiscount) + (withAnnualDiscount * (this.vat / 100))).toFixed(2));
       this.billYearly = true;
     } else {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef  } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
@@ -50,9 +50,9 @@ export class DataboxItemInitializeComponent implements OnInit, OnDestroy {
 
   // Get databox items created by users with parameter id
   getSingleItem() {
-    let id = this.activatedRoute.snapshot.paramMap.get('id');
-    let folder = this.activatedRoute.snapshot.paramMap.get('folder');
-    let folderParam = (folder).replace(/\-/g, ' ');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const folder = this.activatedRoute.snapshot.paramMap.get('folder');
+    const folderParam = (folder).replace(/\-/g, ' ');
     this.folder = folderParam;
 
     this.getItemSub = this.databoxesService.getSingleItem(id)

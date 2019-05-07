@@ -1,5 +1,5 @@
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { Component, Inject, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MinervaAccountService } from '../minerva-account-service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ export class MinervaAccountDialogComponent implements OnInit, OnDestroy {
     private minervaAccountService: MinervaAccountService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { console.log(data) }
+  ) { }
 
   ngOnInit() {
     this.userFormGroupBuilder();
@@ -55,8 +55,8 @@ export class MinervaAccountDialogComponent implements OnInit, OnDestroy {
 
 
   // add new user as pending
-  addNewUser(){
-    let body = {
+  addNewUser() {
+    const body = {
       'name': this.userForm.get('name').value,
       'email': this.userForm.get('email').value,
       'role' : this.userForm.get('role').value
@@ -66,13 +66,12 @@ export class MinervaAccountDialogComponent implements OnInit, OnDestroy {
     .addNewUser(body)
     .subscribe(result => {
       this.dialogRef.close(false);
-      console.log(result);
     });
   }
 
   // edit user account
-  editUser(){
-    let body = {
+  editUser() {
+    const body = {
       'name': this.userForm.get('name').value,
       'email': this.userForm.get('email').value,
       'role' : this.userForm.get('role').value
@@ -82,18 +81,17 @@ export class MinervaAccountDialogComponent implements OnInit, OnDestroy {
     .editUser(body, this.data.details._id)
     .subscribe(result => {
       this.dialogRef.close(false);
-      console.log(result);
     });
   }
 
 
   // delete user
-  deleteUser(){
+  deleteUser() {
     this.deleteSubs = this.minervaAccountService
     .deleteUser(this.data.details._id, this.deleteInput)
     .subscribe(result => {
       this.dialogRef.close(false);
-    })
+    });
   }
 
   closeDialog() {

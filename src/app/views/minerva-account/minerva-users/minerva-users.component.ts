@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, ViewChild  } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router'
+import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { Router } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { MinervaAccountDialogService } from '../../../shared/services/minerva-account/minerva-account-dialog/minerva-account-dialog.service';
 import { MinervaAccountImageDialogService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-image-dialog.service';
@@ -26,8 +26,8 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     public loggedInUser;
     public isUserAdded;
 
-    constructor(private router: Router,
-    private activatedRoute: ActivatedRoute,
+    constructor(
+    private router: Router,
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService,
@@ -60,7 +60,7 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     }
 
     setDate(date) {
-      let converted_date = new Date(date);
+      const converted_date = new Date(date);
       return converted_date;
     }
 

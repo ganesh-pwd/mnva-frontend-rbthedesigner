@@ -48,6 +48,7 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
     // get databox items
     this.getDataboxes();
   }
+
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
   }
@@ -111,13 +112,13 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
 
   // check databox connectors
   checkAlgorithmConnectors(databox, connector){
-    let filter = databox.algorithmConnectors.findIndex(el => el === connector);
+    const filter = databox.algorithmConnectors.findIndex(el => el === connector);
 
     return filter > -1 ? true : false;
   }
 
   checkDataConnectors(databox, connector){
-    let filter = databox.dataConnectors.findIndex(el => el === connector);
+    const filter = databox.dataConnectors.findIndex(el => el === connector);
 
     return filter > -1 ? true : false;
   }

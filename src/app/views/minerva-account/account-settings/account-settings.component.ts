@@ -92,7 +92,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     }
 
     this.req = this.userService.setAccountName(body).subscribe(result => {
-      let url = this.router.url;
+      const url = this.router.url;
 
       this.router.navigateByUrl('', { skipLocationChange: true })
       .then(() => sessionStorage.setItem('selectedAccount', JSON.stringify(body)))
