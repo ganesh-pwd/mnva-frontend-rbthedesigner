@@ -23,7 +23,7 @@
 			</mat-expansion-panel-header>
 
 	        <!-- Time line -->
-	        <mat-card class="default p-0" *ngIf="data.datasource !== 'Twitter'">
+	        <mat-card class="default" *ngIf="data.datasource !== 'Twitter'">
 		        <form [formGroup]="receive_email_group">
         	        <mat-card-content>
         	            <div class="timeline">
@@ -151,10 +151,11 @@
 	        </mat-card>
 	        <!-- End Time line -->
 		</mat-expansion-panel>
+
 		<mat-expansion-panel>
 			<mat-expansion-panel-header>
 				<mat-panel-title>
-					<mat-slide-toggle color="primary" class="mb-1" [checked]="">
+					<mat-slide-toggle color="primary" class="mb-1" [checked]="checked">
 						Receive an aggregated report periodically
 					</mat-slide-toggle> 
 				</mat-panel-title>

@@ -1,7 +1,7 @@
 <br>
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
   <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-    <img src="assets/images/icon-products.png">
+    <img src="assets/images/icon-databox.png">
     <h1 class="mat-h1">
         Products
         <small>
@@ -84,7 +84,7 @@
         (click)="addToCart('Basic Account', standardAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Basic'">Current Plan</button>
+        <h3 class="text-center mat-h3 mt-1" *ngIf="loggedInUser.accountType === 'Basic'">Current Plan</h3>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
@@ -132,7 +132,7 @@
         (click)="addToCart('Professional Account', plusAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Professional'">Current Plan</button>
+        <h3 class="text-center mat-h3 mt-1" *ngIf="loggedInUser.accountType === 'Professional'">Current Plan</h3>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
@@ -180,7 +180,8 @@
         (click)="addToCart('Enterprise Account', enterpriseAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Enterprise'">Current Plan</button>
+
+        <h4 class="text-center" *ngIf="loggedInUser.accountType === 'Enterprise'">Selected Plan</h4>
       </div>
     </div>
   </mat-card-content>

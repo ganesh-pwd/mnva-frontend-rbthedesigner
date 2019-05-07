@@ -9,7 +9,7 @@ interface IMenuItem {
   name?: string;      // Used as display text for item and title for separator type
   state?: string;     // Router state
   icon?: string;      // Material icon name
-  tooltip?: string;
+  tooltip?: string;   // Tooltip text
   disabled?: boolean; // If true, item will not be appeared in sidenav.
   sub?: any[]; // Dropdown items
   badges?: IBadge[];
@@ -85,8 +85,7 @@ export class NavigationService {
         tooltip: 'Databoxes',
         icon: 'widgets',
         state: 'databoxes',
-        image_icon: '../assets/images/icon-databox.png',
-        class: 'databox'
+        image_icon: '../assets/images/icon-databox.png'
       },
       {
         name: 'Template Gallery',
@@ -95,7 +94,6 @@ export class NavigationService {
         icon: 'pie_chart',
         state: 'template-gallery',
         image_icon: '../assets/images/icon-gallery.png',
-        class: 'gallery',
         sub: [...template_gallery]
       },
       {
@@ -105,7 +103,6 @@ export class NavigationService {
         icon: 'shopping_cart',
         state: 'products',
         image_icon: '../assets/images/icon-products.png',
-        class: 'products',
         sub: [
           { name: 'Account Type', state: 'account-type' },
           { name: 'Algorithm Credit', state: 'algorithm-credit' },
@@ -118,4 +115,5 @@ export class NavigationService {
 
      return of(arr);
   }
+
 }

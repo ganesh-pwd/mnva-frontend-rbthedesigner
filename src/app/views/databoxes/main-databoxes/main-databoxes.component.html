@@ -89,6 +89,7 @@
 
               <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'entityRecognition')">
               <mat-icon class="icon-header">location_city</mat-icon></button>
+
               <!-- Data Connectors -->
               <button mat-icon-button *ngIf="checkDataConnectors(data, 'email')">
               <i><img src="/assets/images/email.png"></i></button>
@@ -98,7 +99,8 @@
 
               <button mat-icon-button *ngIf="checkDataConnectors(data, 'appleTV')">
               <i><img src="/assets/images/apple_tv.png"></i></button>
-            </div>            
+            </div>
+            
           </div>
         </div>
       </mat-card-content>
@@ -111,13 +113,12 @@
     </mat-card>
   </div>
   <div class="no-databoxes">
-    <div fxLayout="column" class="text-center" *ngIf="databoxes?.length == 0" class="welcome-image">
-      <img fxFlex="100" class="mb-1" src="assets/images/databox_big.png">
-      <h2 class="mat-h2 text-center">There are no databoxes. Please create one.</h2>
-      <div fxFlex="100" class="text-center">
+    <div fxLayout="column" fxlayoutalign="center center" class="text-center" *ngIf="databoxes?.length == 0">
+      <h2>There are no databoxes. Please create one.</h2>
+      <div fxFlex="100">
         <button
           mat-raised-button
-          class="mat-bg-success"
+          class="mt-1 mat-bg-success"
           (click)="createDatabox('Create a New Databox', 'In Minerva, everything happens on a Databox. A Minerva Databox is simply a query to our databases', false)">
           Create Databox
         </button>
