@@ -101,18 +101,17 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   }
 
   clickSlideToggle(data) {
+
     switch (true) {
       case data === 'email': {
         if(this.email)
           this.email = false;
         else this.email = true;
-
         setTimeout(() => {
           this.openDialog('Connect to Email Notification', 
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.email, 'email');
         }, 300);
-
         break;
       }
 
@@ -120,13 +119,11 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         if(this.slack)
           this.slack = false;
         else this.slack = true;
-
         setTimeout(() => {
           this.openDialog('Connect to Slack',
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.slack, 'slack');
         }, 300);
-
         break;
       }
 
@@ -134,13 +131,11 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         if(this.appleTV)
           this.appleTV = false;
         else this.appleTV = true;
-
         setTimeout(() => {
           this.openDialog('Connect to Apple TV', 
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.appleTV, 'appleTV');
         }, 300);
-
         break;
       }
     }
@@ -152,7 +147,6 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
         this.email ? this.email = false : this.email = true;
         break;
       }
-
       case data === 'slack': {
         this.slack ? this.slack = false : this.slack = true;
         break;
@@ -164,6 +158,5 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
       }
     }
   }
-
 
 }
