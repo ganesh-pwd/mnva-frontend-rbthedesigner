@@ -22,7 +22,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   public showQuery: string = 'basic';
 
   // tslint:disable-next-line:max-line-length
-  editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
+  editorData = `Type your desired keywords`;
 
   constructor(public dialogRef: MatDialogRef<DataboxDialogsQueryComponent>,
     public dialog: MatDialog, 

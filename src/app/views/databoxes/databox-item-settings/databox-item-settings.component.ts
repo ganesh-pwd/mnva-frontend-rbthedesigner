@@ -43,7 +43,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public showAdvanceAccord: boolean = true;
   public showConnectAccord: boolean = true;
   public loggedInUser;
-  public editorData = `( "Hino" OR Toyota OR Lexus OR Mercedes Benz OR "KIA" OR "Fiat" OR Suzuki OR [Mase(r|rr)ati] OR "BMW" OR hyundai OR mitsubishi ) AND NOT ( contiguo OR conjunto a OR "frente a" OR "norte" OR "oeste" OR "sur" OR metros )`;
+  public editorData = `Type your desired keywords`;
 
   /* @SET CHART DATA */
   // set chart data

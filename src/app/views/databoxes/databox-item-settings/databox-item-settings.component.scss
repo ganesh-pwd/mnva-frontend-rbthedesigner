@@ -80,16 +80,18 @@ button.query_type{
 	border: 1px solid gray;
 	font-size: 11px !important;
 	min-width: auto;
+	padding: 0 16px;
+	line-height: 25px;
 	&:hover{
-		background-color: #22d9c9;
+		background-color: #3c4650;
 		color: white;
-		border: 1px solid #22d9c9 !important;
+		border: 1px solid #3c4650 !important;
 	}
 }
 
 .query-active {
-  background: #22d9c9 !important; 
-  border: 1px solid #22d9c9 !important; 
+  background: #3c4650 !important; 
+  border: 1px solid #3c4650 !important; 
   color: white !important;
 }
 
@@ -212,8 +214,4 @@ button.query_type{
 
 .text-justify{
 	text-align: justify;
-}
-
-.mat-card>:last-child:not(.mat-card-footer) {
-	padding-bottom: 40px !important;
 }

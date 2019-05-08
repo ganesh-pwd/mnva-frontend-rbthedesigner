@@ -91,7 +91,7 @@
           </mat-card-header>
 
           <mat-divider></mat-divider>
-          <mat-card-content>
+          <mat-card-content class="p-0">
             <br />
             <mat-form-field class="full-width">
               <mat-select 
@@ -132,9 +132,8 @@
             </mat-card-title>
           </mat-card-header>
           <mat-divider></mat-divider>
-          <mat-card-content>
+          <mat-card-content class="p-0">
             <br>
-
             <div id="countries">
               <button mat-raised-button class="query_type" 
               *ngFor="let country of countries" 
@@ -156,7 +155,7 @@
             </mat-card-title>
           </mat-card-header>
           <mat-divider></mat-divider>
-          <mat-card-content>
+          <mat-card-content class="p-0">
             <br>
           </mat-card-content>
         </mat-card>
@@ -269,7 +268,7 @@
                   >
                     <div class="p-1">
                       <mat-placeholder class="placeholder" 
-                      *ngIf="queryForm.controls['optional-keywords'].value === ''">
+                      *ngIf="queryForm.controls['required-keywords'].value === ''">
                         {{editorData}}
                       </mat-placeholder>
                       <textarea
