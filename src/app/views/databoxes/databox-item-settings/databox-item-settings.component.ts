@@ -42,8 +42,11 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public showQueryAccord: boolean = true;
   public showAdvanceAccord: boolean = true;
   public showConnectAccord: boolean = true;
+  public showSimpleExample: boolean = true;
+  public showAdvancedExample: boolean = true;
   public loggedInUser;
   public editorData = `Type your desired keywords`;
+  public editorDataAdv = `Please type your query`;
 
   /* @SET CHART DATA */
   // set chart data
@@ -329,7 +332,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           }
         }
       }
-
+      
       // set mention value
       setMentionValue(mention){
         const checkChanges = sessionStorage.getItem('databox_test_query_bool');

@@ -390,11 +390,8 @@ code {
   width: 13px;
 }
 
-
-
 mat-card-title{
   font-size: 15px !important;
-  font-weight: 500 !important;
 }
 
 .mat-card.default {
@@ -406,9 +403,7 @@ mat-card-title{
   padding-right: 1rem;
   line-height: 1;
 }
-.mat-card-title{
-  color: #fb8a01;
-}
+
 .mat-card.default>:first-child {
   border-radius: 2px 2px 0 0;
 }

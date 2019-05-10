@@ -41,22 +41,6 @@
 
                         <div fxLayout="row" fxLayoutWrap="wrap" >
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-                                <b class="mt-1">Optional Keywords</b>
-                                <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
-                                <mat-form-field style="border: 1px solid gray;" class="full-width">
-                                    <div class="p-1">
-                                        <mat-placeholder class="placeholder" 
-                                        *ngIf="queryForm.controls['optional-keywords'].value === null 
-                                        || queryForm.controls['optional-keywords'].value === ''">
-                                          {{editorData}}
-                                        </mat-placeholder>
-                                        <textarea matInput rows="5" cols="80" 
-                                        formControlName="optional-keywords"></textarea>
-                                    </div>  
-                                </mat-form-field>
-                            </div>
-                            <span fxFlex></span>
-                            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
                                 <b class="mt-1">Required Keywords</b>
                                 <p class="mt-1">Your Databox will collect mentions that contain all of these keywords.</p>
                                 <mat-form-field style="border: 1px solid gray;" class="full-width">
@@ -69,6 +53,22 @@
                                         <textarea matInput rows="5" cols="80" 
                                         formControlName="required-keywords"></textarea>
                                     </div>
+                                </mat-form-field>
+                            </div>
+                            <span fxFlex></span>
+                            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="49" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                                <b class="mt-1">Optional Keywords</b>
+                                <p class="mt-1">Your Databox will collect mentions that contain at least one of these keywords, plus all required keywords.</p>
+                                <mat-form-field style="border: 1px solid gray;" class="full-width">
+                                    <div class="p-1">
+                                        <mat-placeholder class="placeholder" 
+                                        *ngIf="queryForm.controls['optional-keywords'].value === null 
+                                        || queryForm.controls['optional-keywords'].value === ''">
+                                          {{editorData}}
+                                        </mat-placeholder>
+                                        <textarea matInput rows="5" cols="80" 
+                                        formControlName="optional-keywords"></textarea>
+                                    </div>  
                                 </mat-form-field>
                             </div>
                         </div>

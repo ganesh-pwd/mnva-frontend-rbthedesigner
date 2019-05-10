@@ -72,7 +72,7 @@
 
 <div *ngIf="checkIfCreateOrEdit === 'Create'" class="m-333" fxLayout="row" fxLayoutWrap="wrap">
     <h3 class="mat-h3">Creating a Databox:</h3>
-    <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+    <p>Databoxes are where everything happens in Minerva. To create a Databox, you'll need to create a query, which is comprised of several required fields: your datasource, country, historical data and the keywords that will search our databases.</p>
 </div>
 <form [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
   <!-- Column1 -->
@@ -256,36 +256,6 @@
                   fxLayout="column"
                   fxFlex="100"
                   fxFlex.gt-sm="100"
-                >
-                  <b>Optional Keywords</b>
-                  <p class="mt-05 text-muted">
-                    Your Databox will collect mentions that contain at least one
-                    of these keywords, plus all required keywords.
-                  </p>
-                  <mat-form-field
-                    style="border: 1px solid gray;"
-                    class="full-width"
-                  >
-                    <div class="p-1">
-                      <mat-placeholder class="placeholder" 
-                      *ngIf="queryForm.controls['required-keywords'].value === ''">
-                        {{editorData}}
-                      </mat-placeholder>
-                      <textarea
-                        matInput
-                        rows="10"
-                        cols="80"
-                        formControlName="optional-keywords"
-                      ></textarea>
-                    </div>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div fxLayout="row" fxLayoutWrap="wrap">
-                <div
-                  fxLayout="column"
-                  fxFlex="100"
-                  fxFlex.gt-sm="100"
                   [@animate]="{
                     value: '*',
                     params: { x: '200px', delay: '400ms' }
@@ -310,6 +280,36 @@
                         rows="10"
                         cols="80"
                         formControlName="required-keywords"
+                      ></textarea>
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div
+                  fxLayout="column"
+                  fxFlex="100"
+                  fxFlex.gt-sm="100"
+                >
+                  <b>Optional Keywords</b>
+                  <p class="mt-05 text-muted">
+                    Your Databox will collect mentions that contain at least one
+                    of these keywords, plus all required keywords.
+                  </p>
+                  <mat-form-field
+                    style="border: 1px solid gray;"
+                    class="full-width"
+                  >
+                    <div class="p-1">
+                      <mat-placeholder class="placeholder" 
+                      *ngIf="queryForm.controls['required-keywords'].value === ''">
+                        {{editorData}}
+                      </mat-placeholder>
+                      <textarea
+                        matInput
+                        rows="10"
+                        cols="80"
+                        formControlName="optional-keywords"
                       ></textarea>
                     </div>
                   </mat-form-field>
@@ -369,14 +369,7 @@
                     </mat-card-title>
                     <mat-card-subtitle>
                       <p>
-                        Lorem ipsum dolor sit amet, et vel error viris democritum,
-                        ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque
-                        omittantur definitionem et, meliore intellegebat an cum.
-                        Vim falli insolens persequeris no. Eu pri aeque semper,
-                        dicunt malorum reprehendunt ex mea, viderer inimicus vim
-                        ne. Cu causae impetus eam, et atqui tibique consectetuer
-                        nam, in erroribus incorrupte vim. Ea voluptua eloquentiam
-                        has.
+                        The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                       </p>
                     </mat-card-subtitle>
                   </mat-card-header>
@@ -400,7 +393,7 @@
                             <div class="p-1">
                               <mat-placeholder class="placeholder" 
                               *ngIf="queryForm.controls['advance-query'].value === ''">
-                              {{editorData}}</mat-placeholder>
+                              {{editorDataAdv}}</mat-placeholder>
                               <textarea
                                 matInput
                                 rows="10"
@@ -410,8 +403,11 @@
                             </div>
                           </mat-form-field>
                           <div class="text-muted query-help mt-1">
-                            <a>Show Simple Example</a>
-                            <a>Show Complex Example</a>
+                            <a matTooltip="car OR bus OR train" ng-click="showDetails = ! showDetails">Show Simple Example</a>
+                              <div class="procedure-details" ng-class="{ 'hidden': ! showDetails }">
+                                <p>Number of patient discharges</p>
+                              </div>
+                            <a matTooltip="(car OR bus) AND train">Show Complex Example</a>
                             <a>Need More Help?</a>
                           </div>
                       </div>
@@ -502,21 +498,15 @@
               params: { y: '-20px', delay: '400ms' }
             }">
             <br>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="include_comments" matTooltip="Include comments will retieve all the comments from the posts on your query. The content will no necessarily match your query">Include Comments
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="include_comments"><b>Include Comments</b>
               </mat-slide-toggle>
-              <br>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result" matTooltip="Specify the máximum number of results your query will retrieve">Specify Maximum Number of Results
+            <p>Include comments will retieve all the comments from the posts on your query. The content will not necessarily match your query.</p>
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result"><b>Specify Maximum Number of Results</b>
               </mat-slide-toggle>
-              <br>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_only_news_media" matTooltip="Monitor only news media">Monitor only News Media
-              </mat-slide-toggle>
-              <br>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page" matTooltip="Monitor specific pages">Monitor Specific Pages
-              </mat-slide-toggle>
-
+              <p>Specify the máximum number of results your query will retrieve.</p>
             <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
               <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-                  <p class="mt-1">Please type the maximum number of result.</p>
+                  <p>Please type the amount of desired results.</p>
                     <mat-form-field style="border: 1px solid gray;" class="full-width">
                       <div class="p-1">
                         <input type="number" min="0" max="99" matInput formControlName="max_number_result">
@@ -524,10 +514,15 @@
                     </mat-form-field>
                 </div>
             </div>
-
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_only_news_media"><b>Monitor only News Media</b>
+              </mat-slide-toggle>
+              <p>Minerva curates a list of media profiles specific to your selected country. By choosing this option, you will monitor only these profiles.</p>
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page"><b>Monitor Specific Pages</b>
+              </mat-slide-toggle>
+              <p>Use this option if you only need a specific amount of results and don't to be charged for the entire amount of results found from your query.</p>
             <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
               <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
-                  <p class="mt-1">Please type the Facebook Page ID's, one per row.</p>
+                  <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
                     <mat-form-field style="border: 1px solid gray;" class="full-width">
                       <div class="p-1">
                         <textarea matInput rows="10" cols="80"

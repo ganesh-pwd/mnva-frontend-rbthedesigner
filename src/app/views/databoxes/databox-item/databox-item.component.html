@@ -88,12 +88,12 @@
                 <span fxFlex></span>
                 <div>
                   <!-- Download CSV -->
-                  <a class="mr-1 head-mentions" 
+                  <a class="mr-1 fz-12 head-mentions" 
                   (click)="downloadCSV()">
-                  <mat-icon class="download">file_download</mat-icon><b>Download</b></a>
+                  <mat-icon class="download">file_download</mat-icon><b>Download Data</b></a>
 
                   <!-- Add Suggestion -->
-                  <a class="head-mentions" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
+                  <a class="head-mentions fz-12" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
                   (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
                 </div>
               </div>
