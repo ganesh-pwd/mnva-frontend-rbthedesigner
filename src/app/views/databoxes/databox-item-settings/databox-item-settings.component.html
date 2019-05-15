@@ -587,16 +587,18 @@
           style="padding-top: 40px !important; padding-left: 20px !important;">
             <!-- Line Chart -->
             <!-- <ngx-charts-line-chart
-            [view]="view"
-            class="chart-container"
-            [scheme]="colorScheme"
-            [results]="dateDataWithOrWithoutRange"
-            [legend]="showLegend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="multi"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [autoScale]="autoScale"
             >
             </ngx-charts-line-chart> -->
             <canvas 
@@ -607,6 +609,8 @@
               [options]="lineChartOptions"
               [colors]="chartColors"
               [legend]="lineChartLegend"
+              showXAxisLabel="false"
+              showYAxisLabel="false"
               [chartType]="lineChartType"></canvas> 
           </mat-card-content>
         </mat-card>

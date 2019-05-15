@@ -7,6 +7,9 @@ import { HotTableRegisterer } from '@handsontable-pro/angular';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  // @Input()
+  // username: string;
+
   dataset: any[] = [
     { id: 1, name: 'Ted Right', address: 'Wall Street' },
     { id: 2, name: 'Frank Honest', address: 'Pennsylvania Avenue' },

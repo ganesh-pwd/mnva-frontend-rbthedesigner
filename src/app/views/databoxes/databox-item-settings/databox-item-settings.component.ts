@@ -54,7 +54,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public sharedChartOptions: any = {
     responsive: true,
     legend: {
-      display: false,
+      display: true,
       position: 'bottom'
     }
   };
@@ -106,6 +106,70 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   }, this.sharedChartOptions);
   public lineChartLegend: boolean = false;
   public lineChartType: string = 'line';
+
+  // SECOND GRAPH
+  // view: any[] = [700, 400];
+
+  // options
+  // showXAxis = true;
+  // showYAxis = true;
+  // gradient = false;
+  // showLegend = true;
+  // showXAxisLabel = true;
+  // xAxisLabel = 'Country';
+  // showYAxisLabel = true;
+  // yAxisLabel = 'Population';
+
+  // colorScheme = {
+  //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  // };
+
+  // line, area
+  // autoScale = true;
+
+  // multi = [
+  //   {
+  //     "name": "Germany",
+  //     "series": [
+  //       {
+  //         "name": "2010",
+  //         "value": 7300000
+  //       },
+  //       {
+  //         "name": "2011",
+  //         "value": 8940000
+  //       }
+  //     ]
+  //   },
+  
+  //   {
+  //     "name": "USA",
+  //     "series": [
+  //       {
+  //         "name": "2010",
+  //         "value": 7870000
+  //       },
+  //       {
+  //         "name": "2011",
+  //         "value": 8270000
+  //       }
+  //     ]
+  //   },
+  
+  //   {
+  //     "name": "France",
+  //     "series": [
+  //       {
+  //         "name": "2010",
+  //         "value": 5000002
+  //       },
+  //       {
+  //         "name": "2011",
+  //         "value": 5800000
+  //       }
+  //     ]
+  //   }
+  // ];
 
   constructor(
     private router: Router,
