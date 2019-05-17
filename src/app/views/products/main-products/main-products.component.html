@@ -189,6 +189,47 @@
   </mat-card-content>
 </mat-card>
 
+<!-- Consulting -->
+<mat-card>
+  <div fxLayout="row" fxLayoutWrap="wrap" class="faq"
+    [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+      <h1 class="mat-h1 faq-header">Consulting</h1>
+    </div>
+
+    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+      <div class="faq-inner">
+        <h2 class="mat-h3">Add consulting to your package</h2>
+        <p>
+          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+        </p>
+      </div>
+    </div>
+
+    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+      <div class="faq-inner">
+        <h2 class="mat-h3">Pay by hour</h2>
+        <p>
+          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque.
+        </p>
+        <mat-form-field>
+         <mat-select [formControl]="filterForm.controls['algoCredit']">
+            <mat-option value="50" style="font-size: 14px !important;">1 Hour</mat-option>
+            <mat-option value="100" style="font-size: 14px !important;">2 Hours</mat-option>
+            <mat-option value="150" style="font-size: 14px !important;">3 Hours</mat-option>
+            <mat-option value="250" style="font-size: 14px !important;">4 Hours</mat-option>
+         </mat-select>
+        </mat-form-field>
+        <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()" style="display: inline;">
+          <mat-icon>shopping_cart</mat-icon>
+             Add to cart
+        </button>
+      </div>
+    </div>
+  </div> 
+</mat-card> 
+
 <!-- FAQ's -->
 <div fxLayout="row" fxLayoutWrap="wrap" class="faq"
   [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
