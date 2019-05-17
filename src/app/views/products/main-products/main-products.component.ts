@@ -101,6 +101,10 @@ export class MainProductsComponent implements OnInit {
     }
   }
 
+  public addCreditToCart() {
+    console.log('addCreditToCart');
+  }
+
   private buildFilterForm(filterData: any = {}) {
     this.filterForm = this.fb.group({
       search: [''],

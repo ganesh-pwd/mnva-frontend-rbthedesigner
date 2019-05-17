@@ -28,6 +28,12 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   public when_data_released;
   public when_invoice_generated;
 
+  public when_user_leaves: boolean = false;
+  public when_credit_warning: boolean = false;
+  public when_credit_expired: boolean = false;
+  public when_purchase_success: boolean = false;
+  public when_purchase_declined: boolean = false;
+
   constructor(
     private minervaAccountDialogService: MinervaAccountDialogService,
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
@@ -45,22 +51,22 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
 
         this.loggedInUser = user;
         // set selected account
-        this.selected = selectedAccount ?  
-        (JSON.parse(selectedAccount)).accountName : 
+        this.selected = selectedAccount ?
+        (JSON.parse(selectedAccount)).accountName :
         user.accountNames[0].accountName;
 
         this.new_value = this.selected;
 
-        this.when_user_join = selectedAccount ?  
-        (JSON.parse(selectedAccount)).when_user_join : 
+        this.when_user_join = selectedAccount ?
+        (JSON.parse(selectedAccount)).when_user_join :
         user.accountNames[0].when_user_join;
 
-        this.when_data_released = selectedAccount ?  
-        (JSON.parse(selectedAccount)).when_data_released : 
+        this.when_data_released = selectedAccount ?
+        (JSON.parse(selectedAccount)).when_data_released :
         user.accountNames[0].when_data_released;
 
-        this.when_invoice_generated = selectedAccount ?  
-        (JSON.parse(selectedAccount)).when_invoice_generated : 
+        this.when_invoice_generated = selectedAccount ?
+        (JSON.parse(selectedAccount)).when_invoice_generated :
         user.accountNames[0].when_invoice_generated;
       });
   }
