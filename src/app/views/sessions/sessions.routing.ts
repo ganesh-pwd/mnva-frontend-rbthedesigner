@@ -6,6 +6,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorComponent } from './error/error.component';
+import { ConfirmComponent } from './confirm/confirm.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 export const SessionsRoutes: Routes = [
   {
@@ -18,6 +20,14 @@ export const SessionsRoutes: Routes = [
       path: 'signin',
       component: SigninComponent,
       data: { title: 'Signin' }
+    }, {
+      path: 'confirm',
+      component: ConfirmComponent,
+      data: { title: 'Confirm' }
+    }, {
+      path: 'resetPassword',
+      component: ResetPasswordComponent,
+      data: { title: 'Reset Password' }
     }, {
       path: 'forgot-password',
       component: ForgotPasswordComponent,

@@ -54,6 +54,9 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
     private databoxesService: DataboxesService,
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+    if ('photoUrl' in sessionStorage) {
+      this.userImage = sessionStorage.getItem('photoUrl');
+    }
     userService.userData$.subscribe((user) => this.loggedInUser = user);
   }
 

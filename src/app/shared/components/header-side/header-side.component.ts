@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../../../shared/services/auth/user-services';
 
+import { AmplifyService } from 'aws-amplify-angular';
+import { AuthService } from 'angularx-social-login';
+
 @Component({
   selector: 'app-header-side',
   templateUrl: './header-side.template.html',
@@ -27,8 +30,9 @@ export class HeaderSideComponent implements OnInit {
   public notificationCount: any;
   private getReqImage: Subscription;
   public userImage: string;
-  public userFullName: string;
+  // public userFullName: string;
   public loggedInUser;
+  public userName: string;
 
   public remaining: number = 0;
 
@@ -39,14 +43,24 @@ export class HeaderSideComponent implements OnInit {
     private renderer: Renderer2,
     private router: Router,
     private userService: UserService,
-    public minervaAccountChangeService: MinervaAccountChangeService
+    public minervaAccountChangeService: MinervaAccountChangeService,
+    private amplifyService: AmplifyService,
+    private socialAuthService: AuthService
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+
+    if ('userName' in sessionStorage) {
+      this.userName = sessionStorage.getItem('userName');
+    }
+    if ('photoUrl' in sessionStorage) {
+      this.userImage = sessionStorage.getItem('photoUrl');
+    }
+
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
     
     userService.userData$.subscribe(user => {
       if (user) {
-        this.userFullName = user.name
+        // this.userFullName = user.name
         this.loggedInUser = user;
       }
     });
@@ -108,4 +122,21 @@ export class HeaderSideComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  // signOut() {
+  //   console.log('Sign out Component');
+  //   sessionStorage.clear();
+
+  //   this.socialAuthService.signOut()
+  //   .then(data => {
+  //     console.log('user name sign Out::');
+  //     this.router.navigate(['/sessions/signin']);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //     console.log('Error message:', err.message);
+  //     this.router.navigate(['/sessions/signin']);
+  //   });
+  // }
+
 }

@@ -37,6 +37,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public selectedOption = false;
   public id: string;
   public mentions: number;
+  public creditRemaining: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
@@ -53,7 +54,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   @ViewChild(MatSidenav) private sideNav: MatSidenav;
 
   public databoxItemTable: any;
-  public databoxCategories: any;
   public hotId: string = 'databoxItemTable';
   public selectedHero: any;
   public tableSettings: {};
@@ -69,6 +69,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public genderAuthor: boolean = false;
   public entityRecognition: boolean = false;
   public loggedInUser;
+  public testCategory: any;
 
   /* @SET CHART DATA */
   // Doughnuts
@@ -109,9 +110,22 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     private loader: AppLoaderService
     ) {
       this.data = [];
+      this.id   = this.activatedRoute.snapshot.paramMap.get('id');
+
       this.databoxesService.apiData$.subscribe(result => this.databoxItemData = result);
+
+      // category items
+      this.databoxCategoryService.categoryItems$.subscribe(_result => {
+        this.dataSource = _result || [];
+      });
+
+      // test category data
+      this.databoxCategoryService.testData$.subscribe(_result => {
+         this.testCategory = _result;
+      });
+
       this.selectedTab = parseInt(sessionStorage.getItem('selectedTabDatabox')) || 0;
-      userService.userData$.subscribe((user) => this.loggedInUser = user);
+      userService.userData$.subscribe((user) => this.loggedInUser = user); 
     }
 
 
@@ -145,6 +159,11 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     if (this.addRowReq) { this.addRowReq.unsubscribe(); }
     if (this.resetRowReq) { this.resetRowReq.unsubscribe(); }
     if (this.req) {this.req.unsubscribe(); }
+
+    sessionStorage.removeItem('databoxCategory');
+    sessionStorage.removeItem('databoxCategoryTestData');
+    
+    this.databoxCategoryService.setTestDataItem(null);
   }
 
   // build queryForm
@@ -252,14 +271,13 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
   // Get databox items created by users with parameter id
   getSingleItem() {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-
     this.databoxesService
       .getSingleItem(this.id)
       .subscribe(
         (data) => {
           if (data && data.status === 'Active' || data.status === 'Paused') {
             this.mentions = data.mentions;
+            this.creditRemaining = data.credit_remaining;
             this.categoryRemaining = data.category_available - data.category_used;
             this.subcategoryRemaining = data.sub_category_available - data.sub_category_available_used;
 
@@ -287,10 +305,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.databoxCategoryReq = this.databoxCategoryService
     .getItem(id)
     .subscribe(result => {
-      if (result[0]) {
-        this.databoxCategories = result[0].categories;
-        this.dataSource = result[0].categories;
-      }
+      if (result[0]) this.databoxCategoryService.setCategoryItem(result[0].categories); 
+      else this.databoxCategoryService.setCategoryItem(null); 
     });
   }
 
@@ -349,6 +365,20 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         this.databoxAddSuggestionService.confirm({ title: `Suggest Result From a Specific ${this.data.page_search_name}`, data: body, field: this.data.page_search_name}).subscribe((result) => { });
       }
 
+      // cancel changes for categorized your data
+      cancelChanges(){
+        const getTempData = sessionStorage.getItem('databoxCategoryTestData') || sessionStorage.getItem('databoxCategory');
+
+        if(getTempData)
+          this.openQueryDialog('Cancel Changes', this.data);
+        else {
+          let url = this.router.url;
+
+          this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+          .then(() => this.router.navigate(['/databoxes']))
+          .then(() => this.router.navigate([url]))
+        }
+      }
 
 
   /* @DATABOX ITEM HANDSONTABLE DATA FUNCTIONS */

@@ -10,7 +10,6 @@ import {
   MatButtonModule,
   MatCardModule,
   MatTooltipModule,
-  MatSidenav,
   MatMenuModule,
   MatSlideToggleModule,
   MatGridListModule,

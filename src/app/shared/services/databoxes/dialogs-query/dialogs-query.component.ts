@@ -1,10 +1,11 @@
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { Component, Inject, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar, MatTable } from '@angular/material';
+import { Component, Inject, OnDestroy, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { egretAnimations } from '../../../animations/egret-animations';
 import { Subscription } from 'rxjs';
 import { DataboxCategoryService } from '../databox-category-creator-services';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
 	selector: 'app-dialogs-query',
@@ -21,6 +22,8 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   public categoryName: string;
   public showQuery: string = 'basic';
 
+  @ViewChild('categoryTable') table: MatTable<any>;
+
   // tslint:disable-next-line:max-line-length
   editorData = `Type your desired keywords`;
 
@@ -33,7 +36,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
     private databoxCategoryService: DataboxCategoryService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
-
+    console.log(data)
   }
 
   ngOnInit() {
@@ -48,7 +51,9 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
   // get databox category 
   getDataboxCategory(){
-    if(!this.data.editCategory){
+    let getTempData = sessionStorage.getItem('databoxCategory');
+
+    if(!this.data.editCategory && !getTempData){
       this.reqSubs = this.databoxCategoryService
       .getItem(this.data.databox._id)
       .subscribe(result => {
@@ -56,7 +61,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       }); 
     } 
     // set form value based on databox item details
-    else {
+    else if(this.data.editCategory && !getTempData){
       this.reqSubs = this.databoxCategoryService
         .getCategoryData(this.data.databox._id, this.data.category)
         .subscribe(result => {
@@ -68,7 +73,25 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
             'excluded-keywords' : category['excluded-keywords'] || null,
             'advance-query' : category['query'] || null,
             'category-name' : category['name'] || null,
-            'category-type' : category['type'] || null
+            'category-type' : category['type'] || 'Category'
+          });
+        });
+    }
+
+    // set form value based on databox item details
+    else if(this.data.editCategory && getTempData){
+      this.reqSubs = this.databoxCategoryService
+        .getCategoryDataTemp(this.data.databox._id, this.data.category)
+        .subscribe(result => {
+          let category = result[0];
+
+          this.queryForm.setValue({
+            'required-keywords' : category['required-keywords'] || null,
+            'optional-keywords' : category['optional-keywords'] || null,
+            'excluded-keywords' : category['excluded-keywords'] || null,
+            'advance-query' : category['query'] || null,
+            'category-name' : category['name'] || null,
+            'category-type' : category['type'] || 'Category'
           });
         });
     }
@@ -92,7 +115,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       'excluded-keywords': [null],
       'advance-query': [null],
       'category-name': [null, Validators.compose([Validators.required])],
-      'category-type': [null]
+      'category-type': ['Category']
     });
   }
 
@@ -142,16 +165,11 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
       // add new category
       this.addCategoryReq = this.databoxCategoryService
-      .addCategoryItem(this.data.databox._id, body)
-      .subscribe(result => {
+      .addCategoryTemp(this.data.databox._id, body)
+      .subscribe(_result => {
         let url = this.router.url;
 
-        this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
-        .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
-        .then(() => sessionStorage.removeItem('databox_updated'))
-        .then(() => this.router.navigate(['/databoxes']))
-        .then(() => this.router.navigate([url]))
-        .then(() => sessionStorage.removeItem('selectedTabDatabox'));
+        this.databoxCategoryService.setCategoryItem(_result)
       });
     }
   }
@@ -189,18 +207,65 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
       // add new category
       this.addCategoryReq = this.databoxCategoryService
-      .editCategory(this.data.databox._id, body, this.data.category)
+      .editCategoryTemp(this.data.databox._id, body, this.data.category)
       .subscribe(result => {
         let url = this.router.url;
 
-        this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
-        .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
-        .then(() => sessionStorage.removeItem('databox_updated'))
-        .then(() => this.router.navigate(['/databoxes']))
-        .then(() => this.router.navigate([url]))
-        .then(() => sessionStorage.removeItem('selectedTabDatabox'));
+        this.databoxCategoryService.setCategoryItem(result);
+         
+        if(!sessionStorage.getItem('databoxCategory')){
+          
+          this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+          .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
+          .then(() => sessionStorage.removeItem('databox_updated'))
+          .then(() => this.router.navigate(['/databoxes']))
+          .then(() => this.router.navigate([url]))
+          .then(() => sessionStorage.removeItem('selectedTabDatabox'));
+        }
       });
     }
+  }
+
+  // save all categories to fake db
+  saveChangesToDB(){
+    // close dialog
+    this.dialogRef.close(false);
+
+    // add new category
+    this.addCategoryReq = this.databoxCategoryService
+    .saveChangesToDB(this.data.databox._id)
+    .subscribe(_result => {
+      let url = this.router.url;
+
+      this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+      .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
+      .then(() => sessionStorage.removeItem('databox_updated'))
+      .then(() => this.router.navigate(['/databoxes']))
+      .then(() => this.router.navigate([url]))
+      .then(() => sessionStorage.removeItem('selectedTabDatabox'));
+    });
+  }
+
+  // cancel all changes
+  cancelChanges(){
+    let url = this.router.url;
+
+    // close dialog
+    this.dialogRef.close(false);
+    this.databoxCategoryService.setTestDataItem(null);
+    this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
+      .then(() => sessionStorage.removeItem('databoxCategoryTestData'))
+      .then(() => sessionStorage.removeItem('databoxCategory'))
+      .then(() => this.router.navigate(['/databoxes']))
+      .then(() => this.router.navigate([url]))
+  }
+
+  // test category save to temp session storage
+  testCategory(){
+    // close dialog
+    this.dialogRef.close(false);
+
+    this.databoxCategoryService.testCategory(this.data.databox._id);
   }
 
 
@@ -226,4 +291,6 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+
 }

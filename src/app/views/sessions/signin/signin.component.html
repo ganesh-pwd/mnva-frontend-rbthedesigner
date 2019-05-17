@@ -22,7 +22,8 @@
                   <div class="text-center pb-1">
                     <h3 class="text-muted m-0">Sign in to your account</h3>
                   </div>
-                  <form [formGroup]="signinForm" (ngSubmit)="signin()">
+                  <!-- <form [formGroup]="signinForm" (ngSubmit)="signin()"> -->
+                  <form [formGroup]="signinForm">
                     <div class="">
                       <mat-form-field class="full-width">
                         <input
@@ -51,8 +52,8 @@
                         *ngIf="!signinForm.controls['password'].valid && signinForm.controls['password'].touched" 
                         class="form-error-msg"> Password is required </small>
                     </div>
-                    
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="!signinForm.valid">Sign in</button>
+
+                    <button (click)="signin()" mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="!signinForm.valid">Sign in</button>
                     <div class="text-center"><br>
                       <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
                       <span fxFlex></span>
@@ -61,11 +62,11 @@
 
                     <br>
 
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button>
+                    <!-- <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button> -->
 
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Facebook</button>
+                    <button (click)="socialSignIn('facebook')" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Facebook</button>
 
-                    <button mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Google</button>
+                    <button (click)="socialSignIn('google')" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Google</button>
 
                     <div class="pb-1 text-center">
                       <mat-checkbox
