@@ -85,6 +85,7 @@ export class DataboxesService {
           'mentions': 1200,
           'algorithm_quota': 100,
           'mentions_per_day': 7.5,
+          'credit_remaining': 120,
           'page_search_name': 'Website',
           'expiry_date': 'No Configuration',
           'status': status,

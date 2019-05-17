@@ -35,6 +35,9 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     private snackbar: MatSnackBar,
     private userService: UserService) {
       this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+      if ('photoUrl' in sessionStorage) {
+        this.userImage = sessionStorage.getItem('photoUrl');
+      }
       userService.userData$.subscribe((user) => this.loggedInUser = user);
 
       this.isUserAdded = sessionStorage.getItem('user_new');

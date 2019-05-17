@@ -26,7 +26,7 @@ export class databoxCategoryEditorDialogService {
 
     let dialogRef: MatDialogRef<DataboxDialogsQueryComponent>;
     dialogRef = this.dialog.open(DataboxDialogsQueryComponent, {
-      width: '800px',
+      width: data.title === 'Create Category' || data.title === 'Edit Category' ? '800px' : '500px',
       disableClose: true,
       data: {
         title: data.title,

@@ -36,30 +36,33 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     private router: Router,
     public snackbar: MatSnackBar
     ) {
-    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
-    userService.userData$.subscribe((user) => {
-      const selectedAccount = sessionStorage.getItem('selectedAccount');
+      this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
+      if ('photoUrl' in sessionStorage) {
+        this.userImage = sessionStorage.getItem('photoUrl');
+      }
+      userService.userData$.subscribe((user) => {
+        const selectedAccount = sessionStorage.getItem('selectedAccount');
 
-      this.loggedInUser = user;
-      // set selected account
-      this.selected = selectedAccount ?  
-      (JSON.parse(selectedAccount)).accountName : 
-      user.accountNames[0].accountName;
+        this.loggedInUser = user;
+        // set selected account
+        this.selected = selectedAccount ?  
+        (JSON.parse(selectedAccount)).accountName : 
+        user.accountNames[0].accountName;
 
-      this.new_value = this.selected;
+        this.new_value = this.selected;
 
-      this.when_user_join = selectedAccount ?  
-      (JSON.parse(selectedAccount)).when_user_join : 
-      user.accountNames[0].when_user_join;
+        this.when_user_join = selectedAccount ?  
+        (JSON.parse(selectedAccount)).when_user_join : 
+        user.accountNames[0].when_user_join;
 
-      this.when_data_released = selectedAccount ?  
-      (JSON.parse(selectedAccount)).when_data_released : 
-      user.accountNames[0].when_data_released;
+        this.when_data_released = selectedAccount ?  
+        (JSON.parse(selectedAccount)).when_data_released : 
+        user.accountNames[0].when_data_released;
 
-      this.when_invoice_generated = selectedAccount ?  
-      (JSON.parse(selectedAccount)).when_invoice_generated : 
-      user.accountNames[0].when_invoice_generated;
-    });
+        this.when_invoice_generated = selectedAccount ?  
+        (JSON.parse(selectedAccount)).when_invoice_generated : 
+        user.accountNames[0].when_invoice_generated;
+      });
   }
 
   ngOnInit() {

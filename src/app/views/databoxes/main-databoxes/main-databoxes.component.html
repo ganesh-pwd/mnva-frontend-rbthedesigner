@@ -50,6 +50,7 @@
       	<mat-menu #userMenu="matMenu">
       	    <button mat-menu-item routerLink="/databoxes/edit-query/{{data._id}}">Edit Query</button>
             <button mat-menu-item routerLink="/databoxes/settings/connect/{{data?._id}}">Connect Your Data</button>
+            <button mat-menu-item (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true, data)">Delete Databox</button>
       	</mat-menu>
 
         <mat-menu #userMenu2="matMenu">

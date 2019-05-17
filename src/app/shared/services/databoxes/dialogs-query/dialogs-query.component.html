@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="data.title === 'Create Category' || data.title === 'Edit Category'">
     <h1 matDialogTitle>{{ data.title }}</h1>
     <div mat-dialog-content>
         <form [formGroup]="queryForm"  *ngIf="data.title !== 'Delete Category'">
@@ -127,7 +127,7 @@
                     </mat-card-content>
 
                     <!-- Expression Help -->
-                    <mat-card-content *ngIf="showQuery == 'advance'">
+                    <mat-card-content>
                         <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
                             <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
                                 <mat-card class="p-0">
@@ -160,9 +160,7 @@
                     </mat-card-content>
                 </div>
             </div>
-        </form>
-
-        <p *ngIf="data.title === 'Delete Category'">You are about to delete a Category or Expresson. Are you sure you want to delete the {{data.category}} Category from the list of categories?</p>
+        </form>  
     </div>
 
     <br>
@@ -186,6 +184,51 @@
 
         <button mat-raised-button
           class="mb-05"
+
+          (click)="dialogRef.close(false)">
+          Cancel
+        </button>
+    </div>
+</div>
+
+<!-- Save categories to fake db -->
+<div *ngIf="data.title === 'Save Categories'">
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <p>Are you sure you want to save all the categories? Click the "Save Categories" button to proceed</p>
+    </div>
+
+    <br>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button
+          class="mb-05"
+          color="primary"
+          (click)="saveChangesToDB()">
+          Save Categories
+        </button>
+
+        <button mat-raised-button
+          class="mb-05"
+
+          (click)="dialogRef.close(false)">
+          Cancel
+        </button>
+    </div>
+</div>
+
+<!-- Delete categories to fake db -->
+<div *ngIf="data.title === 'Delete Category'">
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <p >You are about to delete a Category or Expresson. Are you sure you want to delete the {{data.category}} Category from the list of categories?</p>
+    </div>
+
+    <br>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button
+          class="mb-05"
           color="warn"
           (click)="deleteCategoryExpression()"
           *ngIf="data?.editCategory && data.title === 'Delete Category'">
@@ -200,3 +243,56 @@
         </button>
     </div>
 </div>
+
+
+
+<!-- Cancel Changes -->
+<div *ngIf="data.title === 'Cancel Changes'">
+    <h1 matDialogTitle>Exit without saving changes?</h1>
+    <div mat-dialog-content>
+        <p>Are you sure you want to cancel all the changes you applied. Please confirm to proceed.</p>
+    </div>
+
+    <br>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button
+          class="mb-05"
+          color="warn"
+          (click)="cancelChanges()">
+          Yes
+        </button>
+
+        <button mat-raised-button
+          class="mb-05"
+          (click)="dialogRef.close(false)">
+          Cancel
+        </button>
+    </div>
+</div>
+
+<!-- Cancel Changes -->
+<div *ngIf="data.title === 'Test Category'">
+    <h1 matDialogTitle>{{ data.title }}</h1>
+    <div mat-dialog-content>
+        <p>You are about to build and update this databox categories expression. Are you sure you want to proceed?</p>
+    </div>
+
+    <br>
+    <div mat-dialog-actions>
+        <span fxFlex></span>
+        <button mat-raised-button
+          class="mb-05 mat-bg-success"
+          (click)="testCategory()">
+          Test Category
+        </button>
+
+        <button mat-raised-button
+          class="mb-05"
+
+          (click)="dialogRef.close(false)">
+          Cancel
+        </button>
+    </div>
+</div>
+

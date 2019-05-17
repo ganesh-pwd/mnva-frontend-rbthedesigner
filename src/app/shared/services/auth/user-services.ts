@@ -19,7 +19,7 @@ export class UserService {
     const users = new UserDB();
     this.users = users.users;
 
-    let checkLogin = JSON.parse(sessionStorage.getItem('loggedInUser'))
+    let checkLogin = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
     if(checkLogin) this.setUser(checkLogin);
 
