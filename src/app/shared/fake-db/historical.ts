@@ -8,5 +8,6 @@ export class HistoricalDB {
     { name: '3 Month', display_text: '3m'},
     { name: '6 Month', display_text: '6m'},
     { name: '1 Year', display_text: '1y'},
+    { name: 'None', display_text: 'None'},
   ];
 }

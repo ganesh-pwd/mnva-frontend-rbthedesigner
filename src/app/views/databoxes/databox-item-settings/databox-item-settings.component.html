@@ -261,7 +261,7 @@
                     params: { x: '200px', delay: '400ms' }
                   }"
                 >
-                  <b class="mt-1">Required Keywords</b>
+                  <b>Required Keywords</b>
                   <p class="mt-05 text-muted">
                     Your Databox will collect mentions that contain all of these
                     keywords.
@@ -291,7 +291,7 @@
                   fxFlex="100"
                   fxFlex.gt-sm="100"
                 >
-                  <b>Optional Keywords</b>
+                  <b class="mt-1">Optional Keywords</b>
                   <p class="mt-05 text-muted">
                     Your Databox will collect mentions that contain at least one
                     of these keywords, plus all required keywords.
@@ -503,9 +503,9 @@
             <p>Include comments will retieve all the comments from the posts on your query. The content will not necessarily match your query.</p>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result"><b>Specify Maximum Number of Results</b>
               </mat-slide-toggle>
-              <p>Specify the máximum number of results your query will retrieve.</p>
+              <p>Use this option if you only need a specific amount of results and don't to be charged for the entire amount of results found from your query.</p>
             <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
                   <p>Please type the amount of desired results.</p>
                     <mat-form-field style="border: 1px solid gray;" class="full-width">
                       <div class="p-1">
@@ -519,9 +519,9 @@
               <p>Minerva curates a list of media profiles specific to your selected country. By choosing this option, you will monitor only these profiles.</p>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page"><b>Monitor Specific Pages</b>
               </mat-slide-toggle>
-              <p>Use this option if you only need a specific amount of results and don't to be charged for the entire amount of results found from your query.</p>
+              <p>Use this option if you only need to monitor a specific list of pages.</p>
             <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
                   <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
                     <mat-form-field style="border: 1px solid gray;" class="full-width">
                       <div class="p-1">
@@ -531,8 +531,20 @@
                     </mat-form-field>
                 </div>
             </div>
-             
-            
+              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page"><b>Exclude Specific Pages</b>
+              </mat-slide-toggle>
+              <p>Use this option if you only need to exclude a specific list of pages.</p>
+            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
+              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                  <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
+                    <mat-form-field style="border: 1px solid gray;" class="full-width">
+                      <div class="p-1">
+                        <textarea matInput rows="10" cols="80"
+                        formControlName="facebook_page_id"></textarea>
+                      </div>  
+                    </mat-form-field>
+                </div>
+            </div>
           </div>
         </mat-card>
       </div>

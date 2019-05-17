@@ -71,35 +71,47 @@
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-md="80" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
 		<mat-card>
 			<mat-card-content>
-				<h4 class="mat-h4">Change Account Name</h4>
-				<br>
-
+				<h3 class="mat-h3">Change Account Name</h3>
 				<mat-form-field>
 				    <input matInput placeholder="Account Name" [value]="selected" [(ngModel)]="new_value">
 				</mat-form-field>
-
-				<h4 class="mat-h4">Email From Minerva</h4>
-				<mat-checkbox [(ngModel)]="when_user_join" 
-        [checked]="when_user_join">When New User Joins</mat-checkbox><br>
-				<mat-checkbox [(ngModel)]="when_data_released" 
-        [checked]="when_data_released">When New Data Sources are Released</mat-checkbox><br>
-				<mat-checkbox [(ngModel)]="when_invoice_generated" 
-        [checked]="when_invoice_generated">When An Invoice is Generated</mat-checkbox><br><br>
-
+				<h3 class="mat-h3">Emails and Notifications</h3>
+        <div class="mb-1">
+          <h4 class="mat-h4 m-0">Account</h4>
+          <mat-checkbox [(ngModel)]="when_user_join" 
+          [checked]="when_user_join">When new user joins</mat-checkbox><br>
+          <mat-checkbox [(ngModel)]="when_user_leaves" 
+          [checked]="when_user_leaves">When user leaves account</mat-checkbox><br>
+        </div>  
+        <div class="mb-1">
+          <h4 class="mat-h4 m-0">Credit</h4>
+          <mat-checkbox [(ngModel)]="when_credit_warning" 
+          [checked]="when_credit_warning">When mentions or algorithm credit is lower than 80%</mat-checkbox><br>
+          <mat-checkbox [(ngModel)]="when_credit_expired" 
+          [checked]="when_credit_expired">When mentions or algorithm credit has expired</mat-checkbox><br>
+        </div> 
+        <div class="mb-1">
+          <h4 class="mat-h4 m-0">Billing</h4>
+          <mat-checkbox [(ngModel)]="when_invoice_generated" 
+          [checked]="when_invoice_generated">When an invoice is generated</mat-checkbox><br>
+          <mat-checkbox [(ngModel)]="when_purchase_success" 
+          [checked]="when_purchase_success">When a purchase is successful</mat-checkbox><br>
+          <mat-checkbox [(ngModel)]="when_purchase_declined" 
+          [checked]="when_purchase_declined">When a purchase is declined</mat-checkbox><br>
+        </div>
+        <div class="mb-1">
+          <h4 class="mat-h4 m-0">Minerva News</h4>
+          <mat-checkbox [(ngModel)]="when_data_released" 
+          [checked]="when_data_released">When product updates are released</mat-checkbox><br>
+        </div>
         <button mat-raised-button color="primary" 
         (click)="saveChanges()">Save Changes</button>
-
-        <br><br>
-
-        <mat-divider></mat-divider>
-
-        <br>
-
-				<h4 class="mat-h4">Delete Account</h4>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique.</p>
-				<button mat-raised-button color="warn" (click)="deleteAccountDialog('Delete Account')">Delete Account</button>
-
 			</mat-card-content>
+        <mat-divider></mat-divider>
+        <br>
+        <h4 class="mat-h4">Delete Account</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique. Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem necessitatibus natus fugit porro at sunt mollitia repellendus deserunt, libero similique.</p>
+        <button mat-raised-button color="warn" (click)="deleteAccountDialog('Delete Account')">Delete Account</button>
 		</mat-card>
 	</div>
 </div>
