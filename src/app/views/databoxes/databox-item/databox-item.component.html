@@ -129,19 +129,6 @@
             </mat-card-content>
           </mat-card>
       </div>
-  
-  
-      <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-  
-          <div class="bottom-data">
-            <br><br>
-            <h2 class="mat-h1">Delete Databox</h2>
-            <p>Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.</p>
-            <button mat-raised-button color="warn" (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true)">Delete Databox</button>
-          </div>
-        </div>
-      </div>
 
       <br><br>
     </mat-tab>
@@ -150,7 +137,7 @@
     <mat-tab label="Categorize Your Data">
       <div fxLayout="row" fxLayoutWrap="wrap">
         <!-- Column 1 -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayoutAlign="center">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}"  >
           <mat-card>
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
@@ -163,7 +150,7 @@
             <mat-divider></mat-divider>
             <br>
             <mat-card-content>
-              <table mat-table [dataSource]="dataSource">
+              <table mat-table #categoryTable [dataSource]="dataSource">
                 <!--- Note that these columns can be defined in any order.
                       The actual rendered columns are set as a property on the row definition" -->
   
@@ -216,8 +203,9 @@
           </mat-card>
           <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
             <span fxFlex></span>
-            <button mat-raised-button class="mb-05 mat-bg-success">
-            Categorize Your Data
+            <button mat-raised-button class="mb-05 mat-bg-success" 
+            (click)="openQueryDialog('Test Category', data)" >
+            Test Category
             </button>
           </div>
         </div>
@@ -298,9 +286,44 @@
                     <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
                   </table>
                 </mat-card-content>
+
+
+                <mat-card-content *ngIf="testCategory">
+                  <mat-divider>
+                    
+                  </mat-divider>   
+                  <br>
+                  <p>Result from Test Category: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </mat-card-content>
               </mat-card>
-            </div>      
+
+
+            </div>   
+
+            
           </div>    
+        </div>
+
+
+        <div fxLayout="column" fxFlex="100">
+          <div>
+            <br>
+            <mat-divider></mat-divider>  
+            <br>
+            <div>
+              <span fxFlex></span>
+              <button 
+              (click)="cancelChanges()" 
+              mat-raised-button class="mb-05">
+              Back</button>
+
+              <button 
+              (click)="openQueryDialog('Save Categories', data)" 
+              mat-raised-button 
+              class="mb-05 mat-bg-gray" >
+              Save Categories</button>
+            </div>
+          </div>
         </div>
       </div>
     </mat-tab>
@@ -318,7 +341,7 @@
           </div>
           <div class="mt-1 mr-1">
             <span fxFlex></span>
-            <h3 class="mat-h3">Credits Remaining:<span class="credits">$100</span></h3>
+            <h3 class="mat-h3">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
           </div>
         </div>
       </div>

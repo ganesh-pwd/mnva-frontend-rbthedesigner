@@ -127,7 +127,7 @@ export class SigninComponent implements OnInit {
 
     // temporary disable
     // this.progressBar.mode = 'indeterminate';
-
+    /*
     this.amplifyService.auth().signIn(signinData)
     .then(data => {
       console.log('data: ', data);
@@ -148,25 +148,25 @@ export class SigninComponent implements OnInit {
       }
       alert(err.message);
       // this.submitButton.disabled = false;
-    });
+    });*/
 
     // temporary select a user and set it as the currently logged in user
-    // this.reqUser = this.userService
-    // .signInUser(body.username, body.password)
-    // .subscribe((result) => {
+     this.reqUser = this.userService
+     .signInUser(body.username, body.password)
+     .subscribe((result) => {
 
       // set logged in user from ../fake-db/user.ts
-      // sessionStorage.setItem('loggedInUser', JSON.stringify(result[0]));
+      sessionStorage.setItem('loggedInUser', JSON.stringify(result[0]));
 
       // set image
-      // this.minervaAccountChangeService.setImage(result[0].profile_image);
+      this.minervaAccountChangeService.setImage(result[0].profile_image);
 
       // navigate to databox dashboard
-    //   setTimeout(() => {
-    //     this.router.navigateByUrl('/', { skipLocationChange: true });
-    //     this.router.navigate(['/databoxes']);
-    //   }, 1000);
-    // });
+      setTimeout(() => {
+          this.router.navigateByUrl('/', { skipLocationChange: true });
+          this.router.navigate(['/databoxes']);
+        }, 1000);
+      });
 
   }
 
