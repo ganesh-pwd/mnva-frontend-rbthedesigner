@@ -10,7 +10,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -50,14 +55,24 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': true, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         },
         {
           'accountName': 'Paprika Digital',
           'id': '5a7b73f7cab10f461153989b',  
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }],
       'isActive': true,
       'balance': 2838.08,
@@ -96,7 +111,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -135,7 +155,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -175,7 +200,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -214,7 +244,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -251,7 +286,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -288,7 +328,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -325,7 +370,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -362,7 +412,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -399,7 +454,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -436,7 +496,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -473,7 +538,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -510,7 +580,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -547,7 +622,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -584,7 +664,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -621,7 +706,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -658,7 +748,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -695,7 +790,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -732,7 +832,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -769,7 +874,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -806,7 +916,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -843,7 +958,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -880,7 +1000,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -917,7 +1042,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -954,7 +1084,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -991,7 +1126,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1028,7 +1168,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1065,7 +1210,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1102,7 +1252,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1139,7 +1294,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1176,7 +1336,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1213,7 +1378,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1250,7 +1420,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1287,7 +1462,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1324,7 +1504,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1361,7 +1546,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1398,7 +1588,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1435,7 +1630,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1472,7 +1672,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1509,7 +1714,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1546,7 +1756,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1583,7 +1798,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1620,7 +1840,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1657,7 +1882,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1694,7 +1924,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1731,7 +1966,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1768,7 +2008,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1805,7 +2050,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1842,7 +2092,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1879,7 +2134,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -1916,7 +2176,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1953,7 +2218,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -1990,7 +2260,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2027,7 +2302,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2064,7 +2344,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2101,7 +2386,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2138,7 +2428,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2175,7 +2470,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2212,7 +2512,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2249,7 +2554,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2286,7 +2596,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2323,7 +2638,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2360,7 +2680,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2397,7 +2722,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2434,7 +2764,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2471,7 +2806,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,
@@ -2508,7 +2848,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': false,
@@ -2545,7 +2890,12 @@ export class UserDB {
           'id': '5a7b73f7cab10f461153989c', 
           'when_user_join': false, 
           'when_data_released': false, 
-          'when_invoice_generated': false
+          'when_invoice_generated': false,
+          'when_user_leave': false,
+          'when_credit_warning': false,
+          'when_credit_expired': false,
+          'when_purchase_declined': false,
+          'when_purchase_success': false,
         }
       ],
       'isActive': true,

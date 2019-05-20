@@ -67,6 +67,24 @@ export class ProductShopService {
     });
   }
 
+  public updatePrice(cartItem: CartItem, billedYearly: boolean): Observable<CartItem[]>{
+    let findCart = this.cart.find(el => el === cartItem);
+
+    if(!sessionStorage.getItem('oldAccountPrice')) 
+      sessionStorage.setItem('oldAccountPrice', `${findCart.product.price.sale}`);
+    
+    let oldPrice = sessionStorage.getItem('oldAccountPrice');
+
+    if(billedYearly)
+      findCart.product.price.sale -= (findCart.product.price.sale * 0.10);
+
+    else {
+      findCart.product.price.sale = parseInt(oldPrice)
+    }
+
+    return of(this.cart);
+  }
+
   public removeFromCart(cartItem: CartItem): Observable<CartItem[]> {
     this.cart = this.cart.filter(item => {
       if(item.product._id === cartItem.product._id) {

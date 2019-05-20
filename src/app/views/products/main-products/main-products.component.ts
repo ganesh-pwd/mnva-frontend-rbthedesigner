@@ -60,14 +60,19 @@ export class MainProductsComponent implements OnInit {
       this.standardAccount = parseFloat((this.standardAccount - this.standardAccount * 0.10).toFixed(2));
       this.plusAccount = parseFloat((this.plusAccount - this.plusAccount * 0.10).toFixed(2));
       this.enterpriseAccount = parseFloat((this.enterpriseAccount - this.enterpriseAccount * 0.10).toFixed(2));
+      sessionStorage.setItem('billedAnually', 'true');
+      this.billedAnnually = true;
     } else {
       this.standardAccount = 40;
       this.plusAccount = 70;
       this.enterpriseAccount = 100;
+      sessionStorage.removeItem('billedAnually');
+      this.billedAnnually = false;
     }
   }
 
-  public addToCart(name, price) {
+  public addToCartAccountType(name, price) {
+    console.log(price)
     const productBuild = {
       name: name,
       _id: Date.now().toString(),
@@ -83,6 +88,11 @@ export class MainProductsComponent implements OnInit {
         quantity: 1
       }
     };
+
+    if(this.billedAnnually){
+      sessionStorage.setItem('annualPriceText', ((price/0.9) * 12 * 0.10).toFixed(0));
+      sessionStorage.setItem('oldAccountPrice', `${price/0.9}`);
+    }
 
     // check if item is already added to cart
     const filter = this.cart.filter(el => {
@@ -102,13 +112,38 @@ export class MainProductsComponent implements OnInit {
   }
 
   public addCreditToCart() {
-    console.log('addCreditToCart');
+    let value = JSON.parse(this.filterForm.get('consulting').value);
+    let label = this.filterForm.get('consulting');
+
+    const productBuild = {
+      name: `Consulting Credit: ${value.name}`,
+      _id: Date.now().toString(),
+      price: {
+        sale: value.price
+      },
+      category: 'Consulting Credit',
+      photo: 'https://via.placeholder.com/140x140'
+    };
+    const cartItem: CartItem = {
+      product: productBuild,
+      data: {
+        quantity: 1
+      }
+    };
+
+    this.shopService
+      .addToCart(cartItem)
+      .subscribe(cart => {
+        this.cart = cart;
+        this.snackBar.open('Product added to cart', 'OK', { duration: 4000 });
+      });
   }
 
   private buildFilterForm(filterData: any = {}) {
     this.filterForm = this.fb.group({
       search: [''],
       category: ['all'],
+      consulting: [''],
       minPrice: [filterData.minPrice],
       maxPrice: [filterData.maxPrice],
       minRating: [filterData.minRating],

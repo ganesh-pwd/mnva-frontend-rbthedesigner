@@ -28,7 +28,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   public when_data_released;
   public when_invoice_generated;
 
-  public when_user_leaves: boolean = false;
+  public when_user_leave: boolean = false;
   public when_credit_warning: boolean = false;
   public when_credit_expired: boolean = false;
   public when_purchase_success: boolean = false;
@@ -47,27 +47,48 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
         this.userImage = sessionStorage.getItem('photoUrl');
       }
       userService.userData$.subscribe((user) => {
-        const selectedAccount = sessionStorage.getItem('selectedAccount');
+        const selectedAccount = JSON.parse(sessionStorage.getItem('selectedAccount'));
 
         this.loggedInUser = user;
         // set selected account
         this.selected = selectedAccount ?
-        (JSON.parse(selectedAccount)).accountName :
+        selectedAccount.accountName :
         user.accountNames[0].accountName;
 
         this.new_value = this.selected;
 
         this.when_user_join = selectedAccount ?
-        (JSON.parse(selectedAccount)).when_user_join :
+        selectedAccount.when_user_join :
         user.accountNames[0].when_user_join;
 
         this.when_data_released = selectedAccount ?
-        (JSON.parse(selectedAccount)).when_data_released :
+        selectedAccount.when_data_released :
         user.accountNames[0].when_data_released;
 
         this.when_invoice_generated = selectedAccount ?
-        (JSON.parse(selectedAccount)).when_invoice_generated :
+        selectedAccount.when_invoice_generated :
         user.accountNames[0].when_invoice_generated;
+
+        this.when_user_leave = selectedAccount ?
+        selectedAccount.when_user_leave :
+        user.accountNames[0].when_user_leave;
+
+        this.when_credit_warning = selectedAccount ?
+        selectedAccount.when_credit_warning :
+        user.accountNames[0].when_credit_warning;
+
+        this.when_credit_expired = selectedAccount ?
+        selectedAccount.when_credit_expired :
+        user.accountNames[0].when_credit_expired;
+
+        this.when_purchase_declined = selectedAccount ?
+        selectedAccount.when_purchase_declined :
+        user.accountNames[0].when_purchase_declined;
+
+        this.when_purchase_success = selectedAccount ?
+        selectedAccount.when_purchase_success :
+        user.accountNames[0].when_purchase_success;
+
       });
   }
 
@@ -98,6 +119,11 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       'when_user_join': this.when_user_join,
       'when_data_released': this.when_data_released,
       'when_invoice_generated': this.when_invoice_generated,
+      'when_user_leave': this.when_user_leave,
+      'when_credit_warning': this.when_credit_warning,
+      'when_credit_expired': this.when_credit_expired,
+      'when_purchase_declined': this.when_purchase_declined,
+      'when_purchase_success': this.when_purchase_success
     }
 
     this.req = this.userService.setAccountName(body).subscribe(result => {

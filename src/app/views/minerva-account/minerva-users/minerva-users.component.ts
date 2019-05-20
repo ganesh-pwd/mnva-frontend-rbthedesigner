@@ -25,6 +25,8 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     public data: any;
     public loggedInUser;
     public isUserAdded;
+    public isUserDeleted;
+    public isUserUpdated;
 
     constructor(
     private router: Router,
@@ -42,6 +44,12 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
 
       this.isUserAdded = sessionStorage.getItem('user_new');
       if (this.isUserAdded) this.openSnackBar(this.isUserAdded);  
+
+      this.isUserDeleted = sessionStorage.getItem('user_deleted');
+      if (this.isUserDeleted) this.openSnackBar(this.isUserDeleted); 
+
+      this.isUserUpdated = sessionStorage.getItem('user_update');
+      if (this.isUserUpdated) this.openSnackBar(this.isUserUpdated); 
     }
 
     ngOnInit() {
@@ -87,6 +95,8 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       /**/
       if(this.isUserAdded) sessionStorage.removeItem('user_new');
+      if(this.isUserDeleted) sessionStorage.removeItem('user_deleted');
+      if(this.isUserAdded) sessionStorage.removeItem('user_update');
 
       this.snackbar.dismiss();
     }, 3000);

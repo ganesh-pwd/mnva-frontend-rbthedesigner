@@ -11,7 +11,8 @@ import { DataboxMentionsDialogService } from '../../../shared/services/databoxes
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { UserService } from '../../../shared/services/auth/user-services';
-import { MatSnackBar } from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatSnackBar, MatChipInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-databox-item-settings',
@@ -171,6 +172,16 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   //   }
   // ];
 
+  public visible = true;
+  public selectable = true;
+  public removable = true;
+  public addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  public requiredKeywords = [];
+  public optionalKeywords = [];
+  public excludeKeywords = [];
+  public chipInputPlaceholder: string;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -210,6 +221,41 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     if (this.databoxReq) this.databoxReq.unsubscribe();
     if (this.countryReq) this.countryReq.unsubscribe();
     if (this.historicalReq) this.historicalReq.unsubscribe();
+  }
+
+  add(event: MatChipInputEvent, keywordType: string): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add keywords
+    if ((value || '').trim()) {
+      if (keywordType === 'required') {
+        this.requiredKeywords.push({name: value.trim()});
+      } else if (keywordType === 'optional') {
+        this.optionalKeywords.push({name: value.trim()});
+      } else if (keywordType === 'exclude') {
+        this.excludeKeywords.push({name: value.trim()});
+      }
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(keyword: any): void {
+    const indexRequired = this.requiredKeywords.indexOf(keyword);
+    const indexOptional = this.optionalKeywords.indexOf(keyword);
+    const indexExclude = this.excludeKeywords.indexOf(keyword);
+
+    if (indexRequired >= 0) {
+      this.requiredKeywords.splice(indexRequired, 1);
+    } else if (indexOptional >= 0) {
+      this.optionalKeywords.splice(indexOptional, 1);
+    } else if (indexExclude >= 0) {
+      this.excludeKeywords.splice(indexExclude, 1);
+    }
   }
 
   /* @DATABOX FORM GROUP FUNCTIONS INITIALIZE */
@@ -307,11 +353,13 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'max_number_result': this.data ? this.data.max_number_result : 1,
         };
 
+        this.chipInputPlaceholder = data['required-keywords'];
+
         // set form value based on databox item details
         this.queryForm.setValue({
           'datasource': data.datasource,
-          'required-keywords': data['required-keywords'],
-          'optional-keywords': data['optional-keywords'],
+          'required-keywords': '',
+          'optional-keywords': '',
           'excluded-keywords': data['excluded-keywords'],
           'advance-query': data['advance-query'],
           'include_comments': data.include_comments,
