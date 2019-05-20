@@ -65,6 +65,12 @@ export class UserService {
     filterAccountNames.when_data_released = details.when_data_released;
     filterAccountNames.when_invoice_generated = details.when_invoice_generated;
 
+    filterAccountNames.when_user_leave = details.when_user_leave;
+    filterAccountNames.when_credit_warning = details.when_credit_warning;
+    filterAccountNames.when_credit_expired = details.when_credit_expired;
+    filterAccountNames.when_purchase_declined = details.when_purchase_declined;
+    filterAccountNames.when_purchase_success = details.when_purchase_success;
+
     return of(filterAccountNames);
   }
 

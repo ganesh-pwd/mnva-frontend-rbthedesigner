@@ -16,18 +16,34 @@ export class ProductsCartComponent implements OnInit {
   public vat: number = 13;
   public billYearly: boolean = false;
   public annualDiscount: number;
+  public annualDiscountText: string;
 
   constructor(
     private shopService: ProductShopService,
     private location: Location
-  ) { }
+  ) { 
+    if(sessionStorage.getItem('billedAnually')){
+      this.billYearly = true;
+    }
+
+    if(sessionStorage.getItem('annualPriceText')){
+      this.annualDiscountText = sessionStorage.getItem('annualPriceText')
+    }
+  }
 
   ngOnInit() {
     this.getCart();
     this.onQuantityChange();
   }
 
+
   public removeProduct(cartItem) {
+    if(cartItem.product.category == 'Account Type'){
+      sessionStorage.removeItem('billedAnually');
+      sessionStorage.removeItem('oldAccountPrice');
+      sessionStorage.removeItem('annualPriceText');
+    }
+
     this.shopService
     .removeFromCart(cartItem)
     .subscribe(res => {
@@ -78,25 +94,36 @@ export class ProductsCartComponent implements OnInit {
   }
 
   // if user select pay yearly or monthly
-  public onBillMonthlyYearly(event, price) {
-    this.annualDiscount = price * 12 * 0.10;
+  public onBillMonthlyYearly(event, price, cartItem) {
+    
 
     if (event.checked) {
-      // If pays monthly it should have a 10% discount
-      let withAnnualDiscount = 0;
-      const yearlyBal = parseFloat((price * 12).toFixed(5));
-
-      this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(2));
-
-      withAnnualDiscount = this.subTotal - this.annualDiscount;
-      this.total    = parseFloat(((withAnnualDiscount) + (withAnnualDiscount * (this.vat / 100))).toFixed(2));
       this.billYearly = true;
+      this.shopService.updatePrice(cartItem, this.billYearly).subscribe(el => el)
+
+      const yearlyBal = parseInt(((price * 12) - (price * 12 * 0.10)).toFixed(0));
+
+      this.annualDiscount = price * 12 * 0.10;
+      this.subTotal   = parseInt((this.computePriceNotAccount() + yearlyBal).toFixed(2));
+      this.total      = parseInt((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(2));
+
+      // add billed annually
+      sessionStorage.setItem('billedAnually', 'true');
+      sessionStorage.setItem('annualPriceText', this.annualDiscount.toFixed(0));
     } else {
-      const yearlyBal = parseFloat((price * 1).toFixed(5));
-      this.annualDiscount = 0;
-      this.subTotal = parseFloat((this.computePriceNotAccount() + yearlyBal).toFixed(2));
-      this.total    = parseFloat((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(2));
       this.billYearly = false;
+      this.shopService.updatePrice(cartItem, this.billYearly).subscribe(el => el);
+
+      const yearlyBal = parseInt(sessionStorage.getItem('oldAccountPrice'));
+      this.annualDiscount = 0;
+      this.subTotal   = parseInt((this.computePriceNotAccount() + yearlyBal).toFixed(2));
+      this.total      = parseInt((this.subTotal + (this.subTotal * (this.vat / 100))).toFixed(2));
+
+      // remove billed annually
+      sessionStorage.removeItem('billedAnually');
+      sessionStorage.removeItem('oldAccountPrice');
+      sessionStorage.removeItem('annualPriceText');
+      this.annualDiscountText = null;
     }
   }
 
@@ -109,6 +136,15 @@ export class ProductsCartComponent implements OnInit {
       .getCart()
       .subscribe(cart => {
         this.cart = cart;
+        if(cart.length > 0 && sessionStorage.getItem('billedAnually')){
+          let selectedAccountType = cart.filter(el => el.product.category === 'Account Type')[0].product.price.sale;
+          this.annualDiscount = parseFloat(((selectedAccountType * 0.10)).toFixed(0));
+          console.log(this.annualDiscount)
+        } else {
+          sessionStorage.removeItem('billedAnually');
+          sessionStorage.removeItem('oldAccountPrice');
+          sessionStorage.removeItem('annualPriceText');
+        }
       });
   }
 

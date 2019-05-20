@@ -57,9 +57,7 @@
         <a *ngIf="item.type === 'dropDown'" 
           appDropdownToggle 
           matRipple 
-          routerLink="/{{item.state}}"
-          routerLinkActive="mat-color-primary"
-          [routerLinkActiveOptions]="{exact:true}">
+          routerLink="/{{item.state}}">
               <!-- <mat-icon>{{item.icon}}</mat-icon> -->
               <img src="{{item.image_icon}}" class="side-image-icon {{item.class}}">
               <span class="item-name lvl1">
@@ -76,13 +74,12 @@
 
         <!-- LEVEL 2 -->
         <ul class="submenu lvl2" appDropdown *ngIf="item.type === 'dropDown'">
-          <li *ngFor="let itemLvL2 of item.sub" appDropdownLink>
+          <li *ngFor="let itemLvL2 of item.sub" appDropdownLink [routerLinkActiveOptions]="{exact:true}"
+              routerLinkActive="open">
 
             <a routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}" 
-              routerLinkActive="mat-color-primary" 
-              [routerLinkActiveOptions]="{exact:true}" 
               appDropdownToggle 
-              *ngIf="itemLvL2.type !== 'dropDown'" 
+              *ngIf="itemLvL2.type !== 'dropDown'"
               matRipple>
                 <span class="item-name lvl2">
                   {{itemLvL2.name | translate}}
@@ -93,8 +90,6 @@
             <a *ngIf="itemLvL2.type === 'dropDown'" 
               appDropdownToggle 
               matRipple 
-              routerLinkActive="mat-color-primary" 
-              [routerLinkActiveOptions]="{exact:true}" 
               routerLink="{{item.state ? '/'+item.state : ''}}/{{itemLvL2.state}}">
                 <span class="item-name lvl2">{{itemLvL2.name | translate}}</span>
                 <span fxFlex></span>

@@ -30,7 +30,23 @@
         <tr *ngFor="let item of cart">
           <td><button mat-icon-button color="warn" (click)="removeProduct(item)"><mat-icon>close</mat-icon></button> </td>
           <td><span style="cursor: pointer" [routerLink]="['/products/advanced-templates', item.product._id]">{{item.product.name}}</span></td>
-          <td>${{item.product.price.sale}}
+          <td>
+
+            <!--
+            <span *ngIf="checkIfAccountType() && item.product.category === 'Account Type' && billYearly">
+              ${{item.product.price.sale * 12 * 0.10}}
+            </span>
+
+            <span *ngIf="checkIfAccountType() && item.product.category === 'Account Type' && !billYearly">
+              ${{item.product.price.sale}}
+            </span>
+
+            <span *ngIf="item.product.category !== 'Account Type'">
+              ${{item.product.price.sale}}
+            </span>-->
+
+            ${{item.product.price.sale}}
+
             {{item.product.category === 'Account Type' ? '/month' : ''}}
             {{item.product.category === 'Credit' ? '/mentions' : ''}}
           </td>
@@ -48,7 +64,7 @@
               color="primary"
               class="mb-1"
               [ngModel]="billYearly"
-              (change)="onBillMonthlyYearly($event, item.product.price.sale)">
+              (change)="onBillMonthlyYearly($event, item.product.price.sale, item)">
             </mat-slide-toggle>
              
           </td> 
@@ -70,7 +86,7 @@
           <div class="line mb-1">
             <span class="fw-500">Annual Discount (10%):</span>
             <span fxFlex></span>
-            <span class="text-muted">${{annualDiscount}}</span>
+            <span class="text-muted">${{annualDiscount || annualDiscountText}}</span>
           </div>
           <div class="line mb-1">
             <span class="fw-500">IVA:</span>

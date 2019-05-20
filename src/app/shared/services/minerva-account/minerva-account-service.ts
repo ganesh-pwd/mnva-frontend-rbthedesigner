@@ -83,9 +83,9 @@ export class MinervaAccountService {
         this.accounts = minerva_accounts;
 
         this.router.navigateByUrl('/accounts/minerva-notifications', { skipLocationChange: true })
-        .then(() => sessionStorage.setItem('user_new', 'A User has been successfully updated'))
+        .then(() => sessionStorage.setItem('user_update', 'A User has been successfully updated'))
         .then(() => this.router.navigate(['/accounts/users']))
-        .then(() => sessionStorage.removeItem('user_new'));
+        .then(() => sessionStorage.removeItem('user_update'));
        
         return of(this.accounts.slice());
       }
@@ -101,9 +101,9 @@ export class MinervaAccountService {
           this.accounts = minerva_accounts;
 
           this.router.navigateByUrl('/accounts/minerva-notifications', { skipLocationChange: true })
-          .then(() => sessionStorage.setItem('user_new', 'A User has been successfully deleted'))
+          .then(() => sessionStorage.setItem('user_deleted', 'A User has been successfully deleted'))
           .then(() => this.router.navigate(['/accounts/users']))
-          .then(() => sessionStorage.removeItem('user_new'));
+          .then(() => sessionStorage.removeItem('user_deleted'));
 
         } else alert(`You didn't write the word 'delete' to confirm the deletion of the user account`);
 

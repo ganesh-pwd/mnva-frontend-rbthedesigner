@@ -271,16 +271,22 @@
                     class="full-width"
                   >
                     <div class="p-1">
-                      <mat-placeholder class="placeholder" 
-                      *ngIf="queryForm.controls['required-keywords'].value === ''">
-                        {{editorData}}
+                      <mat-placeholder class="placeholder">
+                        {{chipInputPlaceholder}}
                       </mat-placeholder>
-                      <textarea
-                        matInput
-                        rows="10"
-                        cols="80"
-                        formControlName="required-keywords"
-                      ></textarea>
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let keyword of requiredKeywords" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(keyword, 'required')">
+                            {{keyword.name}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input
+                          [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          matChipInputAddOnBlur="false"
+                          (matChipInputTokenEnd)="add($event, 'required')"
+                          formControlName="required-keywords">
+                      </mat-chip-list>
                     </div>
                   </mat-form-field>
                 </div>
@@ -301,16 +307,22 @@
                     class="full-width"
                   >
                     <div class="p-1">
-                      <mat-placeholder class="placeholder" 
-                      *ngIf="queryForm.controls['required-keywords'].value === ''">
-                        {{editorData}}
+                      <mat-placeholder class="placeholder">
+                        {{chipInputPlaceholder}}
                       </mat-placeholder>
-                      <textarea
-                        matInput
-                        rows="10"
-                        cols="80"
-                        formControlName="optional-keywords"
-                      ></textarea>
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let optionalKeyword of optionalKeywords" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(optionalKeyword, 'optional')">
+                            {{optionalKeyword.name}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input
+                          [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event, 'optional')"
+                          formControlName="optional-keywords">
+                      </mat-chip-list>
                     </div>
                   </mat-form-field>
                 </div>
@@ -335,15 +347,22 @@
                     class="full-width"
                   >
                     <div class="p-1">
-                      <mat-placeholder class="placeholder" 
-                      *ngIf="queryForm.controls['excluded-keywords'].value === ''">
-                      {{editorData}}</mat-placeholder>
-                      <textarea
-                        matInput
-                        rows="10"
-                        cols="80"
-                        formControlName="excluded-keywords"
-                      ></textarea>
+                      <mat-placeholder class="placeholder">
+                        {{chipInputPlaceholder}}
+                      </mat-placeholder>
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let excludeKeyword of excludeKeywords" [selectable]="selectable"
+                            [removable]="removable" (removed)="remove(excludeKeyword, 'exclude')">
+                            {{excludeKeyword.name}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input
+                          [matChipInputFor]="chipList"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event, 'exclude')"
+                          formControlName="optional-keywords">
+                      </mat-chip-list>
                     </div>
                   </mat-form-field>
                 </div>

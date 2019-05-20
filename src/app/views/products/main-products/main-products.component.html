@@ -41,7 +41,8 @@
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
         <mat-card class="plan-pricing text-center green p-0">
-          <mat-card-title class="mat-bg-gray pt-1 pr-1 pl-1 m-0">
+          <mat-card-title class="pt-1 pr-1 pl-1 m-0"
+          [ngClass]="loggedInUser.accountType === 'Basic' ? 'mat-bg-gray' : 'light-mat-gray'">
             <img src="assets/images/box-green.png">
             <div class="pt-1 pb-1">
               <h1 class="mat-h1 mb-0"><strong>$<span>{{standardAccount}} /Mo</span></strong></h1>
@@ -82,7 +83,7 @@
         <button 
         *ngIf="loggedInUser.accountType !== 'Basic'"
         mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" 
-        (click)="addToCart('Basic Account', standardAccount)">
+        (click)="addToCartAccountType('Basic Account', standardAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
         <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Basic'">Current Plan</button>
@@ -90,7 +91,8 @@
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
         <mat-card class="plan-pricing text-center blue p-0">
-          <mat-card-title class="light-mat-gray pt-1 pr-1 pl-1 m-0">
+          <mat-card-title class="pt-1 pr-1 pl-1 m-0"
+          [ngClass]="loggedInUser.accountType === 'Professional' ? 'mat-bg-gray' : 'light-mat-gray'">
             <img src="assets/images/box-blue.png">
             <div class="pt-1 pb-1">
               <h1 class="mat-h1 mb-0"><strong>$<span>{{plusAccount}} /Mo</span></strong></h1>
@@ -131,7 +133,7 @@
         <button 
         *ngIf="loggedInUser.accountType !== 'Professional'"
         mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" 
-        (click)="addToCart('Professional Account', plusAccount)">
+        (click)="addToCartAccountType('Professional Account', plusAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
         <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Professional'">Current Plan</button>
@@ -139,7 +141,8 @@
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
         <mat-card class="plan-pricing text-center orange p-0">
-          <mat-card-title class="light-mat-gray pt-1 pr-1 pl-1 m-0">
+          <mat-card-title class="pt-1 pr-1 pl-1 m-0"
+          [ngClass]="loggedInUser.accountType === 'Enterprise' ? 'mat-bg-gray' : 'light-mat-gray'">
             <img src="assets/images/box-orange.png">
             <div class="pt-1 pb-1">
               <h1 class="mat-h1 mb-0"><strong>$<span>{{enterpriseAccount}} /Mo</span></strong></h1>
@@ -180,7 +183,7 @@
         <button mat-raised-button 
         *ngIf="loggedInUser.accountType !== 'Enterprise'"
         class="mat-bg-primary btn-add-to-cart mt-1" 
-        (click)="addToCart('Enterprise Account', enterpriseAccount)">
+        (click)="addToCartAccountType('Enterprise Account', enterpriseAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
         <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Enterprise'">Current Plan</button>
@@ -214,11 +217,11 @@
           Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque.
         </p>
         <mat-form-field>
-         <mat-select [formControl]="filterForm.controls['algoCredit']">
-            <mat-option value="50" style="font-size: 14px !important;">1 Hour</mat-option>
-            <mat-option value="100" style="font-size: 14px !important;">2 Hours</mat-option>
-            <mat-option value="150" style="font-size: 14px !important;">3 Hours</mat-option>
-            <mat-option value="250" style="font-size: 14px !important;">4 Hours</mat-option>
+         <mat-select [formControl]="filterForm.controls['consulting']" id="consulting">
+            <mat-option data-value='{"name":"1 Hour","price":"50"}' style="font-size: 14px !important;">1 Hour</mat-option>
+            <mat-option data-value='{"name":"2 Hour","price":"100"}' style="font-size: 14px !important;">2 Hours</mat-option>
+            <mat-option data-value='{"name":"3 Hour","price":"150"}'  style="font-size: 14px !important;">3 Hours</mat-option>
+            <mat-option data-value='{"name":"4 Hour","price":"200"}'  style="font-size: 14px !important;">4 Hours</mat-option>
          </mat-select>
         </mat-form-field>
         <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()" style="display: inline;">
