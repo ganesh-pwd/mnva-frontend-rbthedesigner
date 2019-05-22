@@ -5,6 +5,7 @@ import { DataboxesService } from '../databoxes-services';
 import { DataboxesTestQueryService } from '../databox-test-query.service';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from 'app/shared/animations/egret-animations';
+import { DataboxConnectivityDialogService } from '../dialogs-connectivity/dialogs-connectivity.services';
 
 @Component({
   selector: 'databoxes-dialog',
@@ -18,10 +19,12 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
   public inputData: string;
   public deleteDataInfo: boolean = false;
   public databox_id_new: string;
+  public email: boolean = false;
 
   constructor(private router: Router,
     private databoxesService: DataboxesService,
     private databoxesTestQueryService: DataboxesTestQueryService,
+    private databoxConnectivityDialogService: DataboxConnectivityDialogService,
     public dialogRef: MatDialogRef<MainDataboxDialogComponent>,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -118,14 +121,14 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
   }
 
   // build databox query
-  testQuery(){
+  testQuery() {
     this.reqSubs = this.databoxesTestQueryService
     .testQueryDatabox(this.data.details)
     .subscribe((result) => {
       this.dialogRef.close(false);
 
       let url = this.router.url;
-     
+
       this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
       .then(() => sessionStorage.removeItem('databox_updated'))
       .then(() => this.router.navigate(['/databoxes']))
@@ -135,31 +138,38 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
       .then(() => {
         this.snackBar.open('The Databox Query has been successfully built', 'close');
         setTimeout(() => this.snackBar.dismiss(), 3000);
-      }); 
+      });
     });
   }
 
 
   // update connectors
-  updateConnector(automatic?: boolean){
+  updateConnector(automatic?: boolean) {
     this.reqSubs = this.databoxesService
     .addDataConnector(this.data.connector, automatic ? true : this.data.checked)
     .subscribe(result => {
+      if (automatic) {
+        this.databoxConnectivityDialogService
+          .confirm({
+            title: 'Email Notifications',
+            datasource: result[0].datasource
+          })
+          .subscribe(result => {});
+      }
       this.dialogRef.close(false);
-      
-      let url = this.router.url;
+
+      const url = this.router.url;
 
       this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
       .then(() => sessionStorage.removeItem('databox_updated'))
       .then(() => this.router.navigate(['/databoxes']))
-      .then(() => this.router.navigate([url]))
-    })
+      .then(() => this.router.navigate([url]));
+    });
   }
 
-  cancelConnector(){
+  cancelConnector() {
     this.dialogRef.close(false);
-    
-    let url = this.router.url;
+    const url = this.router.url;
 
     this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
     .then(() => sessionStorage.removeItem('databox_updated'))
@@ -170,9 +180,9 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
   // cancel databox changes
   cancelChanges() {
     sessionStorage.removeItem('databox_edited_name');
-    if(sessionStorage.getItem('databox_test_query_bool')){
-      let url = this.router.url.split('/').filter(el => el !== 'edit-query').join('/');
-      
+    if (sessionStorage.getItem('databox_test_query_bool')){
+      const url = this.router.url.split('/').filter(el => el !== 'edit-query').join('/');
+
       this.router.navigate([url])
       .then(() => {
         sessionStorage.removeItem('databox_test_query_bool');

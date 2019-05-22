@@ -272,6 +272,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'specify_max_number_result': [false],
           'monitor_only_news_media': [false],
           'monitor_specific_page': [false],
+          'exclude_specific_pages': [true],
           'facebook_page_id': [null],
           'max_number_result': [null],
         });
@@ -349,6 +350,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'specify_max_number_result': this.data ? this.data.specify_max_number_result : false,
           'monitor_only_news_media': this.data ? this.data.monitor_only_news_media : false,
           'monitor_specific_page': this.data ? this.data.monitor_specific_page : false,
+          'exclude_specific_pages': this.data ? this.data.exclude_specific_pages : false,
           'facebook_page_id': this.data ? this.data.facebook_page_id : '',
           'max_number_result': this.data ? this.data.max_number_result : 1,
         };
@@ -366,6 +368,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'specify_max_number_result': data.specify_max_number_result,
           'monitor_only_news_media': data.monitor_only_news_media,
           'monitor_specific_page': data.monitor_specific_page,
+          'exclude_specific_pages': data.exclude_specific_pages,
           'facebook_page_id': data.facebook_page_id,
           'max_number_result': data.max_number_result
         });
@@ -444,16 +447,16 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           }
         }
       }
-      
+
       // set mention value
-      setMentionValue(mention){
+      setMentionValue(mention) {
         const checkChanges = sessionStorage.getItem('databox_test_query_bool');
 
         return this.changes || checkChanges ? mention : 0;
       }
 
   /* @DATABOX COMPONENT ADVANCE CONDITION */
-  
+
       // check monitor specific page slider
       checkFacebookPageID(){ return this.queryForm.get('monitor_specific_page').value; }
 
