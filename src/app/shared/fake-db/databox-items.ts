@@ -43,6 +43,7 @@ export class DataboxDB {
       'specify_max_number_result': false,
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
+      'exclude_specific_pages': false,
       'max_number_result': 1,
       'facebook_page_id': '',
       'databox_item_result_table': [
@@ -220,6 +221,7 @@ export class DataboxDB {
       'specify_max_number_result': false,
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
+      'exclude_specific_pages': false,
       'max_number_result': 1,
       'facebook_page_id': '',
       'databox_item_result_table': [
@@ -397,6 +399,7 @@ export class DataboxDB {
       'specify_max_number_result': false,
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
+      'exclude_specific_pages': false,
       'max_number_result': 1,
       'facebook_page_id': '',
       'databox_item_result_table': [
@@ -574,6 +577,7 @@ export class DataboxDB {
       'specify_max_number_result': false,
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
+      'exclude_specific_pages': false,
       'max_number_result': 1,
       'facebook_page_id': '',
       'databox_item_result_table': [
@@ -750,6 +754,7 @@ export class DataboxDB {
       'specify_max_number_result': false,
       'monitor_only_news_media': true,
       'monitor_specific_page': false,
+      'exclude_specific_pages': false,
       'max_number_result': 1,
       'facebook_page_id': '',
       'databox_item_result_table': [

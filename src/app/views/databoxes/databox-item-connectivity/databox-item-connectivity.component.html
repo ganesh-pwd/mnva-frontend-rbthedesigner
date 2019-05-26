@@ -117,7 +117,7 @@
 			<mat-card-header (click)="openNotificationDialog('Email Notifications', data.datasource)">
 				<mat-card-title class="mat-color-primary">
 					<img src="/assets/images/email.png" class="minerva-logo" >
-					<span class="title-header">Email <br>
+					<span class="title-header">Email<br>
 						<small class="text-muted">Email</small></span>
 				</mat-card-title>
 			</mat-card-header>
@@ -134,8 +134,7 @@
 			<br>
 			<div class="text-center">
 				<mat-slide-toggle color="primary" class="mb-1" 
-				[checked]="email"
-                (change)="clickSlideToggle('email')">
+					[checked]="email" (change)="clickSlideToggle('email')">
 				  On / Off
 				</mat-slide-toggle>
 			</div>

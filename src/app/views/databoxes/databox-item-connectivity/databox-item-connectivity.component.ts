@@ -52,7 +52,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
 
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
-        if (data){
+        if (data) {
           if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
           
           this.data = data;
@@ -103,11 +103,13 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
   clickSlideToggle(data) {
     switch (true) {
       case data === 'email': {
-        if(this.email)
+        if (this.email) {
           this.email = false;
-        else this.email = true;
+        } else {
+          this.email = true;
+        }
         setTimeout(() => {
-          this.openDialog('Connect to Email Notification', 
+          this.openDialog('Connect to Email Notification',
             'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', 
             false, this.email, 'email');
         }, 300);
@@ -141,6 +143,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
       }
     }
   }
+
   slideToggle(data) {
     switch (true) {
       case data === 'email': {

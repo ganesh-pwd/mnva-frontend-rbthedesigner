@@ -28,8 +28,6 @@ export class HeaderSideComponent implements OnInit {
   public egretThemes;
   public layoutConf: any;
   public notificationCount: any;
-  private getReqImage: Subscription;
-  public userImage: string;
   // public userFullName: string;
   public loggedInUser;
   public userName: string;
@@ -47,17 +45,12 @@ export class HeaderSideComponent implements OnInit {
     private amplifyService: AmplifyService,
     private socialAuthService: AuthService
   ) {
-    this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
 
     if ('userName' in sessionStorage) {
       this.userName = sessionStorage.getItem('userName');
     }
-    if ('photoUrl' in sessionStorage) {
-      this.userImage = sessionStorage.getItem('photoUrl');
-    }
 
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
-    
     userService.userData$.subscribe(user => {
       if (user) {
         // this.userFullName = user.name
