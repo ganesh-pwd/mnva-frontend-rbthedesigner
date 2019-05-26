@@ -51,20 +51,20 @@
     <!-- Results -->
     <mat-tab label="Results">
       <!-- Line Chart -->
-      <div [hidden]="data?.first_create">
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100">
+      <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
+        <div fxFlex="100" fxFlex.gt-sm="100">
           <mat-card class="p-0 fixed-height">
             <mat-card-content>
-              <!-- Line Chart 
+              <!-- Line Chart -->
               <canvas 
-                baseChart 
-                class="chart"
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="chartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"></canvas>-->
+              baseChart
+              class="chart"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="chartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"></canvas>
             </mat-card-content>
           </mat-card>
         </div>
@@ -112,14 +112,16 @@
                         <button mat-raised-button class="mat-bg-success" (click)="saveAllData()">Save All Changes</button>
                       </div>
                       <span fxFlex></span>
-  
+                    
                       <button class="paginate" matTooltip="Prev Page" 
                       (click)="navigateToPrevPage(data?._id)" 
                       [hidden]="!paginatedData.pre_page">
                       <i class="fa fa-chevron-left"></i>
                       </button> 
   
-                      <button class="paginate" matTooltip="Next Page" (click)="navigateToNextPage(data?._id)">
+                      <button class="paginate" matTooltip="Next Page" 
+                      (click)="navigateToNextPage(data?._id)"
+                      [hidden]="!paginatedData?.next_page">
                         <i class="fa fa-chevron-right"></i> 
                       </button>
                     </div>

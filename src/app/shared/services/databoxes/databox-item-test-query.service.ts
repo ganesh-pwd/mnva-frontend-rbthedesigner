@@ -3,6 +3,7 @@ import { DataboxTestQueryDB } from '../../fake-db/databox-item-test-query';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../auth/user-services';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,12 @@ export class DataboxesTestQueryService {
   public loggedInUser: any;
 
   constructor(private router: Router,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute) {
     const databoxDB = new DataboxTestQueryDB();
 
     // logged in user
-    const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-    this.loggedInUser  = loggedInUser;
+    userService.userData$.subscribe((user) => this.loggedInUser = user);
     this.databox_items_test_query = databoxDB.databox_test_queries;
   }
 
@@ -35,19 +36,16 @@ export class DataboxesTestQueryService {
 
         // set the data
         const data = {
-          '_id': this.generateID(),
+          '_id': this.generateID(), 
           'databox_id': details.databox_id,
-          'master_user_info': this.loggedInUser._id,
-          'index': getDataboxTestQuery.length + 1,
-          'guid': this.generateGUID(),
-          'expression': expression !== 'null' ? expression : details['advance-query'],
-          'required-keywords': details['required-keywords'],
+          'query-type': details['query-type'],
+          'expression': '',
+          'query':  details['advance-query'] ,
           'optional-keywords': details['optional-keywords'],
+          'required-keywords': details['required-keywords'],
           'excluded-keywords': details['excluded-keywords'],
-          'advance-query': details['advance-query']
         }
-
-        sessionStorage.setItem('databox_updated', `Query for ${details.databox_name} Databox has been updated`);
+        
         sessionStorage.setItem('databox_test_query', JSON.stringify(data));
 
         // push to array of databoxes
@@ -73,11 +71,6 @@ export class DataboxesTestQueryService {
 
         return id;
       }
-
-
-      // generate guID
-      generateGUID() { return Math.round(Math.random() * 5000000000).toString(); }
-
 
       // get max index
       getMaxIndex(item) { return Math.max(...item.map(x => x.index)); }

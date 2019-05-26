@@ -1,10 +1,15 @@
+/* 
+  The account types that can be created by the currently selected user (see. user-accounts.ts) 
+  - Refer to the current database schema
+
+  Foreign Key: account_id (id of the currently selected user)
+*/
 export class MinervaAccountDB {
   public minerva_accounts = [
     {
       '_id': '5a7b73f76bed15c94d1e46da',
-      'master_user_info': '5a7b73f76bed15c94d1e46d4',
+      'account_id': 'jzut3ednmnzhuzfbsggc3cny',
       'index': 0,
-      'guid': 'c01da2d1-07f8-4acc-a1e3-72dda7310af8',
       'status': 'Active',
       'age': 30,
       'name': 'Stefanie Marsh',
@@ -20,9 +25,8 @@ export class MinervaAccountDB {
     },
     {
       '_id': '5a7b73f7f79f4250b96a355b',
-      'master_user_info': '5a7b73f76bed15c94d1e46d4',
+      'account_id': 'jzut3ednmnzhuzfbsggc3cny',
       'index': 1,
-      'guid': '3f04aa40-62da-466d-ac14-2b8a5da3d1ce',
       'status': 'Active',
       'age': 39,
       'name': 'Elena Bennett',
@@ -38,9 +42,8 @@ export class MinervaAccountDB {
     },
     {
       '_id': '5a7b73f78b64a02a67204d6c',
-      'master_user_info': '5a7b73f7f79f4250b96a355a',
+      'account_id': 'jzut3ednmnzhuzfbsggc3cny',
       'index': 2,
-      'guid': 'e7d9d61e-b657-4fcf-b069-2eb9bfdc44fa',
       'status': 'Active',
       'age': 23,
       'name': 'Joni Cabrera',
@@ -56,9 +59,8 @@ export class MinervaAccountDB {
     },
     {
       '_id': '5a7b73f7572e59b231149b9d',
-      'master_user_info': '5a7b73f78b64a02a67204d6e',
+      'account_id': 'hng57zw7413edoocrc1k4dev',
       'index': 3,
-      'guid': '47673d82-ab31-48a1-8a16-2c6701573c67',
       'status': 'Active',
       'age': 37,
       'name': 'Gallagher Shaw',
@@ -74,9 +76,8 @@ export class MinervaAccountDB {
     },
     {
       '_id': '5a7b73f70f9d074552e1309e',
-      'master_user_info': '5a7b73f78b64a02a67204d6e',
+      'account_id': 'hng57zw7413edoocrc1k4dev',
       'index': 4,
-      'guid': 'bc9c7cd3-04e0-4095-a933-af28efaf3b3e',
       'status': 'Active',
       'age': 26,
       'name': 'Blanchard Knapp',
@@ -92,9 +93,8 @@ export class MinervaAccountDB {
     },
     {
       '_id': '5a7b73f78988bd6e9265047f',
-      'master_user_info': '5a7b73f7572e59b231149b94',
+      'account_id': 'dhnf3sadc29rmc0dgvin1jcs',
       'index': 5,
-      'guid': '08cb947c-e49c-4736-9687-0fca0992ec38',
       'status': 'Active',
       'age': 34,
       'name': 'Parker Rivas',

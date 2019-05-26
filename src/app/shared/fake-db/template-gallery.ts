@@ -1,10 +1,14 @@
+/* 
+  The template gallery fake db data, data will be loaded based on the currently selected user
+  - FOREIGN key or RELATED object is: account_id
+  - Refer to the current database schema
+*/
+
 export class TemplateGalleryDB {
   public template_gallery_type = [
     {
       '_id': "5a7b735ge4z123c94d1e46d4",
-      'index': 0,
-      'guid': "c01da2d1-07f8-4123-a1e3-72ddakj2Jaf8",
-      'master_user_info': '5a7b73f76bed15c94d1e46d4',
+      'account_id': 'jzut3ednmnzhuzfbsggc3cny', // foreign key
       'type': "Reputation Management",
       'link': "reputation-management",
       'author': "Minerva",
@@ -23,8 +27,7 @@ export class TemplateGalleryDB {
     {
       '_id': "5a7b73jh6be234c25hal46d4",
       'index': 1,
-      'guid': "c8kda2d1-07f8-4234-a1e3-72ddakdeJaf8",
-      'master_user_info': '5a7b73f76bed15c94d1e46d4',
+      'account_id': 'jzut3ednmnzhuzfbsggc3cny', // foreign key
       'type': "Influencers",
       'link': "influencers",
       'author': "Minerva",
@@ -43,8 +46,7 @@ export class TemplateGalleryDB {
     {
       '_id': "5a7b73jh7hj456c25hal46d4",
       'index': 2,
-      'guid': "e8kda2d1-07f8-g34t-a1e3-72ddakdeJaf8",
-      'master_user_info': '5a7b73f76bed15c94d1e46d4',
+      'account_id': 'jzut3ednmnzhuzfbsggc3cny', // foreign key
       'type': "Insight Generations",
       'link': "insight-generations",
       'author': "Minerva",
@@ -67,8 +69,7 @@ export class TemplateGalleryDB {
     {
       '_id': "5a7b735ge4z123c94d1e46d4",
       'index': 0,
-      'guid': "c01da2d1-07f8-4123-a1e3-72ddakj2Jaf8",
-      'master_user_info': '5a7b73f7f79f4250b96a355a',
+      'account_id': 'hng57zw7413edoocrc1k4dev', // foreign key
       'type': "Reputation Management",
       'link': "reputation-management",
       'author': "Minerva",
@@ -87,8 +88,7 @@ export class TemplateGalleryDB {
     {
       '_id': "5a7b73jh6be234c25hal46d4",
       'index': 1,
-      'guid': "c8kda2d1-07f8-4234-a1e3-72ddakdeJaf8",
-      'master_user_info': '5a7b73f7f79f4250b96a355a',
+      'account_id': 'hng57zw7413edoocrc1k4dev', // foreign key
       'type': "Influencers",
       'link': "influencers",
       'author': "Minerva",
@@ -107,8 +107,7 @@ export class TemplateGalleryDB {
     {
       '_id': "5a7b73jh7hj456c25hal46d4",
       'index': 2,
-      'guid': "e8kda2d1-07f8-g34t-a1e3-72ddakdeJaf8",
-      'master_user_info': '5a7b73f78b64a02a67204d6e',
+      'account_id': 'ab2g4m77wheqy3q4u5ymik4g', // foreign key
       'type': "Insight Generations",
       'link': "insight-generations",
       'author': "Minerva",

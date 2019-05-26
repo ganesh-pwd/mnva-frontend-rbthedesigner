@@ -3,7 +3,6 @@ import { map } from 'rxjs/operators';
 import { MatPaginator, MatSort, MatSnackBar, MatSidenav } from '@angular/material';
 import { AlgorithmCreditService } from '../../../shared/services/algorithm-credit/algorithm-credit.service';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataTableDataSource } from './algorithm-credit.datasource';
 import { ProductShopService, CartItem } from '../products-shop.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -29,7 +28,6 @@ export class AlgorithmCreditComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  dataSource: DataTableDataSource;
   public isSideNavOpen: boolean;
   public viewMode: string = 'list-view';
 
@@ -51,9 +49,6 @@ export class AlgorithmCreditComponent implements OnInit {
   ) { this.getAlgorithms(); this.selectedCredit = "250" }
 
   ngOnInit() {
-    this.dataSource = new DataTableDataSource(this.paginator, this.sort);
-
-    
     this.getCart();
     this.buildFilterForm(this.shopService.initialFilters);
 
@@ -155,7 +150,7 @@ export class AlgorithmCreditComponent implements OnInit {
 
   setActiveCategory(category) {
     this.activeCategory = category;
-    this.filterForm.controls['category'].setValue(category)
+    this.filterForm.controls['category'].setValue(category);
   }
 
   toggleSideNav() {

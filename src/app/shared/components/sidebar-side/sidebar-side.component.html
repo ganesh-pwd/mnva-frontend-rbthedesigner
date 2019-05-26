@@ -19,7 +19,7 @@
             (selectionChange)="changeSelectedAccount($event)"
             [value]="selected">
             <mat-option value="{{accounts.accountName}}" 
-            *ngFor="let accounts of loggedInUser?.accountNames">
+            *ngFor="let accounts of userList">
               {{accounts.accountName}}
             </mat-option>
           </mat-select>

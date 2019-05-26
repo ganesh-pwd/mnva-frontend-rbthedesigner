@@ -9,8 +9,6 @@ import { of, combineLatest } from 'rxjs';
 import { startWith, debounceTime, delay, map, switchMap } from 'rxjs/operators';
 import { DiscountCouponsDB } from 'app/shared/fake-db/discount-coupons';
 
-
-
 export interface CartItem {
   product: Product;
   data: {
@@ -19,7 +17,9 @@ export interface CartItem {
   };
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductShopService {
   public products: Product[] = [];
   public initialFilters = {
@@ -38,10 +38,12 @@ export class ProductShopService {
 
   constructor() { }
 
+  // get cart items
   public getCart(): Observable<CartItem[]> {
     return of(this.cart);
   }
 
+  // add item to cart
   public addToCart(cartItem: CartItem): Observable<CartItem[]> {
     let index = -1;
     this.cart.forEach((item, i) => {
@@ -60,6 +62,7 @@ export class ProductShopService {
     }
   }
 
+  // update cart item count
   private updateCount() {
     this.cartData.itemCount = 0;
     this.cart.forEach(item => {
@@ -67,6 +70,7 @@ export class ProductShopService {
     });
   }
 
+  // update product item price
   public updatePrice(cartItem: CartItem, billedYearly: boolean): Observable<CartItem[]>{
     let findCart = this.cart.find(el => el === cartItem);
 
@@ -85,6 +89,7 @@ export class ProductShopService {
     return of(this.cart);
   }
 
+  // remove item from cart
   public removeFromCart(cartItem: CartItem): Observable<CartItem[]> {
     this.cart = this.cart.filter(item => {
       if(item.product._id === cartItem.product._id) {
@@ -96,6 +101,14 @@ export class ProductShopService {
     return of(this.cart)
   }
 
+  // remove all from cart
+  public removeAllFromCart(): Observable<any> {
+    this.cart = [];
+    this.updateCount();
+    return of(this.cart);
+  }
+
+  // get products 
   public getProducts(): Observable<Product[]> {
     const licenseDB = new LicenseDB();
     return of(licenseDB.licenses)
@@ -108,6 +121,7 @@ export class ProductShopService {
       );
   }
 
+  // get product details
   public getProductDetails(productID): Observable<Product> {
     const licenseDB = new LicenseDB();
     const product = licenseDB.licenses.filter(p => p._id === productID)[0];
@@ -117,11 +131,13 @@ export class ProductShopService {
     return of(product)
   }
 
+  // get product category
   public getCategories(): Observable<any> {
     const categories = ['speaker', 'headphone', 'watch', 'phone'];
     return of(categories);
   }
 
+  // get filtered product
   public getFilteredProduct(filterForm: FormGroup): Observable<Product[]> {
     return combineLatest(
       this.getProducts(),
@@ -200,6 +216,7 @@ export class ProductShopService {
     return of(filteredProducts);
   }
 
+  // get coupons
   public getCoupons(): Observable<any[]> {
     const discounts = new DiscountCouponsDB();
     return of(discounts.coupons)

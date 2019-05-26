@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxConnectivityDialogService } from '../../../shared/services/databoxes/dialogs-connectivity/dialogs-connectivity.services';
 import { Subscription } from 'rxjs';
@@ -53,7 +53,9 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
         if (data) {
-          if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
+          // if status is draft
+          if(data.status === 'Draft') 
+            this.router.navigate([`/databoxes/create-databox/${data._id}`]);
           
           this.data = data;
 

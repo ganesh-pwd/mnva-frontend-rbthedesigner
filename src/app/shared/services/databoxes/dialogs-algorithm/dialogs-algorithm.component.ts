@@ -1,7 +1,7 @@
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataboxesService } from '../databoxes-services';
+import { DataboxesService } from '../databox-item-main.services';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

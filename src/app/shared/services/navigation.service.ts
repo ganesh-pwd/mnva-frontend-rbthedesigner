@@ -3,6 +3,8 @@ import { of, Subscription } from 'rxjs';
 import { DataboxDB } from '../fake-db/databox-items';
 import { TemplateGalleryDB } from '../fake-db/template-gallery';
 import { TemplateGalleryService } from '../services/template-gallery/template-gallery.service';
+import { UserService } from '../../shared/services/auth/user-services';
+import { Router, NavigationEnd } from '@angular/router';
 
 interface IMenuItem {
   type: string;       // Possible values: link/dropDown/icon/separator/extLink
@@ -35,15 +37,26 @@ export class NavigationService {
   template_gallery: any[];
   databoxDB: any;
 
-  constructor(private templateGalleryService: TemplateGalleryService) {
+  constructor(private templateGalleryService: TemplateGalleryService, 
+    private router: Router, 
+    private userService: UserService) {
+
     const databoxDB = new DataboxDB();
-    //const templateGalleryDB = new TemplateGalleryDB();
-
     this.databoxDB = databoxDB;
-    //this.template_gallery = templateGalleryDB.template_gallery_type;
 
-    // filter template gallery by currently logged in user
-    this.templateGalleryReq = templateGalleryService.getAllItems()
+    this.getTemplateGallery();
+
+    this.router.events.subscribe((routeChange) => {
+      if (routeChange instanceof NavigationEnd) {
+        // filter template gallery by currently logged in user
+        this.getTemplateGallery();
+      }
+    });
+  }
+
+  // get template gallery
+  getTemplateGallery(){
+    this.templateGalleryReq = this.templateGalleryService.getAllItems()
     .subscribe(result => this.template_gallery = result.map(el => el));
   }
 

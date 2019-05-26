@@ -1,3 +1,7 @@
+/* 
+  List of discount coupons for users
+*/
+
 export class DiscountCouponsDB {
   public coupons = [
     {

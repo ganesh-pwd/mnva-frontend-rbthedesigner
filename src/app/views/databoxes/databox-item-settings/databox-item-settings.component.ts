@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
+import { DataboxesQueryService } from '../../../shared/services/databoxes/databox-item-query.service';
 import { CountryService } from '../../../shared/services/countries/country.service';
 import { HistoricalService } from '../../../shared/services/historical/historical.service';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
@@ -22,12 +23,14 @@ import { MatSnackBar, MatChipInputEvent } from '@angular/material';
 })
 export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   private databoxSingleReq: Subscription;
+  private databoxQueryReq: Subscription;
   private databoxReq: Subscription;
   private countryReq: Subscription;
   private historicalReq: Subscription;
 
   public queryForm: FormGroup;
   public data: any;
+  public dataQuery: any;
   public databoxes: any[];
   public databoxItemData: any;
   public checked: boolean = true;
@@ -49,137 +52,67 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public editorData = `Type your desired keywords`;
   public editorDataAdv = `Please type your query`;
 
+  /** Results table */
+  public resultsTableColumns: string[] = ['date', 'content', 'author'];
+
   /* @SET CHART DATA */
-  // set chart data
+    // set chart data
+    public sharedChartOptions: any = {
+      responsive: true,
+      legend: {
+        display: true,
+        position: 'bottom'
+      }
+    };
 
-  public sharedChartOptions: any = {
-    responsive: true,
-    legend: {
-      display: true,
-      position: 'bottom'
-    }
-  };
-
-  public chartColors: Array <any> = [{
-    backgroundColor: '#19b4d7',
-    borderColor: '#19b4d7',
-    pointBackgroundColor: '#19b4d7',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-  }, {
-    backgroundColor: '#fb8a01',
-    borderColor: '#fb8a01',
-    pointBackgroundColor: '#fb8a01',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(77,83,96,1)'
-  }];
+    public chartColors: Array <any> = [{
+      backgroundColor: '#19b4d7',
+      borderColor: '#19b4d7',
+      pointBackgroundColor: '#19b4d7',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }, {
+      backgroundColor: '#fb8a01',
+      borderColor: '#fb8a01',
+      pointBackgroundColor: '#fb8a01',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    }];
 
   /* set line chart option
   * Line Chart Options
   */
-  public lineChartData: Array <any> = [{
-    data: [1200, 3200, 1600, 5300, 4100, 9800, 7900],
-    label: 'Mentions'
-  }];
-  public lineChartLabels: Array <any> = [`Sat 17`, 'Sun 18', 'Mon 19', 'Tue 20', 'Wed 21', 'Thu 22'];
-  public lineChartOptions: any = Object.assign({
-    animation: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'rgba(0,0,0,0.02)',
-          zeroLineColor: 'rgba(0,0,0,0.02)'
-        }
-      }],
-      yAxes: [{
-        gridLines: {
-          color: 'rgba(0,0,0,0.02)',
-          zeroLineColor: 'rgba(0,0,0,0.02)'
-        },
-        ticks: {
-          beginAtZero: true,
-          suggestedMax: 9,
-        }
-      }]
-    }
-  }, this.sharedChartOptions);
-  public lineChartLegend: boolean = false;
-  public lineChartType: string = 'line';
-
-  // SECOND GRAPH
-  // view: any[] = [700, 400];
-
-  // options
-  // showXAxis = true;
-  // showYAxis = true;
-  // gradient = false;
-  // showLegend = true;
-  // showXAxisLabel = true;
-  // xAxisLabel = 'Country';
-  // showYAxisLabel = true;
-  // yAxisLabel = 'Population';
-
-  // colorScheme = {
-  //   domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  // };
-
-  // line, area
-  // autoScale = true;
-
-  // multi = [
-  //   {
-  //     "name": "Germany",
-  //     "series": [
-  //       {
-  //         "name": "2010",
-  //         "value": 7300000
-  //       },
-  //       {
-  //         "name": "2011",
-  //         "value": 8940000
-  //       }
-  //     ]
-  //   },
-  
-  //   {
-  //     "name": "USA",
-  //     "series": [
-  //       {
-  //         "name": "2010",
-  //         "value": 7870000
-  //       },
-  //       {
-  //         "name": "2011",
-  //         "value": 8270000
-  //       }
-  //     ]
-  //   },
-  
-  //   {
-  //     "name": "France",
-  //     "series": [
-  //       {
-  //         "name": "2010",
-  //         "value": 5000002
-  //       },
-  //       {
-  //         "name": "2011",
-  //         "value": 5800000
-  //       }
-  //     ]
-  //   }
-  // ];
+    public lineChartData: Array <any> = [{
+      data: [30, 95, 180, 720, 1290, 3600, 5000],
+      label: 'Mentions'
+    }];
+    public lineChartLabels: Array <string> = ['Sat 17', 'Sun 18', 'Mon 19', 'Tue 20', 'Wed 21', 'Thu 22'];
+    public lineChartOptions: any = Object.assign({
+      animation: false,
+      scaledisplay: false,
+      responsive: true,
+      scales: {
+        xAxes: [{
+          display: false
+        }],
+        yAxes: [{
+          display: false
+        }]
+      }
+    }, this.sharedChartOptions);
+    public lineChartLegend: boolean = false;
+    public lineChartType: string = 'line';
 
   public visible = true;
   public selectable = true;
   public removable = true;
   public addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  public requiredKeywords = [];
-  public optionalKeywords = [];
-  public excludeKeywords = [];
+  public requiredKeywords: string[] = [];
+  public optionalKeywords: string[] = [];
+  public excludeKeywords: string[] = [];
   public chipInputPlaceholder: string;
 
   constructor(
@@ -187,6 +120,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private countryService: CountryService,
     private databoxesService: DataboxesService,
+    private databoxQueryService: DataboxesQueryService,
     private databoxMentionsDialogService: DataboxMentionsDialogService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private userService: UserService,
@@ -218,61 +152,25 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.databoxSingleReq) this.databoxSingleReq.unsubscribe();
+    if (this.databoxQueryReq) this.databoxQueryReq.unsubscribe();
     if (this.databoxReq) this.databoxReq.unsubscribe();
     if (this.countryReq) this.countryReq.unsubscribe();
     if (this.historicalReq) this.historicalReq.unsubscribe();
   }
 
-  add(event: MatChipInputEvent, keywordType: string): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add keywords
-    if ((value || '').trim()) {
-      if (keywordType === 'required') {
-        this.requiredKeywords.push({name: value.trim()});
-      } else if (keywordType === 'optional') {
-        this.optionalKeywords.push({name: value.trim()});
-      } else if (keywordType === 'exclude') {
-        this.excludeKeywords.push({name: value.trim()});
-      }
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  remove(keyword: any): void {
-    const indexRequired = this.requiredKeywords.indexOf(keyword);
-    const indexOptional = this.optionalKeywords.indexOf(keyword);
-    const indexExclude = this.excludeKeywords.indexOf(keyword);
-
-    if (indexRequired >= 0) {
-      this.requiredKeywords.splice(indexRequired, 1);
-    } else if (indexOptional >= 0) {
-      this.optionalKeywords.splice(indexOptional, 1);
-    } else if (indexExclude >= 0) {
-      this.excludeKeywords.splice(indexExclude, 1);
-    }
-  }
-
+  
   /* @DATABOX FORM GROUP FUNCTIONS INITIALIZE */
 
       // build queryForm
       queryFormGroup() {
         this.queryForm = this.formBuilder.group({
           'datasource': [null, Validators.compose([Validators.required])],
-          'required-keywords': [null, Validators.compose([Validators.required])],
-          'optional-keywords': [null],
-          'excluded-keywords': [null],
           'advance-query': [null],
           'include_comments': [false],
           'specify_max_number_result': [false],
           'monitor_only_news_media': [false],
           'monitor_specific_page': [false],
-          'exclude_specific_pages': [true],
+          'exclude_specific_pages': [false],
           'facebook_page_id': [null],
           'max_number_result': [null],
         });
@@ -300,16 +198,18 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'datasource': this.queryForm.get('datasource').value,
           'country': countries,
           'historical': historical[0].textContent.trim(),
-          'required-keywords': this.queryForm.get('required-keywords').value,
-          'optional-keywords': this.queryForm.get('optional-keywords').value,
-          'excluded-keywords': this.queryForm.get('excluded-keywords').value,
+          'query-type': this.showQuery,
+          'required-keywords': this.requiredKeywords,
+          'optional-keywords': this.optionalKeywords,
+          'excluded-keywords': this.excludeKeywords,
           'advance-query': this.queryForm.get('advance-query').value,
           'include_comments': this.queryForm.get('include_comments').value,
           'specify_max_number_result': this.queryForm.get('specify_max_number_result').value,
           'monitor_only_news_media': this.queryForm.get('monitor_only_news_media').value,
           'monitor_specific_page': this.queryForm.get('monitor_specific_page').value,
           'facebook_page_id': this.queryForm.get('facebook_page_id').value,
-          'max_number_result': this.queryForm.get('max_number_result').value
+          'max_number_result': this.queryForm.get('max_number_result').value,
+          'exclude_specific_pages': this.queryForm.get('exclude_specific_pages').value
         };
 
         return body;
@@ -318,32 +218,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // set initial value of query form
       setValueOfForm() {
-        const databox_id = this.data ? this.data._id : sessionStorage.getItem('databox_id_new');
-        const test_query_exist = sessionStorage.getItem('databox_test_query_bool');
-        const test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
-        const check_databox    = this.data && test_query_data && test_query_data.databox_id === databox_id ? true : false;
-        
+        // data from the currently selected databox
         const data = {
-          // basic query: required keywords
-          'required-keywords': this.data && !(test_query_data && check_databox) 
-            ? this.data['required-keywords'] : test_query_exist 
-            && check_databox ? test_query_data['required-keywords'] : '',
-
-          // basic query: optional keywords
-          'optional-keywords': this.data  && !(test_query_data && check_databox) 
-            ? this.data['optional-keywords'] : test_query_exist 
-            && check_databox ? test_query_data['optional-keywords'] : '',
-
-          // basic query: excluded keywords
-          'excluded-keywords': this.data  && !(test_query_data && check_databox) 
-            ? this.data['excluded-keywords'] : test_query_exist 
-            && check_databox ? test_query_data['excluded-keywords'] : '',
-
-          // advance query: full query
-          'advance-query': this.data && !(test_query_data && check_databox)  
-            ? this.data.query : test_query_exist 
-            && check_databox ? test_query_data['advance-query'] : '',
-
           'datasource': this.data ? this.data.datasource : this.selectedDatasource,
           'country': this.data ? this.data.location : this.selectedCountry,
           'include_comments': this.data ? this.data.include_comments : false,
@@ -355,15 +231,10 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'max_number_result': this.data ? this.data.max_number_result : 1,
         };
 
-        this.chipInputPlaceholder = data['required-keywords'];
-
         // set form value based on databox item details
         this.queryForm.setValue({
           'datasource': data.datasource,
-          'required-keywords': '',
-          'optional-keywords': '',
-          'excluded-keywords': data['excluded-keywords'],
-          'advance-query': data['advance-query'],
+          'advance-query': '',
           'include_comments': data.include_comments,
           'specify_max_number_result': data.specify_max_number_result,
           'monitor_only_news_media': data.monitor_only_news_media,
@@ -376,14 +247,42 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         this.changes = false;
       }
 
-      // databox result
-      setResult() {
+      // set databox query inputs
+      setQueryInputs(){
+        const databox_id = this.dataQuery ? this.dataQuery.databox_id : sessionStorage.getItem('databox_id_new');
         const test_query_exist = sessionStorage.getItem('databox_test_query_bool');
         const test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
-        const check_databox    = this.data && test_query_data && test_query_data.databox_id === this.data._id ? true : false;
+        const check_test_query_create = !!test_query_data ? test_query_data.databox_id === databox_id ? true : false : false;
 
-        return this.data  && !(test_query_data && check_databox) ? 'No results yet, please Create a Query and then click “Test Query” to see results.':
-        'Generated Result From Test Query, <br><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur. '
+        // from fake db
+        if(!check_test_query_create && this.dataQuery){
+          this.queryForm.controls['advance-query'].setValue(this.dataQuery['query']);
+          this.requiredKeywords = [...this.dataQuery['required-keywords']];
+          this.optionalKeywords = [...this.dataQuery['optional-keywords']];
+          this.excludeKeywords  = [...this.dataQuery['excluded-keywords']];
+
+          this.showQuery = this.dataQuery['query-type'];
+        }
+
+        // from test query temporary session storage
+        if(check_test_query_create){
+          this.queryForm.controls['advance-query'].setValue(test_query_data['query']);
+          this.requiredKeywords = [...test_query_data['required-keywords']];
+          this.optionalKeywords = [...test_query_data['optional-keywords']];
+          this.excludeKeywords  = [...test_query_data['excluded-keywords']];
+
+          this.showQuery = test_query_data['query-type'];
+        }
+      }
+
+      // databox result
+      setResult() {
+        const databox_id = this.data ? this.data._id : sessionStorage.getItem('databox_id_new');
+        const test_query_exist = sessionStorage.getItem('databox_test_query_bool');
+        const test_query_data  = JSON.parse(sessionStorage.getItem('databox_test_query'));
+        const check_databox    = !!test_query_data ? test_query_data.databox_id === databox_id ? true : false : false;
+       
+        return check_databox;
       }
 
       // set datasources
@@ -391,11 +290,11 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
 
       // select country like a checkbox
-      selectCountry(id_value){
+      selectCountry(id_value) {
         const selected = document.getElementById(id_value);
 
         if(selected.classList.contains('query-active')) selected.classList.remove('query-active');
-        else selected.classList.add('query-active');
+          else selected.classList.add('query-active');
       }
 
 
@@ -405,19 +304,19 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         const historicals = document.getElementById('historicals');
         const active_historical = historicals.getElementsByClassName('query-active');
 
-        if (active_historical.length > 0) {
-          for (let i = 0; i < active_historical.length; i++) {
+        // set historical loops
+        if (active_historical.length > 0) 
+          for (let i = 0; i < active_historical.length; i++) 
             active_historical[i].classList.remove('query-active');
-          }
-        }
-
+          
+        
         // select the button as active
         const selected = document.getElementById(id_value);
 
-        if (selected.classList.contains('query-active')) {
+        // vanilla js for making button act like a checkbox or radio
+        if (selected.classList.contains('query-active')) 
           selected.classList.remove('query-active');
-        }
-
+        
         else selected.classList.add('query-active');
       }
 
@@ -428,21 +327,21 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           case accord === 'showQuery':
           {
             if(this.showQueryAccord) this.showQueryAccord = false;
-            else this.showQueryAccord = true;
+              else this.showQueryAccord = true;
             break;
           }
 
           case accord === 'showAdvance':
           {
             if(this.showAdvanceAccord) this.showAdvanceAccord = false;
-            else this.showAdvanceAccord = true;
+              else this.showAdvanceAccord = true;
             break;
           }
 
           case accord === 'showConnect':
           {
             if(this.showConnectAccord) this.showQueryAccord = false;
-            else this.showConnectAccord = true;
+              else this.showConnectAccord = true;
             break;
           }
         }
@@ -455,13 +354,70 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         return this.changes || checkChanges ? mention : 0;
       }
 
+  /* @DATABOX MAT CHIP FUNCTIONS */
+
+      // Will add new mat-chip item
+      add(event: MatChipInputEvent, keywordType: string): void {
+        const input = event.input;
+        const value = event.value;
+
+        // Add keywords
+        if ((value || '').trim()) {
+          // for required keywords
+          if (keywordType === 'required') 
+            this.requiredKeywords.push(value.trim());
+          
+          // for optional keywords
+          else if (keywordType === 'optional') 
+            this.optionalKeywords.push(value.trim());
+
+          // for excluded keywords
+          else if (keywordType === 'exclude') 
+            this.excludeKeywords.push(value.trim());
+           
+          // set changes to true
+          this.changes = true;
+        }
+
+        // Reset the input value
+        if (input) input.value = '';
+      }
+
+
+      // Will remove mat chip item
+      remove(keyword: any): void {
+        const indexRequired = this.requiredKeywords.indexOf(keyword);
+        const indexOptional = this.optionalKeywords.indexOf(keyword);
+        const indexExclude  = this.excludeKeywords.indexOf(keyword);
+
+        // for required keywords
+        if (indexRequired >= 0) 
+          this.requiredKeywords.splice(indexRequired, 1);
+        
+        // for optional keywords
+        else if (indexOptional >= 0) 
+          this.optionalKeywords.splice(indexOptional, 1);
+
+        // for excluded keywords
+        else if (indexExclude >= 0) 
+          this.excludeKeywords.splice(indexExclude, 1);
+
+        // set changes to true
+        this.changes = true;
+
+      }
+    
+
   /* @DATABOX COMPONENT ADVANCE CONDITION */
 
       // check monitor specific page slider
-      checkFacebookPageID(){ return this.queryForm.get('monitor_specific_page').value; }
+      checkFacebookPageID() { return this.queryForm.get('monitor_specific_page').value; }
+
+      // check exclude specific page slider
+      checkExcludedPage() { return this.queryForm.get('exclude_specific_pages').value; }
 
       // check max number of result
-      checkMaxNumberResult(){ return this.queryForm.get('specify_max_number_result').value; }
+      checkMaxNumberResult() { return this.queryForm.get('specify_max_number_result').value; }
 
       // show basic query
       showBasicQuery() { this.showQuery = 'basic'; }
@@ -495,9 +451,12 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           .getSingleItem(id)
           .subscribe(data => {
             if (data) {
-              if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
 
               this.data = data;
+
+              // if databox istatus is draft
+              if(data.status === 'Draft') 
+                this.router.navigate([`/databoxes/create-databox/${data._id}`]);
 
               // set value of forms
               this.setValueOfForm();
@@ -505,14 +464,22 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
               // get data source 
               this.getDatasource();
 
+              // get databox query
+              this.getDataboxQuery(data._id);
+
               // select countries
               data.location.forEach(el => this.selectCountry(el));
               
               // select historical value
               this.selectCountry(data.historical);
 
+              // for test query
+              this.setResult();
+
               this.loader.close();
-            } else if (!data) {
+            } 
+
+            else if (!data) {
               // set databox initial name
               this.databoxItemData =
                 (sessionStorage.getItem('databox_edited_name')
@@ -526,11 +493,17 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
                 // get data source 
                 this.getDatasource();
 
+                // get databox query
+                this.setQueryInputs();
+
                 // set initial country as Costa Rica
                 this.selectCountry('Costa Rica');
 
                 // set historical value
                 this.selectHistorical('Full Archive');
+
+                // for test query
+                this.setResult();
 
                 this.loader.close();
             }
@@ -543,6 +516,20 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         this.databoxReq = this.databoxesService.getItems()
         .subscribe(data => {
           if (data) this.databoxes = data;
+        });
+      }
+
+      // get currently selected databox query
+      getDataboxQuery(id){
+        this.databoxQueryReq = this.databoxQueryService
+        .getSingleItem(id)
+        .subscribe(result => {
+          if(result){
+             this.dataQuery = result;
+
+             // set query inputs
+             this.setQueryInputs();
+          }
         });
       }
 
@@ -568,7 +555,6 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         this.databoxSingleReq = this.datasourceService
           .getDatasource()
           .subscribe(data => {
-      
             this.datasource = data
               .filter(el => this.loggedInUser.datasources.indexOf(el.name) < 0)
               .map(el => el.name);
@@ -588,9 +574,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
             update: false,
             details: this.getQueryFormBody()
           })
-          .subscribe(result => {
-            this.selectedOption = result;
-          });
+          .subscribe(result => this.selectedOption = result);
       }
 
 
@@ -598,7 +582,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       checkIfInputIsValid(){
         let valid = true;
 
-        if ((!this.queryForm.get('required-keywords').value && this.showQuery === 'basic')) {
+        if ((this.requiredKeywords.length === 0 && this.showQuery === 'basic')) {
           this.snackBar.open("You need to add the required keywords", 'close');
           setTimeout(() => this.snackBar.dismiss(), 3000);
           valid = false;
@@ -626,9 +610,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
               update: true,
               details: this.getQueryFormBody()
             })
-            .subscribe(result => {
-              this.selectedOption = result;
-            });
+            .subscribe(result => this.selectedOption = result);
         }
       }
 
@@ -643,9 +625,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
               update: true,
               details: this.getQueryFormBody()
             })
-            .subscribe(result => {
-              this.selectedOption = result;
-            });
+            .subscribe(result => this.selectedOption = result);
         }
       }
 
@@ -675,7 +655,15 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
             'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
             false
           );
-        } else this.router.navigate(['/databoxes']);
+        } 
+
+        // if you are trying to edit a databox
+        else if(this.checkIfCreateOrEdit === 'Edit')
+          this.router.navigate([`databoxes/${this.data._id}`]);
+
+        // if you are trying to create a databox
+        else if(this.checkIfCreateOrEdit === 'Create')
+          this.router.navigate([`databoxes`]);
 
         sessionStorage.removeItem('databox_edited_name');
       }

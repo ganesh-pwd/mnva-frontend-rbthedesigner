@@ -89,8 +89,7 @@ import { AdvancedTemplatesLinkComponent } from './advanced-templates-link/advanc
     AdvancedTemplatesLinkComponent,
   ],
   providers: [
-    MatDatepickerModule,
-    ProductShopService
+    MatDatepickerModule
   ]
 })
 export class ProductsModule { }

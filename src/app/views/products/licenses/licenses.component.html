@@ -23,14 +23,6 @@
       <!-- View change buttons and cart -->
       <span fxFlex></span>
       
-      <div [fxHide.lt-md]="true">
-        <button mat-icon-button [color]="viewMode === 'list-view' ? 'primary' : ''" (click)="viewMode = 'list-view'">
-          <mat-icon>format_list_bulleted</mat-icon>
-        </button>
-        <button mat-icon-button [color]="viewMode === 'grid-view' ? 'primary' : ''" (click)="viewMode = 'grid-view'">
-          <mat-icon>apps</mat-icon>
-        </button>
-      </div>
       <span fxFlex="20px"></span>
       <button mat-raised-button color="primary" routerLink="/products/cart">
         <mat-icon>shopping_cart</mat-icon> Cart ({{cartData.itemCount}})
@@ -50,9 +42,6 @@
         <div class="product-wrap" *ngFor="let product of products$ | async | paginate: { itemsPerPage: 6, currentPage: currentPage }; let i = index;"
           [@animate]="{value:'*',params:{delay: (i*100)+'ms', y:'50px'}}">
           <div class="product-inner default-bg">
-            <!--div *ngIf="product?.badge?.text" class="product-badge mat-elevation-z7" [ngStyle]="{background: product?.badge?.color || '#f44336'}">
-                <span>{{product?.badge?.text}}</span>
-              </div-->
             <div class="featured-img licenses" (click)="addToCart(product)">
               <img [src]="product.photo" alt="">
             </div>
@@ -60,10 +49,6 @@
               <div class="main-info">
                 <h3 class="mat-h3" (click)="addToCart(product)">{{product.name}}</h3>
                 <p class="text-muted p-line">{{product?.description}}</p>
-                <!--<p class="text-muted p-line">
-                  <strong>Tags:</strong>
-                  <span *ngFor="let t of product.tags">{{t}} </span>
-                </p> -->
               </div>
               <div class="actions">
                 <div class="price-rating">

@@ -1,3 +1,8 @@
+/* 
+  The list of advance-templates that the currently selected user 
+  can purchase from products (/product/advance-templates)
+*/
+
 export class TemplateDB {
   public templates = [
     {

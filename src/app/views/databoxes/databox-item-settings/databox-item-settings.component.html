@@ -1,6 +1,6 @@
 <br id="databox-breadcrumb">
 <!-- Header and Breadcrumb for Databox with Status Active -->
-<div *ngIf="checkIfCreateOrEdit === 'Create' && (databoxItemData || data)">
+<div *ngIf="checkIfCreateOrEdit === 'Create' && (databoxItemData || data) || data?.status === 'Draft'">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div class="header-row" fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
       <img src="assets/images/icon-databox.png" />
@@ -93,7 +93,7 @@
           <mat-divider></mat-divider>
           <mat-card-content class="p-0">
             <br />
-            <mat-form-field class="full-width">
+            <mat-form-field>
               <mat-select 
                 formControlName="datasource"
                 [(value)]="selectedDatasource" 
@@ -271,21 +271,24 @@
                     class="full-width"
                   >
                     <div class="p-1">
-                      <mat-placeholder class="placeholder">
-                        {{chipInputPlaceholder}}
+                      <mat-placeholder class="placeholder" >
+                        {{editorData}}
                       </mat-placeholder>
-                      <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let keyword of requiredKeywords" [selectable]="selectable"
-                            [removable]="removable" (removed)="remove(keyword, 'required')">
-                            {{keyword.name}}
-                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      <mat-chip-list #requiredKeywordChip>
+                        <mat-chip *ngFor="let keyword of requiredKeywords" 
+                            [selectable]="selectable"
+                            [removable]="removable" 
+                            (removed)="remove(keyword, 'required')">
+                            {{keyword}}
+                          <mat-icon matChipRemove 
+                          *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input
-                          [matChipInputFor]="chipList"
+                          [matChipInputFor]="requiredKeywordChip"
                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          matChipInputAddOnBlur="false"
+                          matChipInputAddOnBlur="addOnBlur"
                           (matChipInputTokenEnd)="add($event, 'required')"
-                          formControlName="required-keywords">
+                        >
                       </mat-chip-list>
                     </div>
                   </mat-form-field>
@@ -308,20 +311,21 @@
                   >
                     <div class="p-1">
                       <mat-placeholder class="placeholder">
-                        {{chipInputPlaceholder}}
+                        {{editorData}}
                       </mat-placeholder>
-                      <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let optionalKeyword of optionalKeywords" [selectable]="selectable"
-                            [removable]="removable" (removed)="remove(optionalKeyword, 'optional')">
-                            {{optionalKeyword.name}}
+                      <mat-chip-list #optionalKeywordChip>
+                        <mat-chip *ngFor="let optionalKeyword of optionalKeywords" 
+                            [selectable]="selectable"
+                            [removable]="removable" 
+                            (removed)="remove(optionalKeyword, 'optional')">
+                            {{optionalKeyword}}
                           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input
-                          [matChipInputFor]="chipList"
+                          [matChipInputFor]="optionalKeywordChip"
                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                           [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="add($event, 'optional')"
-                          formControlName="optional-keywords">
+                          (matChipInputTokenEnd)="add($event, 'optional')">
                       </mat-chip-list>
                     </div>
                   </mat-form-field>
@@ -348,20 +352,19 @@
                   >
                     <div class="p-1">
                       <mat-placeholder class="placeholder">
-                        {{chipInputPlaceholder}}
+                        {{editorData}}
                       </mat-placeholder>
-                      <mat-chip-list #chipList>
+                      <mat-chip-list #excludeKeywordChip>
                         <mat-chip *ngFor="let excludeKeyword of excludeKeywords" [selectable]="selectable"
                             [removable]="removable" (removed)="remove(excludeKeyword, 'exclude')">
-                            {{excludeKeyword.name}}
+                            {{excludeKeyword}}
                           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input
-                          [matChipInputFor]="chipList"
+                          [matChipInputFor]="excludeKeywordChip"
                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                           [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="add($event, 'exclude')"
-                          formControlName="optional-keywords">
+                          (matChipInputTokenEnd)="add($event, 'exclude')">
                       </mat-chip-list>
                     </div>
                   </mat-form-field>
@@ -519,52 +522,50 @@
             <br>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="include_comments"><b>Include Comments</b>
               </mat-slide-toggle>
-            <p>Include comments will retieve all the comments from the posts on your query. The content will not necessarily match your query.</p>
+              <p>Include comments will retieve all the comments from the posts on your query. The content will not necessarily match your query.</p>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result"><b>Specify Maximum Number of Results</b>
               </mat-slide-toggle>
               <p>Use this option if you only need a specific amount of results and don't to be charged for the entire amount of results found from your query.</p>
-            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
-                  <p>Please type the amount of desired results.</p>
-                    <mat-form-field style="border: 1px solid gray;" class="full-width">
-                      <div class="p-1">
-                        <input type="number" min="0" max="99" matInput formControlName="max_number_result">
-                      </div>  
+              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                  <p class="d-block">Please type the amount of desired results.</p>
+                    <mat-form-field style="border: 1px solid gray;">
+                        <input type="number" min="0" max="99" matInput mat-autosize formControlName="max_number_result">
                     </mat-form-field>
                     <br>
                 </div>
-            </div>
+              </div>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_only_news_media"><b>Monitor only News Media</b>
               </mat-slide-toggle>
               <p>Minerva curates a list of media profiles specific to your selected country. By choosing this option, you will monitor only these profiles.</p>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page"><b>Monitor Specific Pages</b>
               </mat-slide-toggle>
               <p>Use this option if you only need to monitor a specific list of pages.</p>
-            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
-                  <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
-                    <mat-form-field style="border: 1px solid gray;" class="full-width">
-                      <div class="p-1">
-                        <textarea matInput rows="10" cols="80"
-                        formControlName="facebook_page_id"></textarea>
-                      </div>  
-                    </mat-form-field>
-                </div>
-            </div>
+              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                    <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
+                      <mat-form-field style="border: 1px solid gray;" class="full-width">
+                        <div class="p-1">
+                          <textarea matInput rows="10" cols="80"
+                          formControlName="facebook_page_id"></textarea>
+                        </div>  
+                      </mat-form-field>
+                  </div>
+              </div>
               <mat-slide-toggle color="primary" class="mb-1" formControlName="exclude_specific_pages"><b>Exclude Specific Pages</b>
               </mat-slide-toggle>
               <p>Use this option if you only need to exclude a specific list of pages.</p>
-            <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
-              <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
-                  <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
-                    <mat-form-field style="border: 1px solid gray;" class="full-width">
-                      <div class="p-1">
-                        <textarea matInput rows="10" cols="80"
-                        formControlName="facebook_page_id"></textarea>
-                      </div>  
-                    </mat-form-field>
-                </div>
-            </div>
+              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkExcludedPage()">
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                    <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
+                      <mat-form-field style="border: 1px solid gray;" class="full-width">
+                        <div class="p-1">
+                          <textarea matInput rows="10" cols="80"
+                          formControlName="facebook_page_id"></textarea>
+                        </div>  
+                      </mat-form-field>
+                  </div>
+              </div>
           </div>
         </mat-card>
       </div>
@@ -604,33 +605,16 @@
       <div fxFlex="100" fxFlex.gt-sm="100">
         <mat-card class="p-0">
           <mat-card-content class="px-1" 
-          style="padding-top: 40px !important; padding-left: 20px !important;">
+          style="padding-left: 20px !important;">
             <!-- Line Chart -->
-            <!-- <ngx-charts-line-chart
-              [view]="view"
-              [scheme]="colorScheme"
-              [results]="multi"
-              [gradient]="gradient"
-              [xAxis]="showXAxis"
-              [yAxis]="showYAxis"
-              [legend]="showLegend"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [autoScale]="autoScale"
-            >
-            </ngx-charts-line-chart> -->
             <canvas 
-              baseChart 
+              baseChart
               class="chart"
               [datasets]="lineChartData"
               [labels]="lineChartLabels"
               [options]="lineChartOptions"
               [colors]="chartColors"
               [legend]="lineChartLegend"
-              showXAxisLabel="false"
-              showYAxisLabel="false"
               [chartType]="lineChartType"></canvas> 
           </mat-card-content>
         </mat-card>
@@ -654,7 +638,28 @@
             </mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <p class="text-justify" [innerHtml]="setResult()">.</p>
+            <p class="text-justify" *ngIf="!setResult()">
+              No results yet, please Create a Query and then click “Test Query” to see results.
+            </p>
+            <table mat-table [dataSource]="dataSource" *ngIf="setResult()">
+              <!--- Note this table dataSource should be fetched with real data from the backend service -->
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="content">
+                <th mat-header-cell *matHeaderCellDef> Content </th>
+                <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="author">
+                <th mat-header-cell *matHeaderCellDef> Author </th>
+                <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
+            </table>
           </mat-card-content>
           <mat-divider></mat-divider>
           <mat-card-content> </mat-card-content>

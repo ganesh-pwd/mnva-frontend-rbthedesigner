@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MainDataboxesDialogService } from 'app/shared/services/databoxes/dialogs/main-databoxes-dialog.service';
-import { DataboxesService } from 'app/shared/services/databoxes/databoxes-services';
+import { DataboxesService } from 'app/shared/services/databoxes/databox-item-main.services';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 

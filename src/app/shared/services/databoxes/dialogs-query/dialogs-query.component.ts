@@ -2,7 +2,7 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar, MatTable } from 
 import { Component, Inject, OnDestroy, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { egretAnimations } from '../../../animations/egret-animations';
 import { Subscription } from 'rxjs';
-import { DataboxCategoryService } from '../databox-category-creator-services';
+import { DataboxCategoryService } from '../databox-item-category.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -25,7 +25,8 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   @ViewChild('categoryTable') table: MatTable<any>;
 
   // tslint:disable-next-line:max-line-length
-  editorData = `Type your desired keywords`;
+  public editorData = `Type your desired keywords`;
+  public editorDataAdv = `Please type your query`;
 
   constructor(public dialogRef: MatDialogRef<DataboxDialogsQueryComponent>,
     public dialog: MatDialog, 
