@@ -123,33 +123,7 @@ export class SigninComponent implements OnInit {
     const signinData = this.signinForm.value;
     console.log('signinData: ', signinData);
 
-    // this.submitButton.disabled = true;
-
-    // temporary disable
-    // this.progressBar.mode = 'indeterminate';
-    /*
-    this.amplifyService.auth().signIn(signinData)
-    .then(data => {
-      console.log('data: ', data);
-      this.awsConfirm = data;
-      console.log('awsConfirm: ', this.awsConfirm);
-      if (this.awsConfirm) {
-        const username = this.awsConfirm.username;
-        console.log('username:', username);
-        sessionStorage.setItem('userName', signinData.username);
-        this.router.navigate(['/databoxes']);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      console.log('Error message:', err.message);
-      if (err.code === 'UserNotConfirmedException') {
-        this.navCtrl.navigate('/sessions/confirm', {username: signinData.username});
-      }
-      alert(err.message);
-      // this.submitButton.disabled = false;
-    });*/
-
+ 
     // temporary select a user and set it as the currently logged in user
      this.reqUser = this.userService
      .signInUser(body.username, body.password)
@@ -167,6 +141,37 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['/databoxes']);
         }, 1000);
       });
+
+
+     // this.submitButton.disabled = true;
+
+     // temporary disable
+     // this.progressBar.mode = 'indeterminate';
+     /*
+      COGNITO IMPLEMENTATION WITH BUG
+
+
+     this.amplifyService.auth().signIn(signinData)
+     .then(data => {
+       console.log('data: ', data);
+       this.awsConfirm = data;
+       console.log('awsConfirm: ', this.awsConfirm);
+       if (this.awsConfirm) {
+         const username = this.awsConfirm.username;
+         console.log('username:', username);
+         sessionStorage.setItem('userName', signinData.username);
+         this.router.navigate(['/databoxes']);
+       }
+     })
+     .catch(err => {
+       console.log(err);
+       console.log('Error message:', err.message);
+       if (err.code === 'UserNotConfirmedException') {
+         this.navCtrl.navigate('/sessions/confirm', {username: signinData.username});
+       }
+       alert(err.message);
+       // this.submitButton.disabled = false;
+     });*/
 
   }
 

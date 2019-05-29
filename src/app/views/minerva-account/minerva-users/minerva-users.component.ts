@@ -93,7 +93,6 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     this.snackbar.open(message, 'close');
 
     setTimeout(() => {
-      /**/
       if(this.isUserAdded) sessionStorage.removeItem('user_new');
       if(this.isUserDeleted) sessionStorage.removeItem('user_deleted');
       if(this.isUserAdded) sessionStorage.removeItem('user_update');

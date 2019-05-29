@@ -5,7 +5,7 @@ import {
   MatSnackBar
 } from '@angular/material';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { DataboxesService } from '../databoxes-services';
+import { DataboxSuggestionService } from '../databox-item-suggestion.service';
 import { Subscription } from 'rxjs';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -21,7 +21,7 @@ export class DataboxDialogAddSuggestionComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialogRef: MatDialogRef<DataboxDialogAddSuggestionComponent>,
-    private databoxesService: DataboxesService,
+    private databoxSuggestionService: DataboxSuggestionService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
@@ -55,8 +55,12 @@ export class DataboxDialogAddSuggestionComponent implements OnInit, OnDestroy {
       page_country: this.suggestResultForm.get('page-country').value
     };
 
-    this.reqSubs = this.databoxesService
+    this.reqSubs = this.databoxSuggestionService
       .addNewResultSuggestion(body)
-      .subscribe(result => this.dialogRef.close(false));
+      .subscribe(result => {
+        this.dialogRef.close(false);
+        this.snackBar.open('A new suggestion has been successfully added', 'close');
+        setTimeout(() => this.snackBar.dismiss(), 3000);
+      });
   }
 }

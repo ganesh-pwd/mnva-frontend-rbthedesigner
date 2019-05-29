@@ -64,9 +64,6 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
         this.isModuleLoading = false;
       }
     });
-
-    // temporary select logged in user
-    //this.selectUserAsLogged();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -103,19 +100,6 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       const element = <HTMLElement>document.querySelector(selector);
       element.scrollTop = 0;
     }
-  }
-
-  /* TEMPORARY SELECT USER */
-  selectUserAsLogged() {
-    this.reqUser = this.userService.selectUser()
-    .subscribe((result) => {
-      let session = sessionStorage.getItem('loggedInUser');
-        if (!session) {
-          sessionStorage.setItem('loggedInUser', JSON.stringify(result[0]));
-          window.location.reload();
-        }
-    });
-
   }
 
 

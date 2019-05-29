@@ -1,8 +1,9 @@
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataboxesService } from '../databoxes-services';
-import { DataboxesTestQueryService } from '../databox-test-query.service';
+import { DataboxesService } from '../databox-item-main.services';
+import { DataboxesTestQueryService } from '../databox-item-test-query.service';
+import { DataboxConnectorService } from '../databox-item-connector.service';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from 'app/shared/animations/egret-animations';
 import { DataboxConnectivityDialogService } from '../dialogs-connectivity/dialogs-connectivity.services';
@@ -25,6 +26,7 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
     private databoxesService: DataboxesService,
     private databoxesTestQueryService: DataboxesTestQueryService,
     private databoxConnectivityDialogService: DataboxConnectivityDialogService,
+    private databoxConnectorService: DataboxConnectorService,
     public dialogRef: MatDialogRef<MainDataboxDialogComponent>,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -145,10 +147,10 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
 
   // update connectors
   updateConnector(automatic?: boolean) {
-    this.reqSubs = this.databoxesService
+    this.reqSubs = this.databoxConnectorService
     .addDataConnector(this.data.connector, automatic ? true : this.data.checked)
     .subscribe(result => {
-      if (automatic) {
+      if (automatic && this.data.connector === 'email') {
         this.databoxConnectivityDialogService
           .confirm({
             title: 'Email Notifications',

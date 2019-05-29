@@ -46,15 +46,15 @@ export class HeaderSideComponent implements OnInit {
     private socialAuthService: AuthService
   ) {
 
-    if ('userName' in sessionStorage) {
-      this.userName = sessionStorage.getItem('userName');
-    }
+    
 
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
     userService.userData$.subscribe(user => {
       if (user) {
         // this.userFullName = user.name
         this.loggedInUser = user;
+
+        if ('userName' in sessionStorage) this.userName = sessionStorage.getItem('userName');
       }
     });
   }

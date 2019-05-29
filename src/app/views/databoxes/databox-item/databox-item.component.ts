@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { databoxCategoryEditorDialogService } from '../../../shared/services/databoxes/dialogs-query/dialogs-query.services';
-import { DataboxItemSearchService } from '../../../shared/services/databoxes/databox-item-search-services';
+import { DataboxItemResultService } from '../../../shared/services/databoxes/databox-item-result.service';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxAddSuggestionService } from '../../../shared/services/databoxes/dialog-add-suggestions/dialog-add-suggestions.service';
-import { DataboxCategoryService } from '../../../shared/services/databoxes/databox-category-creator-services';
+import { DataboxCategoryService } from '../../../shared/services/databoxes/databox-item-category.service';
+import { DataboxConnectorService } from '../../../shared/services/databoxes/databox-item-connector.service';
 import { UserService } from '../../../shared/services/auth/user-services';
 import { HotTableRegisterer } from '@handsontable-pro/angular';
 import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
@@ -58,7 +59,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public selectedHero: any;
   public tableSettings: {};
   public changeList: any[];
-  public suggestResultForm: FormGroup;
   public categoryRemaining: number;
   public categoryUsed: number;
   public subcategoryRemaining: number;
@@ -71,15 +71,59 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public loggedInUser;
   public testCategory: any;
 
-  /* @SET CHART DATA */
-  // Doughnuts
+  /* Share CHART DATA */
   public sharedChartOptions: any = {
     responsive: true,
     legend: {
-      display: false,
+      display: true,
       position: 'bottom'
     }
   };
+
+  /* @SET CHART DATA */
+  // linear chart data
+  public chartColors: Array <any> = [{
+    backgroundColor: '#19b4d7',
+    borderColor: '#19b4d7',
+    pointBackgroundColor: '#19b4d7',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+  }, {
+    backgroundColor: '#fb8a01',
+    borderColor: '#fb8a01',
+    pointBackgroundColor: '#fb8a01',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgba(77,83,96,1)'
+  }];
+
+  /* set line chart option
+  * Line Chart Options
+  */
+  public lineChartData: Array <any> = [{
+    data: [30, 95, 180, 720, 1290, 3600, 5000],
+    label: 'Mentions'
+  }];
+  public lineChartLabels: Array <string> = ['Sat 17', 'Sun 18', 'Mon 19', 'Tue 20', 'Wed 21', 'Thu 22'];
+  public lineChartOptions: any = Object.assign({
+    animation: false,
+    scaledisplay: false,
+    responsive: true,
+    scales: {
+      xAxes: [{
+        display: false
+      }],
+      yAxes: [{
+        display: false
+      }]
+    }
+  }, this.sharedChartOptions);
+  public lineChartLegend: boolean = false;
+  public lineChartType: string = 'line';
+
+  /* @SET CHART DATA */
+  // Doughnuts chart
   public doughnutOptions: any = Object.assign({
     elements: {
       arc: {
@@ -101,28 +145,34 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     private databoxesService: DataboxesService,
     private databoxAlgorithmDialogService: DataboxAlgorithmDialogService,
     private databoxCategoryEditorDialogService: databoxCategoryEditorDialogService,
-    private databoxItemSearchService: DataboxItemSearchService,
+    private databoxItemResultService: DataboxItemResultService,
     private databoxAddSuggestionService: DataboxAddSuggestionService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private databoxCategoryService: DataboxCategoryService,
+    private databoxConnectorService: DataboxConnectorService,
     private userService: UserService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService
     ) {
       this.data = [];
-      this.id   = this.activatedRoute.snapshot.paramMap.get('id');
 
-      this.databoxesService.apiData$.subscribe(result => this.databoxItemData = result);
+      // get databox id
+      this.id = this.activatedRoute.snapshot.paramMap.get('id');
+
+      // get selected databox
+      this.databoxesService
+      .apiData$
+      .subscribe(result => this.databoxItemData = result);
 
       // category items
-      this.databoxCategoryService.categoryItems$.subscribe(_result => {
-        this.dataSource = _result || [];
-      });
+      this.databoxCategoryService
+      .categoryItems$
+      .subscribe(_result => this.dataSource = _result || []);
 
       // test category data
-      this.databoxCategoryService.testData$.subscribe(_result => {
-         this.testCategory = _result;
-      });
+      this.databoxCategoryService
+      .testData$
+      .subscribe(_result => this.testCategory = _result);
 
       this.selectedTab = parseInt(sessionStorage.getItem('selectedTabDatabox')) || 0;
       userService.userData$.subscribe((user) => this.loggedInUser = user); 
@@ -135,20 +185,10 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.getSingleItem();
 
     // load databox item table data
-    this.getDataboxItemSearch();
-
-    this.paginatedData['items'].map(el => {
-      const arr = [];
-      for (let item in el) {
-        arr.push(el[item]);
-      }
-
-      return arr;
-    });
+    this.getDataboxItemResult();
 
     // create databox item result table (handsontable)
     this.createTable();
-    this.suggestResultFormGroup();
 
     setTimeout(() => document.getElementById('head').click(), 500);
   }
@@ -166,45 +206,33 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.databoxCategoryService.setTestDataItem(null);
   }
 
-  // build queryForm
-  suggestResultFormGroup() {
-    this.suggestResultForm = this.formBuilder.group({
-      'page-name': [null, Validators.compose([Validators.required])],
-      'page-id': [null, Validators.compose([Validators.required])],
-      'page-country': [null, Validators.compose([Validators.required])],
-    });
-  }
-
+  // function for setting the slider to true or false
   slideToggle(data) {
     switch (true) {
       case data === 'sentiment': {
-        if(this.sentiment)
-          this.sentiment = false;
-        else this.sentiment = true;
+        if(this.sentiment) this.sentiment = false;
+          else this.sentiment = true;
 
         break;
       }
 
       case data === 'topicRecognition': {
-        if(this.topicRecognition)
-          this.topicRecognition = false;
-        else this.topicRecognition = true;
+        if(this.topicRecognition) this.topicRecognition = false;
+          else this.topicRecognition = true;
 
         break;
       }
 
       case data === 'genderAuthor': {
-        if(this.genderAuthor)
-          this.genderAuthor = false;
-        else this.genderAuthor = true;
+        if(this.genderAuthor) this.genderAuthor = false;
+          else this.genderAuthor = true;
 
         break;
       }
 
       case data === 'entityRecognition': {
-        if(this.entityRecognition)
-          this.entityRecognition = false;
-        else this.entityRecognition = true;
+        if(this.entityRecognition) this.entityRecognition = false;
+          else this.entityRecognition = true;
 
         break;
       }
@@ -212,12 +240,12 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   }
 
 
+  // function for setting the slider to true or false
   clickSlideToggle(data){
     switch (true) {
       case data === 'sentiment': {
-        if(this.sentiment)
-          this.sentiment = false;
-        else this.sentiment = true;
+        if(this.sentiment) this.sentiment = false;
+          else this.sentiment = true;
 
         setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.sentiment, data, true), 300);
 
@@ -225,9 +253,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       }
 
       case data === 'topicRecognition': {
-        if(this.topicRecognition)
-          this.topicRecognition = false;
-        else this.topicRecognition = true;
+        if(this.topicRecognition) this.topicRecognition = false;
+          else this.topicRecognition = true;
 
         setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.topicRecognition, data, true), 300);
 
@@ -235,9 +262,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       }
 
       case data === 'genderAuthor': {
-        if(this.genderAuthor)
-          this.genderAuthor = false;
-        else this.genderAuthor = true;
+        if(this.genderAuthor) this.genderAuthor = false;
+          else this.genderAuthor = true;
 
         setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.genderAuthor, data, true), 300);
 
@@ -245,9 +271,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       }
 
       case data === 'entityRecognition': {
-        if(this.entityRecognition)
-          this.entityRecognition = false;
-        else this.entityRecognition = true;
+        if(this.entityRecognition) this.entityRecognition = false;
+          else this.entityRecognition = true;
 
         setTimeout(() => this.openAlgorithmDialog('Apply Enrichment', this.entityRecognition, data, true), 300);
 
@@ -258,14 +283,23 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
 
   // get databox table search item
-  getDataboxItemSearch() {
+  getDataboxItemResult() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     const page = this.activatedRoute.snapshot.paramMap.get('page');
 
-    this.getTableReq = this.databoxItemSearchService.getItems(id)
+    this.getTableReq = this.databoxItemResultService.getItems(id)
     .subscribe(data => {
       this.databoxItemTable = data;
       this.paginatedData    = this.paginateDatabox(this.databoxItemTable, page ? parseInt(page) : 1);
+
+      this.paginatedData['items'].map(el => {
+        const arr = [];
+        for (let item in el) {
+          arr.push(el[item]);
+        }
+
+        return arr;
+      });
     });
   }
 
@@ -278,11 +312,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
           if (data && data.status === 'Active' || data.status === 'Paused') {
             this.mentions = data.mentions;
             this.creditRemaining = data.credit_remaining;
-            this.categoryRemaining = data.category_available - data.category_used;
-            this.subcategoryRemaining = data.sub_category_available - data.sub_category_available_used;
-
-            this.categoryUsed = data.category_used;
-            this.subCategoryUsed = data.sub_category_available_used;
 
             this.data = data;
             this.selectedOption = true;
@@ -291,7 +320,11 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
             this.getDataboxCategory(this.id);
 
             // slide apply automatically toggle
-            data.algorithmConnectors.forEach(el => this.slideToggle(el));
+            // set data connectors
+            this.databoxConnectorService
+            .getSingleItem(this.id)
+            .algorithmConnectors
+            .forEach(el => this.slideToggle(el));
 
             this.loader.close();
           }
@@ -305,11 +338,23 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     this.databoxCategoryReq = this.databoxCategoryService
     .getItem(id)
     .subscribe(result => {
-      if (result[0]) this.databoxCategoryService.setCategoryItem(result[0].categories); 
+      if (result[0]){ 
+        this.databoxCategoryService.setCategoryItem(result[0].categories);
+
+        this.categoryRemaining = result[0].category_available - result[0].category_used;
+        this.subcategoryRemaining = result[0].sub_category_available - result[0].sub_category_available_used;
+
+        this.categoryUsed = result[0].category_used;
+        this.subCategoryUsed = result[0].sub_category_available_used;
+      }
       else this.databoxCategoryService.setCategoryItem(null); 
     });
   }
 
+
+  getDataboxConnector(id){
+
+  }
   
 
 
@@ -346,23 +391,12 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         }).subscribe((result) => { });
       }
 
+      // open the modal for adding databox suggestion
       openAddSuggestion(){
         this.databoxAddSuggestionService.confirm({ 
           title: `Suggest Result From a Specific ${this.data.page_search_name}`, 
           field: this.data.page_search_name})
         .subscribe((result) => { });
-      }
-
-      // add suggestion
-      openAddSuggestionPreField(){
-        let body = {
-          'source': this.data.page_search_name,
-          'page_name': this.suggestResultForm.get('page-name').value,
-          'page_id': this.suggestResultForm.get('page-id').value,
-          'page_country': this.suggestResultForm.get('page-country').value,
-        }
-
-        this.databoxAddSuggestionService.confirm({ title: `Suggest Result From a Specific ${this.data.page_search_name}`, data: body, field: this.data.page_search_name}).subscribe((result) => { });
       }
 
       // cancel changes for categorized your data
@@ -408,7 +442,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         const route = `/databoxes/${id}/${this.paginatedData.total_pages}`;
 
-        this.addRowReq = this.databoxItemSearchService.addRow(id).subscribe(data => {
+        this.addRowReq = this.databoxItemResultService.addRow(id).subscribe(data => {
           if (data) {
             this.router.navigateByUrl('/databoxes', { skipLocationChange: true })
             .then(() => this.router.navigate([route]));
@@ -421,7 +455,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         const route = `/databoxes/${id}`;
 
-        this.resetRowReq = this.databoxItemSearchService.deleteRow(id, row).subscribe(data => {
+        this.resetRowReq = this.databoxItemResultService.deleteRow(id, row).subscribe(data => {
           if (data) {
             this.router.navigateByUrl('/databoxes', { skipLocationChange: true })
             .then(() => this.router.navigate([route]));
@@ -434,7 +468,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const id = this.activatedRoute.snapshot.paramMap.get('id');
         const route = `/databoxes/${id}`;
 
-        this.addRowReq = this.databoxItemSearchService.saveAllChanges(id, this.paginatedData['items'])
+        this.addRowReq = this.databoxItemResultService.saveAllChanges(id, this.paginatedData['items'])
         .subscribe(data => {
           this.router.navigateByUrl('', { skipLocationChange: true })
           .then(() => this.router.navigate([route]));
@@ -446,7 +480,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         const name = this.activatedRoute.snapshot.paramMap.get('name');
         const route = `/databoxes/${name}`;
 
-        this.resetRowReq = this.databoxItemSearchService.resetRows()
+        this.resetRowReq = this.databoxItemResultService.resetRows()
           .subscribe(data => {
             this.router.navigateByUrl('/databoxes', { skipLocationChange: true })
               .then(() => this.router.navigate([route]));
@@ -594,11 +628,3 @@ export interface DataTableItem {
   parent: string;
   author: string;
 }
-
-// Databox item second table data
-const DataboxResultItem: DataTableItem[] = [
-  {
-    id: 1, date: '15-07-2018', content: 'Te mereces un descanso de la carreras de diciembre. Celebremos que es viernes! #SiempreHayUnaRazonParaCelebrar #NosVemosEnApplebees',
-    parent: 'Null', author: 'Sabores a lo Tico'
-  }
-];

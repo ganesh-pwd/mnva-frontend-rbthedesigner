@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxConnectivityDialogService } from '../../../shared/services/databoxes/dialogs-connectivity/dialogs-connectivity.services';
 import { Subscription } from 'rxjs';
-
+import { DataboxConnectorService } from '../../../shared/services/databoxes/databox-item-connector.service';
 
 @Component({
   selector: 'app-databox-item-connectivity',
@@ -30,6 +30,7 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private databoxesService: DataboxesService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
+    private databoxConnectorService: DataboxConnectorService,
     private databoxConnectivityDialogService: DataboxConnectivityDialogService
   ) {
     this.databoxesService.apiData$.subscribe(
@@ -53,12 +54,14 @@ export class DataboxItemConnectivityComponent implements OnInit, OnDestroy {
     this.getItemSub = this.databoxesService.getSingleItem(id).subscribe(
       data => {
         if (data) {
-          if(data.status === 'Draft') this.router.navigate([`/databoxes/create-databox/${data._id}`]);
+          // if status is draft
+          if(data.status === 'Draft') 
+            this.router.navigate([`/databoxes/create-databox/${data._id}`]);
           
           this.data = data;
 
           // slide toggle if element is found on databox 
-          data.dataConnectors.forEach(el => this.slideToggle(el));
+          this.databoxConnectorService.getSingleItem(data._id).dataConnectors.forEach(el => this.slideToggle(el));
         }
         else this.router.navigate(["/sessions/404"]);
       },

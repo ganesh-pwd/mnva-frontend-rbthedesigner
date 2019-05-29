@@ -19,6 +19,7 @@ import {
   MatRadioModule,
   MatCheckboxModule,
   MatCardModule,
+  MatChipsModule,
   MatProgressSpinnerModule,
   MatRippleModule,
   MatDialogModule,
@@ -163,6 +164,7 @@ const classesToInclude = [
     MatExpansionModule,
     MatSlideToggleModule,
     MatProgressBarModule,
+    MatChipsModule,
     ReactiveFormsModule
   ],
   entryComponents: [

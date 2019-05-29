@@ -77,27 +77,37 @@
 
         <div fxLayout="row" fxLayoutWrap="wrap">
           <div class="gallery-icons text-center  min-ht" fxFlex="100">
-            <!-- Algorithm Connectors -->
+            
             <div *ngIf="data?.status !== 'Draft'">
-              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'sentiment')">
+              <!-- Algorithm Connectors -->
+              <button mat-icon-button 
+              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'sentiment')">
               <mat-icon class="icon-header">add</mat-icon></button>
 
-              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'topicRecognition')">
+              <button mat-icon-button 
+              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'topicRecognition')">
               <mat-icon class="icon-header">airplanemode_active</mat-icon></button>
 
-              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'genderAuthor')">
+              <button mat-icon-button 
+              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'genderAuthor')"
+              >
               <mat-icon class="icon-header">people</mat-icon></button>
 
-              <button mat-icon-button *ngIf="checkAlgorithmConnectors(data, 'entityRecognition')">
+              <button mat-icon-button 
+              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'entityRecognition')">
               <mat-icon class="icon-header">location_city</mat-icon></button>
+
               <!-- Data Connectors -->
-              <button mat-icon-button *ngIf="checkDataConnectors(data, 'email')">
+              <button mat-icon-button 
+              *ngIf="checkDataConnectors(filterConnector(data?._id), 'email')">
               <i><img src="/assets/images/email.png"></i></button>
 
-              <button mat-icon-button *ngIf="checkDataConnectors(data, 'slack')">
+              <button mat-icon-button 
+              *ngIf="checkDataConnectors(filterConnector(data?._id), 'slack')">
               <i><img src="/assets/images/slack.png"></i></button>
 
-              <button mat-icon-button *ngIf="checkDataConnectors(data, 'appleTV')">
+              <button mat-icon-button 
+              *ngIf="checkDataConnectors(filterConnector(data?._id), 'appleTV')">
               <i><img src="/assets/images/apple_tv.png"></i></button>
             </div>
           </div>
@@ -113,7 +123,7 @@
   </div>
   <div class="no-databoxes">
     <div fxLayout="column" class="text-center" *ngIf="databoxes?.length == 0" class="welcome-image">
-      <img fxFlex="100" class="mb-1" src="assets/images/databox_big.png">
+      <img fxFlex="100" class="mb-1" src="assets/images/databox_big.png" width="250px">
       <h2 class="mat-h2 text-center">There are no databoxes. Please create one.</h2>
       <div fxFlex="100" class="text-center">
         <button

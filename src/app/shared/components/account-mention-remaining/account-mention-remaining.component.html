@@ -13,11 +13,11 @@
       Unlimited Mentions</p>
       </div>
       <span fxFlex></span> 
-      <div>
+      <div *ngIf="loggedInUser.accountType !== 'Enterprise'">
         <p class="m-0"><a class="text-muted mat-color-primary"
         routerLink="/products/mentions-credit">
         Add Mentions
-        </a> or <br> <a *ngIf="loggedInUser.accountType !== 'Enterprise'" class="text-muted mat-color-primary"
+        </a> or <br> <a class="text-muted mat-color-primary"
         routerLink="/products/mentions-credit">
         Upgrade your plan
         </a></p>

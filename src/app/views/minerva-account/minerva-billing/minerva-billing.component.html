@@ -126,71 +126,81 @@
 			  			</mat-card-header>
 
 			  			<mat-card-content>
-			  				<form>
+			  				<form [formGroup]="billingInfoForm">
 			  					<div fxLayout="row" fxLayoutWrap="wrap">
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-		  							  		<input matInput placeholder="Country">
+		  							  		<input matInput placeholder="Country"
+		  							  		formControlName="country">
 		  								</mat-form-field>
 			  						</div>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  						  		<input matInput placeholder="First Name">
+			  						  		<input matInput placeholder="First Name"
+			  						  		formControlName="firstName">
 			  							</mat-form-field>
 			  						</div><br>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="Last Name">
+			  				    			<input matInput placeholder="Last Name"
+			  				    			formControlName="lastName">
 			  				  			</mat-form-field>
 			  						</div>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-		  								  	<input matInput placeholder="Company">
+		  								  	<input matInput placeholder="Company"
+		  								  	formControlName="company">
 		  								</mat-form-field>
 			  						</div><br>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="Address Line 1">
+			  				    			<input matInput placeholder="Address Line 1"
+			  				    			formControlName="address">
 			  				  			</mat-form-field>
 			  						</div>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="Address Line 2">
+			  				    			<input matInput placeholder="Address Line 2"
+			  				    			formControlName="address2">
 			  				  			</mat-form-field>
 			  						</div><br>
 
 									<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="City">
+			  				    			<input matInput placeholder="City"
+			  				    			formControlName="city">
 			  				  			</mat-form-field>
 			  						</div>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="Zip">
+			  				    			<input matInput placeholder="Zip"
+			  				    			formControlName="zip">
 			  				  			</mat-form-field>
 			  						</div><br>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="Phone">
+			  				    			<input matInput placeholder="Phone"
+			  				    			formControlName="phone">
 			  				  			</mat-form-field>
 			  						</div>
 
 			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
 		  								<mat-form-field class="billing-form">
-			  				    			<input matInput placeholder="Email">
+			  				    			<input matInput placeholder="Email"
+			  				    			formControlName="email">
 			  				  			</mat-form-field>
 			  						</div><br>
 			  					</div>
 
 			  				  	<div class="text-center"><br>
-			  				  		<button mat-raised-button color="primary">Save</button>
+			  				  		<button (click)="saveUpdateBillingInfo()" mat-raised-button color="primary">Save</button>
 			  				  	</div>
 			  				</form>
 			  			</mat-card-content>

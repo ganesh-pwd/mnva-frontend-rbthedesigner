@@ -1,3 +1,7 @@
+/* 
+  The list of Algorithm Credits you can purchase in /products/algorithm-credits
+*/
+
 export class AlgorithmCreditsDB {
   public algorithm_credit = [
     {

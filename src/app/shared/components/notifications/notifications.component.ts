@@ -4,6 +4,7 @@ import { MinervaNewsService } from '../../services/minerva-news/minerva-news.ser
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/auth/user-services';
 
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html'
@@ -17,7 +18,6 @@ export class NotificationsComponent implements OnInit {
   public isUserAdded;
   public isUserDeleted;
   public loggedInUser;
-  public selected;
 
   public basic: number = 3000;
   public professional: number = 5000;
@@ -36,11 +36,6 @@ export class NotificationsComponent implements OnInit {
     userService.userData$.subscribe((user) => {
       this.loggedInUser = user;
 
-      // set selected account
-      this.selected = sessionStorage.getItem('selectedAccount') ?  
-      (JSON.parse(sessionStorage.getItem('selectedAccount'))).accountName : 
-      user.accountNames[0].accountName;
-
       if(this.loggedInUser){
         let userAccountType = this.loggedInUser.accountType === 'Basic' 
         ? this.basic 
@@ -57,9 +52,6 @@ export class NotificationsComponent implements OnInit {
     this.getNews(); // get news notification  
 
     this.router.events.subscribe((routeChange) => {
-        const selectedUserFromTemp = JSON.parse(sessionStorage.getItem('selectedAccount'));
-        const selectedUser = selectedUserFromTemp || this.loggedInUser.accountNames.filter(el => el.accountName === this.selected)[0]
-
         if (routeChange instanceof NavigationEnd) {
           this.isDataboxAdded  = sessionStorage.getItem('databox_new');
           this.isDataboxDeleted = sessionStorage.getItem('deleted_databox_true');
@@ -83,17 +75,17 @@ export class NotificationsComponent implements OnInit {
           }
 
           // if user is added
-          if ((selectedUser.when_user_join && this.isUserAdded)) {
+          if (this.loggedInUser && (this.loggedInUser.notifications.when_user_join && this.isUserAdded)) {
             this.updateNotification(this.isUserAdded, 'assignment_ind', '/accounts/users', 'primary');
           }
 
           // if user is deleted
-          if ((selectedUser.when_user_leave && this.isUserDeleted)) {
+          if (this.loggedInUser && (this.loggedInUser.notifications.when_user_leave && this.isUserDeleted)) {
             this.updateNotification(this.isUserDeleted, 'assignment_ind', '/accounts/users', 'warn');
           }
 
           // if mentions is below 80%
-          if (selectedUser.when_credit_warning && (this.remaining_mentions >= 80 && this.remaining_mentions <= 99)) {
+          if (this.loggedInUser && this.loggedInUser.notifications.when_credit_warning && (this.remaining_mentions >= 80 && this.remaining_mentions <= 99)) {
             let findNotif = this.notifications.find(el => el.message === 'Your mentions credit is now below 80%');
             
             if(!findNotif){
@@ -102,7 +94,7 @@ export class NotificationsComponent implements OnInit {
           }
 
           // if mentions is above 100%
-          if (selectedUser.when_credit_expired && (this.remaining_mentions >= 100)) {
+          if (this.loggedInUser && this.loggedInUser.notifications.when_credit_expired && (this.remaining_mentions >= 100)) {
             let findNotif = this.notifications.find(el => el.message === 'Your mentions credit are now expired');
             
             if(!findNotif){

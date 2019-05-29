@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
+import { DataboxConnectorService } from '../../../shared/services/databoxes/databox-item-connector.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -14,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class MainDataboxesComponent implements OnInit, OnDestroy {
   private getItemSub: Subscription;
+  private getDataConnectorReq: Subscription;
 
   public databoxes: any[];
   public selectedOption;
@@ -25,10 +27,13 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   public databoxSearch: string;
   public databox_id_new: string;
 
+  public databoxConnectors: any;
+
   editorData = `( Type your desired keywords )`;
 
   constructor(private databoxesService: DataboxesService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
+    private databoxConnectorService: DataboxConnectorService,
     private router: Router,
     public snackBar: MatSnackBar) {
 
@@ -53,43 +58,9 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
     if (this.getItemSub) this.getItemSub.unsubscribe();
   }
 
-  // open confirmation dialog
-  openDialog(title: string, data: string, input: boolean) {
-    this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
-      .subscribe((result) => this.selectedOption = result);
-  }
+  
 
-  // modify databox
-  modifyDataboxDialog(title: string, data: string, input: boolean, details: any) {
-    this.mainDataboxesDialogService.confirm({
-      title: title,
-      data: data,
-      input: input,
-      details: details
-    }).subscribe((result) => {
-      this.selectedOption = result;
-    });
-  }
-
-  // open create databox dialog
-  createDatabox(title: string = 'my title', data: string = 'my data', input: boolean) {
-    this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
-      .subscribe((result) => this.selectedOption = result);
-  }
-
-  // open snackbar
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'close');
-
-    setTimeout(() => {
-      /**/
-      if(this.isDataboxAdded) sessionStorage.removeItem('databox_new');
-      if(this.isDataboxDeleted) sessionStorage.removeItem('deleted_databox_true');
-      if(this.isDataboxUpdated) sessionStorage.removeItem('databox_updated');
-
-      this.snackBar.dismiss();
-    }, 3000);
-  }
+  
 
   // navigate to databox details
   navigateToDatabox(id: string, first: boolean, status: string) {
@@ -105,10 +76,23 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (data) {
           this.databoxes = data;
+          this.getDataboxConnectors();
         }
       });
   }
 
+  // get databox connectors
+  getDataboxConnectors(){
+    this.getDataConnectorReq = this.databoxConnectorService
+    .getAllItems()
+    .subscribe(result => {
+      this.databoxConnectors = result;
+    })
+  }
+
+  filterConnector(id){
+    return this.databoxConnectorService.getSingleItem(id);
+  }
 
   // check databox connectors
   checkAlgorithmConnectors(databox, connector){
@@ -122,6 +106,44 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
 
     return filter > -1 ? true : false;
   }
+
+    // open confirmation dialog
+    openDialog(title: string, data: string, input: boolean) {
+      this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
+        .subscribe((result) => this.selectedOption = result);
+    }
+
+    // modify databox
+    modifyDataboxDialog(title: string, data: string, input: boolean, details: any) {
+      this.mainDataboxesDialogService.confirm({
+        title: title,
+        data: data,
+        input: input,
+        details: details
+      }).subscribe((result) => {
+        this.selectedOption = result;
+      });
+    }
+
+    // open create databox dialog
+    createDatabox(title: string = 'my title', data: string = 'my data', input: boolean) {
+      this.mainDataboxesDialogService.confirm({ title: title, data: data, input: input })
+        .subscribe((result) => this.selectedOption = result);
+    }
+
+    // open snackbar
+    openSnackBar(message: string) {
+      this.snackBar.open(message, 'close');
+
+      setTimeout(() => {
+        /**/
+        if(this.isDataboxAdded) sessionStorage.removeItem('databox_new');
+        if(this.isDataboxDeleted) sessionStorage.removeItem('deleted_databox_true');
+        if(this.isDataboxUpdated) sessionStorage.removeItem('databox_updated');
+
+        this.snackBar.dismiss();
+      }, 3000);
+    }
 
   // generate id with length 24
   generateID() {

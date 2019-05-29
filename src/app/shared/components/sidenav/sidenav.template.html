@@ -39,7 +39,7 @@
               <span fxFlex></span>
         </a>
 
-        <a [href]="item.state" 
+        <a (click)="navigateToState(item.state)"
           appDropdownToggle matRipple 
           *ngIf="item.type === 'extLink'" 
           target="_blank">

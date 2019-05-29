@@ -1,3 +1,7 @@
+/* 
+  The list of mention credits that the user can purchase in products (product/mentions-credit)
+*/
+
 export class MentionsCreditsDB {
     public mentions_credit = [
       {

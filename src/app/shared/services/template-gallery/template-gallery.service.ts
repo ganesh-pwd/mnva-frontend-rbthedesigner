@@ -21,13 +21,13 @@ export class TemplateGalleryService {
 
   getAllItems() {
     const rows = this.template_gallery;
-    const filter_by_logged_in_user = rows.filter(i => i.master_user_info === this.loggedInUser._id);
+    const filter_by_logged_in_user = rows.filter(i => i.account_id === this.loggedInUser._id);
     return of(filter_by_logged_in_user.slice());
   }
 
   // ******* Implement your APIs ********
   getItemByLink(link) {
-    const template_gallery_type = this.template_gallery.find(i => i.link === link && i.master_user_info === this.loggedInUser._id);
+    const template_gallery_type = this.template_gallery.find(i => i.link === link && i.account_id === this.loggedInUser._id);
     return of(template_gallery_type);
   }
 }

@@ -203,7 +203,8 @@ button.query_type{
 
 .placeholder{
 	color: rgba(0, 0, 0, .54);
-	font-size: 10px !important
+	font-size: 10px !important;
+	padding-top: 100px !important;
 }
 
 .mat-focused .placeholder {
@@ -214,4 +215,8 @@ button.query_type{
 
 .text-justify{
 	text-align: justify;
+}
+
+.mat-chip{
+	margin-top: 14px !important;
 }

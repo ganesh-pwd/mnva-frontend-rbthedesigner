@@ -1,3 +1,7 @@
+/* 
+  The list of countries you can pick including country code
+*/
+
 export class CountryDB {
   public countries = [
     // { name: 'Afghanistan', code: 'AF' },

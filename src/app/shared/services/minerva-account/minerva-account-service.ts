@@ -29,7 +29,7 @@ export class MinervaAccountService {
   /* @GET MINERVA ACCOUNTS DATA FROM THE FAKE DB */
 
       getAllItems(): Observable<any> {
-        const minerva_accounts = this.accounts.filter(el => el.master_user_info === this.loggedInUser._id);
+        const minerva_accounts = this.accounts.filter(el => el.account_id === this.loggedInUser._id);
         return of(minerva_accounts.slice());
       }
 
@@ -41,7 +41,7 @@ export class MinervaAccountService {
 
       // add new user
       addNewUser(details: any = {}): Observable<any> {
-        const minerva_accounts = this.accounts.filter(el => el.master_user_info === this.loggedInUser._id);
+        const minerva_accounts = this.accounts.filter(el => el.account_id === this.loggedInUser._id);
 
 
         if(minerva_accounts.length === this.loggedInUser.max_created_users) 
@@ -49,9 +49,8 @@ export class MinervaAccountService {
         else {
           const data = {
             '_id': this.generateID(),
-            'master_user_info': this.loggedInUser._id,
+            'account_id': this.loggedInUser._id,
             'index': minerva_accounts.length + 1,
-            'guid': this.generateGUID(),
             'status': 'Pending',
             'name': details.name,
             'user_type': details.role,
@@ -73,7 +72,7 @@ export class MinervaAccountService {
 
       // edit existing user
       editUser(details: any = {}, id): Observable<any> {
-        const minerva_accounts = this.accounts.filter(el => el.master_user_info === this.loggedInUser._id);
+        const minerva_accounts = this.accounts.filter(el => el.account_id === this.loggedInUser._id);
         const user_details = minerva_accounts[minerva_accounts.findIndex(el => el._id === id)];
 
         user_details.name = details.name;
@@ -93,7 +92,7 @@ export class MinervaAccountService {
       // remove user 
       deleteUser(id: string, input): Observable<any>{
         if(input === 'delete'){
-          const minerva_accounts = this.accounts.filter(el => el.master_user_info === this.loggedInUser._id);
+          const minerva_accounts = this.accounts.filter(el => el.account_id === this.loggedInUser._id);
           const user_details = minerva_accounts[minerva_accounts.findIndex(el => el._id === id)];
 
           minerva_accounts.splice(minerva_accounts.findIndex(el => el._id === id), 1);
@@ -123,9 +122,6 @@ export class MinervaAccountService {
 
         return id;
       }
-
-      // generate guID
-      generateGUID() { return Math.round(Math.random() * 5000000000).toString(); }
 
       // get max index
       getMaxIndex(item) { return Math.max(...item.map(x => x.index)) }

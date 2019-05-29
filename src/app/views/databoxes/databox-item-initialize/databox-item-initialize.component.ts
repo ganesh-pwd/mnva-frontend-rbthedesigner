@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef  } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databoxes-services';
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';

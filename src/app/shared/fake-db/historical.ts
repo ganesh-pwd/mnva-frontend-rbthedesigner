@@ -1,3 +1,7 @@
+/* 
+  The list of historical values that can be selected for databoxes
+*/
+
 export class HistoricalDB {
   public historical = [
     { name: 'Full Archive', display_text: 'Full Archive'},

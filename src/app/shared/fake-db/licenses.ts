@@ -1,3 +1,7 @@
+/* 
+  The list of licenses that the currently selected user can purchase from products (/product/licenses)
+*/
+
 export class LicenseDB {
   public licenses = [
     {

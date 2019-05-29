@@ -1,7 +1,8 @@
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataboxesService } from '../databoxes-services';
+import { DataboxesService } from '../databox-item-main.services';
+import { DataboxConnectorService } from '../databox-item-connector.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,6 +17,7 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 		public snackBar: MatSnackBar,
 		private router: Router,
 		private databoxesService: DataboxesService,
+		private databoxConnectorService: DataboxConnectorService,
 		@Inject(MAT_DIALOG_DATA) public data: any) {}
 
 	private reqSubs: Subscription;
@@ -39,7 +41,7 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 
 	// switch algorithm service
 	switchAlgorithm(switch_data: boolean){
-		this.reqSubs = this.databoxesService
+		this.reqSubs = this.databoxConnectorService
 		.addAlgorithmConnector(this.data.connector, switch_data)
 		.subscribe(result => {
 			this.dialogRef.close(false);
