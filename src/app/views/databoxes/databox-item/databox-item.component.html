@@ -1,4 +1,21 @@
-<br />
+<div class="notification__container">
+  <div class="notification__cell">
+    <div class="notification notification--red mb-1">
+      <div class="notification__icon">
+        <mat-icon class="">info_outline</mat-icon>
+      </div>
+      <div class="notification__content">
+        <h3 class="notification__type mat-h3">Info</h3>
+        <p class="notification__message">Anyone with access can view your invited visitors.</p>
+      </div>
+      <div class="notification__close">
+        <mat-icon class="">close</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
 <div *ngIf="data?.databox_name && paginatedData">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" id="head">
@@ -50,26 +67,6 @@
 <mat-tab-group dynamicHeight [selectedIndex]="selectedTab">
     <!-- Results -->
     <mat-tab label="Results">
-      <!-- Line Chart -->
-      <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
-        <div fxFlex="100" fxFlex.gt-sm="100">
-          <mat-card class="p-0 fixed-height">
-            <mat-card-content>
-              <!-- Line Chart -->
-              <canvas 
-              baseChart
-              class="chart"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="chartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"></canvas>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-      
       <!-- First Table -->
       <div [hidden]="data?.first_create">
         
@@ -339,162 +336,119 @@
           [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
           <div>
             <span fxFlex></span>
-            <button mat-raised-button class="mat-color-green" [routerLink]="['/products/mentions-credit']">Buy More</button>
+            <h3 class="mat-h3 m-0">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
           </div>
-          <div class="mt-1 mr-1">
+          <div>
             <span fxFlex></span>
-            <h3 class="mat-h3">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
+            <a class="mat-color-primary" [routerLink]="['/products/algorithm-credit']">Add credit</a>
           </div>
         </div>
       </div>
+      <br>
 
       <!-- Process Data List Options -->
       <div *ngIf="loggedInUser && data">
         <!-- Process Data List Options -->
-        <div class="product-container list-view"  
-        [@animate]="{value:'*', params:{ y:'200px', delay:'700ms' }}">
-          <!-- Algorithm Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="sentiment"
-                    (change)="clickSlideToggle('sentiment')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Sentiment</span>
-                     </mat-card-title>
-                   </mat-card-header>
-                    <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'sentiment')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <mat-card class="m-0 p-0">
+          <mat-card-header class="p-1">
+            <mat-card-title class="mat-color-primary">
+              <span>Process Your Data</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+            <table id="algorithm-table">
+              <thead>
 
-          <!-- Topic Recognition Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="topicRecognition"
-                    (change)="clickSlideToggle('topicRecognition')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Topic Recognition</span>
-                     </mat-card-title>
-                   </mat-card-header>
+                <tr class="mat-header-row">
+                  <th class="mat-header-cell">On/Off</th>
+                  <th class="mat-header-cell">Algorithm Name</th>
+                  <th class="mat-header-cell">Description </th>
+                  <th class="mat-header-cell">Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Sentiment -->
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-slide-toggle color="primary" class="" 
+                        [checked]="sentiment"
+                        (change)="clickSlideToggle('sentiment')">
+                    </mat-slide-toggle><br>
+                    <p>Turn on or <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'sentiment')"> Apply only to unprocessed data
+                    </a></p>
+                  </td>
+                  <td class="mat-cell"><strong class="algorithm-header">Sentiment</strong></td>
+                  <td class="mat-cell">
                     <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition, 'topicRecognition')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gender Author Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="genderAuthor"
-                    (change)="clickSlideToggle('genderAuthor')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Gender Author</span>
-                     </mat-card-title>
-                   </mat-card-header>
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+                <!-- Topic Recognition -->
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-slide-toggle color="primary" class="" 
+                      [checked]="topicRecognition"
+                      (change)="clickSlideToggle('topicRecognition')">
+                    </mat-slide-toggle><br>
+                    <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition, 'topicRecognition')"> Apply only to unprocessed data
+                    </a></p>
+                  </td>
+                  <td class="mat-cell"><strong class="algorithm-header">Topic Recognition</strong></td>
+                  <td class="mat-cell">
                     <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor, 'genderAuthor')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Entity Recognition Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="entityRecognition"
-                    (change)="clickSlideToggle('entityRecognition')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Entity Recognition</span>
-                     </mat-card-title>
-                   </mat-card-header>
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+                <!-- Gender Author -->
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-slide-toggle color="primary" class="" 
+                      [checked]="genderAuthor"
+                      (change)="clickSlideToggle('genderAuthor')">
+                    </mat-slide-toggle><br>
+                    <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor, 'genderAuthor')"> apply only to unprocessed data
+                    </a></p>
+                  </td>
+                  <td class="mat-cell"><strong class="algorithm-header">Gender Recognition</strong></td>
+                  <td class="mat-cell">
                     <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition, 'entityRecognition')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+                <!-- Entity Recognition -->
+                <tr class="mat-row">
+                  <td class="mat-cell">
+                    <mat-slide-toggle color="primary" class="" 
+                      [checked]="entityRecognition"
+                      (change)="clickSlideToggle('entityRecognition')">
+                    </mat-slide-toggle><br>
+                    <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition, 'entityRecognition')"> Apply only to unprocessed data
+                    </a></p>
+                  </td>
+                  <td class="mat-cell"><strong class="algorithm-header">Entity Recognition</strong></td>
+                  <td class="mat-cell">
+                    <p style="text-align: justify;" class="mb-0">
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </mat-card-content>
+        </mat-card>
       </div>
-  
       <!-- FAQ's -->
       <div fxLayout="row" fxLayoutWrap="wrap" class="faq" 
         *ngIf="data?.databox_name && paginatedData"

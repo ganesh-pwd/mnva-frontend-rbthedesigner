@@ -26,6 +26,7 @@ mat-card.account-type {
 .btn-add-to-cart {
   display: block;
   margin: auto;
+  max-height: 40px;
 }
 
 .faq{
@@ -113,4 +114,9 @@ tr:nth-child(odd) {
 .current-plan{
   box-shadow: none;
   cursor: initial;
+}
+
+.product-search-wrap{
+  position:absolute;
+  top:51px;
 }

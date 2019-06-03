@@ -141,6 +141,11 @@ small{
 .fixed-height{
 	min-height: 177px;
 }
+@media screen and (max-width:1279px) {
+  .fixed-height{
+      min-height: auto;
+  }
+}
 
 mat-progress-bar, mat-card-content{
 	cursor:initial;

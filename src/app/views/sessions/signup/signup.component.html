@@ -1,114 +1,103 @@
-<div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap" [@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
+<div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap"
+  [@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
   <div class="container" id="scroll-signin" fxLayoutAlign="center">
-    <div fxFlex="100" fxFlex.gt-sm="73" class="box">
-      <mat-card>
-        <div fxFlex="100" fxFlex.gt-sm="35" class="minerva-icon">
-          <mat-card>
-            <mat-card-content>
-              <div class="text-center pb-1">
-                <img src="assets/images/logo_minerva.svg" class="mb-05">
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-
-        <div fxFlex="100" fxFlex.gt-sm="65">
-          <mat-card>
-            <div class="minerva-sm">
-              <mat-card-header>
-                <img src="assets/images/logo_minerva.svg" class="mb-05">
-              </mat-card-header>
-         
-              <mat-divider></mat-divider>
-              <br>
-            </div>
-            
-            <mat-card-content>
-              <div class="text-center pb-1">
-                <h4 class="text-muted m-0">Get started by signing up</h4>
-                <p class="copyright text-muted">
-                  Track, analyze, and react to everything said about your brand online.
-                </p>
-              </div>
-              <form>
-                <div class="">
-                  <mat-form-field class="full-width">
-                    <input
-                      matInput
-                      type="email"
-                      name="email"
-                      [formControl]="signupForm.controls['email']"
-                      placeholder="Your Email"
-                      value="">
-                  </mat-form-field>
-                  <small 
-                    *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched" 
-                    class="form-error-msg"> Email is required </small>
-
+    <img src="assets/images/pattern_blue.png" id="background1">
+    <img src="assets/images/pattern_orange.png" id="background2">
+    <div fxFlex="100" fxFlex.gt-sm="50" class="box">
+      <div fxFlex="100" fxFlex.gt-sm="100">
+        <div class="page-wrap">
+          <div class="session-form-hold">
+            <mat-card>
+              <mat-card-content>
+                <div class="text-center pb-1">
+                  <img src="assets/images/logo_minerva.svg" class="mb-05" id="logo">
+                  <h4 class="text-muted m-0">Get started by signing up</h4>
+                  <p class="copyright text-muted text-center">
+                    Track, analyze, and react to everything said about your brand online.
+                  </p>
+                </div>
+                <form>
+                  <div class="">
+                    <mat-form-field class="full-width">
+                      <input
+                        matInput
+                        type="email"
+                        name="email"
+                        [formControl]="signupForm.controls['email']"
+                        placeholder="Your Email"
+                        value="">
+                    </mat-form-field>
                     <small 
-                      *ngIf="signupForm.controls['email'].hasError('email') && signupForm.controls['email'].touched" 
-                      class="form-error-msg"> Invaild email address </small>
-                </div>
+                      *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched" 
+                      class="form-error-msg"> Email is required </small>
 
-                <div class="">
-                  <mat-form-field class="full-width">
-                    <input 
-                      type="password"
-                      name="password"
-                      matInput
-                      [formControl]="signupForm.controls['password']"
-                      placeholder="Password" 
-                      value="">
-                  </mat-form-field>
-                  <small 
-                    *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched" 
-                    class="form-error-msg"> Password is required </small>
-                  <small 
-                    *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched" 
-                    class="form-error-msg"> Password should have 6 chars </small>
-                </div>
-                
-                <div class="">
-                  <mat-form-field class="full-width">
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      matInput
-                      [formControl]="signupForm.controls['confirmPassword']"
-                      placeholder="Confirm Password"
-                      value="">
-                  </mat-form-field>
-                  <small *ngIf="signupForm.controls['confirmPassword'].hasError('required') && signupForm.controls['confirmPassword'].touched" class="form-error-msg">Confirm password is required.</small>
-                  <small *ngIf="signupForm.controls['confirmPassword'].hasError('equalTo')" class="form-error-msg">Passwords does not match.</small>
-                </div>
-                
-                <div class="pb-1">
-                  <mat-checkbox
-                    name="agreed"
-                    [formControl]="signupForm.controls['agreed']"
-                    class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
+                      <small 
+                        *ngIf="signupForm.controls['email'].hasError('email') && signupForm.controls['email'].touched" 
+                        class="form-error-msg"> Invaild email address </small>
+                  </div>
 
+                  <div class="">
+                    <mat-form-field class="full-width">
+                      <input 
+                        type="password"
+                        name="password"
+                        matInput
+                        [formControl]="signupForm.controls['password']"
+                        placeholder="Password" 
+                        value="">
+                    </mat-form-field>
                     <small 
-                      *ngIf="signupForm.controls['agreed'].hasError('agreed') && signupForm.controls['agreed'].touched" 
-                      class="form-error-msg"> You must agree to the terms and conditions </small>
-                </div>
+                      *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched" 
+                      class="form-error-msg"> Password is required </small>
+                    <small 
+                      *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched" 
+                      class="form-error-msg"> Password should have 6 chars </small>
+                  </div>
+                  
+                  <div class="">
+                    <mat-form-field class="full-width">
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        matInput
+                        [formControl]="signupForm.controls['confirmPassword']"
+                        placeholder="Confirm Password"
+                        value="">
+                    </mat-form-field>
+                    <small *ngIf="signupForm.controls['confirmPassword'].hasError('required') && signupForm.controls['confirmPassword'].touched" class="form-error-msg">Confirm password is required.</small>
+                    <small *ngIf="signupForm.controls['confirmPassword'].hasError('equalTo')" class="form-error-msg">Passwords does not match.</small>
+                  </div>
+                  
+                  <div class="pb-1 text-center">
+                    <mat-checkbox
+                      name="agreed"
+                      [formControl]="signupForm.controls['agreed']"
+                      class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
 
-                <button (click)="signup()" mat-raised-button class="mat-primary full-width mb-1" [disabled]="signupForm.invalid">Sign up</button>
-                <div class="text-center">
-                  <p class="mat-primary text-center full-width">Or</p>
-                </div>
+                      <small 
+                        *ngIf="signupForm.controls['agreed'].hasError('agreed') && signupForm.controls['agreed'].touched" 
+                        class="form-error-msg"> You must agree to the terms and conditions </small>
+                  </div>
 
-                <button (click)="socialSignIn('facebook')" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Sign In With Facebook</button>
-                <button (click)="socialSignIn('google')" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Sign In With Google</button>
-                <div class="text-center">
-                  Already Have an Account?
-                  <a class="mat-primary text-center full-width">Login here</a><br>
-                </div>
-              </form>
-            </mat-card-content>
-          </mat-card>
+                  <button (click)="signup()" mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="signupForm.invalid">Sign up</button>
+
+                  <div class="text-center">
+                    <p class="mat-primary text-center full-width">Or</p>
+                  </div>
+                  <button (click)="socialSignIn('facebook')" mat-raised-button class=" facebook full-width mb-1 signin-btn">Log In With Facebook</button>
+
+                  <button (click)="socialSignIn('google')" mat-raised-button class="google full-width mb-1 signin-btn">Log In With Google</button>
+
+                  <div class="text-center">
+                    Already Have an Account?
+                    <a [routerLink]="'/sessions/signin'" class="mat-primary text-center full-width">Login here</a><br>
+                  </div>
+                </form>
+              </mat-card-content>
+            </mat-card>
+          </div>
         </div>
-      </mat-card>
+      </div>
     </div>
   </div>
 </div>

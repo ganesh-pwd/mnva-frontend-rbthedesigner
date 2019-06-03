@@ -199,12 +199,10 @@ hot-table {
       display: none !important;
     }
   }
-
 }
 
-
-
 .header-row {
+  position: relative;
   h1 {
     margin-left: 63px;
   }
@@ -212,7 +210,7 @@ hot-table {
     max-width: 50px;
     max-height: 50px;
     position: absolute;
-    top: 22px;
+    top: -10px;
   }
   small {
     font-size: 14px !important;
@@ -220,7 +218,7 @@ hot-table {
     margin-left: 35px;
     margin-top: 8px;
     position: absolute;
-    top: 27px;
+    top: -6px;
     mat-icon {
       cursor: pointer;
       font-size: 18px;
@@ -314,4 +312,76 @@ table {
   width: 100%;
   padding-top: 15px;
   text-align: center;
+}
+
+//notifications
+.notification__container {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.notification__cell{
+  display:inline-block;
+}
+
+.notification {
+  text-align:left;
+    padding: 12px 0;
+    background-color:#fff;
+    border-radius:4px;
+    width: 100%;
+    top: 0px;
+    position:relative;
+    box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+}
+
+
+.notification:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-top-left-radius:4px;
+    border-bottom-left-radius: 4px;
+}
+
+.notification__icon{
+  position:absolute;
+  left:22px; 
+  top: 50%;
+  transform:translateY(-50%);
+}
+
+.notification__type {
+  color: #3e3e3e;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.notification__message {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #878787;
+}
+
+.notification__content{
+  padding-left:70px;
+  padding-right:60px;
+}
+
+.notification__close {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    cursor:pointer;
+    fill:#878787;
+    transform: translateY(-50%);
+}
+
+.notification--red:before{
+  background-color:red;
 }

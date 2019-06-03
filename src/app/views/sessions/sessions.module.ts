@@ -26,6 +26,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LockscreenComponent } from './lockscreen/lockscreen.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ChooseAccountComponent } from './choose-account/choose-account.component';
 import { SessionsRoutes } from './sessions.routing';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorComponent } from './error/error.component';
@@ -37,6 +38,7 @@ const classesToInclude = [
   LockscreenComponent,
   SigninComponent,
   SignupComponent,
+  ChooseAccountComponent,
   ConfirmComponent,
   ResetPasswordComponent,
   NotFoundComponent,
