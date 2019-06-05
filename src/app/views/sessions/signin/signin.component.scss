@@ -1,22 +1,3 @@
-.page-wrap{
-	#background2{
-		position: absolute;
-		z-index: 1;
-		left: 0;
-	}
-	#background1{
-		position: absolute;
-		z-index: 1;
-		right: 0;
-	}
-	.box{
-		z-index: 2;
-		#logo{
-			max-width: 200px;
-		}
-	}
-}
-
 .header-platform{
 	font-size: 17px;
 	text-transform: uppercase;
@@ -26,6 +7,15 @@
 	margin: 20px 0;
 	font-size: 13px;
 	text-align: justify;
+}
+
+.minerva-logo{
+	width: 100%;
+	margin: 20px 0;
+}
+
+.mat-card{
+	box-shadow: none !important;
 }
 
 .signin-form{
@@ -40,20 +30,12 @@
 	padding-bottom: 10px !important;
 }
 
-button.facebook{
-  background-color: #3B5998;
-  color: white;
-}
-
-button.google {
-  background-color: #dd4b39;
-  color: white;
+.minerva-icon{
+  padding-top: 140px;
 }
 
 .page-wrap {
   @media screen and (max-width: 764px) {
-    img#background1, img#background2{
-    	display: none;
-  	}
+    padding-top: 100px !important;
   }
 }

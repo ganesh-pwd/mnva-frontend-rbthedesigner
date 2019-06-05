@@ -17,25 +17,25 @@
 	            <td>{{databoxMention}} Mentions</td>
 	        </tr>
 
-	        <tr *ngIf="loggedInUser.accountType !== 'Enterprise'">
+	        <tr *ngIf="userPlanDetails.account_type !== 'Enterprise'">
 	            <td>Current Mentions Remaining in Plan</td>
-	            <td>{{loggedInUser.mentions}} Mentions</td>
+	            <td>{{userPlanDetails.remaining_mentions}} Mentions</td>
 	        </tr>
 
-	        <tr [ngClass]="(loggedInUser.mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'" 
-	        *ngIf="loggedInUser.accountType !== 'Enterprise'">
+	        <tr [ngClass]="(userPlanDetails.remaining_mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'" 
+	        *ngIf="userPlanDetails.account_type !== 'Enterprise'">
 	            <td *ngIf="!data.update">Total Remaining After Creation</td>
 	            <td *ngIf="data.update">Total Remaining After Running The Query</td>
-	            <td>{{loggedInUser.mentions - databoxMention}} Mentions</td>
+	            <td>{{userPlanDetails.remaining_mentions - databoxMention}} Mentions</td>
 	        </tr>
 
-	        <tr *ngIf="loggedInUser.accountType === 'Enterprise'">
+	        <tr *ngIf="userPlanDetails.account_type === 'Enterprise'">
 	            <td>Current Mentions Remaining in Plan</td>
 	            <td>Unlimited Mentions</td>
 	        </tr>
 
-	        <tr [ngClass]="(loggedInUser.mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'" 
-	        *ngIf="loggedInUser.accountType === 'Enterprise'">
+	        <tr [ngClass]="(userPlanDetails.remaining_mentions - databoxMention) < 0 ? 'mat-bg-red': 'mat-bg-green'" 
+	        *ngIf="userPlanDetails.account_type === 'Enterprise'">
 	            <td *ngIf="!data.update">Total Remaining After Creation</td>
 	            <td *ngIf="data.update">Total Remaining After Running The Query</td>
 	            <td>Unlimited Mentions</td>
@@ -47,25 +47,25 @@
     <br>
 	<div mat-dialog-actions>
 		<span fxFlex></span>
-		<button *ngIf="!data.update && (loggedInUser.mentions - databoxMention) > 0" 
+		<button *ngIf="!data.update && (userPlanDetails.remaining_mentions - databoxMention) > 0" 
 			type="button" mat-raised-button color="primary"
 			(click)="createNewDatabox()">Apply</button>
 	
-		<button *ngIf="data.update && (loggedInUser.mentions - databoxMention) > 0" type="button" 
+		<button *ngIf="data.update && (userPlanDetails.remaining_mentions - databoxMention) > 0" type="button" 
 			mat-raised-button color="primary"
 			(click)="updateCreateDatabox()">Apply</button>
 
 		<!-- If mentions credit are negative -->
-		<button *ngIf="!data.update && (loggedInUser.mentions - databoxMention) < 0" 
+		<button *ngIf="!data.update && (userPlanDetails.remaining_mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="warn"
-			(click)="createNewDatabox()">Continue with {{loggedInUser.mentions - databoxMention}} Mentions</button>
+			(click)="createNewDatabox()">Continue with {{userPlanDetails.remaining_mentions - databoxMention}} Mentions</button>
 
 		<!-- If mentions credit are negative -->
-		<button *ngIf="data.update && (loggedInUser.mentions - databoxMention) < 0" 
+		<button *ngIf="data.update && (userPlanDetails.remaining_mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="warn"
-			(click)="updateCreateDatabox()">Continue with {{loggedInUser.mentions - databoxMention}} Mentions</button>
+			(click)="updateCreateDatabox()">Continue with {{userPlanDetails.remaining_mentions - databoxMention}} Mentions</button>
 
-		<button *ngIf="(loggedInUser.mentions - databoxMention) < 0" 
+		<button *ngIf="(userPlanDetails.remaining_mentions - databoxMention) < 0" 
 			type="button" mat-raised-button color="primary"
 			(click)="goToMentions()">Add More Credit</button>
 	

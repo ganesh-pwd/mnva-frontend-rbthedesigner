@@ -26,19 +26,8 @@ hr {
     &:hover {
         text-decoration: underline;
     }
-    &.small{
-        font-weight:initial;
-        font-size: 12px;
-        margin-left: 10px;
-    }
 }
 
 .mat-menu-item {
     font-size: 14px !important;
-}
-
-@media screen and (max-width:660px) {
-  .username{
-      display: none !important;
-  }
 }

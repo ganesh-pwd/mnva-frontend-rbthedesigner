@@ -6,7 +6,7 @@
   id="sidenavToggle" 
   (click)="toggleSidenav()"
   matTooltip="Toggle Hide/Open">
-  <mat-icon>zoom_out_map</mat-icon>
+  <mat-icon>menu</mat-icon>
   </button>
 
   <span fxFlex></span>
@@ -35,51 +35,36 @@
     <mat-icon>notifications</mat-icon>
     <span class="notification-number mat-bg-warn">{{notificationCount}}</span>
   </button>
-  <h4 class="username topbar-button-right">{{userName}}</h4>  
+  <h4 class="topbar-button-right">{{userName}}</h4>  
   <!-- Top left user menu -->
   <button mat-icon-button [matMenuTriggerFor]="accountMenu" class="topbar-button-right img-button">
-    <mat-icon>menu</mat-icon>
+    <img src="../../../../assets/images/user-icon.png" alt="">
   </button>
   <mat-menu #accountMenu="matMenu">
-
     <div class="account-type p16">
-      <span> <strong> {{loggedInUser.accountType}} </strong></span>
+      <span> <strong> {{userPlanDetails.account_type}} </strong></span>
       <a routerLink="/products/account-type" class="menu-link" 
-      *ngIf="loggedInUser.accountType !== 'Enterprise'">Upgrade plan</a>
+      *ngIf="userPlanDetails.account_type !== 'Enterprise'">Upgrade </a>
     </div>
-
     <div class="mentions-remaining p16">
-      <div>
-        <p class="m-0" *ngIf="loggedInUser.accountType !== 'Enterprise'">{{loggedInUser.mentions}} Mentions Remaining</p>
-      </div>
-      <span fxFlex *ngIf="loggedInUser.accountType !== 'Enterprise'"></span>
-      <a routerLink="/products/mentions-credit" class="menu-link small" 
-      *ngIf="loggedInUser.accountType !== 'Enterprise'">Add mentions</a>
-      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+      <p *ngIf="userPlanDetails.account_type !== 'Enterprise'">
+      {{userPlanDetails.remaining_mentions}} Mentions Remaining</p>
+
+      <p class="mat-color-primary" *ngIf="userPlanDetails.account_type === 'Enterprise'">
       Unlimited Mentions</p>
-    </div>
 
-    <div class="p16">
       <app-mentions-progress-bar></app-mentions-progress-bar>
-      <p class="mt-1" *ngIf="loggedInUser.accountType !== 'Enterprise'">Your quota resets in 10 days</p>
-      <p class="mt-1 mat-color-red"> Your free trail has expired, please upgrade your plan.</p>
-    </div>
 
+      <p class="mt-1" *ngIf="userPlanDetails.account_type !== 'Enterprise'">
+      Your quota resets in 10 days</p>
+    </div>
     <hr>
-
-    <div class="account-type p16 mt-1"> 
-      <strong> Algorithm Credit </strong>
-    </div>
-
-    <div class="mentions-remaining p16">
-      <div>
-        <p class="m-0">${{loggedInUser.algorithmCredits}} in credit remaining</p>
-      </div>  
-      <span fxFlex></span>
-      <a routerLink="/products/algorithm-credit" class="menu-link small">Add credit </a>
-    </div>
-
-    <div class="p16"> 
+    <div class="algorithm-credit p16 mt-1">
+      <span> 
+        <strong> Algorithm Credit </strong>
+      </span>
+      <a routerLink="/products/algorithm-credit" class="menu-link">Buy More </a>
+      <p>${{userPlanDetails.algorithm_credits}} in credit remaining</p>
       <mat-progress-bar
         [ngClass]="remaining >= 80 && remaining <= 99 
           ? 'yellow-progress': remaining >= 100 
@@ -88,11 +73,10 @@
         [value]="remaining">
       </mat-progress-bar>
     </div>
-
     <hr>
     <button mat-menu-item [routerLink]="['/accounts/minerva-notifications']">
       <mat-icon>home</mat-icon>
-      <span>Minerva News</span>
+      <span>Notifications</span>
     </button>
     <button mat-menu-item [routerLink]="['/accounts/settings']">
       <mat-icon>settings</mat-icon>

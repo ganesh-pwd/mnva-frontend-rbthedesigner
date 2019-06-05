@@ -7,6 +7,7 @@ import { MinervaAccountChangeService } from '../../../shared/services/minerva-ac
 import { MinervaAccountService } from '../../../shared/services/minerva-account/minerva-account-service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -27,6 +28,7 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     public isUserAdded;
     public isUserDeleted;
     public isUserUpdated;
+    public userPlanDetails;
 
     constructor(
     private router: Router,
@@ -35,7 +37,8 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
     private minervaAccountChangeService: MinervaAccountChangeService,
     private minervaAccountService: MinervaAccountService,
     private snackbar: MatSnackBar,
-    private userService: UserService) {
+    private userService: UserService,
+    private userPlanDetailsService: UserPlanDetailsService) {
       this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
       if ('photoUrl' in sessionStorage) {
         this.userImage = sessionStorage.getItem('photoUrl');
@@ -50,6 +53,8 @@ export class MinervaUsersComponent implements OnInit, OnDestroy {
 
       this.isUserUpdated = sessionStorage.getItem('user_update');
       if (this.isUserUpdated) this.openSnackBar(this.isUserUpdated); 
+
+      userPlanDetailsService.userPlanData$.subscribe((user) => this.userPlanDetails = user);
     }
 
     ngOnInit() {

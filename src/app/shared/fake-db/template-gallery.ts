@@ -7,7 +7,7 @@
 export class TemplateGalleryDB {
   public template_gallery_type = [
     {
-      '_id': "5a7b735ge4z123c94d1e46d4",
+      '_id': "5a7b735ge4z123c94d1e46d4", // Primary Key
       'account_id': 'jzut3ednmnzhuzfbsggc3cny', // Foreign key
       'type': "Reputation Management",
       'link': "reputation-management",
@@ -25,7 +25,7 @@ export class TemplateGalleryDB {
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur.`
     },
     {
-      '_id': "5a7b73jh6be234c25hal46d4",
+      '_id': "5a7b73jh6be234c25hal46d4", // Primary Key
       'index': 1,
       'account_id': 'jzut3ednmnzhuzfbsggc3cny', // Foreign key
       'type': "Influencers",
@@ -44,7 +44,7 @@ export class TemplateGalleryDB {
       <br><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur.`
     },
     {
-      '_id': "5a7b73jh7hj456c25hal46d4",
+      '_id': "5a7b73jh7hj456c25hal46d4", // Primary Key
       'index': 2,
       'account_id': 'jzut3ednmnzhuzfbsggc3cny', // Foreign key
       'type': "Insight Generations",
@@ -67,7 +67,7 @@ export class TemplateGalleryDB {
       <br><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur.`
     },
     {
-      '_id': "5a7b735ge4z123c94d1e46d4",
+      '_id': "5a7b735ge4z123c94d1e46d4", // Primary Key
       'index': 0,
       'account_id': 'hng57zw7413edoocrc1k4dev', // Foreign key
       'type': "Reputation Management",
@@ -86,7 +86,7 @@ export class TemplateGalleryDB {
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur.`
     },
     {
-      '_id': "5a7b73jh6be234c25hal46d4",
+      '_id': "5a7b73jh6be234c25hal46d4", // Primary Key
       'index': 1,
       'account_id': 'hng57zw7413edoocrc1k4dev', // Foreign key
       'type': "Influencers",
@@ -105,7 +105,7 @@ export class TemplateGalleryDB {
       <br><br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est, debitis vitae! Reprehenderit quis quibusdam earum voluptates voluptate veniam dolores, dignissimos provident eligendi expedita veritatis rem corrupti asperiores sequi velit consequatur.`
     },
     {
-      '_id': "5a7b73jh7hj456c25hal46d4",
+      '_id': "5a7b73jh7hj456c25hal46d4", // Primary Key
       'index': 2,
       'account_id': 'ab2g4m77wheqy3q4u5ymik4g', // Foreign key
       'type': "Insight Generations",

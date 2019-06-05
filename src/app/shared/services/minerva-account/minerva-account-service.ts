@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { delay } from 'rxjs/operators';
 import { MinervaAccountDB } from '../../fake-db/minerva-accounts';
 import { UserService } from '../auth/user-services';
+import { UserPlanDetailsService } from '../auth/user-plan-details.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface confirmData {
@@ -14,9 +15,11 @@ interface confirmData {
 })
 export class MinervaAccountService {
   public loggedInUser: any;
+  public userPlanDetails: any;
   public accounts: any[];
 
   constructor(private userService: UserService,
+    private userPlanDetailsService: UserPlanDetailsService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
     const accounts = new MinervaAccountDB();
@@ -24,6 +27,7 @@ export class MinervaAccountService {
 
     // logged in user
     userService.userData$.subscribe((user) => this.loggedInUser = user);
+    userPlanDetailsService.userPlanData$.subscribe((user) => this.userPlanDetails = user);
   }
 
   /* @GET MINERVA ACCOUNTS DATA FROM THE FAKE DB */
@@ -44,7 +48,7 @@ export class MinervaAccountService {
         const minerva_accounts = this.accounts.filter(el => el.account_id === this.loggedInUser._id);
 
 
-        if(minerva_accounts.length === this.loggedInUser.max_created_users) 
+        if(minerva_accounts.length === this.userPlanDetails.max_created_users) 
           alert("You already created the max number of users");
         else {
           const data = {

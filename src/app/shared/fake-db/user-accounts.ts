@@ -2,27 +2,24 @@
   The list of user details (please see user.ts for further details)
 
   Primary Key - _id,
-      _id is also a Foreign key of user.ts (account_id)
+      _id is also a Foreign key of
+        - user.ts: account_id
+        - user-billing-history.ts: account_id
+        - user-billing-info.ts: account_id
+        - user-notifications.ts: account_id
+        - user-plan-details.ts: account_id
 */
 
 export class UserAccountsDB {
   public user_accounts = [
     {
-      '_id': 'jzut3ednmnzhuzfbsggc3cny', 
-      'accountName': 'CCK',
-      'isActive': true,
-      'balance': 9999,
+      '_id': 'jzut3ednmnzhuzfbsggc3cny',  // Primary Key
+      'account_name': 'CCK',
+      'account_enabled': true,
+      'account_created': '2019-05-08T04:28:44',
+      'plan_id': '9afn467a892fvdma5kjdqlud',
       'email': 'james_trussart@minerva.com',
       'profile_image': '../assets/images/face-1.jpg',
-      'accountType': 'Enterprise',
-      'mentions': 9999999999,
-      'datasources': ['Facebook', 'Twitter', 'Web','Owned Facebook Page', 'Owned Twitter Profile', 'AirBnB', 'Waze'],
-      'algorithmCredits': 500,
-      'max_created_users': 9999999999,
-      'connector': {
-        'alerts': ['Email Alerts', 'Slack Alerts'],
-        'connectors': ['Google Data Studio', 'Tableau Connectors', 'Power BI Connectors']
-      },
       'notifications': {
         'when_user_join': false, 
         'when_data_released': false, 
@@ -35,21 +32,13 @@ export class UserAccountsDB {
       }
     },
     {
-      '_id': 'hng57zw7413edoocrc1k4dev', 
-      'accountName': 'Paprika Digital',
-      'isActive': true,
-      'balance': 2838.08,
+      '_id': 'hng57zw7413edoocrc1k4dev',  // Primary Key
+      'account_name': 'Paprika Digital',
+      'account_enabled': true,
+      'account_created': '2019-05-08T04:28:44',
+      'plan_id': 'k4qrka3cwvvlvx72hocavnnp',
       'email': 'stephan_trussart@minerva.com',
       'profile_image': '../assets/images/face-2.jpg',
-      'accountType': 'Professional',
-      'mentions': 5000,
-      'datasources': ['Facebook', 'Twitter', 'Web','Owned Facebook Page', 'Owned Twitter Profile'],
-      'algorithmCredits': 250,
-      'max_created_users': 5,
-      'connector': {
-        'alerts': ['Email Alerts', 'Slack Alerts'],
-        'connectors': ['Google Data Studio', 'Tableau Connectors', 'Power BI Connectors']
-      },
       'notifications': {
         'when_user_join': false, 
         'when_data_released': false, 
@@ -62,21 +51,13 @@ export class UserAccountsDB {
       }
     },
     {
-      '_id': 'ab2g4m77wheqy3q4u5ymik4g', 
-      'accountName': 'Digital News',
-      'isActive': true,
-      'balance': 2838.08,
+      '_id': 'ab2g4m77wheqy3q4u5ymik4g',  // Primary Key
+      'account_name': 'Digital News',
+      'account_enabled': true,
+      'account_created': '2019-05-08T04:28:44',
+      'plan_id': '7lqjc780nrmbq5ucp5p87eil',
       'email': 'elenabennett@fibrodyne.com',
       'profile_image': '../assets/images/face-3.jpg',
-      'accountType': 'Basic',
-      'mentions': 3000,
-      'datasources': ['Facebook'],
-      'algorithmCredits': 100,
-      'max_created_users': 2,
-      'connector': {
-        'alerts': ['Email Alerts'],
-        'connectors': ['Google Data Studio']
-      },
       'notifications': {
         'when_user_join': false, 
         'when_data_released': false, 

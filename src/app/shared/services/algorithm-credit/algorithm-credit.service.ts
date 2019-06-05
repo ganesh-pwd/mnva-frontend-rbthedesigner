@@ -16,6 +16,7 @@ export class AlgorithmCreditService {
   }
 
   // ******* Implement your APIs ********
+  // get list of algorithm credits
   getItems(): Observable<any> {
     const rows = this.algorithm_credit;
     return  of(rows.slice()).pipe(delay(500));

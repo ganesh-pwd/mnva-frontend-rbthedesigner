@@ -1,21 +1,4 @@
-<div class="notification__container">
-  <div class="notification__cell">
-    <div class="notification notification--red mb-1">
-      <div class="notification__icon">
-        <mat-icon class="">info_outline</mat-icon>
-      </div>
-      <div class="notification__content">
-        <h3 class="notification__type mat-h3">Info</h3>
-        <p class="notification__message">Anyone with access can view your invited visitors.</p>
-      </div>
-      <div class="notification__close">
-        <mat-icon class="">close</mat-icon>
-      </div>
-    </div>
-  </div>
-</div>
-
-<br/>
+<br />
 <div *ngIf="data?.databox_name && paginatedData">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" id="head">
@@ -67,6 +50,26 @@
 <mat-tab-group dynamicHeight [selectedIndex]="selectedTab">
     <!-- Results -->
     <mat-tab label="Results">
+      <!-- Line Chart -->
+      <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
+        <div fxFlex="100" fxFlex.gt-sm="100">
+          <mat-card class="p-0 fixed-height">
+            <mat-card-content>
+              <!-- Line Chart -->
+              <canvas 
+              baseChart
+              class="chart"
+              [datasets]="lineChartData"
+              [labels]="lineChartLabels"
+              [options]="lineChartOptions"
+              [colors]="chartColors"
+              [legend]="lineChartLegend"
+              [chartType]="lineChartType"></canvas>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      
       <!-- First Table -->
       <div [hidden]="data?.first_create">
         
@@ -79,7 +82,7 @@
               class="page-search mat-bg-gray">
                 <div>
                   <p>
-                      <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day}}
+                      <b>Mentions:</b> {{mentions?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{mentions?.mentions_per_day}}
                   </p>
                 </div>
                 <span fxFlex></span>
@@ -90,7 +93,7 @@
                   <mat-icon class="download">file_download</mat-icon><b>Download Data</b></a>
 
                   <!-- Add Suggestion -->
-                  <a class="head-mentions fz-12" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
+                  <a class="head-mentions fz-12" *ngIf="mentions?.mentions && data?.datasource !== 'Twitter'"
                   (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
                 </div>
               </div>
@@ -105,8 +108,15 @@
   
                     <div class="table-foot" >
                       <div class="mb-1">
-                        <button mat-raised-button color="primary" (click)="addNewRow()">Add Row</button>
-                        <button mat-raised-button class="mat-bg-success" (click)="saveAllData()">Save All Changes</button>
+                        <button mat-raised-button 
+                        class="mat-bg-success" 
+                        (click)="addNewRow()">
+                        Add Row</button>
+
+                        <button mat-raised-button 
+                        color="primary" 
+                        (click)="saveAllData()">Save All Changes
+                        </button>
                       </div>
                       <span fxFlex></span>
                     
@@ -189,8 +199,7 @@
             <mat-card-actions>
               <button (click)="openQueryDialog('Create Category', data)"
                 mat-raised-button
-                color="primary"
-                class="query-category">
+                class="mat-bg-success query-category">
                 Add Category
               </button>
               <span fxFlex></span>
@@ -202,7 +211,7 @@
           </mat-card>
           <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
             <span fxFlex></span>
-            <button mat-raised-button class="mb-05 mat-bg-success" 
+            <button mat-raised-button color="primary" 
             (click)="openQueryDialog('Test Category', data)" >
             Test Category
             </button>
@@ -319,7 +328,7 @@
               <button 
               (click)="openQueryDialog('Save Categories', data)" 
               mat-raised-button 
-              class="mb-05 mat-bg-gray" >
+              class="mb-05" color="primary">
               Save Categories</button>
             </div>
           </div>
@@ -336,119 +345,64 @@
           [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
           <div>
             <span fxFlex></span>
-            <h3 class="mat-h3 m-0">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
+            <button mat-raised-button class="mat-color-green" [routerLink]="['/products/mentions-credit']">Buy More</button>
           </div>
-          <div>
+          <div class="mt-1 mr-1">
             <span fxFlex></span>
-            <a class="mat-color-primary" [routerLink]="['/products/algorithm-credit']">Add credit</a>
+            <h3 class="mat-h3">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
           </div>
         </div>
       </div>
-      <br>
 
       <!-- Process Data List Options -->
       <div *ngIf="loggedInUser && data">
         <!-- Process Data List Options -->
-        <mat-card class="m-0 p-0">
-          <mat-card-header class="p-1">
-            <mat-card-title class="mat-color-primary">
-              <span>Process Your Data</span>
-            </mat-card-title>
-            <mat-card-subtitle>
-              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
-            </mat-card-subtitle>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <br>
-          <mat-card-content>
-            <table id="algorithm-table">
-              <thead>
-
-                <tr class="mat-header-row">
-                  <th class="mat-header-cell">On/Off</th>
-                  <th class="mat-header-cell">Algorithm Name</th>
-                  <th class="mat-header-cell">Description </th>
-                  <th class="mat-header-cell">Cost</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Sentiment -->
-                <tr class="mat-row">
-                  <td class="mat-cell">
-                    <mat-slide-toggle color="primary" class="" 
-                        [checked]="sentiment"
-                        (change)="clickSlideToggle('sentiment')">
-                    </mat-slide-toggle><br>
-                    <p>Turn on or <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'sentiment')"> Apply only to unprocessed data
-                    </a></p>
-                  </td>
-                  <td class="mat-cell"><strong class="algorithm-header">Sentiment</strong></td>
-                  <td class="mat-cell">
+        <div class="product-container list-view"  
+        [@animate]="{value:'*', params:{ y:'200px', delay:'700ms' }}">
+          <!-- Algorithm Box -->
+          <div class="product-wrap" *ngFor="let algorithms of databoxAlgorithm">
+            <div class="product-inner default-bg">
+              <div class="relative p-1">
+                <div class="allign-middle" >
+                  <mat-slide-toggle color="primary" class="" 
+                    [checked]="algorithms.display_text === 'Sentiment' ? sentiment 
+                    : algorithms.display_text === 'Topic Recognition' ? topicRecognition
+                    : algorithms.display_text === 'Entity Recognition'  ? entityRecognition
+                    : algorithms.display_text === 'Gender Author' ? genderAuthor : ''"
+                    
+                    (change)="clickSlideToggle({
+                      '_id': algorithms._id, 
+                      'algorithm': algorithms.display_text
+                    })">
+                  </mat-slide-toggle><br>
+                </div>
+              </div>  
+              <div class="info-wrap p-1">
+                <div class="main-info main-info-prcs-data mb-0">
+                 <mat-card-header>
+                     <mat-card-title class="mat-color-primary">
+                       <span class="algorithm-header">{{algorithms.display_text}}</span>
+                     </mat-card-title>
+                   </mat-card-header>
                     <p style="text-align: justify;" class="mb-0">
-                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p>
-                  </td>
-                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-                </tr>
-                <!-- Topic Recognition -->
-                <tr class="mat-row">
-                  <td class="mat-cell">
-                    <mat-slide-toggle color="primary" class="" 
-                      [checked]="topicRecognition"
-                      (change)="clickSlideToggle('topicRecognition')">
-                    </mat-slide-toggle><br>
-                    <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition, 'topicRecognition')"> Apply only to unprocessed data
-                    </a></p>
-                  </td>
-                  <td class="mat-cell"><strong class="algorithm-header">Topic Recognition</strong></td>
-                  <td class="mat-cell">
-                    <p style="text-align: justify;" class="mb-0">
-                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p>
-                  </td>
-                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-                </tr>
-                <!-- Gender Author -->
-                <tr class="mat-row">
-                  <td class="mat-cell">
-                    <mat-slide-toggle color="primary" class="" 
-                      [checked]="genderAuthor"
-                      (change)="clickSlideToggle('genderAuthor')">
-                    </mat-slide-toggle><br>
-                    <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor, 'genderAuthor')"> apply only to unprocessed data
-                    </a></p>
-                  </td>
-                  <td class="mat-cell"><strong class="algorithm-header">Gender Recognition</strong></td>
-                  <td class="mat-cell">
-                    <p style="text-align: justify;" class="mb-0">
-                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p>
-                  </td>
-                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-                </tr>
-                <!-- Entity Recognition -->
-                <tr class="mat-row">
-                  <td class="mat-cell">
-                    <mat-slide-toggle color="primary" class="" 
-                      [checked]="entityRecognition"
-                      (change)="clickSlideToggle('entityRecognition')">
-                    </mat-slide-toggle><br>
-                    <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition, 'entityRecognition')"> Apply only to unprocessed data
-                    </a></p>
-                  </td>
-                  <td class="mat-cell"><strong class="algorithm-header">Entity Recognition</strong></td>
-                  <td class="mat-cell">
-                    <p style="text-align: justify;" class="mb-0">
-                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p>
-                  </td>
-                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-card-content>
-        </mat-card>
+                      {{algorithms.description}}
+                    </p><br>
+                    <mat-divider></mat-divider><br>
+                   <div>
+                      <div>
+                        <h2 class="mat-h4 mb-0">Cost / Mention: ${{algorithms?.price.sale}}</h2>
+                      </div>
+                      <span fxFlex></span>
+                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'algorithms.display_text')"> Apply only to unprocessed data
+                      </a>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+  
       <!-- FAQ's -->
       <div fxLayout="row" fxLayoutWrap="wrap" class="faq" 
         *ngIf="data?.databox_name && paginatedData"

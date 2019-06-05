@@ -4,6 +4,83 @@ $gutter: 1rem !default;
 $transitionTiming: cubic-bezier(.35,0,.25,1);
 $sidebarTrnTime: .3s;
 
+// Colors
+$mat-primary: (
+    50 : #e3f6fa,
+    100 : #bae9f3,
+    200 : #8cdaeb,
+    300 : #5ecbe3,
+    400 : #3cbfdd,
+    500 : #19b4d7,
+    600 : #16add3,
+    700 : #12a4cd,
+    800 : #0e9cc7,
+    900 : #088cbe,
+    A100 : #e8f8ff,
+    A200 : #b5e9ff,
+    A400 : #82d9ff,
+    A700 : #69d2ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-accent: (
+    50 : #fff1e1,
+    100 : #fedcb3,
+    200 : #fdc580,
+    300 : #fcad4d,
+    400 : #fc9c27,
+    500 : #fb8a01,
+    600 : #fa8201,
+    700 : #fa7701,
+    800 : #f96d01,
+    900 : #f85a00,
+    A100 : #ffffff,
+    A200 : #fff1eb,
+    A400 : #ffceb8,
+    A700 : #ffbc9f,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+$minerva-primary: mat-palette($mat-primary);
+$minerva-primary-dark: darken( map-get($mat-primary, 500), 8% );
+$minerva-accent:  mat-palette($mat-accent);
+$minerva-gray: #3b4650;
+$minerva-gray-light: #ebebeb;
+$minerva-green: #37cc71;
+$minerva-orange: #fb8a01;
+$minerva-orange-dark: #ff7105;
+$minerva-yellow: #ffe082;
+$minerva-red: #e74c3c;
+
 // Widths
 $sidebar-width: 15rem !default;
 $compact-sidebar-width: 48px !default;

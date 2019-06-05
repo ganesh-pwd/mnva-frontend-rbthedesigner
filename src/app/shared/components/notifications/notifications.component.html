@@ -1,5 +1,5 @@
 <div class="text-center mat-bg-primary pt-1 pb-1">
-  <h4 class="m-0 mat-h4">Notifications</h4>
+  <h6 class="m-0">Notifications</h6>
 </div>
 <mat-nav-list class="notification-list" role="list">
   <!-- Notification item -->
@@ -9,7 +9,7 @@
   role="listitem" 
   routerLinkActive="open">
       <mat-icon [color]="n.color" class="notific-icon">{{n.icon}}</mat-icon>
-      <a [routerLink]="[n.route || '/dashboard']">
+      <a [routerLink]="[n.route]">
         <div class="mat-list-text">
           <h4 class="mat-h4 message">{{n.message}}</h4>
           <small class="time text-muted">{{n.time}}</small>

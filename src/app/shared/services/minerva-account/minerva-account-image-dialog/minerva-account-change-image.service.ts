@@ -20,8 +20,8 @@ export class MinervaAccountChangeService {
     userService.userData$.subscribe((user) => {
       this.loggedInUser = user;
       if(user) this.setImage(user.profile_image);
-    });
-    
+      console.log(user.profile_image)
+    });   
   }
 
   setImage(image) {

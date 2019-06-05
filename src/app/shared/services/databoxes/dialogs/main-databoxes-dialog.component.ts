@@ -124,6 +124,8 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
 
   // build databox query
   testQuery() {
+    console.log(this.data.details)
+
     this.reqSubs = this.databoxesTestQueryService
     .testQueryDatabox(this.data.details)
     .subscribe((result) => {

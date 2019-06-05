@@ -47,7 +47,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
         this.userImage = sessionStorage.getItem('photoUrl');
       }
       userService.userData$.subscribe((user) => {
-        this.selected = user.accountName;
+        this.selected = user.account_name;
         this.loggedInUser = user;
         // set selected account
         this.new_value = this.selected;
@@ -85,8 +85,8 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   saveChanges(){
     const body = {
       '_id': this.loggedInUser._id,
-      'accountName': this.new_value,
-      'old_accountName': this.selected,
+      'account_name': this.new_value,
+      'old_account_name': this.selected,
       'when_user_join': this.when_user_join,
       'when_data_released': this.when_data_released,
       'when_invoice_generated': this.when_invoice_generated,
@@ -97,6 +97,6 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       'when_purchase_success': this.when_purchase_success
     }
 
-    this.userService.setNotifications(body).subscribe(result => console.log(result));
+    this.userService.setNotificationSettings(body).subscribe(result => console.log(result));
   }
 }

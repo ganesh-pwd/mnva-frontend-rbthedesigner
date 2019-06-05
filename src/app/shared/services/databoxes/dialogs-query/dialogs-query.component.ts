@@ -92,9 +92,9 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   // build queryForm
   queryFormGroup() {
     this.queryForm = this.formBuilder.group({
-      'advance-query': [null],
-      'category-name': [null, Validators.compose([Validators.required])],
-      'category-type': ['Category']
+      'advance_query': [null],
+      'category_name': [null, Validators.compose([Validators.required])],
+      'category_type': ['Category']
     });
   }
 
@@ -102,21 +102,21 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   setValueOfForm(databox, databox_category) {
     // set form value based on databox item details
     this.queryForm.setValue({
-      'advance-query': null,
-      'category-name': null,
-      'category-type': 'Category'
+      'advance_query': null,
+      'category_name': null,
+      'category_type': 'Category'
     });
   }
 
   setQueryValue(category){
-    this.requiredKeywords = [...category['required-keywords']];
-    this.optionalKeywords = [...category['optional-keywords']];
-    this.excludeKeywords  = [...category['excluded-keywords']];
+    this.requiredKeywords = [...category['required_keywords']];
+    this.optionalKeywords = [...category['optional_keywords']];
+    this.excludeKeywords  = [...category['excluded_keywords']];
 
     this.queryForm.setValue({
-      'advance-query' : category['query'] || category['expression'],
-      'category-name' : category['name'] || null,
-      'category-type' : category['type'] || 'Category'
+      'advance_query' : category['query'] || category['expression'],
+      'category_name' : category['name'] || null,
+      'category_type' : category['type'] || 'Category'
     });
   }
 
@@ -126,14 +126,14 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
     // if form is invalid and query type is basic
     if((this.requiredKeywords.length === 0 && this.showQuery === 'basic') 
-      || (!this.queryForm.get('category-name').value && this.showQuery === 'basic')){
+      || (!this.queryForm.get('category_name').value && this.showQuery === 'basic')){
       this.snackBar.open("You need to add a required keywords", 'close');
       valid = false;
     }
 
     // if form is invalid and query type is advance
-    if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance') 
-      || (!this.queryForm.get('category-name').value && this.showQuery === 'advance')){
+    if((!this.queryForm.get('advance_query').value && this.showQuery === 'advance') 
+      || (!this.queryForm.get('category_name').value && this.showQuery === 'advance')){
       this.snackBar.open("You need to add an advance query", 'close');
       valid = false;
     }
@@ -143,13 +143,13 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       this.snackBar.dismiss();
 
       let body = {
-        'required-keywords': this.showQuery === 'basic' ? this.requiredKeywords : [],
-        'optional-keywords': this.showQuery === 'basic' ? this.optionalKeywords : [],
-        'excluded-keywords': this.showQuery === 'basic' ? this.excludeKeywords : [],
-        'query': this.showQuery === 'advance' ? this.queryForm.get('advance-query').value : null,
-        'query-type': this.showQuery,
-        'name': this.queryForm.get('category-name').value,
-        'type': this.queryForm.get('category-type').value
+        'required_keywords': this.showQuery === 'basic' ? this.requiredKeywords : [],
+        'optional_keywords': this.showQuery === 'basic' ? this.optionalKeywords : [],
+        'excluded_keywords': this.showQuery === 'basic' ? this.excludeKeywords : [],
+        'query': this.showQuery === 'advance' ? this.queryForm.get('advance_query').value : null,
+        'query_type': this.showQuery,
+        'name': this.queryForm.get('category_name').value,
+        'type': this.queryForm.get('category_type').value
       }
 
       // close dialog
@@ -214,14 +214,14 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
 
     // if form is invalid and query type is basic
     if((this.requiredKeywords.length === 0 && this.showQuery === 'basic') 
-      || (!this.queryForm.get('category-name').value && this.showQuery === 'basic')){
+      || (!this.queryForm.get('category_name').value && this.showQuery === 'basic')){
       this.snackBar.open("You need to add a required keywords", 'close');
       valid = false;
     }
 
     // if form is invalid and query type is advance
-    if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance') 
-      || (!this.queryForm.get('category-name').value && this.showQuery === 'advance')){
+    if((!this.queryForm.get('advance_query').value && this.showQuery === 'advance') 
+      || (!this.queryForm.get('category_name').value && this.showQuery === 'advance')){
       this.snackBar.open("You need to add an advance query", 'close');
       valid = false;
     }
@@ -230,13 +230,13 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
       this.snackBar.dismiss();
 
       let body = {
-        'required-keywords': this.showQuery === 'basic' ? this.requiredKeywords : [],
-        'optional-keywords': this.showQuery === 'basic' ? this.optionalKeywords : [],
-        'excluded-keywords': this.showQuery === 'basic' ? this.excludeKeywords : [],
-        'query': this.showQuery === 'advance' ? this.queryForm.get('advance-query').value : null,
-        'name': this.queryForm.get('category-name').value,
-        'type': this.queryForm.get('category-type').value,
-        'query-type': this.showQuery,
+        'required_keywords': this.showQuery === 'basic' ? this.requiredKeywords : [],
+        'optional_keywords': this.showQuery === 'basic' ? this.optionalKeywords : [],
+        'excluded_keywords': this.showQuery === 'basic' ? this.excludeKeywords : [],
+        'query': this.showQuery === 'advance' ? this.queryForm.get('advance_query').value : null,
+        'name': this.queryForm.get('category_name').value,
+        'type': this.queryForm.get('category_type').value,
+        'query_type': this.showQuery,
       }
 
       // close dialog
@@ -251,7 +251,6 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
         this.databoxCategoryService.setCategoryItem(result);
          
         if(!sessionStorage.getItem('databoxCategory')){
-          
           this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })
           .then(() => sessionStorage.setItem('selectedTabDatabox', '1'))
           .then(() => sessionStorage.removeItem('databox_updated'))

@@ -3,11 +3,11 @@
     <div mat-dialog-content>
         <form [formGroup]="queryForm"  *ngIf="data.title !== 'Delete Category'">
             <mat-form-field class="full-width">
-                <input matInput placeholder="Category Name" formControlName="category-name">
+                <input matInput placeholder="Category Name" formControlName="category_name">
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <mat-select placeholder="Choose a Type" formControlName="category-type">
+                <mat-select placeholder="Choose a Type" formControlName="category_type">
                     <mat-option value="Category" >Category</mat-option>
                     <mat-option value="Sub Category">Sub Category</mat-option>
                 </mat-select>
@@ -153,12 +153,12 @@
                                 <mat-card-content class="p-0">
                                     <mat-form-field class="full-width">
                                         <mat-placeholder class="placeholder" 
-                                        *ngIf="queryForm.controls['advance-query'].value === null
-                                        || queryForm.controls['advance-query'].value === ''">
+                                        *ngIf="queryForm.controls['advance_query'].value === null
+                                        || queryForm.controls['advance_query'].value === ''">
                                           {{editorDataAdv}}
                                         </mat-placeholder>
                                         <textarea matInput rows="10" cols="80" 
-                                        formControlName="advance-query"></textarea>
+                                        formControlName="advance_query"></textarea>
                                     </mat-form-field>
                                 </mat-card-content>
                             </div>

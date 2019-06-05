@@ -7,7 +7,7 @@
 export class MinervaAccountDB {
   public minerva_accounts = [
     {
-      '_id': '5a7b73f76bed15c94d1e46da',
+      '_id': '5a7b73f76bed15c94d1e46da',  // Primary Key
       'account_id': 'jzut3ednmnzhuzfbsggc3cny', // Foreign Key
       'index': 0,
       'status': 'Active',
@@ -24,7 +24,7 @@ export class MinervaAccountDB {
       'bd': '2015-02-08T04:28:44'
     },
     {
-      '_id': '5a7b73f7f79f4250b96a355b',
+      '_id': '5a7b73f7f79f4250b96a355b',  // Primary Key
       'account_id': 'jzut3ednmnzhuzfbsggc3cny', // Foreign Key
       'index': 1,
       'status': 'Active',
@@ -41,7 +41,7 @@ export class MinervaAccountDB {
       'bd': '2017-11-15T09:04:57'
     },
     {
-      '_id': '5a7b73f78b64a02a67204d6c',
+      '_id': '5a7b73f78b64a02a67204d6c',  // Primary Key
       'account_id': 'jzut3ednmnzhuzfbsggc3cny', // Foreign Key
       'index': 2,
       'status': 'Active',
@@ -58,7 +58,7 @@ export class MinervaAccountDB {
       'bd': '2017-10-15T12:55:51'
     },
     {
-      '_id': '5a7b73f7572e59b231149b9d',
+      '_id': '5a7b73f7572e59b231149b9d',  // Primary Key
       'account_id': 'hng57zw7413edoocrc1k4dev', // Foreign Key
       'index': 3,
       'status': 'Active',
@@ -75,7 +75,7 @@ export class MinervaAccountDB {
       'bd': '2017-11-19T03:38:30'
     },
     {
-      '_id': '5a7b73f70f9d074552e1309e',
+      '_id': '5a7b73f70f9d074552e1309e',  // Primary Key
       'account_id': 'hng57zw7413edoocrc1k4dev', // Foreign Key
       'index': 4,
       'status': 'Active',
@@ -92,7 +92,7 @@ export class MinervaAccountDB {
       'bd': '2014-05-28T01:33:58'
     },
     {
-      '_id': '5a7b73f78988bd6e9265047f',
+      '_id': '5a7b73f78988bd6e9265047f',  // Primary Key
       'account_id': 'dhnf3sadc29rmc0dgvin1jcs', // Foreign Key
       'index': 5,
       'status': 'Active',

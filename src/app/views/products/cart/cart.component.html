@@ -29,21 +29,8 @@
       <tbody>
         <tr *ngFor="let item of cart">
           <td><button mat-icon-button color="warn" (click)="removeProduct(item)"><mat-icon>close</mat-icon></button> </td>
-          <td><span style="cursor: pointer" [routerLink]="['/products/advanced-templates', item.product._id]">{{item.product.name}}</span></td>
+          <td><span>{{item.product.name}}</span></td>
           <td>
-
-            <!--
-            <span *ngIf="checkIfAccountType() && item.product.category === 'Account Type' && billYearly">
-              ${{item.product.price.sale * 12 * 0.10}}
-            </span>
-
-            <span *ngIf="checkIfAccountType() && item.product.category === 'Account Type' && !billYearly">
-              ${{item.product.price.sale}}
-            </span>
-
-            <span *ngIf="item.product.category !== 'Account Type'">
-              ${{item.product.price.sale}}
-            </span>-->
 
             ${{item.product.price.sale}}
 

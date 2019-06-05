@@ -1,19 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { egretAnimations } from '../../../shared/animations/egret-animations';
-import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
-import { DataboxesQueryService } from '../../../shared/services/databoxes/databox-item-query.service';
-import { CountryService } from '../../../shared/services/countries/country.service';
-import { HistoricalService } from '../../../shared/services/historical/historical.service';
-import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatSnackBar, MatChipInputEvent } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { DatasourceService } from '../../../shared/services/datasource/datasource.service';
-import { DataboxMentionsDialogService } from '../../../shared/services/databoxes/dialogs-mentions/dialogs-mentions.services';
+import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { UserService } from '../../../shared/services/auth/user-services';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatSnackBar, MatChipInputEvent } from '@angular/material';
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
+
+import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
+import { DataboxesQueryService } from '../../../shared/services/databoxes/databox-item-query.service';
+import { DataboxItemMentionService } from '../../../shared/services/databoxes/databox-item-mention.service';
+import { DataboxMentionsDialogService } from '../../../shared/services/databoxes/dialogs-mentions/dialogs-mentions.services';
+
+import { CountryService } from '../../../shared/services/countries/country.service';
+import { HistoricalService } from '../../../shared/services/historical/historical.service';
+import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
+import { DatasourceService } from '../../../shared/services/datasource/datasource.service';
 
 @Component({
   selector: 'app-databox-item-settings',
@@ -49,6 +53,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public showSimpleExample: boolean = true;
   public showAdvancedExample: boolean = true;
   public loggedInUser;
+  public userPlanDetails;
+  public userPlanDatasource;
   public editorData = `Type your desired keywords`;
   public editorDataAdv = `Please type your query`;
 
@@ -121,16 +127,31 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     private countryService: CountryService,
     private databoxesService: DataboxesService,
     private databoxQueryService: DataboxesQueryService,
+    private databoxItemMentionService: DataboxItemMentionService,
     private databoxMentionsDialogService: DataboxMentionsDialogService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private userService: UserService,
+    private userPlanDetailsService: UserPlanDetailsService,
     private datasourceService: DatasourceService,
     private historicalService: HistoricalService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService,
     public snackBar: MatSnackBar
   ) {
-    userService.userData$.subscribe((user) => this.loggedInUser = user);
+    // get user data
+    userService.userData$
+    .subscribe((user) => 
+      this.loggedInUser = user);
+
+    // get user plan details
+    userPlanDetailsService.userPlanData$
+    .subscribe((user) => 
+      this.userPlanDetails = user);
+
+    // get user datasource
+    userService.planDatasourceData$
+    .subscribe((user) => 
+      this.userPlanDatasource = user);
 
     // check if user is creating databox or editing query
     const urlSegment = this.router.url.split('/')[2];
@@ -165,7 +186,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       queryFormGroup() {
         this.queryForm = this.formBuilder.group({
           'datasource': [null, Validators.compose([Validators.required])],
-          'advance-query': [null],
+          'advance_query': [null],
           'include_comments': [false],
           'specify_max_number_result': [false],
           'monitor_only_news_media': [false],
@@ -190,7 +211,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         const countries = [];
 
         for(let i = 0; i < active_country.length; i++)
-          countries.push(active_country[i].textContent)
+          countries.push(active_country[i].textContent);
 
         // initialize inputs
         const body = {
@@ -199,11 +220,11 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'datasource': this.queryForm.get('datasource').value,
           'country': countries,
           'historical': historical[0].textContent.trim(),
-          'query-type': this.showQuery,
-          'required-keywords': this.requiredKeywords,
-          'optional-keywords': this.optionalKeywords,
-          'excluded-keywords': this.excludeKeywords,
-          'advance-query': this.queryForm.get('advance-query').value,
+          'query_type': this.showQuery,
+          'required_keywords': this.requiredKeywords,
+          'optional_keywords': this.optionalKeywords,
+          'excluded_keywords': this.excludeKeywords,
+          'advance_query': this.queryForm.get('advance_query').value,
           'include_comments': this.queryForm.get('include_comments').value,
           'specify_max_number_result': this.queryForm.get('specify_max_number_result').value,
           'monitor_only_news_media': this.queryForm.get('monitor_only_news_media').value,
@@ -212,6 +233,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'max_number_result': this.queryForm.get('max_number_result').value,
           'exclude_specific_pages': this.queryForm.get('exclude_specific_pages').value,
           'excluded_pages': this.queryForm.get('excluded_pages').value,
+          'mentions': 1200,
+          'mentions_per_day': 7.5
         };
 
         return body;
@@ -220,10 +243,10 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
       // set initial value of query form
       setValueOfForm() {
-        // data from the currently selected databox
-        const data = {
+        // set form value based on databox item details
+        this.queryForm.setValue({
           'datasource': this.data ? this.data.datasource : this.selectedDatasource,
-          'country': this.data ? this.data.location : this.selectedCountry,
+          'advance_query': '',
           'include_comments': this.data ? this.data.include_comments : false,
           'specify_max_number_result': this.data ? this.data.specify_max_number_result : false,
           'monitor_only_news_media': this.data ? this.data.monitor_only_news_media : false,
@@ -232,23 +255,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           'facebook_page_id': this.data ? this.data.facebook_page_id : '',
           'max_number_result': this.data ? this.data.max_number_result : 1,
           'excluded_pages': this.data ? this.data.excluded_pages : ''
-        };
-
-        // set form value based on databox item details
-        this.queryForm.setValue({
-          'datasource': data.datasource,
-          'advance-query': '',
-          'include_comments': data.include_comments,
-          'specify_max_number_result': data.specify_max_number_result,
-          'monitor_only_news_media': data.monitor_only_news_media,
-          'monitor_specific_page': data.monitor_specific_page,
-          'exclude_specific_pages': data.exclude_specific_pages,
-          'facebook_page_id': data.facebook_page_id,
-          'max_number_result': data.max_number_result,
-          'excluded_pages': data.excluded_pages 
         });
-
-        console.log(this.data)
 
         this.changes = false;
       }
@@ -262,22 +269,22 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
 
         // from fake db
         if(!check_test_query_create && this.dataQuery){
-          this.queryForm.controls['advance-query'].setValue(this.dataQuery['query'] || this.dataQuery['expression']);
-          this.requiredKeywords = [...this.dataQuery['required-keywords']];
-          this.optionalKeywords = [...this.dataQuery['optional-keywords']];
-          this.excludeKeywords  = [...this.dataQuery['excluded-keywords']];
+          this.queryForm.controls['advance_query'].setValue(this.dataQuery['query'] || this.dataQuery['expression']);
+          this.requiredKeywords = [...this.dataQuery['required_keywords']];
+          this.optionalKeywords = [...this.dataQuery['optional_keywords']];
+          this.excludeKeywords  = [...this.dataQuery['excluded_keywords']];
 
-          this.showQuery = this.dataQuery['query-type'];
+          this.showQuery = this.dataQuery['query_type'];
         }
 
         // from test query temporary session storage
         if(check_test_query_create){
-          this.queryForm.controls['advance-query'].setValue(test_query_data['query'] || this.dataQuery['expression']);
-          this.requiredKeywords = [...test_query_data['required-keywords']];
-          this.optionalKeywords = [...test_query_data['optional-keywords']];
-          this.excludeKeywords  = [...test_query_data['excluded-keywords']];
+          this.queryForm.controls['advance_query'].setValue(test_query_data['query'] || test_query_data['expression']);
+          this.requiredKeywords = [...test_query_data['required_keywords']];
+          this.optionalKeywords = [...test_query_data['optional_keywords']];
+          this.excludeKeywords  = [...test_query_data['excluded_keywords']];
 
-          this.showQuery = test_query_data['query-type'];
+          this.showQuery = test_query_data['query_type'];
         }
       }
 
@@ -561,10 +568,19 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
         this.databoxSingleReq = this.datasourceService
           .getDatasource()
           .subscribe(data => {
+            console.log(data, this.userPlanDatasource)
+
             this.datasource = data
-              .filter(el => this.loggedInUser.datasources.indexOf(el.name) < 0)
+              .filter(el => this.userPlanDatasource.datasources.indexOf(el.name) < 0)
               .map(el => el.name);
+
+              console.log(this.datasource)
           });
+      }
+
+      // get databox mention
+      getDataboxMention(id){
+        return this.databoxItemMentionService.getSingleItem(id);
       }
 
 
@@ -588,13 +604,28 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       checkIfInputIsValid(){
         let valid = true;
 
+        // set selected multiple countries
+        const country = document.getElementById('countries');
+        const active_country = country.getElementsByClassName('query-active');
+        const countries = [];
+
+        for(let i = 0; i < active_country.length; i++)
+          countries.push(active_country[i].textContent);
+
+        if (countries.length <= 0) {
+          this.snackBar.open("You need to add atleast one Country", 'close');
+          setTimeout(() => this.snackBar.dismiss(), 3000);
+          valid = false;
+        }
+
         if ((this.requiredKeywords.length === 0 && this.showQuery === 'basic')) {
           this.snackBar.open("You need to add the required keywords", 'close');
           setTimeout(() => this.snackBar.dismiss(), 3000);
           valid = false;
         }
 
-        if((!this.queryForm.get('advance-query').value && this.showQuery === 'advance')){
+        if((!this.queryForm.get('advance_query').value && this.showQuery === 'advance') 
+          || this.showQuery === 'advance' &&  countries.length <= 0){
           this.snackBar.open("You need to add an advance query", 'close');
           setTimeout(() => this.snackBar.dismiss(), 3000);
           valid = false;
