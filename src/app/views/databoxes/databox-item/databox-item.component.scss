@@ -14,9 +14,12 @@ mat-card-actions {
   padding: 2% 8px;
 }
 
-.minerva-logo {
-  width: 250px;
+.databox-details-below{
+  padding: 0 4%;
+}
 
+.connector-logo{
+  width: 80px;
   margin-top: 2%;
 }
 
@@ -24,21 +27,36 @@ h5 {
   padding-top: 2%;
 }
 
+.mat-elevation-z8{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
 .bottom-data {
   margin-left: 1%;
   margin-right: 1%;
 
-  form {
+  h2, h3, form{
     margin-top: 2%;
+    margin-left: 5%;
   }
-
-  button {
-    
-  }
-
   .download-csv {
     margin-left: 1% !important;
   }
+  button{
+    margin-left: 5%;
+  }
+}
+
+.title-header{
+  top: 10%;
+  margin-left: 30px;
+  font-size: 18px;
+  position: absolute;
+}
+
+.icon-header{
+  font-size: 35px;
 }
 
 .mat-cell {

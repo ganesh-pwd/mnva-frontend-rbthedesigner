@@ -11,9 +11,9 @@
               <mat-card-content>
                 <div class="text-center pb-1">
                   <img src="assets/images/logo_minerva.svg" class="mb-05" id="logo">
-                  <h4 class="text-muted m-0">Get started by signing up</h4>
+                  <h4 class="text-muted m-0">Start Your 3 Day Free Trial</h4>
                   <p class="copyright text-muted text-center">
-                    Track, analyze, and react to everything said about your brand online.
+                    Track, analyze, and react to everything said about your brand online. No credit card required.
                   </p>
                 </div>
                 <form>
@@ -79,19 +79,16 @@
                         class="form-error-msg"> You must agree to the terms and conditions </small>
                   </div>
 
-                  <button (click)="signup()" mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="signupForm.invalid">Sign up</button>
+                  <button (click)="signup()" mat-raised-button class="mat-primary full-width mb-1" [disabled]="signupForm.invalid">Sign up</button>
 
                   <div class="text-center">
-                    <p class="mat-primary text-center full-width">Or</p>
+                    <p class="text-center full-width">Or</p>
                   </div>
                   <button (click)="socialSignIn('facebook')" mat-raised-button class=" facebook full-width mb-1 signin-btn">Log In With Facebook</button>
 
                   <button (click)="socialSignIn('google')" mat-raised-button class="google full-width mb-1 signin-btn">Log In With Google</button>
 
-                  <div class="text-center">
-                    Already Have an Account?
-                    <a [routerLink]="'/sessions/signin'" class="mat-primary text-center full-width">Login here</a><br>
-                  </div>
+                  <p class="text-center full-width">Already Have an Account? <a [routerLink]="'/sessions/signin'" class="mat-color-primary">Login here</a></p>
                 </form>
               </mat-card-content>
             </mat-card>

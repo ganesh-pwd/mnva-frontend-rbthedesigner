@@ -33,9 +33,10 @@
   </div>  
   <div fxFlex="100" fxFlex.gt-xs="33">
     <div class="product-search-wrap">
-      <form>
-        <input type="text" name="searchProduct" placeholder="Search databoxes, datasource or query" class="product-search default-bg full-width" [(ngModel)]="databoxSearch">
-      </form>
+        <form>
+          <mat-icon>search</mat-icon>
+          <input type="text" name="searchProduct" placeholder="Search databoxes, datasource or query" class="product-search default-bg" [(ngModel)]="databoxSearch">
+        </form>
     </div>
   </div>  
 </div>
@@ -66,67 +67,47 @@
         </button>
 
       	<mat-menu #userMenu="matMenu">
-      	    <button mat-menu-item routerLink="/databoxes/edit-query/{{data._id}}">Edit Query</button>
-            <button mat-menu-item routerLink="/databoxes/settings/connect/{{data?._id}}">Connect Your Data</button>
+      	    <button mat-menu-item routerLink="/databoxes/edit-databox/{{data._id}}">Edit Databox</button>
+            <button mat-menu-item routerLink="/databoxes/settings/connect/{{data?._id}}">Connect Your Databox</button>
             <button mat-menu-item (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true, data)">Delete Databox</button>
       	</mat-menu>
 
         <mat-menu #userMenu2="matMenu">
             <button mat-menu-item routerLink="/databoxes/create-databox/{{data._id}}">
-            Create Databox</button>
+            Edit Databox</button>
             <button mat-menu-item (click)="modifyDataboxDialog('Delete Databox', 'Input the databox name for confirmation.', true, data)">Delete Databox</button>
         </mat-menu>
       </mat-card-header>
 
       <mat-divider></mat-divider>
 
-      <mat-card-content  class="p-0 m-0">
-        <div (click)="navigateToDatabox(data._id, data.first_create, data.status)" class="m-0 p-1">
-            <div class="mt-1">
-              <div>
-                <p>
-                    {{data?.mentions}} mentions&nbsp;&nbsp;|&nbsp;&nbsp;{{data?.mentions_per_day}} per day
-                </p>
-              </div>
+      <mat-card-content (click)="navigateToDatabox(data._id, data.first_create, data.status)" class="p-0 m-0">
+        <div class="m-0 p-1">
+            <div>
+              <p class="m-0">
+                  {{data?.mentions}} results&nbsp;&nbsp;|&nbsp;&nbsp;{{data?.mentions_per_day}} per day
+              </p>
             </div>
-            <br>
-            <br>
         </div>
 
         <div fxLayout="row" fxLayoutWrap="wrap">
-          <div class="gallery-icons text-center  min-ht" fxFlex="100">
-            
+          <div class="gallery-icons min-ht m-0 pl-1 pr-1 pb-1" fxFlex="100">
             <div *ngIf="data?.status !== 'Draft'">
               <!-- Algorithm Connectors -->
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'sentiment')">
-              <mat-icon class="icon-header">add</mat-icon></button>
-
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'topicRecognition')">
-              <mat-icon class="icon-header">airplanemode_active</mat-icon></button>
-
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'genderAuthor')"
-              >
-              <mat-icon class="icon-header">people</mat-icon></button>
-
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'entityRecognition')">
-              <mat-icon class="icon-header">location_city</mat-icon></button>
-
+              <strong class="m-0">Active Algorithms:</strong>
+              <ul class="m-0">
+                <li *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'sentiment')">Sentiment</li>
+                <li *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'topicRecognition')">Topic Recognition</li>
+                <li *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'genderAuthor')">Gender Recognition</li>
+                <li *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'entityRecognition')">Entity Recognition</li>
+              </ul>
               <!-- Data Connectors -->
-              <button mat-icon-button 
-              *ngIf="checkDataConnectors(filterConnector(data?._id), 'email')">
-              <i><img src="/assets/images/email.png"></i></button>
-
-              <button mat-icon-button 
-              *ngIf="checkDataConnectors(filterConnector(data?._id), 'slack')">
-              <i><img src="/assets/images/slack.png"></i></button>
-
-              <button mat-icon-button 
-              *ngIf="checkDataConnectors(filterConnector(data?._id), 'appleTV')">
-              <i><img src="/assets/images/apple_tv.png"></i></button>
+              <strong class="m-0">Active Connectors:</strong>
+              <ul class="m-0">
+                <li *ngIf="checkDataConnectors(filterConnector(data?._id), 'email')">Email Alerts</li>
+                <li *ngIf="checkDataConnectors(filterConnector(data?._id), 'slack')">Slack</li>
+                <li *ngIf="checkDataConnectors(filterConnector(data?._id), 'appleTV')">Apple Tv</li>
+              </ul>
             </div>
           </div>
         </div>

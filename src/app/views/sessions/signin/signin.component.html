@@ -11,7 +11,7 @@
               <mat-card-content>
                 <div class="text-center pb-1">
                   <img src="assets/images/logo_minerva.svg" class="mb-05" id="logo">
-                  <h3 class="text-muted m-0">Sign in to your account</h3>
+                  <h3 class="text-muted m-0">Welcome Back</h3>
                 </div>
                 <!-- <form [formGroup]="signinForm" (ngSubmit)="signin()"> -->
                 <form [formGroup]="signinForm">
@@ -54,17 +54,15 @@
                       </small>
                   </div>
 
-                  <button (click)="signin()" mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="!signinForm.valid">Sign in</button>
+                  <button (click)="signin()" mat-raised-button class="mat-primary full-width mb-1" [disabled]="!signinForm.valid">Sign in</button>
                   <div class="text-center"><br>
-                    <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
+                    <p class="text-center full-width"><a [routerLink]="'/sessions/forgot-password'" class="">Forgot password?</a></p>
                     <span fxFlex></span>
-                    <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Create a new account</a>
+                    <p class="text-center full-width">Don't have an account? <br><a [routerLink]="'/sessions/signup'" class="mat-color-primary text-center full-width">Start your 3-Days Free Trial</a></p>
                   </div>
-                  <br>
                   <button (click)="socialSignIn('facebook')" mat-raised-button class=" facebook full-width mb-1 signin-btn">Log In With Facebook</button>
 
                   <button (click)="socialSignIn('google')" mat-raised-button class="google full-width mb-1 signin-btn">Log In With Google</button>
-
                 </form>
               </mat-card-content>
             </mat-card>
