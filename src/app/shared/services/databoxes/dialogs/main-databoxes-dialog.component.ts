@@ -185,7 +185,7 @@ export class MainDataboxDialogComponent implements OnInit, OnDestroy {
   cancelChanges() {
     sessionStorage.removeItem('databox_edited_name');
     if (sessionStorage.getItem('databox_test_query_bool')){
-      const url = this.router.url.split('/').filter(el => el !== 'edit-query').join('/');
+      const url = this.router.url.split('/').filter(el => el !== 'edit-databox').join('/');
 
       this.router.navigate([url])
       .then(() => {

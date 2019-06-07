@@ -429,7 +429,7 @@ mat-card-title{
   border-radius: 0 0 2px 2px;
 }
 
-.mat-cell{
+tr td.mat-cell{
   padding: 1% 1%;
   font-size: 12px !important;
 }
@@ -934,4 +934,8 @@ div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
       width: 100px;
       font-size: 100px;
   }
+}
+
+.mat-menu-panel {
+  max-width: none !important;
 }

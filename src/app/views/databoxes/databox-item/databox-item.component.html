@@ -1,4 +1,21 @@
-<br />
+<div class="notification__container">
+  <div class="notification__cell">
+    <div class="notification notification--red mb-1">
+      <div class="notification__icon">
+        <mat-icon class="">info_outline</mat-icon>
+      </div>
+      <div class="notification__content">
+        <h3 class="notification__type mat-h3">Info</h3>
+        <p class="notification__message">Anyone with access can view your invited visitors.</p>
+      </div>
+      <div class="notification__close">
+        <mat-icon class="">close</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
 <div *ngIf="data?.databox_name && paginatedData">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" id="head">
@@ -27,18 +44,10 @@
       mat-raised-button
       class="mb-05"
       color="primary"
-      routerLink="/databoxes/edit-query/{{ data?._id }}"
+      routerLink="/databoxes/edit-databox/{{ data?._id }}"
     >
-      Edit Query
+      Edit Databox
     </button>
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-success"
-      routerLink="/databoxes/settings/connect/{{ data?._id }}"
-    >
-      Connect Your Data
-    </button>
-
     <span fxFlex></span>
     <div class="mr-1 ">
       <app-slide-toggle [id]="id" *ngIf="data._id"></app-slide-toggle>
@@ -48,408 +57,643 @@
 
 <!-- Tabs -->
 <mat-tab-group dynamicHeight [selectedIndex]="selectedTab">
-    <!-- Results -->
-    <mat-tab label="Results">
-      <!-- Line Chart -->
-      <div fxLayout="row" fxLayoutWrap="wrap" [hidden]="data?.first_create">
-        <div fxFlex="100" fxFlex.gt-sm="100">
-          <mat-card class="p-0 fixed-height">
-            <mat-card-content>
-              <!-- Line Chart -->
-              <canvas 
-              baseChart
-              class="chart"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="chartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"></canvas>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
+  <!-- Results -->
+  <mat-tab label="Your Data">
+    <!-- First Table -->
+    <div [hidden]="data?.first_create">
       
-      <!-- First Table -->
-      <div [hidden]="data?.first_create">
-        
-          <mat-card class="p-0" fxLayout="row" fxLayoutWrap="wrap" style="height: 100% !important; overflow: hidden !important;">
-            
-            <mat-card-content class="table-mat-card-content" fxLayout="row" fxLayoutWrap="wrap"  
-              style="overflow: hidden !important; width: 100% !important; height: 100% !important;">
-              
-              <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100" fxFlex.gt-md="100" 
-              class="page-search mat-bg-gray">
-                <div>
-                  <p>
-                      <b>Mentions:</b> {{mentions?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{mentions?.mentions_per_day}}
-                  </p>
-                </div>
-                <span fxFlex></span>
-                <div>
-                  <!-- Download CSV -->
-                  <a class="mr-1 fz-12 head-mentions" 
-                  (click)="downloadCSV()">
-                  <mat-icon class="download">file_download</mat-icon><b>Download Data</b></a>
-
-                  <!-- Add Suggestion -->
-                  <a class="head-mentions fz-12" *ngIf="mentions?.mentions && data?.datasource !== 'Twitter'"
-                  (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
-                </div>
-              </div>
+        <mat-card class="p-0" fxLayout="row" fxLayoutWrap="wrap" style="height: 100% !important; overflow: hidden !important;">
           
-              <div [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayout="row" fxLayoutWrap="wrap"  style="overflow-x: scroll !important; width: 102% !important; height: 100% !important;" (scroll)="createTable()">
-                
-                <div fxLayout="row" fxLayoutWrap="wrap">
-                  <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-                    <div class="hot-container full-width">
-                      <hot-table id="scroll-area" [hotId]="hotId" [settings]="tableSettings"></hot-table>
-                    </div>
-  
-                    <div class="table-foot" >
-                      <div class="mb-1">
-                        <button mat-raised-button 
-                        class="mat-bg-success" 
-                        (click)="addNewRow()">
-                        Add Row</button>
+          <mat-card-content class="table-mat-card-content" fxLayout="row" fxLayoutWrap="wrap"  
+            style="overflow: hidden !important; width: 100% !important; height: 100% !important;">
+            
+            <div fxLayout="row" fxLayout.lt-sm="column" fxFlex="100" fxFlex.gt-md="100" 
+            class="page-search mat-bg-gray">
+              <div>
+                <p>
+                    <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day}}
+                </p>
+              </div>
+              <span fxFlex></span>
+              <div>
+                <!-- Download CSV -->
+                <a class="mr-1 fz-12 head-mentions" 
+                (click)="downloadCSV()">
+                <mat-icon class="download">file_download</mat-icon><b>Download Data</b></a>
 
-                        <button mat-raised-button 
-                        color="primary" 
-                        (click)="saveAllData()">Save All Changes
-                        </button>
-                      </div>
-                      <span fxFlex></span>
-                    
-                      <button class="paginate" matTooltip="Prev Page" 
-                      (click)="navigateToPrevPage(data?._id)" 
-                      [hidden]="!paginatedData.pre_page">
-                      <i class="fa fa-chevron-left"></i>
-                      </button> 
-  
-                      <button class="paginate" matTooltip="Next Page" 
-                      (click)="navigateToNextPage(data?._id)"
-                      [hidden]="!paginatedData?.next_page">
-                        <i class="fa fa-chevron-right"></i> 
-                      </button>
+                <!-- Add Suggestion -->
+                <a class="head-mentions fz-12" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
+                (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
+              </div>
+            </div>
+        
+            <div [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}" fxLayout="row" fxLayoutWrap="wrap"  style="overflow-x: scroll !important; width: 102% !important; height: 100% !important;" (scroll)="createTable()">
+              
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+                  <div class="hot-container full-width">
+                    <hot-table id="scroll-area" [hotId]="hotId" [settings]="tableSettings"></hot-table>
+                  </div>
+
+                  <div class="table-foot" >
+                    <div class="mb-1">
+                      <button mat-raised-button color="primary" (click)="addNewRow()">Add Row</button>
+                      <button mat-raised-button class="mat-bg-success" (click)="saveAllData()">Save All Changes</button>
                     </div>
+                    <span fxFlex></span>
+                  
+                    <button class="paginate" matTooltip="Prev Page" 
+                    (click)="navigateToPrevPage(data?._id)" 
+                    [hidden]="!paginatedData.pre_page">
+                    <i class="fa fa-chevron-left"></i>
+                    </button> 
+
+                    <button class="paginate" matTooltip="Next Page" 
+                    (click)="navigateToNextPage(data?._id)"
+                    [hidden]="!paginatedData?.next_page">
+                      <i class="fa fa-chevron-right"></i> 
+                    </button>
                   </div>
                 </div>
               </div>
-            </mat-card-content>
-          </mat-card>
-      </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+    </div>
 
-      <br><br>
-    </mat-tab>
-  
-    <!-- Categorize Your Data -->
-    <mat-tab label="Categorize Your Data">
-      <div fxLayout="row" fxLayoutWrap="wrap">
-        <!-- Column 1 -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}"  >
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title class="mat-color-primary">
-                <span>Category Creator</span>
-              </mat-card-title>
-              <mat-card-subtitle>
-                <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
-              </mat-card-subtitle>
-            </mat-card-header>
-            <mat-divider></mat-divider>
-            <br>
-            <mat-card-content>
-              <table mat-table #categoryTable [dataSource]="dataSource">
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-  
+    <br><br>
+  </mat-tab>
 
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Name </th>
-                  <td mat-cell *matCellDef="let category"> {{category.name}} </td>
-                </ng-container>
-  
-                <ng-container matColumnDef="type">
-                  <th mat-header-cell *matHeaderCellDef> Type </th>
-                  <td mat-cell *matCellDef="let category"> {{category.type}} </td>
-                </ng-container>
-  
-                <ng-container matColumnDef="expression">
-                  <th mat-header-cell *matHeaderCellDef> Expression </th>
-                  <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
-                </ng-container>
-  
-                <ng-container matColumnDef="action">
-                  <th mat-header-cell *matHeaderCellDef> Action </th>
-                  <td mat-cell *matCellDef="let category;" width="100px">
-                      <mat-icon class="text-muted icon-sm" 
-                      (click)="openQueryDialog('Edit Category', data, true, category.name)">
-                      edit</mat-icon> 
-                      <mat-icon class="text-muted icon-sm"
-                      (click)="openQueryDialog('Delete Category', data, true, category.name)">
-                      delete</mat-icon>
-                  </td>
-                </ng-container>
-  
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-            </mat-card-content>
-            <br>
-            <mat-card-actions>
-              <button (click)="openQueryDialog('Create Category', data)"
-                mat-raised-button
-                class="mat-bg-success query-category">
-                Add Category
-              </button>
-              <span fxFlex></span>
-              <p class="text-muted query-category-text">
-                Category Remaining: {{ categoryRemaining || 0 }}<br>
-                SubCategory Remaining: {{ subcategoryRemaining || 0 }}
-              </p>
-            </mat-card-actions>
-          </mat-card>
-          <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
-            <span fxFlex></span>
-            <button mat-raised-button color="primary" 
-            (click)="openQueryDialog('Test Category', data)" >
-            Test Category
+  <!-- Categorize Your Data -->
+  <mat-tab label="Categorize Your Data">
+    <div fxLayout="row" fxLayoutWrap="wrap">
+      <!-- Column 1 -->
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}"  >
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title class="mat-color-primary">
+              <span>Categorize Your Data</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-divider></mat-divider>
+          <br>
+          <mat-card-content>
+            <table mat-table #categoryTable [dataSource]="dataSource">
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="expression">
+                <th mat-header-cell *matHeaderCellDef> Expression </th>
+                <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let category;" width="100px">
+                    <mat-icon class="text-muted icon-sm" 
+                    (click)="openQueryDialog('Edit Category', data, true, category.name)">
+                    edit</mat-icon> 
+                    <mat-icon class="text-muted icon-sm"
+                    (click)="openQueryDialog('Delete Category', data, true, category.name)">
+                    delete</mat-icon>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </mat-card-content>
+          <br>
+          <mat-card-actions>
+            <button (click)="openQueryDialog('Create Category', data)"
+              mat-raised-button
+              color="primary"
+              class="query-category">
+              Add Category
             </button>
-          </div>
+            <span fxFlex></span>
+            <p class="text-muted query-category-text">
+              Category Remaining: {{ categoryRemaining || 0 }}<br>
+              SubCategory Remaining: {{ subcategoryRemaining || 0 }}
+            </p>
+          </mat-card-actions>
+        </mat-card>
+        <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
+          <span fxFlex></span>
+          <button mat-raised-button class="mb-05 mat-bg-success" 
+          (click)="openQueryDialog('Test Category', data)" >
+          Test Category
+          </button>
         </div>
-        <!-- Column2 -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <!-- Doughnut Chart -->
-          <div fxLayout="row" fxLayoutWrap="wrap" >
-            <!-- Doughnut Chart para Categorias -->
-            <div fxFlex="100" fxFlex.gt-sm="50">
-              <mat-card class="p-0  doughnut-card">
+      </div>
+      <!-- Column2 -->
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+        <!-- Doughnut Chart -->
+        <div fxLayout="row" fxLayoutWrap="wrap" >
+          <!-- Doughnut Chart para Categorias -->
+          <div fxFlex="100" fxFlex.gt-sm="50">
+            <mat-card class="p-0  doughnut-card">
+              <mat-card-header>
+                <mat-card-title class="mat-color-primary">
+                  <span>Category Mentions</span>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <!-- Doughnut Chart para Categorias -->
+                <canvas 
+                  baseChart 
+                  class="chart"
+                  id="categoryRemain"
+                  [data]="[categoryUsed, categoryRemaining]"
+                  [labels]="doughnutChartCategoryLabels"
+                  [options]="doughnutOptions"
+                  [colors]="doughnutChartColors"
+                  [chartType]="doughnutChartType"></canvas>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <!-- Doughnut Chart para SubCategorias -->
+          <div fxFlex="100" fxFlex.gt-sm="50">
+            <mat-card class="p-0 doughnut-card">
                 <mat-card-header>
                   <mat-card-title class="mat-color-primary">
-                    <span>Category Mentions</span>
+                    <span>SubCategory Mentions</span>
                   </mat-card-title>
                 </mat-card-header>
-                <mat-card-content>
-                  <!-- Doughnut Chart para Categorias -->
-                  <canvas 
-                    baseChart 
-                    class="chart"
-                    id="categoryRemain"
-                    [data]="[categoryUsed, categoryRemaining]"
-                    [labels]="doughnutChartCategoryLabels"
-                    [options]="doughnutOptions"
-                    [colors]="doughnutChartColors"
-                    [chartType]="doughnutChartType"></canvas>
-                </mat-card-content>
-              </mat-card>
-            </div>
-            <!-- Doughnut Chart para SubCategorias -->
-            <div fxFlex="100" fxFlex.gt-sm="50">
-              <mat-card class="p-0 doughnut-card">
-                  <mat-card-header>
-                    <mat-card-title class="mat-color-primary">
-                      <span>SubCategory Mentions</span>
-                    </mat-card-title>
-                  </mat-card-header>
-                <mat-card-content>
-                  <!-- Doughnut Chart para SubCategorias -->
-                  <canvas 
-                    baseChart 
-                    class="chart"
-                    [data]="[subCategoryUsed, subcategoryRemaining]"
-                    [labels]="doughnutChartSubCategoryLabels"
-                    [options]="doughnutOptions"
-                    [colors]="doughnutChartColors"
-                    [chartType]="doughnutChartType"></canvas> 
-                </mat-card-content>
-              </mat-card>
-            </div>            
-          </div>
-          <!-- Result Preview -->
-          <div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
-            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-              <mat-card>
-                <mat-card-title>
-                  <h3 class="mat-h3 mat-color-primary">Results</h3>
-                </mat-card-title>
-                <mat-divider></mat-divider>
-                <mat-card-content>
-                  <table mat-table [dataSource]="dataSource">
-                    <!--- Note this table dataSource should be fetched with real data from the backend service -->
-                    <ng-container matColumnDef="content">
-                      <th mat-header-cell *matHeaderCellDef> Content </th>
-                      <td mat-cell *matCellDef="let category"> {{category.name}} </td>
-                    </ng-container>
-      
-                    <ng-container matColumnDef="category">
-                      <th mat-header-cell *matHeaderCellDef> Category </th>
-                      <td mat-cell *matCellDef="let category"> {{category.type}} </td>
-                    </ng-container>
-      
-                    <ng-container matColumnDef="subCategory">
-                      <th mat-header-cell *matHeaderCellDef> SubCategory </th>
-                      <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
-                  </table>
-                </mat-card-content>
-
-
-                <mat-card-content *ngIf="testCategory">
-                  <mat-divider>
-                    
-                  </mat-divider>   
-                  <br>
-                  <p>Result from Test Category: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </mat-card-content>
-              </mat-card>
-
-
-            </div>   
-
-            
-          </div>    
+              <mat-card-content>
+                <!-- Doughnut Chart para SubCategorias -->
+                <canvas 
+                  baseChart 
+                  class="chart"
+                  [data]="[subCategoryUsed, subcategoryRemaining]"
+                  [labels]="doughnutChartSubCategoryLabels"
+                  [options]="doughnutOptions"
+                  [colors]="doughnutChartColors"
+                  [chartType]="doughnutChartType"></canvas> 
+              </mat-card-content>
+            </mat-card>
+          </div>            
         </div>
+        <!-- Result Preview -->
+        <div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+            <mat-card>
+              <mat-card-title>
+                <h3 class="mat-h3 mat-color-primary">Results</h3>
+              </mat-card-title>
+              <mat-divider></mat-divider>
+              <mat-card-content>
+                <table mat-table [dataSource]="dataSource">
+                  <!--- Note this table dataSource should be fetched with real data from the backend service -->
+                  <ng-container matColumnDef="content">
+                    <th mat-header-cell *matHeaderCellDef> Content </th>
+                    <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef> Category </th>
+                    <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="subCategory">
+                    <th mat-header-cell *matHeaderCellDef> SubCategory </th>
+                    <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
+                </table>
+              </mat-card-content>
 
 
-        <div fxLayout="column" fxFlex="100">
-          <div>
-            <br>
-            <mat-divider></mat-divider>  
-            <br>
-            <div>
-              <span fxFlex></span>
-              <button 
-              (click)="cancelChanges()" 
-              mat-raised-button class="mb-05">
-              Back</button>
+              <mat-card-content *ngIf="testCategory">
+                <mat-divider>
+                  
+                </mat-divider>   
+                <br>
+                <p>Result from Test Category: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </mat-card-content>
+            </mat-card>
 
-              <button 
-              (click)="openQueryDialog('Save Categories', data)" 
-              mat-raised-button 
-              class="mb-05" color="primary">
-              Save Categories</button>
-            </div>
-          </div>
-        </div>
+
+          </div>   
+
+          
+        </div>    
       </div>
-    </mat-tab>
-  
-    <!-- Process Your Results -->
-    <mat-tab label="Process Your Data">
-      <!-- Credits -->
-      <br>
-      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="loggedInUser && data">
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100"
-          [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+
+
+      <div fxLayout="column" fxFlex="100">
+        <div>
+          <br>
+          <mat-divider></mat-divider>  
+          <br>
           <div>
             <span fxFlex></span>
-            <button mat-raised-button class="mat-color-green" [routerLink]="['/products/mentions-credit']">Buy More</button>
-          </div>
-          <div class="mt-1 mr-1">
-            <span fxFlex></span>
-            <h3 class="mat-h3">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
-          </div>
-        </div>
-      </div>
+            <button 
+            (click)="cancelChanges()" 
+            mat-raised-button class="mb-05">
+            Back</button>
 
-      <!-- Process Data List Options -->
-      <div *ngIf="loggedInUser && data">
-        <!-- Process Data List Options -->
-        <div class="product-container list-view"  
-        [@animate]="{value:'*', params:{ y:'200px', delay:'700ms' }}">
-          <!-- Algorithm Box -->
-          <div class="product-wrap" *ngFor="let algorithms of databoxAlgorithm">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="algorithms.display_text === 'Sentiment' ? sentiment 
-                    : algorithms.display_text === 'Topic Recognition' ? topicRecognition
-                    : algorithms.display_text === 'Entity Recognition'  ? entityRecognition
-                    : algorithms.display_text === 'Gender Author' ? genderAuthor : ''"
-                    
-                    (change)="clickSlideToggle({
-                      '_id': algorithms._id, 
-                      'algorithm': algorithms.display_text
-                    })">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">{{algorithms.display_text}}</span>
-                     </mat-card-title>
-                   </mat-card-header>
-                    <p style="text-align: justify;" class="mb-0">
-                      {{algorithms.description}}
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: ${{algorithms?.price.sale}}</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'algorithms.display_text')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
+            <button 
+            (click)="openQueryDialog('Save Categories', data)" 
+            mat-raised-button 
+            class="mb-05 mat-bg-gray" >
+            Save Categories</button>
           </div>
         </div>
       </div>
-  
-      <!-- FAQ's -->
-      <div fxLayout="row" fxLayoutWrap="wrap" class="faq" 
-        *ngIf="data?.databox_name && paginatedData"
+    </div>
+  </mat-tab>
+
+  <!-- Process Your Results -->
+  <mat-tab label="Process Your Data">
+    <!-- Credits -->
+    <br>
+    <div class="pr-1 pl-1" fxLayout="row" fxLayoutWrap="wrap" *ngIf="loggedInUser && data">
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100"
         [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-      
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-          <h1 class="mat-h2 faq-header">Frequently Asked Questions</h1>
+        <div>
+          <span fxFlex></span>
+          <h3 class="mat-h3 m-0">Credits Remaining:<span class="credits"> ${{creditRemaining}}</span></h3>
         </div>
-      
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-          <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">Apply Automatically</h2>
-            <p>
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-          </div>
-        </div>
-      
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-          <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">Apply to Unprocessed Data</h2>
-            <p>
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-          </div>
-        </div>
-      
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-          <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">Cost / Mention</h2>
-            <p>
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-          </div>
-        </div>
-      
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
-          <div class="faq-inner">
-            <h2 class="mat-h3 mat-color-primary">How to buy credit</h2>
-            <p>
-              Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-            </p>
-          </div>
+        <div>
+          <span fxFlex></span>
+          <a class="mat-color-primary" [routerLink]="['/products/algorithm-credit']">Add credit</a>
         </div>
       </div>
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+    <br>
+
+    <!-- Process Data List Options -->
+    <div *ngIf="loggedInUser && data">
+      <!-- Process Data List Options -->
+      <mat-card class="m-0 p-0">
+        <mat-card-header class="p-1">
+          <mat-card-title class="mat-color-primary">
+            <span>Process Your Data</span>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-card-content>
+          <mat-card-header class="pl-1 pr-1" style="width: 100%">
+            <mat-card-title class="mat-color-primary">
+              <span>Algorithms</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius.</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <table id="algorithm-table">
+            <thead>
+
+              <tr class="mat-header-row">
+                <th class="mat-header-cell">On/Off</th>
+                <th class="mat-header-cell">Algorithm Name</th>
+                <th class="mat-header-cell">Description </th>
+                <th class="mat-header-cell">Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Sentiment -->
+              <tr class="mat-row">
+                <td class="mat-cell">
+                  <mat-slide-toggle color="primary" class="" 
+                      [checked]="sentiment"
+                      (change)="clickSlideToggle('sentiment')">
+                  </mat-slide-toggle><br>
+                  <p>Turn on or <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'sentiment')"> apply only to unprocessed data
+                  </a></p>
+                </td>
+                <td class="mat-cell"><strong class="algorithm-header">Sentiment</strong></td>
+                <td class="mat-cell">
+                  <p style="text-align: justify;" class="mb-0">
+                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                  </p>
+                </td>
+                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+              </tr>
+              <!-- Topic Recognition -->
+              <tr class="mat-row">
+                <td class="mat-cell">
+                  <mat-slide-toggle color="primary" class="" 
+                    [checked]="topicRecognition"
+                    (change)="clickSlideToggle('topicRecognition')">
+                  </mat-slide-toggle><br>
+                  <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition, 'topicRecognition')"> apply only to unprocessed data
+                  </a></p>
+                </td>
+                <td class="mat-cell"><strong class="algorithm-header">Topic Recognition</strong></td>
+                <td class="mat-cell">
+                  <p style="text-align: justify;" class="mb-0">
+                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                  </p>
+                </td>
+                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+              </tr>
+              <!-- Gender Author -->
+              <tr class="mat-row">
+                <td class="mat-cell">
+                  <mat-slide-toggle color="primary" class="" 
+                    [checked]="genderAuthor"
+                    (change)="clickSlideToggle('genderAuthor')">
+                  </mat-slide-toggle><br>
+                  <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor, 'genderAuthor')"> apply only to unprocessed data
+                  </a></p>
+                </td>
+                <td class="mat-cell"><strong class="algorithm-header">Gender Recognition</strong></td>
+                <td class="mat-cell">
+                  <p style="text-align: justify;" class="mb-0">
+                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                  </p>
+                </td>
+                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+              </tr>
+              <!-- Entity Recognition -->
+              <tr class="mat-row">
+                <td class="mat-cell">
+                  <mat-slide-toggle color="primary" class="" 
+                    [checked]="entityRecognition"
+                    (change)="clickSlideToggle('entityRecognition')">
+                  </mat-slide-toggle><br>
+                  <p>Turn on or<a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition, 'entityRecognition')"> apply only to unprocessed data
+                  </a></p>
+                </td>
+                <td class="mat-cell"><strong class="algorithm-header">Entity Recognition</strong></td>
+                <td class="mat-cell">
+                  <p style="text-align: justify;" class="mb-0">
+                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                  </p>
+                </td>
+                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- FAQ's -->
+    <div fxLayout="row" fxLayoutWrap="wrap" class="faq" 
+      *ngIf="data?.databox_name && paginatedData"
+      [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+    
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+        <h1 class="mat-h2 faq-header">Frequently Asked Questions</h1>
+      </div>
+    
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+        <div class="faq-inner">
+          <h2 class="mat-h3 mat-color-primary">Apply Automatically</h2>
+          <p>
+            Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+          </p>
+        </div>
+      </div>
+    
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+        <div class="faq-inner">
+          <h2 class="mat-h3 mat-color-primary">Apply to Unprocessed Data</h2>
+          <p>
+            Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+          </p>
+        </div>
+      </div>
+    
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+        <div class="faq-inner">
+          <h2 class="mat-h3 mat-color-primary">Cost / Mention</h2>
+          <p>
+            Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+          </p>
+        </div>
+      </div>
+    
+      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+        <div class="faq-inner">
+          <h2 class="mat-h3 mat-color-primary">How to buy credit</h2>
+          <p>
+            Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+          </p>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <!-- Connect Your Data -->
+  <mat-tab label="Connect Your Data">
+    <mat-card>
+      <mat-card-header class="">
+        <mat-card-title class="mat-color-primary">
+          <span>Connect Your Data</span>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <br>
+      <mat-card-content>
+        <!-- Connectors -->
+        <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data" 
+        [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <mat-card-header class="pl-1 pr-1" style="width: 100%">
+            <mat-card-title class="mat-color-primary">
+              <span>Connectors</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius.</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <!-- PowerBI -->
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+            <mat-card >
+              <mat-card-header (click)="openDialog('How to connect to Power BI', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, powerBi, 'powerBi')">
+                <mat-card-title class="mat-color-primary">
+                  <img src="/assets/images/power_bi.png" class="connector-logo" >
+                  <span class="title-header">Power BI <br>
+                    <small class="text-muted">Microsoft</small></span>
+
+
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+              <mat-card-content (click)="openDialog('How to connect to Power BI', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, powerBi, 'powerBi')">
+                <p class=" p-333">
+                Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <!-- Tableau -->
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+            <mat-card >
+              <mat-card-header (click)="openDialog('How to connect to Tableau', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, tableau, 'tableau')">
+                <mat-card-title class="mat-color-primary">
+                  <img src="/assets/images/tableau.png" class="connector-logo" >
+                  <span class="title-header">Tableau <br>
+                    <small class="text-muted">Tableau</small></span>
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+              <mat-card-content (click)="openDialog('How to connect to Tableau', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, tableau, 'tableau')">
+                <p class="">
+                Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <!-- DataStudio -->
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+            <mat-card>
+              <mat-card-header (click)="openDialog('How to connect to Data Studio', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, dataStudio, 'dataStudio')">
+                <mat-card-title class="mat-color-primary">
+                  <img src="/assets/images/data_studio.png" class="connector-logo" >
+                  <span class="title-header">Data Studio <br>
+                    <small class="text-muted">Google</small></span>
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+              
+              <mat-card-content (click)="openDialog('How to connect to Data Studio', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, dataStudio, 'dataStudio')">
+                <p class="">
+                Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+        <br>
+        <!-- Notification -->
+        <div fxLayout="row" fxLayoutWrap="wrap" 
+          [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+          <mat-card-header class="pl-1 pr-1" style="width: 100%">
+            <mat-card-title class="mat-color-primary">
+              <span>Notifications</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius.</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <!-- Email -->
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >
+            <mat-card>
+              <mat-card-header (click)="openNotificationDialog('Email Notifications', data.datasource)">
+                <mat-card-title class="mat-color-primary">
+                  <img src="/assets/images/email.png" class="connector-logo" >
+                  <span class="title-header">Email<br>
+                    <small class="text-muted">Email</small></span>
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+              
+              <mat-card-content (click)="openNotificationDialog('Email Notifications', data.datasource)">
+                <p class="">
+                Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </mat-card-content>
+              <mat-divider></mat-divider>
+              <br>
+              <div class="text-center">
+                <mat-slide-toggle color="primary" class="mb-1" 
+                  [checked]="email" (change)="clickSlideToggle('email')">
+                  On / Off
+                </mat-slide-toggle>
+              </div>
+            </mat-card>
+          </div>
+          <!-- Slack -->
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title class="mat-color-primary">
+                  <img src="/assets/images/slack.png" class="connector-logo" >
+                  <span class="title-header">Slack <br>
+                    <small class="text-muted">Slack</small></span>
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+              
+              <mat-card-content>
+                <p class="">
+                Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </mat-card-content>
+              <mat-divider></mat-divider>
+              <br>
+              <div class="text-center">
+                <mat-slide-toggle color="primary" class="mb-1" 
+                [checked]="slack"
+                        (change)="clickSlideToggle('slack')">
+                  On / Off
+                </mat-slide-toggle>
+              </div>
+            </mat-card>
+          </div>
+          <!-- Apple Tv -->
+          <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title class="mat-color-primary">
+                  <img src="/assets/images/apple_tv.png" class="connector-logo" >
+                  <span class="title-header">Apple TV <br>
+                    <small class="text-muted">Apple</small></span>
+                </mat-card-title>
+              </mat-card-header>
+
+              <mat-divider></mat-divider>
+              <br>
+              
+              <mat-card-content>
+                <p class="">
+                Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                </p>
+              </mat-card-content>
+              <mat-divider></mat-divider>
+              <br>
+              <div class="text-center">
+                <mat-slide-toggle color="primary" class="mb-1"
+                [checked]="appleTV"
+                        (change)="clickSlideToggle('appleTV')">
+                  On / Off
+                </mat-slide-toggle>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>   
+  </mat-tab>
+
+</mat-tab-group>
 
 
 

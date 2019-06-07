@@ -1,91 +1,74 @@
-
 <div class="page-wrap" fxLayout="row" fxLayoutWrap="wrap"
   [@animate]="{value:'*', params:{ y:'200px', delay:'300ms',scale:'.9'}}">
   <div class="container" id="scroll-signin" fxLayoutAlign="center">
-    <div fxFlex="100" fxFlex.gt-sm="73" class="box">
-      <mat-card>
-        <div fxFlex="100" fxFlex.gt-sm="35" class="minerva-icon">
-          <mat-card>
-            <mat-card-content>
-              <div class="text-center pb-1">
-                <img src="assets/images/logo_minerva.svg" class="mb-05">
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-
-        <div fxFlex="100" fxFlex.gt-sm="65">
-          <div class="page-wrap">
-            <div class="session-form-hold">
-              <mat-card>
-                <mat-card-content>
-                  <div class="text-center pb-1">
-                    <h3 class="text-muted m-0">Sign in to your account</h3>
+    <img src="assets/images/pattern_blue.png" id="background1">
+    <img src="assets/images/pattern_orange.png" id="background2">
+    <div fxFlex="100" fxFlex.gt-sm="50" class="box">
+      <div fxFlex="100" fxFlex.gt-sm="100">
+        <div class="page-wrap">
+          <div class="session-form-hold">
+            <mat-card>
+              <mat-card-content>
+                <div class="text-center pb-1">
+                  <img src="assets/images/logo_minerva.svg" class="mb-05" id="logo">
+                  <h3 class="text-muted m-0">Welcome Back</h3>
+                </div>
+                <!-- <form [formGroup]="signinForm" (ngSubmit)="signin()"> -->
+                <form [formGroup]="signinForm">
+                  <div class="">
+                    <mat-form-field class="full-width">
+                      <input
+                        matInput
+                        name="username"
+                        [formControl]="signinForm.controls['username']"
+                        placeholder="Username"
+                        value="">
+                    </mat-form-field>
+                    <small 
+                      *ngIf="!signinForm.controls['username'].valid && signinForm.controls['username'].touched" 
+                      class="form-error-msg"> Username is required </small>
                   </div>
-                  <!-- <form [formGroup]="signinForm" (ngSubmit)="signin()"> -->
-                  <form [formGroup]="signinForm">
-                    <div class="">
-                      <mat-form-field class="full-width">
-                        <input
-                          matInput
-                          name="username"
-                          [formControl]="signinForm.controls['username']"
-                          placeholder="Username"
-                          value="">
-                      </mat-form-field>
+
+                  <div class="">
+                    <mat-form-field class="full-width">
+                      <input 
+                        type="password"
+                        name="password"
+                        matInput
+                        [formControl]="signinForm.controls['password']"
+                        placeholder="Password" 
+                        value="">
+                    </mat-form-field>
+                    <small 
+                      *ngIf="!signinForm.controls['password'].valid && signinForm.controls['password'].touched" 
+                      class="form-error-msg"> Password is required </small>
+                  </div>
+                  <div class="pb-1 text-center">
+                    <mat-checkbox
+                      name="agreed"
+                      [formControl]="signinForm.controls['agreed']"
+                      class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
                       <small 
-                        *ngIf="!signinForm.controls['username'].valid && signinForm.controls['username'].touched" 
-                        class="form-error-msg"> Username is required </small>
-                    </div>
+                        *ngIf="!signinForm.controls['agreed'].valid && signinForm.controls['agreed'].touched" 
+                        class="form-error-msg"> You must agree to the terms and conditions 
+                      </small>
+                  </div>
 
-                    <div class="">
-                      <mat-form-field class="full-width">
-                        <input 
-                          type="password"
-                          name="password"
-                          matInput
-                          [formControl]="signinForm.controls['password']"
-                          placeholder="Password" 
-                          value="">
-                      </mat-form-field>
-                      <small 
-                        *ngIf="!signinForm.controls['password'].valid && signinForm.controls['password'].touched" 
-                        class="form-error-msg"> Password is required </small>
-                    </div>
+                  <button (click)="signin()" mat-raised-button class="mat-primary full-width mb-1" [disabled]="!signinForm.valid">Sign in</button>
+                  <div class="text-center"><br>
+                    <p class="text-center full-width"><a [routerLink]="'/sessions/forgot-password'" class="">Forgot password?</a></p>
+                    <span fxFlex></span>
+                    <p class="text-center full-width">Don't have an account? <br><a [routerLink]="'/sessions/signup'" class="mat-color-primary text-center full-width">Start your 3-Days Free Trial</a></p>
+                  </div>
+                  <button (click)="socialSignIn('facebook')" mat-raised-button class=" facebook full-width mb-1 signin-btn">Log In With Facebook</button>
 
-                    <button (click)="signin()" mat-raised-button class="mat-primary full-width mb-1 signin-btn" [disabled]="!signinForm.valid">Sign in</button>
-                    <div class="text-center"><br>
-                      <a [routerLink]="'/sessions/forgot-password'" class="mat-primary text-center full-width">Forgot password</a>
-                      <span fxFlex></span>
-                      <a [routerLink]="'/sessions/signup'" class="mat-primary text-center full-width">Create a new account</a>
-                    </div>
-
-                    <br>
-
-                    <!-- <button mat-raised-button class="mat-primary full-width mb-1 signin-btn" routerLink="/databoxes">Go Straight to Dashboard</button> -->
-
-                    <button (click)="socialSignIn('facebook')" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Facebook</button>
-
-                    <button (click)="socialSignIn('google')" mat-raised-button class="mat-primary full-width mb-1 signin-btn">Log In With Google</button>
-
-                    <div class="pb-1 text-center">
-                      <mat-checkbox
-                        name="agreed"
-                        [formControl]="signinForm.controls['agreed']"
-                        class="pb-1">I have read and agree to the terms of service.</mat-checkbox>
-                        <small 
-                          *ngIf="!signinForm.controls['agreed'].valid && signinForm.controls['agreed'].touched" 
-                          class="form-error-msg"> You must agree to the terms and conditions 
-                        </small>
-                    </div>
-                  </form>
-                </mat-card-content>
-              </mat-card>
-            </div>
+                  <button (click)="socialSignIn('google')" mat-raised-button class="google full-width mb-1 signin-btn">Log In With Google</button>
+                </form>
+              </mat-card-content>
+            </mat-card>
           </div>
         </div>
-      </mat-card>
+      </div>
     </div>
   </div>
 </div>
-

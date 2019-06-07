@@ -49,6 +49,8 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public showQuery: string = 'basic';
   public showQueryAccord: boolean = true;
   public showAdvanceAccord: boolean = true;
+  public showHistoricalAccord: boolean = true;
+  public showCountryAccord: boolean = true;
   public showConnectAccord: boolean = true;
   public showSimpleExample: boolean = true;
   public showAdvancedExample: boolean = true;
@@ -156,7 +158,7 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
     // check if user is creating databox or editing query
     const urlSegment = this.router.url.split('/')[2];
     if (urlSegment === 'create-databox') this.checkIfCreateOrEdit = 'Create';
-    if (urlSegment === 'edit-query') this.checkIfCreateOrEdit = 'Edit';
+    if (urlSegment === 'edit-databox') this.checkIfCreateOrEdit = 'Edit';
   }
 
   ngOnInit() {
@@ -348,6 +350,20 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           {
             if(this.showAdvanceAccord) this.showAdvanceAccord = false;
               else this.showAdvanceAccord = true;
+            break;
+          }
+
+          case accord === 'showHistorical':
+          {
+            if(this.showHistoricalAccord) this.showHistoricalAccord = false;
+              else this.showHistoricalAccord = true;
+            break;
+          }
+
+          case accord === 'showCountry':
+          {
+            if(this.showCountryAccord) this.showCountryAccord = false;
+              else this.showCountryAccord = true;
             break;
           }
 

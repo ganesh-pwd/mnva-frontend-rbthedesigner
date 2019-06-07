@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxConnectorService } from '../../../shared/services/databoxes/databox-item-connector.service';
-import { DataboxAlgorithmsService } from '../../../shared/services/databoxes/databox-item-algorithm.service';
-import { DataboxDataConnectorService } from '../../../shared/services/databoxes/databox-item-data-connector.service';
-import { DataboxItemMentionService } from '../../../shared/services/databoxes/databox-item-mention.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -16,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main-databoxes.component.html',
   styleUrls: ['./main-databoxes.component.scss']
 })
-export class MainDataboxesComponent implements OnInit, OnDestroy, AfterViewInit {
+export class MainDataboxesComponent implements OnDestroy, AfterViewInit {
   private getItemSub: Subscription;
   private getDataConnectorReq: Subscription;
 
@@ -36,14 +33,13 @@ export class MainDataboxesComponent implements OnInit, OnDestroy, AfterViewInit 
   public dataConnectors;
   public connectorsDetails: any[];
 
-  constructor(private databoxesService: DataboxesService,
+  constructor(
+    private databoxesService: DataboxesService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private databoxConnectorService: DataboxConnectorService,
-    private databoxAlgorithmsService: DataboxAlgorithmsService,
-    private databoxDataConnectorService: DataboxDataConnectorService,
-    private databoxItemMentionService: DataboxItemMentionService,
     private router: Router,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar
+  ) {
 
     this.isDataboxDeleted = sessionStorage.getItem('deleted_databox_true');
     if (this.isDataboxDeleted) this.openSnackBar(this.isDataboxDeleted);  
@@ -55,11 +51,7 @@ export class MainDataboxesComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this.isDataboxUpdated) this.openSnackBar(this.isDataboxUpdated);  
   }
 
-  ngOnInit() {
-    
-  }
-
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.databox_id_new = this.generateID();
 
     // get databox items
@@ -91,7 +83,7 @@ export class MainDataboxesComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   // get databox connectors
-  getDataboxConnectors(){
+  getDataboxConnectors() {
     this.getDataConnectorReq = this.databoxConnectorService
     .getAllItems()
     .subscribe(result => {
@@ -99,6 +91,22 @@ export class MainDataboxesComponent implements OnInit, OnDestroy, AfterViewInit 
     });
   }
 
+  filterConnector(id){
+    return this.databoxConnectorService.getSingleItem(id);
+  }
+
+  // check databox connectors
+  checkAlgorithmConnectors(databox, connector){
+    const filter = databox.algorithmConnectors.findIndex(el => el === connector);
+
+    return filter > -1 ? true : false;
+  }
+
+  checkDataConnectors(databox, connector){
+    const filter = databox.dataConnectors.findIndex(el => el === connector);
+
+    return filter > -1 ? true : false;
+  }
 
     // open confirmation dialog
     openDialog(title: string, data: string, input: boolean) {

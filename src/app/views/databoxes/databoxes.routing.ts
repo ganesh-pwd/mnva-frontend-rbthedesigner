@@ -8,7 +8,7 @@ import { DataboxItemConnectivityComponent } from './databox-item-connectivity/da
 export const DataboxesRoutes: Routes = [
   { path: '', component: MainDataboxesComponent },
   { path: 'create-databox/:id', component: DataboxItemSettingsComponent },
-  { path: 'edit-query/:id', component: DataboxItemSettingsComponent },
+  { path: 'edit-databox/:id', component: DataboxItemSettingsComponent },
   {
     path: 'settings',
     children: [
