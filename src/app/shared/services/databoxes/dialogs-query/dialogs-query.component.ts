@@ -35,7 +35,7 @@ export class DataboxDialogsQueryComponent implements OnInit, OnDestroy {
   @ViewChild('categoryTable') table: MatTable<any>;
 
   // tslint:disable-next-line:max-line-length
-  public editorData = `Type your desired keywords`;
+  public editorData = `Press 'Enter' to add keyword`;
   public editorDataAdv = `Please type your query`;
 
   constructor(public dialogRef: MatDialogRef<DataboxDialogsQueryComponent>,

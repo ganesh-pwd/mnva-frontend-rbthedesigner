@@ -1,6 +1,6 @@
 <mat-card class="p-0 fixed-height">
-  <mat-card-title class="">
-    <div class="card-title-text mt-05">Mentions Plan</div>
+  <mat-card-title class="light-gray">
+    <div class="card-title-text">Mentions Plan</div>
     <mat-divider></mat-divider>
   </mat-card-title>
   <mat-card-content *ngIf="loggedInUser">
@@ -25,7 +25,6 @@
     </div>  
     <div class="pb-1">
       <mat-progress-bar
-        *ngIf="loggedInUser.accountType !== 'Enterprise'"
         [ngClass]="remaining >= 80 && remaining <= 99 
           ? 'yellow-progress': remaining >= 100 
           ? 'red-progress': 'blue-progress'"

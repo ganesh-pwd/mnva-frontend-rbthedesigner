@@ -70,15 +70,104 @@
 <hr />
 <br />
 
-<div *ngIf="checkIfCreateOrEdit === 'Create'" class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-    <h3 class="mat-h3">Creating a Databox:</h3>
-    <p>Databoxes are where everything happens in Minerva. To create a Databox, you'll need to create a query, which is comprised of several required fields: your datasource, country, historical data and the keywords that will search our databases.</p>
-</div>
-<form [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
+<form id="edit-databox" [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
   <!-- Edit Query -->
   <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
+
+<div class="buttonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
+  
+  <!-- Dialogs for New Creation of Databox with no Status -->
+  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      (click)="cancelChanges()"
+    >
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      (click)="
+        openDialog(
+          'Save as Draft',
+          'Are you sure you want to save this databox as draft? You can edit the details later. Please confirm to continue.',
+          false
+        )
+      "
+    >
+      Save as Draft
+    </button>
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-success"
+      (click)="openMentionsDialog('Create Databox')"
+    >
+      Create Databox
+    </button>
+  </div>
+
+  <!-- Dialogs for already Created Databox with Status as Draft -->
+  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      (click)="
+        openDialog(
+          'Exit without saving changes?',
+          'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
+          false
+        )
+      "
+    >
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      class="mb-05"
+      color="primary"
+      (click)="
+        openDialogUpdate(
+          'Save Changes',
+          'Are you sure you want to save the changes for this databox? Please confirm to continue.'
+        )
+      "
+    >
+      Save Changes
+    </button>
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-success"
+      (click)="openMentionsDialogUpdate('Activate Databox', data?.mentions)"
+    >
+      Activate Databox
+    </button>
+  </div>
+  <!-- Dialogs for already Created Databox with Status as Active -->
+  <div *ngIf="checkIfCreateOrEdit === 'Edit'">
+    <button
+      mat-raised-button
+      class="mb-05"
+      (click)="cancelChanges()"
+    >
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      class="mb-05 mat-bg-success"
+      (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
+    >
+      Save Changes
+    </button>
+  </div>
+</div>
+
+
     <mat-card class="m-0 p-0">
-      <mat-card-header class="p-1">
+      <mat-card-header class="p-1 light-gray">
         <mat-card-title class="mat-color-primary">
           <span>Edit Your Databox</span>
         </mat-card-title>
@@ -86,54 +175,38 @@
           <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
         </mat-card-subtitle>
       </mat-card-header>
-      <br>
+
       <!-- Source and Country -->
       <div fxLayout="row" fxLayoutWrap="wrap" >
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
           <mat-card class="accordion-databox m-0">
             <mat-card-header (click)="selectAccordion('showCountry')">
               <mat-card-title>
-                <span>Source and Country</span>
+                <span>Choose your source and country</span>
                  <p>
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
               <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
-              <div class="ml-1" *ngIf="checkIfCreateOrEdit === 'Edit'">
-                <button
-                  mat-raised-button
-                  class="cancel-button"
-                  (click)="cancelChanges()"
-                >
-                  Cancel
-                </button>
-                <span fxFlex></span>
-                <button
-                  mat-raised-button
-                  class="cancel-button mat-bg-gray"
-                  (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
-                >
-                  Save
-                </button>
-              </div>
-              
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="showCountryAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">
-              keyboard_arrow_down</mat-icon>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showCountryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
 
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="!showCountryAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">keyboard_arrow_right</mat-icon>
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showCountryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
             </mat-card-header>
             
             <div *ngIf="showCountryAccord" 
@@ -144,90 +217,99 @@
               <div class="databoxEditSection databoxEditSources">
                   <div class="databoxEditSection-content is-open">
                       <div class="databoxEditSection-contentWrapper">
-                          <div>
-                              <span fxFlex></span>
-                              <table class="databoxEditTableSelect databoxEditSources-table">
-                                  <thead>
-                                      <tr class="databoxEditTableSelectTr">
-                                          <th class="databoxEditTableSelectHead-th" colspan="2">Sources</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody class="databoxEditTableSelectBody">
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-radio"></i><svg class="databoxEditSources-isonSourceLock" width="12" height="15" viewBox="0 0 12 15" style="height: 11px; width: auto;"><path class="fill" d="M9.83 5.779v-.922C9.83 2.483 8.047.552 5.856.552c-2.192 0-3.974 1.931-3.974 4.305v.922C1.197 5.972.69 6.64.69 7.441v5.167c0 .95.711 1.722 1.59 1.722h7.153c.878 0 1.59-.772 1.59-1.722V7.44c0-.802-.508-1.47-1.193-1.662zm-3.576 5.537c0 .237-.178.43-.398.43-.22 0-.397-.193-.397-.43V8.732c0-.238.178-.43.397-.43.22 0 .398.192.398.43v2.584zM8.24 5.718H3.47v-.86c0-1.425 1.07-2.584 2.385-2.584 1.315 0 2.385 1.159 2.385 2.583v.861z" fill-rule="evenodd"></path></svg>Radio</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-tv"></i><svg class="databoxEditSources-isonSourceLock" width="12" height="15" viewBox="0 0 12 15" style="height: 11px; width: auto;"><path class="fill" d="M9.83 5.779v-.922C9.83 2.483 8.047.552 5.856.552c-2.192 0-3.974 1.931-3.974 4.305v.922C1.197 5.972.69 6.64.69 7.441v5.167c0 .95.711 1.722 1.59 1.722h7.153c.878 0 1.59-.772 1.59-1.722V7.44c0-.802-.508-1.47-1.193-1.662zm-3.576 5.537c0 .237-.178.43-.398.43-.22 0-.397-.193-.397-.43V8.732c0-.238.178-.43.397-.43.22 0 .398.192.398.43v2.584zM8.24 5.718H3.47v-.86c0-1.425 1.07-2.584 2.385-2.584 1.315 0 2.385 1.159 2.385 2.583v.861z" fill-rule="evenodd"></path></svg>TV</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-facebook_keyword"></i><svg class="databoxEditSources-isonSourceLock" width="12" height="15" viewBox="0 0 12 15" style="height: 11px; width: auto;"><path class="fill" d="M9.83 5.779v-.922C9.83 2.483 8.047.552 5.856.552c-2.192 0-3.974 1.931-3.974 4.305v.922C1.197 5.972.69 6.64.69 7.441v5.167c0 .95.711 1.722 1.59 1.722h7.153c.878 0 1.59-.772 1.59-1.722V7.44c0-.802-.508-1.47-1.193-1.662zm-3.576 5.537c0 .237-.178.43-.398.43-.22 0-.397-.193-.397-.43V8.732c0-.238.178-.43.397-.43.22 0 .398.192.398.43v2.584zM8.24 5.718H3.47v-.86c0-1.425 1.07-2.584 2.385-2.584 1.315 0 2.385 1.159 2.385 2.583v.861z" fill-rule="evenodd"></path></svg>Facebook</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-forums"></i>Forums</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class=""></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-images"></i>Images</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class=""></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-web"></i>Web</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class=""></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-twitter"></i>Twitter</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class="checked "></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-news"></i>News</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class=""></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-blogs"></i>Blogs</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class=""></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
-                                          <td class="databoxEditTableSelectRowCustom-left"><span class=""><i class="databoxEditSources-isonSource icon-source-large-gray-videos"></i>Videos</span></td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class=""></i></td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                              <span fxFlex></span>
-                              <table class="databoxEditTableSelect databoxEditSources-table">
-                                  <thead>
-                                      <tr class="databoxEditTableSelectTr">
-                                          <th class="databoxEditTableSelectHead-th" colspan="2">
-                                              <div class=""><span>Countries (10 max )</span>
-                                                  <div class="mnt-switch">
-                                                      <div class="mnt-switch-circle"></div>
-                                                  </div>
-                                              </div>
-                                          </th>
-                                      </tr>
-                                  </thead>
-                                  <tbody class="databoxEditTableSelectBody">
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
-                                          <td class="databoxEditTableSelectRowCustom-left">Get mentions without country information</td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class="checked "></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
-                                          <td class="databoxEditTableSelectRowCustom-left">Afghanistan</td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class="checked "></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
-                                          <td class="databoxEditTableSelectRowCustom-left">Åland Islands</td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class="checked "></i></td>
-                                      </tr>
-                                      <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
-                                          <td class="databoxEditTableSelectRowCustom-left">Albania</td>
-                                          <td class="databoxEditTableSelectRowCustom-right"><i class="checked "></i></td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                              <span fxFlex></span>
+                          <div fxLayout="row" fxLayoutWrap="wrap">
+                              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                <table class="mb-1 databoxEditTableSelect databoxEditSources-table">
+                                    <thead>
+                                        <tr class="databoxEditTableSelectTr">
+                                            <th class="databoxEditTableSelectHead-th" colspan="2">Sources</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="databoxEditTableSelectBody">
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-radio"></i><mat-icon class="small mat-icon material-icons mat-color-gray">lock</mat-icon>Radio</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-tv"></i><mat-icon class="small mat-icon material-icons mat-color-gray">lock</mat-icon>TV</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-facebook_keyword"></i>Facebook</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-web"></i>Web</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-twitter"></i>Twitter</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                <table class="mb-1 databoxEditTableSelect databoxEditSources-table">
+                                    <thead>
+                                        <tr class="databoxEditTableSelectTr">
+                                            <th class="databoxEditTableSelectHead-th" colspan="2">
+                                                <div class=""><span>Countries</span>
+                                                    <div class="mnt-switch">
+                                                        <div class="mnt-switch-circle"></div>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="databoxEditTableSelectBody">
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Get mentions without country information</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Colombia</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Costa Rica</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Ecuador</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">El Salvador</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Guatemala</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Honduras</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">México</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Panama</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Perú</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">República Dominicana</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                              </div>
                           </div>
                       </div>
                   </div>
@@ -243,49 +325,32 @@
           <mat-card class="accordion-databox m-0">
             <mat-card-header (click)="selectAccordion('showHistorical')">
               <mat-card-title>
-                <span>Want to add historical data?</span>
+                <span>Do you want to add historical data?</span>
                  <p>
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
               <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
-              <div class="ml-1" *ngIf="checkIfCreateOrEdit === 'Edit'">
-                <button
-                  mat-raised-button
-                  class="cancel-button"
-                  (click)="cancelChanges()"
-                >
-                  Cancel
-                </button>
-                <span fxFlex></span>
-                <button
-                  mat-raised-button
-                  class="cancel-button mat-bg-gray"
-                  (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
-                >
-                  Save
-                </button>
-              </div>
-              
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="showHistoricalAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">
-              keyboard_arrow_down</mat-icon>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showHistoricalAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
 
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="!showHistoricalAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">keyboard_arrow_right</mat-icon>
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showHistoricalAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
             </mat-card-header>
-            
             <div *ngIf="showHistoricalAccord" 
               [@animate]="{
                 value: '*',
@@ -312,50 +377,33 @@
           [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
         >
           <mat-card class="accordion-databox m-0">
-            <mat-card-header 
-            (click)="selectAccordion('showQuery')">
+            <mat-card-header (click)="selectAccordion('showQuery')">
               <mat-card-title>
-                <span>Keywords</span>
+                <span>Choose your keywords</span>
                  <p>
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
               <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
-              <div class="ml-1" *ngIf="checkIfCreateOrEdit === 'Edit'">
-                <button
-                  mat-raised-button
-                  class="cancel-button"
-                  (click)="cancelChanges()"
-                >
-                  Cancel
-                </button>
-                <span fxFlex></span>
-                <button
-                  mat-raised-button
-                  class="cancel-button mat-bg-gray"
-                  (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
-                >
-                  Save
-                </button>
-              </div>
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="showQueryAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">
-              keyboard_arrow_down</mat-icon>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showQueryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
 
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="!showQueryAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">
-              keyboard_arrow_right</mat-icon>
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showQueryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
             </mat-card-header>
             <div *ngIf="showQueryAccord" [@animate]="{
                   value: '*',
@@ -369,13 +417,13 @@
                 (click)="showBasicQuery()"
                 class="query_type" 
                 [ngClass]="showQuery === 'basic' ? 'query-active': ''">
-                  Basic Query
+                  Basic Editor
                 </button>
                 <button mat-raised-button 
                 class="query_type"
                 [ngClass]="showQuery === 'advance' ? 'query-active': ''"
                 (click)="showAdvanceQuery()">
-                Advanced Query</button>
+                Advanced Editor</button>
               </div>
               <!--Basic Query Editor -->
               <mat-card-content *ngIf="showQuery == 'basic'" 
@@ -384,8 +432,13 @@
                   params: { x: '200px', delay: '400ms' }
                 }">
                 <mat-card-title class="mat-color-primary query-header">
-                  <span>Basic Query</span>
+                  <span>Basic Editor</span>
                 </mat-card-title>
+                <mat-card-subtitle>
+                  <p>
+                    The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                  </p>
+                </mat-card-subtitle>
                 <div fxLayout="row" fxLayoutWrap="wrap">
                   <div
                     fxLayout="column"
@@ -522,7 +575,7 @@
                       params: { x: '200px', delay: '400ms' }
                     }">
                       <mat-card-title class="mat-color-primary">
-                        <span>Advanced Query</span>
+                        <span>Advanced Editor</span>
                       </mat-card-title>
                       <mat-card-subtitle>
                         <p>
@@ -561,9 +614,6 @@
                             </mat-form-field>
                             <div class="text-muted query-help mt-1">
                               <a matTooltip="car OR bus OR train" ng-click="showDetails = ! showDetails">Show Simple Example</a>
-                                <div class="procedure-details" ng-class="{ 'hidden': ! showDetails }">
-                                  <p>Number of patient discharges</p>
-                                </div>
                               <a matTooltip="(car OR bus) AND train">Show Complex Example</a>
                               <a>Need More Help?</a>
                             </div>
@@ -588,7 +638,7 @@
                           <mat-card class="query-right-side">
                             <mat-card-content>
                               <h4 class="mat-h4">
-                                Boolean Operations:
+                                Advanced Query Operators:
                               </h4>
                               <p
                                 class="mat-color-primary query-info"
@@ -634,40 +684,24 @@
               </mat-card-title>
               <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
-              <div class="ml-1" *ngIf="checkIfCreateOrEdit === 'Edit'">
-                <button
-                  mat-raised-button
-                  class="cancel-button"
-                  (click)="cancelChanges()"
-                >
-                  Cancel
-                </button>
-                <span fxFlex></span>
-                <button
-                  mat-raised-button
-                  class="cancel-button mat-bg-gray"
-                  (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
-                >
-                  Save
-                </button>
-              </div>
-              
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="showAdvanceAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">
-              keyboard_arrow_down</mat-icon>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showAdvanceAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
 
-              <mat-icon 
-              class="mat-icon material-icons mat-color-gray" 
-              *ngIf="!showAdvanceAccord" 
-              [@animate]="{
-                value: '*',
-                params: { scale: '0.7', delay: '200ms' }
-              }">keyboard_arrow_right</mat-icon>
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showAdvanceAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
             </mat-card-header>
             
             <div *ngIf="showAdvanceAccord" 
@@ -723,6 +757,189 @@
                         </mat-form-field>
                     </div>
                 </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Results Preview -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showResultsPreview')">
+              <mat-card-title>
+                <span>Results Preview</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showResultsPreviewAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showResultsPreviewAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showResultsPreviewAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
+                  
+                  <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+                    <span fxFlex></span>
+                    <button mat-raised-button class="mb-05 mat-bg-success" 
+                    (click)="openDialogTestQuery(
+                        'Test Query',
+                        'You are about to build and update this query. Are you sure you want to proceed?')
+                    ">
+                      Test Query
+                    </button>
+                  </div>
+
+                  <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
+                    <h1 class="mat-h1">Results Preview</h1>
+                  </div>
+
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
+                      <div>
+                        <p>
+                          <b>Mentions:</b> {{data?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day || 7.5}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.gt-sm="100">
+                      <mat-card class="p-0">
+                        <mat-card-content class="px-1" 
+                        style="padding-left: 20px !important;">
+                          <canvas 
+                            baseChart
+                            class="chart"
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="chartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"></canvas> 
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                  <div
+                    style="position: -webkit-sticky; position: sticky;top: 0;"
+                    fxLayout="row"
+                    fxLayoutWrap="wrap"
+                  >
+                    <div
+                      fxLayout="column"
+                      fxFlex="100"
+                      fxFlex.gt-sm="100"
+                      [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+                    >
+                      <mat-card>
+                        <mat-card-header>
+                          <mat-card-title>
+                            <span>Results</span>
+                          </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                          <p class="text-justify" *ngIf="!setResult()">
+                            No results yet, please Create a Query and then click “Test Query” to see results.
+                          </p>
+                          <table mat-table [dataSource]="dataSource" *ngIf="setResult()">
+                            <ng-container matColumnDef="date">
+                              <th mat-header-cell *matHeaderCellDef> Date </th>
+                              <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="content">
+                              <th mat-header-cell *matHeaderCellDef> Content </th>
+                              <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="author">
+                              <th mat-header-cell *matHeaderCellDef> Author </th>
+                              <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
+                          </table>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-content> </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Delete Databox -->
+      <div *ngIf="checkIfCreateOrEdit === 'Edit'" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showDelete')">
+              <mat-card-title>
+                <span>Delete Databox</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showDeleteAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showDeleteAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showDeleteAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <div>
+                <p style="display: inline-block;" class="mr-1">Be aware that all your mentions will be deleted</p>
+                <button mat-raised-button color="warn">Delete Databox</button>
+              </div>
             </div>
           </mat-card>
         </div>
@@ -810,173 +1027,7 @@
         </div>
       </div>
 
-      <!-- Button -->
-      <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-        <span fxFlex></span>
-        <button mat-raised-button class="mb-05 mat-bg-success" 
-        (click)="openDialogTestQuery(
-            'Test Query',
-            'You are about to build and update this query. Are you sure you want to proceed?')
-        ">
-          Test Query
-        </button>
-      </div>
     </mat-card>
   </div>
 </form>
-
-<!-- Results Preview -->
-<!-- <div fxLayout="row" fxLayoutWrap="wrap">
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
-    <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-      <h1 class="mat-h1">Results Preview</h1>
-    </div>
-
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
-        <div>
-          <p>
-            <b>Mentions:</b> {{data?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day || 7.5}}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxFlex="100" fxFlex.gt-sm="100">
-        <mat-card class="p-0">
-          <mat-card-content class="px-1" 
-          style="padding-left: 20px !important;">
-            <canvas 
-              baseChart
-              class="chart"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="chartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"></canvas> 
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <div
-      style="position: -webkit-sticky; position: sticky;top: 0;"
-      fxLayout="row"
-      fxLayoutWrap="wrap"
-    >
-      <div
-        fxLayout="column"
-        fxFlex="100"
-        fxFlex.gt-sm="100"
-        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-      >
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <span>Results</span>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p class="text-justify" *ngIf="!setResult()">
-              No results yet, please Create a Query and then click “Test Query” to see results.
-            </p>
-            <table mat-table [dataSource]="dataSource" *ngIf="setResult()">
-              <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let category"> {{category.name}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="content">
-                <th mat-header-cell *matHeaderCellDef> Content </th>
-                <td mat-cell *matCellDef="let category"> {{category.type}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="author">
-                <th mat-header-cell *matHeaderCellDef> Author </th>
-                <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
-            </table>
-          </mat-card-content>
-          <mat-divider></mat-divider>
-          <mat-card-content> </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<div class="buttonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
-  
-  <!-- Dialogs for New Creation of Databox with no Status -->
-  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'">
-    <button
-      mat-raised-button
-      class="mb-05"
-      (click)="cancelChanges()"
-    >
-      Cancel
-    </button>
-
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-gray"
-      (click)="
-        openDialog(
-          'Save as Draft',
-          'Are you sure you want to save this databox as draft? You can edit the details later. Please confirm to continue.',
-          false
-        )
-      "
-    >
-      Save as Draft
-    </button>
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-green"
-      (click)="openMentionsDialog('Create Databox')"
-    >
-      Create Databox
-    </button>
-  </div>
-
-  <!-- Dialogs for already Created Databox with Status as Draft -->
-  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'">
-    <button
-      mat-raised-button
-      class="mb-05"
-      (click)="
-        openDialog(
-          'Exit without saving changes?',
-          'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
-          false
-        )
-      "
-    >
-      Cancel
-    </button>
-
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-gray"
-      (click)="
-        openDialogUpdate(
-          'Save Changes',
-          'Are you sure you want to save the changes for this databox? Please confirm to continue.'
-        )
-      "
-    >
-      Save Changes
-    </button>
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-green"
-      (click)="openMentionsDialogUpdate('Activate Databox', data?.mentions)"
-    >
-      Activate Databox
-    </button>
-  </div>
-</div>
 <br /><br />

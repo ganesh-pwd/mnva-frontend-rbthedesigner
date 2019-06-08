@@ -39,6 +39,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public id: string;
   public mentions: number;
   public creditRemaining: number;
+  public showAdvanceAccord: boolean = true;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
@@ -281,6 +282,17 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  selectAccordion(accord) {
+    switch (true) {
+      case accord === 'showResultsPreview':
+      {
+        if(this.showResultsPreviewAccord) this.showResultsPreviewAccord = false;
+          else this.showResultsPreviewAccord = true;
+        break;
+      }
+    }
+  }
 
   // get databox table search item
   getDataboxItemResult() {

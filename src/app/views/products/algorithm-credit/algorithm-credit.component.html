@@ -21,7 +21,6 @@
     <div>
       <!-- Search Form -->
       <div fxLayout.lt-sm="column" fxLayout="row"  class="shop-top-toolbar">
-         <button mat-icon-button class="mr-1" (click)="toggleSideNav()"><mat-icon>short_text</mat-icon> </button>
          <div class="product-search-wrap">
             <form [formGroup]="filterForm">
                <mat-icon>search</mat-icon>
@@ -45,90 +44,90 @@
 </mat-sidenav-container>
 <hr>
 
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+<div fxLayout="row" fxLayoutWrap="wrap">
    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
       <mat-card class="m-0 p-0">
-        <div class="p-1">
-          <div class="m-333 product-form" fxLayout="row" fxLayoutWrap="wrap">
-            <mat-card-title class="mat-color-primary">
-              <span>Algorithm Credit</span>
-            </mat-card-title>
-            <mat-card-subtitle class="m-0">
-              <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
-            </mat-card-subtitle>
-          </div>  
-          <div class="m-333 product-form" fxLayout="row" fxLayoutWrap="wrap">
-            <mat-form-field>
-               <mat-select [formControl]="filterForm.controls['algoCredit']">
-                  <mat-option value="50" style="font-size: 14px !important;">$50</mat-option>
-                  <mat-option value="100" style="font-size: 14px !important;">$100</mat-option>
-                  <mat-option value="150" style="font-size: 14px !important;">$150</mat-option>
-                  <mat-option value="250" style="font-size: 14px !important;">$250</mat-option>
-               </mat-select>
-            </mat-form-field>
-            <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()">
-            <mat-icon>shopping_cart</mat-icon>
-               Add to cart
-            </button>
-          </div> 
-        </div>
+        <mat-card-header class="p-1 light-gray product-form" fxLayout="row" fxLayoutWrap="wrap">
+          <mat-card-title class="mat-color-primary ">
+            <span>Algorithm Credit</span>
+          </mat-card-title>
+          <mat-card-subtitle class="m-0">
+            <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+          </mat-card-subtitle>
+        </mat-card-header>  
+        <div class="p-1 product-form" fxLayout="row" fxLayoutWrap="wrap">
+          <mat-form-field>
+             <mat-select [formControl]="filterForm.controls['algoCredit']">
+                <mat-option value="50" style="font-size: 14px !important;">$50</mat-option>
+                <mat-option value="100" style="font-size: 14px !important;">$100</mat-option>
+                <mat-option value="150" style="font-size: 14px !important;">$150</mat-option>
+                <mat-option value="250" style="font-size: 14px !important;">$250</mat-option>
+             </mat-select>
+          </mat-form-field>
+          <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()">
+          <mat-icon>shopping_cart</mat-icon>
+             Add to cart
+          </button>
+        </div> 
         <mat-divider></mat-divider>
         <br>
         <mat-card-content>
           <mat-card-title class="mat-color-primary">
               <span>Available Algorithms</span>
           </mat-card-title>
-          <table id="algorithm-table">
-            <thead>
-              <tr class="mat-header-row">
-                <th class="mat-header-cell">Algorithm Name</th>
-                <th class="mat-header-cell">Description </th>
-                <th class="mat-header-cell">Cost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Sentiment -->
-              <tr class="mat-row">
-                <td class="mat-cell"><strong class="algorithm-header">Sentiment</strong></td>
-                <td class="mat-cell">
-                  <p style="text-align: justify;" class="mb-0">
-                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                  </p>
-                </td>
-                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-              </tr>
-              <!-- Topic Recognition -->
-              <tr class="mat-row">
-                <td class="mat-cell"><strong class="algorithm-header">Topic Recognition</strong></td>
-                <td class="mat-cell">
-                  <p style="text-align: justify;" class="mb-0">
-                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                  </p>
-                </td>
-                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-              </tr>
-              <!-- Gender Author -->
-              <tr class="mat-row">
-                <td class="mat-cell"><strong class="algorithm-header">Gender Recognition</strong></td>
-                <td class="mat-cell">
-                  <p style="text-align: justify;" class="mb-0">
-                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                  </p>
-                </td>
-                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-              </tr>
-              <!-- Entity Recognition -->
-              <tr class="mat-row">
-                <td class="mat-cell"><strong class="algorithm-header">Entity Recognition</strong></td>
-                <td class="mat-cell">
-                  <p style="text-align: justify;" class="mb-0">
-                        Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                  </p>
-                </td>
-                <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
-              </tr>
-            </tbody>
-          </table>
+          <div id="algorithm-table">
+            <table>
+              <thead>
+                <tr class="mat-header-row">
+                  <th class="mat-header-cell">Algorithm Name</th>
+                  <th class="mat-header-cell">Description </th>
+                  <th class="mat-header-cell">Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Sentiment -->
+                <tr class="mat-row">
+                  <td class="mat-cell"><strong class="algorithm-header">Sentiment</strong></td>
+                  <td class="mat-cell">
+                    <p style="text-align: justify;" class="mb-0">
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+                <!-- Topic Recognition -->
+                <tr class="mat-row">
+                  <td class="mat-cell"><strong class="algorithm-header">Topic Recognition</strong></td>
+                  <td class="mat-cell">
+                    <p style="text-align: justify;" class="mb-0">
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+                <!-- Gender Author -->
+                <tr class="mat-row">
+                  <td class="mat-cell"><strong class="algorithm-header">Gender Recognition</strong></td>
+                  <td class="mat-cell">
+                    <p style="text-align: justify;" class="mb-0">
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+                <!-- Entity Recognition -->
+                <tr class="mat-row">
+                  <td class="mat-cell"><strong class="algorithm-header">Entity Recognition</strong></td>
+                  <td class="mat-cell">
+                    <p style="text-align: justify;" class="mb-0">
+                          Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                    </p>
+                  </td>
+                  <td class="mat-cell"><strong class="mb-0">Cost / Mention: Free</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </mat-card-content>
       </mat-card>
   </div>

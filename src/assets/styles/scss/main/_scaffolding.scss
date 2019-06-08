@@ -58,9 +58,6 @@ bdo[dir=ltr] {
 .mat-card-header-text{
   margin:0 !important;
 }
-.mat-card{
-  padding: 1rem !important;
-}
 
 img {
   max-width: 100%;
@@ -618,7 +615,7 @@ tr td.mat-cell{
 .mat-chip:not(.mat-basic-chip) {
   display: inline-block;
   padding: 8px 12px 8px 12px;
-  border-radius: 24px;
+  border-radius: 4px;
   font-size: 13px;
   line-height: 16px;
 }
@@ -937,4 +934,8 @@ div.hopscotch-bubble .hopscotch-nav-button.prev:hover {
 }
 .mat-menu-panel{
   max-width: none !important;
+}
+
+.mat-form-field-infix{
+  border-top: none !important;
 }
