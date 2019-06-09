@@ -28,20 +28,29 @@ export class DataboxesTestQueryService {
 
       // build the test query
       testQueryDatabox(details: any = {}): Observable<any> {
+        // QUERY EXPRESSION BUILDER
+        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
+        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+
         const getDataboxTestQuery = this.databox_items_test_query;
         const confirm_id_name = getDataboxTestQuery.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
-        const expression = details['optional-keywords'] ? `${details['required-keywords']} OR "${details['optional-keywords']}"` : `${details['required-keywords']}`;
+        
+        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
+          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
+          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
+          : `${requiredKeywords}`;
 
         // set the data
         const data = {
           '_id': this.generateID(), 
           'databox_id': details.databox_id,
-          'query-type': details['query-type'],
-          'expression': '',
-          'query':  details['advance-query'] ,
-          'optional-keywords': details['optional-keywords'],
-          'required-keywords': details['required-keywords'],
-          'excluded-keywords': details['excluded-keywords'],
+          'query_type': details['query_type'],
+          'expression': details['query_type'] === 'basic' ? expression : details['advance_query'],
+          'query':  details['advance_query'] ,
+          'optional_keywords': details['optional_keywords'],
+          'required_keywords': details['required_keywords'],
+          'excluded_keywords': details['excluded_keywords'],
         }
         
         sessionStorage.setItem('databox_test_query', JSON.stringify(data));

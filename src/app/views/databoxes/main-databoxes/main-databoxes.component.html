@@ -15,7 +15,6 @@
   </div>
 </div>
 
-
 <br>
 <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
   <img src="assets/images/icon-databox.png">
@@ -49,12 +48,13 @@
       	<mat-card-title class="" 
         (click)="navigateToDatabox(data._id, data.first_create, data.status)">
         {{data.databox_name}}</mat-card-title>
+
       	<mat-card-subtitle class="mat-color-primary" 
-        (click)="navigateToDatabox(data._id, data.first_create, data.status)">
-        {{data.datasource}} 
-        <small class="mat-color-gray">/</small>
-        <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
-          {{i !== data.location.length - 1 ? location + ' /' : location}}</small>
+          (click)="navigateToDatabox(data._id, data.first_create, data.status)">
+          {{data.datasource}} 
+          <small class="mat-color-gray">/</small>
+          <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
+            {{i !== data.location.length - 1 ? location + ' /' : location}}</small>
         </mat-card-subtitle>
 
       	<span fxFlex></span>
@@ -83,10 +83,13 @@
 
       <mat-card-content (click)="navigateToDatabox(data._id, data.first_create, data.status)" class="p-0 m-0">
         <div class="m-0 p-1">
-            <div>
-              <p class="m-0">
-                  {{data?.mentions}} results&nbsp;&nbsp;|&nbsp;&nbsp;{{data?.mentions_per_day}} per day
-              </p>
+            <div class="mt-1">
+              <div>
+                <p class="m-0">
+                    {{ (data?._id | DataboxIcons)?.mentions }} mentions&nbsp;&nbsp;|&nbsp;&nbsp;
+                    {{data?.mentions}} results&nbsp;&nbsp;|&nbsp;&nbsp;{{data?.mentions_per_day}} per day
+                </p>
+              </div>
             </div>
         </div>
 

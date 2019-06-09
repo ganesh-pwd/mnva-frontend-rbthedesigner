@@ -73,99 +73,94 @@
 <form id="edit-databox" [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
   <!-- Edit Query -->
   <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
+    <div class="buttonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
+      <!-- Dialogs for New Creation of Databox with no Status -->
+      <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'">
+        <button
+          mat-raised-button
+          class="mb-05"
+          (click)="cancelChanges()"
+        >
+          Cancel
+        </button>
 
-<div class="buttonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
-  
-  <!-- Dialogs for New Creation of Databox with no Status -->
-  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status !== 'Draft'">
-    <button
-      mat-raised-button
-      class="mb-05"
-      (click)="cancelChanges()"
-    >
-      Cancel
-    </button>
+        <button
+          mat-raised-button
+          class="mb-05"
+          color="primary"
+          (click)="
+            openDialog(
+              'Save as Draft',
+              'Are you sure you want to save this databox as draft? You can edit the details later. Please confirm to continue.',
+              false
+            )
+          "
+        >
+          Save as Draft
+        </button>
+        <button
+          mat-raised-button
+          class="mb-05 mat-bg-success"
+          (click)="openMentionsDialog('Create Databox')"
+        >
+          Create Databox
+        </button>
+      </div>
+      <!-- Dialogs for already Created Databox with Status as Draft -->
+      <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'">
+        <button
+          mat-raised-button
+          class="mb-05"
+          (click)="
+            openDialog(
+              'Exit without saving changes?',
+              'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
+              false
+            )
+          "
+        >
+          Cancel
+        </button>
 
-    <button
-      mat-raised-button
-      class="mb-05"
-      color="primary"
-      (click)="
-        openDialog(
-          'Save as Draft',
-          'Are you sure you want to save this databox as draft? You can edit the details later. Please confirm to continue.',
-          false
-        )
-      "
-    >
-      Save as Draft
-    </button>
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-success"
-      (click)="openMentionsDialog('Create Databox')"
-    >
-      Create Databox
-    </button>
-  </div>
-
-  <!-- Dialogs for already Created Databox with Status as Draft -->
-  <div *ngIf="checkIfCreateOrEdit === 'Create' && data?.status === 'Draft'">
-    <button
-      mat-raised-button
-      class="mb-05"
-      (click)="
-        openDialog(
-          'Exit without saving changes?',
-          'Are you sure you want to cancel all the changes you applied. Please confirm to proceed.',
-          false
-        )
-      "
-    >
-      Cancel
-    </button>
-
-    <button
-      mat-raised-button
-      class="mb-05"
-      color="primary"
-      (click)="
-        openDialogUpdate(
-          'Save Changes',
-          'Are you sure you want to save the changes for this databox? Please confirm to continue.'
-        )
-      "
-    >
-      Save Changes
-    </button>
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-success"
-      (click)="openMentionsDialogUpdate('Activate Databox', data?.mentions)"
-    >
-      Activate Databox
-    </button>
-  </div>
-  <!-- Dialogs for already Created Databox with Status as Active -->
-  <div *ngIf="checkIfCreateOrEdit === 'Edit'">
-    <button
-      mat-raised-button
-      class="mb-05"
-      (click)="cancelChanges()"
-    >
-      Cancel
-    </button>
-    <button
-      mat-raised-button
-      class="mb-05 mat-bg-success"
-      (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
-    >
-      Save Changes
-    </button>
-  </div>
-</div>
-
-
+        <button
+          mat-raised-button
+          class="mb-05"
+          color="primary"
+          (click)="
+            openDialogUpdate(
+              'Save Changes',
+              'Are you sure you want to save the changes for this databox? Please confirm to continue.'
+            )
+          "
+        >
+          Save Changes
+        </button>
+        <button
+          mat-raised-button
+          class="mb-05 mat-bg-success"
+          (click)="openMentionsDialogUpdate('Activate Databox', data?.mentions)"
+        >
+          Activate Databox
+        </button>
+      </div>
+      <!-- Dialogs for already Created Databox with Status as Active -->
+      <div *ngIf="checkIfCreateOrEdit === 'Edit'">
+        <button
+          mat-raised-button
+          class="mb-05"
+          (click)="cancelChanges()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          class="mb-05 mat-bg-success"
+          (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
     <mat-card class="m-0 p-0">
       <mat-card-header class="p-1 light-gray">
         <mat-card-title class="mat-color-primary">
@@ -1026,7 +1021,6 @@
           </mat-card>
         </div>
       </div>
-
     </mat-card>
   </div>
 </form>

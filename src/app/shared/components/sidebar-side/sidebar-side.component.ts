@@ -4,10 +4,13 @@ import { NavigationService } from '../../services/navigation.service';
 import { ThemeService } from '../../services/theme.service';
 import { Subscription } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
+
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserBillingService } from '../../../shared/services/auth/user-billing-info.service';
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { ProductShopService } from '../../../views/products/products-shop.service';
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 
 @Component({
   selector: 'app-sidebar-side',
@@ -31,10 +34,12 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   constructor(
-    private navService: NavigationService,
-    private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private navService: NavigationService,
+    private userService: UserService,
+    private userBillingService: UserBillingService,
+    private userPlanDetailsService: UserPlanDetailsService,
     public themeService: ThemeService,
     public databoxesService: DataboxesService,
     public minervaAccountChangeService: MinervaAccountChangeService,
@@ -50,7 +55,7 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
       this.loggedInUser = user;
 
       // set selected account
-      this.selected = this.loggedInUser.accountName;
+      this.selected = this.loggedInUser.account_name;
       this.userList = (JSON.parse(sessionStorage.getItem('accountLists')));
     });
   }
@@ -78,30 +83,43 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
     if(checkTemplateGallery) url = checkTemplateGallery // to refresh template gallery
 
     // refresh components
-    this.router.navigateByUrl('', { skipLocationChange: true })
+    this.router.navigateByUrl('/sessions/signin', { skipLocationChange: true })
     .then(() => this.getSidebarItems())
     .then(() => {
       this.selected = selected.value;
 
       // set selected user to session storage and behavior subject
-      const setSelectedUser = this.userList.find(el => el.accountName === selected.value);
+      const setSelectedUser = this.userList.find(el => el.account_name === selected.value);
         // set user
         this.userService.setUser(setSelectedUser);
+        this.userService.setConnector(setSelectedUser.plan_id);
+        this.userService.setDatasource(setSelectedUser.plan_id);
+        
         this.minervaAccountChangeService.setImage(setSelectedUser.profile_image)
         sessionStorage.setItem('loggedInUser', JSON.stringify(setSelectedUser));
 
         // find and set user billing info
-        const billingInfo = this.userService.findUserBillingInfo(setSelectedUser._id);
+        const billingInfo = this.userBillingService.findUserBillingInfo(setSelectedUser._id);
+
+        // find and set user plan details
+        const userPlanDetails = this.userPlanDetailsService.findUserUserPlanDetails(setSelectedUser._id);
         
         // set selected billing info for the selected uer
         if(billingInfo){
-          this.userService.setUserBillingInfo(billingInfo);
+          this.userBillingService.setUserBillingInfo(billingInfo);
           sessionStorage.setItem('billingInfo', JSON.stringify(billingInfo));
+        }
+
+        if(userPlanDetails){
+          this.userPlanDetailsService.setUserUserPlanDetails(userPlanDetails);
+          sessionStorage.setItem('userPlanDetails', JSON.stringify(userPlanDetails));
         }
 
         // remove cart items;
         this.cartReq = this.shopService.removeAllFromCart().subscribe(r => r);
     })
+    .then(() => sessionStorage.removeItem('notifications'))
+    .then(() => sessionStorage.removeItem('notificationCount'))
     .then(() => this.router.navigate([url]))
 
   }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { MinervaAccountChangeService } from "../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service";
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,6 +16,7 @@ export class AccountAlgorithmCreditRemainingComponent {
 
   userImage: string;
   public loggedInUser;
+  public userPlanDetails;
 
   public basic: number = 100;
   public professional: number = 250;
@@ -25,22 +27,25 @@ export class AccountAlgorithmCreditRemainingComponent {
 
   constructor(
     private readonly minervaAccountChangeService: MinervaAccountChangeService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private userPlanDetailsService: UserPlanDetailsService,
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(
       result => (this.userImage = result)
     );
-    userService.userData$.subscribe(user => {
-      this.loggedInUser = user;
+    userService.userData$.subscribe(user => this.loggedInUser = user);
 
-      if (this.loggedInUser) {
-        const userAccountType =
-          this.loggedInUser.accountType === 'Basic'
-            ? this.basic
-            : this.professional;
+    // set user plan details
+    userPlanDetailsService.userPlanData$.subscribe(user => {
+      if(user){ 
+        this.userPlanDetails = user;
 
-        const remaining = userAccountType - this.loggedInUser.algorithmCredits;
-        this.remaining = (remaining / userAccountType) * 100;
+        let userAccountType = this.userPlanDetails.account_type === 'Basic' 
+          ? this.basic 
+          : this.professional;
+
+          let remaining = userAccountType - this.userPlanDetails.mentions;
+          this.remaining = (remaining/userAccountType) * 100;
       }
     });
   }

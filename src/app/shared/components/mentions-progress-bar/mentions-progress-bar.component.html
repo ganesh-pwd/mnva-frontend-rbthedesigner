@@ -1,5 +1,5 @@
 <mat-progress-bar 
-	*ngIf="loggedInUser.accountType !== 'Enterprise'"
+	*ngIf="userPlanDetails.account_type !== 'Enterprise'"
 	[mode]="'determinate'" 
 	[value]="remaining" 
 	[ngClass]="remaining >= 80 && remaining <= 99 

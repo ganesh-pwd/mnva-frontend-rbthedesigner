@@ -119,7 +119,6 @@
           </mat-card-content>
         </mat-card>
     </div>
-
     <br><br>
   </mat-tab>
 
@@ -150,7 +149,6 @@
               </mat-card-subtitle>
             </mat-card-header>
             <table mat-table #categoryTable [dataSource]="dataSource">
-
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let category"> {{category.name}} </td>
@@ -540,8 +538,6 @@
                   <img src="/assets/images/power_bi.png" class="connector-logo" >
                   <span class="title-header">Power BI <br>
                     <small class="text-muted">Microsoft</small></span>
-
-
                 </mat-card-title>
               </mat-card-header>
 
@@ -587,7 +583,6 @@
 
               <mat-divider></mat-divider>
               <br>
-              
               <mat-card-content (click)="openDialog('How to connect to Data Studio', 'Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.', false, dataStudio, 'dataStudio')">
                 <p class="">
                 Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
@@ -596,7 +591,6 @@
             </mat-card>
           </div>
         </div>
-
         <br>
         <!-- Notification -->
         <div fxLayout="row" fxLayoutWrap="wrap" 

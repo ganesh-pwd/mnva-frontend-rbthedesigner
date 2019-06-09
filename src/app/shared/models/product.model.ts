@@ -10,7 +10,7 @@ export class Product {
   };
   public ratings?: {
     rating: number,
-    ratingCount: number
+    rating_count: number
   };
   public features?: string[];
   public photo?: string;

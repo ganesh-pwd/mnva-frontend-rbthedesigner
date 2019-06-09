@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../../../shared/models/product.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 
 @Component({
   selector: 'app-main-products',
@@ -23,6 +24,7 @@ export class MainProductsComponent implements OnInit {
   public cartData: any;
   public filterForm: FormGroup;
   public loggedInUser;
+  public userPlanDetails;
   public billedAnnually = false;
   // 5 keyword - 17.5
 
@@ -30,8 +32,19 @@ export class MainProductsComponent implements OnInit {
     private shopService: ProductShopService,
     private snackBar: MatSnackBar,
     private userService: UserService,
+    private userPlanDetailsService: UserPlanDetailsService,
     private fb: FormBuilder,
-  ) { userService.userData$.subscribe((user) => this.loggedInUser = user); }
+  ) { 
+    // get user data
+    userService.userData$
+    .subscribe((user) => 
+      this.loggedInUser = user); 
+
+    // get user plan details
+    userPlanDetailsService.userPlanData$
+    .subscribe((user) => 
+      this.userPlanDetails = user);
+  }
 
   ngOnInit() {
     this.buildFilterForm(this.shopService.initialFilters);

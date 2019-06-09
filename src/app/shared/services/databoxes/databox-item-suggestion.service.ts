@@ -75,6 +75,8 @@ export class DataboxSuggestionService {
       }
 
 
+
+
   /* @FUNCTIONS FOR GENERATING ID AND SETTING THE SELECTED DATABOX */
       // get max index
       getMaxIndex(item) { return Math.max(...item.map(x => x.index)) }
@@ -89,5 +91,11 @@ export class DataboxSuggestionService {
         }
 
         return id;
+      }
+
+      private removeDataSimple(array, item_storage, index, updatedArray){
+        array.splice(index, 1);
+        updatedArray = array;
+        sessionStorage.setItem(item_storage, JSON.stringify(updatedArray));
       }
 }

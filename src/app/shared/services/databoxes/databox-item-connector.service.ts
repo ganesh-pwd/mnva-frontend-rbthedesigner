@@ -32,12 +32,22 @@ export class DataboxConnectorService {
   // ******* Implement your APIs ********
 
   /* @GET DATABOX CONNECTOR DATA FROM THE FAKE DB */
+      // get all databox connectors
       getAllItems(){
         const row = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
+
         return of(row.slice());
       }
 
-      // get databox by id
+      // get all databoxes connector for the currently selected databox (observable)
+      getDataboxConnectors(databox_id){
+        const row = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
+        const filter = row.filter(el => el.databox_id === databox_id)
+
+        return of(filter.slice());
+      }
+
+      // get single databox connector by id
       getSingleItem(id) {
         const row = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
 
@@ -46,22 +56,23 @@ export class DataboxConnectorService {
         return databox_item_connector;
       }
 
+
       // create data connector table if databox is new
       addConnectorTable(id){
-        const databoxConnectors  = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
+        const data_connectors  = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
 
         // set the data initially
         const data = {
           '_id': this.generateID(),
           'databox_id': id, // Foreign key
-          'algorithmConnectors': [],
-          'dataConnectors': [],
+          'algorithm_connectors': [],
+          'data_connectors': [],
         };
 
-        databoxConnectors.push(data);
+        data_connectors.push(data);
 
-        this.databox_item_connectors = databoxConnectors;
-        sessionStorage.setItem('databox_item_connectors', JSON.stringify(databoxConnectors));
+        this.databox_item_connectors = data_connectors;
+        sessionStorage.setItem('databox_item_connectors', JSON.stringify(data_connectors));
       }
 
 
@@ -77,17 +88,20 @@ export class DataboxConnectorService {
         const databox          = getDataboxItem[confirm_id_name];
 
         const databox_item_connectors = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
-        const dataConnector = databox_item_connectors.findIndex(el => el.databox_id === databox._id);
+        const data_connector = databox_item_connectors.findIndex(el => el.databox_id === databox._id);
 
-        console.log(databox._id, dataConnector, databox_item_connectors)
-        const index = databox_item_connectors[dataConnector].algorithmConnectors.findIndex(el => el === connector);
+        // check connector index
+        const index = databox_item_connectors[data_connector]
+          .algorithm_connectors
+          .findIndex(el => 
+            el.algorithm === connector.algorithm);
 
         // set the data
         if(index === -1 && checked === true)
-          databox_item_connectors[dataConnector].algorithmConnectors.push(connector);
+          databox_item_connectors[data_connector].algorithm_connectors.push(connector);
 
         if(index > -1 && checked === false)
-          databox_item_connectors[dataConnector].algorithmConnectors.splice(index, 1);;
+          databox_item_connectors[data_connector].algorithm_connectors.splice(index, 1);;
 
         databox.last_updated = new Date();
 
@@ -96,7 +110,7 @@ export class DataboxConnectorService {
         sessionStorage.setItem('databox_item_connectors', JSON.stringify(databox_item_connectors));
         sessionStorage.setItem('databox_updated', `Algorithm Connector for ${databox.databox_name} Databox has been updated`);
 
-        return of(databox_item_connectors[dataConnector].dataConnectors.slice()).pipe(delay(500));
+        return of(databox_item_connectors[data_connector].algorithm_connectors.slice()).pipe(delay(500));
       }
 
 
@@ -107,17 +121,21 @@ export class DataboxConnectorService {
         const databox          = getDataboxItem[confirm_id_name];
 
         const databox_item_connectors = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
-        const dataConnector = databox_item_connectors.findIndex(el => el.databox_id === databox._id);
+        const data_connector = databox_item_connectors.findIndex(el => el.databox_id === databox._id);
 
-        console.log(databox._id, dataConnector, databox_item_connectors)
-        const index = databox_item_connectors[dataConnector].dataConnectors.findIndex(el => el === connector);
+        // check connector index
+        const index = databox_item_connectors[data_connector]
+          .data_connectors
+          .findIndex(el => 
+            el.data_connector === connector.data_connector);
+
 
         // set the data
         if(index === -1 && checked === true)
-          databox_item_connectors[dataConnector].dataConnectors.push(connector);
+          databox_item_connectors[data_connector].data_connectors.push(connector);
 
         if(index > -1 && checked === false)
-          databox_item_connectors[dataConnector].dataConnectors.splice(index, 1);;
+          databox_item_connectors[data_connector].data_connectors.splice(index, 1);;
 
         databox.last_updated = new Date();
 
@@ -126,7 +144,15 @@ export class DataboxConnectorService {
         sessionStorage.setItem('databox_item_connectors', JSON.stringify(databox_item_connectors));
         sessionStorage.setItem('databox_updated', `Data Connector for ${databox.databox_name} Databox has been updated`);
 
-        return of(databox_item_connectors[dataConnector].dataConnectors.slice()).pipe(delay(500));
+        return of(databox_item_connectors[data_connector].data_connectors.slice()).pipe(delay(500));
+      }
+
+      removeDataboxItemConnectors(id){
+        const databoxItemConnector = JSON.parse(sessionStorage.getItem('databox_item_connectors')) || this.databox_item_connectors;
+        const index = databoxItemConnector.findIndex(el => el.databox_id === id);
+
+        // reusable code for removing data
+        this.removeDataSimple(databoxItemConnector, 'databox_item_connectors', index, this.databox_item_connectors);
       }
 
 
@@ -145,5 +171,11 @@ export class DataboxConnectorService {
         }
 
         return id;
+      }
+
+      private removeDataSimple(array, item_storage, index, updatedArray){
+        array.splice(index, 1);
+        updatedArray = array;
+        sessionStorage.setItem(item_storage, JSON.stringify(updatedArray));
       }
 }

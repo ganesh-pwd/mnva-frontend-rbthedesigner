@@ -3,17 +3,17 @@
     <div class="card-title-text">Mentions Plan</div>
     <mat-divider></mat-divider>
   </mat-card-title>
-  <mat-card-content *ngIf="loggedInUser">
+  <mat-card-content *ngIf="userPlanDetails">
     <div>
       <div>
         <p class="m-0">Mentions Remaining</p>
-        <p class="text-muted" *ngIf="loggedInUser.accountType !== 'Enterprise'">
-      {{loggedInUser.mentions}} Mentions</p>
-      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+        <p class="text-muted" *ngIf="userPlanDetails.account_type !== 'Enterprise'">
+      {{userPlanDetails.remaining_mentions}} Mentions</p>
+      <p class="mat-color-primary" *ngIf="userPlanDetails.account_type === 'Enterprise'">
       Unlimited Mentions</p>
       </div>
       <span fxFlex></span> 
-      <div *ngIf="loggedInUser.accountType !== 'Enterprise'">
+      <div *ngIf="userPlanDetails.account_type !== 'Enterprise'">
         <p class="m-0"><a class="text-muted mat-color-primary"
         routerLink="/products/mentions-credit">
         Add Mentions

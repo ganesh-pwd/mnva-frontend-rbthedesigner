@@ -41,39 +41,37 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #accountMenu="matMenu">
-
     <div class="account-type p16">
-      <span> <strong> {{loggedInUser.accountType}} </strong></span>
+      <span> <strong> {{userPlanDetails.account_type}} </strong></span>
       <a routerLink="/products/account-type" class="menu-link" 
-      *ngIf="loggedInUser.accountType !== 'Enterprise'">Upgrade plan</a>
+      *ngIf="userPlanDetails.account_type !== 'Enterprise'">Upgrade plan</a>
     </div>
-
     <div class="mentions-remaining p16">
       <div>
-        <p class="m-0" *ngIf="loggedInUser.accountType !== 'Enterprise'">{{loggedInUser.mentions}} Mentions Remaining</p>
+        <p class="m-0" *ngIf="userPlanDetails.accountType !== 'Enterprise'">{{loggedInUser.mentions}} Mentions Remaining</p>
       </div>
-      <span fxFlex *ngIf="loggedInUser.accountType !== 'Enterprise'"></span>
+      <span fxFlex *ngIf="userPlanDetails.accountType !== 'Enterprise'"></span>
       <a routerLink="/products/mentions-credit" class="menu-link small" 
-      *ngIf="loggedInUser.accountType !== 'Enterprise'">Add mentions</a>
-      <p class="mat-color-primary" *ngIf="loggedInUser.accountType === 'Enterprise'">
+        *ngIf="userPlanDetails.accountType !== 'Enterprise'">Add mentions</a>
+      <p class="mat-color-primary" *ngIf="userPlanDetails.account_type === 'Enterprise'">
       Unlimited Mentions</p>
     </div>
 
     <div class="p16">
       <app-mentions-progress-bar></app-mentions-progress-bar>
-      <p class="mt-1" *ngIf="loggedInUser.accountType !== 'Enterprise'">Your quota resets in 10 days</p>
+      <p class="mt-1" *ngIf="userPlanDetails.account_type !== 'Enterprise'">Your quota resets in 10 days</p>
       <p class="mt-1 mat-color-red"> Your free trail has expired, please upgrade your plan.</p>
     </div>
 
     <hr>
 
-    <div class="account-type p16 mt-1"> 
+    <div class="account-type p16 mt-1">
       <strong> Algorithm Credit </strong>
     </div>
 
     <div class="mentions-remaining p16">
       <div>
-        <p class="m-0">${{loggedInUser.algorithmCredits}} in credit remaining</p>
+        <p>${{userPlanDetails.algorithm_credits}} in credit remaining</p>
       </div>  
       <span fxFlex></span>
       <a routerLink="/products/algorithm-credit" class="menu-link small">Add credit </a>
@@ -90,9 +88,10 @@
     </div>
 
     <hr>
+    
     <button mat-menu-item [routerLink]="['/accounts/minerva-notifications']">
       <mat-icon>home</mat-icon>
-      <span>Minerva News</span>
+      <span>Notifications</span>
     </button>
     <button mat-menu-item [routerLink]="['/accounts/settings']">
       <mat-icon>settings</mat-icon>

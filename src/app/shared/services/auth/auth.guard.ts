@@ -7,6 +7,7 @@ export class AuthGuard implements CanActivate {
   private isAuthenticated = true; // Set this value dynamically
   public loggedInUser;
 
+  // function for filtering users and authenticating route
   constructor(private router: Router, private userService: UserService) {
     userService.userData$.subscribe(user => this.loggedInUser = user);
   }

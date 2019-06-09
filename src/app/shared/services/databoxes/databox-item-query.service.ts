@@ -48,13 +48,13 @@ export class DataboxesQueryService {
       // create databox item query
       addItemQuery(id, details){
         // QUERY EXPRESSION BUILDER
-        const requiredKeywords = details['required-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-        const optionalKeywords = details['optional-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
-        const excludedKeywords = details['excluded-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
+        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
 
-        const expression = details['optional-keywords'].length > 0 && details['excluded-keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
-          : details['optional-keywords'].length > 0 && details['excluded-keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
-          : details['optional-keywords'].length === 0 && details['excluded-keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
+        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
+          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
+          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
           : `${requiredKeywords}`;
 
         const databoxItemQuery = JSON.parse(sessionStorage.getItem('databox_item_query')) || this.databox_item_query;
@@ -62,17 +62,18 @@ export class DataboxesQueryService {
         databoxItemQuery.push({
           '_id': this.generateID(), 
           'databox_id': id,
-          'query-type': details['query-type'],
-          'expression': expression,
-          'query':  details['advance-query'] ,
-          'optional-keywords': details['optional-keywords'],
-          'required-keywords': details['required-keywords'],
-          'excluded-keywords': details['excluded-keywords'],
+          'query_type': details['query_type'],
+          'expression': details['query_type'] === 'basic' ? expression : details['advance_query'],
+          'query':  details['advance_query'] ,
+          'optional_keywords': details['optional_keywords'],
+          'required_keywords': details['required_keywords'],
+          'excluded_keywords': details['excluded_keywords'],
         });
 
         this.databox_item_query = databoxItemQuery;
         sessionStorage.setItem('databox_item_query', JSON.stringify(this.databox_item_query));
       }
+
 
       // update databox item query
       updateItemQuery(id, details){
@@ -80,25 +81,26 @@ export class DataboxesQueryService {
         const index = databoxItemQuery.findIndex(el => el.databox_id === id);
 
         // QUERY EXPRESSION BUILDER
-        const requiredKeywords = details['required-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-        const optionalKeywords = details['optional-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
-        const excludedKeywords = details['excluded-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
+        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
 
-        const expression = details['optional-keywords'].length > 0 && details['excluded-keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
-          : details['optional-keywords'].length > 0 && details['excluded-keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND (NOT (${excludedKeywords}))` 
-          : details['optional-keywords'].length === 0 && details['excluded-keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
+        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
+          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND (NOT (${excludedKeywords}))` 
+          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
           : `${requiredKeywords}`;
 
-        databoxItemQuery[index]['query-type'] = details['query-type'];
-        databoxItemQuery[index]['expression'] = expression;
-        databoxItemQuery[index]['optional-keywords'] = details['optional-keywords'];
-        databoxItemQuery[index]['required-keywords'] = details['required-keywords'];
-        databoxItemQuery[index]['excluded-keywords'] = details['excluded-keywords'];
-        databoxItemQuery[index]['query'] = details['advance-query'];
+        databoxItemQuery[index]['query_type'] = details['query_type'];
+        databoxItemQuery[index]['expression'] = details['query_type'] === 'basic' ? expression : details['advance_query'];
+        databoxItemQuery[index]['optional_keywords'] = details['optional_keywords'];
+        databoxItemQuery[index]['required_keywords'] = details['required_keywords'];
+        databoxItemQuery[index]['excluded_keywords'] = details['excluded_keywords'];
+        databoxItemQuery[index]['query'] = details['advance_query'];
 
         this.databox_item_query = databoxItemQuery;
         sessionStorage.setItem('databox_item_query', JSON.stringify(this.databox_item_query));
       }
+
 
       // delete databox item query
       removeItemQuery(id){

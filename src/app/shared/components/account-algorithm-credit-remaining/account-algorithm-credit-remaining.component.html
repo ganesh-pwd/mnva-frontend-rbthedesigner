@@ -3,11 +3,11 @@
     <div class="card-title-text">Algorithm Credit</div>
     <mat-divider></mat-divider>
   </mat-card-title>
-  <mat-card-content *ngIf="loggedInUser">
+  <mat-card-content *ngIf="userPlanDetails">
     <div class="pb-1">
       <div>
         <p class="m-0">Algorithm Credit Remaining</p>
-        <p class="text-muted m-0">${{loggedInUser.algorithmCredits}} in credit remaining</p>
+        <p class="text-muted m-0">${{userPlanDetails.algorithm_credits}} in credit remaining</p>
       </div>
       <span fxFlex></span> 
       <div> 
@@ -18,7 +18,7 @@
       </div>
     </div>  
     <div class="pb-1">
-      <mat-progress-bar *ngIf="loggedInUser"
+      <mat-progress-bar *ngIf="userPlanDetails"
       [ngClass]="remaining >= 80 && remaining <= 99 
         ? 'yellow-progress': remaining >= 100 
         ? 'red-progress': 'blue-progress'"

@@ -58,6 +58,7 @@ import { EgretSideNavToggleDirective } from './directives/egret-side-nav-toggle.
 import { RelativeTimePipe } from './pipes/relative-time.pipe';
 import { ExcerptPipe } from './pipes/excerpt.pipe';
 import { SearchPipe } from './pipes/search-pipe';
+import { DataboxPipe } from './pipes/databox-item.pipe';
 
 // SERVICES
 import { ThemeService } from './services/theme.service';
@@ -126,6 +127,7 @@ const pipes = [
   RelativeTimePipe,
   ExcerptPipe,
   SearchPipe,
+  DataboxPipe
 ];
 
 const classesToInclude = [

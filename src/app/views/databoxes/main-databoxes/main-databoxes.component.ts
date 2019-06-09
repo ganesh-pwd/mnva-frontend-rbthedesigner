@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main-databoxes.component.html',
   styleUrls: ['./main-databoxes.component.scss']
 })
-export class MainDataboxesComponent implements OnInit, OnDestroy {
+export class MainDataboxesComponent implements OnDestroy, AfterViewInit {
   private getItemSub: Subscription;
   private getDataConnectorReq: Subscription;
 
@@ -28,14 +28,18 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   public databox_id_new: string;
 
   public databoxConnectors: any;
+  public algorithmConnectors: any[];
 
-  editorData = `( Type your desired keywords )`;
+  public dataConnectors;
+  public connectorsDetails: any[];
 
-  constructor(private databoxesService: DataboxesService,
+  constructor(
+    private databoxesService: DataboxesService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private databoxConnectorService: DataboxConnectorService,
     private router: Router,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar
+  ) {
 
     this.isDataboxDeleted = sessionStorage.getItem('deleted_databox_true');
     if (this.isDataboxDeleted) this.openSnackBar(this.isDataboxDeleted);  
@@ -47,7 +51,7 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
     if (this.isDataboxUpdated) this.openSnackBar(this.isDataboxUpdated);  
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.databox_id_new = this.generateID();
 
     // get databox items
@@ -56,11 +60,8 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
+    if (this.getDataConnectorReq) this.getDataConnectorReq.unsubscribe();
   }
-
-  
-
-  
 
   // navigate to databox details
   navigateToDatabox(id: string, first: boolean, status: string) {
@@ -73,21 +74,21 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   // Get databox items created by users
   getDataboxes() {
     this.getItemSub = this.databoxesService.getItems()
-      .subscribe(data => {
-        if (data) {
-          this.databoxes = data;
+      .subscribe(result => {
+        if (result) {
+          this.databoxes = result;
           this.getDataboxConnectors();
         }
       });
   }
 
   // get databox connectors
-  getDataboxConnectors(){
+  getDataboxConnectors() {
     this.getDataConnectorReq = this.databoxConnectorService
     .getAllItems()
     .subscribe(result => {
-      this.databoxConnectors = result;
-    })
+      if(result) this.databoxConnectors = result;
+    });
   }
 
   filterConnector(id){

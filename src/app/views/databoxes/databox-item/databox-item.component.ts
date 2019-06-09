@@ -9,6 +9,8 @@ import { MainDataboxesDialogService } from '../../../shared/services/databoxes/d
 import { DataboxAddSuggestionService } from '../../../shared/services/databoxes/dialog-add-suggestions/dialog-add-suggestions.service';
 import { DataboxCategoryService } from '../../../shared/services/databoxes/databox-item-category.service';
 import { DataboxConnectorService } from '../../../shared/services/databoxes/databox-item-connector.service';
+import { DataboxAlgorithmsService } from '../../../shared/services/databoxes/databox-item-algorithm.service';
+import { DataboxItemMentionService } from '../../../shared/services/databoxes/databox-item-mention.service';
 import { UserService } from '../../../shared/services/auth/user-services';
 import { HotTableRegisterer } from '@handsontable-pro/angular';
 import { DataboxAlgorithmDialogService } from '../../../shared/services/databoxes/dialogs-algorithm/dialogs-algorithm.services';
@@ -37,7 +39,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public paginatedData: any;
   public selectedOption = false;
   public id: string;
-  public mentions: number;
+  public mentions: any;
   public creditRemaining: number;
   public showAdvanceAccord: boolean = true;
 
@@ -56,10 +58,13 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   @ViewChild(MatSidenav) private sideNav: MatSidenav;
 
   public databoxItemTable: any;
+  public databoxAlgorithm: any;
   public hotId: string = 'databoxItemTable';
   public selectedHero: any;
   public tableSettings: {};
   public changeList: any[];
+
+  public categoryMentions = [2, 4];
   public categoryRemaining: number;
   public categoryUsed: number;
   public subcategoryRemaining: number;
@@ -76,7 +81,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public sharedChartOptions: any = {
     responsive: true,
     legend: {
-      display: true,
+      display: false,
       position: 'bottom'
     }
   };
@@ -151,6 +156,8 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private databoxCategoryService: DataboxCategoryService,
     private databoxConnectorService: DataboxConnectorService,
+    private databoxAlgorithmsService: DataboxAlgorithmsService,
+    private databoxItemMentionService: DataboxItemMentionService,
     private userService: UserService,
     private formBuilder: FormBuilder,
     private loader: AppLoaderService
@@ -163,20 +170,27 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       // get selected databox
       this.databoxesService
       .apiData$
-      .subscribe(result => this.databoxItemData = result);
+      .subscribe(result => 
+        this.databoxItemData = result);
 
       // category items
       this.databoxCategoryService
       .categoryItems$
-      .subscribe(_result => this.dataSource = _result || []);
+      .subscribe(_result => 
+        this.dataSource = _result || []);
 
       // test category data
       this.databoxCategoryService
       .testData$
-      .subscribe(_result => this.testCategory = _result);
+      .subscribe(_result => 
+        this.testCategory = _result);
+
+      // get selected user details
+      userService.userData$
+      .subscribe((user) => 
+        this.loggedInUser = user); 
 
       this.selectedTab = parseInt(sessionStorage.getItem('selectedTabDatabox')) || 0;
-      userService.userData$.subscribe((user) => this.loggedInUser = user); 
     }
 
 
@@ -210,28 +224,28 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   // function for setting the slider to true or false
   slideToggle(data) {
     switch (true) {
-      case data === 'sentiment': {
+      case data === 'Sentiment': {
         if(this.sentiment) this.sentiment = false;
           else this.sentiment = true;
 
         break;
       }
 
-      case data === 'topicRecognition': {
+      case data === 'Topic Recognition': {
         if(this.topicRecognition) this.topicRecognition = false;
           else this.topicRecognition = true;
 
         break;
       }
 
-      case data === 'genderAuthor': {
+      case data === 'Gender Author': {
         if(this.genderAuthor) this.genderAuthor = false;
           else this.genderAuthor = true;
 
         break;
       }
 
-      case data === 'entityRecognition': {
+      case data === 'Entity Recognition': {
         if(this.entityRecognition) this.entityRecognition = false;
           else this.entityRecognition = true;
 
@@ -244,7 +258,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   // function for setting the slider to true or false
   clickSlideToggle(data){
     switch (true) {
-      case data === 'sentiment': {
+      case data.algorithm === 'Sentiment': {
         if(this.sentiment) this.sentiment = false;
           else this.sentiment = true;
 
@@ -253,7 +267,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
 
-      case data === 'topicRecognition': {
+      case data.algorithm === 'Topic Recognition': {
         if(this.topicRecognition) this.topicRecognition = false;
           else this.topicRecognition = true;
 
@@ -262,7 +276,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
 
-      case data === 'genderAuthor': {
+      case data.algorithm === 'Gender Author': {
         if(this.genderAuthor) this.genderAuthor = false;
           else this.genderAuthor = true;
 
@@ -271,7 +285,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
         break;
       }
 
-      case data === 'entityRecognition': {
+      case data.algorithm === 'Entity Recognition': {
         if(this.entityRecognition) this.entityRecognition = false;
           else this.entityRecognition = true;
 
@@ -281,7 +295,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       }
     }
   }
-
 
   selectAccordion(accord) {
     switch (true) {
@@ -314,7 +327,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       });
     });
   }
-
   // Get databox items created by users with parameter id
   getSingleItem() {
     this.databoxesService
@@ -322,7 +334,6 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
       .subscribe(
         (data) => {
           if (data && data.status === 'Active' || data.status === 'Paused') {
-            this.mentions = data.mentions;
             this.creditRemaining = data.credit_remaining;
 
             this.data = data;
@@ -331,18 +342,60 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
             // get databox categories
             this.getDataboxCategory(this.id);
 
+            // get databox algorithms
+            this.getDataboxAlgorithms();
+
+            // get databox mentions
+            this.getDataboxMentions(this.id);
+
             // slide apply automatically toggle
             // set data connectors
             this.databoxConnectorService
             .getSingleItem(this.id)
-            .algorithmConnectors
-            .forEach(el => this.slideToggle(el));
+            .algorithm_connectors
+            .forEach(el => 
+              this.slideToggle(el.algorithm));
+
+            
 
             this.loader.close();
           }
           if (!data) this.router.navigate(['/sessions/404']);
         },
         (err) => this.router.navigate(['/sessions/404']));
+  }
+
+  // get databox mention
+  getDataboxMentions(id) {  
+    this.mentions = this.databoxItemMentionService.getSingleItem(id);
+  }
+
+  // get databox table search item
+  getDataboxItemResult() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    const page = this.activatedRoute.snapshot.paramMap.get('page');
+
+    this.getTableReq = this.databoxItemResultService.getItems(id)
+    .subscribe(data => {
+      this.databoxItemTable = data;
+      this.paginatedData    = this.paginateDatabox(this.databoxItemTable, page ? parseInt(page) : 1);
+
+      this.paginatedData['items'].map(el => {
+        const arr = [];
+        for (let item in el) {
+          arr.push(el[item]);
+        }
+
+        return arr;
+      });
+    });
+  }
+
+  // get databox algorithms
+  getDataboxAlgorithms(){
+    this.databoxAlgorithmsService
+    .getItems()
+    .subscribe(result => this.databoxAlgorithm = result);
   }
 
   // Get Databox Category

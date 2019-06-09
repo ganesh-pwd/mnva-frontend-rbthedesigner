@@ -9,6 +9,7 @@ import { MinervaBillingHistoryDataSource } from './minerva-billing-history-datas
 import { MinervaAccountImageDialogService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-image-dialog.service';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserBillingService } from '../../../shared/services/auth/user-billing-info.service';
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -56,6 +57,7 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
     private minervaAccountImageDialogService: MinervaAccountImageDialogService,
     private minervaAccountChangeService: MinervaAccountChangeService,
     private userService: UserService,
+    private userBillingService: UserBillingService,
     private databoxesService: DataboxesService,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
@@ -65,7 +67,7 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
       this.userImage = sessionStorage.getItem('photoUrl');
     }
     userService.userData$.subscribe((user) => this.loggedInUser = user);
-    userService.userBillingDetails$.subscribe((billingInfo) => {
+    userBillingService.userBillingDetails$.subscribe((billingInfo) => {
       this.userBillingInfo = billingInfo;
         this.billingFormGroup();
         if(billingInfo) this.setBillingInfoFormGroup(billingInfo);
@@ -190,7 +192,7 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
             'zip': this.billingInfoForm.get('zip').value,
           }
 
-          this.updateReq = this.userService
+          this.updateReq = this.userBillingService
           .saveUserBillingInfo(data)
           .subscribe(result => {
             this.snackBar.open('Your billing info details has been updated.', 'close');
