@@ -99,7 +99,7 @@
                 [(value)]="selectedDatasource" 
                 (selectionChange)="selectDatasource()">
 
-                  <mat-option *ngFor="let singleDatasource of loggedInUser?.datasources" 
+                  <mat-option *ngFor="let singleDatasource of userPlanDatasource?.datasources" 
                   [value]="singleDatasource">
                   {{ singleDatasource }}
                 
@@ -414,13 +414,13 @@
                           >
                             <div class="p-1">
                               <mat-placeholder class="placeholder" 
-                              *ngIf="queryForm.controls['advance-query'].value === ''">
+                              *ngIf="queryForm.controls['advance_query'].value === ''">
                               {{editorDataAdv}}</mat-placeholder>
                               <textarea
                                 matInput
                                 rows="10"
                                 cols="80"
-                                formControlName="advance-query"
+                                formControlName="advance_query"
                               ></textarea>
                             </div>
                           </mat-form-field>
@@ -594,7 +594,7 @@
       <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
         <div>
           <p>
-            <b>Mentions:</b> {{data?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day || 7.5}}
+            <b>Mentions:</b> {{getDataboxMention(data?._id)?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{getDataboxMention(data?._id)?.mentions_per_day || 7.5}}
           </p>
         </div>
       </div>
@@ -685,7 +685,7 @@
 
     <button
       mat-raised-button
-      class="mb-05 mat-bg-gray"
+      class="mb-05 mat-bg-success"
       (click)="
         openDialog(
           'Save as Draft',
@@ -698,7 +698,8 @@
     </button>
     <button
       mat-raised-button
-      class="mb-05 mat-bg-green"
+      class="mb-05" 
+      color="primary"
       (click)="openMentionsDialog('Create Databox')"
     >
       Create Databox
@@ -723,7 +724,7 @@
 
     <button
       mat-raised-button
-      class="mb-05 mat-bg-gray"
+      class="mb-05 mat-bg-success"
       (click)="
         openDialogUpdate(
           'Save Changes',
@@ -735,7 +736,8 @@
     </button>
     <button
       mat-raised-button
-      class="mb-05 mat-bg-green"
+      class="mb-05"
+      color="primary"
       (click)="openMentionsDialogUpdate('Activate Databox', data?.mentions)"
     >
       Activate Databox
@@ -754,7 +756,8 @@
     
     <button
       mat-raised-button
-      class="mb-05 mat-bg-gray"
+      class="mb-05"
+      color="primary"
       (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
     >
       Run Query

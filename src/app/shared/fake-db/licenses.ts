@@ -5,7 +5,7 @@
 export class LicenseDB {
   public licenses = [
     {
-      '_id': '5a9ae2106518248b68251fdf',
+      '_id': '5a9ae2106518248b68251fdf',  // Primary Key
       'name': 'Tableau Desktop',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -20,7 +20,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 3.86,
-        'ratingCount': 26
+        'rating_count': 26
       },
       'features': [
         'aliquip aliquip',
@@ -38,7 +38,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae210b7b4d3ad2f048bbe',
+      '_id': '5a9ae210b7b4d3ad2f048bbe',  // Primary Key
       'name': 'Tableau Desktop',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -54,7 +54,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 3.72,
-        'ratingCount': 18
+        'rating_count': 18
       },
       'features': [
         'magna est',
@@ -72,7 +72,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae210d9a8d6dda7256417',
+      '_id': '5a9ae210d9a8d6dda7256417',  // Primary Key
       'name': 'Tableau Server',
       'subtitle': 'On-ear fit to minimize noise so you can hear every beat',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -88,7 +88,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 3.79,
-        'ratingCount': 77
+        'rating_count': 77
       },
       'features': [
         'laboris id',
@@ -108,7 +108,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae210e8329237332e56d7',
+      '_id': '5a9ae210e8329237332e56d7',  // Primary Key
       'name': 'Tableau Desktop',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -124,7 +124,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 4.74,
-        'ratingCount': 64
+        'rating_count': 64
       },
       'features': [
         'cillum ullamco',
@@ -142,7 +142,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae210cb9937d28c6eca1a',
+      '_id': '5a9ae210cb9937d28c6eca1a',  // Primary Key
       'name': 'Tableau Desktop',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -158,7 +158,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 4.43,
-        'ratingCount': 98
+        'rating_count': 98
       },
       'features': [
         'aliquip consequat',
@@ -176,7 +176,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae2106f155194e5c95d67',
+      '_id': '5a9ae2106f155194e5c95d67',  // Primary Key
       'name': 'Tableau Server',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -192,7 +192,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 4.84,
-        'ratingCount': 52
+        'rating_count': 52
       },
       'features': [
         'est mollit',
@@ -212,7 +212,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae2101625a02fee92e27f',
+      '_id': '5a9ae2101625a02fee92e27f',  // Primary Key
       'name': 'Tableau Desktop',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -228,7 +228,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 3.18,
-        'ratingCount': 90
+        'rating_count': 90
       },
       'features': [
         'ullamco quis',
@@ -248,7 +248,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae2108970b01447ec34aa',
+      '_id': '5a9ae2108970b01447ec34aa',  // Primary Key
       'name': 'Tableau Desktop',
       'subtitle': 'Admodum assentior ad duo',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -264,7 +264,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 3.53,
-        'ratingCount': 47
+        'rating_count': 47
       },
       'features': [
         'sunt laboris',
@@ -282,7 +282,7 @@ export class LicenseDB {
       }
     },
     {
-      '_id': '5a9ae2103c04707145e21300',
+      '_id': '5a9ae2103c04707145e21300',  // Primary Key
       'name': 'Tableau Server',
       'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
       'category': 'phone',
@@ -297,7 +297,7 @@ export class LicenseDB {
       },
       'ratings': {
         'rating': 3.42,
-        'ratingCount': 35
+        'rating_count': 35
       },
       'features': [
         'exercitation excepteur',

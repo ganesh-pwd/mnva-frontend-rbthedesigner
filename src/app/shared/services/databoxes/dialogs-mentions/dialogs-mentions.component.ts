@@ -19,6 +19,7 @@ import { DataboxesService } from '../databox-item-main.services';
 import { UserService } from '../../auth/user-services';
 import { Subscription } from 'rxjs';
 import { AppLoaderService } from '../../../services/app-loader/app-loader.service';
+import { UserPlanDetailsService } from '../../auth/user-plan-details.service';
 
 @Component({
   selector: 'app-dialogs-mentions',
@@ -33,11 +34,13 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
 
   public databoxMention: number;
   public loggedInUser;
+  public userPlanDetails;
 
   constructor(
     public dialogRef: MatDialogRef<DataboxDialogsMentionsComponent>,
     private databoxesService: DataboxesService,
     private userService: UserService,
+    private userPlanDetailsService: UserPlanDetailsService,
     private router: Router,
     private loader: AppLoaderService,
     public dialog: MatDialog,
@@ -45,6 +48,7 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     userService.userData$.subscribe((user) => this.loggedInUser = user);
+    userPlanDetailsService.userPlanData$.subscribe((user) => this.userPlanDetails = user);
     this.databoxMention = this.data.mentions;
   }
 
@@ -75,7 +79,7 @@ export class DataboxDialogsMentionsComponent implements OnInit, OnDestroy {
   // compute remaining mentions
   updateMentionCount(mention){
     return new Promise(resolve => {
-      this.updateMentionsReq = this.userService.computeRemainingMention(mention)
+      this.updateMentionsReq = this.userPlanDetailsService.computeRemainingMention(mention, this.loggedInUser._id)
       .subscribe((result) => resolve(result));
     })
   }

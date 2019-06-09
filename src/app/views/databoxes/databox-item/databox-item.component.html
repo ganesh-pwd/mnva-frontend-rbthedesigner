@@ -82,7 +82,7 @@
               class="page-search mat-bg-gray">
                 <div>
                   <p>
-                      <b>Mentions:</b> {{data?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{data?.mentions_per_day}}
+                      <b>Mentions:</b> {{mentions?.mentions}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{mentions?.mentions_per_day}}
                   </p>
                 </div>
                 <span fxFlex></span>
@@ -93,7 +93,7 @@
                   <mat-icon class="download">file_download</mat-icon><b>Download Data</b></a>
 
                   <!-- Add Suggestion -->
-                  <a class="head-mentions fz-12" *ngIf="data?.mentions && data?.datasource !== 'Twitter'"
+                  <a class="head-mentions fz-12" *ngIf="mentions?.mentions && data?.datasource !== 'Twitter'"
                   (click)="openAddSuggestion()"><b>Not Finding a Result?</b></a>
                 </div>
               </div>
@@ -108,8 +108,15 @@
   
                     <div class="table-foot" >
                       <div class="mb-1">
-                        <button mat-raised-button color="primary" (click)="addNewRow()">Add Row</button>
-                        <button mat-raised-button class="mat-bg-success" (click)="saveAllData()">Save All Changes</button>
+                        <button mat-raised-button 
+                        class="mat-bg-success" 
+                        (click)="addNewRow()">
+                        Add Row</button>
+
+                        <button mat-raised-button 
+                        color="primary" 
+                        (click)="saveAllData()">Save All Changes
+                        </button>
                       </div>
                       <span fxFlex></span>
                     
@@ -192,8 +199,7 @@
             <mat-card-actions>
               <button (click)="openQueryDialog('Create Category', data)"
                 mat-raised-button
-                color="primary"
-                class="query-category">
+                class="mat-bg-success query-category">
                 Add Category
               </button>
               <span fxFlex></span>
@@ -205,7 +211,7 @@
           </mat-card>
           <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
             <span fxFlex></span>
-            <button mat-raised-button class="mb-05 mat-bg-success" 
+            <button mat-raised-button color="primary" 
             (click)="openQueryDialog('Test Category', data)" >
             Test Category
             </button>
@@ -322,7 +328,7 @@
               <button 
               (click)="openQueryDialog('Save Categories', data)" 
               mat-raised-button 
-              class="mb-05 mat-bg-gray" >
+              class="mb-05" color="primary">
               Save Categories</button>
             </div>
           </div>
@@ -354,13 +360,20 @@
         <div class="product-container list-view"  
         [@animate]="{value:'*', params:{ y:'200px', delay:'700ms' }}">
           <!-- Algorithm Box -->
-          <div class="product-wrap">
+          <div class="product-wrap" *ngFor="let algorithms of databoxAlgorithm">
             <div class="product-inner default-bg">
               <div class="relative p-1">
                 <div class="allign-middle" >
                   <mat-slide-toggle color="primary" class="" 
-                    [checked]="sentiment"
-                    (change)="clickSlideToggle('sentiment')">
+                    [checked]="algorithms.display_text === 'Sentiment' ? sentiment 
+                    : algorithms.display_text === 'Topic Recognition' ? topicRecognition
+                    : algorithms.display_text === 'Entity Recognition'  ? entityRecognition
+                    : algorithms.display_text === 'Gender Author' ? genderAuthor : ''"
+                    
+                    (change)="clickSlideToggle({
+                      '_id': algorithms._id, 
+                      'algorithm': algorithms.display_text
+                    })">
                   </mat-slide-toggle><br>
                 </div>
               </div>  
@@ -368,124 +381,28 @@
                 <div class="main-info main-info-prcs-data mb-0">
                  <mat-card-header>
                      <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Sentiment</span>
+                       <span class="algorithm-header">{{algorithms.display_text}}</span>
                      </mat-card-title>
                    </mat-card-header>
                     <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
+                      {{algorithms.description}}
                     </p><br>
                     <mat-divider></mat-divider><br>
                    <div>
                       <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
+                        <h2 class="mat-h4 mb-0">Cost / Mention: ${{algorithms?.price.sale}}</h2>
                       </div>
                       <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', sentiment, 'sentiment')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Topic Recognition Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="topicRecognition"
-                    (change)="clickSlideToggle('topicRecognition')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Topic Recognition</span>
-                     </mat-card-title>
-                   </mat-card-header>
-                    <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', topicRecognition, 'topicRecognition')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Gender Author Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="genderAuthor"
-                    (change)="clickSlideToggle('genderAuthor')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Gender Author</span>
-                     </mat-card-title>
-                   </mat-card-header>
-                    <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', genderAuthor, 'genderAuthor')"> Apply only to unprocessed data
-                      </a>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Entity Recognition Box -->
-          <div class="product-wrap">
-            <div class="product-inner default-bg">
-              <div class="relative p-1">
-                <div class="allign-middle" >
-                  <mat-slide-toggle color="primary" class="" 
-                    [checked]="entityRecognition"
-                    (change)="clickSlideToggle('entityRecognition')">
-                  </mat-slide-toggle><br>
-                </div>
-              </div>  
-              <div class="info-wrap p-1">
-                <div class="main-info main-info-prcs-data mb-0">
-                 <mat-card-header>
-                     <mat-card-title class="mat-color-primary">
-                       <span class="algorithm-header">Entity Recognition</span>
-                     </mat-card-title>
-                   </mat-card-header>
-                    <p style="text-align: justify;" class="mb-0">
-                      Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-                    </p><br>
-                    <mat-divider></mat-divider><br>
-                   <div>
-                      <div>
-                        <h2 class="mat-h4 mb-0">Cost / Mention: Free</h2>
-                      </div>
-                      <span fxFlex></span>
-                      <a class="apply mat-color-primary" (click)="openAlgorithmDialog('Apply Enrichment', entityRecognition, 'entityRecognition')"> Apply only to unprocessed data
+                      <a class="apply mat-color-primary" 
+                      (click)="openAlgorithmDialog('Apply Enrichment', 
+                      algorithms.display_text === 'Sentiment' ? sentiment 
+                      : algorithms.display_text === 'Topic Recognition' ? topicRecognition
+                      : algorithms.display_text === 'Entity Recognition'  ? entityRecognition
+                      : algorithms.display_text === 'Gender Author' ? genderAuthor : '', 
+                      {
+                        '_id': algorithms._id, 
+                        'algorithm': algorithms.display_text
+                      })"> Apply only to unprocessed data
                       </a>
                    </div>
                 </div>

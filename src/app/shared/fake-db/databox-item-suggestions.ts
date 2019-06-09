@@ -7,7 +7,7 @@
 export class DataboxSuggestionDB {
   public databox_items_suggestion = [
     {
-      '_id': '64f6zdfjref9402yz5ssvjdj',
+      '_id': '64f6zdfjref9402yz5ssvjdj', // Primary Key
       'databox_id': '5a7b73jh6bed15c94d1e46d4', // Foreign key
       'datasource_suggestion': [{
             'source': 'Facebook',
@@ -17,7 +17,7 @@ export class DataboxSuggestionDB {
       }]
     },
     {
-      '_id': 's5g1hy0p48e21gh0bumazw96',
+      '_id': 's5g1hy0p48e21gh0bumazw96', // Primary Key
       'databox_id': '5a7b73f7f79f4250b93a355a', // Foreign key
       'datasource_suggestion': [{
             'source': 'Facebook',
@@ -27,7 +27,7 @@ export class DataboxSuggestionDB {
       }]
     },
     {
-      '_id': 'czi72uzulsdunbmgvynu4nd6',
+      '_id': 'czi72uzulsdunbmgvynu4nd6', // Primary Key
       'databox_id': '5a7be3f76bed15c55d1e46d4', // Foreign key
       'datasource_suggestion': [{
             'source': 'Twitter',
@@ -37,7 +37,7 @@ export class DataboxSuggestionDB {
       }]
     },
     {
-      '_id': 'djbjy4jywi5bp6eg4n3nzgbc',
+      '_id': 'djbjy4jywi5bp6eg4n3nzgbc', // Primary Key
       'databox_id': '5a7b73f76bed15c938be46d4', // Foreign key
       'datasource_suggestion': [{
             'source': 'Web',
@@ -47,7 +47,7 @@ export class DataboxSuggestionDB {
       }]
     },
     {
-      '_id': '1crfoclesjy9q24wdyy8qmz9',
+      '_id': '1crfoclesjy9q24wdyy8qmz9', // Primary Key
       'databox_id': '5a7b73f76bed15c9e8ae46d4', // Foreign key
       'datasource_suggestion': [{
             'source': 'Web',

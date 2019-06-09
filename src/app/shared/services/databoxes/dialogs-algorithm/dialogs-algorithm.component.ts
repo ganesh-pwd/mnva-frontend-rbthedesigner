@@ -45,7 +45,6 @@ export class DataboxDialogsAlgorithmComponent implements OnInit, OnDestroy {
 		.addAlgorithmConnector(this.data.connector, switch_data)
 		.subscribe(result => {
 			this.dialogRef.close(false);
-			
 			const url = this.router.url;
 
 			this.router.navigateByUrl('/template-gallery', { skipLocationChange: true })

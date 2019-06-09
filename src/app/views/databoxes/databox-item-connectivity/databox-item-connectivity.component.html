@@ -112,89 +112,38 @@
 			Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 		</p>
 	</div>
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" >
+
+	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" *ngFor="let dataConnector of dataConnectors">
 		<mat-card>
-			<mat-card-header (click)="openNotificationDialog('Email Notifications', data.datasource)">
+			<mat-card-header 
+			(click)="openNotificationDialog('Email Notifications', 
+			data.datasource, dataConnector.display_text)">
 				<mat-card-title class="mat-color-primary">
-					<img src="/assets/images/email.png" class="minerva-logo" >
-					<span class="title-header">Email<br>
-						<small class="text-muted">Email</small></span>
+					<img src="{{dataConnector.icon}}" class="minerva-logo" >
+					<span class="title-header">{{dataConnector.display_text}}<br>
+						<small class="text-muted">{{dataConnector.display_text}}</small></span>
 				</mat-card-title>
 			</mat-card-header>
 
 			<mat-divider></mat-divider>
 			<br>
 			
-			<mat-card-content (click)="openNotificationDialog('Email Notifications', data.datasource)">
-				<p class="">
-				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-				</p>
+			<mat-card-content 
+			(click)="openNotificationDialog('Email Notifications', 
+			data.datasource, dataConnector.display_text)">
+				<p>{{dataConnector.description}}</p>
 			</mat-card-content>
 			<mat-divider></mat-divider>
 			<br>
 			<div class="text-center">
 				<mat-slide-toggle color="primary" class="mb-1" 
-					[checked]="email" (change)="clickSlideToggle('email')">
-				  On / Off
-				</mat-slide-toggle>
-			</div>
-		</mat-card>
-	</div>
-
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
-		<mat-card>
-			<mat-card-header>
-				<mat-card-title class="mat-color-primary">
-					<img src="/assets/images/slack.png" class="minerva-logo" >
-					<span class="title-header">Slack <br>
-						<small class="text-muted">Slack</small></span>
-				</mat-card-title>
-			</mat-card-header>
-
-			<mat-divider></mat-divider>
-			<br>
-			
-			<mat-card-content>
-				<p class="">
-				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-				</p>
-			</mat-card-content>
-			<mat-divider></mat-divider>
-			<br>
-			<div class="text-center">
-				<mat-slide-toggle color="primary" class="mb-1" 
-				[checked]="slack"
-                (change)="clickSlideToggle('slack')">
-				  On / Off
-				</mat-slide-toggle>
-			</div>
-		</mat-card>
-	</div>
-
-	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2">
-		<mat-card>
-			<mat-card-header>
-				<mat-card-title class="mat-color-primary">
-					<img src="/assets/images/apple_tv.png" class="minerva-logo" >
-					<span class="title-header">Apple TV <br>
-						<small class="text-muted">Apple</small></span>
-				</mat-card-title>
-			</mat-card-header>
-
-			<mat-divider></mat-divider>
-			<br>
-			
-			<mat-card-content>
-				<p class="">
-				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
-				</p>
-			</mat-card-content>
-			<mat-divider></mat-divider>
-			<br>
-			<div class="text-center">
-				<mat-slide-toggle color="primary" class="mb-1"
-				[checked]="appleTV"
-                (change)="clickSlideToggle('appleTV')">
+					[checked]="dataConnector.display_text === 'Email' ? email
+					: dataConnector.display_text === 'Slack' ? slack 
+					: dataConnector.display_text === 'Apple TV' ? appleTV: ''" 
+					(change)="clickSlideToggle({
+						'_id': dataConnector._id, 
+						'data_connector': dataConnector.display_text
+					})">
 				  On / Off
 				</mat-slide-toggle>
 			</div>
@@ -210,9 +159,9 @@
 	</div>
 
 	<div fxLayout="column" fxFlex="100" fxFlex.gt-sm="33.2" disabled="true">
-		<mat-card class="dont-disable" 
-		(click)="openNotificationDialog('Email Notifications', data.datasource)">
-			<mat-card-header>
+		<mat-card class="dont-disable">
+			<mat-card-header 
+			(click)="openNotificationDialog('Email Notifications', data.datasource, 'Email')">
 				<mat-card-title class="mat-color-primary">
 					<img src="/assets/images/email.png" class="minerva-logo">
 					<span class="title-header">Email <br>
@@ -223,7 +172,8 @@
 			<mat-divider></mat-divider>
 			<br>
 			
-			<mat-card-content>
+			<mat-card-content 
+			(click)="openNotificationDialog('Email Notifications', data.datasource, 'Email')">
 				<p class="">
 				Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum. Lorem ipsum dolor sit amet, veri modus conceptam mel cu, has in dictas discere qualisque, saperet ullamcorper ad eum.
 				</p>
@@ -234,7 +184,10 @@
 			<div class="text-center">
 				<mat-slide-toggle color="primary" class="mb-1" 
 				[checked]="email"
-				(change)="clickSlideToggle('email')">
+				(change)="clickSlideToggle({
+					'_id': 'b1t0x23xax5w1tsblyrplkb4', 
+					'data_connector': 'Email'
+				})">
 				  On / Off
 				</mat-slide-toggle>
 			</div>

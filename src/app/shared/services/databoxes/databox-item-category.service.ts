@@ -53,10 +53,10 @@ export class DataboxCategoryService {
         return of(categories.slice()).pipe(delay(500));
       }
 
+      // get databox category temporary data (category that hasn't been saved yet)
       getCategoryDataTemp(id, category_name): Observable<any> {
         const rows   = JSON.parse(sessionStorage.getItem('databoxCategory'));
         const categories = rows.categories.filter(el => el.name === category_name);
-        console.log(rows)
 
         return of(categories.slice()).pipe(delay(500));
       }
@@ -88,10 +88,9 @@ export class DataboxCategoryService {
         // set the data initially
         const data = {
           '_id': this.generateID(),
-          'index': 0,
           'databox_id': id,
           'category_available': 20,
-          'category_used': 2,
+          'category_used': 0,
           'sub_category_available': 20,
           'sub_category_available_used': 0,
           'categories': []
@@ -110,13 +109,13 @@ export class DataboxCategoryService {
         const index = rows.findIndex(i => i.databox_id === id);
 
         // QUERY EXPRESSION BUILDER
-        const requiredKeywords = details['required-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-        const optionalKeywords = details['optional-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
-        const excludedKeywords = details['excluded-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
+        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
 
-        const expression = details['optional-keywords'].length > 0 && details['excluded-keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
-          : details['optional-keywords'].length > 0 && details['excluded-keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
-          : details['optional-keywords'].length === 0 && details['excluded-keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
+        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
+          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
+          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
           : `${requiredKeywords}`;
 
         // set to local storage
@@ -131,11 +130,11 @@ export class DataboxCategoryService {
           'index': maxIndex + 1,
           'name': details.name,
           'type': details.type,
-          'expression': details['query-type'] === 'basic' ? expression : details['query'],
-          'required-keywords': details['required-keywords'],
-          'optional-keywords': details['optional-keywords'],
-          'excluded-keywords': details['excluded-keywords'],
-          'query-type': details['query-type'],
+          'expression': details['query_type'] === 'basic' ? expression : details['query'],
+          'required_keywords': details['required_keywords'],
+          'optional_keywords': details['optional_keywords'],
+          'excluded_keywords': details['excluded_keywords'],
+          'query_type': details['query_type'],
           'query': details.query
         }); 
 
@@ -184,13 +183,13 @@ export class DataboxCategoryService {
       editCategoryTemp(id, details, category_name): Observable<any>{
 
         // QUERY EXPRESSION BUILDER
-        const requiredKeywords = details['required-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-        const optionalKeywords = details['optional-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
-        const excludedKeywords = details['excluded-keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
+        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
+        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
 
-        const expression = details['optional-keywords'].length > 0 && details['excluded-keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
-          : details['optional-keywords'].length > 0 && details['excluded-keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
-          : details['optional-keywords'].length === 0 && details['excluded-keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
+        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
+          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
+          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
           : `${requiredKeywords}`;
 
         if(sessionStorage.getItem('databoxCategory')){
@@ -199,11 +198,11 @@ export class DataboxCategoryService {
          
           rows.categories[category_index].name = details.name;
           rows.categories[category_index].type = details.type;
-          rows.categories[category_index].expression = details['query-type'] === 'basic' ? expression : details.query;
-          rows.categories[category_index]['required-keywords'] = details['required-keywords'];
-          rows.categories[category_index]['optional-keywords'] = details['optional-keywords'];
-          rows.categories[category_index]['excluded-keywords'] = details['excluded-keywords'];
-          rows.categories[category_index]['query-type'] = details['query-type'];
+          rows.categories[category_index].expression = details['query_type'] === 'basic' ? expression : details.query;
+          rows.categories[category_index]['required_keywords'] = details['required_keywords'];
+          rows.categories[category_index]['optional_keywords'] = details['optional_keywords'];
+          rows.categories[category_index]['excluded_keywords'] = details['excluded_keywords'];
+          rows.categories[category_index]['query_type'] = details['query_type'];
           rows.categories[category_index]['query'] = details['query'];
 
           // set to local storage
@@ -222,11 +221,11 @@ export class DataboxCategoryService {
           if(category_index > -1){
             rows[index].categories[category_index].name = details.name;
             rows[index].categories[category_index].type = details.type;
-            rows[index].categories[category_index].expression = details['query-type'] === 'basic' ? expression : details.query;
-            rows[index].categories[category_index]['required-keywords'] = details['required-keywords'];
-            rows[index].categories[category_index]['optional-keywords'] = details['optional-keywords'];
-            rows[index].categories[category_index]['excluded-keywords'] = details['excluded-keywords'];
-            rows[index].categories[category_index]['query-type'] = details['query-type'];
+            rows[index].categories[category_index].expression = details['query_type'] === 'basic' ? expression : details.query;
+            rows[index].categories[category_index]['required_keywords'] = details['required_keywords'];
+            rows[index].categories[category_index]['optional_keywords'] = details['optional_keywords'];
+            rows[index].categories[category_index]['excluded_keywords'] = details['excluded_keywords'];
+            rows[index].categories[category_index]['query_type'] = details['query_type'];
             rows[index].categories[category_index]['query'] = details['query'];
 
             // set to local storage

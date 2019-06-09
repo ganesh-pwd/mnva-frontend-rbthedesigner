@@ -5,14 +5,14 @@
 export class DiscountCouponsDB {
   public coupons = [
     {
-      id: 0,
-      name: 'MYCOUPON',
-      discount: 20
+      '_id': 'pu3j5yqcvt1orjow01uhm4g3',
+      'name': 'MYCOUPON',
+      'discount': 20
     },
     {
-      id: 1,
-      name: 'OTHERCOUPON',
-      discount: 10
+      '_id': '72i7e2ff9kcagfxuhan84036',
+      'name': 'OTHERCOUPON',
+      'discount': 10
     }
   ];
 }

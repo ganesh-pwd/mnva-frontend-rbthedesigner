@@ -6,7 +6,7 @@ import { MinervaAccountChangeService } from '../../../shared/services/minerva-ac
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../../../shared/services/auth/user-services';
-
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 import { AmplifyService } from 'aws-amplify-angular';
 import { AuthService } from 'angularx-social-login';
 
@@ -30,36 +30,43 @@ export class HeaderSideComponent implements OnInit {
   public notificationCount: any;
   // public userFullName: string;
   public loggedInUser;
+  public userPlanDetails;
   public userName: string;
 
   public remaining: number = 0;
 
   constructor(
+    public translate: TranslateService,
+    public minervaAccountChangeService: MinervaAccountChangeService,
     private themeService: ThemeService,
     private layout: LayoutService,
-    public translate: TranslateService,
     private renderer: Renderer2,
     private router: Router,
     private userService: UserService,
-    public minervaAccountChangeService: MinervaAccountChangeService,
+    private userPlanDetailsService: UserPlanDetailsService,
     private amplifyService: AmplifyService,
     private socialAuthService: AuthService
   ) {
 
-    
-
-    this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
+    // set user account info
     userService.userData$.subscribe(user => {
       if (user) {
         // this.userFullName = user.name
         this.loggedInUser = user;
+        this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
 
         if ('userName' in sessionStorage) this.userName = sessionStorage.getItem('userName');
       }
     });
+
+    // set user plan details
+    userPlanDetailsService.userPlanData$.subscribe(user => {
+      if(user) this.userPlanDetails = user;
+    });
   }
 
   ngOnInit() {
+    this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
     this.egretThemes = this.themeService.egretThemes;
     this.layoutConf = this.layout.layoutConf;
     this.translate.use(this.currentLang);

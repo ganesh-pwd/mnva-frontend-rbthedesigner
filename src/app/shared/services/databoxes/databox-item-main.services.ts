@@ -12,6 +12,7 @@ import { DataboxesQueryService } from './databox-item-query.service';
 import { DataboxItemResultService } from './databox-item-result.service';
 import { DataboxCategoryService } from './databox-item-category.service';
 import { DataboxConnectorService } from './databox-item-connector.service';
+import { DataboxItemMentionService } from './databox-item-mention.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ import { DataboxConnectorService } from './databox-item-connector.service';
 export class DataboxesService {
   private databox_items: any[];
   private databox_items_suggestion: any[];
-
 
   private apiData = new BehaviorSubject<any>(null);
   public apiData$ = this.apiData.asObservable();
@@ -32,7 +32,8 @@ export class DataboxesService {
     private databoxesQueryService: DataboxesQueryService,
     private databoxItemResultService: DataboxItemResultService,
     private databoxCategoryService: DataboxCategoryService,
-    private databoxConnectorService: DataboxConnectorService) {
+    private databoxConnectorService: DataboxConnectorService,
+    private databoxItemMentionService: DataboxItemMentionService) {
 
     const databoxDB = new DataboxDB();
 
@@ -98,9 +99,7 @@ export class DataboxesService {
           'location': [...details.country]|| ['Costa Rica'],
           'last_updated': new Date(),
           'date_created': new Date(),
-          'mentions': 1200,
           'algorithm_quota': 100,
-          'mentions_per_day': 7.5,
           'credit_remaining': 120,
           'page_search_name': details.datasource === 'Facebook' ? 'Facebook Page' : details.datasource,
           'expiry_date': 'No Configuration',
@@ -111,8 +110,6 @@ export class DataboxesService {
           'category_used': 0,
           'sub_category_available': 20,
           'sub_category_available_used': 0,
-          'algorithmConnectors': [],
-          'dataConnectors': [],
           'include_comments': details.include_comments,
           'specify_max_number_result': details.specify_max_number_result,
           'monitor_only_news_media': details.monitor_only_news_media,
@@ -139,6 +136,9 @@ export class DataboxesService {
 
         // create databox connector service
         this.databoxConnectorService.addConnectorTable(generatedId);
+
+        // create mention table
+        this.databoxItemMentionService.addDataboxItemMention(generatedId, details);
 
         if(status === 'Draft')
           sessionStorage.setItem('databox_new', 'A New Databox with status Draft has been created');
@@ -249,6 +249,12 @@ export class DataboxesService {
           // delete category table
           this.databoxCategoryService.removeCategoryTable(id);
 
+          // delete databox mention table
+          this.databoxItemMentionService.removeDataboxItemMention(id);
+
+          // delete databox connector table
+          this.databoxConnectorService.removeDataboxItemConnectors(id);
+
           // delete suggestion table
           this.removeSuggestionTable(id);
 
@@ -276,12 +282,6 @@ export class DataboxesService {
             this.removeDataSimple(databoxItemSuggestion, 'databox_items_suggestion', index, this.databox_items_suggestion);
           }
 
-      // reusable function for removing data
-      private removeDataSimple(array, item_storage, index, updatedArray){
-        array.splice(index, 1);
-        updatedArray = array;
-        sessionStorage.setItem(item_storage, JSON.stringify(updatedArray));
-      }
 
 
 
@@ -291,7 +291,7 @@ export class DataboxesService {
       setSingleItemData(data) { this.apiData.next(data); }
 
       // get max index
-      getMaxIndex(item) { return Math.max(...item.map(x => x.index)) }
+      private getMaxIndex(item) { return Math.max(...item.map(x => x.index)) }
 
       // generate id with length 24
       generateID() {
@@ -303,5 +303,12 @@ export class DataboxesService {
         }
 
         return id;
+      }
+
+      // reusable function for removing data
+      private removeDataSimple(array, item_storage, index, updatedArray){
+        array.splice(index, 1);
+        updatedArray = array;
+        sessionStorage.setItem(item_storage, JSON.stringify(updatedArray));
       }
 }

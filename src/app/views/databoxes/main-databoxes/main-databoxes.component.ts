@@ -1,8 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
 import { DataboxConnectorService } from '../../../shared/services/databoxes/databox-item-connector.service';
+import { DataboxAlgorithmsService } from '../../../shared/services/databoxes/databox-item-algorithm.service';
+import { DataboxDataConnectorService } from '../../../shared/services/databoxes/databox-item-data-connector.service';
+import { DataboxItemMentionService } from '../../../shared/services/databoxes/databox-item-mention.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main-databoxes.component.html',
   styleUrls: ['./main-databoxes.component.scss']
 })
-export class MainDataboxesComponent implements OnInit, OnDestroy {
+export class MainDataboxesComponent implements OnInit, OnDestroy, AfterViewInit {
   private getItemSub: Subscription;
   private getDataConnectorReq: Subscription;
 
@@ -28,12 +31,17 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   public databox_id_new: string;
 
   public databoxConnectors: any;
+  public algorithmConnectors: any[];
 
-  editorData = `( Type your desired keywords )`;
+  public dataConnectors;
+  public connectorsDetails: any[];
 
   constructor(private databoxesService: DataboxesService,
     private mainDataboxesDialogService: MainDataboxesDialogService,
     private databoxConnectorService: DataboxConnectorService,
+    private databoxAlgorithmsService: DataboxAlgorithmsService,
+    private databoxDataConnectorService: DataboxDataConnectorService,
+    private databoxItemMentionService: DataboxItemMentionService,
     private router: Router,
     public snackBar: MatSnackBar) {
 
@@ -48,6 +56,10 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    
+  }
+
+  ngAfterViewInit(){
     this.databox_id_new = this.generateID();
 
     // get databox items
@@ -56,11 +68,8 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
+    if (this.getDataConnectorReq) this.getDataConnectorReq.unsubscribe();
   }
-
-  
-
-  
 
   // navigate to databox details
   navigateToDatabox(id: string, first: boolean, status: string) {
@@ -73,9 +82,9 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
   // Get databox items created by users
   getDataboxes() {
     this.getItemSub = this.databoxesService.getItems()
-      .subscribe(data => {
-        if (data) {
-          this.databoxes = data;
+      .subscribe(result => {
+        if (result) {
+          this.databoxes = result;
           this.getDataboxConnectors();
         }
       });
@@ -86,26 +95,10 @@ export class MainDataboxesComponent implements OnInit, OnDestroy {
     this.getDataConnectorReq = this.databoxConnectorService
     .getAllItems()
     .subscribe(result => {
-      this.databoxConnectors = result;
-    })
+      if(result) this.databoxConnectors = result;
+    });
   }
 
-  filterConnector(id){
-    return this.databoxConnectorService.getSingleItem(id);
-  }
-
-  // check databox connectors
-  checkAlgorithmConnectors(databox, connector){
-    const filter = databox.algorithmConnectors.findIndex(el => el === connector);
-
-    return filter > -1 ? true : false;
-  }
-
-  checkDataConnectors(databox, connector){
-    const filter = databox.dataConnectors.findIndex(el => el === connector);
-
-    return filter > -1 ? true : false;
-  }
 
     // open confirmation dialog
     openDialog(title: string, data: string, input: boolean) {

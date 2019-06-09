@@ -18,9 +18,9 @@
           <mat-select 
             (selectionChange)="changeSelectedAccount($event)"
             [value]="selected">
-            <mat-option value="{{accounts.accountName}}" 
+            <mat-option value="{{accounts.account_name}}" 
             *ngFor="let accounts of userList">
-              {{accounts.accountName}}
+              {{accounts.account_name}}
             </mat-option>
           </mat-select>
         </mat-form-field>

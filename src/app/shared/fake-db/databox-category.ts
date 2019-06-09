@@ -1,70 +1,68 @@
 /* 
-  The list of categories for the currently selected databox 
-  for the currently logged in and selected user
+  The list of categories for the currently selected databox for the currently logged in and selected user.
+  categories field can contain an array of categories including query values for basic and advance
 
-  Foreign key - databox_id (Id of databox)
+  Foreign key _ databox_id (Id of databox)
 */
 
 export class DataboxCategory {
   public databox_categories =  [
     {
-      '_id': 'bnr4n3obo9juyvjm3cvhtuva', 
-      'index': 0,
+      '_id': 'bnr4n3obo9juyvjm3cvhtuva', // Primary Key
       'databox_id': '5a7b73jh6bed15c94d1e46d4', // Foreign Key
       'category_available': 20,
       'category_used': 4,
       'sub_category_available': 20,
-      'sub_category_available_used': 3,
-      'categories': [
+      'sub_category_available_used': 3, 
+      'categories': [ 
         {
-          'name': 'Movistar',
+          'name': 'Movistar', 
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'movistar OR "movi"',
           'index': 0,
           'query': '',
-          'optional-keywords': [`"movi"`],
-          'required-keywords': [`movistar`],
-          'excluded-keywords': []
+          'optional_keywords': [`"movi"`],
+          'required_keywords': [`movistar`],
+          'excluded_keywords': []
         },
         {
           'name': 'Kolbi',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'kolbi OR "kolbi"',
           'index': 1,
           'query': '',
-          'optional-keywords': [`"kolbi"`],
-          'required-keywords': [`kolbi`],
-          'excluded-keywords': []
+          'optional_keywords': [`"kolbi"`],
+          'required_keywords': [`kolbi`],
+          'excluded_keywords': []
         },
         {
           'name': 'Claro',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'claro',
           'index': 2,
           'query': '',
-          'optional-keywords': [],
-          'required-keywords': [`claro`],
-          'excluded-keywords': []
+          'optional_keywords': [],
+          'required_keywords': [`claro`],
+          'excluded_keywords': []
         },
         {
           'name': 'Internet',
           'type': 'Sub Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'internet',
           'index': 3,
           'query': '',
-          'optional-keywords': [],
-          'required-keywords': [`internet`],
-          'excluded-keywords': []
+          'optional_keywords': [],
+          'required_keywords': [`internet`],
+          'excluded_keywords': []
         },
       ]
     },
     {
-      '_id': 'i1jqhy93q8lqyok9agdsekfb', 
-      'index': 1,
+      '_id': 'i1jqhy93q8lqyok9agdsekfb', // Primary Key
       'databox_id': '5a7b73f7f79f4250b93a355a', // Foreign Key
       'category_available': 20,
       'category_used': 3,
@@ -74,41 +72,40 @@ export class DataboxCategory {
         {
           'name': 'Movistar',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'movistar OR "movi"',
           'index': 0,
           'query': '',
-          'optional-keywords': [`"movi"`],
-          'required-keywords': [`movistar`],
-          'excluded-keywords': []
+          'optional_keywords': [`"movi"`],
+          'required_keywords': [`movistar`],
+          'excluded_keywords': []
         },
         {
           'name': 'Kolbi',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'kolbi OR "kolbi"',
           'index': 1,
           'query': '',
-          'optional-keywords': [`"kolbi"`],
-          'required-keywords': [`kolbi`],
-          'excluded-keywords': []
+          'optional_keywords': [`"kolbi"`],
+          'required_keywords': [`kolbi`],
+          'excluded_keywords': []
         },
         {
           'name': 'Claro',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'claro',
           'index': 2,
           'query': '',
-          'optional-keywords': [],
-          'required-keywords': [`claro`],
-          'excluded-keywords': []
+          'optional_keywords': [],
+          'required_keywords': [`claro`],
+          'excluded_keywords': []
         }
       ]
     },
     {
-      '_id': 'u7tygzlmu7jn7hj37lui2gvv', 
-      'index': 2,
+      '_id': 'u7tygzlmu7jn7hj37lui2gvv', // Primary Key
       'databox_id': '5a7be3f76bed15c55d1e46d4', // Foreign Key
       'category_available': 20,
       'category_used': 2,
@@ -118,30 +115,29 @@ export class DataboxCategory {
         {
           'name': 'Movistar',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'movistar OR "movi"',
           'index': 0,
           'query': '',
-          'optional-keywords': [`"movi"`],
-          'required-keywords': [`movistar`],
-          'excluded-keywords': []
+          'optional_keywords': [`"movi"`],
+          'required_keywords': [`movistar`],
+          'excluded_keywords': []
         },
         {
           'name': 'Kolbi',
           'type': 'Category',
-          'query-type': 'basic',
+          'query_type': 'basic',
           'expression': 'kolbi OR "kolbi"',
           'index': 1,
           'query': '',
-          'optional-keywords': [`"kolbi"`],
-          'required-keywords': [`kolbi`],
-          'excluded-keywords': []
+          'optional_keywords': [`"kolbi"`],
+          'required_keywords': [`kolbi`],
+          'excluded_keywords': []
         },
       ]
     },
     {
-      '_id': 'y60evgpxi3vve2frfm320tas', 
-      'index': 3,
+      '_id': 'y60evgpxi3vve2frfm320tas', // Primary Key
       'databox_id': '5a7b73f76bed15c938be46d4', // Foreign Key
       'category_available': 20,
       'category_used': 2,
@@ -150,8 +146,7 @@ export class DataboxCategory {
       'categories': []
     },
     {
-      '_id': 'mwp6jztvihhx3ig2m3phv6ea', 
-      'index': 4,
+      '_id': 'mwp6jztvihhx3ig2m3phv6ea', // Primary Key
       'databox_id': '5a7b73f76bed15c9e8ae46d4', // Foreign Key
       'category_available': 20,
       'category_used': 2,

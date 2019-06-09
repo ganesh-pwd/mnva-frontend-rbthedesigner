@@ -4,6 +4,7 @@ import { MinervaAccountDialogService } from '../../../shared/services/minerva-ac
 import { MinervaAccountImageDialogService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-image-dialog.service';
 import { MinervaAccountChangeService } from '../../../shared/services/minerva-account/minerva-account-image-dialog/minerva-account-change-image.service';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 import { Subscription } from 'rxjs';
 
 
@@ -28,25 +29,30 @@ export class AccountMentionRemainingComponent implements OnInit {
 
 	userImage: string;
 	public loggedInUser;
+	public userPlanDetails;
 
 	constructor(
 	  private minervaAccountDialogService: MinervaAccountDialogService,
 	  private minervaAccountImageDialogService: MinervaAccountImageDialogService,
 	  private minervaAccountChangeService: MinervaAccountChangeService,
-	  private userService: UserService
+	  private userService: UserService,
+	  private userPlanDetailsService: UserPlanDetailsService,
 	  ) {
 	  this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
-	  userService.userData$.subscribe((user) => {
-	  	this.loggedInUser = user;
+	  userService.userData$.subscribe((user) => this.loggedInUser = user);
 
-	  	if(this.loggedInUser){
-	  		let userAccountType = this.loggedInUser.accountType === 'Basic' 
-	  		? this.basic 
-	  		: this.professional;
+	  // set user plan details
+	  userPlanDetailsService.userPlanData$.subscribe(user => {
+	    if(user){ 
+	    	this.userPlanDetails = user;
 
-	  		let remaining = userAccountType - this.loggedInUser.mentions;
-	  		this.remaining = (remaining/userAccountType) * 100;
-	  	}
+	    	let userAccountType = this.userPlanDetails.account_type === 'Basic' 
+		  		? this.basic 
+		  		: this.professional;
+
+		  		let remaining = userAccountType - this.userPlanDetails.remaining_mentions;
+		  		this.remaining = (remaining/userAccountType) * 100;
+	    }
 	  });
 	}
 

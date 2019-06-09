@@ -30,12 +30,13 @@
       	<mat-card-title class="" 
         (click)="navigateToDatabox(data._id, data.first_create, data.status)">
         {{data.databox_name}}</mat-card-title>
+
       	<mat-card-subtitle class="mat-color-primary" 
-        (click)="navigateToDatabox(data._id, data.first_create, data.status)">
-        {{data.datasource}} 
-        <small class="mat-color-gray">/</small>
-        <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
-          {{i !== data.location.length - 1 ? location + ' /' : location}}</small>
+          (click)="navigateToDatabox(data._id, data.first_create, data.status)">
+          {{data.datasource}} 
+          <small class="mat-color-gray">/</small>
+          <small class="mat-color-gray" *ngFor="let location of data.location; let i = index">
+            {{i !== data.location.length - 1 ? location + ' /' : location}}</small>
         </mat-card-subtitle>
 
       	<span fxFlex></span>
@@ -67,7 +68,8 @@
             <div class="mt-1">
               <div>
                 <p>
-                    {{data?.mentions}} mentions&nbsp;&nbsp;|&nbsp;&nbsp;{{data?.mentions_per_day}} per day
+                    {{ (data?._id | DataboxIcons)?.mentions }} mentions&nbsp;&nbsp;|&nbsp;&nbsp;
+                    {{ (data?._id | DataboxIcons)?.mentions_per_day}} per day
                 </p>
               </div>
             </div>
@@ -79,36 +81,26 @@
           <div class="gallery-icons text-center  min-ht" fxFlex="100">
             
             <div *ngIf="data?.status !== 'Draft'">
-              <!-- Algorithm Connectors -->
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'sentiment')">
-              <mat-icon class="icon-header">add</mat-icon></button>
+              <span *ngFor="let algorithmConnector of databoxConnectors">
+                <span *ngIf="data?._id === algorithmConnector?.databox_id">
+                  <span *ngFor="let algorithms of algorithmConnector?.algorithm_connectors">
+                    <button mat-icon-button>
+                      <mat-icon class="icon-header" *ngIf="algorithms">
+                        {{ algorithms?._id | DataboxIcons }}
+                      </mat-icon>
+                    </button>
+                  </span>
+                </span> 
+              </span>
 
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'topicRecognition')">
-              <mat-icon class="icon-header">airplanemode_active</mat-icon></button>
-
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'genderAuthor')"
-              >
-              <mat-icon class="icon-header">people</mat-icon></button>
-
-              <button mat-icon-button 
-              *ngIf="checkAlgorithmConnectors(filterConnector(data?._id), 'entityRecognition')">
-              <mat-icon class="icon-header">location_city</mat-icon></button>
-
-              <!-- Data Connectors -->
-              <button mat-icon-button 
-              *ngIf="checkDataConnectors(filterConnector(data?._id), 'email')">
-              <i><img src="/assets/images/email.png"></i></button>
-
-              <button mat-icon-button 
-              *ngIf="checkDataConnectors(filterConnector(data?._id), 'slack')">
-              <i><img src="/assets/images/slack.png"></i></button>
-
-              <button mat-icon-button 
-              *ngIf="checkDataConnectors(filterConnector(data?._id), 'appleTV')">
-              <i><img src="/assets/images/apple_tv.png"></i></button>
+              <span *ngFor="let data_connectors of databoxConnectors">
+                <span *ngIf="data?._id === data_connectors?.databox_id">
+                  <span *ngFor="let connectors of data_connectors?.data_connectors">
+                    <button mat-icon-button *ngIf="connectors">
+                    <i><img src="{{ connectors?._id | DataboxIcons}}"></i></button>
+                  </span>
+                </span> 
+              </span>
             </div>
           </div>
         </div>

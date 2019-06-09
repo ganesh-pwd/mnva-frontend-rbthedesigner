@@ -5,7 +5,7 @@
 export class MentionsCreditsDB {
     public mentions_credit = [
       {
-        '_id': 0,
+        '_id': 'edut5zwv2496lo0p787g98us',  // Primary Key
         'name': 'Sentiment Mentions',
         'subtitle': 'Admodum assentior ad duo',
         'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -38,7 +38,7 @@ export class MentionsCreditsDB {
         }
       },
       {
-        '_id': 1,
+        '_id': 'iuec3u4w8r478uolh1qd10a9',  // Primary Key
         'name': 'Gender author Mentions',
         'subtitle': 'Admodum assentior ad duo',
         'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -71,7 +71,7 @@ export class MentionsCreditsDB {
         }
       },
       {
-        '_id': 2,
+        '_id': 'kjfhuc4rpn8rxqv01v1k3pki',  // Primary Key
         'name': 'Image recognition Mentions',
         'subtitle': 'Admodum assentior ad duo',
         'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -104,7 +104,7 @@ export class MentionsCreditsDB {
         }
       },
       {
-        '_id': 3,
+        '_id': 'u6cva14ppfougdwswzk1iofl',  // Primary Key
         'name': 'Lorem Ipsum Mentions',
         'subtitle': 'Admodum assentior ad duo',
         'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',
@@ -137,7 +137,7 @@ export class MentionsCreditsDB {
         }
       },
       {
-        '_id': 4,
+        '_id': 'hh7oho5416mbmsdliazoa51p',  // Primary Key
         'name': 'Ipsum Mentions',
         'subtitle': 'Admodum assentior ad duo',
         'description': 'Lorem ipsum dolor sit amet, et nec putent quodsi, admodum assentior ad duo. Pri ad sapientem ocurreret incorrupte.',

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DataboxesRoutes } from './databoxes.routing';
 import { MainDataboxesComponent } from './main-databoxes/main-databoxes.component';
-import { DataboxItemInitializeComponent } from './databox-item-initialize/databox-item-initialize.component';
 import {
   MatListModule,
   MatIconModule,
@@ -79,7 +78,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     MainDataboxesComponent,
     DataboxItemComponent,
-    DataboxItemInitializeComponent,
     DataboxItemSettingsComponent,
     DataboxItemConnectivityComponent
   ]

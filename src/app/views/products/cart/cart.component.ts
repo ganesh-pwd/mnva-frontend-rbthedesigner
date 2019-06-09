@@ -159,10 +159,14 @@ export class ProductsCartComponent implements OnInit {
   }
 
   getItemTotal(price, quantity, type) {
-    if (this.billYearly && type === 'Account Type') {
+    if (this.billYearly && type === 'Account Type') 
       return parseFloat((price * 12).toFixed(2));
-    } else {
+
+    else if(type === 'Credit')
+      return parseFloat((price * quantity).toFixed(6));
+    
+    else 
       return parseFloat((price * quantity).toFixed(2));
-    }
+    
   }
 }

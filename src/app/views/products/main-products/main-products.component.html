@@ -42,7 +42,7 @@
       <div fxFlex="100" fxFlex.gt-sm="33">
         <mat-card class="plan-pricing text-center green p-0">
           <mat-card-title class="pt-1 pr-1 pl-1 m-0"
-          [ngClass]="loggedInUser.accountType === 'Basic' ? 'mat-bg-gray' : 'light-mat-gray'">
+          [ngClass]="userPlanDetails.account_type === 'Basic' ? 'mat-bg-gray' : 'light-mat-gray'">
             <img src="assets/images/box-green.png">
             <div class="pt-1 pb-1">
               <h1 class="mat-h1 mb-0"><strong>$<span>{{standardAccount}} /Mo</span></strong></h1>
@@ -81,18 +81,18 @@
           </mat-card-content>
         </mat-card>
         <button 
-        *ngIf="loggedInUser.accountType !== 'Basic'"
+        *ngIf="userPlanDetails.account_type !== 'Basic'"
         mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" 
         (click)="addToCartAccountType('Basic Account', standardAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Basic'">Current Plan</button>
+        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="userPlanDetails.account_type === 'Basic'">Current Plan</button>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
         <mat-card class="plan-pricing text-center blue p-0">
           <mat-card-title class="pt-1 pr-1 pl-1 m-0"
-          [ngClass]="loggedInUser.accountType === 'Professional' ? 'mat-bg-gray' : 'light-mat-gray'">
+          [ngClass]="userPlanDetails.account_type === 'Professional' ? 'mat-bg-gray' : 'light-mat-gray'">
             <img src="assets/images/box-blue.png">
             <div class="pt-1 pb-1">
               <h1 class="mat-h1 mb-0"><strong>$<span>{{plusAccount}} /Mo</span></strong></h1>
@@ -131,18 +131,18 @@
           </mat-card-content>
         </mat-card>
         <button 
-        *ngIf="loggedInUser.accountType !== 'Professional'"
+        *ngIf="userPlanDetails.account_type !== 'Professional'"
         mat-raised-button class="mat-bg-primary btn-add-to-cart mt-1" 
         (click)="addToCartAccountType('Professional Account', plusAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Professional'">Current Plan</button>
+        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="userPlanDetails.account_type === 'Professional'">Current Plan</button>
       </div>
       <!-- Pricing box -->
       <div fxFlex="100" fxFlex.gt-sm="33">
         <mat-card class="plan-pricing text-center orange p-0">
           <mat-card-title class="pt-1 pr-1 pl-1 m-0"
-          [ngClass]="loggedInUser.accountType === 'Enterprise' ? 'mat-bg-gray' : 'light-mat-gray'">
+          [ngClass]="userPlanDetails.account_type === 'Enterprise' ? 'mat-bg-gray' : 'light-mat-gray'">
             <img src="assets/images/box-orange.png">
             <div class="pt-1 pb-1">
               <h1 class="mat-h1 mb-0"><strong>$<span>{{enterpriseAccount}} /Mo</span></strong></h1>
@@ -181,12 +181,12 @@
           </mat-card-content>
         </mat-card>
         <button mat-raised-button 
-        *ngIf="loggedInUser.accountType !== 'Enterprise'"
+        *ngIf="userPlanDetails.account_type !== 'Enterprise'"
         class="mat-bg-primary btn-add-to-cart mt-1" 
         (click)="addToCartAccountType('Enterprise Account', enterpriseAccount)">
           <mat-icon>shopping_cart</mat-icon> Select Plan
         </button>
-        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="loggedInUser.accountType === 'Enterprise'">Current Plan</button>
+        <button mat-raised-button class="current-plan mt-1 btn-add-to-cart" *ngIf="userPlanDetails.account_type === 'Enterprise'">Current Plan</button>
       </div>
     </div>
   </mat-card-content>
