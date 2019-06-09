@@ -42,6 +42,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public mentions: any;
   public creditRemaining: number;
   public showAdvanceAccord: boolean = true;
+  public showResultsPreviewAccord: boolean = true;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
