@@ -6,6 +6,7 @@ import { UserService } from '../../../shared/services/auth/user-services';
 import { UserNotificationService } from '../../../shared/services/auth/user-notification.service';
 import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html'
@@ -20,7 +21,6 @@ export class NotificationsComponent implements OnInit {
   public isUserDeleted;
   public loggedInUser;
   public userPlanDetails;
-
   public basic: number = 3000;
   public professional: number = 5000;
   public remaining_mentions: number = 0;
@@ -69,9 +69,7 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
     this.getNews(); // get news notification  
-
     this.getUserNotification(this.loggedInUser._id); // get user notification
-
     this.router.events.subscribe((routeChange) => {
         if (routeChange instanceof NavigationEnd) {
           this.isDataboxAdded  = sessionStorage.getItem('databox_new');

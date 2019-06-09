@@ -12,7 +12,6 @@ import { UserService } from '../auth/user-services';
 export class DataboxCategoryService {
   private databox_items: any[];
   private databox_category: any;
-  
   private categoryItems = new BehaviorSubject<any>(null);
   private testData = new BehaviorSubject<any>(null);
 
@@ -53,7 +52,6 @@ export class DataboxCategoryService {
         return of(categories.slice()).pipe(delay(500));
       }
 
-      // get databox category temporary data (category that hasn't been saved yet)
       getCategoryDataTemp(id, category_name): Observable<any> {
         const rows   = JSON.parse(sessionStorage.getItem('databoxCategory'));
         const categories = rows.categories.filter(el => el.name === category_name);
@@ -73,77 +71,72 @@ export class DataboxCategoryService {
       }
 
 
-  /* @DATABOX CATEGORY CRUD OPERATION
+  /* @DATABOX CRUD OPERATION
     * addCategoryItem - Add new Databox Category Expression
-    * addCategoryTemp - Add new category if category table are already created
-    * editCategoryTemp - Update Databox Category Expression
+    * editCategory - Update Databox Category Expression
     * deleteCategory - Delete Databox Category Expression
-    * saveChangesToDB - Save all changes to fake db and session storage
-    * removeCategoryTable - Delete the category table if the associated databox has been deleted
   */
 
-      // create databox category table for the associated databox
-      addCategoryItem(id, details){
-        const categoryItems  = JSON.parse(sessionStorage.getItem('databox_item_categories')) || this.databox_category;
-
-        // set the data initially
-        const data = {
-          '_id': this.generateID(),
-          'databox_id': id,
-          'category_available': 20,
-          'category_used': 0,
-          'sub_category_available': 20,
-          'sub_category_available_used': 0,
-          'categories': []
-        };
-
-        categoryItems.push(data);
-
-        this.databox_category = categoryItems;
-        sessionStorage.setItem('databox_item_categories', JSON.stringify(categoryItems));
-      }
-
-
-      // add new category if category table are already created
       addCategoryTemp(id, details): Observable<any>{
         const rows  = JSON.parse(sessionStorage.getItem('databox_item_categories')) || this.databox_category;
-        const index = rows.findIndex(i => i.databox_id === id);
-
-        // QUERY EXPRESSION BUILDER
-        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
-        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-
-        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
-          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
-          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
-          : `${requiredKeywords}`;
+        const index = rows.findIndex(i => i.databox_id === id)
+        const expression = details['optional-keywords'] ? `${details['required-keywords']} OR "${details['optional-keywords']}"` : `${details['required-keywords']}`;
 
         // set to local storage
-        if(rows[index] && !sessionStorage.getItem('databoxCategory')) 
+        if(rows[index] && !sessionStorage.getItem('databoxCategory')) {
           sessionStorage.setItem('databoxCategory', JSON.stringify(rows[index]))
+        }
 
         // SET SESSION STORAGE TO VARIABLE
         let tempData = JSON.parse(sessionStorage.getItem('databoxCategory'));
-        let maxIndex = this.getMaxIndex(tempData.categories);
-        
-        tempData.categories.push({
-          'index': maxIndex + 1,
-          'name': details.name,
-          'type': details.type,
-          'expression': details['query_type'] === 'basic' ? expression : details['query'],
-          'required_keywords': details['required_keywords'],
-          'optional_keywords': details['optional_keywords'],
-          'excluded_keywords': details['excluded_keywords'],
-          'query_type': details['query_type'],
-          'query': details.query
-        }); 
 
-        sessionStorage.setItem('databoxCategory', JSON.stringify(tempData));
-        tempData = JSON.parse(sessionStorage.getItem('databoxCategory'));
-        return of(tempData.categories.slice()).pipe(delay(500));
+        // if there's a pre-existing category list
+        if(tempData && tempData.categories.length > 0){
+          let maxIndex = this.getMaxIndex(tempData.categories);
+          
+          tempData.categories.push({
+            'index': maxIndex + 1,
+            'name': details.name,
+            'type': details.type,
+            'expression': expression !== 'null' ? expression : details.query,
+            'required-keywords': details['required-keywords'],
+            'optional-keywords': details['optional-keywords'],
+            'excluded-keywords': details['excluded-keywords'],
+            'query': details.query
+          }); 
+
+          sessionStorage.setItem('databoxCategory', JSON.stringify(tempData));
+          tempData = JSON.parse(sessionStorage.getItem('databoxCategory'));
+
+          return of(tempData.categories.slice()).pipe(delay(500));
+        }
+
+        // if list is empty
+        else if (!tempData) {
+          // set the data initially
+          const data = {
+            '_id': this.generateID(),
+            'index': 0,
+            'databox_id': id,
+            'categories': [{
+              'index': 0,
+              'name': details.name,
+              'type': details.type,
+              'expression': expression !== 'null' ? expression : details.query,
+              'required-keywords': details['required-keywords'],
+              'optional-keywords': details['optional-keywords'],
+              'excluded-keywords': details['excluded-keywords'],
+              'query': details.query
+            }]
+          };
+
+          sessionStorage.setItem('databoxCategory', JSON.stringify(data));
+
+          tempData = JSON.parse(sessionStorage.getItem('databoxCategory'));
+
+          return of(tempData.categories.slice()).pipe(delay(500));
+        }
       }
-
 
       // save all changes to fake db
       saveChangesToDB(id): Observable<any>{
@@ -152,24 +145,32 @@ export class DataboxCategoryService {
         const tempData = JSON.parse(sessionStorage.getItem('databoxCategory'));
 
         // get databox data and update category remaining
-        const databox = rows[index];
-        const sub_category_available = tempData.sub_category_available;
-        const category_available = tempData.category;
+        const getDataboxItem = JSON.parse(sessionStorage.getItem('databox_item')) || this.databox_items;
+        const confirm_id_name = getDataboxItem.findIndex(el => el._id === this.router.url.split('/').filter(el => el.length === 24)[0]);
+        const databox         = getDataboxItem[confirm_id_name];
 
-        tempData.category_used = tempData.categories.filter(el => el.type === 'Category').length;
-        tempData.sub_category_available_used = tempData.categories.filter(el => el.type === 'Sub Category').length;
+        const sub_category_available = databox.sub_category_available;
+        const category_available = databox.category;
 
-        rows[index] = tempData;
-        this.databox_category = rows;
+        console.log(tempData)
+
+        databox.category_used = tempData.categories.filter(el => el.type === 'Category').length;
+        databox.sub_category_available_used = tempData.categories.filter(el => el.type === 'Sub Category').length;
+
+        if(rows[index]){
+          rows[index] = tempData;
+          this.databox_category = rows;
+
+        } else this.databox_category.push(tempData);
 
         // set databox categories
         sessionStorage.setItem('databox_item_categories', JSON.stringify(this.databox_category));
+        sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
         sessionStorage.setItem('databox_updated', `New Category expressions has been added for ${databox.databox_name} Databox`);
         sessionStorage.removeItem('databoxCategory');
 
         return of(this.databox_category.slice()).pipe(delay(500));
       }
-
 
       // test category
       testCategory(id){
@@ -179,31 +180,19 @@ export class DataboxCategoryService {
         this.setTestDataItem(tempData);
       }
 
-
       // edit category
       editCategoryTemp(id, details, category_name): Observable<any>{
-
-        // QUERY EXPRESSION BUILDER
-        const requiredKeywords = details['required_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-        const optionalKeywords = details['optional_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" OR ") : `${el}`).join("");
-        const excludedKeywords = details['excluded_keywords'].map((el,i,arr) => i !== (arr.length - 1) ? el.concat(" AND ") : `${el}`).join("");
-
-        const expression = details['optional_keywords'].length > 0 && details['excluded_keywords'].length === 0 ? `((${requiredKeywords}) OR "(${optionalKeywords})")` 
-          : details['optional_keywords'].length > 0 && details['excluded_keywords'].length > 0 ? `((${requiredKeywords}) OR ("${optionalKeywords}")) AND ( NOT (${excludedKeywords}))` 
-          : details['optional_keywords'].length === 0 && details['excluded_keywords'].length > 0 ? `(${requiredKeywords}) AND (NOT (${excludedKeywords}))` 
-          : `${requiredKeywords}`;
-
         if(sessionStorage.getItem('databoxCategory')){
           const rows  = JSON.parse(sessionStorage.getItem('databoxCategory'));
           const category_index = rows.categories.findIndex(i => i.name === category_name);
-         
+          const expression = details['optional-keywords'] ? `${details['required-keywords']} OR "${details['optional-keywords']}"` : `${details['required-keywords']}`;
+
           rows.categories[category_index].name = details.name;
           rows.categories[category_index].type = details.type;
-          rows.categories[category_index].expression = details['query_type'] === 'basic' ? expression : details.query;
-          rows.categories[category_index]['required_keywords'] = details['required_keywords'];
-          rows.categories[category_index]['optional_keywords'] = details['optional_keywords'];
-          rows.categories[category_index]['excluded_keywords'] = details['excluded_keywords'];
-          rows.categories[category_index]['query_type'] = details['query_type'];
+          rows.categories[category_index].expression = expression !== 'null' ? expression : details.query,
+          rows.categories[category_index]['required-keywords'] = details['required-keywords'];
+          rows.categories[category_index]['optional-keywords'] = details['optional-keywords'];
+          rows.categories[category_index]['excluded-keywords'] = details['excluded-keywords'];
           rows.categories[category_index]['query'] = details['query'];
 
           // set to local storage
@@ -218,15 +207,15 @@ export class DataboxCategoryService {
           const rows  = JSON.parse(sessionStorage.getItem('databox_item_categories')) || this.databox_category;
           const index = rows.findIndex(i => i.databox_id === id)
           const category_index = rows[index].categories.findIndex(el => el.name === category_name);
-          
+          const expression = details['optional-keywords'] ? `${details['required-keywords']} OR "${details['optional-keywords']}"` : `${details['required-keywords']}`;
+
           if(category_index > -1){
             rows[index].categories[category_index].name = details.name;
             rows[index].categories[category_index].type = details.type;
-            rows[index].categories[category_index].expression = details['query_type'] === 'basic' ? expression : details.query;
-            rows[index].categories[category_index]['required_keywords'] = details['required_keywords'];
-            rows[index].categories[category_index]['optional_keywords'] = details['optional_keywords'];
-            rows[index].categories[category_index]['excluded_keywords'] = details['excluded_keywords'];
-            rows[index].categories[category_index]['query_type'] = details['query_type'];
+            rows[index].categories[category_index].expression = expression !== 'null' ? expression : details.query,
+            rows[index].categories[category_index]['required-keywords'] = details['required-keywords'];
+            rows[index].categories[category_index]['optional-keywords'] = details['optional-keywords'];
+            rows[index].categories[category_index]['excluded-keywords'] = details['excluded-keywords'];
             rows[index].categories[category_index]['query'] = details['query'];
 
             // set to local storage
@@ -239,7 +228,6 @@ export class DataboxCategoryService {
           }
         }
       }
-
 
       // delete category
       deleteCategory(id, category_name): Observable<any>{
@@ -274,19 +262,10 @@ export class DataboxCategoryService {
           this.databox_category = rows;
 
           // set databox categories
-          sessionStorage.setItem('databox_item_categories', JSON.stringify(rows));
+          sessionStorage.setItem('databox_item_categories', JSON.stringify(this.databox_category));
         }
 
         return of(this.databox_category.slice()).pipe(delay(500));
-      }
-
-      // delete category table
-      removeCategoryTable(id){
-        const databoxItemCategory = JSON.parse(sessionStorage.getItem('databox_item_categories')) || this.databox_category;
-        const index = databoxItemCategory.findIndex(el => el.databox_id === id);
-
-        // reusable code for removing data
-        this.removeDataSimple(databoxItemCategory, 'databox_item_categories', index, this.databox_category);
       }
 
 
@@ -294,7 +273,7 @@ export class DataboxCategoryService {
   /* @FUNCTIONS FOR GENERATING RANDOM ID AND MAX INDEX */
 
       // generate id with length 24
-      private generateID() {
+      generateID() {
         let id = '';
         const possible = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -306,12 +285,5 @@ export class DataboxCategoryService {
       }
 
       // get max index
-      private getMaxIndex(item) { return Math.max(...item.map(x => x.index)) }
-
-      // reusable function for removing data
-      private removeDataSimple(array, item_storage, index, updatedArray){
-        array.splice(index, 1);
-        updatedArray = array;
-        sessionStorage.setItem(item_storage, JSON.stringify(updatedArray));
-      }
+      getMaxIndex(item) { return Math.max(...item.map(x => x.index)) }
 }

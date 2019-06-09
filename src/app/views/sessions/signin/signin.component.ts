@@ -122,7 +122,6 @@ export class SigninComponent implements OnInit {
 
     const signinData = this.signinForm.value;
     //console.log('signinData: ', signinData);
-
  
     // temporary select a user and set it as the currently logged in user
      this.reqUser = this.userService

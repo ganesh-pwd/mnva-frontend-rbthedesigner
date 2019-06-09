@@ -96,7 +96,6 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       'when_purchase_declined': this.when_purchase_declined,
       'when_purchase_success': this.when_purchase_success
     }
-
     this.userService.setNotificationSettings(body).subscribe(result => console.log(result));
   }
 }

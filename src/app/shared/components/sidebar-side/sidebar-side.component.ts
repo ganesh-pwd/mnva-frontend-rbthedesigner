@@ -11,7 +11,6 @@ import { UserBillingService } from '../../../shared/services/auth/user-billing-i
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { ProductShopService } from '../../../views/products/products-shop.service';
 import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
-
 @Component({
   selector: 'app-sidebar-side',
   templateUrl: './sidebar-side.component.html',
@@ -75,10 +74,8 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
   // change selected account after modifying the mat-select input
   changeSelectedAccount(selected){
     let url = this.router.url; // previous url
-
     const checkDatabox = url.split('/').filter(el => el === 'databoxes').join("");
     const checkTemplateGallery = url.split('/').filter(el => el === 'template-gallery').join("");
-
     if(checkDatabox) url = checkDatabox; // to refresh databoxes
     if(checkTemplateGallery) url = checkTemplateGallery // to refresh template gallery
 
@@ -94,7 +91,6 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
         this.userService.setUser(setSelectedUser);
         this.userService.setConnector(setSelectedUser.plan_id);
         this.userService.setDatasource(setSelectedUser.plan_id);
-        
         this.minervaAccountChangeService.setImage(setSelectedUser.profile_image)
         sessionStorage.setItem('loggedInUser', JSON.stringify(setSelectedUser));
 
@@ -114,7 +110,6 @@ export class SidebarSideComponent implements OnInit, OnDestroy, AfterViewInit {
           this.userPlanDetailsService.setUserUserPlanDetails(userPlanDetails);
           sessionStorage.setItem('userPlanDetails', JSON.stringify(userPlanDetails));
         }
-
         // remove cart items;
         this.cartReq = this.shopService.removeAllFromCart().subscribe(r => r);
     })

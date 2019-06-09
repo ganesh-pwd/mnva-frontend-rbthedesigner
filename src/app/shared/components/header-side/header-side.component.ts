@@ -54,7 +54,6 @@ export class HeaderSideComponent implements OnInit {
         // this.userFullName = user.name
         this.loggedInUser = user;
         this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
-
         if ('userName' in sessionStorage) this.userName = sessionStorage.getItem('userName');
       }
     });

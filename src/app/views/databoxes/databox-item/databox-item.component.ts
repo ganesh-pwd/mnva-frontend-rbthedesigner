@@ -82,7 +82,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public sharedChartOptions: any = {
     responsive: true,
     legend: {
-      display: false,
+      display: true,
       position: 'bottom'
     }
   };

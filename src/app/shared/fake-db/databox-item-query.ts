@@ -1,6 +1,5 @@
 /* 
   The list of databox items queries for the currently logged in and selected user databox
-
   Foreign key _ databox_id (Id of the currently selected databox)
 */
 

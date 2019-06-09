@@ -20,7 +20,6 @@ import { DataboxItemMentionService } from './databox-item-mention.service';
 export class DataboxesService {
   private databox_items: any[];
   private databox_items_suggestion: any[];
-
   private apiData = new BehaviorSubject<any>(null);
   public apiData$ = this.apiData.asObservable();
 
@@ -34,7 +33,6 @@ export class DataboxesService {
     private databoxCategoryService: DataboxCategoryService,
     private databoxConnectorService: DataboxConnectorService,
     private databoxItemMentionService: DataboxItemMentionService) {
-
     const databoxDB = new DataboxDB();
 
     // logged in user
@@ -43,8 +41,6 @@ export class DataboxesService {
 
     const databoxItemSuggestion = new DataboxSuggestionDB();
     this.databox_items_suggestion = JSON.parse(sessionStorage.getItem('databox_items_suggestion')) || databoxItemSuggestion.databox_items_suggestion;  }
-
-
 
   // ******* Implement your APIs ********
 
@@ -198,7 +194,6 @@ export class DataboxesService {
 
         // update databox item query
         this.databoxesQueryService.updateItemQuery(details.databox_id, details);
-
         sessionStorage.setItem('databox_item', JSON.stringify(getDataboxItem));
         sessionStorage.setItem('databox_updated', `The ${databox.databox_name} Databox has been updated`);
         sessionStorage.removeItem('databox_edited_name');

@@ -13,7 +13,6 @@ import { DataboxesService } from '../../../shared/services/databoxes/databox-ite
 import { DataboxesQueryService } from '../../../shared/services/databoxes/databox-item-query.service';
 import { DataboxItemMentionService } from '../../../shared/services/databoxes/databox-item-mention.service';
 import { DataboxMentionsDialogService } from '../../../shared/services/databoxes/dialogs-mentions/dialogs-mentions.services';
-
 import { CountryService } from '../../../shared/services/countries/country.service';
 import { HistoricalService } from '../../../shared/services/historical/historical.service';
 import { MainDataboxesDialogService } from '../../../shared/services/databoxes/dialogs/main-databoxes-dialog.service';
@@ -635,7 +634,6 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
       // check if input is invalid
       checkIfInputIsValid(){
         let valid = true;
-
         // set selected multiple countries
         const country = document.getElementById('countries');
         const active_country = country.getElementsByClassName('query-active');

@@ -191,7 +191,6 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
             'email':this.billingInfoForm.get('email').value,
             'zip': this.billingInfoForm.get('zip').value,
           }
-
           this.updateReq = this.userBillingService
           .saveUserBillingInfo(data)
           .subscribe(result => {
