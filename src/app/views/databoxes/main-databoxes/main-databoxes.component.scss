@@ -35,20 +35,8 @@ mat-card-subtitle{
 
 
 .gallery-icons{
-	padding: 10px 4px !important;
-
-	i{
-		position: absolute;
-		margin: 5px 0px !important;
-		padding: 0 !important;
-		
-		img{
-			width: 100%;
-		}
-	}
-
-	.mat-icon{
-		font-size: 150% !important;
+	ul,li,strong{
+		font-size: 12px;
 	}
 }
 
@@ -79,3 +67,9 @@ mat-card-subtitle{
 		margin: auto;
 	}
 }
+
+.notification-important{
+	background: red;
+	border: 2px solid gray;
+}
+

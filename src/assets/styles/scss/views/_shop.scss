@@ -20,8 +20,8 @@ h1.title {
   border: 0;
   height: 32px;
   border-radius: 2px;
-  padding-left: 8px;
-  font-size: 16px;
+  padding-left: 40px;
+  font-size: 14px;
   width: 260px;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0);
   transition: all $transitionDuration $transitionTiming;
@@ -63,6 +63,16 @@ h1.title {
   padding: 0 8px;
 }
 .product-search-wrap {
+  width: 100%;
+  form{
+    position: relative;
+    mat-icon{
+      position:absolute;
+      top:10px;
+      left:10px;
+      color: rgba(0, 0, 0, .54);
+    }
+  }
   .product-search {
     width: 260px; 
     margin: 6px 0 0;

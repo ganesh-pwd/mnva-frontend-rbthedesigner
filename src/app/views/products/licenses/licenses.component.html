@@ -14,10 +14,10 @@
   <div class="full-width">
     <!-- Search Form -->
     <div fxLayout="row" fxLayout.lt-sm="column" class="shop-top-toolbar">
-      <button mat-icon-button class="mr-1" (click)="toggleSideNav()"><mat-icon>short_text</mat-icon> </button>
       <div class="product-search-wrap">
         <form [formGroup]="filterForm">
-          <input type="text" name="searchProduct" placeholder="Search product" class="product-search default-bg full-width" [formControl]="filterForm.controls['search']">
+          <mat-icon>search</mat-icon>
+          <input type="text" name="searchProduct" placeholder="Search product" class="product-search default-bg" [formControl]="filterForm.controls['search']">
         </form>
       </div>
       <!-- View change buttons and cart -->

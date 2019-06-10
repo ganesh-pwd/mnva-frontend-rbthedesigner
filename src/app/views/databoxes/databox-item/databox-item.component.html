@@ -1,4 +1,21 @@
-<br />
+<div class="notification__container">
+  <div class="notification__cell">
+    <div class="notification notification--red mb-1">
+      <div class="notification__icon">
+        <mat-icon class="">info_outline</mat-icon>
+      </div>
+      <div class="notification__content">
+        <h3 class="notification__type mat-h3">Info</h3>
+        <p class="notification__message">Anyone with access can view your invited visitors.</p>
+      </div>
+      <div class="notification__close">
+        <mat-icon class="">close</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
 <div *ngIf="data?.databox_name && paginatedData">
   <div class="header-row m-333" fxLayout="row" fxLayoutWrap="wrap">
     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" id="head">
@@ -29,7 +46,7 @@
       color="primary"
       routerLink="/databoxes/edit-query/{{ data?._id }}"
     >
-      Edit Query
+      Edit Databox
     </button>
     <button
       mat-raised-button
@@ -145,9 +162,8 @@
     <!-- Categorize Your Data -->
     <mat-tab label="Categorize Your Data">
       <div fxLayout="row" fxLayoutWrap="wrap">
-        <!-- Column 1 -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}"  >
-          <mat-card>
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}"  >
+          <mat-card class="m-0">
             <mat-card-header>
               <mat-card-title class="mat-color-primary">
                 <span>Category Creator</span>
@@ -209,129 +225,147 @@
               </p>
             </mat-card-actions>
           </mat-card>
-          <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
-            <span fxFlex></span>
-            <button mat-raised-button color="primary" 
-            (click)="openQueryDialog('Test Category', data)" >
-            Test Category
-            </button>
-          </div>
         </div>
-        <!-- Column2 -->
-        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-          <!-- Doughnut Chart -->
-          <div fxLayout="row" fxLayoutWrap="wrap" >
-            <!-- Doughnut Chart para Categorias -->
-            <div fxFlex="100" fxFlex.gt-sm="50">
-              <mat-card class="p-0  doughnut-card">
-                <mat-card-header>
-                  <mat-card-title class="mat-color-primary">
-                    <span>Category Mentions</span>
-                  </mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <!-- Doughnut Chart para Categorias -->
-                  <canvas 
-                    baseChart 
-                    class="chart"
-                    id="categoryRemain"
-                    [data]="[categoryUsed, categoryRemaining]"
-                    [labels]="doughnutChartCategoryLabels"
-                    [options]="doughnutOptions"
-                    [colors]="doughnutChartColors"
-                    [chartType]="doughnutChartType"></canvas>
-                </mat-card-content>
-              </mat-card>
-            </div>
-            <!-- Doughnut Chart para SubCategorias -->
-            <div fxFlex="100" fxFlex.gt-sm="50">
-              <mat-card class="p-0 doughnut-card">
-                  <mat-card-header>
-                    <mat-card-title class="mat-color-primary">
-                      <span>SubCategory Mentions</span>
-                    </mat-card-title>
-                  </mat-card-header>
-                <mat-card-content>
-                  <!-- Doughnut Chart para SubCategorias -->
-                  <canvas 
-                    baseChart 
-                    class="chart"
-                    [data]="[subCategoryUsed, subcategoryRemaining]"
-                    [labels]="doughnutChartSubCategoryLabels"
-                    [options]="doughnutOptions"
-                    [colors]="doughnutChartColors"
-                    [chartType]="doughnutChartType"></canvas> 
-                </mat-card-content>
-              </mat-card>
-            </div>            
-          </div>
-          <!-- Result Preview -->
-          <div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
-            <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-              <mat-card>
-                <mat-card-title>
-                  <h3 class="mat-h3 mat-color-primary">Results</h3>
-                </mat-card-title>
-                <mat-divider></mat-divider>
-                <mat-card-content>
-                  <table mat-table [dataSource]="dataSource">
-                    <!--- Note this table dataSource should be fetched with real data from the backend service -->
-                    <ng-container matColumnDef="content">
-                      <th mat-header-cell *matHeaderCellDef> Content </th>
-                      <td mat-cell *matCellDef="let category"> {{category.name}} </td>
-                    </ng-container>
-      
-                    <ng-container matColumnDef="category">
-                      <th mat-header-cell *matHeaderCellDef> Category </th>
-                      <td mat-cell *matCellDef="let category"> {{category.type}} </td>
-                    </ng-container>
-      
-                    <ng-container matColumnDef="subCategory">
-                      <th mat-header-cell *matHeaderCellDef> SubCategory </th>
-                      <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
-                  </table>
-                </mat-card-content>
-
-
-                <mat-card-content *ngIf="testCategory">
-                  <mat-divider>
-                    
-                  </mat-divider>   
-                  <br>
-                  <p>Result from Test Category: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </mat-card-content>
-              </mat-card>
-
-
-            </div>   
-
-            
-          </div>    
-        </div>
-
-
-        <div fxLayout="column" fxFlex="100">
-          <div>
-            <br>
-            <mat-divider></mat-divider>  
-            <br>
-            <div>
+      </div>
+      <!-- Results Preview -->
+      <div fxLayout="row" fxLayoutWrap="wrap" >
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showResultsPreview')">
+              <mat-card-title>
+                <span>Results Preview</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
-              <button 
-              (click)="cancelChanges()" 
-              mat-raised-button class="mb-05">
-              Back</button>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showResultsPreviewAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
 
-              <button 
-              (click)="openQueryDialog('Save Categories', data)" 
-              mat-raised-button 
-              class="mb-05" color="primary">
-              Save Categories</button>
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showResultsPreviewAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            
+            <div *ngIf="showResultsPreviewAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <!-- Results Preview -->
+              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                <div class="m-333" fxLayout="row" fxLayoutWrap="wrap" >
+                  <span fxFlex></span>
+                  <button mat-raised-button color="primary" 
+                  (click)="openQueryDialog('Test Category', data)" >
+                  Test Categories
+                  </button>
+                </div>
+                <!-- Doughnut Chart -->
+                <div fxLayout="row" fxLayoutWrap="wrap" >
+                  <!-- Doughnut Chart para Categorias -->
+                  <div fxFlex="100" fxFlex.gt-sm="50">
+                    <mat-card class="p-0  doughnut-card">
+                      <mat-card-header>
+                        <mat-card-title class="mat-color-primary">
+                          <span>Category Mentions</span>
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content>
+                        <!-- Doughnut Chart para Categorias -->
+                        <canvas 
+                          baseChart 
+                          class="chart"
+                          id="categoryRemain"
+                          [data]="[categoryUsed, categoryRemaining]"
+                          [labels]="doughnutChartCategoryLabels"
+                          [options]="doughnutOptions"
+                          [colors]="doughnutChartColors"
+                          [chartType]="doughnutChartType"></canvas>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                  <!-- Doughnut Chart para SubCategorias -->
+                  <div fxFlex="100" fxFlex.gt-sm="50">
+                    <mat-card class="p-0 doughnut-card">
+                        <mat-card-header>
+                          <mat-card-title class="mat-color-primary">
+                            <span>SubCategory Mentions</span>
+                          </mat-card-title>
+                        </mat-card-header>
+                      <mat-card-content>
+                        <!-- Doughnut Chart para SubCategorias -->
+                        <canvas 
+                          baseChart 
+                          class="chart"
+                          [data]="[subCategoryUsed, subcategoryRemaining]"
+                          [labels]="doughnutChartSubCategoryLabels"
+                          [options]="doughnutOptions"
+                          [colors]="doughnutChartColors"
+                          [chartType]="doughnutChartType"></canvas> 
+                      </mat-card-content>
+                    </mat-card>
+                  </div>            
+                </div>
+                <!-- Results -->
+                <div style="position: -webkit-sticky; position: sticky;top: 0;" fxLayout="row" fxLayoutWrap="wrap" >
+                  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
+                    <mat-card>
+                      <mat-card-title>
+                        <h3 class="mat-h3 mat-color-primary">Results</h3>
+                      </mat-card-title>
+                      <mat-divider></mat-divider>
+                      <mat-card-content>
+                        <table mat-table [dataSource]="dataSource">
+                          <!--- Note this table dataSource should be fetched with real data from the backend service -->
+                          <ng-container matColumnDef="content">
+                            <th mat-header-cell *matHeaderCellDef> Content </th>
+                            <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+                          </ng-container>
+            
+                          <ng-container matColumnDef="category">
+                            <th mat-header-cell *matHeaderCellDef> Category </th>
+                            <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+                          </ng-container>
+            
+                          <ng-container matColumnDef="subCategory">
+                            <th mat-header-cell *matHeaderCellDef> SubCategory </th>
+                            <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
+                        </table>
+                      </mat-card-content>
+
+
+                      <mat-card-content *ngIf="testCategory">
+                        <mat-divider>
+                          
+                        </mat-divider>   
+                        <br>
+                        <p>Result from Test Category: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </mat-card-content>
+                    </mat-card>
+
+
+                  </div>   
+                </div>    
+              </div>
             </div>
-          </div>
+          </mat-card>
         </div>
       </div>
     </mat-tab>

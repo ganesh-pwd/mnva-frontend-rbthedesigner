@@ -49,13 +49,17 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
   public showQuery: string = 'basic';
   public showQueryAccord: boolean = true;
   public showAdvanceAccord: boolean = true;
+  public showHistoricalAccord: boolean = true;
+  public showResultsPreviewAccord: boolean = true;
+  public showCountryAccord: boolean = true;
+  public showDeleteAccord: boolean = true;
   public showConnectAccord: boolean = true;
   public showSimpleExample: boolean = true;
   public showAdvancedExample: boolean = true;
   public loggedInUser;
   public userPlanDetails;
   public userPlanDatasource;
-  public editorData = `Type your desired keywords`;
+  public editorData = `Press 'Enter' to add keyword`;
   public editorDataAdv = `Please type your query`;
 
   /** Results table */
@@ -348,6 +352,34 @@ export class DataboxItemSettingsComponent implements OnInit, OnDestroy {
           {
             if(this.showAdvanceAccord) this.showAdvanceAccord = false;
               else this.showAdvanceAccord = true;
+            break;
+          }
+
+          case accord === 'showHistorical':
+          {
+            if(this.showHistoricalAccord) this.showHistoricalAccord = false;
+              else this.showHistoricalAccord = true;
+            break;
+          }
+
+          case accord === 'showResultsPreview':
+          {
+            if(this.showResultsPreviewAccord) this.showResultsPreviewAccord = false;
+              else this.showResultsPreviewAccord = true;
+            break;
+          }          
+
+          case accord === 'showDelete':
+          {
+            if(this.showDeleteAccord) this.showDeleteAccord = false;
+              else this.showDeleteAccord = true;
+            break;
+          }
+
+          case accord === 'showCountry':
+          {
+            if(this.showCountryAccord) this.showCountryAccord = false;
+              else this.showCountryAccord = true;
             break;
           }
 

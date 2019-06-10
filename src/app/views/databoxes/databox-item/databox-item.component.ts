@@ -41,6 +41,7 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
   public id: string;
   public mentions: any;
   public creditRemaining: number;
+  public showResultsPreviewAccord: boolean = true;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   public displayedColumns: string[] = ['name', 'type', 'expression', 'action'];
@@ -250,6 +251,17 @@ export class DataboxItemComponent implements OnInit, OnDestroy {
 
         break;
       }
+    }
+  }
+
+  selectAccordion(accord) {
+    switch (true) {
+      case accord === 'showResultsPreview':
+      {
+        if(this.showResultsPreviewAccord) this.showResultsPreviewAccord = false;
+          else this.showResultsPreviewAccord = true;
+        break;
+      }          
     }
   }
 

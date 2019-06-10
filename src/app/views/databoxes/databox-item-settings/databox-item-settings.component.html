@@ -54,7 +54,7 @@
               {{ data?.databox_name }}</a
             >
           </span>
-          <span>/ Edit Query</span>
+          <span>/ Edit Databox</span>
         </small>
       </h1>
     </div>
@@ -68,609 +68,6 @@
   </div>
 </div>
 <hr />
-<br />
-
-<div *ngIf="checkIfCreateOrEdit === 'Create'" class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-    <h3 class="mat-h3">Creating a Databox:</h3>
-    <p>Databoxes are where everything happens in Minerva. To create a Databox, you'll need to create a query, which is comprised of several required fields: your datasource, country, historical data and the keywords that will search our databases.</p>
-</div>
-<form [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
-  <!-- Column1 -->
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
-    <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-      <h1 class="mat-h1">Query Editor</h1>
-    </div>
-    <!-- Change Datasource -->
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxLayout="column" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <span>Change Datasource</span>
-            </mat-card-title>
-          </mat-card-header>
-
-          <mat-divider></mat-divider>
-          <mat-card-content class="p-0">
-            <br />
-            <mat-form-field>
-              <mat-select 
-                formControlName="datasource"
-                [(value)]="selectedDatasource" 
-                (selectionChange)="selectDatasource()">
-
-                  <mat-option *ngFor="let singleDatasource of userPlanDatasource?.datasources" 
-                  [value]="singleDatasource">
-                  {{ singleDatasource }}
-                
-                  </mat-option>
-
-                  <mat-option *ngFor="let data_item of datasource" 
-                  [disabled]="true" 
-                  [value]="data_item" class="unavailable-datasource">
-                    <span 
-                    matTooltip="Upgrade your plan to unlock this datasource"
-                    matTooltipPosition="right"
-                    matTooltipClass='pos-right'>
-                      {{data_item}}
-                    </span>
-                  </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div> 
-
-    <!-- Change Country -->
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxLayout="column" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <span>Change Country</span>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content class="p-0">
-            <br>
-            <div id="countries">
-              <button mat-raised-button class="query_type" 
-              *ngFor="let country of countries" 
-              (click)="selectCountry(country.name)" 
-              id="{{country.name}}">{{country.name}}</button>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-
-    <!-- Connect Your Page -->
-    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="data?.datasource === ('Owned Twitter Profile' || 'Owned Facebook Page')">
-      <div fxLayout="column" fxFlex.gt-sm="100">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <span>Connect Your Page</span>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content class="p-0">
-            <br>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-
-    <!-- Historical -->
-    <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="historicals">
-      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" 
-      [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <span>Historical</span>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <mat-card-content>
-            <br>
-            <div id="historicals">
-              <button mat-raised-button class="query_type" 
-              *ngFor="let historical of historicals" 
-              (click)="selectHistorical(historical.display_text)" 
-              id="{{historical.display_text}}">
-              {{historical.display_text}}</button>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-
-    <!-- Query Editor -->
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div
-        fxLayout="column"
-        fxFlex="100"
-        fxFlex.gt-md="100"
-        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-      >
-        <mat-card>
-          <mat-card-header class="accordion-databox" 
-          (click)="selectAccordion('showQuery')">
-            <mat-card-title>
-              <span>Query</span>
-            </mat-card-title>
-            <span fxFlex></span>
-
-            <mat-icon 
-            class="mat-icon material-icons mat-color-gray" 
-            *ngIf="showQueryAccord" 
-            [@animate]="{
-              value: '*',
-              params: { scale: '0.7', delay: '200ms' }
-            }">
-            keyboard_arrow_down</mat-icon>
-
-            <mat-icon 
-            class="mat-icon material-icons mat-color-gray" 
-            *ngIf="!showQueryAccord" 
-            [@animate]="{
-              value: '*',
-              params: { scale: '0.7', delay: '200ms' }
-            }">
-            keyboard_arrow_right</mat-icon>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          
-          <div *ngIf="showQueryAccord" [@animate]="{
-                value: '*',
-                params: { y: '-20px', delay: '400ms' }
-              }">
-            <br />
-            <!--Query Menu -->
-            <div fxLayout="row" fxLayoutWrap="wrap">
-              <button mat-raised-button mat-color-primary 
-              (click)="showBasicQuery()"
-              class="query_type" 
-              [ngClass]="showQuery === 'basic' ? 'query-active': ''">
-                Basic Query
-              </button>
-              <button mat-raised-button 
-              class="query_type"
-              [ngClass]="showQuery === 'advance' ? 'query-active': ''"
-              (click)="showAdvanceQuery()">
-              Advanced Query</button>
-            </div>
-            <!--Basic Query Editor -->
-            <mat-card-content *ngIf="showQuery == 'basic'" 
-              [@animate]="{
-                value: '*',
-                params: { x: '200px', delay: '400ms' }
-              }">
-              <mat-card-title class="mat-color-primary query-header">
-                <span>Basic Query</span>
-              </mat-card-title>
-              <div fxLayout="row" fxLayoutWrap="wrap">
-                <div
-                  fxLayout="column"
-                  fxFlex="100"
-                  fxFlex.gt-sm="100"
-                  [@animate]="{
-                    value: '*',
-                    params: { x: '200px', delay: '400ms' }
-                  }"
-                >
-                  <b>Required Keywords</b>
-                  <p class="mt-05 text-muted">
-                    Your Databox will collect mentions that contain all of these
-                    keywords.
-                  </p>
-                  <mat-form-field
-                    style="border: 1px solid gray;"
-                    class="full-width"
-                  >
-                    <div class="p-1">
-                      <mat-placeholder class="placeholder" >
-                        {{editorData}}
-                      </mat-placeholder>
-                      <mat-chip-list #requiredKeywordChip>
-                        <mat-chip *ngFor="let keyword of requiredKeywords" 
-                            [selectable]="selectable"
-                            [removable]="removable" 
-                            (removed)="remove(keyword, 'required')">
-                            {{keyword}}
-                          <mat-icon matChipRemove 
-                          *ngIf="removable">cancel</mat-icon>
-                        </mat-chip>
-                        <input
-                          [matChipInputFor]="requiredKeywordChip"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          matChipInputAddOnBlur="addOnBlur"
-                          (matChipInputTokenEnd)="add($event, 'required')"
-                        >
-                      </mat-chip-list>
-                    </div>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div fxLayout="row" fxLayoutWrap="wrap">
-                <div
-                  fxLayout="column"
-                  fxFlex="100"
-                  fxFlex.gt-sm="100"
-                >
-                  <b class="mt-1">Optional Keywords</b>
-                  <p class="mt-05 text-muted">
-                    Your Databox will collect mentions that contain at least one
-                    of these keywords, plus all required keywords.
-                  </p>
-                  <mat-form-field
-                    style="border: 1px solid gray;"
-                    class="full-width"
-                  >
-                    <div class="p-1">
-                      <mat-placeholder class="placeholder">
-                        {{editorData}}
-                      </mat-placeholder>
-                      <mat-chip-list #optionalKeywordChip>
-                        <mat-chip *ngFor="let optionalKeyword of optionalKeywords" 
-                            [selectable]="selectable"
-                            [removable]="removable" 
-                            (removed)="remove(optionalKeyword, 'optional')">
-                            {{optionalKeyword}}
-                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                        </mat-chip>
-                        <input
-                          [matChipInputFor]="optionalKeywordChip"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="add($event, 'optional')">
-                      </mat-chip-list>
-                    </div>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div fxLayout="row" fxLayoutWrap="wrap">
-                <div
-                  fxLayout="column"
-                  fxFlex="100"
-                  fxFlex.gt-sm="100"
-                  [@animate]="{
-                    value: '*',
-                    params: { x: '200px', delay: '400ms' }
-                  }"
-                >
-                  <b class="mt-1">Exclude Keywords</b>
-                  <p class="mt-05 text-muted">
-                    Your Databox will not bring in mentions any of the following
-                    keywords.
-                  </p>
-                  <mat-form-field
-                    style="border: 1px solid gray;"
-                    class="full-width"
-                  >
-                    <div class="p-1">
-                      <mat-placeholder class="placeholder">
-                        {{editorData}}
-                      </mat-placeholder>
-                      <mat-chip-list #excludeKeywordChip>
-                        <mat-chip *ngFor="let excludeKeyword of excludeKeywords" [selectable]="selectable"
-                            [removable]="removable" (removed)="remove(excludeKeyword, 'exclude')">
-                            {{excludeKeyword}}
-                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                        </mat-chip>
-                        <input
-                          [matChipInputFor]="excludeKeywordChip"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          [matChipInputAddOnBlur]="addOnBlur"
-                          (matChipInputTokenEnd)="add($event, 'exclude')">
-                      </mat-chip-list>
-                    </div>
-                  </mat-form-field>
-                </div>
-              </div>
-            </mat-card-content>
-            <!--Avanced Query Editor -->
-            <mat-card-content>
-              <div fxLayout="row" fxLayoutWrap="wrap">
-                <div
-                  fxLayout="column"
-                  fxFlex="100"
-                  fxFlex.gt-md="100"
-                  fxLayoutAlign="center"
-                >
-                  <mat-card-header class="query-header" 
-                  *ngIf="showQuery === 'advance'"
-                  [@animate]="{
-                    value: '*',
-                    params: { x: '200px', delay: '400ms' }
-                  }">
-                    <mat-card-title class="mat-color-primary">
-                      <span>Advanced Query</span>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                      <p>
-                        The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
-                      </p>
-                    </mat-card-subtitle>
-                  </mat-card-header>
-                  <mat-card-content 
-                    *ngIf="showQuery === 'advance'"
-                    [@animate]="{
-                      value: '*',
-                      params: { x: '200px', delay: '400ms' }
-                    }">
-                    <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
-                      <div
-                        fxLayout="column"
-                        fxFlex="100"
-                        fxFlex.gt-md="100"
-                        fxLayoutAlign="center"
-                      >
-                          <mat-form-field
-                            style="border: 1px solid gray;"
-                            class="full-width"
-                          >
-                            <div class="p-1">
-                              <mat-placeholder class="placeholder" 
-                              *ngIf="queryForm.controls['advance_query'].value === ''">
-                              {{editorDataAdv}}</mat-placeholder>
-                              <textarea
-                                matInput
-                                rows="10"
-                                cols="80"
-                                formControlName="advance_query"
-                              ></textarea>
-                            </div>
-                          </mat-form-field>
-                          <div class="text-muted query-help mt-1">
-                            <a matTooltip="car OR bus OR train" ng-click="showDetails = ! showDetails">Show Simple Example</a>
-                              <div class="procedure-details" ng-class="{ 'hidden': ! showDetails }">
-                                <p>Number of patient discharges</p>
-                              </div>
-                            <a matTooltip="(car OR bus) AND train">Show Complex Example</a>
-                            <a>Need More Help?</a>
-                          </div>
-                      </div>
-                    </div>
-                  </mat-card-content>
-
-                  <mat-card-content
-                    *ngIf="showQuery === 'advance'"
-                    >
-                    <div fxLayout="row" fxLayoutWrap="wrap">
-                      <div
-                        fxLayout="column"
-                        fxFlex="100"
-                        fxFlex.gt-md="100"
-                        [@animate]="{
-                          value: '*',
-                          params: { y: '200px', delay: '400ms' }
-                        }"
-                        fxLayoutAlign="center"
-                      >
-                        <mat-card class="query-right-side">
-                          <mat-card-content>
-                            <h4 class="mat-h4">
-                              Boolean Operations:
-                            </h4>
-                            <p
-                              class="mat-color-primary query-info"
-                              matTooltip="OR operators are used to expand your query. For example: car OR bus OR train"
-                            >
-                              OR = OR's help you expand your query
-                            </p>
-                            <p
-                              class="mat-color-primary query-info"
-                              matTooltip="AND operators are used to expand your query. For example: car AND bus AND train"
-                            >
-                              AND = AND's help you be more exact
-                            </p>
-                            <p
-                              class="mat-color-primary query-info"
-                              matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train"
-                            >
-                              NOT = NOT's help you exclude information
-                            </p>
-                          </mat-card-content>
-                        </mat-card>
-                      </div>
-                    </div>
-                  </mat-card-content>
-                </div>
-              </div>
-            </mat-card-content>
-          </div>
-        </mat-card>
-      </div>
-    </div>
-
-    <!-- Advanced Settings -->
-    <div fxLayout="row" fxLayoutWrap="wrap" >
-      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
-        <mat-card class="accordion-databox">
-          <mat-card-header (click)="selectAccordion('showAdvance')">
-            <mat-card-title>
-              <span>Advanced Settings</span>
-            </mat-card-title>
-            <span fxFlex></span>
-            <mat-icon 
-            class="mat-icon material-icons mat-color-gray" 
-            *ngIf="showAdvanceAccord" 
-            [@animate]="{
-              value: '*',
-              params: { scale: '0.7', delay: '200ms' }
-            }">
-            keyboard_arrow_down</mat-icon>
-
-            <mat-icon 
-            class="mat-icon material-icons mat-color-gray" 
-            *ngIf="!showAdvanceAccord" 
-            [@animate]="{
-              value: '*',
-              params: { scale: '0.7', delay: '200ms' }
-            }">keyboard_arrow_right</mat-icon>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          
-          <div *ngIf="showAdvanceAccord" 
-            [@animate]="{
-              value: '*',
-              params: { y: '-20px', delay: '400ms' }
-            }">
-            <br>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="include_comments"><b>Include Comments</b>
-              </mat-slide-toggle>
-              <p>Include comments will retieve all the comments from the posts on your query. The content will not necessarily match your query.</p>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result"><b>Specify Maximum Number of Results</b>
-              </mat-slide-toggle>
-              <p>Use this option if you only need a specific amount of results and don't to be charged for the entire amount of results found from your query.</p>
-              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
-                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
-                  <p class="d-block">Please type the amount of desired results.</p>
-                    <mat-form-field style="border: 1px solid gray;">
-                        <input type="number" min="0" max="99" matInput mat-autosize formControlName="max_number_result">
-                    </mat-form-field>
-                    <br>
-                </div>
-              </div>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_only_news_media"><b>Monitor only News Media</b>
-              </mat-slide-toggle>
-              <p>Minerva curates a list of media profiles specific to your selected country. By choosing this option, you will monitor only these profiles.</p>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page"><b>Monitor Specific Pages</b>
-              </mat-slide-toggle>
-              <p>Use this option if you only need to monitor a specific list of pages.</p>
-              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
-                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
-                    <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
-                      <mat-form-field style="border: 1px solid gray;" class="full-width">
-                        <div class="p-1">
-                          <textarea matInput rows="10" cols="80"
-                          formControlName="facebook_page_id"></textarea>
-                        </div>  
-                      </mat-form-field>
-                  </div>
-              </div>
-              <mat-slide-toggle color="primary" class="mb-1" formControlName="exclude_specific_pages"><b>Exclude Specific Pages</b>
-              </mat-slide-toggle>
-              <p>Use this option if you only need to exclude a specific list of pages.</p>
-              <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkExcludedPage()">
-                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
-                    <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
-                      <mat-form-field style="border: 1px solid gray;" class="full-width">
-                        <div class="p-1">
-                          <textarea matInput rows="10" cols="80"
-                          formControlName="excluded_pages"></textarea>
-                        </div>  
-                      </mat-form-field>
-                  </div>
-              </div>
-          </div>
-        </mat-card>
-      </div>
-    </div>
-
-
-    <div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
-      <span fxFlex></span>
-      <button mat-raised-button class="mb-05 mat-bg-success" 
-      (click)="openDialogTestQuery(
-          'Test Query',
-          'You are about to build and update this query. Are you sure you want to proceed?')
-      ">
-        Test Query
-      </button>
-    </div>
-  </div>
-  <!-- Column2 -->
-  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="50" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
-    <div class="m-333 settings" fxLayout="row" fxLayoutWrap="wrap">
-      <h1 class="mat-h1">Results Preview</h1>
-    </div>
-
-    <!-- Metrics -->
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
-        <div>
-          <p>
-            <b>Mentions:</b> {{getDataboxMention(data?._id)?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{getDataboxMention(data?._id)?.mentions_per_day || 7.5}}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Line Chart -->
-    <div fxLayout="row" fxLayoutWrap="wrap">
-      <div fxFlex="100" fxFlex.gt-sm="100">
-        <mat-card class="p-0">
-          <mat-card-content class="px-1" 
-          style="padding-left: 20px !important;">
-            <!-- Line Chart -->
-            <canvas 
-              baseChart
-              class="chart"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="chartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"></canvas> 
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <div
-      style="position: -webkit-sticky; position: sticky;top: 0;"
-      fxLayout="row"
-      fxLayoutWrap="wrap"
-    >
-      <div
-        fxLayout="column"
-        fxFlex="100"
-        fxFlex.gt-sm="100"
-        [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
-      >
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <span>Results</span>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p class="text-justify" *ngIf="!setResult()">
-              No results yet, please Create a Query and then click “Test Query” to see results.
-            </p>
-            <table mat-table [dataSource]="dataSource" *ngIf="setResult()">
-              <!--- Note this table dataSource should be fetched with real data from the backend service -->
-              <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let category"> {{category.name}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="content">
-                <th mat-header-cell *matHeaderCellDef> Content </th>
-                <td mat-cell *matCellDef="let category"> {{category.type}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="author">
-                <th mat-header-cell *matHeaderCellDef> Author </th>
-                <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
-            </table>
-          </mat-card-content>
-          <mat-divider></mat-divider>
-          <mat-card-content> </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-</form>
-<br />
-
-<mat-divider></mat-divider><br />
 <div class="buttonRow m-333" fxLayout="row" fxLayoutWrap="wrap">
   
   <!-- Dialogs for New Creation of Databox with no Status -->
@@ -685,7 +82,8 @@
 
     <button
       mat-raised-button
-      class="mb-05 mat-bg-success"
+      class="mb-05"
+      color="primary"
       (click)="
         openDialog(
           'Save as Draft',
@@ -698,8 +96,7 @@
     </button>
     <button
       mat-raised-button
-      class="mb-05" 
-      color="primary"
+      class="mb-05 mat-bg-success"
       (click)="openMentionsDialog('Create Databox')"
     >
       Create Databox
@@ -724,7 +121,8 @@
 
     <button
       mat-raised-button
-      class="mb-05 mat-bg-success"
+      class="mb-05"
+      color="primary"
       (click)="
         openDialogUpdate(
           'Save Changes',
@@ -736,14 +134,12 @@
     </button>
     <button
       mat-raised-button
-      class="mb-05"
-      color="primary"
+      class="mb-05 mat-bg-success"
       (click)="openMentionsDialogUpdate('Activate Databox', data?.mentions)"
     >
       Activate Databox
     </button>
   </div>
-
   <!-- Dialogs for already Created Databox with Status as Active -->
   <div *ngIf="checkIfCreateOrEdit === 'Edit'">
     <button
@@ -753,15 +149,862 @@
     >
       Cancel
     </button>
-    
     <button
       mat-raised-button
-      class="mb-05"
-      color="primary"
+      class="mb-05 mat-bg-success"
       (click)="openMentionsDialogUpdate('Run Query', setMentionValue(data?.mentions))"
     >
-      Run Query
+      Save Changes
     </button>
   </div>
 </div>
+
+<form id="edit-databox" [formGroup]="queryForm" fxLayout="row" fxLayoutWrap="wrap">
+    <mat-card class="m-0 p-0">
+      <mat-card-header *ngIf="checkIfCreateOrEdit === 'Create'" class="p-1 light-gray">
+        <mat-card-title class="mat-color-primary">
+          <span >Create Your Databox</span>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-header *ngIf="checkIfCreateOrEdit === 'Edit'" class="p-1 light-gray">
+        <mat-card-title class="mat-color-primary">
+          <span >Edit Your Databox</span>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Source and Country -->
+      <div fxLayout="row" fxLayoutWrap="wrap" >
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showCountry')">
+              <mat-card-title>
+                <span>Choose your source and country</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showCountryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showCountryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            
+            <div *ngIf="showCountryAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <div class="databoxEditSection databoxEditSources">
+                  <div class="databoxEditSection-content is-open">
+                      <div class="databoxEditSection-contentWrapper">
+                          <div fxLayout="row" fxLayoutWrap="wrap">
+                              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                <table class="mb-1 databoxEditTableSelect databoxEditSources-table">
+                                    <thead>
+                                        <tr class="databoxEditTableSelectTr">
+                                            <th class="databoxEditTableSelectHead-th" colspan="2">Sources</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="databoxEditTableSelectBody">
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-radio"></i><mat-icon class="small mat-icon material-icons mat-color-gray">lock</mat-icon>Radio</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-tv"></i><mat-icon class="small mat-icon material-icons mat-color-gray">lock</mat-icon>TV</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><span class="databoxEditSources-activate">Upgrade</span></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-facebook_keyword"></i>Facebook</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-gray-web"></i>Web</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left"><span class="flex-display flex-align-center"><i class="databoxEditSources-isonSource icon-source-large-twitter"></i>Twitter</span></td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                              <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                <table class="mb-1 databoxEditTableSelect databoxEditSources-table">
+                                    <thead>
+                                        <tr class="databoxEditTableSelectTr">
+                                            <th class="databoxEditTableSelectHead-th" colspan="2">
+                                                <div class=""><span>Countries</span>
+                                                    <div class="mnt-switch">
+                                                        <div class="mnt-switch-circle"></div>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="databoxEditTableSelectBody">
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Get mentions without country information</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Colombia</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Costa Rica</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Ecuador</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">El Salvador</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Guatemala</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Honduras</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">México</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Panama</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">Perú</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                        <tr class="databoxEditTableSelectTr databoxEditTableSelectRowCustom databoxEditTableSelectRow is-active">
+                                            <td class="databoxEditTableSelectRowCustom-left">República Dominicana</td>
+                                            <td class="databoxEditTableSelectRowCustom-right"><mat-icon class="mat-icon material-icons mat-color-gray">check_circle</mat-icon></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Historical -->
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="historicals">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showHistorical')">
+              <mat-card-title>
+                <span>Do you want to add historical data?</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showHistoricalAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showHistoricalAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showHistoricalAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <div id="historicals">
+                <button mat-raised-button class="query_type" 
+                *ngFor="let historical of historicals" 
+                (click)="selectHistorical(historical.display_text)" 
+                id="{{historical.display_text}}">
+                {{historical.display_text}}</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Query Editor -->
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="historicals">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showQuery')">
+              <mat-card-title>
+                <span>Keywords</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showHistoricalAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showQueryAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showQueryAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <br />
+              <!--Query Menu -->
+              <div fxLayout="row" fxLayoutWrap="wrap">
+                <button mat-raised-button mat-color-primary 
+                (click)="showBasicQuery()"
+                class="query_type" 
+                [ngClass]="showQuery === 'basic' ? 'query-active': ''">
+                  Basic Query
+                </button>
+                <button mat-raised-button 
+                class="query_type"
+                [ngClass]="showQuery === 'advance' ? 'query-active': ''"
+                (click)="showAdvanceQuery()">
+                Advanced Query</button>
+              </div>
+              <!--Basic Query Editor -->
+              <mat-card-content *ngIf="showQuery == 'basic'" 
+                [@animate]="{
+                  value: '*',
+                  params: { x: '200px', delay: '400ms' }
+                }">
+                <mat-card-title class="mat-color-primary query-header">
+                  <span>Basic Query</span>
+                </mat-card-title>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div
+                    fxLayout="column"
+                    fxFlex="100"
+                    fxFlex.gt-sm="100"
+                    [@animate]="{
+                      value: '*',
+                      params: { x: '200px', delay: '400ms' }
+                    }"
+                  >
+                    <b>Required Keywords</b>
+                    <p class="mt-05 text-muted">
+                      Your Databox will collect mentions that contain all of these
+                      keywords.
+                    </p>
+                    <mat-form-field
+                      style="border: 1px solid gray;"
+                      class="full-width"
+                    >
+                      <div class="p-1">
+                        <mat-placeholder class="placeholder" >
+                          {{editorData}}
+                        </mat-placeholder>
+                        <mat-chip-list #requiredKeywordChip>
+                          <mat-chip *ngFor="let keyword of requiredKeywords" 
+                              [selectable]="selectable"
+                              [removable]="removable" 
+                              (removed)="remove(keyword, 'required')">
+                              {{keyword}}
+                            <mat-icon matChipRemove 
+                            *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            [matChipInputFor]="requiredKeywordChip"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            matChipInputAddOnBlur="addOnBlur"
+                            (matChipInputTokenEnd)="add($event, 'required')"
+                          >
+                        </mat-chip-list>
+                      </div>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div
+                    fxLayout="column"
+                    fxFlex="100"
+                    fxFlex.gt-sm="100"
+                  >
+                    <b class="mt-1">Optional Keywords</b>
+                    <p class="mt-05 text-muted">
+                      Your Databox will collect mentions that contain at least one
+                      of these keywords, plus all required keywords.
+                    </p>
+                    <mat-form-field
+                      style="border: 1px solid gray;"
+                      class="full-width"
+                    >
+                      <div class="p-1">
+                        <mat-placeholder class="placeholder">
+                          {{editorData}}
+                        </mat-placeholder>
+                        <mat-chip-list #optionalKeywordChip>
+                          <mat-chip *ngFor="let optionalKeyword of optionalKeywords" 
+                              [selectable]="selectable"
+                              [removable]="removable" 
+                              (removed)="remove(optionalKeyword, 'optional')">
+                              {{optionalKeyword}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            [matChipInputFor]="optionalKeywordChip"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event, 'optional')">
+                        </mat-chip-list>
+                      </div>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div
+                    fxLayout="column"
+                    fxFlex="100"
+                    fxFlex.gt-sm="100"
+                    [@animate]="{
+                      value: '*',
+                      params: { x: '200px', delay: '400ms' }
+                    }"
+                  >
+                    <b class="mt-1">Exclude Keywords</b>
+                    <p class="mt-05 text-muted">
+                      Your Databox will not bring in mentions any of the following
+                      keywords.
+                    </p>
+                    <mat-form-field
+                      style="border: 1px solid gray;"
+                      class="full-width"
+                    >
+                      <div class="p-1">
+                        <mat-placeholder class="placeholder">
+                          {{editorData}}
+                        </mat-placeholder>
+                        <mat-chip-list #excludeKeywordChip>
+                          <mat-chip *ngFor="let excludeKeyword of excludeKeywords" [selectable]="selectable"
+                              [removable]="removable" (removed)="remove(excludeKeyword, 'exclude')">
+                              {{excludeKeyword}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            [matChipInputFor]="excludeKeywordChip"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event, 'exclude')">
+                        </mat-chip-list>
+                      </div>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card-content>
+              <!--Avanced Query Editor -->
+              <mat-card-content>
+                <div fxLayout="row" fxLayoutWrap="wrap">
+                  <div
+                    fxLayout="column"
+                    fxFlex="100"
+                    fxFlex.gt-md="100"
+                    fxLayoutAlign="center"
+                  >
+                    <mat-card-header class="query-header" 
+                    *ngIf="showQuery === 'advance'"
+                    [@animate]="{
+                      value: '*',
+                      params: { x: '200px', delay: '400ms' }
+                    }">
+                      <mat-card-title class="mat-color-primary">
+                        <span>Advanced Query</span>
+                      </mat-card-title>
+                      <mat-card-subtitle>
+                        <p>
+                          The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                        </p>
+                      </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content 
+                      *ngIf="showQuery === 'advance'"
+                      [@animate]="{
+                        value: '*',
+                        params: { x: '200px', delay: '400ms' }
+                      }">
+                      <div fxLayout="row" fxLayoutWrap="wrap" class="query-inner">
+                        <div
+                          fxLayout="column"
+                          fxFlex="100"
+                          fxFlex.gt-md="100"
+                          fxLayoutAlign="center"
+                        >
+                            <mat-form-field
+                              style="border: 1px solid gray;"
+                              class="full-width"
+                            >
+                              <div class="p-1">
+                                <mat-placeholder class="placeholder" 
+                                *ngIf="queryForm.controls['advance_query'].value === ''">
+                                {{editorDataAdv}}</mat-placeholder>
+                                <textarea
+                                  matInput
+                                  rows="10"
+                                  cols="80"
+                                  formControlName="advance_query"
+                                ></textarea>
+                              </div>
+                            </mat-form-field>
+                            <div class="text-muted query-help mt-1">
+                              <a matTooltip="car OR bus OR train" ng-click="showDetails = ! showDetails">Show Simple Example</a>
+                                <div class="procedure-details" ng-class="{ 'hidden': ! showDetails }">
+                                  <p>Number of patient discharges</p>
+                                </div>
+                              <a matTooltip="(car OR bus) AND train">Show Complex Example</a>
+                              <a>Need More Help?</a>
+                            </div>
+                        </div>
+                      </div>
+                    </mat-card-content>
+
+                    <mat-card-content
+                      *ngIf="showQuery === 'advance'"
+                      >
+                      <div fxLayout="row" fxLayoutWrap="wrap">
+                        <div
+                          fxLayout="column"
+                          fxFlex="100"
+                          fxFlex.gt-md="100"
+                          [@animate]="{
+                            value: '*',
+                            params: { y: '200px', delay: '400ms' }
+                          }"
+                          fxLayoutAlign="center"
+                        >
+                          <mat-card class="query-right-side">
+                            <mat-card-content>
+                              <h4 class="mat-h4">
+                                Boolean Operations:
+                              </h4>
+                              <p
+                                class="mat-color-primary query-info"
+                                matTooltip="OR operators are used to expand your query. For example: car OR bus OR train"
+                              >
+                                OR = OR's help you expand your query
+                              </p>
+                              <p
+                                class="mat-color-primary query-info"
+                                matTooltip="AND operators are used to expand your query. For example: car AND bus AND train"
+                              >
+                                AND = AND's help you be more exact
+                              </p>
+                              <p
+                                class="mat-color-primary query-info"
+                                matTooltip="NOT operators are used to expand your query. For example: car NOT bus NOT train"
+                              >
+                                NOT = NOT's help you exclude information
+                              </p>
+                            </mat-card-content>
+                          </mat-card>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </div>
+                </div>
+              </mat-card-content>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Advanced Settings -->
+      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="historicals">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showAdvance')">
+              <mat-card-title>
+                <span>Advanced Settings</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showAdvanceAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showAdvanceAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showAdvanceAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <br>
+                <mat-slide-toggle color="primary" class="mb-1" formControlName="include_comments"><b>Include Comments</b>
+                </mat-slide-toggle>
+                <p>Include comments will retieve all the comments from the posts on your query. The content will not necessarily match your query.</p>
+                <mat-slide-toggle color="primary" class="mb-1" formControlName="specify_max_number_result"><b>Specify Maximum Number of Results</b>
+                </mat-slide-toggle>
+                <p>Use this option if you only need a specific amount of results and don't to be charged for the entire amount of results found from your query.</p>
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkMaxNumberResult()">
+                  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                    <p class="d-block">Please type the amount of desired results.</p>
+                      <mat-form-field style="border: 1px solid gray;">
+                          <input type="number" min="0" max="99" matInput mat-autosize formControlName="max_number_result">
+                      </mat-form-field>
+                      <br>
+                  </div>
+                </div>
+                <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_only_news_media"><b>Monitor only News Media</b>
+                </mat-slide-toggle>
+                <p>Minerva curates a list of media profiles specific to your selected country. By choosing this option, you will monitor only these profiles.</p>
+                <mat-slide-toggle color="primary" class="mb-1" formControlName="monitor_specific_page"><b>Monitor Specific Pages</b>
+                </mat-slide-toggle>
+                <p>Use this option if you only need to monitor a specific list of pages.</p>
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkFacebookPageID()">
+                  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                      <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
+                        <mat-form-field style="border: 1px solid gray;" class="full-width">
+                          <div class="p-1">
+                            <textarea matInput rows="10" cols="80"
+                            formControlName="facebook_page_id"></textarea>
+                          </div>  
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-slide-toggle color="primary" class="mb-1" formControlName="exclude_specific_pages"><b>Exclude Specific Pages</b>
+                </mat-slide-toggle>
+                <p>Use this option if you only need to exclude a specific list of pages.</p>
+                <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="checkExcludedPage()">
+                  <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" class="pb-1">
+                      <p>Write down the name of the profile, if you don't see it, it's probably because we don't have it in our databases. If this happens, use the following link to make the suggestion.</p>
+                        <mat-form-field style="border: 1px solid gray;" class="full-width">
+                          <div class="p-1">
+                            <textarea matInput rows="10" cols="80"
+                            formControlName="excluded_pages"></textarea>
+                          </div>  
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Results Preview -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showResultsPreview')">
+              <mat-card-title>
+                <span>Results Preview</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showResultsPreviewAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showResultsPreviewAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showResultsPreviewAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              
+              <div fxLayout="row" fxLayoutWrap="wrap">
+
+                <div fxLayout="column" fxFlex="100" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
+                  
+                  <button mat-raised-button class="mb-05 mat-bg-success" 
+                  (click)="openDialogTestQuery(
+                      'Test Query',
+                      'You are about to build and update this query. Are you sure you want to proceed?')
+                  ">
+                    Test Query
+                  </button>
+
+                  <!-- Metrics -->
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" class="page-search mat-bg-gray">
+                      <div>
+                        <p>
+                          <b>Mentions:</b> {{getDataboxMention(data?._id)?.mentions || 1200}}&nbsp;&nbsp;|&nbsp;&nbsp;<b>Mentions per day:</b> {{getDataboxMention(data?._id)?.mentions_per_day || 7.5}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Line Chart -->
+                  <div fxLayout="row" fxLayoutWrap="wrap">
+                    <div fxFlex="100" fxFlex.gt-sm="100">
+                      <mat-card class="p-0">
+                        <mat-card-content class="px-1" 
+                        style="padding-left: 20px !important;">
+                          <!-- Line Chart -->
+                          <canvas 
+                            baseChart
+                            class="chart"
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="chartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"></canvas> 
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                  <div
+                    style="position: -webkit-sticky; position: sticky;top: 0;"
+                    fxLayout="row"
+                    fxLayoutWrap="wrap"
+                  >
+                    <div
+                      fxLayout="column"
+                      fxFlex="100"
+                      fxFlex.gt-sm="100"
+                      [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }"
+                    >
+                      <mat-card>
+                        <mat-card-header>
+                          <mat-card-title>
+                            <span>Results</span>
+                          </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                          <p class="text-justify" *ngIf="!setResult()">
+                            No results yet, please Create a Query and then click “Test Query” to see results.
+                          </p>
+                          <table mat-table [dataSource]="dataSource" *ngIf="setResult()">
+                            <!--- Note this table dataSource should be fetched with real data from the backend service -->
+                            <ng-container matColumnDef="date">
+                              <th mat-header-cell *matHeaderCellDef> Date </th>
+                              <td mat-cell *matCellDef="let category"> {{category.name}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="content">
+                              <th mat-header-cell *matHeaderCellDef> Content </th>
+                              <td mat-cell *matCellDef="let category"> {{category.type}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="author">
+                              <th mat-header-cell *matHeaderCellDef> Author </th>
+                              <td mat-cell *matCellDef="let category"> {{category.expression}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="resultsTableColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: resultsTableColumns;"></tr>
+                          </table>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-content> </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+                            </div>
+
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Delete Databox -->
+      <div *ngIf="checkIfCreateOrEdit === 'Edit'" fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
+          <mat-card class="accordion-databox m-0">
+            <mat-card-header (click)="selectAccordion('showDelete')">
+              <mat-card-title>
+                <span>Delete Databox</span>
+                 <p>
+                  The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
+                </p>
+              </mat-card-title>
+              <!-- Dialogs for already Created Databox with Status as Active -->
+              <span fxFlex></span>
+              <div class="ml-1">
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="showDeleteAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">
+                keyboard_arrow_down</mat-icon>
+
+                <mat-icon 
+                class="ml-1 mat-icon material-icons mat-color-gray" 
+                *ngIf="!showDeleteAccord" 
+                [@animate]="{
+                  value: '*',
+                  params: { scale: '0.7', delay: '200ms' }
+                }">keyboard_arrow_right</mat-icon>
+              </div>
+            </mat-card-header>
+            <div *ngIf="showDeleteAccord" 
+              [@animate]="{
+                value: '*',
+                params: { y: '-20px', delay: '400ms' }
+              }">
+              <div>
+                <p style="display: inline-block;" class="mr-1">Be aware that all your mentions will be deleted</p>
+                <button mat-raised-button color="warn">Delete Databox</button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Change Datasource -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                <span>Change Datasource</span>
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+            <mat-card-content class="p-0">
+              <br />
+              <mat-form-field>
+                <mat-select 
+                  formControlName="datasource"
+                  [(value)]="selectedDatasource" 
+                  (selectionChange)="selectDatasource()">
+
+                    <mat-option *ngFor="let singleDatasource of userPlanDatasource?.datasources" 
+                    [value]="singleDatasource">
+                    {{ singleDatasource }}
+                  
+                    </mat-option>
+
+                    <mat-option *ngFor="let data_item of datasource" 
+                    [disabled]="true" 
+                    [value]="data_item" class="unavailable-datasource">
+                      <span 
+                      matTooltip="Upgrade your plan to unlock this datasource"
+                      matTooltipPosition="right"
+                      matTooltipClass='pos-right'>
+                        {{data_item}}
+                      </span>
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div> 
+
+      <!-- Change Country -->
+      <div fxLayout="row" fxLayoutWrap="wrap">
+        <div fxLayout="column" fxFlex.gt-sm="100" [@animate]="{ value: '*', params: { y: '200px', delay: '400ms' } }">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                <span>Change Country</span>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content class="p-0">
+              <br>
+              <div id="countries">
+                <button mat-raised-button class="query_type" 
+                *ngFor="let country of countries" 
+                (click)="selectCountry(country.name)" 
+                id="{{country.name}}">{{country.name}}</button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+    </mat-card>
+</form>
 <br /><br />

@@ -13,16 +13,14 @@
   <div class="full-width">
     <!-- Search Form -->
     <div fxLayout="row" fxLayout.lt-sm="column" class="shop-top-toolbar">
-      <button mat-icon-button class="mr-1">
-        <mat-icon>short_text</mat-icon>
-      </button>
       <div class="product-search-wrap">
         <form>
+          <mat-icon>search</mat-icon>
           <input
             type="text"
             name="searchProduct"
             placeholder="Search product"
-            class="product-search default-bg full-width"
+            class="product-search default-bg"
             [(ngModel)]="searchGallery"
           />
         </form>

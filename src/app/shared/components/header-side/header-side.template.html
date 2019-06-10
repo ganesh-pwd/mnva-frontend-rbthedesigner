@@ -6,7 +6,7 @@
   id="sidenavToggle" 
   (click)="toggleSidenav()"
   matTooltip="Toggle Hide/Open">
-  <mat-icon>menu</mat-icon>
+  <mat-icon>zoom_out_map</mat-icon>
   </button>
 
   <span fxFlex></span>
@@ -35,35 +35,42 @@
     <mat-icon>notifications</mat-icon>
     <span class="notification-number mat-bg-warn">{{notificationCount}}</span>
   </button>
-  <h4 class="topbar-button-right">{{userName}}</h4>  
+  <h4 class="username topbar-button-right">{{userName}}</h4>  
   <!-- Top left user menu -->
   <button mat-icon-button [matMenuTriggerFor]="accountMenu" class="topbar-button-right img-button">
-    <img src="../../../../assets/images/user-icon.png" alt="">
+    <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #accountMenu="matMenu">
     <div class="account-type p16">
       <span> <strong> {{userPlanDetails.account_type}} </strong></span>
       <a routerLink="/products/account-type" class="menu-link" 
-      *ngIf="userPlanDetails.account_type !== 'Enterprise'">Upgrade </a>
+      *ngIf="userPlanDetails.account_type !== 'Enterprise'">Upgrade Plan</a>
     </div>
-    <div class="mentions-remaining p16">
-      <p *ngIf="userPlanDetails.account_type !== 'Enterprise'">
-      {{userPlanDetails.remaining_mentions}} Mentions Remaining</p>
 
+    <div class="mentions-remaining p16">
+      <div>
+        <p *ngIf="userPlanDetails.account_type !== 'Enterprise'">
+      {{userPlanDetails.remaining_mentions}} Mentions Remaining</p>
+      </div>
+      <span fxFlex *ngIf="userPlanDetails.account_type !== 'Enterprise'"></span>
+      <a routerLink="/products/mentions-credit" class="menu-link small" *ngIf="userPlanDetails.account_type !== 'Enterprise'">Add mentions</a>
       <p class="mat-color-primary" *ngIf="userPlanDetails.account_type === 'Enterprise'">
       Unlimited Mentions</p>
+    </div>
 
+    <div class="p16">
       <app-mentions-progress-bar></app-mentions-progress-bar>
-
       <p class="mt-1" *ngIf="userPlanDetails.account_type !== 'Enterprise'">
       Your quota resets in 10 days</p>
+      <p class="mt-1 mat-color-red"> Your free trail has expired, please upgrade your plan.</p>
     </div>
+
     <hr>
     <div class="algorithm-credit p16 mt-1">
-      <span> 
+      <div> 
         <strong> Algorithm Credit </strong>
-      </span>
-      <a routerLink="/products/algorithm-credit" class="menu-link">Buy More </a>
+      </div>
+      <a routerLink="/products/algorithm-credit" class="menu-link small">Add Credit</a>
       <p>${{userPlanDetails.algorithm_credits}} in credit remaining</p>
       <mat-progress-bar
         [ngClass]="remaining >= 80 && remaining <= 99 
@@ -76,7 +83,7 @@
     <hr>
     <button mat-menu-item [routerLink]="['/accounts/minerva-notifications']">
       <mat-icon>home</mat-icon>
-      <span>Notifications</span>
+      <span>Minerva News</span>
     </button>
     <button mat-menu-item [routerLink]="['/accounts/settings']">
       <mat-icon>settings</mat-icon>

@@ -21,9 +21,9 @@
     <div>
       <!-- Search Form -->
       <div fxLayout="row" fxLayout.lt-sm="column" class="shop-top-toolbar">
-         <button mat-icon-button class="mr-1" (click)="toggleSideNav()"><mat-icon>short_text</mat-icon> </button>
          <div class="product-search-wrap">
             <form [formGroup]="filterForm">
+               <mat-icon>search</mat-icon>
                <input type="text" name="searchProduct" 
                placeholder="Search product" 
                class="product-search default-bg" 
@@ -43,36 +43,32 @@
   </div>
 </mat-sidenav-container>
 <hr>
-<div class="m-333" fxLayout="row" fxLayoutWrap="wrap">
+<div fxLayout="row" fxLayoutWrap="wrap">
    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100" [@animate]="{value:'*', params:{ y:'200px', delay:'400ms' }}">
-   <mat-card>
-      <mat-card-header>
-         <mat-card-title class="mat-color-primary">
-            <div class="mt-05">Mentions Credit</div>
-         </mat-card-title>
-      </mat-card-header>
-      <mat-divider></mat-divider>
-      <br>
-
-      <mat-card-content>
-         <h3 class="mat-h3">Adding mentions or upgrading your plan:</h3>
-         <mat-card-subtitle>
-            <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
-            <br>
-            <mat-form-field>
-                 <mat-select [formControl]="filterForm.controls['mentionCredit']" >
-                    <mat-option value="50" style="font-size: 14px !important;">$50</mat-option>
-                    <mat-option value="100" style="font-size: 14px !important;">$100</mat-option>
-                    <mat-option value="150" style="font-size: 14px !important;">$150</mat-option>
-                    <mat-option value="250" style="font-size: 14px !important;">$250</mat-option>
-                 </mat-select>
-            </mat-form-field>
-            <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()">
-              <mat-icon>shopping_cart</mat-icon>
-                 Add to cart
-            </button>
-         </mat-card-subtitle>
-      </mat-card-content>
+   <mat-card class="m-0 p-0">
+      <mat-card-header class="p-1 light-gray product-form" fxLayout="row" fxLayoutWrap="wrap">
+        <mat-card-title class="mat-color-primary">
+          <span>Mentions Credit</span>
+        </mat-card-title>
+        <mat-card-subtitle class="m-0">
+          <p>Lorem ipsum dolor sit amet, et vel error viris democritum, ei duo sumo tota albucius. Sumo atqui ut eam, mel recteque omittantur definitionem et, meliore intellegebat an cum. Vim falli insolens persequeris no. Eu pri aeque semper, dicunt malorum reprehendunt ex mea, viderer inimicus vim ne. Cu causae impetus eam, et atqui tibique consectetuer nam, in erroribus incorrupte vim. Ea voluptua eloquentiam has.</p>
+        </mat-card-subtitle>
+      </mat-card-header>  
+      <div class="p-1 product-form" fxLayout="row" fxLayoutWrap="wrap">
+        <mat-form-field>
+             <mat-select [formControl]="filterForm.controls['mentionCredit']" >
+                <mat-option value="50" style="font-size: 14px !important;">$50</mat-option>
+                <mat-option value="100" style="font-size: 14px !important;">$100</mat-option>
+                <mat-option value="150" style="font-size: 14px !important;">$150</mat-option>
+                <mat-option value="250" style="font-size: 14px !important;">$250</mat-option>
+             </mat-select>
+        </mat-form-field>
+        <button mat-raised-button class="mat-primary btn-add-to-cart ml-1" (click)="addCreditToCart()">
+          <mat-icon>shopping_cart</mat-icon>
+             Add to cart
+        </button>
+      </div> 
+    <mat-divider></mat-divider>
    </mat-card>
   </div>
 </div>

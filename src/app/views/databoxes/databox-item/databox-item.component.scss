@@ -14,9 +14,12 @@ mat-card-actions {
   padding: 2% 8px;
 }
 
-.minerva-logo {
-  width: 250px;
+.databox-details-below{
+  padding: 0 4%;
+}
 
+.connector-logo{
+  width: 80px;
   margin-top: 2%;
 }
 
@@ -24,21 +27,36 @@ h5 {
   padding-top: 2%;
 }
 
+.mat-elevation-z8{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
 .bottom-data {
   margin-left: 1%;
   margin-right: 1%;
 
-  form {
+  h2, h3, form{
     margin-top: 2%;
+    margin-left: 5%;
   }
-
-  button {
-    
-  }
-
   .download-csv {
     margin-left: 1% !important;
   }
+  button{
+    margin-left: 5%;
+  }
+}
+
+.title-header{
+  top: 10%;
+  margin-left: 30px;
+  font-size: 18px;
+  position: absolute;
+}
+
+.icon-header{
+  font-size: 35px;
 }
 
 .mat-cell {
@@ -120,20 +138,6 @@ h5 {
   margin-top: -20px !important;
 }
 
-.algorithm-header {
-  margin-top: 5px;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-
-.category-header {
-  font-size: 18px;
-}
-
-.icon-header {
-  font-size: 35px;
-}
-
 .airplane {
   transform: rotate(45deg);
   transition: transform 2s;
@@ -142,10 +146,6 @@ h5 {
 .credit-remain {
   margin-right: 2%;
   margin-top: 10px;
-}
-
-.credits {
-  color: green;
 }
 
 .truncate {
@@ -224,4 +224,72 @@ td{
 }
 .info-wrap{
   background-color: rgba(0, 0, 0, 0.03);
+}
+
+#algorithm-table{
+  overflow-x: scroll;
+  table{
+    margin: auto;
+    min-width: 750px;
+    .mat-header-cell{
+      text-align: center;
+      overflow: auto;
+    }
+    .mat-cell {
+      text-align: center;
+      overflow: auto;
+      &:first-child, &:last-child{
+        text-align: left;
+      }
+      &:nth-child(2){
+        min-width:150px;
+      }
+      &:nth-child(3){
+        min-width:300px;
+      }
+      &:last-child{
+        min-width: 150px;
+      }
+      &:first-child{
+        min-width:150px;
+        p{
+        font-size: 10px;
+        }
+      }
+    } 
+  }
+}
+
+.credits-container{
+  div{
+    text-align: right;
+  }
+}
+
+@media (min-width: 767px) {
+    .width-80{
+        width:80%;
+        margin: auto;
+    }
+}
+
+.mat-icon{
+  cursor: pointer !important;
+}
+
+.accordion-databox{
+  cursor: pointer;
+}
+
+.cancel-button{
+    color: initial;
+}
+
+.cancel-save-buttons{
+    position: absolute;
+    right: 21px;
+    a{
+        float: left;
+        margin-top: 2px;
+    }  
 }
