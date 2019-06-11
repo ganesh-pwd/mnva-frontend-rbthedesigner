@@ -189,7 +189,6 @@
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
-              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
               <div class="ml-1">
                 <mat-icon 
@@ -332,7 +331,6 @@
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
-              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
               <div class="ml-1">
                 <mat-icon 
@@ -371,7 +369,7 @@
       </div>
 
       <!-- Query Editor -->
-      <div fxLayout="row" fxLayoutWrap="wrap" *ngIf="historicals">
+      <div fxLayout="row" fxLayoutWrap="wrap">
         <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
           <mat-card class="accordion-databox m-0">
             <mat-card-header (click)="selectAccordion('showQuery')">
@@ -381,7 +379,6 @@
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
-              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
               <div class="ml-1">
                 <mat-icon 
@@ -552,7 +549,7 @@
                 </div>
               </mat-card-content>
               <!--Avanced Query Editor -->
-              <mat-card-content>
+              <mat-card-content class="m-0">
                 <div fxLayout="row" fxLayoutWrap="wrap">
                   <div
                     fxLayout="column"
@@ -576,6 +573,7 @@
                       </mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content 
+                      class="m-0"
                       *ngIf="showQuery === 'advance'"
                       [@animate]="{
                         value: '*',
@@ -606,9 +604,6 @@
                             </mat-form-field>
                             <div class="text-muted query-help mt-1">
                               <a matTooltip="car OR bus OR train" ng-click="showDetails = ! showDetails">Show Simple Example</a>
-                                <div class="procedure-details" ng-class="{ 'hidden': ! showDetails }">
-                                  <p>Number of patient discharges</p>
-                                </div>
                               <a matTooltip="(car OR bus) AND train">Show Complex Example</a>
                               <a>Need More Help?</a>
                             </div>
@@ -617,6 +612,7 @@
                     </mat-card-content>
 
                     <mat-card-content
+                      class="m-0"
                       *ngIf="showQuery === 'advance'"
                       >
                       <div fxLayout="row" fxLayoutWrap="wrap">
@@ -677,7 +673,6 @@
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
-              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
               <div class="ml-1">
                 <mat-icon 
@@ -766,7 +761,6 @@
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
-              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
               <div class="ml-1">
                 <mat-icon 
@@ -905,7 +899,6 @@
                   The advanced query editor gives you the possibility to create a more complex query, using regular expressions and boolean operators.
                 </p>
               </mat-card-title>
-              <!-- Dialogs for already Created Databox with Status as Active -->
               <span fxFlex></span>
               <div class="ml-1">
                 <mat-icon 
