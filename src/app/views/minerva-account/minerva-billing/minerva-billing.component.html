@@ -308,6 +308,80 @@
 
 					</mat-card-content>
 				</mat-tab>
+
+
+				<!-- Billing Subscription -->
+			  	<mat-tab label="Subscription">
+			  		<br><br>
+			  		<mat-card>
+			  			<mat-card-header>
+			  				<mat-card-title>
+			  					
+			  				</mat-card-title>
+			  			</mat-card-header>
+
+			  			<mat-card-content>
+			  				<form [formGroup]="billingInfoForm">
+			  					<div fxLayout="row" fxLayoutWrap="wrap">
+
+
+
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                    <span>Plan</span><br/> 
+
+			  						<h3 class="mat-h3">Professional</h3>
+
+			  					    </div>
+
+
+			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                    <span>Fee</span><br/> 
+                                   
+			  						<h3 class="mat-h3">$240 / month</h3>
+
+			  					    </div>
+
+
+
+			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                    <span>Subscription started</span><br/> 
+                                   
+			  						<h3 class="mat-h3">5 July 2019</h3>
+
+			  					    </div>
+
+
+			  					     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                    <span>Plan Duration Remaining</span><br/> 
+                                   
+			  						<h3 class="mat-h3">10 Days</h3>
+
+			  					    </div>
+
+
+			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+                                    <span>Subscription Status</span><br/> 
+                                   
+			  						<h3 class="mat-h3">Active</h3>
+
+			  					    </div>
+			  						
+
+			  						
+
+			  					</div>
+
+			  				  	<div class="text-center"><br>
+			  				  		<span>Cancel Subscription</span>
+			  				  		<!-- <button (click)="saveUpdateBillingInfo()" mat-raised-button color="primary">Save</button> -->
+			  				  	</div>
+			  				</form>
+			  			</mat-card-content>
+			  		</mat-card>
+			  	</mat-tab>
+
+
+
 			</mat-tab-group>
 		</mat-card>
 	</div>
