@@ -13,6 +13,12 @@ import { UserBillingService } from '../../../shared/services/auth/user-billing-i
 import { DataboxesService } from '../../../shared/services/databoxes/databox-item-main.services';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { Http , Resposnse } from '@angular/http'; 
+
+import 'rxjs/add/operator/map';
+
 @Component({
   selector: 'app-minerva-billing',
   animations: [egretAnimations],
@@ -61,12 +67,13 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
     private databoxesService: DataboxesService,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
+    private http : HttpClient
   ) {
     this.getReqImage = minervaAccountChangeService.image$.subscribe(result => this.userImage = result);
     if ('photoUrl' in sessionStorage) {
       this.userImage = sessionStorage.getItem('photoUrl');
     }
-    userService.userData$.subscribe((user) => this.loggedInUser = user);
+    userService.userData$.subscribe( (user) => this.loggedInUser = user);
     userBillingService.userBillingDetails$.subscribe((billingInfo) => {
       this.userBillingInfo = billingInfo;
         this.billingFormGroup();
@@ -79,6 +86,9 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
     
     this.dataSourceBillingHistory = new MinervaBillingHistoryDataSource(this.historyPaginator, this.historySort);
     this.dataSource = new MinervaBillingDataSource(this.paginator, this.sort);
+
+    let obs = this.http.get('https://tugu8uuzu2.execute-api.us-west-2.amazonaws.com/v1/accounts/1');
+    obs.subscribe( () => console.log('Got the first response') );
   }
 
   ngOnDestroy() {
