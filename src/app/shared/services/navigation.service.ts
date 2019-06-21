@@ -102,7 +102,7 @@ export class NavigationService {
         class: 'databox'
       },
       {
-        name: 'Template Gallery',
+        name: 'Report Gallery',
         type: 'dropDown',
         tooltip: 'charts',
         icon: 'pie_chart',
@@ -120,7 +120,7 @@ export class NavigationService {
         image_icon: '../assets/images/icon-products.png',
         class: 'products',
         sub: [
-          { name: 'Account Type', state: 'account-type' },
+          { name: 'Plans', state: 'account-type' },
           { name: 'Algorithm Credit', state: 'algorithm-credit' },
           { name: 'Mentions Credit', state: 'mentions-credit' },
           { name: 'Licenses', state: 'licenses' },
