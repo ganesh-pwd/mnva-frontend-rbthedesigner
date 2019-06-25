@@ -15,7 +15,9 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { Http , Resposnse } from '@angular/http'; 
+import { Http } from '@angular/http'; 
+
+import { map } from 'rxjs/operators';
 
 import 'rxjs/add/operator/map';
 
@@ -32,6 +34,8 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   private updateReq: Subscription;
 
   public billingInfoForm: FormGroup;
+
+  public subscriptionInfoForm: FormGroup;
 
   @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
@@ -56,6 +60,12 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
   public databoxes;
   public databoxes_sorted;
   public userBillingInfo;
+  public userSubscriptionInfo;
+
+
+  title = 'app';
+  restItems: any;
+  restItemsUrl = 'https://tugu8uuzu2.execute-api.us-west-2.amazonaws.com/v1/accounts/1';
   
   constructor(
     private router: Router,
@@ -74,26 +84,59 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
       this.userImage = sessionStorage.getItem('photoUrl');
     }
     userService.userData$.subscribe( (user) => this.loggedInUser = user);
-    userBillingService.userBillingDetails$.subscribe((billingInfo) => {
+    userBillingService.userBillingDetails$.subscribe(  (billingInfo) => {
       this.userBillingInfo = billingInfo;
         this.billingFormGroup();
         if(billingInfo) this.setBillingInfoFormGroup(billingInfo);
     });
+
+
+
+     let obs = this.http.get('https://tugu8uuzu2.execute-api.us-west-2.amazonaws.com/v1/accounts/1');
+    obs.subscribe( (response) => {
+       this.userSubscriptionInfo = response;    
+       this.subscriptionFormGroup();
+        if(response) this.setSubscriptionInfoFormGroup(response);
+    });
+
+
   }
 
   ngOnInit() {
+
+   this.getRestItems();
+
     this.getDataboxes();
     
     this.dataSourceBillingHistory = new MinervaBillingHistoryDataSource(this.historyPaginator, this.historySort);
     this.dataSource = new MinervaBillingDataSource(this.paginator, this.sort);
 
-    let obs = this.http.get('https://tugu8uuzu2.execute-api.us-west-2.amazonaws.com/v1/accounts/1');
-    obs.subscribe( () => console.log('Got the first response') );
+   
   }
 
   ngOnDestroy() {
     if (this.getItemSub) this.getItemSub.unsubscribe();
     if (this.req) this.req.unsubscribe();
+  }
+
+
+  // Read all REST Items
+  getRestItems(): void {
+    this.restItemsServiceGetRestItems()
+      .subscribe(
+        restItems => {
+          this.restItems = restItems;
+          console.log(this.restItems);
+        }
+      )
+  }
+
+
+  // Rest Items Service: Read all REST Items
+  restItemsServiceGetRestItems() {
+    return this.http
+      .get<any[]>(this.restItemsUrl)
+      .pipe(map(data => data));
   }
 
   //
@@ -172,6 +215,7 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
 
         // set form value based on databox item details
         setBillingInfoFormGroup(details){
+        console.log(details);
           this.billingInfoForm.setValue({
             'country': details.country || '',
             'firstName': details.first_name || '',
@@ -207,6 +251,31 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
           .subscribe(result => {
             this.snackBar.open('Your billing info details has been updated.', 'close');
             setTimeout(() => this.snackBar.dismiss(), 3000);
+          });
+        }
+
+
+
+
+
+        // build subscriptionInfoForm
+        subscriptionFormGroup() {
+          this.subscriptionInfoForm = this.formBuilder.group({
+            'plan_name': [null, Validators.compose([Validators.required])],
+            'plan_price': [null, Validators.compose([Validators.required])],
+            'plan_created': [null, Validators.compose([Validators.required])],
+            'plan_duration_remain': [null, Validators.compose([Validators.required])],
+          });
+        }
+
+        // set form value based on databox item details
+        setSubscriptionInfoFormGroup(details){
+        console.log(details);
+          this.subscriptionInfoForm.setValue({
+            'plan_name': 'fffffff' || '',
+            'plan_price': details.plan_price || '',
+            'plan_created': details.plan_created || '',
+            'plan_duration_remain': details.plan_duration_remain || '',
           });
         }
 }
