@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, Renderer2 , Inject  } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { LayoutService } from '../../services/layout.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,15 +6,45 @@ import { MinervaAccountChangeService } from '../../../shared/services/minerva-ac
 import { Subscription } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
 import { UserService } from '../../../shared/services/auth/user-services';
+import { UserBillingService } from '../../../shared/services/auth/user-billing-info.service';
 import { UserPlanDetailsService } from '../../../shared/services/auth/user-plan-details.service';
 import { AmplifyService } from 'aws-amplify-angular';
 import { AuthService } from 'angularx-social-login';
+
+
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { Http } from '@angular/http'; 
+
+import { map } from 'rxjs/operators';
+
+import 'rxjs/add/operator/map';
+
+
+
+import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { egretAnimations } from '../../../shared/animations/egret-animations';
+
+
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { Http } from '@angular/http'; 
+
+import { map } from 'rxjs/operators';
+
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-header-side',
   templateUrl: './header-side.template.html',
   styleUrls: ['./header-side.component.scss']
 })
+
 export class HeaderSideComponent implements OnInit {
   @Input() notificPanel;
   currentLang = 'en';
@@ -35,6 +65,12 @@ export class HeaderSideComponent implements OnInit {
 
   public remaining: number = 0;
 
+   
+
+  title = 'app';
+  restItems: any;
+  restItemsUrl = 'https://tugu8uuzu2.execute-api.us-west-2.amazonaws.com/v1/accounts/1';
+
   constructor(
     public translate: TranslateService,
     public minervaAccountChangeService: MinervaAccountChangeService,
@@ -45,7 +81,8 @@ export class HeaderSideComponent implements OnInit {
     private userService: UserService,
     private userPlanDetailsService: UserPlanDetailsService,
     private amplifyService: AmplifyService,
-    private socialAuthService: AuthService
+    private socialAuthService: AuthService ,
+    private http : HttpClient
   ) {
 
     // set user account info
@@ -66,6 +103,9 @@ export class HeaderSideComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getRestItems();
+
     this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
     this.egretThemes = this.themeService.egretThemes;
     this.layoutConf = this.layout.layoutConf;
@@ -75,6 +115,27 @@ export class HeaderSideComponent implements OnInit {
         this.notificationCount = sessionStorage.getItem('notificationCount') || 3;
       }
     });
+  }
+
+
+
+  // Read all REST Items
+  getRestItems(): void {
+    this.restItemsServiceGetRestItems()
+      .subscribe(
+        restItems => {
+          this.restItems = restItems;
+          console.log(this.restItems);
+        }
+      )
+  }
+
+
+  // Rest Items Service: Read all REST Items
+  restItemsServiceGetRestItems() {
+    return this.http
+      .get<any[]>(this.restItemsUrl)
+      .pipe(map(data => data));
   }
 
   setLang(e) {

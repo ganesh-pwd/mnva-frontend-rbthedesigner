@@ -49,13 +49,13 @@
 
     <div class="mentions-remaining p16">
       <div>
-        <p *ngIf="userPlanDetails.account_type !== 'Enterprise'">
-      {{userPlanDetails.remaining_mentions}} Mentions Remaining</p>
+        <!-- <p *ngIf="userPlanDetails.account_type !== 'Enterprise'"> </p> -->
+      {{ restItems.account_plan.plan_mentions_remaining }} Mentions Remaining
       </div>
       <span fxFlex *ngIf="userPlanDetails.account_type !== 'Enterprise'"></span>
       <a routerLink="/products/mentions-credit" class="menu-link small" *ngIf="userPlanDetails.account_type !== 'Enterprise'">Add mentions</a>
-      <p class="mat-color-primary" *ngIf="userPlanDetails.account_type === 'Enterprise'">
-      Unlimited Mentions</p>
+      <!-- <p class="mat-color-primary" *ngIf="userPlanDetails.account_type === 'Enterprise'">
+      Unlimited Mentions</p> -->
     </div>
 
     <div class="p16">
