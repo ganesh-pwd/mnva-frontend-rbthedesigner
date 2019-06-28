@@ -25,19 +25,10 @@ import 'rxjs/add/operator/map';
 
 
 import { MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
+
 import { egretAnimations } from '../../../shared/animations/egret-animations';
 
 
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-import { Http } from '@angular/http'; 
-
-import { map } from 'rxjs/operators';
-
-import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-header-side',
