@@ -178,6 +178,11 @@ export class MinervaBillingComponent implements OnInit, OnDestroy {
     this.minervaAccountImageDialogService.confirm({ title: title })
       .subscribe(result => { });
   }
+  
+  confirmDialog(title: string) {
+    this.minervaAccountImageDialogService.confirm({ title: title })
+      .subscribe(result => { });
+  }
 
   sortData(sort) {
       const data = this.databoxes.slice();

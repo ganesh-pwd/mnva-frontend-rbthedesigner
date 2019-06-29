@@ -326,7 +326,7 @@
 
 
 
-			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+			  						<div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
                                     <span>Plan</span><br/> 
 
 			  						<h3 class="mat-h3">{{ restItems.account_plan.plan_name }}</h3>
@@ -334,7 +334,7 @@
 			  					    </div>
 
 
-			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
                                     <span>Fee</span><br/> 
                                    
 			  						<h3 class="mat-h3">${{ restItems.account_plan.plan_price }} / month</h3>
@@ -343,7 +343,7 @@
 
 
 
-			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
                                     <span>Subscription started</span><br/> 
                                    
 			  						<h3 class="mat-h3">{{ restItems.account_plan.plan_created }}</h3>
@@ -351,7 +351,7 @@
 			  					    </div>
 
 
-			  					     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+			  					     <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
                                     <span>Plan Duration Remaining</span><br/> 
                                    
 			  						<h3 class="mat-h3">{{ restItems.account_plan.plan_duration_remain }} Days</h3>
@@ -359,10 +359,10 @@
 			  					    </div>
 
 
-			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="50">
+			  					    <div fxLayout="column" fxFlex="100" fxFlex.gt-md="100">
                                     <span>Subscription Status</span><br/> 
                                    
-			  						<h3 class="mat-h3">Active</h3>
+			  						<h3 class="mat-h3 actClr">Active</h3>
 
 			  					    </div>
 			  						
@@ -371,8 +371,8 @@
 
 			  					</div>
 
-			  				  	<div class="text-center"><br>
-			  				  		<span>Cancel Subscription</span>
+			  				  	<div class="text-center">
+			  				  		<span class="cnclSub" (click)="openDialog('sas')">Cancel Subscription</span>
 			  				  		<!-- <button (click)="saveUpdateBillingInfo()" mat-raised-button color="primary">Save</button> -->
 			  				  	</div>
 			  				</form>
