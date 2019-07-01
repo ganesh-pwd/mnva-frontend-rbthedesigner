@@ -19,6 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HotTableModule } from '@handsontable-pro/angular';
+import { ModalComponent } from './modal/modal.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -65,7 +66,7 @@ export function getAuthServiceConfigs() {
     }),
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, ModalComponent],
   providers: [
     AmplifyService,
     NgxNavigationWithDataComponent,
